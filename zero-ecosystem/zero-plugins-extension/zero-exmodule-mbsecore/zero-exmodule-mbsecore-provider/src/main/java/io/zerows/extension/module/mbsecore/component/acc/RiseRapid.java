@@ -63,7 +63,7 @@ class RiseRapid implements Rise {
             if (Objects.isNull(queried)) {
                 // Add
                 final MAcc acc = new MAcc();
-                acc.setKey(UUID.randomUUID().toString());
+                acc.setId(UUID.randomUUID().toString());
                 acc.setModelId(atom.identifier());
                 acc.setModelKey(key);
 

@@ -1,147 +1,63 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `M_ATTRIBUTE`;
+CREATE TABLE IF NOT EXISTS `M_ATTRIBUTE` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`                VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                    -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-attribute-1
--- 模型属性表：M_ATTRIBUTE
-DROP TABLE IF EXISTS M_ATTRIBUTE;
-CREATE TABLE IF NOT EXISTS M_ATTRIBUTE
-(
-    `KEY`
-    VARCHAR
-(
-    36
-) COMMENT '「key」- 属性ID',
-    `NAME` VARCHAR
-(
-    255
-) COMMENT '「name」- 属性名称',
-    `ALIAS` VARCHAR
-(
-    255
-) COMMENT '「alias」- 属性别名（业务名）',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `ALIAS`             VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「alias」- 别名',             -- 属性别名（业务名）
+    `COMMENTS`          TEXT          COLLATE utf8mb4_bin COMMENT '「comments」- 当前属性的描述信息',
+    `EXPRESSION`        TEXT          COLLATE utf8mb4_bin COMMENT '「expression」- 表达式',
+    `IN_COMPONENT`      VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「inComponent」- 写入插件',
+    `IS_ARRAY`          BIT(1)        DEFAULT NULL COMMENT '「isArray」- 是否集合属性',                       -- 是否集合属性，集合属性在导入导出时可用（保留）
+    `IS_CONFIRM`        BIT(1)        DEFAULT NULL COMMENT '「isConfirm」- 是否生成待确认变更',               -- 是否生成待确认变更，只有放在待确认变更中的数据需要生成待确认变更
+    `IS_LOCK`           BIT(1)        DEFAULT NULL COMMENT '「isLock」- 是否锁定',                            -- 是否锁定，锁定属性不可删除
+    `IS_REFER`          BIT(1)        DEFAULT NULL COMMENT '「isRefer」- 是否引用属性的主属性',               -- 是否引用属性的主属性，主属性才可拥有 sourceReference 配置，根据 source 有区别
+    `IS_SYNC_IN`        BIT(1)        DEFAULT NULL COMMENT '「isSyncIn」- 是否同步读',
+    `IS_SYNC_OUT`       BIT(1)        DEFAULT NULL COMMENT '「isSyncOut」- 是否同步写',
+    `IS_TRACK`          BIT(1)        DEFAULT NULL COMMENT '「isTrack」- 是否实现历史记录',                   -- 是否实现历史记录，如果是 isTrack 那么启用 ACTIVITY 的变更记录，对应 ITEM
+    `NAME`              VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `NORMALIZE`         TEXT          COLLATE utf8mb4_bin COMMENT '「normalize」- 表达式',
+    `OUT_COMPONENT`     VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「outComponent」- 读取插件',
+    `SOURCE`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「source」- 关联实体ID',
+    `SOURCE_CONFIG`     TEXT          COLLATE utf8mb4_bin COMMENT '「sourceConfig」- 数据集配置',             -- 数据集配置（区分 Array 和 Object）
+    `SOURCE_EXTERNAL`   TEXT          COLLATE utf8mb4_bin COMMENT '「sourceExternal」- 外部配置信息',         -- 外部配置信息（ type = EXTERNAL ）
+    `SOURCE_FIELD`      VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sourceField」- 可选',       -- 可选，如果不设置则以name为主
+    `SOURCE_REFERENCE`  TEXT          COLLATE utf8mb4_bin COMMENT '「sourceReference」- 引用配置信息',        -- 引用配置信息（ type = REFERENCE）
 
-    /*
-     * INTERNAL  -  CMDB平台内部和数据库绑定的字段
-     * REFERENCE -  CMDB平台内部引用专用数据库
-     * EXTERNAL  -  CMDB平台之外的数据库字段（不落库，只读取）
-     *
-     */
-    `TYPE` VARCHAR
-(
-    10
-) COMMENT '「type」- INTERNAL/EXTERNAL/REFERENCE属性',
-    `EXPRESSION` TEXT COMMENT '「expression」- 表达式',
-    `NORMALIZE` TEXT COMMENT '「normalize」- 表达式',
-    `IN_COMPONENT` VARCHAR
-(
-    255
-) COMMENT '「inComponent」- 写入插件',
-    `OUT_COMPONENT` VARCHAR
-(
-    255
-) COMMENT '「outComponent」- 读取插件',
-    `MODEL_ID` VARCHAR
-(
-    36
-) COMMENT '「modelId」- 关联的模型ID',
-    `COMMENTS` TEXT COMMENT '「comments」- 当前属性的描述信息',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`              VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',              -- [类型],
+    `MODEL_ID`          VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「modelId」- 模型标识',
 
-    -- 扩展专用配置
-    /*
-     * 目前出现的几种配置类型：
-     * 1）type = INTERNAL, isArray = true
-     * -- 内部字段，直接存储的数组类型字段
-     * -- 启用 SOURCE_CONFIG 用于存储二维数据的配置
-     * 2）type = REFERENCE, isArray = true
-     * -- 内部字段，引用类型，引用其他表的二维数据
-     * -- 启用 SOURCE_REFERENCE 存储引用信息
-     * -- 启用 SOURCE_CONFIG 用于存储二维数据的配置
-     * 3) type = REFERENCE, isArray = false
-     * -- 内部字段，引用类型，引用其他表的一维数据
-     * -- 启用 SOURCE_EXTERNAL 存储外联配置信息
-     * -- 启用 SOURCE_CONFIG 用于存储一维数据基础信息
-     * 4）type = EXTERNAL, isArray = true/false
-     * -- 外部平台的字段信息，可 true，可 false
-     * 注：type = INTERNAL 的时候不需要额外的配置
-     */
-    `SOURCE` VARCHAR
-(
-    255
-) COMMENT '「source」- 关联实体ID',
-    `SOURCE_FIELD` VARCHAR
-(
-    255
-) COMMENT '「sourceField」- 可选，如果不设置则以name为主',
-    /*
-     * 基本数据结构
-     * {
-     *     "field":{
-     *          "字段名": "字段值"
-     *     },
-     *     "linker":{
-     *          "源字段": "目标字段"
-     *     },
-     *     "reference": {
-     *          "joinedId": "关联模型ID",
-     *          "joinedBy": "被查询字段"
-     *     }
-     * }
-     */
-    `SOURCE_CONFIG` TEXT COMMENT '「sourceConfig」- 数据集配置（区分 Array 和 Object）',
-    `SOURCE_REFERENCE` TEXT COMMENT '「sourceReference」- 引用配置信息（ type = REFERENCE）',
-    `SOURCE_EXTERNAL` TEXT COMMENT '「sourceExternal」- 外部配置信息（ type = EXTERNAL ）',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`             VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',         -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`         VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',          -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`            VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',             -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`            BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                            -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`          VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',      -- [国际化] 如: zh_CN, en_US,
+    `METADATA`          TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                     -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`           VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`        DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                         -- [审计] 创建时间
+    `CREATED_BY`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',       -- [审计] 创建人
+    `UPDATED_AT`        DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                         -- [审计] 更新时间
+    `UPDATED_BY`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',       -- [审计] 更新人
 
-    -- 该字段是否集合字段，如果集合则返回 Array，否则返回 Object
-    `IS_ARRAY` BIT COMMENT '「isArray」- 是否集合属性，集合属性在导入导出时可用（保留）',
-    `IS_REFER` BIT COMMENT '「isRefer」- 是否引用属性的主属性，主属性才可拥有 sourceReference 配置，根据 source 有区别',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_M_ATTRIBUTE_NAME_MODEL_ID` (`NAME`, `MODEL_ID`) USING BTREE,
+    KEY `IDX_M_ATTRIBUTE_MODEL_ID` (`MODEL_ID`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='M_ATTRIBUTE';
 
-    -- 标记
-    `IS_SYNC_IN` BIT COMMENT '「isSyncIn」- 是否同步读',
-    `IS_SYNC_OUT` BIT COMMENT '「isSyncOut」- 是否同步写',
-    `IS_LOCK` BIT COMMENT '「isLock」- 是否锁定，锁定属性不可删除',
-    `IS_TRACK` BIT COMMENT '「isTrack」- 是否实现历史记录，如果是 isTrack 那么启用 ACTIVITY 的变更记录，对应 ITEM',
-    `IS_CONFIRM` BIT COMMENT '「isConfirm」- 是否生成待确认变更，只有放在待确认变更中的数据需要生成待确认变更',
-
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA` VARCHAR
-(
-    128
-) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE` VARCHAR
-(
-    10
-) COMMENT '「language」- 使用的语言',
-    `ACTIVE` BIT COMMENT '「active」- 是否启用',
-    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY` VARCHAR
-(
-    36
-) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY` VARCHAR
-(
-    36
-) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID` VARCHAR
-(
-    36
-) COMMENT '「appId」- 应用ID',
-    `TENANT_ID` VARCHAR
-(
-    36
-) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY
-(
-    `KEY`
-) USING BTREE
-    );
-
--- changeset Lang:ox-attribute-2
-ALTER TABLE M_ATTRIBUTE
-    ADD UNIQUE (`NAME`, `MODEL_ID`) USING BTREE;
-
-ALTER TABLE M_ATTRIBUTE
-    ADD INDEX IDX_M_ATTRIBUTE_MODEL_ID (`MODEL_ID`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)

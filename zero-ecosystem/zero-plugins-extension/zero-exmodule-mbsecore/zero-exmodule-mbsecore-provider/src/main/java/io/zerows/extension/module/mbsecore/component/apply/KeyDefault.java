@@ -39,7 +39,7 @@ class KeyDefault implements AoDefault {
              */
             // 先计算
             AoDefault.apply(key, "name", this.getName(key));
-            AoDefault.apply(key, "entityId", this.entity.getKey());
+            AoDefault.apply(key, "entityId", this.entity.getId());
             // 上述流程完成过后
             final JsonArray columns = this.getColumns(key);
             key.put("columns", columns.encode());

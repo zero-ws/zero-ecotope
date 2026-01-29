@@ -127,7 +127,7 @@ public class DataSchema implements Schema {
     @Override
     public void connect(final String key) {
         // 设置 MEntity 主键
-        this.entity.setKey(key);
+        this.entity.setId(key);
         // 修改 MKey 关联主键
         this.keys.values().forEach(keyItem -> keyItem.setEntityId(key));
         // 修改 MField 关联主键

@@ -167,7 +167,7 @@ public class DataModel extends AbstractHModel implements Model {
     @Override
     public void connect(final String key) {
         // 修改 MModel 主键
-        this.model.setKey(key);
+        this.model.setId(key);
         // 修改 MAttribute 关联主键
         this.attributes.values().forEach(attribute -> attribute.setModelId(key));
     }

@@ -5,105 +5,89 @@ package io.zerows.extension.module.mbsecore.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
-import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMKey;
+import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMModelCat;
 
 import java.time.LocalDateTime;
 
 
 import static io.r2mo.vertx.jooq.shared.internal.VertxPojo.*;
 /**
- * M_KEY
+ * M_MODEL_CAT
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
-public class MKey implements VertxPojo, IMKey {
+public class MModelCat implements VertxPojo, IMModelCat {
 
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String columns;
-    private String comments;
-    private String entityId;
     private String name;
-    private String type;
+    private String catName;
     private String sigma;
-    private String tenantId;
     private String appId;
+    private String tenantId;
     private Boolean active;
     private String language;
     private String metadata;
-    private String version;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
 
-    public MKey() {}
+    public MModelCat() {}
 
-    public MKey(IMKey value) {
+    public MModelCat(IMModelCat value) {
         this.id = value.getId();
-        this.columns = value.getColumns();
-        this.comments = value.getComments();
-        this.entityId = value.getEntityId();
         this.name = value.getName();
-        this.type = value.getType();
+        this.catName = value.getCatName();
         this.sigma = value.getSigma();
-        this.tenantId = value.getTenantId();
         this.appId = value.getAppId();
+        this.tenantId = value.getTenantId();
         this.active = value.getActive();
         this.language = value.getLanguage();
         this.metadata = value.getMetadata();
-        this.version = value.getVersion();
         this.createdAt = value.getCreatedAt();
         this.createdBy = value.getCreatedBy();
         this.updatedAt = value.getUpdatedAt();
         this.updatedBy = value.getUpdatedBy();
     }
 
-    public MKey(
+    public MModelCat(
         String id,
-        String columns,
-        String comments,
-        String entityId,
         String name,
-        String type,
+        String catName,
         String sigma,
-        String tenantId,
         String appId,
+        String tenantId,
         Boolean active,
         String language,
         String metadata,
-        String version,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime updatedAt,
         String updatedBy
     ) {
         this.id = id;
-        this.columns = columns;
-        this.comments = comments;
-        this.entityId = entityId;
         this.name = name;
-        this.type = type;
+        this.catName = catName;
         this.sigma = sigma;
-        this.tenantId = tenantId;
         this.appId = appId;
+        this.tenantId = tenantId;
         this.active = active;
         this.language = language;
         this.metadata = metadata;
-        this.version = version;
         this.createdAt = createdAt;
         this.createdBy = createdBy;
         this.updatedAt = updatedAt;
         this.updatedBy = updatedBy;
     }
 
-        public MKey(io.vertx.core.json.JsonObject json) {
+        public MModelCat(io.vertx.core.json.JsonObject json) {
                 this();
                 fromJson(json);
         }
 
     /**
-     * Getter for <code>ZDB.M_KEY.ID</code>. 「id」- 主键
+     * Getter for <code>ZDB.M_MODEL_CAT.ID</code>. 「id」- 分类ID
      */
     @Override
     public String getId() {
@@ -111,67 +95,16 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.ID</code>. 「id」- 主键
+     * Setter for <code>ZDB.M_MODEL_CAT.ID</code>. 「id」- 分类ID
      */
     @Override
-    public MKey setId(String id) {
+    public MModelCat setId(String id) {
         this.id = id;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArra
-     */
-    @Override
-    public String getColumns() {
-        return this.columns;
-    }
-
-    /**
-     * Setter for <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArra
-     */
-    @Override
-    public MKey setColumns(String columns) {
-        this.columns = columns;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.M_KEY.COMMENTS</code>. 「comments」- 当前属性的描述信息
-     */
-    @Override
-    public String getComments() {
-        return this.comments;
-    }
-
-    /**
-     * Setter for <code>ZDB.M_KEY.COMMENTS</code>. 「comments」- 当前属性的描述信息
-     */
-    @Override
-    public MKey setComments(String comments) {
-        this.comments = comments;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.M_KEY.ENTITY_ID</code>. 「entityId」- 关联的实体ID
-     */
-    @Override
-    public String getEntityId() {
-        return this.entityId;
-    }
-
-    /**
-     * Setter for <code>ZDB.M_KEY.ENTITY_ID</code>. 「entityId」- 关联的实体ID
-     */
-    @Override
-    public MKey setEntityId(String entityId) {
-        this.entityId = entityId;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.M_KEY.NAME</code>. 「name」- 名称
+     * Getter for <code>ZDB.M_MODEL_CAT.NAME</code>. 「name」- 定义名称
      */
     @Override
     public String getName() {
@@ -179,33 +112,33 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.NAME</code>. 「name」- 名称
+     * Setter for <code>ZDB.M_MODEL_CAT.NAME</code>. 「name」- 定义名称
      */
     @Override
-    public MKey setName(String name) {
+    public MModelCat setName(String name) {
         this.name = name;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.TYPE</code>. 「type」- 类型
+     * Getter for <code>ZDB.M_MODEL_CAT.CAT_NAME</code>. 「catName」- 分类别名
      */
     @Override
-    public String getType() {
-        return this.type;
+    public String getCatName() {
+        return this.catName;
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.TYPE</code>. 「type」- 类型
+     * Setter for <code>ZDB.M_MODEL_CAT.CAT_NAME</code>. 「catName」- 分类别名
      */
     @Override
-    public MKey setType(String type) {
-        this.type = type;
+    public MModelCat setCatName(String catName) {
+        this.catName = catName;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.SIGMA</code>. 「sigma」- 统一标识
+     * Getter for <code>ZDB.M_MODEL_CAT.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public String getSigma() {
@@ -213,33 +146,16 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.SIGMA</code>. 「sigma」- 统一标识
+     * Setter for <code>ZDB.M_MODEL_CAT.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
-    public MKey setSigma(String sigma) {
+    public MModelCat setSigma(String sigma) {
         this.sigma = sigma;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.TENANT_ID</code>. 「tenantId」- 租户ID
-     */
-    @Override
-    public String getTenantId() {
-        return this.tenantId;
-    }
-
-    /**
-     * Setter for <code>ZDB.M_KEY.TENANT_ID</code>. 「tenantId」- 租户ID
-     */
-    @Override
-    public MKey setTenantId(String tenantId) {
-        this.tenantId = tenantId;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.M_KEY.APP_ID</code>. 「appId」- 应用ID
+     * Getter for <code>ZDB.M_MODEL_CAT.APP_ID</code>. 「appId」- 应用ID
      */
     @Override
     public String getAppId() {
@@ -247,16 +163,33 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.APP_ID</code>. 「appId」- 应用ID
+     * Setter for <code>ZDB.M_MODEL_CAT.APP_ID</code>. 「appId」- 应用ID
      */
     @Override
-    public MKey setAppId(String appId) {
+    public MModelCat setAppId(String appId) {
         this.appId = appId;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.M_MODEL_CAT.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    @Override
+    public String getTenantId() {
+        return this.tenantId;
+    }
+
+    /**
+     * Setter for <code>ZDB.M_MODEL_CAT.TENANT_ID</code>. 「tenantId」- 租户ID
+     */
+    @Override
+    public MModelCat setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.M_MODEL_CAT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -264,16 +197,16 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.M_MODEL_CAT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
-    public MKey setActive(Boolean active) {
+    public MModelCat setActive(Boolean active) {
         this.active = active;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.M_MODEL_CAT.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public String getLanguage() {
@@ -281,16 +214,16 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.M_MODEL_CAT.LANGUAGE</code>. 「language」- 语言
      */
     @Override
-    public MKey setLanguage(String language) {
+    public MModelCat setLanguage(String language) {
         this.language = language;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.M_MODEL_CAT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
     public String getMetadata() {
@@ -298,33 +231,16 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.M_MODEL_CAT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public MKey setMetadata(String metadata) {
+    public MModelCat setMetadata(String metadata) {
         this.metadata = metadata;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.VERSION</code>. 「version」- 版本号
-     */
-    @Override
-    public String getVersion() {
-        return this.version;
-    }
-
-    /**
-     * Setter for <code>ZDB.M_KEY.VERSION</code>. 「version」- 版本号
-     */
-    @Override
-    public MKey setVersion(String version) {
-        this.version = version;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.M_KEY.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>ZDB.M_MODEL_CAT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public LocalDateTime getCreatedAt() {
@@ -332,16 +248,16 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>ZDB.M_MODEL_CAT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
-    public MKey setCreatedAt(LocalDateTime createdAt) {
+    public MModelCat setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>ZDB.M_MODEL_CAT.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public String getCreatedBy() {
@@ -349,16 +265,16 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>ZDB.M_MODEL_CAT.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
-    public MKey setCreatedBy(String createdBy) {
+    public MModelCat setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>ZDB.M_MODEL_CAT.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public LocalDateTime getUpdatedAt() {
@@ -366,16 +282,16 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>ZDB.M_MODEL_CAT.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
-    public MKey setUpdatedAt(LocalDateTime updatedAt) {
+    public MModelCat setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_KEY.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>ZDB.M_MODEL_CAT.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public String getUpdatedBy() {
@@ -383,10 +299,10 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     /**
-     * Setter for <code>ZDB.M_KEY.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>ZDB.M_MODEL_CAT.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
-    public MKey setUpdatedBy(String updatedBy) {
+    public MModelCat setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
         return this;
     }
@@ -399,30 +315,12 @@ public class MKey implements VertxPojo, IMKey {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final MKey other = (MKey) obj;
+        final MModelCat other = (MModelCat) obj;
         if (this.id == null) {
             if (other.id != null)
                 return false;
         }
         else if (!this.id.equals(other.id))
-            return false;
-        if (this.columns == null) {
-            if (other.columns != null)
-                return false;
-        }
-        else if (!this.columns.equals(other.columns))
-            return false;
-        if (this.comments == null) {
-            if (other.comments != null)
-                return false;
-        }
-        else if (!this.comments.equals(other.comments))
-            return false;
-        if (this.entityId == null) {
-            if (other.entityId != null)
-                return false;
-        }
-        else if (!this.entityId.equals(other.entityId))
             return false;
         if (this.name == null) {
             if (other.name != null)
@@ -430,11 +328,11 @@ public class MKey implements VertxPojo, IMKey {
         }
         else if (!this.name.equals(other.name))
             return false;
-        if (this.type == null) {
-            if (other.type != null)
+        if (this.catName == null) {
+            if (other.catName != null)
                 return false;
         }
-        else if (!this.type.equals(other.type))
+        else if (!this.catName.equals(other.catName))
             return false;
         if (this.sigma == null) {
             if (other.sigma != null)
@@ -442,17 +340,17 @@ public class MKey implements VertxPojo, IMKey {
         }
         else if (!this.sigma.equals(other.sigma))
             return false;
-        if (this.tenantId == null) {
-            if (other.tenantId != null)
-                return false;
-        }
-        else if (!this.tenantId.equals(other.tenantId))
-            return false;
         if (this.appId == null) {
             if (other.appId != null)
                 return false;
         }
         else if (!this.appId.equals(other.appId))
+            return false;
+        if (this.tenantId == null) {
+            if (other.tenantId != null)
+                return false;
+        }
+        else if (!this.tenantId.equals(other.tenantId))
             return false;
         if (this.active == null) {
             if (other.active != null)
@@ -471,12 +369,6 @@ public class MKey implements VertxPojo, IMKey {
                 return false;
         }
         else if (!this.metadata.equals(other.metadata))
-            return false;
-        if (this.version == null) {
-            if (other.version != null)
-                return false;
-        }
-        else if (!this.version.equals(other.version))
             return false;
         if (this.createdAt == null) {
             if (other.createdAt != null)
@@ -510,18 +402,14 @@ public class MKey implements VertxPojo, IMKey {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result + ((this.columns == null) ? 0 : this.columns.hashCode());
-        result = prime * result + ((this.comments == null) ? 0 : this.comments.hashCode());
-        result = prime * result + ((this.entityId == null) ? 0 : this.entityId.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
-        result = prime * result + ((this.type == null) ? 0 : this.type.hashCode());
+        result = prime * result + ((this.catName == null) ? 0 : this.catName.hashCode());
         result = prime * result + ((this.sigma == null) ? 0 : this.sigma.hashCode());
-        result = prime * result + ((this.tenantId == null) ? 0 : this.tenantId.hashCode());
         result = prime * result + ((this.appId == null) ? 0 : this.appId.hashCode());
+        result = prime * result + ((this.tenantId == null) ? 0 : this.tenantId.hashCode());
         result = prime * result + ((this.active == null) ? 0 : this.active.hashCode());
         result = prime * result + ((this.language == null) ? 0 : this.language.hashCode());
         result = prime * result + ((this.metadata == null) ? 0 : this.metadata.hashCode());
-        result = prime * result + ((this.version == null) ? 0 : this.version.hashCode());
         result = prime * result + ((this.createdAt == null) ? 0 : this.createdAt.hashCode());
         result = prime * result + ((this.createdBy == null) ? 0 : this.createdBy.hashCode());
         result = prime * result + ((this.updatedAt == null) ? 0 : this.updatedAt.hashCode());
@@ -531,21 +419,17 @@ public class MKey implements VertxPojo, IMKey {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("MKey (");
+        StringBuilder sb = new StringBuilder("MModelCat (");
 
         sb.append(id);
-        sb.append(", ").append(columns);
-        sb.append(", ").append(comments);
-        sb.append(", ").append(entityId);
         sb.append(", ").append(name);
-        sb.append(", ").append(type);
+        sb.append(", ").append(catName);
         sb.append(", ").append(sigma);
-        sb.append(", ").append(tenantId);
         sb.append(", ").append(appId);
+        sb.append(", ").append(tenantId);
         sb.append(", ").append(active);
         sb.append(", ").append(language);
         sb.append(", ").append(metadata);
-        sb.append(", ").append(version);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(createdBy);
         sb.append(", ").append(updatedAt);
@@ -560,20 +444,16 @@ public class MKey implements VertxPojo, IMKey {
     // -------------------------------------------------------------------------
 
     @Override
-    public void from(IMKey from) {
+    public void from(IMModelCat from) {
         setId(from.getId());
-        setColumns(from.getColumns());
-        setComments(from.getComments());
-        setEntityId(from.getEntityId());
         setName(from.getName());
-        setType(from.getType());
+        setCatName(from.getCatName());
         setSigma(from.getSigma());
-        setTenantId(from.getTenantId());
         setAppId(from.getAppId());
+        setTenantId(from.getTenantId());
         setActive(from.getActive());
         setLanguage(from.getLanguage());
         setMetadata(from.getMetadata());
-        setVersion(from.getVersion());
         setCreatedAt(from.getCreatedAt());
         setCreatedBy(from.getCreatedBy());
         setUpdatedAt(from.getUpdatedAt());
@@ -581,7 +461,7 @@ public class MKey implements VertxPojo, IMKey {
     }
 
     @Override
-    public <E extends IMKey> E into(E into) {
+    public <E extends IMModelCat> E into(E into) {
         into.from(this);
         return into;
     }

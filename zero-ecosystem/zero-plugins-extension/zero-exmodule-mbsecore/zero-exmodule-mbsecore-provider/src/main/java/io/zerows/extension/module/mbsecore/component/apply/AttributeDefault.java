@@ -34,7 +34,7 @@ class AttributeDefault implements AoDefault {
              */
             AoDefault.apply(attribute, "sourceField", attribute.getValue("name"));
             AoDefault.apply(attribute, "type", EmAttribute.Type.INTERNAL.name());
-            AoDefault.apply(attribute, "modelId", this.model.getKey());
+            AoDefault.apply(attribute, "modelId", this.model.getId());
             AoDefault.apply(attribute);
         }
     }

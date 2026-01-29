@@ -82,7 +82,7 @@ class AoRefineSchema implements AoRefine {
     private JsonObject criteria(final String name, final MEntity entity) {
         final JsonObject filters = new JsonObject();
         filters.put(KName.NAME, name);
-        filters.put(KName.ENTITY_ID, entity.getKey());
+        filters.put(KName.ENTITY_ID, entity.getId());
         filters.put(VString.EMPTY, Boolean.TRUE);
         return filters;
     }
@@ -110,7 +110,7 @@ class AoRefineSchema implements AoRefine {
             .upsertAsync(this.criteria(updated), updated)
             .compose(entity -> {
                 // 设置关系信息重建
-                schema.connect(entity.getKey());
+                schema.connect(entity.getId());
                 final List<Future<JsonArray>> combine = new ArrayList<>();
                 // Schema -> Field
                 combine.add(this.saveField(schema, entity));
