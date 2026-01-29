@@ -133,7 +133,7 @@ public class FetchActor {
                     .compose(fTrans -> {
                         Set<String> seria = null;
                         for (final FTrans item : fTrans) {
-                            seria = Set.of(item.getKey());
+                            seria = Set.of(item.getId());
                         }
                         return DB.on(FTransItemDao.class).<FTransItem>fetchAsync("TRANSACTION_ID", seria);
                     }).compose(fTransItems -> {

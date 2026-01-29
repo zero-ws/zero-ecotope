@@ -42,7 +42,7 @@ public class FetchService implements FetchStub {
 
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.Finance.BILL_ID + ",i",
-            Ut.toJArray(bills.stream().map(FBill::getKey)
+            Ut.toJArray(bills.stream().map(FBill::getId)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet()))
         );
@@ -67,7 +67,7 @@ public class FetchService implements FetchStub {
 
     @Override
     public Future<List<FSettlementItem>> fetchBySettlements(final List<FSettlement> settlements) {
-        final Set<String> settlementIds = Ut.valueSetString(settlements, FSettlement::getKey);
+        final Set<String> settlementIds = Ut.valueSetString(settlements, FSettlement::getId);
         final JsonObject condition = Ux.whereAnd();
         condition.put(KName.Finance.SETTLEMENT_ID + ",i", Ut.toJArray(settlementIds));
         return DB.on(FSettlementItemDao.class).fetchAsync(condition);

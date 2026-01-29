@@ -71,13 +71,13 @@ class Step05Debt implements Step<List<FSettlement>, FDebt> {
                 final String string = data.getString("amount");
                 entity.setAmount(new BigDecimal(string));
                 entity.setAmountBalance(new BigDecimal(string));
-                entity.setKey(null);
+                entity.setId(null);
                 return DB.on(FDebtDao.class).insertAsync(entity);
             })
             .compose(inserted -> {
                 // 更新 items
                 final List<FSettlementItem> items = ref.get();
-                items.forEach(item -> item.setDebtId(inserted.getKey()));
+                items.forEach(item -> item.setDebtId(inserted.getId()));
                 return DB.on(FSettlementItemDao.class).updateAsync(items)
                     .compose(nil -> Ux.future(inserted));
             });
@@ -89,7 +89,7 @@ class Step05Debt implements Step<List<FSettlement>, FDebt> {
             return Ux.futureL();
         }
         final Set<String> ids = settlements.stream()
-            .map(FSettlement::getKey)
+            .map(FSettlement::getId)
             .collect(Collectors.toSet());
 
         final String sigma = settlements.get(VValue.IDX).getSigma();
@@ -103,7 +103,7 @@ class Step05Debt implements Step<List<FSettlement>, FDebt> {
                 return Ux.future(items);
             }
             return Ux.future(items.stream()
-                .filter(item -> keySelected.contains(item.getKey()))
+                .filter(item -> keySelected.contains(item.getId()))
                 .collect(Collectors.toList()));
         });
     }

@@ -27,7 +27,7 @@ class IkTrans2TransItem implements IkWay<FTrans, FTransItem> {
     public void transfer(final FTrans transaction, final List<FTransItem> items) {
         for (int idx = 0; idx < items.size(); idx++) {
             final FTransItem item = items.get(idx);
-            item.setTransactionId(transaction.getKey());
+            item.setTransactionId(transaction.getId());
             if (Objects.isNull(item.getCode()) || Objects.isNull(item.getSerial())) {
                 item.setSerial(transaction.getSerial() + "-" + Ut.fromAdjust(idx + 1, 2));
                 item.setCode(transaction.getCode() + "-" + Ut.fromAdjust(idx + 1, 2));

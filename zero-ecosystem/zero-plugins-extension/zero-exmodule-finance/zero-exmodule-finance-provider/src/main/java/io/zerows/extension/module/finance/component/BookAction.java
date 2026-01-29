@@ -61,7 +61,7 @@ class BookAction {
             if (books.isEmpty()) {
                 return Ux.future(new ConcurrentHashMap<>());
             }
-            return Ux.future(Ut.elementMap(books, FBook::getKey));
+            return Ux.future(Ut.elementMap(books, FBook::getId));
         });
     }
 }

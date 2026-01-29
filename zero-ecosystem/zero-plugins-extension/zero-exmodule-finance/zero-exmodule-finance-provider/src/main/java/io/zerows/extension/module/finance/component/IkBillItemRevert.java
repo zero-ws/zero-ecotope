@@ -41,12 +41,12 @@ class IkBillItemRevert implements IkWay<FBillItem, FBillItem> {
         item.setActive(Boolean.FALSE);
         item.setStatus(FmConstant.Status.INVALID);
         // To
-        to.setKey(null);
+        to.setId(null);
         to.setBillId(item.getBillId());
         to.setSerial(item.getSerial() + "R");
         to.setCode(item.getCode() + "R");
         to.setStatus(FmConstant.Status.INVALID);
-        to.setRelatedId(item.getKey());
+        to.setRelatedId(item.getId());
         to.setIncome(item.getIncome());
         Ke.umCreated(to, item);
     }

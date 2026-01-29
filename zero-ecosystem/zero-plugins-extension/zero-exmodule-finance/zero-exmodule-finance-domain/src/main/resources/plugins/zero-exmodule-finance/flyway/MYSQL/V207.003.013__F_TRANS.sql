@@ -1,61 +1,56 @@
--- liquibase formatted sql
-
--- changeset Lang:f-trans-1
 DROP TABLE IF EXISTS `F_TRANS`;
-CREATE TABLE `F_TRANS`
-(
-    `KEY`        VARCHAR(36) COMMENT '「key」- 交易单主键ID',
-    `NAME`       VARCHAR(255) COMMENT '「name」 - 交易单标题',
-    `CODE`       VARCHAR(255)   NOT NULL COMMENT '「code」 - 交易单编号',
-    `SERIAL`     VARCHAR(36)    NOT NULL COMMENT '「serial」 - 交易单据号',
+CREATE TABLE IF NOT EXISTS `F_TRANS` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`          VARCHAR(36)     COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                        -- [主键] 采用 Snowflake/UUID，避开自增ID
 
-    /*
-     * 交易单类型
-     * SETTLEMENT - 针对结算单的交易
-     * DEBT - 针对欠款单的交易
-     * REFUND - 针对退款单的交易
-     */
-    `TYPE`       VARCHAR(32)    NOT NULL COMMENT '「type」 - 交易单类型',
-    `STATUS`     VARCHAR(36)    NOT NULL COMMENT '「status」 - 交易状态',
-    -- 交易总金额
-    `AMOUNT`     DECIMAL(18, 2) NOT NULL COMMENT '「amount」——价税合计，所有明细对应的实际结算金额',
-    `AMOUNT_PRE` DECIMAL(18, 2) COMMENT '「amountPre」预付金额',
-    `AMOUNT_GAP` DECIMAL(18, 2) COMMENT '「amountGap」——差价，根据 rounded 计算差价', -- 可以为空，如果没有此值则表示没有差价
-    /*
-     * 此处在原始基础上拓展了五个值
-     * - NONE：不处理
-     * - HALF：四舍五入
-     * - FLOOR：零头舍弃
-     * - CEIL：零头入进
-     * - INPUT：自定义
-     */
-    `ROUNDED`    VARCHAR(12) COMMENT '「rounded」抹零方式，不同抹零方式会影响验证规则',
-    -- 预付信息
-    `PREPAY`     BIT COMMENT '「prepay」 - 是否预付',
-    `COMMENT`    LONGTEXT COMMENT '「comment」 - 备注',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `AMOUNT`      DECIMAL(18, 2)  NOT NULL COMMENT '「amount」——价税合计，所有明细对应的实际结算金额',
+    `AMOUNT_GAP`  DECIMAL(18, 2)  DEFAULT NULL COMMENT '「amountGap」——差价，根据 rounded 计算差价',
+    `AMOUNT_PRE`  DECIMAL(18, 2)  DEFAULT NULL COMMENT '「amountPre」预付金额',
+    `CODE`        VARCHAR(255)    NOT NULL COLLATE utf8mb4_bin COMMENT '「code」- 编号',
+    `COMMENT`     LONGTEXT        COLLATE utf8mb4_bin COMMENT '「comment」- 备注',
+    `END_AT`      DATETIME        DEFAULT NULL COMMENT '「endAt」 - 结束时间',
+    `GROUP_BY`    VARCHAR(64)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「groupBy」 - 分组',
+    `NAME`        VARCHAR(255)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `PREPAY`      BIT(1)          DEFAULT NULL COMMENT '「prepay」 - 是否预付',
+    `ROUNDED`     VARCHAR(12)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「rounded」抹零方式，不同抹零方式会影响验证规则',
+    `SERIAL`      VARCHAR(36)     NOT NULL COLLATE utf8mb4_bin COMMENT '「serial」- 单号',
+    `START_AT`    DATETIME        DEFAULT NULL COMMENT '「startAt」 - 开始时间',
 
-    `START_AT`   DATETIME COMMENT '「startAt」 - 开始时间',
-    `END_AT`     DATETIME COMMENT '「endAt」 - 结束时间',
-    `GROUP_BY`   VARCHAR(64) COMMENT '「groupBy」 - 分组',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`        VARCHAR(32)     NOT NULL COLLATE utf8mb4_bin COMMENT '「type」- 类型',                      -- [类型],
+    `STATUS`      VARCHAR(36)     NOT NULL COLLATE utf8mb4_bin COMMENT '「status」- 状态',
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`      VARCHAR(128) COMMENT '「sigma」 - 用户组绑定的统一标识',
-    `LANGUAGE`   VARCHAR(10) COMMENT '「language」 - 使用的语言',
-    `ACTIVE`     BIT COMMENT '「active」 - 是否启用',
-    `METADATA`   TEXT COMMENT '「metadata」 - 附加配置数据',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`       VARCHAR(128)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',             -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`   VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',              -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`      VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                 -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`      BIT(1)          DEFAULT NULL COMMENT '「active」- 是否启用',                                -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`    VARCHAR(10)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',          -- [国际化] 如: zh_CN, en_US,
+    `METADATA`    TEXT            COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                         -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`     VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`  DATETIME        DEFAULT NULL COMMENT '「createdAt」- 创建时间',                             -- [审计] 创建时间
+    `CREATED_BY`  VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',           -- [审计] 创建人
+    `UPDATED_AT`  DATETIME        DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                             -- [审计] 更新时间
+    `UPDATED_BY`  VARCHAR(36)     COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',           -- [审计] 更新人
 
-    -- Auditor字段
-    `CREATED_AT` DATETIME COMMENT '「createdAt」 - 创建时间',
-    `CREATED_BY` VARCHAR(36) COMMENT '「createdBy」 - 创建人',
-    `UPDATED_AT` DATETIME COMMENT '「updatedAt」 - 更新时间',
-    `UPDATED_BY` VARCHAR(36) COMMENT '「updatedBy」 - 更新人',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_F_TRANS_CODE_SIGMA` (`CODE`, `SIGMA`) USING BTREE,
+    UNIQUE KEY `UK_F_TRANS_SERIAL_SIGMA` (`SERIAL`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='F_TRANS';
 
-    `APP_ID`     VARCHAR(36) COMMENT '「appId」 - 应用ID',
-    `TENANT_ID`  VARCHAR(36) COMMENT '「tenantId」 - 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:f-trans-2
-ALTER TABLE F_TRANS
-    ADD UNIQUE (`CODE`, `SIGMA`);
-ALTER TABLE F_TRANS
-    ADD UNIQUE (`SERIAL`, `SIGMA`);
+-- 缺失公共字段：
+-- - VERSION (版本)

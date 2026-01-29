@@ -39,7 +39,7 @@ class MakerBillItemTransfer implements Maker<List<FBillItem>, FBillItem> {
             // 此处序列化和反序列化是必须的，防止引用重复，此处要的效果是拷贝
             final JsonObject itemJson = Ux.toJson(item);
             final FBillItem itemN = Ux.fromJson(itemJson, FBillItem.class);
-            itemN.setRelatedId(item.getKey());
+            itemN.setRelatedId(item.getId());
             itemN.setCreatedAt(LocalDateTime.now());
             itemN.setCreatedBy(item.getUpdatedBy());
             itemTo.add(itemN);

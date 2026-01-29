@@ -47,7 +47,7 @@ public class EndTransService implements EndTransStub {
         {
             params.put(KName.COMMENT, settlement.getComment());
             params.put(KName.TYPE, EmTran.Type.SETTLEMENT.name());
-            params.put(KName.KEYS, new JsonArray().add(settlement.getKey()));
+            params.put(KName.KEYS, new JsonArray().add(settlement.getId()));
         }
         // 1. 构造 FTrans
         return Step.step06T().flatter(data, List.of(settlement))
@@ -61,7 +61,7 @@ public class EndTransService implements EndTransStub {
         {
             params.put(KName.COMMENT, Ut.valueString(data, KName.COMMENT));
             params.put(KName.TYPE, EmTran.Type.SETTLEMENT.name());
-            final JsonArray keys = Ut.toJArray(Ut.valueSetString(settlements, FSettlement::getKey));
+            final JsonArray keys = Ut.toJArray(Ut.valueSetString(settlements, FSettlement::getId));
             params.put(KName.KEYS, keys);
         }
         // 1. 构造 FTrans
@@ -77,7 +77,7 @@ public class EndTransService implements EndTransStub {
             // 这种模式下前端已经传入了 type 信息
             params.put(KName.COMMENT, Ut.valueString(data, KName.COMMENT));
             params.put(KName.TYPE, Ut.valueString(data, KName.TYPE));
-            final JsonArray keys = Ut.toJArray(Ut.valueSetString(debts, FDebt::getKey));
+            final JsonArray keys = Ut.toJArray(Ut.valueSetString(debts, FDebt::getId));
             params.put(KName.KEYS, keys);
         }
         // 1. 构造 FTrans
@@ -95,7 +95,7 @@ public class EndTransService implements EndTransStub {
 
                 IkWay.ofT2TI().transfer(trans, payments);
                 // 防重复创建：Duplicate entry 'Cash' for key 'name_UNIQUE'
-                payments.forEach(payment -> payment.setKey(null));
+                payments.forEach(payment -> payment.setId(null));
 
                 return DB.on(FTransItemDao.class).insertAsync(payments);
             })
@@ -152,8 +152,8 @@ public class EndTransService implements EndTransStub {
                 final List<DataTran> response = new ArrayList<>();
                 transList.forEach(tran -> {
                     final DataTran object = DataTran.instance().transaction(tran);
-                    final List<FTransItem> itemData = grouped.getOrDefault(tran.getKey(), new ArrayList<>());
-                    final List<FTransOf> ofData = tranMap.getOrDefault(tran.getKey(), new ArrayList<>());
+                    final List<FTransItem> itemData = grouped.getOrDefault(tran.getId(), new ArrayList<>());
+                    final List<FTransOf> ofData = tranMap.getOrDefault(tran.getId(), new ArrayList<>());
                     response.add(object.items(itemData).of(ofData));
                 });
                 return Ux.future(response);

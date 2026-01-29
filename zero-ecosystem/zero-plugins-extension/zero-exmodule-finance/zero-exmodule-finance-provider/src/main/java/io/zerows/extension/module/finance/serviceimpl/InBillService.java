@@ -58,7 +58,7 @@ public class InBillService implements InBillStub {
          * We must remove `key` of items instead of duplicated key met here
          * Fix:
          */
-        items.forEach(item -> item.setKey(null));
+        items.forEach(item -> item.setId(null));
 
         return DB.on(FBillDao.class).insertAsync(bill).compose(inserted -> {
             // UCA

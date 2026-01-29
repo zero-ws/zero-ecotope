@@ -46,8 +46,8 @@ class MakerUpSettlementItem implements Maker<FSettlement, FSettlementItem> {
 
             record.remove(KName.KEY);
             final FSettlementItem settlementItem = Ux.fromJson(record, FSettlementItem.class);
-            settlementItem.setSettlementId(settlement.getKey());
-            settlementItem.setRelatedId(item.getKey());
+            settlementItem.setSettlementId(settlement.getId());
+            settlementItem.setRelatedId(item.getId());
             settlementItem.setIncome(item.getIncome());
 
             Ke.umCreated(settlementItem, item);

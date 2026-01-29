@@ -40,7 +40,7 @@ class IkBill2PreAuthorize implements IkWay<FBill, FPreAuthorize> {
             return;
         }
 
-        authorize.setBillId(bill.getKey());
+        authorize.setBillId(bill.getId());
         authorize.setSerial(bill.getSerial() + "-A");
         authorize.setCode(bill.getCode() + "-A");
         authorize.setStatus(FmConstant.Status.PENDING);

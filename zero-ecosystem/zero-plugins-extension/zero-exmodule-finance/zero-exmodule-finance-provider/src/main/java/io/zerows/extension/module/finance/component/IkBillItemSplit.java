@@ -51,13 +51,13 @@ class IkBillItemSplit implements IkWay<FBillItem, FBillItem> {
         item.setStatus(FmConstant.Status.INVALID);
         for (int idx = 0; idx < size; idx++) {
             final FBillItem split = items.get(idx);
-            split.setKey(null);
+            split.setId(null);
             split.setStartAt(item.getStartAt());
             split.setBillId(item.getBillId());
             split.setSerial(item.getSerial() + FmConstant.SEQ[idx]);
             split.setCode(item.getCode() + FmConstant.SEQ[idx]);
             split.setStatus(FmConstant.Status.PENDING);
-            split.setRelatedId(item.getKey());
+            split.setRelatedId(item.getId());
             split.setIncome(item.getIncome());
             // active, sigma
             Ke.umCreated(split, item);

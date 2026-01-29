@@ -81,14 +81,14 @@ public class DataBill implements Serializable {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
             final List<FBill> bills = this.bills.stream()
-                .filter(item -> bIds.contains(item.getKey()))
+                .filter(item -> bIds.contains(item.getId()))
                 .collect(Collectors.toList());
             final Set<String> sIds = this.items.stream()
                 .map(FBillItem::getSettlementId)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
             final List<FSettlement> settlements = this.settlements.stream()
-                .filter(item -> sIds.contains(item.getKey()))
+                .filter(item -> sIds.contains(item.getId()))
                 .collect(Collectors.toList());
             response.put("bills", Ux.toJson(bills));
             response.put("settlements", Ux.toJson(settlements));

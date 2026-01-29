@@ -46,7 +46,7 @@ class StepSync01Debt implements Step<User, FDebt> {
                 final ConcurrentMap<String, JsonObject> dataMap = Ut.elementMap(data, KName.KEY);
 
                 debts.forEach(debt -> {
-                    final JsonObject dataJ = dataMap.get(debt.getKey());
+                    final JsonObject dataJ = dataMap.get(debt.getId());
                     if (Ut.isNotNil(dataJ)) {
                         this.executeFinished(debt, dataJ, user);
                     }

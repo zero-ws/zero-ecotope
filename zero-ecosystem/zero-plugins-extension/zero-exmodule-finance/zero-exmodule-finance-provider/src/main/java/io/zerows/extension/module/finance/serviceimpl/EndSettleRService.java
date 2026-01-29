@@ -207,7 +207,7 @@ public class EndSettleRService implements EndSettleRStub {
             return DB.on(FDebtDao.class).<FDebt>fetchInAsync(KName.KEY, debtIds).compose(debts -> {
                 final ConcurrentMap<String, List<FSettlementItem>> mapItem = Ut.elementGroup(items, FSettlementItem::getDebtId);
                 debts.forEach(debt -> {
-                    final String debtId = debt.getKey();
+                    final String debtId = debt.getId();
                     final List<FSettlementItem> itemList = mapItem.getOrDefault(debtId, new ArrayList<>());
                     itemList.forEach(item -> {
                         final JsonArray statusQ = statusMap.getOrDefault(item.getSettlementId(), new JsonArray());

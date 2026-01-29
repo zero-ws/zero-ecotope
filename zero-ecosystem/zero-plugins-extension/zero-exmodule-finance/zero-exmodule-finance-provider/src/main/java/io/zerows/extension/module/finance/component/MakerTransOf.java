@@ -35,7 +35,7 @@ class MakerTransOf implements Maker<FTrans, List<FTransOf>> {
 
         keys.forEach(key -> {
             final FTransOf transOf = new FTransOf();
-            transOf.setTransId(trans.getKey());
+            transOf.setTransId(trans.getId());
             transOf.setObjectId(key);
 
             transOf.setObjectType(type);

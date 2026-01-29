@@ -72,7 +72,7 @@ class FmBook {
         created.setOrderId(book.getOrderId());
         created.setAmount(BigDecimal.ZERO);
         created.setMajor(Boolean.FALSE);
-        created.setParentId(book.getKey());
+        created.setParentId(book.getId());
         // serial, code
         created.setSerial(serial);
         created.setCode(serial);

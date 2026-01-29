@@ -36,7 +36,7 @@ class Step04SettlementItem implements Step<FSettlement, FSettlementItem> {
     public Future<List<FSettlementItem>> flatter(final JsonArray data, final List<FSettlement> settlements) {
         final List<Future<List<FSettlementItem>>> futures = new ArrayList<>();
         final ConcurrentMap<String, JsonArray> grouped = Ut.elementGroup(data, KName.Finance.SETTLEMENT_ID);
-        final ConcurrentMap<String, FSettlement> settlementMap = Ut.elementMap(settlements, FSettlement::getKey);
+        final ConcurrentMap<String, FSettlement> settlementMap = Ut.elementMap(settlements, FSettlement::getId);
         grouped.forEach((settlementId, items) -> {
             if (Ut.isNotNil(settlementId) && Ut.isNotNil(items)) {
                 final FSettlement settlement = settlementMap.get(settlementId);

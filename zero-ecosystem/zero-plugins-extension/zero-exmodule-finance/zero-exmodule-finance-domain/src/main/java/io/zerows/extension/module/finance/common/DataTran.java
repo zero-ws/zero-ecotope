@@ -78,7 +78,7 @@ public class DataTran implements Serializable, HJson {
     public DataTran transaction(final FTrans trans) {
         if (Objects.nonNull(trans)) {
             this.trans = trans;
-            this.id = trans.getKey();
+            this.id = trans.getId();
         }
         return this;
     }

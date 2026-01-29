@@ -131,7 +131,7 @@ public class EndSettleWService implements EndSettleWStub {
                 final Set<String> ignoreSet = new HashSet<>();
                 items.stream()
                     .filter(item -> item.getDebtId() == null)
-                    .filter(item -> !itemsKeys.contains(item.getKey()))
+                    .filter(item -> !itemsKeys.contains(item.getId()))
                     .forEach(item -> ignoreSet.add(item.getSettlementId()));
                 final Set<String> settlementSet = Ut.toSet(settlementIds);
                 return Ux.future(Ut.elementDiff(settlementSet, ignoreSet));

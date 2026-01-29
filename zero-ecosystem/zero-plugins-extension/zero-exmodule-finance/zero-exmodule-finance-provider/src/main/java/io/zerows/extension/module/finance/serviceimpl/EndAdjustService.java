@@ -23,7 +23,7 @@ public class EndAdjustService implements EndAdjustStub {
     @Override
     public Future<FTrans> adjustAsync(final FTrans trans, final FSettlement settlement) {
         final JsonObject condition = Ux.whereAnd();
-        condition.put(KName.Finance.SETTLEMENT_ID, settlement.getKey());
+        condition.put(KName.Finance.SETTLEMENT_ID, settlement.getId());
 
         final ADB jq = DB.on(FSettlementItemDao.class);
         return jq.<FSettlementItem>fetchAsync(condition)
@@ -42,7 +42,7 @@ public class EndAdjustService implements EndAdjustStub {
     private List<FSettlementItem> buildData(final FTrans trans, final List<FSettlementItem> items) {
         // 批量设置 items 中的 finishedId
         items.forEach(item -> {
-            item.setFinishedId(trans.getKey());
+            item.setFinishedId(trans.getId());
             item.setUpdatedAt(LocalDateTime.now());
             item.setUpdatedBy(trans.getCreatedBy());
         });
