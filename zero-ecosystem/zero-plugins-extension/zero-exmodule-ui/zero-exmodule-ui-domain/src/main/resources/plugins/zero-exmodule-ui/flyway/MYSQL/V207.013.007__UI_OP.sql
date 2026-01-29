@@ -1,115 +1,51 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `UI_OP`;
+CREATE TABLE IF NOT EXISTS `UI_OP` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`            VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                        -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-op-1
--- 应用程序使用的模板：UI_OP
-DROP TABLE IF EXISTS UI_OP;
-CREATE TABLE IF NOT EXISTS UI_OP
-(
-    `KEY`
-    VARCHAR
-(
-    36
-) COMMENT '「key」- 操作主键',
-    `ACTION` VARCHAR
-(
-    255
-) COMMENT '「action」- S_ACTION中的code（权限检查专用）',
-    `TEXT` VARCHAR
-(
-    255
-) COMMENT '「text」- 该操作上的文字信息',
-    `EVENT` VARCHAR
-(
-    128
-) COMMENT '「event」- 操作中的 event 事件名称',
-    `CLIENT_KEY` VARCHAR
-(
-    128
-) COMMENT '「clientKey」- 一般是Html中对应的key信息，如 $opSave',
-    `CLIENT_ID` VARCHAR
-(
-    128
-) COMMENT '「clientId」- 没有特殊情况，clientId = clientKey',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `ACTION`        VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「action」- S_ACTION',            -- S_ACTION中的code（权限检查专用）
+    `CLIENT_ID`     VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「clientId」- 没有特殊情况',      -- 没有特殊情况，clientId = clientKey
+    `CLIENT_KEY`    VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「clientKey」- 一般',             -- 一般是Html中对应的key信息，如 $opSave
+    `CONFIG`        TEXT          COLLATE utf8mb4_bin COMMENT '「config」- 该按钮操作对应',                   -- 该按钮操作对应的配置数据信息, icon, type
+    `CONTROL_ID`    VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「controlId」- 挂载专用的ID',
+    `CONTROL_TYPE`  VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「controlType」- 操作关联的控件类型',
+    `EVENT`         VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「event」- 操作中的',             -- 操作中的 event 事件名称
+    `PLUGIN`        TEXT          COLLATE utf8mb4_bin COMMENT '「plugin」- 该按钮中的插件',                   -- 该按钮中的插件，如 tooltip，component等
+    `TEXT`          VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「text」- 该操作上的文字信息',
+    `UI_SORT`       INT           DEFAULT NULL COMMENT '「uiSort」- 按钮',                                    -- 按钮在管理过程中的排序
 
-    -- 配置数据
-    `CONFIG` TEXT COMMENT '「config」- 该按钮操作对应的配置数据信息, icon, type',
-    `PLUGIN` TEXT COMMENT '「plugin」- 该按钮中的插件，如 tooltip，component等',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`         VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',             -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`     VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',              -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                 -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`        BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                                -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`      VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',          -- [国际化] 如: zh_CN, en_US,
+    `METADATA`      TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                         -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`       VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`    DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                             -- [审计] 创建时间
+    `CREATED_BY`    VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',           -- [审计] 创建人
+    `UPDATED_AT`    DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                             -- [审计] 更新时间
+    `UPDATED_BY`    VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',           -- [审计] 更新人
 
-    -- 管理专用属性
-    `UI_SORT` INT COMMENT '「uiSort」- 按钮在管理过程中的排序',
-    -- 直接从 control 这个级别处理 OP
-    /*
-     * 1）列表类：CONTROL - LIST - COLUMN - OP（列表ID）
-     * 2）表单类：CONTROL - FORM - FIELD - OP（表单ID）
-     * 3）控件类：CONTROL - OP（控件ID）
-     * controlId 可区分维度，为了兼容动态模型、静态模型、流程模型，此处的操作可重构如下
-     * 扩展 controlId 长度为 128，可存储某些专用的 code 值
-     * -- LIST/FORM 动态类（zero-argument）中绑定的操作读取（controlType = null OR controlType = ATOM）
-     *    此时必须属性：
-     *    -- event,事件名称
-     *    -- clientId,clientKey, 一般是同样的值
-     *    -- controlId,对应的 UI_CONTROL 的主键
-     * -- FLOW 类型（zero-wf）中绑定的流程表单专用操作（controlType = WORKFLOW）
-     *    此时必须属性：
-     *    -- event,task任务节点名称
-     *    -- controlId,对应的 W_FLOW 中流程名称
-     *    -- clientId,clientKey, 一般是同样的值
-     * -- FREEDOM 类型，绑定的自由控件，此时（controlType = WEB）
-     */
-    `CONTROL_ID` VARCHAR
-(
-    128
-) COMMENT '「controlId」- 挂载专用的ID',
-    `CONTROL_TYPE` VARCHAR
-(
-    255
-) COMMENT '「controlType」- 操作关联的控件类型',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_UI_OP_CONTROL_ID_SIGMA_CLIENT_KEY` (`CONTROL_ID`, `SIGMA`, `CLIENT_KEY`) USING BTREE,
+    UNIQUE KEY `UK_UI_OP_CONTROL_ID_SIGMA_ACTION` (`CONTROL_ID`, `SIGMA`, `ACTION`) USING BTREE,
+    KEY `IDXM_UI_OP_SIGMA_CONTROL_ID` (`SIGMA`, `CONTROL_ID`) USING BTREE,
+    KEY `IDXM_UI_OP_SIGMA_CONTROL_TYPE` (`SIGMA`, `CONTROL_TYPE`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='UI_OP';
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA` VARCHAR
-(
-    128
-) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE` VARCHAR
-(
-    10
-) COMMENT '「language」- 使用的语言',
-    `ACTIVE` BIT COMMENT '「active」- 是否启用',
-    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY` VARCHAR
-(
-    36
-) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY` VARCHAR
-(
-    36
-) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID` VARCHAR
-(
-    36
-) COMMENT '「appId」- 应用ID',
-    `TENANT_ID` VARCHAR
-(
-    36
-) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY
-(
-    `KEY`
-) USING BTREE
-    );
-
--- changeset Lang:ox-op-2
-ALTER TABLE UI_OP
-    ADD UNIQUE (`CONTROL_ID`, `SIGMA`, `CLIENT_KEY`) USING BTREE;
-ALTER TABLE UI_OP
-    ADD UNIQUE (`CONTROL_ID`, `SIGMA`, `ACTION`) USING BTREE;
-
-ALTER TABLE UI_OP
-    ADD INDEX IDXM_UI_OP_SIGMA_CONTROL_ID (`SIGMA`, `CONTROL_ID`) USING BTREE;
-ALTER TABLE UI_OP
-    ADD INDEX IDXM_UI_OP_SIGMA_CONTROL_TYPE (`SIGMA`, `CONTROL_TYPE`);
+-- 缺失公共字段：
+-- - VERSION (版本)
+-- - TYPE (类型)

@@ -23,76 +23,76 @@ import io.zerows.extension.module.ui.domain.tables.VTable;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>ZDB.UI_COLUMN</code>.
+     * 列信息
      */
     public static final UiColumn UI_COLUMN = UiColumn.UI_COLUMN;
 
     /**
-     * The table <code>ZDB.UI_CONTROL</code>.
+     * UI_CONTROL
      */
     public static final UiControl UI_CONTROL = UiControl.UI_CONTROL;
 
     /**
-     * The table <code>ZDB.UI_FIELD</code>.
+     * UI_FIELD
      */
     public static final UiField UI_FIELD = UiField.UI_FIELD;
 
     /**
-     * The table <code>ZDB.UI_FORM</code>.
+     * UI_FORM
      */
     public static final UiForm UI_FORM = UiForm.UI_FORM;
 
     /**
-     * The table <code>ZDB.UI_LAYOUT</code>.
+     * UI_LAYOUT
      */
     public static final UiLayout UI_LAYOUT = UiLayout.UI_LAYOUT;
 
     /**
-     * The table <code>ZDB.UI_LIST</code>.
+     * UI_LIST
      */
     public static final UiList UI_LIST = UiList.UI_LIST;
 
     /**
-     * The table <code>ZDB.UI_OP</code>.
+     * UI_OP
      */
     public static final UiOp UI_OP = UiOp.UI_OP;
 
     /**
-     * The table <code>ZDB.UI_PAGE</code>.
+     * UI_PAGE
      */
     public static final UiPage UI_PAGE = UiPage.UI_PAGE;
 
     /**
-     * The table <code>ZDB.UI_VIEW</code>.
+     * UI_VIEW
      */
     public static final UiView UI_VIEW = UiView.UI_VIEW;
 
     /**
-     * The table <code>ZDB.UI_VISITOR</code>.
+     * 资源访问者
      */
     public static final UiVisitor UI_VISITOR = UiVisitor.UI_VISITOR;
 
     /**
-     * The table <code>ZDB.V_FRAGMENT</code>.
+     * V_FRAGMENT
      */
     public static final VFragment V_FRAGMENT = VFragment.V_FRAGMENT;
 
     /**
-     * The table <code>ZDB.V_QUERY</code>.
+     * V_QUERY
      */
     public static final VQuery V_QUERY = VQuery.V_QUERY;
 
     /**
-     * The table <code>ZDB.V_SEARCH</code>.
+     * V_SEARCH
      */
     public static final VSearch V_SEARCH = VSearch.V_SEARCH;
 
     /**
-     * The table <code>ZDB.V_TABLE</code>.
+     * V_TABLE
      */
     public static final VTable V_TABLE = VTable.V_TABLE;
 }
