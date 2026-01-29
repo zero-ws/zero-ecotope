@@ -68,7 +68,7 @@ class IsFs {
 
             // Grouped List<IDirectory> by `runComponent`, transfer to runComponent = Set<String> ( keys )
             final ConcurrentMap<String, List<String>> grouped =
-                Ut.elementGroup(directories, IDirectory::getRunComponent, IDirectory::getKey);
+                Ut.elementGroup(directories, IDirectory::getRunComponent, IDirectory::getId);
 
             /*
              * Connect to Map

@@ -131,7 +131,7 @@ public class ServiceEnvironment {
     private Future<Boolean> initService(final Vertx vertx) {
         final IServiceDao serviceDao = new IServiceDao(this.database.getConfiguration(), vertx);
         return serviceDao.findManyBySigma(this.condition).compose(services -> {
-            this.serviceMap.putAll(Ut.elementMap(services, IService::getKey, service -> service));
+            this.serviceMap.putAll(Ut.elementMap(services, IService::getId, service -> service));
             log.info("{} ---> 服务环境初始化完成！！！数量 = {}", KeConstant.K_PREFIX_BOOT, this.serviceMap.size());
             return Ux.future(Boolean.TRUE);
         });
@@ -206,11 +206,11 @@ public class ServiceEnvironment {
          * serviceKey -> service (Cached)
          */
         final IService service = job.service();
-        this.serviceMap.put(service.getKey(), service);
+        this.serviceMap.put(service.getId(), service);
         /*
          * serviceKey -> job (JtJob)
          */
-        this.jobs.put(service.getKey(), job);
+        this.jobs.put(service.getId(), job);
     }
 
     /*
@@ -221,11 +221,11 @@ public class ServiceEnvironment {
          * serviceKey -> service (Cached)
          */
         final IService service = uri.service();
-        this.serviceMap.put(service.getKey(), service);
+        this.serviceMap.put(service.getId(), service);
         /*
          * serviceKey -> uri (JtUri)
          */
-        this.uris.put(service.getKey(), uri);
+        this.uris.put(service.getId(), uri);
     }
 
     public boolean isOk() {

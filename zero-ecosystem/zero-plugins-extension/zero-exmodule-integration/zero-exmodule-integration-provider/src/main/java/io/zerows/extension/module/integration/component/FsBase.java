@@ -127,7 +127,7 @@ public abstract class FsBase implements Fs {
             directoryJ.put(KName.OWNER, parentD.getOwner());
             directoryJ.put(KName.INTEGRATION_ID, parentD.getIntegrationId());
             directoryJ.put(KName.Component.RUN_COMPONENT, parentD.getRunComponent());
-            directoryJ.put(KName.PARENT_ID, parentD.getKey());
+            directoryJ.put(KName.PARENT_ID, parentD.getId());
 
             directoryJ.put(KName.VISIT_ROLE, parentD.getVisitRole());
             directoryJ.put(KName.VISIT_GROUP, parentD.getVisitGroup());

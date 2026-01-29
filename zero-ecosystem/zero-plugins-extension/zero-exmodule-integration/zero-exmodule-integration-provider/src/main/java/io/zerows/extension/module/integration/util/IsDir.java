@@ -270,8 +270,8 @@ class IsDir {
 
 
                 // key modification
-                created.setKey(UUID.randomUUID().toString());
-                created.setParentId(parent.getKey());
+                created.setId(UUID.randomUUID().toString());
+                created.setParentId(parent.getId());
 
 
                 // Auditor Processing

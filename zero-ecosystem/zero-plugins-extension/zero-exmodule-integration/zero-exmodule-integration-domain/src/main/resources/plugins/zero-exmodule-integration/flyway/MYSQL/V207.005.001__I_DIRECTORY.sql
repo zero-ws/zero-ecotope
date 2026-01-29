@@ -1,81 +1,58 @@
--- liquibase formatted sql
-
--- changeset Lang:i-directory-1
 DROP TABLE IF EXISTS `I_DIRECTORY`;
-CREATE TABLE `I_DIRECTORY`
-(
-    `KEY`             VARCHAR(36) COMMENT '「key」 - 目录主键',
-    `NAME`            VARCHAR(255) NOT NULL COMMENT '「name」 - 目录名称',
-    `CODE`            VARCHAR(255) NOT NULL COMMENT '「code」 - 目录编号',
+CREATE TABLE IF NOT EXISTS `I_DIRECTORY` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`               VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                     -- [主键] 采用 Snowflake/UUID，避开自增ID
 
-    -- 目录全名
-    -- 目录本身树结构（创建目录时必须拷贝 STORE_ID）
-    /*
-     * 目录的 STORE_PATH 具有二义性
-     * 1. 如果是实际目录，则是真实地址，从 / 开始
-     * 2. 如果是非实际目录，则是虚拟地址，使用 软链接规范
-     *
-     * 关于文件路径 / 目录路径的计算流程
-     */
-    `STORE_PATH`      VARCHAR(512) COMMENT '「storePath」 - 目录相对路径',
-    `LINKED_PATH`     VARCHAR(512) COMMENT '「linkedPath」 - 链接路径，type = LINK 时专用',
-    `PARENT_ID`       VARCHAR(36) COMMENT '「parentId」 - 父目录ID',
-    `CATEGORY`        VARCHAR(36) COMMENT '「category」 - 目录连接的类型树',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `CODE`             VARCHAR(255)  NOT NULL COLLATE utf8mb4_bin COMMENT '「code」- 编号',
+    `INTEGRATION_ID`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「integrationId」 - 该目录关联的 KIntegration，不关联则不转存',
+    `LINKED_PATH`      VARCHAR(512)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「linkedPath」 - 链接路径，type = LINK 时专用',
+    `NAME`             VARCHAR(255)  NOT NULL COLLATE utf8mb4_bin COMMENT '「name」- 名称',
+    `OWNER`            VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「owner」 - 目录访问人',
+    `PARENT_ID`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「parentId」- 父节点',
+    `RUN_COMPONENT`    TEXT          COLLATE utf8mb4_bin COMMENT '「runComponent」 - 目录执行组件，抓文件专用',
+    `STORE_PATH`       VARCHAR(512)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「storePath」 - 目录相对路径',
+    `VISIT`            BIT(1)        DEFAULT NULL COMMENT '「visit」 - 公有 / 私有',
+    `VISIT_COMPONENT`  TEXT          COLLATE utf8mb4_bin COMMENT '「visitComponent」 - 目录访问控制专用组件',
+    `VISIT_GROUP`      TEXT          COLLATE utf8mb4_bin COMMENT '「visitGroup」 - 目录访问组',
+    `VISIT_MODE`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「visitMode」 - 目录模式：只读 / 可写，以后扩展为其他',
+    `VISIT_ROLE`       TEXT          COLLATE utf8mb4_bin COMMENT '「visitRole」 - 目录访问角色',
 
-    -- 目录视图专用
-    -- 1）category, parentId 同时存在，该目录一定是 STORE（手工创建）
-    -- 2）category存在，parentId 不存在，该目录是根目录 ROOT，旗下会包含所有的所属文件
-    -- 3）runComponent存在时，目录包含执行组件，用于抓取目录下的文件专用
-    -- 4) integrationId不存在时，目录为虚拟目录，和 runComponent 配合执行
-    `TYPE`            VARCHAR(36)  NOT NULL COMMENT '「type」 - 目录类型：INTEGRATION / STORE / LINK',
-    `OWNER`           VARCHAR(36) COMMENT '「owner」 - 目录访问人',
-    `INTEGRATION_ID`  VARCHAR(36) COMMENT '「integrationId」 - 该目录关联的 KIntegration，不关联则不转存',
-    `RUN_COMPONENT`   TEXT COMMENT '「runComponent」 - 目录执行组件，抓文件专用',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`             VARCHAR(36)   NOT NULL COLLATE utf8mb4_bin COMMENT '「type」- 类型',                   -- [类型],
+    `CATEGORY`         VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「category」- 类别',
 
-    -- 目录计算专用规则（以目录为核心权限）
-    -- 私有目录只能通过创建的方式操作，不可由系统设置，且私有目录只能用户自己访问，且私有必定包含 owner
-    `VISIT`           BIT COMMENT '「visit」 - 公有 / 私有',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`            VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',          -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',           -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`           VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',              -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`           BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                             -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`         VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',       -- [国际化] 如: zh_CN, en_US,
+    `METADATA`         TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                      -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`          VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`       DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                          -- [审计] 创建时间
+    `CREATED_BY`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',        -- [审计] 创建人
+    `UPDATED_AT`       DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                          -- [审计] 更新时间
+    `UPDATED_BY`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',        -- [审计] 更新人
 
-    /*
-     * 「目录」
-     *   r - 只读权限，可读取目录以及打开目录，下载目录中的文件
-     *   w - 可写权限，可以在目录中创建新目录，上传文件
-     *   x - 执行权限，可重命名目录、删除目录（软删除硬删除）
-     * 「文件」
-     *   r - 可下载（目录内）
-     *   w - 可上传（目录内）
-     */
-    `VISIT_MODE`      VARCHAR(36) COMMENT '「visitMode」 - 目录模式：只读 / 可写，以后扩展为其他',
-    `VISIT_ROLE`      TEXT COMMENT '「visitRole」 - 目录访问角色',
-    `VISIT_GROUP`     TEXT COMMENT '「visitGroup」 - 目录访问组',
-    `VISIT_COMPONENT` TEXT COMMENT '「visitComponent」 - 目录访问控制专用组件',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_I_DIRECTORY_CODE_SIGMA` (`CODE`, `SIGMA`) USING BTREE,
+    UNIQUE KEY `UK_I_DIRECTORY_NAME_PARENT_ID_SIGMA` (`NAME`, `PARENT_ID`, `SIGMA`) USING BTREE,
+    UNIQUE KEY `UK_I_DIRECTORY_STORE_PATH_SIGMA` (`STORE_PATH`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='I_DIRECTORY';
 
-    /*
-     * 回收站中 active = false
-     * 软删除，放在根目录下：/.Trash 的目录中，即：
-     * active = true，目录路径 = storePath
-     * active = false，目录路径 = /.Trash/storePath
-     */
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`           VARCHAR(128) COMMENT '「sigma」 - 用户组绑定的统一标识',
-    `LANGUAGE`        VARCHAR(10) COMMENT '「language」 - 使用的语言',
-    `ACTIVE`          BIT COMMENT '「active」 - 是否启用',
-    `METADATA`        TEXT COMMENT '「metadata」 - 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT`      DATETIME COMMENT '「createdAt」 - 创建时间',
-    `CREATED_BY`      VARCHAR(36) COMMENT '「createdBy」 - 创建人',
-    `UPDATED_AT`      DATETIME COMMENT '「updatedAt」 - 更新时间',
-    `UPDATED_BY`      VARCHAR(36) COMMENT '「updatedBy」 - 更新人',
-
-    `APP_ID`          VARCHAR(36) COMMENT '「appId」 - 应用ID',
-    `TENANT_ID`       VARCHAR(36) COMMENT '「tenantId」 - 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:i-directory-2
-ALTER TABLE I_DIRECTORY
-    ADD UNIQUE (`CODE`, `SIGMA`);
-ALTER TABLE I_DIRECTORY
-    ADD UNIQUE (`NAME`, `PARENT_ID`, `SIGMA`);
-ALTER TABLE I_DIRECTORY
-    ADD UNIQUE (`STORE_PATH`, `SIGMA`);
+-- 缺失公共字段：
+-- - VERSION (版本)

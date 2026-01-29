@@ -17,46 +17,46 @@ import io.zerows.extension.module.lbs.domain.tables.LYard;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>ZDB.L_CITY</code>.
+     * L_CITY
      */
     public static final LCity L_CITY = LCity.L_CITY;
 
     /**
-     * The table <code>ZDB.L_COUNTRY</code>.
+     * L_COUNTRY
      */
     public static final LCountry L_COUNTRY = LCountry.L_COUNTRY;
 
     /**
-     * The table <code>ZDB.L_FLOOR</code>.
+     * L_FLOOR
      */
     public static final LFloor L_FLOOR = LFloor.L_FLOOR;
 
     /**
-     * The table <code>ZDB.L_LOCATION</code>.
+     * L_LOCATION
      */
     public static final LLocation L_LOCATION = LLocation.L_LOCATION;
 
     /**
-     * The table <code>ZDB.L_REGION</code>.
+     * L_REGION
      */
     public static final LRegion L_REGION = LRegion.L_REGION;
 
     /**
-     * The table <code>ZDB.L_STATE</code>.
+     * L_STATE
      */
     public static final LState L_STATE = LState.L_STATE;
 
     /**
-     * The table <code>ZDB.L_TENT</code>.
+     * L_TENT
      */
     public static final LTent L_TENT = LTent.L_TENT;
 
     /**
-     * The table <code>ZDB.L_YARD</code>.
+     * L_YARD
      */
     public static final LYard L_YARD = LYard.L_YARD;
 }

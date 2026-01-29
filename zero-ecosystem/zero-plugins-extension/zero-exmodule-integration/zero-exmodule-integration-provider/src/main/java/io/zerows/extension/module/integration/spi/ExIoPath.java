@@ -187,7 +187,7 @@ public class ExIoPath implements ExIo {
                 return jq.updateAsync(directory)
                     .compose(updated -> Is.directoryBranch(directoryId, updatedBy));
             })
-            .compose(directory -> Is.fsComponent(directory.getKey()))
+            .compose(directory -> Is.fsComponent(directory.getId()))
             .compose(fs -> fs.rename(renameKv));
     }
 

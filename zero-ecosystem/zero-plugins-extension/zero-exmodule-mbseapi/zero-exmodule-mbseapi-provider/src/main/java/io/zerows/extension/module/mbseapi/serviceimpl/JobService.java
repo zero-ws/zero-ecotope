@@ -2,7 +2,6 @@ package io.zerows.extension.module.mbseapi.serviceimpl;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.component.log.LogOf;
 import io.zerows.component.qr.Ir;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
@@ -16,16 +15,15 @@ import io.zerows.extension.module.mbseapi.servicespec.JobStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static io.zerows.extension.module.mbseapi.boot.Jt.LOG;
-
+@Slf4j
 public class JobService implements JobStub {
-    private static final LogOf LOGGER = LogOf.get(JobService.class);
     @Inject
     private transient AmbientStub ambient;
 
@@ -34,7 +32,7 @@ public class JobService implements JobStub {
         final Ir qr = Ir.create(body);
         qr.getCriteria().save("sigma", sigma);
         final JsonObject condition = qr.toJson();
-        LOGGER.info("Job condition: {0}", condition);
+        log.info("[ ZERO ] ( Job ) 任务条件：{}", condition);
         return DB.on(IJobDao.class)
             .searchJAsync(condition)
             .compose(jobs -> {
@@ -49,8 +47,7 @@ public class JobService implements JobStub {
                      */
                     .map(Jt::jobCode)
                     .collect(Collectors.toSet());
-                LOG.Web.info(LOGGER, "Job fetched from database: {0}, input sigma: {1}",
-                    codes.size(), sigma);
+                log.info("[ ZERO ] ( Job ) 任务编码：{}, 输入 Sigma：{}", codes.size(), sigma);
                 return JobKit.fetchMission(codes).compose(normalized -> {
                     jobs.put("list", normalized);
                     /*
@@ -105,9 +102,9 @@ public class JobService implements JobStub {
             /*
              * 3. Upsert by Key for Service instance
              */
-            .upsertAsync(job.getKey(), job)
+            .upsertAsync(job.getId(), job)
             .compose(updatedJob -> DB.on(IServiceDao.class)
-                .upsertAsync(service.getKey(), service)
+                .upsertAsync(service.getId(), service)
                 /*
                  * 4. Merge updatedJob / updatedService
                  * -- Call `AmbientService` to updateJob cache
