@@ -19,56 +19,56 @@ import io.zerows.extension.module.tpl.domain.tables.TplTicket;
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
-     * The table <code>ZDB.MY_APP</code>.
+     * MY_APP
      */
     public static final MyApp MY_APP = MyApp.MY_APP;
 
     /**
-     * The table <code>ZDB.MY_DESKTOP</code>.
+     * 个人工作台
      */
     public static final MyDesktop MY_DESKTOP = MyDesktop.MY_DESKTOP;
 
     /**
-     * The table <code>ZDB.MY_FAVOR</code>.
+     * MY_FAVOR
      */
     public static final MyFavor MY_FAVOR = MyFavor.MY_FAVOR;
 
     /**
-     * The table <code>ZDB.MY_MENU</code>.
+     * MY_MENU
      */
     public static final MyMenu MY_MENU = MyMenu.MY_MENU;
 
     /**
-     * The table <code>ZDB.MY_NOTIFY</code>.
+     * MY_NOTIFY
      */
     public static final MyNotify MY_NOTIFY = MyNotify.MY_NOTIFY;
 
     /**
-     * The table <code>ZDB.MY_SETTING</code>.
+     * MY_SETTING
      */
     public static final MySetting MY_SETTING = MySetting.MY_SETTING;
 
     /**
-     * The table <code>ZDB.MY_TPL</code>.
+     * MY_TPL
      */
     public static final MyTpl MY_TPL = MyTpl.MY_TPL;
 
     /**
-     * The table <code>ZDB.TPL_MESSAGE</code>.
+     * TPL_MESSAGE
      */
     public static final TplMessage TPL_MESSAGE = TplMessage.TPL_MESSAGE;
 
     /**
-     * The table <code>ZDB.TPL_MODEL</code>.
+     * TPL_MODEL
      */
     public static final TplModel TPL_MODEL = TplModel.TPL_MODEL;
 
     /**
-     * The table <code>ZDB.TPL_TICKET</code>.
+     * TPL_TICKET
      */
     public static final TplTicket TPL_TICKET = TplTicket.TPL_TICKET;
 }
