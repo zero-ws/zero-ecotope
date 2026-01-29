@@ -7,7 +7,7 @@ import io.zerows.extension.module.ambient.component.Cabinet;
 import io.zerows.extension.module.ambient.component.CabinetApp;
 import io.zerows.extension.module.ambient.component.CabinetSource;
 import io.zerows.extension.module.ambient.component.CabinetTenant;
-import io.zerows.extension.module.ambient.component.CombineArk;
+import io.zerows.extension.module.ambient.component.CoreArk;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XTenant;
@@ -47,12 +47,12 @@ public class RegistryExtension implements HRegistry<Vertx> {
             // id = XSource
             () -> Cabinet.<List<XSource>>of(CabinetSource::new).loadAsync(container),
             // 1 XApp + N XSource
-            CombineArk::buildAsync
+            CoreArk::buildAsync
         ).compose(arkSet ->
             // id = XTenant
             Cabinet.<XTenant>of(CabinetTenant::new).loadAsync(container).compose(tenantMap ->
                 // 1 HArk + M XTenant ( Set Owner )
-                CombineArk.buildAsync(arkSet, tenantMap)
+                CoreArk.buildAsync(arkSet, tenantMap)
             )
         );
     }

@@ -4,6 +4,9 @@ import io.vertx.core.Future;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XTenant;
+import io.zerows.platform.apps.KDS;
+import io.zerows.platform.management.StoreApp;
+import io.zerows.platform.management.StoreArk;
 import io.zerows.specification.app.HArk;
 
 import java.util.LinkedHashSet;
@@ -11,7 +14,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
-public class CombineArk {
+/**
+ * 底层对接
+ * <pre>
+ * - {@link StoreArk}
+ * - {@link StoreApp}
+ * </pre>
+ */
+public class CoreArk {
+
+    private static final StoreArk STORED = StoreArk.of();
 
     public static Future<Set<HArk>> buildAsync(final Set<HArk> arkSet, final ConcurrentMap<String, XTenant> tenantMap) {
         return Future.succeededFuture(build(arkSet, tenantMap));
@@ -31,12 +43,37 @@ public class CombineArk {
         return Future.succeededFuture(build(apps, children));
     }
 
+    /**
+     * 合并函数
+     * <pre>
+     *     此处的租户必须是已存在的组户信息 X_TENANT 中有数据
+     * </pre>
+     *
+     * @param arkSet    应用集合
+     * @param tenantMap 组户表
+     * @return 构造好的应用容器
+     */
     public static Set<HArk> build(final Set<HArk> arkSet, final ConcurrentMap<String, XTenant> tenantMap) {
-
+        if (tenantMap.isEmpty()) {
+            return arkSet;
+        }
         return arkSet;
     }
 
-    // 最小粒度
+    /**
+     * 合并函数
+     * <pre>
+     *     1. 查找已加载的 {@link HArk} 容器
+     *        - 若不存在则创建新的
+     *        - 存在则直接使用 XApp 中的数据更新
+     *     2. 针对 {@link KDS} 数据源进行编排
+     *        此处若存在动态数据源则需要执行动态数据源编排
+     * </pre>
+     *
+     * @param app     应用结构
+     * @param sources 数据源列表
+     * @return 构造好的应用容器
+     */
     public static HArk build(final XApp app, final List<XSource> sources) {
         return null;
     }
