@@ -5,7 +5,6 @@ import io.zerows.platform.enums.Environment;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author lang : 2023/4/28
@@ -24,41 +23,85 @@ class IoPath {
         }
     }
 
-    static String resolve(final String folder, final String file) {
-        Objects.requireNonNull(file, "File path cannot be null");
+    /**
+     * 解析并拼接路径，支持多个片段，自动处理斜杠和重复片段
+     *
+     * @param folder   基础路径
+     * @param segments 后续路径片段 (e.g., "api", "/user/get", "info")
+     * @return 规范化后的完整路径
+     */
+    public static String resolve(final String folder, final String... segments) {
+        // 1. 初始化基础路径 (base)
+        String currentPath = (folder == null) ? "" : folder.trim().replace("\\", "/");
 
-        // 1. 规范化 folder
-        final String base = (folder == null) ? "" : folder.trim().replace("\\", "/");
-
-        // 2. 规范化 file (去除首部的斜杠，因为我们要手动控制拼接)
-        String append = file.trim().replace("\\", "/");
-        while (append.startsWith("/")) {
-            append = append.substring(1);
+        // 如果没有后续片段，直接处理返回
+        if (segments == null || segments.length == 0) {
+            // 去除末尾斜杠（保持统一风格，可选）
+            return currentPath.endsWith("/") && currentPath.length() > 1 ?
+                currentPath.substring(0, currentPath.length() - 1) : currentPath;
         }
 
-        if (base.isEmpty()) {
-            return append;
-        }
+        // 2. 循环处理每一个片段
+        for (final String segment : segments) {
+            if (segment == null || segment.trim().isEmpty()) {
+                continue;
+            }
 
-        // 3. 智能处理重叠部分 (如 base="usr/local", append="local/bin")
-        // 这里保持您之前的逻辑，但去掉 base 结尾的斜杠
-        final String cleanBase = base.endsWith("/") ? base.substring(0, base.length() - 1) : base;
+            // --- 下面是您原有逻辑的复用与适配 ---
 
-        final String[] baseParts = cleanBase.split("/");
-        if (baseParts.length > 0) {
-            final String lastSegment = baseParts[baseParts.length - 1];
+            // A. 规范化当前片段 (append)
+            String append = segment.trim().replace("\\", "/");
+
+            // 去除 append 首部的斜杠 (为了后续拼接)
+            while (append.startsWith("/")) {
+                append = append.substring(1);
+            }
+            // 去除 append 尾部的斜杠 (防止拼接后出现 // 或者影响下一次重叠判断)
+            while (append.endsWith("/")) {
+                append = append.substring(0, append.length() - 1);
+            }
+
+            // 如果 currentPath 为空，直接赋值
+            if (currentPath.isEmpty()) {
+                currentPath = append;
+                continue;
+            }
+
+            // B. 准备 currentPath (去除末尾斜杠以便进行重叠判断)
+            // 注意：根路径 "/" 特殊处理
+            String cleanBase = currentPath;
+            if (cleanBase.endsWith("/") && cleanBase.length() > 1) {
+                cleanBase = cleanBase.substring(0, cleanBase.length() - 1);
+            }
+
+            // C. 智能处理重叠部分 (如 base="api/v1", append="v1/user")
+            // 获取 base 的最后一段
+            final int lastSlashIndex = cleanBase.lastIndexOf('/');
+            final String lastSegment = (lastSlashIndex == -1) ? cleanBase : cleanBase.substring(lastSlashIndex + 1);
+
+            // 检查重叠
             if (append.startsWith(lastSegment + "/")) {
+                // 情况 1: append = "xxx/yyy", lastSegment = "xxx" -> 截取掉 "xxx/"
                 append = append.substring(lastSegment.length() + 1);
             } else if (append.equals(lastSegment)) {
+                // 情况 2: append = "xxx", lastSegment = "xxx" -> 变成空
                 append = "";
+            }
+
+            // D. 拼接更新 currentPath
+            if (!append.isEmpty()) {
+                // 如果 base 是 "/"，拼接时不需要加额外的 "/" (变成 //api)
+                if (cleanBase.equals("/")) {
+                    currentPath = cleanBase + append;
+                } else {
+                    currentPath = cleanBase + "/" + append;
+                }
+            } else {
+                currentPath = cleanBase;
             }
         }
 
-        // 4. 最终拼接：不再强制在最前面加 "/"
-        if (append.isEmpty()) {
-            return cleanBase;
-        }
-        return cleanBase + "/" + append;
+        return currentPath;
     }
 
 
