@@ -36,6 +36,21 @@ import java.util.function.Function;
  *                     - id-0102 = {@link HLot}
  *             id-02 = {@link HLot}
  * </pre>
+ * 关于 vertx.yml 中的 app 节点部分的配置：
+ * <pre>
+ *     静态模式：
+ *     app:
+ *       id:
+ *       tenant:
+ *       ns:
+ *       data:
+ *       config:
+ *     动态模式
+ *     app:              直接连接 X_APP 表
+ *       id:
+ *       tenant:
+ *       ns:
+ * </pre>
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
@@ -66,6 +81,12 @@ public interface HArk extends Function<HArk, HArk> {
     default HArk apply(final HArk app) {
         return this;
     }
+
+    HArk apply(KDS kds);
+
+    HArk apply(HLot lot);
+
+    HArk apply(HApp app);
 
     // 高频属性部分：----------------------------------------------------------
 

@@ -8,6 +8,7 @@ import io.zerows.specification.app.HLot;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 「默认配置容器」
@@ -16,9 +17,9 @@ import java.util.Objects;
  */
 @Slf4j
 public class KArk implements HArk {
+    private final HLot owner;
+    private final HApp app;
     private KDS kds;
-    private HLot owner;
-    private HApp app;
 
     private KArk(final HApp app) {
         this.app = app;
@@ -60,10 +61,28 @@ public class KArk implements HArk {
     @Override
     public HArk apply(final HArk target) {
         if (Objects.nonNull(target) && target instanceof final KArk targetRef) {
-            this.app = this.app.apply(targetRef.app);
-            this.kds = targetRef.kds;
-            this.owner = this.owner.apply(targetRef.owner);
+            this.apply(targetRef.kds);
+            this.apply(targetRef.app);
+            this.apply(targetRef.owner);
         }
+        return this;
+    }
+
+    @Override
+    public HArk apply(final KDS kds) {
+        this.kds = kds;
+        return this;
+    }
+
+    @Override
+    public HArk apply(final HApp app) {
+        Optional.ofNullable(app).ifPresent(this.app::apply);
+        return this;
+    }
+
+    @Override
+    public HArk apply(final HLot lot) {
+        Optional.ofNullable(lot).ifPresent(this.owner::apply);
         return this;
     }
 }

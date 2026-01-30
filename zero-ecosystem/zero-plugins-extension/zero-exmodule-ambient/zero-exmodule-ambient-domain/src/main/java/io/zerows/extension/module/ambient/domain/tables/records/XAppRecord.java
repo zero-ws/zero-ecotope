@@ -41,45 +41,11 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
-     */
-    @Override
-    public XAppRecord setAppKey(String value) {
-        set(1, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
-     */
-    @Override
-    public String getAppKey() {
-        return (String) get(1);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
-     */
-    @Override
-    public XAppRecord setAppSecret(String value) {
-        set(2, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
-     */
-    @Override
-    public String getAppSecret() {
-        return (String) get(2);
-    }
-
-    /**
      * Setter for <code>ZDB.X_APP.CODE</code>. 「code」- 编号
      */
     @Override
     public XAppRecord setCode(String value) {
-        set(3, value);
+        set(1, value);
         return this;
     }
 
@@ -88,24 +54,41 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getCode() {
-        return (String) get(3);
+        return (String) get(1);
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用路径
+     * Setter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
      */
     @Override
-    public XAppRecord setContext(String value) {
-        set(4, value);
+    public XAppRecord setName(String value) {
+        set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用路径
+     * Getter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
      */
     @Override
-    public String getContext() {
-        return (String) get(4);
+    public String getName() {
+        return (String) get(2);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     */
+    @Override
+    public XAppRecord setTitle(String value) {
+        set(3, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     */
+    @Override
+    public String getTitle() {
+        return (String) get(3);
     }
 
     /**
@@ -113,7 +96,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setCopyRight(String value) {
-        set(5, value);
+        set(4, value);
         return this;
     }
 
@@ -122,24 +105,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getCopyRight() {
-        return (String) get(5);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
-     */
-    @Override
-    public XAppRecord setDomain(String value) {
-        set(6, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
-     */
-    @Override
-    public String getDomain() {
-        return (String) get(6);
+        return (String) get(4);
     }
 
     /**
@@ -147,7 +113,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setEmail(String value) {
-        set(7, value);
+        set(5, value);
         return this;
     }
 
@@ -156,23 +122,57 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getEmail() {
+        return (String) get(5);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
+     */
+    @Override
+    public XAppRecord setIcp(String value) {
+        set(6, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
+     */
+    @Override
+    public String getIcp() {
+        return (String) get(6);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.LOGO</code>. 「logo」- 图标
+     */
+    @Override
+    public XAppRecord setLogo(String value) {
+        set(7, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.LOGO</code>. 「logo」- 图标
+     */
+    @Override
+    public String getLogo() {
         return (String) get(7);
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     * Setter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
      */
     @Override
-    public XAppRecord setEndpoint(String value) {
+    public XAppRecord setFavicon(String value) {
         set(8, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     * Getter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
      */
     @Override
-    public String getEndpoint() {
+    public String getFavicon() {
         return (String) get(8);
     }
 
@@ -194,54 +194,20 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
+     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
      */
     @Override
-    public XAppRecord setIcp(String value) {
+    public XAppRecord setDomain(String value) {
         set(10, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
+     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
      */
     @Override
-    public String getIcp() {
+    public String getDomain() {
         return (String) get(10);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.LOGO</code>. 「logo」- 图标
-     */
-    @Override
-    public XAppRecord setLogo(String value) {
-        set(11, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_APP.LOGO</code>. 「logo」- 图标
-     */
-    @Override
-    public String getLogo() {
-        return (String) get(11);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
-     */
-    @Override
-    public XAppRecord setName(String value) {
-        set(12, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
-     */
-    @Override
-    public String getName() {
-        return (String) get(12);
     }
 
     /**
@@ -249,7 +215,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setPort(Integer value) {
-        set(13, value);
+        set(11, value);
         return this;
     }
 
@@ -258,24 +224,41 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public Integer getPort() {
-        return (Integer) get(13);
+        return (Integer) get(11);
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
      */
     @Override
-    public XAppRecord setTitle(String value) {
-        set(14, value);
+    public XAppRecord setContext(String value) {
+        set(12, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
      */
     @Override
-    public String getTitle() {
-        return (String) get(14);
+    public String getContext() {
+        return (String) get(12);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     */
+    @Override
+    public XAppRecord setEndpoint(String value) {
+        set(13, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     */
+    @Override
+    public String getEndpoint() {
+        return (String) get(13);
     }
 
     /**
@@ -283,7 +266,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setUrlAdmin(String value) {
-        set(15, value);
+        set(14, value);
         return this;
     }
 
@@ -292,7 +275,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getUrlAdmin() {
-        return (String) get(15);
+        return (String) get(14);
     }
 
     /**
@@ -300,7 +283,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setUrlLogin(String value) {
-        set(16, value);
+        set(15, value);
         return this;
     }
 
@@ -309,7 +292,58 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getUrlLogin() {
+        return (String) get(15);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     */
+    @Override
+    public XAppRecord setUrlHealth(String value) {
+        set(16, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     */
+    @Override
+    public String getUrlHealth() {
         return (String) get(16);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     */
+    @Override
+    public XAppRecord setAppKey(String value) {
+        set(17, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     */
+    @Override
+    public String getAppKey() {
+        return (String) get(17);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
+     */
+    @Override
+    public XAppRecord setAppSecret(String value) {
+        set(18, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
+     */
+    @Override
+    public String getAppSecret() {
+        return (String) get(18);
     }
 
     /**
@@ -317,7 +351,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setStatus(String value) {
-        set(17, value);
+        set(19, value);
         return this;
     }
 
@@ -326,7 +360,24 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getStatus() {
-        return (String) get(17);
+        return (String) get(19);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.NAMESPACE</code>. 「namespace」- 名空间
+     */
+    @Override
+    public XAppRecord setNamespace(String value) {
+        set(20, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.NAMESPACE</code>. 「namespace」- 名空间
+     */
+    @Override
+    public String getNamespace() {
+        return (String) get(20);
     }
 
     /**
@@ -334,7 +385,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setSigma(String value) {
-        set(18, value);
+        set(21, value);
         return this;
     }
 
@@ -343,7 +394,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getSigma() {
-        return (String) get(18);
+        return (String) get(21);
     }
 
     /**
@@ -351,7 +402,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setTenantId(String value) {
-        set(19, value);
+        set(22, value);
         return this;
     }
 
@@ -360,7 +411,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getTenantId() {
-        return (String) get(19);
+        return (String) get(22);
     }
 
     /**
@@ -368,7 +419,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setAppId(String value) {
-        set(20, value);
+        set(23, value);
         return this;
     }
 
@@ -377,7 +428,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getAppId() {
-        return (String) get(20);
+        return (String) get(23);
     }
 
     /**
@@ -385,7 +436,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setActive(Boolean value) {
-        set(21, value);
+        set(24, value);
         return this;
     }
 
@@ -394,7 +445,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(21);
+        return (Boolean) get(24);
     }
 
     /**
@@ -402,7 +453,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setLanguage(String value) {
-        set(22, value);
+        set(25, value);
         return this;
     }
 
@@ -411,7 +462,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getLanguage() {
-        return (String) get(22);
+        return (String) get(25);
     }
 
     /**
@@ -419,7 +470,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setMetadata(String value) {
-        set(23, value);
+        set(26, value);
         return this;
     }
 
@@ -428,7 +479,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getMetadata() {
-        return (String) get(23);
+        return (String) get(26);
     }
 
     /**
@@ -436,7 +487,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setVersion(String value) {
-        set(24, value);
+        set(27, value);
         return this;
     }
 
@@ -445,7 +496,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getVersion() {
-        return (String) get(24);
+        return (String) get(27);
     }
 
     /**
@@ -453,7 +504,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setCreatedAt(LocalDateTime value) {
-        set(25, value);
+        set(28, value);
         return this;
     }
 
@@ -462,7 +513,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(25);
+        return (LocalDateTime) get(28);
     }
 
     /**
@@ -470,7 +521,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setCreatedBy(String value) {
-        set(26, value);
+        set(29, value);
         return this;
     }
 
@@ -479,7 +530,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(26);
+        return (String) get(29);
     }
 
     /**
@@ -487,7 +538,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setUpdatedAt(LocalDateTime value) {
-        set(27, value);
+        set(30, value);
         return this;
     }
 
@@ -496,7 +547,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(27);
+        return (LocalDateTime) get(30);
     }
 
     /**
@@ -504,7 +555,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public XAppRecord setUpdatedBy(String value) {
-        set(28, value);
+        set(31, value);
         return this;
     }
 
@@ -513,7 +564,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(28);
+        return (String) get(31);
     }
 
     // -------------------------------------------------------------------------
@@ -532,23 +583,26 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     @Override
     public void from(IXApp from) {
         setId(from.getId());
-        setAppKey(from.getAppKey());
-        setAppSecret(from.getAppSecret());
         setCode(from.getCode());
-        setContext(from.getContext());
+        setName(from.getName());
+        setTitle(from.getTitle());
         setCopyRight(from.getCopyRight());
-        setDomain(from.getDomain());
         setEmail(from.getEmail());
-        setEndpoint(from.getEndpoint());
-        setEntry(from.getEntry());
         setIcp(from.getIcp());
         setLogo(from.getLogo());
-        setName(from.getName());
+        setFavicon(from.getFavicon());
+        setEntry(from.getEntry());
+        setDomain(from.getDomain());
         setPort(from.getPort());
-        setTitle(from.getTitle());
+        setContext(from.getContext());
+        setEndpoint(from.getEndpoint());
         setUrlAdmin(from.getUrlAdmin());
         setUrlLogin(from.getUrlLogin());
+        setUrlHealth(from.getUrlHealth());
+        setAppKey(from.getAppKey());
+        setAppSecret(from.getAppSecret());
         setStatus(from.getStatus());
+        setNamespace(from.getNamespace());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());
         setAppId(from.getAppId());
@@ -583,27 +637,30 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     /**
      * Create a detached, initialised XAppRecord
      */
-    public XAppRecord(String id, String appKey, String appSecret, String code, String context, String copyRight, String domain, String email, String endpoint, String entry, String icp, String logo, String name, Integer port, String title, String urlAdmin, String urlLogin, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XAppRecord(String id, String code, String name, String title, String copyRight, String email, String icp, String logo, String favicon, String entry, String domain, Integer port, String context, String endpoint, String urlAdmin, String urlLogin, String urlHealth, String appKey, String appSecret, String status, String namespace, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XApp.X_APP);
 
         setId(id);
-        setAppKey(appKey);
-        setAppSecret(appSecret);
         setCode(code);
-        setContext(context);
+        setName(name);
+        setTitle(title);
         setCopyRight(copyRight);
-        setDomain(domain);
         setEmail(email);
-        setEndpoint(endpoint);
-        setEntry(entry);
         setIcp(icp);
         setLogo(logo);
-        setName(name);
+        setFavicon(favicon);
+        setEntry(entry);
+        setDomain(domain);
         setPort(port);
-        setTitle(title);
+        setContext(context);
+        setEndpoint(endpoint);
         setUrlAdmin(urlAdmin);
         setUrlLogin(urlLogin);
+        setUrlHealth(urlHealth);
+        setAppKey(appKey);
+        setAppSecret(appSecret);
         setStatus(status);
+        setNamespace(namespace);
         setSigma(sigma);
         setTenantId(tenantId);
         setAppId(appId);
@@ -626,23 +683,26 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
 
         if (value != null) {
             setId(value.getId());
-            setAppKey(value.getAppKey());
-            setAppSecret(value.getAppSecret());
             setCode(value.getCode());
-            setContext(value.getContext());
+            setName(value.getName());
+            setTitle(value.getTitle());
             setCopyRight(value.getCopyRight());
-            setDomain(value.getDomain());
             setEmail(value.getEmail());
-            setEndpoint(value.getEndpoint());
-            setEntry(value.getEntry());
             setIcp(value.getIcp());
             setLogo(value.getLogo());
-            setName(value.getName());
+            setFavicon(value.getFavicon());
+            setEntry(value.getEntry());
+            setDomain(value.getDomain());
             setPort(value.getPort());
-            setTitle(value.getTitle());
+            setContext(value.getContext());
+            setEndpoint(value.getEndpoint());
             setUrlAdmin(value.getUrlAdmin());
             setUrlLogin(value.getUrlLogin());
+            setUrlHealth(value.getUrlHealth());
+            setAppKey(value.getAppKey());
+            setAppSecret(value.getAppSecret());
             setStatus(value.getStatus());
+            setNamespace(value.getNamespace());
             setSigma(value.getSigma());
             setTenantId(value.getTenantId());
             setAppId(value.getAppId());

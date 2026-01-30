@@ -4,17 +4,28 @@ CREATE TABLE IF NOT EXISTS `X_TENANT` (
     -- 🆔 1. 核心主键区 (Primary Key Strategy)
     -- ==================================================================================================
     `ID`          VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                          -- [主键] 采用 Snowflake/UUID，避开自增ID
+    `NAME`        VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `CODE`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
 
     -- ==================================================================================================
-    -- 📝 2. 业务字段区 (Business Fields)
+    -- 📝 2.1. 基础业务区 (Profile & Identity)
     -- ==================================================================================================
-    `BANK_CARD`   VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「bankCard」- 开户行账号',
-    `BANK_ID`     VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「bankId」- 开户行',
-    `CODE`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `ALIAS`       VARCHAR(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「alias」- 简称/别名',                -- [✨推荐] 用于显示较短的名字 
+    `DESCRIPTION` TEXT         COLLATE utf8mb4_bin COMMENT '「desc」- 简介',                                           -- [✨推荐] 企业简介 
+    `EMAIL`       VARCHAR(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「email」- 管理员邮箱',                -- 用于接收账单、系统通知 
+    `PHONE`       VARCHAR(20)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「phone」- 联系电话', 
+    `CONTACT`     VARCHAR(64)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「contact」- 联系人姓名', 
+    `ADDRESS`     VARCHAR(512) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「address」- 联系地址',
+    
+    -- ==================================================================================================
+    -- 📝 2.2. 财务与认证区 (Finance & KYC)
+    -- ==================================================================================================
+    `ID_TYPE`     VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「idType」- 证件类型',               -- [✨推荐] 区分: PERSONAL(个人), COMPANY(企业)
+    `ID_NUMBER`   VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「idNumber」- 身份证号',
     `ID_BACK`     VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「idBack」- 身份证反面',
     `ID_FRONT`    VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「idFront」- 身份证正面',
-    `ID_NUMBER`   VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「idNumber」- 身份证号',
-    `NAME`        VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `BANK_CARD`   VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「bankCard」- 开户行账号',
+    `BANK_ID`     VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「bankId」- 开户行',
 
     -- ==================================================================================================
     -- 🧩 3. 模型关联与多态 (Polymorphic Associations)

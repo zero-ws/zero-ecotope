@@ -28,24 +28,14 @@ public interface IXTenant extends VertxPojo, Serializable {
     public String getId();
 
     /**
-     * Setter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
+     * Setter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
      */
-    public IXTenant setBankCard(String value);
+    public IXTenant setName(String value);
 
     /**
-     * Getter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
+     * Getter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
      */
-    public String getBankCard();
-
-    /**
-     * Setter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
-     */
-    public IXTenant setBankId(String value);
-
-    /**
-     * Getter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
-     */
-    public String getBankId();
+    public String getName();
 
     /**
      * Setter for <code>ZDB.X_TENANT.CODE</code>. 「code」- 编号
@@ -56,6 +46,86 @@ public interface IXTenant extends VertxPojo, Serializable {
      * Getter for <code>ZDB.X_TENANT.CODE</code>. 「code」- 编号
      */
     public String getCode();
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ALIAS</code>. 「alias」- 简称/别名
+     */
+    public IXTenant setAlias(String value);
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ALIAS</code>. 「alias」- 简称/别名
+     */
+    public String getAlias();
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.DESCRIPTION</code>. 「desc」- 简介
+     */
+    public IXTenant setDescription(String value);
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.DESCRIPTION</code>. 「desc」- 简介
+     */
+    public String getDescription();
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.EMAIL</code>. 「email」- 管理员邮箱
+     */
+    public IXTenant setEmail(String value);
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.EMAIL</code>. 「email」- 管理员邮箱
+     */
+    public String getEmail();
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.PHONE</code>. 「phone」- 联系电话
+     */
+    public IXTenant setPhone(String value);
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.PHONE</code>. 「phone」- 联系电话
+     */
+    public String getPhone();
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.CONTACT</code>. 「contact」- 联系人姓名
+     */
+    public IXTenant setContact(String value);
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.CONTACT</code>. 「contact」- 联系人姓名
+     */
+    public String getContact();
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ADDRESS</code>. 「address」- 联系地址
+     */
+    public IXTenant setAddress(String value);
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ADDRESS</code>. 「address」- 联系地址
+     */
+    public String getAddress();
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ID_TYPE</code>. 「idType」- 证件类型
+     */
+    public IXTenant setIdType(String value);
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ID_TYPE</code>. 「idType」- 证件类型
+     */
+    public String getIdType();
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     */
+    public IXTenant setIdNumber(String value);
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     */
+    public String getIdNumber();
 
     /**
      * Setter for <code>ZDB.X_TENANT.ID_BACK</code>. 「idBack」- 身份证反面
@@ -78,24 +148,24 @@ public interface IXTenant extends VertxPojo, Serializable {
     public String getIdFront();
 
     /**
-     * Setter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     * Setter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
      */
-    public IXTenant setIdNumber(String value);
+    public IXTenant setBankCard(String value);
 
     /**
-     * Getter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     * Getter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
      */
-    public String getIdNumber();
+    public String getBankCard();
 
     /**
-     * Setter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
+     * Setter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
      */
-    public IXTenant setName(String value);
+    public IXTenant setBankId(String value);
 
     /**
-     * Getter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
+     * Getter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
      */
-    public String getName();
+    public String getBankId();
 
     /**
      * Setter for <code>ZDB.X_TENANT.TYPE</code>. 「type」- 类型
@@ -246,13 +316,20 @@ public interface IXTenant extends VertxPojo, Serializable {
         @Override
         public default IXTenant fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
-                setOrThrow(this::setBankCard,json::getString,"BANK_CARD","java.lang.String");
-                setOrThrow(this::setBankId,json::getString,"BANK_ID","java.lang.String");
+                setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
+                setOrThrow(this::setAlias,json::getString,"ALIAS","java.lang.String");
+                setOrThrow(this::setDescription,json::getString,"DESCRIPTION","java.lang.String");
+                setOrThrow(this::setEmail,json::getString,"EMAIL","java.lang.String");
+                setOrThrow(this::setPhone,json::getString,"PHONE","java.lang.String");
+                setOrThrow(this::setContact,json::getString,"CONTACT","java.lang.String");
+                setOrThrow(this::setAddress,json::getString,"ADDRESS","java.lang.String");
+                setOrThrow(this::setIdType,json::getString,"ID_TYPE","java.lang.String");
+                setOrThrow(this::setIdNumber,json::getString,"ID_NUMBER","java.lang.String");
                 setOrThrow(this::setIdBack,json::getString,"ID_BACK","java.lang.String");
                 setOrThrow(this::setIdFront,json::getString,"ID_FRONT","java.lang.String");
-                setOrThrow(this::setIdNumber,json::getString,"ID_NUMBER","java.lang.String");
-                setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
+                setOrThrow(this::setBankCard,json::getString,"BANK_CARD","java.lang.String");
+                setOrThrow(this::setBankId,json::getString,"BANK_ID","java.lang.String");
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setStatus,json::getString,"STATUS","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -274,13 +351,20 @@ public interface IXTenant extends VertxPojo, Serializable {
         public default io.vertx.core.json.JsonObject toJson() {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
-                json.put("BANK_CARD",getBankCard());
-                json.put("BANK_ID",getBankId());
+                json.put("NAME",getName());
                 json.put("CODE",getCode());
+                json.put("ALIAS",getAlias());
+                json.put("DESCRIPTION",getDescription());
+                json.put("EMAIL",getEmail());
+                json.put("PHONE",getPhone());
+                json.put("CONTACT",getContact());
+                json.put("ADDRESS",getAddress());
+                json.put("ID_TYPE",getIdType());
+                json.put("ID_NUMBER",getIdNumber());
                 json.put("ID_BACK",getIdBack());
                 json.put("ID_FRONT",getIdFront());
-                json.put("ID_NUMBER",getIdNumber());
-                json.put("NAME",getName());
+                json.put("BANK_CARD",getBankCard());
+                json.put("BANK_ID",getBankId());
                 json.put("TYPE",getType());
                 json.put("STATUS",getStatus());
                 json.put("SIGMA",getSigma());

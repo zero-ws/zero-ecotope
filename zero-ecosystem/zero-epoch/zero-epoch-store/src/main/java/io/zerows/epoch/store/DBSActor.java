@@ -62,7 +62,7 @@ public class DBSActor extends AbstractHActor {
         return ofDBS().getDs();
     }
 
-    private static DBContext context() {
+    public static DBContext context() {
         // TODO: DBE-EXTENSION / 未来可扩展更多数据库类型
         //       目前仅支持 JooqDatabase 类型
         return CC_CONTEXT.pick(
@@ -90,8 +90,7 @@ public class DBSActor extends AbstractHActor {
         this.vLog("[ DBS ] DBSActor 初始化数据源！");
         this.configure(configDs, vertxRef);
 
-        final DBSAddOn addOn = DBSAddOn.of(vertxRef, config);
-
+        DBSAddOn.of(vertxRef, config);
         return Future.succeededFuture(Boolean.TRUE);
     }
 
@@ -106,7 +105,7 @@ public class DBSActor extends AbstractHActor {
                 });
             } else {
                 // 只有 Master 库
-                final DBS dbs = DBMany.of().put("master", configDs.ref());
+                final DBS dbs = DBMany.of().put(DBMany.DEFAULT_DBS, configDs.ref());
                 this.configure(dbs, vertx);
             }
         } catch (final Throwable ex) {

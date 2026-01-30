@@ -20,23 +20,26 @@ public class XApp implements VertxPojo, IXApp {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String appKey;
-    private String appSecret;
     private String code;
-    private String context;
+    private String name;
+    private String title;
     private String copyRight;
-    private String domain;
     private String email;
-    private String endpoint;
-    private String entry;
     private String icp;
     private String logo;
-    private String name;
+    private String favicon;
+    private String entry;
+    private String domain;
     private Integer port;
-    private String title;
+    private String context;
+    private String endpoint;
     private String urlAdmin;
     private String urlLogin;
+    private String urlHealth;
+    private String appKey;
+    private String appSecret;
     private String status;
+    private String namespace;
     private String sigma;
     private String tenantId;
     private String appId;
@@ -53,23 +56,26 @@ public class XApp implements VertxPojo, IXApp {
 
     public XApp(IXApp value) {
         this.id = value.getId();
-        this.appKey = value.getAppKey();
-        this.appSecret = value.getAppSecret();
         this.code = value.getCode();
-        this.context = value.getContext();
+        this.name = value.getName();
+        this.title = value.getTitle();
         this.copyRight = value.getCopyRight();
-        this.domain = value.getDomain();
         this.email = value.getEmail();
-        this.endpoint = value.getEndpoint();
-        this.entry = value.getEntry();
         this.icp = value.getIcp();
         this.logo = value.getLogo();
-        this.name = value.getName();
+        this.favicon = value.getFavicon();
+        this.entry = value.getEntry();
+        this.domain = value.getDomain();
         this.port = value.getPort();
-        this.title = value.getTitle();
+        this.context = value.getContext();
+        this.endpoint = value.getEndpoint();
         this.urlAdmin = value.getUrlAdmin();
         this.urlLogin = value.getUrlLogin();
+        this.urlHealth = value.getUrlHealth();
+        this.appKey = value.getAppKey();
+        this.appSecret = value.getAppSecret();
         this.status = value.getStatus();
+        this.namespace = value.getNamespace();
         this.sigma = value.getSigma();
         this.tenantId = value.getTenantId();
         this.appId = value.getAppId();
@@ -85,23 +91,26 @@ public class XApp implements VertxPojo, IXApp {
 
     public XApp(
         String id,
-        String appKey,
-        String appSecret,
         String code,
-        String context,
+        String name,
+        String title,
         String copyRight,
-        String domain,
         String email,
-        String endpoint,
-        String entry,
         String icp,
         String logo,
-        String name,
+        String favicon,
+        String entry,
+        String domain,
         Integer port,
-        String title,
+        String context,
+        String endpoint,
         String urlAdmin,
         String urlLogin,
+        String urlHealth,
+        String appKey,
+        String appSecret,
         String status,
+        String namespace,
         String sigma,
         String tenantId,
         String appId,
@@ -115,23 +124,26 @@ public class XApp implements VertxPojo, IXApp {
         String updatedBy
     ) {
         this.id = id;
-        this.appKey = appKey;
-        this.appSecret = appSecret;
         this.code = code;
-        this.context = context;
+        this.name = name;
+        this.title = title;
         this.copyRight = copyRight;
-        this.domain = domain;
         this.email = email;
-        this.endpoint = endpoint;
-        this.entry = entry;
         this.icp = icp;
         this.logo = logo;
-        this.name = name;
+        this.favicon = favicon;
+        this.entry = entry;
+        this.domain = domain;
         this.port = port;
-        this.title = title;
+        this.context = context;
+        this.endpoint = endpoint;
         this.urlAdmin = urlAdmin;
         this.urlLogin = urlLogin;
+        this.urlHealth = urlHealth;
+        this.appKey = appKey;
+        this.appSecret = appSecret;
         this.status = status;
+        this.namespace = namespace;
         this.sigma = sigma;
         this.tenantId = tenantId;
         this.appId = appId;
@@ -168,40 +180,6 @@ public class XApp implements VertxPojo, IXApp {
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
-     */
-    @Override
-    public String getAppKey() {
-        return this.appKey;
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
-     */
-    @Override
-    public XApp setAppKey(String appKey) {
-        this.appKey = appKey;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
-     */
-    @Override
-    public String getAppSecret() {
-        return this.appSecret;
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
-     */
-    @Override
-    public XApp setAppSecret(String appSecret) {
-        this.appSecret = appSecret;
-        return this;
-    }
-
-    /**
      * Getter for <code>ZDB.X_APP.CODE</code>. 「code」- 编号
      */
     @Override
@@ -219,19 +197,36 @@ public class XApp implements VertxPojo, IXApp {
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用路径
+     * Getter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
      */
     @Override
-    public String getContext() {
-        return this.context;
+    public String getName() {
+        return this.name;
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用路径
+     * Setter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
      */
     @Override
-    public XApp setContext(String context) {
-        this.context = context;
+    public XApp setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     */
+    @Override
+    public String getTitle() {
+        return this.title;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     */
+    @Override
+    public XApp setTitle(String title) {
+        this.title = title;
         return this;
     }
 
@@ -253,23 +248,6 @@ public class XApp implements VertxPojo, IXApp {
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
-     */
-    @Override
-    public String getDomain() {
-        return this.domain;
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
-     */
-    @Override
-    public XApp setDomain(String domain) {
-        this.domain = domain;
-        return this;
-    }
-
-    /**
      * Getter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 管理员Email
      */
     @Override
@@ -283,40 +261,6 @@ public class XApp implements VertxPojo, IXApp {
     @Override
     public XApp setEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
-     */
-    @Override
-    public String getEndpoint() {
-        return this.endpoint;
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
-     */
-    @Override
-    public XApp setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
-     */
-    @Override
-    public String getEntry() {
-        return this.entry;
-    }
-
-    /**
-     * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
-     */
-    @Override
-    public XApp setEntry(String entry) {
-        this.entry = entry;
         return this;
     }
 
@@ -355,19 +299,53 @@ public class XApp implements VertxPojo, IXApp {
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
+     * Getter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
      */
     @Override
-    public String getName() {
-        return this.name;
+    public String getFavicon() {
+        return this.favicon;
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
+     * Setter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
      */
     @Override
-    public XApp setName(String name) {
-        this.name = name;
+    public XApp setFavicon(String favicon) {
+        this.favicon = favicon;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     */
+    @Override
+    public String getEntry() {
+        return this.entry;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     */
+    @Override
+    public XApp setEntry(String entry) {
+        this.entry = entry;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     */
+    @Override
+    public String getDomain() {
+        return this.domain;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     */
+    @Override
+    public XApp setDomain(String domain) {
+        this.domain = domain;
         return this;
     }
 
@@ -389,19 +367,36 @@ public class XApp implements VertxPojo, IXApp {
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
      */
     @Override
-    public String getTitle() {
-        return this.title;
+    public String getContext() {
+        return this.context;
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
      */
     @Override
-    public XApp setTitle(String title) {
-        this.title = title;
+    public XApp setContext(String context) {
+        this.context = context;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     */
+    @Override
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     */
+    @Override
+    public XApp setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
         return this;
     }
 
@@ -440,6 +435,57 @@ public class XApp implements VertxPojo, IXApp {
     }
 
     /**
+     * Getter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     */
+    @Override
+    public String getUrlHealth() {
+        return this.urlHealth;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     */
+    @Override
+    public XApp setUrlHealth(String urlHealth) {
+        this.urlHealth = urlHealth;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     */
+    @Override
+    public String getAppKey() {
+        return this.appKey;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     */
+    @Override
+    public XApp setAppKey(String appKey) {
+        this.appKey = appKey;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
+     */
+    @Override
+    public String getAppSecret() {
+        return this.appSecret;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
+     */
+    @Override
+    public XApp setAppSecret(String appSecret) {
+        this.appSecret = appSecret;
+        return this;
+    }
+
+    /**
      * Getter for <code>ZDB.X_APP.STATUS</code>. 「status」- 状态
      */
     @Override
@@ -453,6 +499,23 @@ public class XApp implements VertxPojo, IXApp {
     @Override
     public XApp setStatus(String status) {
         this.status = status;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_APP.NAMESPACE</code>. 「namespace」- 名空间
+     */
+    @Override
+    public String getNamespace() {
+        return this.namespace;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_APP.NAMESPACE</code>. 「namespace」- 名空间
+     */
+    @Override
+    public XApp setNamespace(String namespace) {
+        this.namespace = namespace;
         return this;
     }
 
@@ -658,29 +721,23 @@ public class XApp implements VertxPojo, IXApp {
         }
         else if (!this.id.equals(other.id))
             return false;
-        if (this.appKey == null) {
-            if (other.appKey != null)
-                return false;
-        }
-        else if (!this.appKey.equals(other.appKey))
-            return false;
-        if (this.appSecret == null) {
-            if (other.appSecret != null)
-                return false;
-        }
-        else if (!this.appSecret.equals(other.appSecret))
-            return false;
         if (this.code == null) {
             if (other.code != null)
                 return false;
         }
         else if (!this.code.equals(other.code))
             return false;
-        if (this.context == null) {
-            if (other.context != null)
+        if (this.name == null) {
+            if (other.name != null)
                 return false;
         }
-        else if (!this.context.equals(other.context))
+        else if (!this.name.equals(other.name))
+            return false;
+        if (this.title == null) {
+            if (other.title != null)
+                return false;
+        }
+        else if (!this.title.equals(other.title))
             return false;
         if (this.copyRight == null) {
             if (other.copyRight != null)
@@ -688,29 +745,11 @@ public class XApp implements VertxPojo, IXApp {
         }
         else if (!this.copyRight.equals(other.copyRight))
             return false;
-        if (this.domain == null) {
-            if (other.domain != null)
-                return false;
-        }
-        else if (!this.domain.equals(other.domain))
-            return false;
         if (this.email == null) {
             if (other.email != null)
                 return false;
         }
         else if (!this.email.equals(other.email))
-            return false;
-        if (this.endpoint == null) {
-            if (other.endpoint != null)
-                return false;
-        }
-        else if (!this.endpoint.equals(other.endpoint))
-            return false;
-        if (this.entry == null) {
-            if (other.entry != null)
-                return false;
-        }
-        else if (!this.entry.equals(other.entry))
             return false;
         if (this.icp == null) {
             if (other.icp != null)
@@ -724,11 +763,23 @@ public class XApp implements VertxPojo, IXApp {
         }
         else if (!this.logo.equals(other.logo))
             return false;
-        if (this.name == null) {
-            if (other.name != null)
+        if (this.favicon == null) {
+            if (other.favicon != null)
                 return false;
         }
-        else if (!this.name.equals(other.name))
+        else if (!this.favicon.equals(other.favicon))
+            return false;
+        if (this.entry == null) {
+            if (other.entry != null)
+                return false;
+        }
+        else if (!this.entry.equals(other.entry))
+            return false;
+        if (this.domain == null) {
+            if (other.domain != null)
+                return false;
+        }
+        else if (!this.domain.equals(other.domain))
             return false;
         if (this.port == null) {
             if (other.port != null)
@@ -736,11 +787,17 @@ public class XApp implements VertxPojo, IXApp {
         }
         else if (!this.port.equals(other.port))
             return false;
-        if (this.title == null) {
-            if (other.title != null)
+        if (this.context == null) {
+            if (other.context != null)
                 return false;
         }
-        else if (!this.title.equals(other.title))
+        else if (!this.context.equals(other.context))
+            return false;
+        if (this.endpoint == null) {
+            if (other.endpoint != null)
+                return false;
+        }
+        else if (!this.endpoint.equals(other.endpoint))
             return false;
         if (this.urlAdmin == null) {
             if (other.urlAdmin != null)
@@ -754,11 +811,35 @@ public class XApp implements VertxPojo, IXApp {
         }
         else if (!this.urlLogin.equals(other.urlLogin))
             return false;
+        if (this.urlHealth == null) {
+            if (other.urlHealth != null)
+                return false;
+        }
+        else if (!this.urlHealth.equals(other.urlHealth))
+            return false;
+        if (this.appKey == null) {
+            if (other.appKey != null)
+                return false;
+        }
+        else if (!this.appKey.equals(other.appKey))
+            return false;
+        if (this.appSecret == null) {
+            if (other.appSecret != null)
+                return false;
+        }
+        else if (!this.appSecret.equals(other.appSecret))
+            return false;
         if (this.status == null) {
             if (other.status != null)
                 return false;
         }
         else if (!this.status.equals(other.status))
+            return false;
+        if (this.namespace == null) {
+            if (other.namespace != null)
+                return false;
+        }
+        else if (!this.namespace.equals(other.namespace))
             return false;
         if (this.sigma == null) {
             if (other.sigma != null)
@@ -834,23 +915,26 @@ public class XApp implements VertxPojo, IXApp {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result + ((this.appKey == null) ? 0 : this.appKey.hashCode());
-        result = prime * result + ((this.appSecret == null) ? 0 : this.appSecret.hashCode());
         result = prime * result + ((this.code == null) ? 0 : this.code.hashCode());
-        result = prime * result + ((this.context == null) ? 0 : this.context.hashCode());
+        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
         result = prime * result + ((this.copyRight == null) ? 0 : this.copyRight.hashCode());
-        result = prime * result + ((this.domain == null) ? 0 : this.domain.hashCode());
         result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
-        result = prime * result + ((this.endpoint == null) ? 0 : this.endpoint.hashCode());
-        result = prime * result + ((this.entry == null) ? 0 : this.entry.hashCode());
         result = prime * result + ((this.icp == null) ? 0 : this.icp.hashCode());
         result = prime * result + ((this.logo == null) ? 0 : this.logo.hashCode());
-        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.favicon == null) ? 0 : this.favicon.hashCode());
+        result = prime * result + ((this.entry == null) ? 0 : this.entry.hashCode());
+        result = prime * result + ((this.domain == null) ? 0 : this.domain.hashCode());
         result = prime * result + ((this.port == null) ? 0 : this.port.hashCode());
-        result = prime * result + ((this.title == null) ? 0 : this.title.hashCode());
+        result = prime * result + ((this.context == null) ? 0 : this.context.hashCode());
+        result = prime * result + ((this.endpoint == null) ? 0 : this.endpoint.hashCode());
         result = prime * result + ((this.urlAdmin == null) ? 0 : this.urlAdmin.hashCode());
         result = prime * result + ((this.urlLogin == null) ? 0 : this.urlLogin.hashCode());
+        result = prime * result + ((this.urlHealth == null) ? 0 : this.urlHealth.hashCode());
+        result = prime * result + ((this.appKey == null) ? 0 : this.appKey.hashCode());
+        result = prime * result + ((this.appSecret == null) ? 0 : this.appSecret.hashCode());
         result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
+        result = prime * result + ((this.namespace == null) ? 0 : this.namespace.hashCode());
         result = prime * result + ((this.sigma == null) ? 0 : this.sigma.hashCode());
         result = prime * result + ((this.tenantId == null) ? 0 : this.tenantId.hashCode());
         result = prime * result + ((this.appId == null) ? 0 : this.appId.hashCode());
@@ -870,23 +954,26 @@ public class XApp implements VertxPojo, IXApp {
         StringBuilder sb = new StringBuilder("XApp (");
 
         sb.append(id);
-        sb.append(", ").append(appKey);
-        sb.append(", ").append(appSecret);
         sb.append(", ").append(code);
-        sb.append(", ").append(context);
+        sb.append(", ").append(name);
+        sb.append(", ").append(title);
         sb.append(", ").append(copyRight);
-        sb.append(", ").append(domain);
         sb.append(", ").append(email);
-        sb.append(", ").append(endpoint);
-        sb.append(", ").append(entry);
         sb.append(", ").append(icp);
         sb.append(", ").append(logo);
-        sb.append(", ").append(name);
+        sb.append(", ").append(favicon);
+        sb.append(", ").append(entry);
+        sb.append(", ").append(domain);
         sb.append(", ").append(port);
-        sb.append(", ").append(title);
+        sb.append(", ").append(context);
+        sb.append(", ").append(endpoint);
         sb.append(", ").append(urlAdmin);
         sb.append(", ").append(urlLogin);
+        sb.append(", ").append(urlHealth);
+        sb.append(", ").append(appKey);
+        sb.append(", ").append(appSecret);
         sb.append(", ").append(status);
+        sb.append(", ").append(namespace);
         sb.append(", ").append(sigma);
         sb.append(", ").append(tenantId);
         sb.append(", ").append(appId);
@@ -910,23 +997,26 @@ public class XApp implements VertxPojo, IXApp {
     @Override
     public void from(IXApp from) {
         setId(from.getId());
-        setAppKey(from.getAppKey());
-        setAppSecret(from.getAppSecret());
         setCode(from.getCode());
-        setContext(from.getContext());
+        setName(from.getName());
+        setTitle(from.getTitle());
         setCopyRight(from.getCopyRight());
-        setDomain(from.getDomain());
         setEmail(from.getEmail());
-        setEndpoint(from.getEndpoint());
-        setEntry(from.getEntry());
         setIcp(from.getIcp());
         setLogo(from.getLogo());
-        setName(from.getName());
+        setFavicon(from.getFavicon());
+        setEntry(from.getEntry());
+        setDomain(from.getDomain());
         setPort(from.getPort());
-        setTitle(from.getTitle());
+        setContext(from.getContext());
+        setEndpoint(from.getEndpoint());
         setUrlAdmin(from.getUrlAdmin());
         setUrlLogin(from.getUrlLogin());
+        setUrlHealth(from.getUrlHealth());
+        setAppKey(from.getAppKey());
+        setAppSecret(from.getAppSecret());
         setStatus(from.getStatus());
+        setNamespace(from.getNamespace());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());
         setAppId(from.getAppId());

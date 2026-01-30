@@ -20,13 +20,20 @@ public class XTenant implements VertxPojo, IXTenant {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String bankCard;
-    private String bankId;
+    private String name;
     private String code;
+    private String alias;
+    private String description;
+    private String email;
+    private String phone;
+    private String contact;
+    private String address;
+    private String idType;
+    private String idNumber;
     private String idBack;
     private String idFront;
-    private String idNumber;
-    private String name;
+    private String bankCard;
+    private String bankId;
     private String type;
     private String status;
     private String sigma;
@@ -45,13 +52,20 @@ public class XTenant implements VertxPojo, IXTenant {
 
     public XTenant(IXTenant value) {
         this.id = value.getId();
-        this.bankCard = value.getBankCard();
-        this.bankId = value.getBankId();
+        this.name = value.getName();
         this.code = value.getCode();
+        this.alias = value.getAlias();
+        this.description = value.getDescription();
+        this.email = value.getEmail();
+        this.phone = value.getPhone();
+        this.contact = value.getContact();
+        this.address = value.getAddress();
+        this.idType = value.getIdType();
+        this.idNumber = value.getIdNumber();
         this.idBack = value.getIdBack();
         this.idFront = value.getIdFront();
-        this.idNumber = value.getIdNumber();
-        this.name = value.getName();
+        this.bankCard = value.getBankCard();
+        this.bankId = value.getBankId();
         this.type = value.getType();
         this.status = value.getStatus();
         this.sigma = value.getSigma();
@@ -69,13 +83,20 @@ public class XTenant implements VertxPojo, IXTenant {
 
     public XTenant(
         String id,
-        String bankCard,
-        String bankId,
+        String name,
         String code,
+        String alias,
+        String description,
+        String email,
+        String phone,
+        String contact,
+        String address,
+        String idType,
+        String idNumber,
         String idBack,
         String idFront,
-        String idNumber,
-        String name,
+        String bankCard,
+        String bankId,
         String type,
         String status,
         String sigma,
@@ -91,13 +112,20 @@ public class XTenant implements VertxPojo, IXTenant {
         String updatedBy
     ) {
         this.id = id;
-        this.bankCard = bankCard;
-        this.bankId = bankId;
+        this.name = name;
         this.code = code;
+        this.alias = alias;
+        this.description = description;
+        this.email = email;
+        this.phone = phone;
+        this.contact = contact;
+        this.address = address;
+        this.idType = idType;
+        this.idNumber = idNumber;
         this.idBack = idBack;
         this.idFront = idFront;
-        this.idNumber = idNumber;
-        this.name = name;
+        this.bankCard = bankCard;
+        this.bankId = bankId;
         this.type = type;
         this.status = status;
         this.sigma = sigma;
@@ -136,36 +164,19 @@ public class XTenant implements VertxPojo, IXTenant {
     }
 
     /**
-     * Getter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
+     * Getter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
      */
     @Override
-    public String getBankCard() {
-        return this.bankCard;
+    public String getName() {
+        return this.name;
     }
 
     /**
-     * Setter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
+     * Setter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
      */
     @Override
-    public XTenant setBankCard(String bankCard) {
-        this.bankCard = bankCard;
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
-     */
-    @Override
-    public String getBankId() {
-        return this.bankId;
-    }
-
-    /**
-     * Setter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
-     */
-    @Override
-    public XTenant setBankId(String bankId) {
-        this.bankId = bankId;
+    public XTenant setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -183,6 +194,142 @@ public class XTenant implements VertxPojo, IXTenant {
     @Override
     public XTenant setCode(String code) {
         this.code = code;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ALIAS</code>. 「alias」- 简称/别名
+     */
+    @Override
+    public String getAlias() {
+        return this.alias;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ALIAS</code>. 「alias」- 简称/别名
+     */
+    @Override
+    public XTenant setAlias(String alias) {
+        this.alias = alias;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.DESCRIPTION</code>. 「desc」- 简介
+     */
+    @Override
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.DESCRIPTION</code>. 「desc」- 简介
+     */
+    @Override
+    public XTenant setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.EMAIL</code>. 「email」- 管理员邮箱
+     */
+    @Override
+    public String getEmail() {
+        return this.email;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.EMAIL</code>. 「email」- 管理员邮箱
+     */
+    @Override
+    public XTenant setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.PHONE</code>. 「phone」- 联系电话
+     */
+    @Override
+    public String getPhone() {
+        return this.phone;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.PHONE</code>. 「phone」- 联系电话
+     */
+    @Override
+    public XTenant setPhone(String phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.CONTACT</code>. 「contact」- 联系人姓名
+     */
+    @Override
+    public String getContact() {
+        return this.contact;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.CONTACT</code>. 「contact」- 联系人姓名
+     */
+    @Override
+    public XTenant setContact(String contact) {
+        this.contact = contact;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ADDRESS</code>. 「address」- 联系地址
+     */
+    @Override
+    public String getAddress() {
+        return this.address;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ADDRESS</code>. 「address」- 联系地址
+     */
+    @Override
+    public XTenant setAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ID_TYPE</code>. 「idType」- 证件类型
+     */
+    @Override
+    public String getIdType() {
+        return this.idType;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ID_TYPE</code>. 「idType」- 证件类型
+     */
+    @Override
+    public XTenant setIdType(String idType) {
+        this.idType = idType;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     */
+    @Override
+    public String getIdNumber() {
+        return this.idNumber;
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     */
+    @Override
+    public XTenant setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
         return this;
     }
 
@@ -221,36 +368,36 @@ public class XTenant implements VertxPojo, IXTenant {
     }
 
     /**
-     * Getter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     * Getter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
      */
     @Override
-    public String getIdNumber() {
-        return this.idNumber;
+    public String getBankCard() {
+        return this.bankCard;
     }
 
     /**
-     * Setter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     * Setter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
      */
     @Override
-    public XTenant setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
+    public XTenant setBankCard(String bankCard) {
+        this.bankCard = bankCard;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
+     * Getter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
      */
     @Override
-    public String getName() {
-        return this.name;
+    public String getBankId() {
+        return this.bankId;
     }
 
     /**
-     * Setter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
+     * Setter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
      */
     @Override
-    public XTenant setName(String name) {
-        this.name = name;
+    public XTenant setBankId(String bankId) {
+        this.bankId = bankId;
         return this;
     }
 
@@ -490,23 +637,65 @@ public class XTenant implements VertxPojo, IXTenant {
         }
         else if (!this.id.equals(other.id))
             return false;
-        if (this.bankCard == null) {
-            if (other.bankCard != null)
+        if (this.name == null) {
+            if (other.name != null)
                 return false;
         }
-        else if (!this.bankCard.equals(other.bankCard))
-            return false;
-        if (this.bankId == null) {
-            if (other.bankId != null)
-                return false;
-        }
-        else if (!this.bankId.equals(other.bankId))
+        else if (!this.name.equals(other.name))
             return false;
         if (this.code == null) {
             if (other.code != null)
                 return false;
         }
         else if (!this.code.equals(other.code))
+            return false;
+        if (this.alias == null) {
+            if (other.alias != null)
+                return false;
+        }
+        else if (!this.alias.equals(other.alias))
+            return false;
+        if (this.description == null) {
+            if (other.description != null)
+                return false;
+        }
+        else if (!this.description.equals(other.description))
+            return false;
+        if (this.email == null) {
+            if (other.email != null)
+                return false;
+        }
+        else if (!this.email.equals(other.email))
+            return false;
+        if (this.phone == null) {
+            if (other.phone != null)
+                return false;
+        }
+        else if (!this.phone.equals(other.phone))
+            return false;
+        if (this.contact == null) {
+            if (other.contact != null)
+                return false;
+        }
+        else if (!this.contact.equals(other.contact))
+            return false;
+        if (this.address == null) {
+            if (other.address != null)
+                return false;
+        }
+        else if (!this.address.equals(other.address))
+            return false;
+        if (this.idType == null) {
+            if (other.idType != null)
+                return false;
+        }
+        else if (!this.idType.equals(other.idType))
+            return false;
+        if (this.idNumber == null) {
+            if (other.idNumber != null)
+                return false;
+        }
+        else if (!this.idNumber.equals(other.idNumber))
             return false;
         if (this.idBack == null) {
             if (other.idBack != null)
@@ -520,17 +709,17 @@ public class XTenant implements VertxPojo, IXTenant {
         }
         else if (!this.idFront.equals(other.idFront))
             return false;
-        if (this.idNumber == null) {
-            if (other.idNumber != null)
+        if (this.bankCard == null) {
+            if (other.bankCard != null)
                 return false;
         }
-        else if (!this.idNumber.equals(other.idNumber))
+        else if (!this.bankCard.equals(other.bankCard))
             return false;
-        if (this.name == null) {
-            if (other.name != null)
+        if (this.bankId == null) {
+            if (other.bankId != null)
                 return false;
         }
-        else if (!this.name.equals(other.name))
+        else if (!this.bankId.equals(other.bankId))
             return false;
         if (this.type == null) {
             if (other.type != null)
@@ -618,13 +807,20 @@ public class XTenant implements VertxPojo, IXTenant {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result + ((this.bankCard == null) ? 0 : this.bankCard.hashCode());
-        result = prime * result + ((this.bankId == null) ? 0 : this.bankId.hashCode());
+        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result + ((this.code == null) ? 0 : this.code.hashCode());
+        result = prime * result + ((this.alias == null) ? 0 : this.alias.hashCode());
+        result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
+        result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
+        result = prime * result + ((this.phone == null) ? 0 : this.phone.hashCode());
+        result = prime * result + ((this.contact == null) ? 0 : this.contact.hashCode());
+        result = prime * result + ((this.address == null) ? 0 : this.address.hashCode());
+        result = prime * result + ((this.idType == null) ? 0 : this.idType.hashCode());
+        result = prime * result + ((this.idNumber == null) ? 0 : this.idNumber.hashCode());
         result = prime * result + ((this.idBack == null) ? 0 : this.idBack.hashCode());
         result = prime * result + ((this.idFront == null) ? 0 : this.idFront.hashCode());
-        result = prime * result + ((this.idNumber == null) ? 0 : this.idNumber.hashCode());
-        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.bankCard == null) ? 0 : this.bankCard.hashCode());
+        result = prime * result + ((this.bankId == null) ? 0 : this.bankId.hashCode());
         result = prime * result + ((this.type == null) ? 0 : this.type.hashCode());
         result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
         result = prime * result + ((this.sigma == null) ? 0 : this.sigma.hashCode());
@@ -646,13 +842,20 @@ public class XTenant implements VertxPojo, IXTenant {
         StringBuilder sb = new StringBuilder("XTenant (");
 
         sb.append(id);
-        sb.append(", ").append(bankCard);
-        sb.append(", ").append(bankId);
+        sb.append(", ").append(name);
         sb.append(", ").append(code);
+        sb.append(", ").append(alias);
+        sb.append(", ").append(description);
+        sb.append(", ").append(email);
+        sb.append(", ").append(phone);
+        sb.append(", ").append(contact);
+        sb.append(", ").append(address);
+        sb.append(", ").append(idType);
+        sb.append(", ").append(idNumber);
         sb.append(", ").append(idBack);
         sb.append(", ").append(idFront);
-        sb.append(", ").append(idNumber);
-        sb.append(", ").append(name);
+        sb.append(", ").append(bankCard);
+        sb.append(", ").append(bankId);
         sb.append(", ").append(type);
         sb.append(", ").append(status);
         sb.append(", ").append(sigma);
@@ -678,13 +881,20 @@ public class XTenant implements VertxPojo, IXTenant {
     @Override
     public void from(IXTenant from) {
         setId(from.getId());
-        setBankCard(from.getBankCard());
-        setBankId(from.getBankId());
+        setName(from.getName());
         setCode(from.getCode());
+        setAlias(from.getAlias());
+        setDescription(from.getDescription());
+        setEmail(from.getEmail());
+        setPhone(from.getPhone());
+        setContact(from.getContact());
+        setAddress(from.getAddress());
+        setIdType(from.getIdType());
+        setIdNumber(from.getIdNumber());
         setIdBack(from.getIdBack());
         setIdFront(from.getIdFront());
-        setIdNumber(from.getIdNumber());
-        setName(from.getName());
+        setBankCard(from.getBankCard());
+        setBankId(from.getBankId());
         setType(from.getType());
         setStatus(from.getStatus());
         setSigma(from.getSigma());

@@ -38,36 +38,6 @@ public class XAppDao extends AbstractVertxDAO<XAppRecord, io.zerows.extension.mo
         }
 
         /**
-     * Find records that have <code>APP_KEY IN (values)</code> asynchronously
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByAppKey(Collection<String> values) {
-                return findManyByCondition(XApp.X_APP.APP_KEY.in(values));
-        }
-
-        /**
-     * Find records that have <code>APP_KEY IN (values)</code> asynchronously
-     * limited by the given limit
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByAppKey(Collection<String> values, int limit) {
-                return findManyByCondition(XApp.X_APP.APP_KEY.in(values),limit);
-        }
-
-        /**
-     * Find records that have <code>APP_SECRET IN (values)</code> asynchronously
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByAppSecret(Collection<String> values) {
-                return findManyByCondition(XApp.X_APP.APP_SECRET.in(values));
-        }
-
-        /**
-     * Find records that have <code>APP_SECRET IN (values)</code> asynchronously
-     * limited by the given limit
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByAppSecret(Collection<String> values, int limit) {
-                return findManyByCondition(XApp.X_APP.APP_SECRET.in(values),limit);
-        }
-
-        /**
      * Find records that have <code>CODE IN (values)</code> asynchronously
      */
         public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByCode(Collection<String> values) {
@@ -83,18 +53,33 @@ public class XAppDao extends AbstractVertxDAO<XAppRecord, io.zerows.extension.mo
         }
 
         /**
-     * Find records that have <code>CONTEXT IN (values)</code> asynchronously
+     * Find records that have <code>NAME IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByContext(Collection<String> values) {
-                return findManyByCondition(XApp.X_APP.CONTEXT.in(values));
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByName(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.NAME.in(values));
         }
 
         /**
-     * Find records that have <code>CONTEXT IN (values)</code> asynchronously
+     * Find records that have <code>NAME IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByContext(Collection<String> values, int limit) {
-                return findManyByCondition(XApp.X_APP.CONTEXT.in(values),limit);
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByName(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.NAME.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>TITLE IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByTitle(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.TITLE.in(values));
+        }
+
+        /**
+     * Find records that have <code>TITLE IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByTitle(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.TITLE.in(values),limit);
         }
 
         /**
@@ -113,21 +98,6 @@ public class XAppDao extends AbstractVertxDAO<XAppRecord, io.zerows.extension.mo
         }
 
         /**
-     * Find records that have <code>DOMAIN IN (values)</code> asynchronously
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByDomain(Collection<String> values) {
-                return findManyByCondition(XApp.X_APP.DOMAIN.in(values));
-        }
-
-        /**
-     * Find records that have <code>DOMAIN IN (values)</code> asynchronously
-     * limited by the given limit
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByDomain(Collection<String> values, int limit) {
-                return findManyByCondition(XApp.X_APP.DOMAIN.in(values),limit);
-        }
-
-        /**
      * Find records that have <code>EMAIL IN (values)</code> asynchronously
      */
         public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEmail(Collection<String> values) {
@@ -140,36 +110,6 @@ public class XAppDao extends AbstractVertxDAO<XAppRecord, io.zerows.extension.mo
      */
         public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEmail(Collection<String> values, int limit) {
                 return findManyByCondition(XApp.X_APP.EMAIL.in(values),limit);
-        }
-
-        /**
-     * Find records that have <code>ENDPOINT IN (values)</code> asynchronously
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEndpoint(Collection<String> values) {
-                return findManyByCondition(XApp.X_APP.ENDPOINT.in(values));
-        }
-
-        /**
-     * Find records that have <code>ENDPOINT IN (values)</code> asynchronously
-     * limited by the given limit
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEndpoint(Collection<String> values, int limit) {
-                return findManyByCondition(XApp.X_APP.ENDPOINT.in(values),limit);
-        }
-
-        /**
-     * Find records that have <code>ENTRY IN (values)</code> asynchronously
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEntry(Collection<String> values) {
-                return findManyByCondition(XApp.X_APP.ENTRY.in(values));
-        }
-
-        /**
-     * Find records that have <code>ENTRY IN (values)</code> asynchronously
-     * limited by the given limit
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEntry(Collection<String> values, int limit) {
-                return findManyByCondition(XApp.X_APP.ENTRY.in(values),limit);
         }
 
         /**
@@ -203,18 +143,48 @@ public class XAppDao extends AbstractVertxDAO<XAppRecord, io.zerows.extension.mo
         }
 
         /**
-     * Find records that have <code>NAME IN (values)</code> asynchronously
+     * Find records that have <code>FAVICON IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByName(Collection<String> values) {
-                return findManyByCondition(XApp.X_APP.NAME.in(values));
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByFavicon(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.FAVICON.in(values));
         }
 
         /**
-     * Find records that have <code>NAME IN (values)</code> asynchronously
+     * Find records that have <code>FAVICON IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByName(Collection<String> values, int limit) {
-                return findManyByCondition(XApp.X_APP.NAME.in(values),limit);
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByFavicon(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.FAVICON.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>ENTRY IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEntry(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.ENTRY.in(values));
+        }
+
+        /**
+     * Find records that have <code>ENTRY IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEntry(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.ENTRY.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>DOMAIN IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByDomain(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.DOMAIN.in(values));
+        }
+
+        /**
+     * Find records that have <code>DOMAIN IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByDomain(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.DOMAIN.in(values),limit);
         }
 
         /**
@@ -233,18 +203,33 @@ public class XAppDao extends AbstractVertxDAO<XAppRecord, io.zerows.extension.mo
         }
 
         /**
-     * Find records that have <code>TITLE IN (values)</code> asynchronously
+     * Find records that have <code>CONTEXT IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByTitle(Collection<String> values) {
-                return findManyByCondition(XApp.X_APP.TITLE.in(values));
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByContext(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.CONTEXT.in(values));
         }
 
         /**
-     * Find records that have <code>TITLE IN (values)</code> asynchronously
+     * Find records that have <code>CONTEXT IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByTitle(Collection<String> values, int limit) {
-                return findManyByCondition(XApp.X_APP.TITLE.in(values),limit);
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByContext(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.CONTEXT.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>ENDPOINT IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEndpoint(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.ENDPOINT.in(values));
+        }
+
+        /**
+     * Find records that have <code>ENDPOINT IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByEndpoint(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.ENDPOINT.in(values),limit);
         }
 
         /**
@@ -278,6 +263,51 @@ public class XAppDao extends AbstractVertxDAO<XAppRecord, io.zerows.extension.mo
         }
 
         /**
+     * Find records that have <code>URL_HEALTH IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByUrlHealth(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.URL_HEALTH.in(values));
+        }
+
+        /**
+     * Find records that have <code>URL_HEALTH IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByUrlHealth(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.URL_HEALTH.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>APP_KEY IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByAppKey(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.APP_KEY.in(values));
+        }
+
+        /**
+     * Find records that have <code>APP_KEY IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByAppKey(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.APP_KEY.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>APP_SECRET IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByAppSecret(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.APP_SECRET.in(values));
+        }
+
+        /**
+     * Find records that have <code>APP_SECRET IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByAppSecret(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.APP_SECRET.in(values),limit);
+        }
+
+        /**
      * Find records that have <code>STATUS IN (values)</code> asynchronously
      */
         public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByStatus(Collection<String> values) {
@@ -290,6 +320,21 @@ public class XAppDao extends AbstractVertxDAO<XAppRecord, io.zerows.extension.mo
      */
         public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByStatus(Collection<String> values, int limit) {
                 return findManyByCondition(XApp.X_APP.STATUS.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>NAMESPACE IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByNamespace(Collection<String> values) {
+                return findManyByCondition(XApp.X_APP.NAMESPACE.in(values));
+        }
+
+        /**
+     * Find records that have <code>NAMESPACE IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XApp>> findManyByNamespace(Collection<String> values, int limit) {
+                return findManyByCondition(XApp.X_APP.NAMESPACE.in(values),limit);
         }
 
         /**

@@ -41,113 +41,11 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
     }
 
     /**
-     * Setter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
-     */
-    @Override
-    public XTenantRecord setBankCard(String value) {
-        set(1, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
-     */
-    @Override
-    public String getBankCard() {
-        return (String) get(1);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
-     */
-    @Override
-    public XTenantRecord setBankId(String value) {
-        set(2, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
-     */
-    @Override
-    public String getBankId() {
-        return (String) get(2);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_TENANT.CODE</code>. 「code」- 编号
-     */
-    @Override
-    public XTenantRecord setCode(String value) {
-        set(3, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_TENANT.CODE</code>. 「code」- 编号
-     */
-    @Override
-    public String getCode() {
-        return (String) get(3);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_TENANT.ID_BACK</code>. 「idBack」- 身份证反面
-     */
-    @Override
-    public XTenantRecord setIdBack(String value) {
-        set(4, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_TENANT.ID_BACK</code>. 「idBack」- 身份证反面
-     */
-    @Override
-    public String getIdBack() {
-        return (String) get(4);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_TENANT.ID_FRONT</code>. 「idFront」- 身份证正面
-     */
-    @Override
-    public XTenantRecord setIdFront(String value) {
-        set(5, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_TENANT.ID_FRONT</code>. 「idFront」- 身份证正面
-     */
-    @Override
-    public String getIdFront() {
-        return (String) get(5);
-    }
-
-    /**
-     * Setter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
-     */
-    @Override
-    public XTenantRecord setIdNumber(String value) {
-        set(6, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
-     */
-    @Override
-    public String getIdNumber() {
-        return (String) get(6);
-    }
-
-    /**
      * Setter for <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
      */
     @Override
     public XTenantRecord setName(String value) {
-        set(7, value);
+        set(1, value);
         return this;
     }
 
@@ -156,7 +54,228 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getName() {
+        return (String) get(1);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.CODE</code>. 「code」- 编号
+     */
+    @Override
+    public XTenantRecord setCode(String value) {
+        set(2, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.CODE</code>. 「code」- 编号
+     */
+    @Override
+    public String getCode() {
+        return (String) get(2);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ALIAS</code>. 「alias」- 简称/别名
+     */
+    @Override
+    public XTenantRecord setAlias(String value) {
+        set(3, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ALIAS</code>. 「alias」- 简称/别名
+     */
+    @Override
+    public String getAlias() {
+        return (String) get(3);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.DESCRIPTION</code>. 「desc」- 简介
+     */
+    @Override
+    public XTenantRecord setDescription(String value) {
+        set(4, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.DESCRIPTION</code>. 「desc」- 简介
+     */
+    @Override
+    public String getDescription() {
+        return (String) get(4);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.EMAIL</code>. 「email」- 管理员邮箱
+     */
+    @Override
+    public XTenantRecord setEmail(String value) {
+        set(5, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.EMAIL</code>. 「email」- 管理员邮箱
+     */
+    @Override
+    public String getEmail() {
+        return (String) get(5);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.PHONE</code>. 「phone」- 联系电话
+     */
+    @Override
+    public XTenantRecord setPhone(String value) {
+        set(6, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.PHONE</code>. 「phone」- 联系电话
+     */
+    @Override
+    public String getPhone() {
+        return (String) get(6);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.CONTACT</code>. 「contact」- 联系人姓名
+     */
+    @Override
+    public XTenantRecord setContact(String value) {
+        set(7, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.CONTACT</code>. 「contact」- 联系人姓名
+     */
+    @Override
+    public String getContact() {
         return (String) get(7);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ADDRESS</code>. 「address」- 联系地址
+     */
+    @Override
+    public XTenantRecord setAddress(String value) {
+        set(8, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ADDRESS</code>. 「address」- 联系地址
+     */
+    @Override
+    public String getAddress() {
+        return (String) get(8);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ID_TYPE</code>. 「idType」- 证件类型
+     */
+    @Override
+    public XTenantRecord setIdType(String value) {
+        set(9, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ID_TYPE</code>. 「idType」- 证件类型
+     */
+    @Override
+    public String getIdType() {
+        return (String) get(9);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     */
+    @Override
+    public XTenantRecord setIdNumber(String value) {
+        set(10, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     */
+    @Override
+    public String getIdNumber() {
+        return (String) get(10);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ID_BACK</code>. 「idBack」- 身份证反面
+     */
+    @Override
+    public XTenantRecord setIdBack(String value) {
+        set(11, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ID_BACK</code>. 「idBack」- 身份证反面
+     */
+    @Override
+    public String getIdBack() {
+        return (String) get(11);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.ID_FRONT</code>. 「idFront」- 身份证正面
+     */
+    @Override
+    public XTenantRecord setIdFront(String value) {
+        set(12, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.ID_FRONT</code>. 「idFront」- 身份证正面
+     */
+    @Override
+    public String getIdFront() {
+        return (String) get(12);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
+     */
+    @Override
+    public XTenantRecord setBankCard(String value) {
+        set(13, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
+     */
+    @Override
+    public String getBankCard() {
+        return (String) get(13);
+    }
+
+    /**
+     * Setter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
+     */
+    @Override
+    public XTenantRecord setBankId(String value) {
+        set(14, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
+     */
+    @Override
+    public String getBankId() {
+        return (String) get(14);
     }
 
     /**
@@ -164,7 +283,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setType(String value) {
-        set(8, value);
+        set(15, value);
         return this;
     }
 
@@ -173,7 +292,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getType() {
-        return (String) get(8);
+        return (String) get(15);
     }
 
     /**
@@ -181,7 +300,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setStatus(String value) {
-        set(9, value);
+        set(16, value);
         return this;
     }
 
@@ -190,7 +309,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getStatus() {
-        return (String) get(9);
+        return (String) get(16);
     }
 
     /**
@@ -198,7 +317,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setSigma(String value) {
-        set(10, value);
+        set(17, value);
         return this;
     }
 
@@ -207,7 +326,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getSigma() {
-        return (String) get(10);
+        return (String) get(17);
     }
 
     /**
@@ -215,7 +334,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setTenantId(String value) {
-        set(11, value);
+        set(18, value);
         return this;
     }
 
@@ -224,7 +343,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getTenantId() {
-        return (String) get(11);
+        return (String) get(18);
     }
 
     /**
@@ -232,7 +351,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setAppId(String value) {
-        set(12, value);
+        set(19, value);
         return this;
     }
 
@@ -241,7 +360,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getAppId() {
-        return (String) get(12);
+        return (String) get(19);
     }
 
     /**
@@ -249,7 +368,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setActive(Boolean value) {
-        set(13, value);
+        set(20, value);
         return this;
     }
 
@@ -258,7 +377,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(13);
+        return (Boolean) get(20);
     }
 
     /**
@@ -266,7 +385,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setLanguage(String value) {
-        set(14, value);
+        set(21, value);
         return this;
     }
 
@@ -275,7 +394,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getLanguage() {
-        return (String) get(14);
+        return (String) get(21);
     }
 
     /**
@@ -283,7 +402,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setMetadata(String value) {
-        set(15, value);
+        set(22, value);
         return this;
     }
 
@@ -292,7 +411,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getMetadata() {
-        return (String) get(15);
+        return (String) get(22);
     }
 
     /**
@@ -300,7 +419,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setVersion(String value) {
-        set(16, value);
+        set(23, value);
         return this;
     }
 
@@ -309,7 +428,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getVersion() {
-        return (String) get(16);
+        return (String) get(23);
     }
 
     /**
@@ -317,7 +436,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setCreatedAt(LocalDateTime value) {
-        set(17, value);
+        set(24, value);
         return this;
     }
 
@@ -326,7 +445,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(17);
+        return (LocalDateTime) get(24);
     }
 
     /**
@@ -334,7 +453,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setCreatedBy(String value) {
-        set(18, value);
+        set(25, value);
         return this;
     }
 
@@ -343,7 +462,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(18);
+        return (String) get(25);
     }
 
     /**
@@ -351,7 +470,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setUpdatedAt(LocalDateTime value) {
-        set(19, value);
+        set(26, value);
         return this;
     }
 
@@ -360,7 +479,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(19);
+        return (LocalDateTime) get(26);
     }
 
     /**
@@ -368,7 +487,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public XTenantRecord setUpdatedBy(String value) {
-        set(20, value);
+        set(27, value);
         return this;
     }
 
@@ -377,7 +496,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(20);
+        return (String) get(27);
     }
 
     // -------------------------------------------------------------------------
@@ -396,13 +515,20 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
     @Override
     public void from(IXTenant from) {
         setId(from.getId());
-        setBankCard(from.getBankCard());
-        setBankId(from.getBankId());
+        setName(from.getName());
         setCode(from.getCode());
+        setAlias(from.getAlias());
+        setDescription(from.getDescription());
+        setEmail(from.getEmail());
+        setPhone(from.getPhone());
+        setContact(from.getContact());
+        setAddress(from.getAddress());
+        setIdType(from.getIdType());
+        setIdNumber(from.getIdNumber());
         setIdBack(from.getIdBack());
         setIdFront(from.getIdFront());
-        setIdNumber(from.getIdNumber());
-        setName(from.getName());
+        setBankCard(from.getBankCard());
+        setBankId(from.getBankId());
         setType(from.getType());
         setStatus(from.getStatus());
         setSigma(from.getSigma());
@@ -439,17 +565,24 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
     /**
      * Create a detached, initialised XTenantRecord
      */
-    public XTenantRecord(String id, String bankCard, String bankId, String code, String idBack, String idFront, String idNumber, String name, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XTenantRecord(String id, String name, String code, String alias, String description, String email, String phone, String contact, String address, String idType, String idNumber, String idBack, String idFront, String bankCard, String bankId, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XTenant.X_TENANT);
 
         setId(id);
-        setBankCard(bankCard);
-        setBankId(bankId);
+        setName(name);
         setCode(code);
+        setAlias(alias);
+        setDescription(description);
+        setEmail(email);
+        setPhone(phone);
+        setContact(contact);
+        setAddress(address);
+        setIdType(idType);
+        setIdNumber(idNumber);
         setIdBack(idBack);
         setIdFront(idFront);
-        setIdNumber(idNumber);
-        setName(name);
+        setBankCard(bankCard);
+        setBankId(bankId);
         setType(type);
         setStatus(status);
         setSigma(sigma);
@@ -474,13 +607,20 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
 
         if (value != null) {
             setId(value.getId());
-            setBankCard(value.getBankCard());
-            setBankId(value.getBankId());
+            setName(value.getName());
             setCode(value.getCode());
+            setAlias(value.getAlias());
+            setDescription(value.getDescription());
+            setEmail(value.getEmail());
+            setPhone(value.getPhone());
+            setContact(value.getContact());
+            setAddress(value.getAddress());
+            setIdType(value.getIdType());
+            setIdNumber(value.getIdNumber());
             setIdBack(value.getIdBack());
             setIdFront(value.getIdFront());
-            setIdNumber(value.getIdNumber());
-            setName(value.getName());
+            setBankCard(value.getBankCard());
+            setBankId(value.getBankId());
             setType(value.getType());
             setStatus(value.getStatus());
             setSigma(value.getSigma());

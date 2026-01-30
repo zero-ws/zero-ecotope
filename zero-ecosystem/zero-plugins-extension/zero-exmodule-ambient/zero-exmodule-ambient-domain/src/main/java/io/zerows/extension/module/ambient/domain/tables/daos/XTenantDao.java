@@ -38,33 +38,18 @@ public class XTenantDao extends AbstractVertxDAO<XTenantRecord, io.zerows.extens
         }
 
         /**
-     * Find records that have <code>BANK_CARD IN (values)</code> asynchronously
+     * Find records that have <code>NAME IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByBankCard(Collection<String> values) {
-                return findManyByCondition(XTenant.X_TENANT.BANK_CARD.in(values));
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByName(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.NAME.in(values));
         }
 
         /**
-     * Find records that have <code>BANK_CARD IN (values)</code> asynchronously
+     * Find records that have <code>NAME IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByBankCard(Collection<String> values, int limit) {
-                return findManyByCondition(XTenant.X_TENANT.BANK_CARD.in(values),limit);
-        }
-
-        /**
-     * Find records that have <code>BANK_ID IN (values)</code> asynchronously
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByBankId(Collection<String> values) {
-                return findManyByCondition(XTenant.X_TENANT.BANK_ID.in(values));
-        }
-
-        /**
-     * Find records that have <code>BANK_ID IN (values)</code> asynchronously
-     * limited by the given limit
-     */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByBankId(Collection<String> values, int limit) {
-                return findManyByCondition(XTenant.X_TENANT.BANK_ID.in(values),limit);
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByName(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.NAME.in(values),limit);
         }
 
         /**
@@ -80,6 +65,127 @@ public class XTenantDao extends AbstractVertxDAO<XTenantRecord, io.zerows.extens
      */
         public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByCode(Collection<String> values, int limit) {
                 return findManyByCondition(XTenant.X_TENANT.CODE.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>ALIAS IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByAlias(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.ALIAS.in(values));
+        }
+
+        /**
+     * Find records that have <code>ALIAS IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByAlias(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.ALIAS.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>DESCRIPTION IN (values)</code>
+     * asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByDescription(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.DESCRIPTION.in(values));
+        }
+
+        /**
+     * Find records that have <code>DESCRIPTION IN (values)</code>
+     * asynchronously limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByDescription(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.DESCRIPTION.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>EMAIL IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByEmail(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.EMAIL.in(values));
+        }
+
+        /**
+     * Find records that have <code>EMAIL IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByEmail(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.EMAIL.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>PHONE IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByPhone(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.PHONE.in(values));
+        }
+
+        /**
+     * Find records that have <code>PHONE IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByPhone(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.PHONE.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>CONTACT IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByContact(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.CONTACT.in(values));
+        }
+
+        /**
+     * Find records that have <code>CONTACT IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByContact(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.CONTACT.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>ADDRESS IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByAddress(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.ADDRESS.in(values));
+        }
+
+        /**
+     * Find records that have <code>ADDRESS IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByAddress(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.ADDRESS.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>ID_TYPE IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByIdType(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.ID_TYPE.in(values));
+        }
+
+        /**
+     * Find records that have <code>ID_TYPE IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByIdType(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.ID_TYPE.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>ID_NUMBER IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByIdNumber(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.ID_NUMBER.in(values));
+        }
+
+        /**
+     * Find records that have <code>ID_NUMBER IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByIdNumber(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.ID_NUMBER.in(values),limit);
         }
 
         /**
@@ -113,33 +219,33 @@ public class XTenantDao extends AbstractVertxDAO<XTenantRecord, io.zerows.extens
         }
 
         /**
-     * Find records that have <code>ID_NUMBER IN (values)</code> asynchronously
+     * Find records that have <code>BANK_CARD IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByIdNumber(Collection<String> values) {
-                return findManyByCondition(XTenant.X_TENANT.ID_NUMBER.in(values));
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByBankCard(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.BANK_CARD.in(values));
         }
 
         /**
-     * Find records that have <code>ID_NUMBER IN (values)</code> asynchronously
+     * Find records that have <code>BANK_CARD IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByIdNumber(Collection<String> values, int limit) {
-                return findManyByCondition(XTenant.X_TENANT.ID_NUMBER.in(values),limit);
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByBankCard(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.BANK_CARD.in(values),limit);
         }
 
         /**
-     * Find records that have <code>NAME IN (values)</code> asynchronously
+     * Find records that have <code>BANK_ID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByName(Collection<String> values) {
-                return findManyByCondition(XTenant.X_TENANT.NAME.in(values));
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByBankId(Collection<String> values) {
+                return findManyByCondition(XTenant.X_TENANT.BANK_ID.in(values));
         }
 
         /**
-     * Find records that have <code>NAME IN (values)</code> asynchronously
+     * Find records that have <code>BANK_ID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByName(Collection<String> values, int limit) {
-                return findManyByCondition(XTenant.X_TENANT.NAME.in(values),limit);
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByBankId(Collection<String> values, int limit) {
+                return findManyByCondition(XTenant.X_TENANT.BANK_ID.in(values),limit);
         }
 
         /**

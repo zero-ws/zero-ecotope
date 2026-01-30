@@ -57,7 +57,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author lang : 2023-06-06
  */
-class KTenant implements HLot {
+public class KTenant implements HLot {
 
     private final static Cc<String, HLot> CC_TENANT = Cc.open();
     /**

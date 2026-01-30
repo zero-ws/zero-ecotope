@@ -58,19 +58,54 @@ public class XTenant extends TableImpl<XTenantRecord> {
     public final TableField<XTenantRecord, String> ID = createField(DSL.name("ID"), SQLDataType.VARCHAR(36).nullable(false), this, "「id」- 主键");
 
     /**
-     * The column <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
+     * The column <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
      */
-    public final TableField<XTenantRecord, String> BANK_CARD = createField(DSL.name("BANK_CARD"), SQLDataType.VARCHAR(255), this, "「bankCard」- 开户行账号");
-
-    /**
-     * The column <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
-     */
-    public final TableField<XTenantRecord, String> BANK_ID = createField(DSL.name("BANK_ID"), SQLDataType.VARCHAR(36), this, "「bankId」- 开户行");
+    public final TableField<XTenantRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(255), this, "「name」- 名称");
 
     /**
      * The column <code>ZDB.X_TENANT.CODE</code>. 「code」- 编号
      */
     public final TableField<XTenantRecord, String> CODE = createField(DSL.name("CODE"), SQLDataType.VARCHAR(36), this, "「code」- 编号");
+
+    /**
+     * The column <code>ZDB.X_TENANT.ALIAS</code>. 「alias」- 简称/别名
+     */
+    public final TableField<XTenantRecord, String> ALIAS = createField(DSL.name("ALIAS"), SQLDataType.VARCHAR(255), this, "「alias」- 简称/别名");
+
+    /**
+     * The column <code>ZDB.X_TENANT.DESCRIPTION</code>. 「desc」- 简介
+     */
+    public final TableField<XTenantRecord, String> DESCRIPTION = createField(DSL.name("DESCRIPTION"), SQLDataType.CLOB(65535), this, "「desc」- 简介");
+
+    /**
+     * The column <code>ZDB.X_TENANT.EMAIL</code>. 「email」- 管理员邮箱
+     */
+    public final TableField<XTenantRecord, String> EMAIL = createField(DSL.name("EMAIL"), SQLDataType.VARCHAR(255), this, "「email」- 管理员邮箱");
+
+    /**
+     * The column <code>ZDB.X_TENANT.PHONE</code>. 「phone」- 联系电话
+     */
+    public final TableField<XTenantRecord, String> PHONE = createField(DSL.name("PHONE"), SQLDataType.VARCHAR(20), this, "「phone」- 联系电话");
+
+    /**
+     * The column <code>ZDB.X_TENANT.CONTACT</code>. 「contact」- 联系人姓名
+     */
+    public final TableField<XTenantRecord, String> CONTACT = createField(DSL.name("CONTACT"), SQLDataType.VARCHAR(64), this, "「contact」- 联系人姓名");
+
+    /**
+     * The column <code>ZDB.X_TENANT.ADDRESS</code>. 「address」- 联系地址
+     */
+    public final TableField<XTenantRecord, String> ADDRESS = createField(DSL.name("ADDRESS"), SQLDataType.VARCHAR(512), this, "「address」- 联系地址");
+
+    /**
+     * The column <code>ZDB.X_TENANT.ID_TYPE</code>. 「idType」- 证件类型
+     */
+    public final TableField<XTenantRecord, String> ID_TYPE = createField(DSL.name("ID_TYPE"), SQLDataType.VARCHAR(32), this, "「idType」- 证件类型");
+
+    /**
+     * The column <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     */
+    public final TableField<XTenantRecord, String> ID_NUMBER = createField(DSL.name("ID_NUMBER"), SQLDataType.VARCHAR(255), this, "「idNumber」- 身份证号");
 
     /**
      * The column <code>ZDB.X_TENANT.ID_BACK</code>. 「idBack」- 身份证反面
@@ -83,14 +118,14 @@ public class XTenant extends TableImpl<XTenantRecord> {
     public final TableField<XTenantRecord, String> ID_FRONT = createField(DSL.name("ID_FRONT"), SQLDataType.VARCHAR(255), this, "「idFront」- 身份证正面");
 
     /**
-     * The column <code>ZDB.X_TENANT.ID_NUMBER</code>. 「idNumber」- 身份证号
+     * The column <code>ZDB.X_TENANT.BANK_CARD</code>. 「bankCard」- 开户行账号
      */
-    public final TableField<XTenantRecord, String> ID_NUMBER = createField(DSL.name("ID_NUMBER"), SQLDataType.VARCHAR(255), this, "「idNumber」- 身份证号");
+    public final TableField<XTenantRecord, String> BANK_CARD = createField(DSL.name("BANK_CARD"), SQLDataType.VARCHAR(255), this, "「bankCard」- 开户行账号");
 
     /**
-     * The column <code>ZDB.X_TENANT.NAME</code>. 「name」- 名称
+     * The column <code>ZDB.X_TENANT.BANK_ID</code>. 「bankId」- 开户行
      */
-    public final TableField<XTenantRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(255), this, "「name」- 名称");
+    public final TableField<XTenantRecord, String> BANK_ID = createField(DSL.name("BANK_ID"), SQLDataType.VARCHAR(36), this, "「bankId」- 开户行");
 
     /**
      * The column <code>ZDB.X_TENANT.TYPE</code>. 「type」- 类型

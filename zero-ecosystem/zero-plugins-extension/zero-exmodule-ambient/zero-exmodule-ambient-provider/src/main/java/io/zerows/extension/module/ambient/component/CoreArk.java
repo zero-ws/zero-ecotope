@@ -1,16 +1,23 @@
 package io.zerows.extension.module.ambient.component;
 
+import io.r2mo.typed.domain.builder.BuilderOf;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XTenant;
 import io.zerows.platform.apps.KDS;
+import io.zerows.platform.apps.KTenant;
 import io.zerows.platform.management.StoreApp;
 import io.zerows.platform.management.StoreArk;
+import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HLot;
+import io.zerows.support.Ut;
 
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
@@ -22,8 +29,6 @@ import java.util.concurrent.ConcurrentMap;
  * </pre>
  */
 public class CoreArk {
-
-    private static final StoreArk STORED = StoreArk.of();
 
     public static Future<Set<HArk>> buildAsync(final Set<HArk> arkSet, final ConcurrentMap<String, XTenant> tenantMap) {
         return Future.succeededFuture(build(arkSet, tenantMap));
@@ -57,6 +62,17 @@ public class CoreArk {
         if (tenantMap.isEmpty()) {
             return arkSet;
         }
+        arkSet.forEach(ark -> {
+            final HApp app = ark.app();
+            final XTenant tenant = tenantMap.getOrDefault(app.tenant(), null);
+            if (Objects.nonNull(tenant)) {
+                // HLot 构造
+                final JsonObject tenantJ = Ut.serializeJson(tenant);
+                final HLot lot = KTenant.getOrCreate(tenant.getId());
+                lot.data(tenantJ);
+                ark.apply(lot);
+            }
+        });
         return arkSet;
     }
 
@@ -75,6 +91,11 @@ public class CoreArk {
      * @return 构造好的应用容器
      */
     public static HArk build(final XApp app, final List<XSource> sources) {
-        return null;
+        // 构造新的 HArk
+        final BuilderOf<HArk> builder = BuilderOf.of(BuilderOfHApp::new);
+        final HArk ark = builder.create(app);
+        // 更新 HArk 中的数据库信息
+        builder.updateConditional(ark, sources);
+        return ark;
     }
 }

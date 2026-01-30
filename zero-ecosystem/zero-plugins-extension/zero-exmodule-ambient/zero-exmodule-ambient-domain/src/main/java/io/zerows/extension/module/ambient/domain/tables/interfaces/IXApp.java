@@ -28,26 +28,6 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getId();
 
     /**
-     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
-     */
-    public IXApp setAppKey(String value);
-
-    /**
-     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
-     */
-    public String getAppKey();
-
-    /**
-     * Setter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
-     */
-    public IXApp setAppSecret(String value);
-
-    /**
-     * Getter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
-     */
-    public String getAppSecret();
-
-    /**
      * Setter for <code>ZDB.X_APP.CODE</code>. 「code」- 编号
      */
     public IXApp setCode(String value);
@@ -58,14 +38,24 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getCode();
 
     /**
-     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用路径
+     * Setter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
      */
-    public IXApp setContext(String value);
+    public IXApp setName(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用路径
+     * Getter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
      */
-    public String getContext();
+    public String getName();
+
+    /**
+     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     */
+    public IXApp setTitle(String value);
+
+    /**
+     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     */
+    public String getTitle();
 
     /**
      * Setter for <code>ZDB.X_APP.COPY_RIGHT</code>. 「copyRight」- 版权
@@ -78,16 +68,6 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getCopyRight();
 
     /**
-     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
-     */
-    public IXApp setDomain(String value);
-
-    /**
-     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
-     */
-    public String getDomain();
-
-    /**
      * Setter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 管理员Email
      */
     public IXApp setEmail(String value);
@@ -96,26 +76,6 @@ public interface IXApp extends VertxPojo, Serializable {
      * Getter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 管理员Email
      */
     public String getEmail();
-
-    /**
-     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
-     */
-    public IXApp setEndpoint(String value);
-
-    /**
-     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
-     */
-    public String getEndpoint();
-
-    /**
-     * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
-     */
-    public IXApp setEntry(String value);
-
-    /**
-     * Getter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
-     */
-    public String getEntry();
 
     /**
      * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
@@ -138,14 +98,34 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getLogo();
 
     /**
-     * Setter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
+     * Setter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
      */
-    public IXApp setName(String value);
+    public IXApp setFavicon(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.NAME</code>. 「name」- 名称
+     * Getter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
      */
-    public String getName();
+    public String getFavicon();
+
+    /**
+     * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     */
+    public IXApp setEntry(String value);
+
+    /**
+     * Getter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     */
+    public String getEntry();
+
+    /**
+     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     */
+    public IXApp setDomain(String value);
+
+    /**
+     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     */
+    public String getDomain();
 
     /**
      * Setter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口号
@@ -158,14 +138,24 @@ public interface IXApp extends VertxPojo, Serializable {
     public Integer getPort();
 
     /**
-     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
      */
-    public IXApp setTitle(String value);
+    public IXApp setContext(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
      */
-    public String getTitle();
+    public String getContext();
+
+    /**
+     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     */
+    public IXApp setEndpoint(String value);
+
+    /**
+     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     */
+    public String getEndpoint();
 
     /**
      * Setter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理业URL
@@ -188,6 +178,36 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getUrlLogin();
 
     /**
+     * Setter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     */
+    public IXApp setUrlHealth(String value);
+
+    /**
+     * Getter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     */
+    public String getUrlHealth();
+
+    /**
+     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     */
+    public IXApp setAppKey(String value);
+
+    /**
+     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     */
+    public String getAppKey();
+
+    /**
+     * Setter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
+     */
+    public IXApp setAppSecret(String value);
+
+    /**
+     * Getter for <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
+     */
+    public String getAppSecret();
+
+    /**
      * Setter for <code>ZDB.X_APP.STATUS</code>. 「status」- 状态
      */
     public IXApp setStatus(String value);
@@ -196,6 +216,16 @@ public interface IXApp extends VertxPojo, Serializable {
      * Getter for <code>ZDB.X_APP.STATUS</code>. 「status」- 状态
      */
     public String getStatus();
+
+    /**
+     * Setter for <code>ZDB.X_APP.NAMESPACE</code>. 「namespace」- 名空间
+     */
+    public IXApp setNamespace(String value);
+
+    /**
+     * Getter for <code>ZDB.X_APP.NAMESPACE</code>. 「namespace」- 名空间
+     */
+    public String getNamespace();
 
     /**
      * Setter for <code>ZDB.X_APP.SIGMA</code>. 「sigma」- 统一标识
@@ -326,23 +356,26 @@ public interface IXApp extends VertxPojo, Serializable {
         @Override
         public default IXApp fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
-                setOrThrow(this::setAppKey,json::getString,"APP_KEY","java.lang.String");
-                setOrThrow(this::setAppSecret,json::getString,"APP_SECRET","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
-                setOrThrow(this::setContext,json::getString,"CONTEXT","java.lang.String");
+                setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
+                setOrThrow(this::setTitle,json::getString,"TITLE","java.lang.String");
                 setOrThrow(this::setCopyRight,json::getString,"COPY_RIGHT","java.lang.String");
-                setOrThrow(this::setDomain,json::getString,"DOMAIN","java.lang.String");
                 setOrThrow(this::setEmail,json::getString,"EMAIL","java.lang.String");
-                setOrThrow(this::setEndpoint,json::getString,"ENDPOINT","java.lang.String");
-                setOrThrow(this::setEntry,json::getString,"ENTRY","java.lang.String");
                 setOrThrow(this::setIcp,json::getString,"ICP","java.lang.String");
                 setOrThrow(this::setLogo,json::getString,"LOGO","java.lang.String");
-                setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
+                setOrThrow(this::setFavicon,json::getString,"FAVICON","java.lang.String");
+                setOrThrow(this::setEntry,json::getString,"ENTRY","java.lang.String");
+                setOrThrow(this::setDomain,json::getString,"DOMAIN","java.lang.String");
                 setOrThrow(this::setPort,json::getInteger,"PORT","java.lang.Integer");
-                setOrThrow(this::setTitle,json::getString,"TITLE","java.lang.String");
+                setOrThrow(this::setContext,json::getString,"CONTEXT","java.lang.String");
+                setOrThrow(this::setEndpoint,json::getString,"ENDPOINT","java.lang.String");
                 setOrThrow(this::setUrlAdmin,json::getString,"URL_ADMIN","java.lang.String");
                 setOrThrow(this::setUrlLogin,json::getString,"URL_LOGIN","java.lang.String");
+                setOrThrow(this::setUrlHealth,json::getString,"URL_HEALTH","java.lang.String");
+                setOrThrow(this::setAppKey,json::getString,"APP_KEY","java.lang.String");
+                setOrThrow(this::setAppSecret,json::getString,"APP_SECRET","java.lang.String");
                 setOrThrow(this::setStatus,json::getString,"STATUS","java.lang.String");
+                setOrThrow(this::setNamespace,json::getString,"NAMESPACE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
@@ -362,23 +395,26 @@ public interface IXApp extends VertxPojo, Serializable {
         public default io.vertx.core.json.JsonObject toJson() {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
-                json.put("APP_KEY",getAppKey());
-                json.put("APP_SECRET",getAppSecret());
                 json.put("CODE",getCode());
-                json.put("CONTEXT",getContext());
+                json.put("NAME",getName());
+                json.put("TITLE",getTitle());
                 json.put("COPY_RIGHT",getCopyRight());
-                json.put("DOMAIN",getDomain());
                 json.put("EMAIL",getEmail());
-                json.put("ENDPOINT",getEndpoint());
-                json.put("ENTRY",getEntry());
                 json.put("ICP",getIcp());
                 json.put("LOGO",getLogo());
-                json.put("NAME",getName());
+                json.put("FAVICON",getFavicon());
+                json.put("ENTRY",getEntry());
+                json.put("DOMAIN",getDomain());
                 json.put("PORT",getPort());
-                json.put("TITLE",getTitle());
+                json.put("CONTEXT",getContext());
+                json.put("ENDPOINT",getEndpoint());
                 json.put("URL_ADMIN",getUrlAdmin());
                 json.put("URL_LOGIN",getUrlLogin());
+                json.put("URL_HEALTH",getUrlHealth());
+                json.put("APP_KEY",getAppKey());
+                json.put("APP_SECRET",getAppSecret());
                 json.put("STATUS",getStatus());
+                json.put("NAMESPACE",getNamespace());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());

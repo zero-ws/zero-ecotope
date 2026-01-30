@@ -11,6 +11,7 @@ import io.zerows.specification.app.HArk;
 
 import javax.sql.DataSource;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -99,9 +100,7 @@ public class KDS {
      *        来进行查找，只要知道 name 就可以访问到对应的 {@link DBS} 实例。
      *
      *     3. 应用正式启动：完全创建 KDS
-     *        直接调用 {@link #registry(HArk)} 方法重新初始化 KDS，此时的 KDS 是最终版本，并且之前创建的 KDS 会因为
-     *        name / appId / appKey / sigma 四个键值相同而被覆盖掉，最终这些所有键值都可以访问到对应的 KDS 并且根据名称访问
-     *        到 {@link DBMany} 中所管理的 {@link DBS} 实例。
+     *        此时处理 KDS 中的 appId -> DBS 的子应用以及对应数据源的初始化，让整体 KDS 实现最终初始化的流程
      * </pre>
      *
      * @param appId 应用ID
@@ -213,11 +212,6 @@ public class KDS {
         return this;
     }
 
-    public KDS registry(final HArk ark) {
-
-        return null;
-    }
-
     public DBS findRunning(final String name) {
         DBS found = this.dbs.getOrDefault(name, null);
         if (Objects.isNull(found)) {
@@ -242,5 +236,13 @@ public class KDS {
 
     private String app() {
         return this.appId;
+    }
+
+    public Set<String> registryOf() {
+        return this.dbs.keySet();
+    }
+
+    public DBS registryOf(final String name) {
+        return this.dbs.getOrDefault(name, null);
     }
 }

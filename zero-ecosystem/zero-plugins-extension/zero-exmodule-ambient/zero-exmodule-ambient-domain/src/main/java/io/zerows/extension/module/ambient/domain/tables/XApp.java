@@ -60,24 +60,19 @@ public class XApp extends TableImpl<XAppRecord> {
     public final TableField<XAppRecord, String> ID = createField(DSL.name("ID"), SQLDataType.VARCHAR(36).nullable(false), this, "「id」- 主键");
 
     /**
-     * The column <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
-     */
-    public final TableField<XAppRecord, String> APP_KEY = createField(DSL.name("APP_KEY"), SQLDataType.VARCHAR(128), this, "「appKey」- 敏感标识符");
-
-    /**
-     * The column <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
-     */
-    public final TableField<XAppRecord, String> APP_SECRET = createField(DSL.name("APP_SECRET"), SQLDataType.VARCHAR(128), this, "「appSecret」- 应用密钥");
-
-    /**
      * The column <code>ZDB.X_APP.CODE</code>. 「code」- 编号
      */
     public final TableField<XAppRecord, String> CODE = createField(DSL.name("CODE"), SQLDataType.VARCHAR(36), this, "「code」- 编号");
 
     /**
-     * The column <code>ZDB.X_APP.CONTEXT</code>. 「configure」- 应用路径
+     * The column <code>ZDB.X_APP.NAME</code>. 「name」- 名称
      */
-    public final TableField<XAppRecord, String> CONTEXT = createField(DSL.name("CONTEXT"), SQLDataType.VARCHAR(255), this, "「configure」- 应用路径");
+    public final TableField<XAppRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(255), this, "「name」- 名称");
+
+    /**
+     * The column <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     */
+    public final TableField<XAppRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(64), this, "「title」- 应用标题");
 
     /**
      * The column <code>ZDB.X_APP.COPY_RIGHT</code>. 「copyRight」- 版权
@@ -85,24 +80,9 @@ public class XApp extends TableImpl<XAppRecord> {
     public final TableField<XAppRecord, String> COPY_RIGHT = createField(DSL.name("COPY_RIGHT"), SQLDataType.VARCHAR(255), this, "「copyRight」- 版权");
 
     /**
-     * The column <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
-     */
-    public final TableField<XAppRecord, String> DOMAIN = createField(DSL.name("DOMAIN"), SQLDataType.VARCHAR(255), this, "「domain」- 服务器域");
-
-    /**
      * The column <code>ZDB.X_APP.EMAIL</code>. 「email」- 管理员Email
      */
     public final TableField<XAppRecord, String> EMAIL = createField(DSL.name("EMAIL"), SQLDataType.VARCHAR(255), this, "「email」- 管理员Email");
-
-    /**
-     * The column <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
-     */
-    public final TableField<XAppRecord, String> ENDPOINT = createField(DSL.name("ENDPOINT"), SQLDataType.VARCHAR(255), this, "「endpoint」- Web服务端地址");
-
-    /**
-     * The column <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
-     */
-    public final TableField<XAppRecord, String> ENTRY = createField(DSL.name("ENTRY"), SQLDataType.VARCHAR(255), this, "「entry」- 入口菜单");
 
     /**
      * The column <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
@@ -115,9 +95,19 @@ public class XApp extends TableImpl<XAppRecord> {
     public final TableField<XAppRecord, String> LOGO = createField(DSL.name("LOGO"), SQLDataType.CLOB, this, "「logo」- 图标");
 
     /**
-     * The column <code>ZDB.X_APP.NAME</code>. 「name」- 名称
+     * The column <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
      */
-    public final TableField<XAppRecord, String> NAME = createField(DSL.name("NAME"), SQLDataType.VARCHAR(255), this, "「name」- 名称");
+    public final TableField<XAppRecord, String> FAVICON = createField(DSL.name("FAVICON"), SQLDataType.VARCHAR(64), this, "「favicon」- 小图标");
+
+    /**
+     * The column <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     */
+    public final TableField<XAppRecord, String> ENTRY = createField(DSL.name("ENTRY"), SQLDataType.VARCHAR(255), this, "「entry」- 入口菜单");
+
+    /**
+     * The column <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     */
+    public final TableField<XAppRecord, String> DOMAIN = createField(DSL.name("DOMAIN"), SQLDataType.VARCHAR(255), this, "「domain」- 服务器域");
 
     /**
      * The column <code>ZDB.X_APP.PORT</code>. 「port」- 端口号
@@ -125,9 +115,14 @@ public class XApp extends TableImpl<XAppRecord> {
     public final TableField<XAppRecord, Integer> PORT = createField(DSL.name("PORT"), SQLDataType.INTEGER, this, "「port」- 端口号");
 
     /**
-     * The column <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * The column <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
      */
-    public final TableField<XAppRecord, String> TITLE = createField(DSL.name("TITLE"), SQLDataType.VARCHAR(64), this, "「title」- 应用标题");
+    public final TableField<XAppRecord, String> CONTEXT = createField(DSL.name("CONTEXT"), SQLDataType.VARCHAR(255), this, "「context」- 应用路径");
+
+    /**
+     * The column <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     */
+    public final TableField<XAppRecord, String> ENDPOINT = createField(DSL.name("ENDPOINT"), SQLDataType.VARCHAR(255), this, "「endpoint」- Web服务端地址");
 
     /**
      * The column <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理业URL
@@ -140,9 +135,29 @@ public class XApp extends TableImpl<XAppRecord> {
     public final TableField<XAppRecord, String> URL_LOGIN = createField(DSL.name("URL_LOGIN"), SQLDataType.VARCHAR(255), this, "「urlLogin」— 登录页URL");
 
     /**
+     * The column <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     */
+    public final TableField<XAppRecord, String> URL_HEALTH = createField(DSL.name("URL_HEALTH"), SQLDataType.VARCHAR(255), this, "「urlHealth」- 健康检查URL");
+
+    /**
+     * The column <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     */
+    public final TableField<XAppRecord, String> APP_KEY = createField(DSL.name("APP_KEY"), SQLDataType.VARCHAR(128), this, "「appKey」- 敏感标识符");
+
+    /**
+     * The column <code>ZDB.X_APP.APP_SECRET</code>. 「appSecret」- 应用密钥
+     */
+    public final TableField<XAppRecord, String> APP_SECRET = createField(DSL.name("APP_SECRET"), SQLDataType.VARCHAR(128), this, "「appSecret」- 应用密钥");
+
+    /**
      * The column <code>ZDB.X_APP.STATUS</code>. 「status」- 状态
      */
     public final TableField<XAppRecord, String> STATUS = createField(DSL.name("STATUS"), SQLDataType.VARCHAR(255), this, "「status」- 状态");
+
+    /**
+     * The column <code>ZDB.X_APP.NAMESPACE</code>. 「namespace」- 名空间
+     */
+    public final TableField<XAppRecord, String> NAMESPACE = createField(DSL.name("NAMESPACE"), SQLDataType.VARCHAR(64), this, "「namespace」- 名空间");
 
     /**
      * The column <code>ZDB.X_APP.SIGMA</code>. 「sigma」- 统一标识
