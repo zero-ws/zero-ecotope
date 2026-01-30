@@ -44,7 +44,6 @@ public interface DimProc {
      *
      * @param params    参数
      * @param dimension 维度定义
-     *
      * @return 处理之后的维度信息
      */
     default Future<List<RDimension>> dimAsync(final JsonObject params, final List<KpDimension> dimension) {

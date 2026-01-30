@@ -6,8 +6,8 @@ import io.zerows.component.log.LogO;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.cosmic.bootstrap.Linear;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.jigsaw.NodeNetwork;
+import io.zerows.epoch.jigsaw.NodeVertx;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
@@ -55,7 +55,6 @@ public interface EnergyVertx {
      * 此处传入的配置实例是 {@link NodeNetwork}，所以启动的最终 {@link Vertx} 实例是多个 x N，所以此处
      *
      * @param network {@link NodeNetwork}
-     *
      * @return {@link StoreVertx}
      */
     Future<StoreVertx> startAsync(HBundle bundle, NodeNetwork network);

@@ -6,13 +6,32 @@ DROP TABLE IF EXISTS S_VIEW;
 CREATE TABLE IF NOT EXISTS S_VIEW
 (
     -- 资源拥有者：按角色/用户 处理
-    `KEY`         VARCHAR(36) COMMENT '「key」- 限定记录ID',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 限定记录ID',
     -- 用户优先模式，角色为默认（S_RESOURCE需要传入角色计算模式，多个角色处理时支持多角色的筛选字段需要保存在内
-    `NAME`        VARCHAR(96) COMMENT '「name」- 视图名称，每个 MATRIX 对应一个视图',
-    `TITLE`       VARCHAR(255) COMMENT '「title」- 视图标题，用户输入，可选择',
-    `OWNER`       VARCHAR(36) COMMENT '「owner」- 用户 / 角色ID',
-    `OWNER_TYPE`  VARCHAR(5) COMMENT '「ownerType」- ROLE 角色，USER 用户',
-    `RESOURCE_ID` VARCHAR(36) COMMENT '「resourceId」- 关联资源ID',
+    `NAME` VARCHAR
+(
+    96
+) COMMENT '「name」- 视图名称，每个 MATRIX 对应一个视图',
+    `TITLE` VARCHAR
+(
+    255
+) COMMENT '「title」- 视图标题，用户输入，可选择',
+    `OWNER` VARCHAR
+(
+    36
+) COMMENT '「owner」- 用户 / 角色ID',
+    `OWNER_TYPE` VARCHAR
+(
+    5
+) COMMENT '「ownerType」- ROLE 角色，USER 用户',
+    `RESOURCE_ID` VARCHAR
+(
+    36
+) COMMENT '「resourceId」- 关联资源ID',
 
     /*
      * 1. 针对该资源，只能查看对应的列
@@ -23,7 +42,7 @@ CREATE TABLE IF NOT EXISTS S_VIEW
      * [field1, field2, field3]
      * -- 「后置列过滤」
      */
-    `PROJECTION`  TEXT COMMENT '「projection」- 该资源的列定义（单用户处理）',
+    `PROJECTION` TEXT COMMENT '「projection」- 该资源的列定义（单用户处理）',
     /*
      * 2. 针对该资源，提供查询引擎的分支条件，和传入条件进行合并
      * 固定格式：
@@ -32,7 +51,7 @@ CREATE TABLE IF NOT EXISTS S_VIEW
      * {} or {} 的模式来执行查询
      * -- 「前置查询条件修改，只针对查询参数专用」
      */
-    `CRITERIA`    TEXT COMMENT '「criteria」- 该资源的行查询（单用户处理）',
+    `CRITERIA` TEXT COMMENT '「criteria」- 该资源的行查询（单用户处理）',
     /*
      * 3. 针对特殊资源，提供IDS的主键直接命中条件，用户处理复杂场景的直接Join（本来可以依靠查询引擎处理，但这里不设置）
      *    表单不存在这种类型，主要针对列表
@@ -46,8 +65,11 @@ CREATE TABLE IF NOT EXISTS S_VIEW
      * }
      * -- 「后置行过滤」
      */
-    `ROWS`        TEXT COMMENT '「rows」- 该资源针对保存的行进行过滤',
-    `POSITION`    VARCHAR(96) COMMENT '「position」- 当前视图的模块位置，比页面低一个维度',
+    `ROWS` TEXT COMMENT '「rows」- 该资源针对保存的行进行过滤',
+    `POSITION` VARCHAR
+(
+    96
+) COMMENT '「position」- 当前视图的模块位置，比页面低一个维度',
 
     /*
      * 是否虚拟视图，一般在抽象层的为虚拟视图，一旦出现虚拟视图，则需要针对原始视图执行视图替换
@@ -61,24 +83,45 @@ CREATE TABLE IF NOT EXISTS S_VIEW
      * 一旦启用了访问者，那么该视图中对应的 ROWS/CRITERIA/PROJECTION/POSITION 会纳入到系统中
      * 运算，运算时需要考虑访问者中的扩展属性
      */
-    `VISITANT`    BIT COMMENT '「visitant」- 是否包含了视图访问者',
+    `VISITANT` BIT COMMENT '「visitant」- 是否包含了视图访问者',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`       VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`    VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`      BIT COMMENT '「active」- 是否启用',
-    `METADATA`    TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`  DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`  VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`  DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`  VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`      VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`   VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 
 -- changeset Lang:ox-view-2
 -- Unique

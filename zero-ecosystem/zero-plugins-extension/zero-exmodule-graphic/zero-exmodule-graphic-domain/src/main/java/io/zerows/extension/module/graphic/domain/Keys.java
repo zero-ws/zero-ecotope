@@ -31,13 +31,13 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<GClusterRecord> KEY_G_CLUSTER_NAME = Internal.createUniqueKey(GCluster.G_CLUSTER, DSL.name("KEY_G_CLUSTER_NAME"), new TableField[] { GCluster.G_CLUSTER.NAME, GCluster.G_CLUSTER.GRAPHIC_ID }, true);
-    public static final UniqueKey<GClusterRecord> KEY_G_CLUSTER_PRIMARY = Internal.createUniqueKey(GCluster.G_CLUSTER, DSL.name("KEY_G_CLUSTER_PRIMARY"), new TableField[] { GCluster.G_CLUSTER.KEY }, true);
-    public static final UniqueKey<GEdgeRecord> KEY_G_EDGE_NAME = Internal.createUniqueKey(GEdge.G_EDGE, DSL.name("KEY_G_EDGE_NAME"), new TableField[] { GEdge.G_EDGE.NAME, GEdge.G_EDGE.GRAPHIC_ID }, true);
-    public static final UniqueKey<GEdgeRecord> KEY_G_EDGE_PRIMARY = Internal.createUniqueKey(GEdge.G_EDGE, DSL.name("KEY_G_EDGE_PRIMARY"), new TableField[] { GEdge.G_EDGE.KEY }, true);
-    public static final UniqueKey<GGraphicRecord> KEY_G_GRAPHIC_CODE = Internal.createUniqueKey(GGraphic.G_GRAPHIC, DSL.name("KEY_G_GRAPHIC_CODE"), new TableField[] { GGraphic.G_GRAPHIC.CODE, GGraphic.G_GRAPHIC.SIGMA }, true);
-    public static final UniqueKey<GGraphicRecord> KEY_G_GRAPHIC_PRIMARY = Internal.createUniqueKey(GGraphic.G_GRAPHIC, DSL.name("KEY_G_GRAPHIC_PRIMARY"), new TableField[] { GGraphic.G_GRAPHIC.KEY }, true);
-    public static final UniqueKey<GNodeRecord> KEY_G_NODE_NAME = Internal.createUniqueKey(GNode.G_NODE, DSL.name("KEY_G_NODE_NAME"), new TableField[] { GNode.G_NODE.NAME, GNode.G_NODE.GRAPHIC_ID }, true);
-    public static final UniqueKey<GNodeRecord> KEY_G_NODE_PRIMARY = Internal.createUniqueKey(GNode.G_NODE, DSL.name("KEY_G_NODE_PRIMARY"), new TableField[] { GNode.G_NODE.KEY }, true);
+    public static final UniqueKey<GClusterRecord> KEY_G_CLUSTER_PRIMARY = Internal.createUniqueKey(GCluster.G_CLUSTER, DSL.name("KEY_G_CLUSTER_PRIMARY"), new TableField[] { GCluster.G_CLUSTER.ID }, true);
+    public static final UniqueKey<GClusterRecord> KEY_G_CLUSTER_UK_G_CLUSTER_NAME_GRAPHIC_ID = Internal.createUniqueKey(GCluster.G_CLUSTER, DSL.name("KEY_G_CLUSTER_UK_G_CLUSTER_NAME_GRAPHIC_ID"), new TableField[] { GCluster.G_CLUSTER.NAME, GCluster.G_CLUSTER.GRAPHIC_ID }, true);
+    public static final UniqueKey<GEdgeRecord> KEY_G_EDGE_PRIMARY = Internal.createUniqueKey(GEdge.G_EDGE, DSL.name("KEY_G_EDGE_PRIMARY"), new TableField[] { GEdge.G_EDGE.ID }, true);
+    public static final UniqueKey<GEdgeRecord> KEY_G_EDGE_UK_G_EDGE_NAME_GRAPHIC_ID = Internal.createUniqueKey(GEdge.G_EDGE, DSL.name("KEY_G_EDGE_UK_G_EDGE_NAME_GRAPHIC_ID"), new TableField[] { GEdge.G_EDGE.NAME, GEdge.G_EDGE.GRAPHIC_ID }, true);
+    public static final UniqueKey<GGraphicRecord> KEY_G_GRAPHIC_PRIMARY = Internal.createUniqueKey(GGraphic.G_GRAPHIC, DSL.name("KEY_G_GRAPHIC_PRIMARY"), new TableField[] { GGraphic.G_GRAPHIC.ID }, true);
+    public static final UniqueKey<GGraphicRecord> KEY_G_GRAPHIC_UK_G_GRAPHIC_CODE_SIGMA = Internal.createUniqueKey(GGraphic.G_GRAPHIC, DSL.name("KEY_G_GRAPHIC_UK_G_GRAPHIC_CODE_SIGMA"), new TableField[] { GGraphic.G_GRAPHIC.CODE, GGraphic.G_GRAPHIC.SIGMA }, true);
+    public static final UniqueKey<GNodeRecord> KEY_G_NODE_PRIMARY = Internal.createUniqueKey(GNode.G_NODE, DSL.name("KEY_G_NODE_PRIMARY"), new TableField[] { GNode.G_NODE.ID }, true);
+    public static final UniqueKey<GNodeRecord> KEY_G_NODE_UK_G_NODE_NAME_GRAPHIC_ID = Internal.createUniqueKey(GNode.G_NODE, DSL.name("KEY_G_NODE_UK_G_NODE_NAME_GRAPHIC_ID"), new TableField[] { GNode.G_NODE.NAME, GNode.G_NODE.GRAPHIC_ID }, true);
     public static final UniqueKey<RClusterNodeRecord> KEY_R_CLUSTER_NODE_PRIMARY = Internal.createUniqueKey(RClusterNode.R_CLUSTER_NODE, DSL.name("KEY_R_CLUSTER_NODE_PRIMARY"), new TableField[] { RClusterNode.R_CLUSTER_NODE.CLUSTER_ID, RClusterNode.R_CLUSTER_NODE.NODE_ID }, true);
 }

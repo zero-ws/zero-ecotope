@@ -1,49 +1,48 @@
--- liquibase formatted sql
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- changeset Lang:e-brand-1
--- ----------------------------
--- Table structure for E_BRAND
--- ----------------------------
 DROP TABLE IF EXISTS `E_BRAND`;
-CREATE TABLE `E_BRAND`
-(
-    `KEY`           VARCHAR(36) NOT NULL COMMENT '「key」- 品牌ID',
-    `CODE`          VARCHAR(255) COMMENT '「code」- 品牌编码',
-    `NAME`          VARCHAR(255) COMMENT '「name」- 品牌名称',
-    `ALIAS`         VARCHAR(255) COMMENT '「alias」- 品牌别名',
-    `COMPANY_NAME`  VARCHAR(128) COMMENT '「companyName」- 品牌公司名',
+CREATE TABLE IF NOT EXISTS `E_BRAND` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`             VARCHAR(36)   NOT NULL COLLATE utf8mb4_bin COMMENT '「id」- 主键',                       -- [主键] 采用 Snowflake/UUID，避开自增ID
 
-    -- 品牌基础信息
-    `CATEGORY_CODE` VARCHAR(16) COMMENT '「categoryCode」- 类别代码',
-    `CATEGORY_NAME` VARCHAR(128) COMMENT '「categoryName」- 类别名称',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `ALIAS`          VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「alias」- 别名',
+    `AREA`           VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「area」- 区域码',               -- 区域码，如：GB/T2659-2000国际标准
+    `AREA_CATEGORY`  VARCHAR(16)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「areaCategory」- 区域类别码',
+    `AREA_NAME`      VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「areaName」- 区域名称',
+    `CATEGORY_CODE`  VARCHAR(16)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「categoryCode」- 类别代码',
+    `CATEGORY_NAME`  VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「categoryName」- 类别名称',
+    `CODE`           VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `COMPANY_NAME`   VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「companyName」- 品牌公司名',
+    `NAME`           VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
 
-    -- 区域信息
-    `AREA`          VARCHAR(128) COMMENT '「area」- 区域码，如：GB/T2659-2000国际标准',
-    `AREA_NAME`     VARCHAR(128) COMMENT '「areaName」- 区域名称',
-    `AREA_CATEGORY` VARCHAR(16) COMMENT '「areaCategory」- 区域类别码',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`          VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',            -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',             -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`         VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`         BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                               -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`       VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',         -- [国际化] 如: zh_CN, en_US,
+    `METADATA`       TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                        -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`        VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`     DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                            -- [审计] 创建时间
+    `CREATED_BY`     VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',          -- [审计] 创建人
+    `UPDATED_AT`     DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                            -- [审计] 更新时间
+    `UPDATED_BY`     VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',          -- [审计] 更新人
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_E_BRAND_CODE_SIGMA` (`CODE`, `SIGMA`) USING BTREE,
+    KEY `IDX_E_BRAND_SIGMA` (`SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='E_BRAND';
 
-    -- Auditor字段
-    `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:e-brand-2
-ALTER TABLE E_BRAND
-    ADD UNIQUE (`CODE`, `SIGMA`) USING BTREE;
-
-ALTER TABLE E_BRAND
-    ADD INDEX IDX_E_BRAND_SIGMA (`SIGMA`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)
+-- - TYPE (类型)

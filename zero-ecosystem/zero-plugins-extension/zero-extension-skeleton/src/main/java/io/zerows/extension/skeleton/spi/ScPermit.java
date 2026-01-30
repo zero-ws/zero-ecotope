@@ -17,7 +17,6 @@ public interface ScPermit {
      * 验证令牌
      *
      * @param token token详细信息
-     *
      * @return 是否验证通过
      */
     Future<Boolean> token(String token);

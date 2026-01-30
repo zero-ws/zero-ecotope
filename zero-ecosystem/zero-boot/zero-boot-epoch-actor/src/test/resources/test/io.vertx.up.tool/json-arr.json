@@ -1,30 +1,30 @@
 [
-    {
-        "name": "lang",
-        "_id": "111",
-        "data": {
-            "name": "lang1",
-            "_id": "222"
-        },
-        "array": [
-            {
-                "name": "lang2",
-                "_id": "333"
-            }
-        ]
+  {
+    "name": "lang",
+    "_id": "111",
+    "data": {
+      "name": "lang1",
+      "_id": "222"
     },
-    {
-        "name": "lang",
-        "_id": "114",
-        "data": {
-            "name": "lang1",
-            "_id": "224"
-        },
-        "array": [
-            {
-                "name": "lang2",
-                "_id": "334"
-            }
-        ]
-    }
+    "array": [
+      {
+        "name": "lang2",
+        "_id": "333"
+      }
+    ]
+  },
+  {
+    "name": "lang",
+    "_id": "114",
+    "data": {
+      "name": "lang1",
+      "_id": "224"
+    },
+    "array": [
+      {
+        "name": "lang2",
+        "_id": "334"
+      }
+    ]
+  }
 ]

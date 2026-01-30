@@ -1,6 +1,6 @@
 {
-    "field": {
-        "pLoginWechat": "BOOLEAN",
-        "pLoginSMS": "BOOLEAN"
-    }
+  "field": {
+    "pLoginWechat": "BOOLEAN",
+    "pLoginSMS": "BOOLEAN"
+  }
 }

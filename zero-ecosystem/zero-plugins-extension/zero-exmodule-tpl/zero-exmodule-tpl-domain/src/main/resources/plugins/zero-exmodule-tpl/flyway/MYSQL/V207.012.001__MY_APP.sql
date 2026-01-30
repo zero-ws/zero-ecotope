@@ -1,46 +1,47 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `MY_APP`;
+CREATE TABLE IF NOT EXISTS `MY_APP` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`          VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                          -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:my-app-1
--- 个人应用表：MY_APP
-DROP TABLE IF EXISTS MY_APP;
-CREATE TABLE IF NOT EXISTS MY_APP
-(
-    `KEY`        VARCHAR(36) COMMENT '「key」- 个人应用主键',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `BAG_ID`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「bagId」- 个人应用绑定的',         -- 个人应用绑定的 BAG ID
+    `OWNER`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「owner」- 拥有者ID',               -- 拥有者ID，我的 / 角色级
+    `OWNER_TYPE`  VARCHAR(5)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「ownerType」- ROLE 角色',          -- ROLE 角色，USER 用户
+    `POSITION`    VARCHAR(16)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「position」- 位置（默认左上）',
+    `UI_SORT`     BIGINT        DEFAULT NULL COMMENT '「uiSort」- 模块排序',
 
-    -- 关联配置
-    /*
-     * 关联 Apps 只能处理 AppId 以及入口问题，不可以处理其他问题，比如使用 AppId 直接读取
-     * 字典相关数据，不包含在 Apps 的个人设置中，所以此处主要针对 AppId 以及 BagId 进行关联设置
-     */
-    `BAG_ID`     VARCHAR(36) COMMENT '「bagId」- 个人应用绑定的 BAG ID',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`        VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',                    -- [类型],
 
-    `OWNER`      VARCHAR(36) COMMENT '「owner」- 拥有者ID，我的 / 角色级',
-    `OWNER_TYPE` VARCHAR(5) COMMENT '「ownerType」- ROLE 角色，USER 用户',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`       VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',               -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',                -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                   -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`      BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                                  -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`    VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',            -- [国际化] 如: zh_CN, en_US,
+    `METADATA`    TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                           -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`     VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`  DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                               -- [审计] 创建时间
+    `CREATED_BY`  VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',             -- [审计] 创建人
+    `UPDATED_AT`  DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                               -- [审计] 更新时间
+    `UPDATED_BY`  VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',             -- [审计] 更新人
 
-    -- UI定制
-    `UI_SORT`    BIGINT COMMENT '「uiSort」- 模块排序',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_MY_APP_OWNER_TYPE_OWNER_TYPE_POSITION_APP_ID` (`OWNER_TYPE`, `OWNER`, `TYPE`, `POSITION`, `APP_ID`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='MY_APP';
 
-    -- 维度控制
-    `TYPE`       VARCHAR(32) COMMENT '「type」- 类型（默认全站）',
-    `POSITION`   VARCHAR(16) COMMENT '「position」- 位置（默认左上）',
-
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`      VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`   VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`     BIT COMMENT '「active」- 是否启用',
-    `METADATA`   TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY` VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY` VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`  VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
-
--- changeset Lang:my-app-2
-ALTER TABLE MY_APP
-    ADD UNIQUE (`OWNER_TYPE`, `OWNER`, `TYPE`, `POSITION`, `APP_ID`);
+-- 缺失公共字段：
+-- - VERSION (版本)

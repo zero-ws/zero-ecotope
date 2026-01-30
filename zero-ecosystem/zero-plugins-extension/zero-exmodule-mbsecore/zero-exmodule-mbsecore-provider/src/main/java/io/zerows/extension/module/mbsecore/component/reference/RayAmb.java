@@ -25,7 +25,6 @@ public class RayAmb {
 
     /**
      * @param <T> The actual data type of {@link java.lang.Object} instance member `data`.
-     *
      * @return Generic data reference that will be convert to Tool
      */
     @SuppressWarnings("unchecked")
@@ -37,7 +36,6 @@ public class RayAmb {
      * 「Fluent」Set the data of {@link io.vertx.core.json.JsonObject}.
      *
      * @param data {@link io.vertx.core.json.JsonObject}
-     *
      * @return Reference of this
      */
     @Fluent
@@ -51,7 +49,6 @@ public class RayAmb {
      * 「Fluent」Set the data of {@link io.vertx.core.json.JsonArray}.
      *
      * @param data {@link io.vertx.core.json.JsonArray}
-     *
      * @return Reference of this
      */
     @Fluent
@@ -65,7 +62,6 @@ public class RayAmb {
      * 「Fluent」Add new element in {@link io.vertx.core.json.JsonArray}.
      *
      * @param item {@link io.vertx.core.json.JsonObject}
-     *
      * @return Reference of this
      */
     @Fluent
@@ -78,7 +74,7 @@ public class RayAmb {
 
     /**
      * Here are three values for `this.single`.
-     *
+     * <p>
      * - TRUE: The data is {@link io.vertx.core.json.JsonObject} type.
      * - FALSE: The data is {@link io.vertx.core.json.JsonArray} type.
      * - null: Invalid of current, the data part is null or invalid formatFail.

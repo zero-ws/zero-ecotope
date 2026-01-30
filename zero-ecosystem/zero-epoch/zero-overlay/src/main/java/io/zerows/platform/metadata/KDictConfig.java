@@ -161,23 +161,33 @@ public class KDictConfig implements Serializable {
     @Slf4j
     public static class Source implements Serializable, HCopier<Source> {
 
-        /** 类型，一般用于 CATEGORY | TABULAR 两类字典从系统中企图数据专用，可同时读取多种类型 */
+        /**
+         * 类型，一般用于 CATEGORY | TABULAR 两类字典从系统中企图数据专用，可同时读取多种类型
+         */
         private final Set<String> types = new HashSet<>();
 
 
-        /** 组件配置，和 component 搭配使用的组件配置节点 */
+        /**
+         * 组件配置，和 component 搭配使用的组件配置节点
+         */
         private final JsonObject componentConfig = new JsonObject();
 
 
-        /** 字典类型，指明当前字典的类型信息 */
+        /**
+         * 字典类型，指明当前字典的类型信息
+         */
         private EmDS.Dictionary source;
 
 
-        /** 当前字典名字，消费者专用 {@link KDictUse} 此名字执行消费 **/
+        /**
+         * 当前字典名字，消费者专用 {@link KDictUse} 此名字执行消费
+         **/
         private String key;
 
 
-        /** 字典数据提取依托的组件信息 **/
+        /**
+         * 字典数据提取依托的组件信息
+         **/
         private Class<?> component;
 
         public Source(final JsonObject definition) {

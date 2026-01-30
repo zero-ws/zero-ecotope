@@ -28,7 +28,6 @@ public interface PartyA extends Party {
      * 和当前甲方环境相关的所有乙方环境加载
      *
      * @param name 乙方环境名称
-     *
      * @return {@link PartyB}
      */
     PartyB partyB(String name);

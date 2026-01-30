@@ -11,7 +11,7 @@ import io.zerows.specification.modeling.HRule;
  *     2. NormAtom，使用 Hybrid 模式处理的静态混合相容的混合模型（现阶段主要使用于流程工单）。
  *     3. EmfAtom，使用 EMF 模式处理的动态核心模型（内部对接Emf规范），不开源不对外。
  * </code></pre>
- *
+ * <p>
  * 「统一模型」{@link HAtom}
  * 1. 关于标识规则
  * {@link HAtom} 内部包含了 {@link HRule} 定义的双通道标识规则：
@@ -30,7 +30,7 @@ import io.zerows.specification.modeling.HRule;
  *       }
  *       嵌套结构标识的使用在后期会提供标识规则选择器选择核心标识规则。
  * </code></pre>
- *
+ * <p>
  * 2. 关于标准模型
  * <pre><code>
  *    「动态模型」DataAtom

@@ -68,7 +68,7 @@ public class InVarietyService implements InVarietyStub {
                     // FBillItem New Adding
                     final List<FBillItem> newItem = fromTo.get(Boolean.TRUE);
                     newItem.forEach(each -> {
-                        each.setBillId(bill.getKey());
+                        each.setBillId(bill.getId());
 
                         each.setComment(VString.ARROW_RIGHT + comment);
                     });

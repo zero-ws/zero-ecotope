@@ -28,77 +28,77 @@ import io.zerows.extension.module.finance.domain.tables.FTransOf;
 public class Tables {
 
     /**
-     * The table <code>ZDB.F_BANK</code>.
+     * 银行
      */
     public static final FBank F_BANK = FBank.F_BANK;
 
     /**
-     * The table <code>ZDB.F_BILL</code>.
+     * F_BILL
      */
     public static final FBill F_BILL = FBill.F_BILL;
 
     /**
-     * The table <code>ZDB.F_BILL_ITEM</code>.
+     * F_BILL_ITEM
      */
     public static final FBillItem F_BILL_ITEM = FBillItem.F_BILL_ITEM;
 
     /**
-     * The table <code>ZDB.F_BOOK</code>.
+     * F_BOOK
      */
     public static final FBook F_BOOK = FBook.F_BOOK;
 
     /**
-     * The table <code>ZDB.F_CURRENCY</code>.
+     * F_CURRENCY
      */
     public static final FCurrency F_CURRENCY = FCurrency.F_CURRENCY;
 
     /**
-     * The table <code>ZDB.F_DEBT</code>.
+     * F_DEBT
      */
     public static final FDebt F_DEBT = FDebt.F_DEBT;
 
     /**
-     * The table <code>ZDB.F_INVOICE</code>.
+     * F_INVOICE
      */
     public static final FInvoice F_INVOICE = FInvoice.F_INVOICE;
 
     /**
-     * The table <code>ZDB.F_PAY_TERM</code>.
+     * F_PAY_TERM
      */
     public static final FPayTerm F_PAY_TERM = FPayTerm.F_PAY_TERM;
 
     /**
-     * The table <code>ZDB.F_PRE_AUTHORIZE</code>.
+     * F_PRE_AUTHORIZE
      */
     public static final FPreAuthorize F_PRE_AUTHORIZE = FPreAuthorize.F_PRE_AUTHORIZE;
 
     /**
-     * The table <code>ZDB.F_SETTLEMENT</code>.
+     * F_SETTLEMENT
      */
     public static final FSettlement F_SETTLEMENT = FSettlement.F_SETTLEMENT;
 
     /**
-     * The table <code>ZDB.F_SETTLEMENT_ITEM</code>.
+     * F_SETTLEMENT_ITEM
      */
     public static final FSettlementItem F_SETTLEMENT_ITEM = FSettlementItem.F_SETTLEMENT_ITEM;
 
     /**
-     * The table <code>ZDB.F_SUBJECT</code>.
+     * F_SUBJECT
      */
     public static final FSubject F_SUBJECT = FSubject.F_SUBJECT;
 
     /**
-     * The table <code>ZDB.F_TRANS</code>.
+     * F_TRANS
      */
     public static final FTrans F_TRANS = FTrans.F_TRANS;
 
     /**
-     * The table <code>ZDB.F_TRANS_ITEM</code>.
+     * F_TRANS_ITEM
      */
     public static final FTransItem F_TRANS_ITEM = FTransItem.F_TRANS_ITEM;
 
     /**
-     * The table <code>ZDB.F_TRANS_OF</code>.
+     * 财务 - 交易关联
      */
     public static final FTransOf F_TRANS_OF = FTransOf.F_TRANS_OF;
 }

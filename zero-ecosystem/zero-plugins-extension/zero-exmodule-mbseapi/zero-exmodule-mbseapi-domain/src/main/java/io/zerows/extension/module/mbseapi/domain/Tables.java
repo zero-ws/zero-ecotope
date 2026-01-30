@@ -16,17 +16,17 @@ import io.zerows.extension.module.mbseapi.domain.tables.IService;
 public class Tables {
 
     /**
-     * The table <code>ZDB.I_API</code>.
+     * 接口
      */
     public static final IApi I_API = IApi.I_API;
 
     /**
-     * The table <code>ZDB.I_JOB</code>.
+     * 任务
      */
     public static final IJob I_JOB = IJob.I_JOB;
 
     /**
-     * The table <code>ZDB.I_SERVICE</code>.
+     * 服务
      */
     public static final IService I_SERVICE = IService.I_SERVICE;
 }

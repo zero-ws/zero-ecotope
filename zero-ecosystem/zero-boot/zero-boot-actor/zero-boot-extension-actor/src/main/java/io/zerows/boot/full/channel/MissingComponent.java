@@ -9,23 +9,23 @@ import io.zerows.mbse.metadata.ActOut;
 
 /**
  * ## 「Channel」丢失检查通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 不带任何<strong>集成功能</strong>的标准丢失检查通道，支持如下功能
- *
+ * <p>
  * - 传入查询引擎中的`criteria`复杂条件
  * - 请求`POST /api/ox/:identifier/missing`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
  * - Qr参数中的`criteria`部分
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * > 参考Zero查询引擎中的Qr标准格式。
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -37,9 +37,9 @@ import io.zerows.mbse.metadata.ActOut;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -47,7 +47,7 @@ import io.zerows.mbse.metadata.ActOut;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * - true：当前记录不存在系统中
  * - false：当前数据记录存在。
  *
@@ -58,7 +58,6 @@ public class MissingComponent extends AbstractAdaptor {
      * 「Async」通道主方法
      *
      * @param request 通道的标准请求参数，类型{@link ActIn}。
-     *
      * @return 返回`{@link Future}<{@link ActOut}>`
      */
     @Override

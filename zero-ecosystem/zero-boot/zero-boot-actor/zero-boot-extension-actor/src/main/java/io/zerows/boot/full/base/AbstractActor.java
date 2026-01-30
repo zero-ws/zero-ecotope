@@ -5,7 +5,7 @@ import io.zerows.epoch.annotations.Contract;
 
 /**
  * ## 「Actor」顶层调度器
- *
+ * <p>
  * 在连接器{@link AbstractActor}上追加任务配置{@link Mission}。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

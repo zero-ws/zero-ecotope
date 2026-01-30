@@ -58,7 +58,6 @@ final class IoStream {
      *
      * @param message The java object that will be converted from.
      * @param <T>     Target java object that will be converted to.
-     *
      * @return Target java object ( Generic Type )
      */
     static <T> byte[] to(final T message) {
@@ -77,7 +76,6 @@ final class IoStream {
      * @param pos    The position of reading
      * @param buffer The buffer to hold the data from reading.
      * @param <T>    The converted java object type, Generic Type
-     *
      * @return Return to converted java object.
      */
     @SuppressWarnings("unchecked")
@@ -91,7 +89,6 @@ final class IoStream {
 
     /**
      * @param filename The filename to describe source path
-     *
      * @return Return the InputStream object mount to source path.
      */
     static InputStream read(final String filename) {
@@ -113,7 +110,6 @@ final class IoStream {
      *
      * @param filename The filename to describe source path
      * @param clazz    The class loader related class
-     *
      * @return Return the InputStream object mount to source path.
      */
     static InputStream read(final String filename,

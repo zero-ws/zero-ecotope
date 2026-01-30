@@ -1,22 +1,22 @@
 {
-    "name": "w-oa-vacation",
-    "daoCls": "T_OA_VACATION",
-    "field": {
-        "unique": [
-            [
-                "key"
-            ]
-        ]
+  "name": "w-oa-vacation",
+  "daoCls": "T_OA_VACATION",
+  "field": {
+    "unique": [
+      [
+        "key"
+      ]
+    ]
+  },
+  "connect": {
+    "targetIndent": "w.todo",
+    "target": {
+      "w.todo": {
+        "keyJoin": "traceId"
+      }
     },
-    "connect": {
-        "targetIndent": "w.todo",
-        "target": {
-            "w.todo": {
-                "keyJoin": "traceId"
-            }
-        },
-        "source": {
-            "keyJoin": "key"
-        }
+    "source": {
+      "keyJoin": "key"
     }
+  }
 }

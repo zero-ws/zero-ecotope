@@ -1,13 +1,13 @@
 {
-    "name": "x-api",
-    "daoCls": "I_API",
-    "field": {
-        "unique": [
-            [
-                "uri",
-                "method",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "x-api",
+  "daoCls": "I_API",
+  "field": {
+    "unique": [
+      [
+        "uri",
+        "method",
+        "sigma"
+      ]
+    ]
+  }
 }

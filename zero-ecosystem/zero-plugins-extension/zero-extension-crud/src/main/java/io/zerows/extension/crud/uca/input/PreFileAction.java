@@ -26,7 +26,6 @@ abstract class PreFileAction implements Pre {
      *
      * @param in     IxMod
      * @param fileFn BiFunction<JsonObject, JsonArray, Future<JsonArray>>
-     *
      * @return {@link Function}
      */
     protected Function<JsonObject, Future<JsonObject>> actionFn(

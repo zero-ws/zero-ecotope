@@ -89,7 +89,6 @@ public abstract class ConflateBase<I, O> implements Conflate<I, O> {
      * </code></pre>
      *
      * @param identifier 连接点的标识符
-     *
      * @return {@link KJoin.Point} 配置
      */
     protected KJoin.Point target(final String identifier) {

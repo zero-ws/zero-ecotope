@@ -16,23 +16,23 @@ import io.zerows.spi.HPI;
 
 /**
  * ## 「Channel」我的列定制通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 该通道又称为<strong>个人视图保存通道</strong>，不带任何<strong>集成功能</strong>的标准存储我的视图组件，支持如下功能：
- *
+ * <p>
  * - 更新当前列的视图
  * - 请求`PUT /api/ox/columns/:identifier/my`
  * - 计算影响路径中的Session数据，键值`dataKey`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
  * - 直接从`DataAtom`中读取模型标识符
  * - 内置调用了ServiceLoader通道`io.zerows.extension.mbse.ui.osgi.spi.ui.ApeakMy`
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * [
@@ -42,9 +42,9 @@ import io.zerows.spi.HPI;
  * ]
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -56,7 +56,7 @@ import io.zerows.spi.HPI;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * 内置调用{@link Ox#viewMy Ox.viewMy}
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -66,7 +66,6 @@ public class ViewComponent extends AbstractAdaptor {
      * 「Async」通道主方法
      *
      * @param request 通道的标准请求参数，类型{@link ActIn}。
-     *
      * @return 返回`{@link Future}<{@link ActOut}>`
      */
     @Override

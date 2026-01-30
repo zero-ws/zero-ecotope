@@ -120,15 +120,15 @@ public class ActionService implements ActionStub {
         /*
          * Read action list of original
          */
-        return DB.on(SActionDao.class).<SAction>fetchAsync(KName.PERMISSION_ID, permission.getKey())
+        return DB.on(SActionDao.class).<SAction>fetchAsync(KName.PERMISSION_ID, permission.getId())
             .compose(oldList -> {
                 /*
                  * Get actions of input
                  */
                 final List<SAction> inputList = Ux.fromJson(actionData, SAction.class);
 
-                final ConcurrentMap<String, SAction> mapInput = Ut.elementMap(inputList, SAction::getKey);
-                final ConcurrentMap<String, SAction> mapStored = Ut.elementMap(oldList, SAction::getKey);
+                final ConcurrentMap<String, SAction> mapInput = Ut.elementMap(inputList, SAction::getId);
+                final ConcurrentMap<String, SAction> mapStored = Ut.elementMap(oldList, SAction::getId);
                 /*
                  * Remove link
                  */
@@ -138,7 +138,7 @@ public class ActionService implements ActionStub {
                      * Existing in inputMap but not in original
                      * Here should remove link between Permission / Action
                      */
-                    if (!mapInput.containsKey(original.getKey())) {
+                    if (!mapInput.containsKey(original.getId())) {
                         this.setAction(original, permission, null);
                         updated.add(original);
                     }
@@ -148,7 +148,7 @@ public class ActionService implements ActionStub {
                  */
                 mapInput.keySet().stream().filter(key -> !mapStored.containsKey(key)).forEach(actionKey -> {
                     final SAction action = mapInput.get(actionKey);
-                    this.setAction(action, permission, permission.getKey());
+                    this.setAction(action, permission, permission.getId());
                     updated.add(action);
                 });
                 return DB.on(SActionDao.class).updateAsync(updated);

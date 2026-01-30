@@ -13,21 +13,41 @@
     <name>(POM) 📚️ - Zero::Epoch</name>
     <packaging>pom</packaging>
     <modules>
+        <!--
+        -overlay :系统对接层，负责和 R2MO 连接，并提供 AMS 基础
+                 Agree Metadata Specification
+                 Fx / 函数功能库 Function Library
+                 ENV / 环境访问层
+        -use     :功能使用层，负责提供基础功能的使用接口
+                 Ut / 统一工具类 Utils
+        -spec    :配置规范层，负责定义系统配置的规范，包括不同配置的连接部分
+        -->
         <module>zero-overlay</module>
         <module>zero-epoch-use</module>
+        <module>zero-epoch-spec</module>
+
+
         <!--
-        - 设置模块，主要提供基础层之上的支持功能，其中包括
-          - io.zerows.epoch.boot:               启动器
-          - io.zerows.epoch.configuration:      配置
-          - io.zerows.epoch.management:         基本管理功能
+        -setting :系统设置层，负责系统配置的加载与管理
+        -store   :数据存储层，负责系统数据的持久化存储
+        -focus   :核心调用层，Invoker 以及 Assembly 的调用核心，内置不同流程的调用逻辑
         -->
         <module>zero-epoch-setting</module>
         <module>zero-epoch-store</module>
         <module>zero-epoch-focus</module>
-        <!-- 工具层 -->
+
+
+        <!--
+        -execution: 核心执行层
+                    Ux / 开发专用工具类 Utility X
+        -cosmic   : 核心容器层
+                    Zero Web Container
+        -adhoc    : 测试处理层
+                    测试框架和全容器测试环境
+        -->
         <module>zero-epoch-execution</module>
         <module>zero-epoch-cosmic</module>
-        <!-- 测试 -->
         <module>zero-epoch-adhoc</module>
+        <module>zero-epoch-spec-nacos</module>
     </modules>
 </project>

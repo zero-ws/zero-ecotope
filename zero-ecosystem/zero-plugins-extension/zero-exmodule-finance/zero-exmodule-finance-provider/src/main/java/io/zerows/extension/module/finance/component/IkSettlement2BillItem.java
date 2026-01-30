@@ -31,7 +31,7 @@ class IkSettlement2BillItem implements IkWay<FSettlement, FBillItem> {
     @Override
     public void transfer(final FSettlement settlement, final List<FBillItem> items) {
         items.forEach(item -> {
-            item.setSettlementId(settlement.getKey());
+            item.setSettlementId(settlement.getId());
             item.setUpdatedAt(LocalDateTime.now());
             item.setUpdatedBy(settlement.getUpdatedBy());
         });

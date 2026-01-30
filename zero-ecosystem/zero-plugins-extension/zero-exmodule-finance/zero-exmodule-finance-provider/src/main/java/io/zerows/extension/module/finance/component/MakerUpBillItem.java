@@ -23,7 +23,6 @@ class MakerUpBillItem implements Maker<String, FBillItem> {
      *
      * @param key  账单子项的主键
      * @param data 更新的数据
-     *
      * @return {@link FBillItem}
      */
     @Override

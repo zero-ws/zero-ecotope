@@ -4,10 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
 import io.zerows.extension.module.mbsecore.component.file.AoFile;
 import io.zerows.extension.module.mbsecore.component.file.FileReader;
+import io.zerows.extension.module.mbsecore.metadata.Model;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -63,8 +63,8 @@ class AoRefineCombine implements AoRefine {
          * 检查新的MModel的主键是否相同
          * 不相同则表示数据库中的主键需要同步到json中
          */
-        if (!stored.dbModel().getKey().equals(json.dbModel().getKey())) {
-            json.connect(stored.dbModel().getKey());
+        if (!stored.dbModel().getId().equals(json.dbModel().getId())) {
+            json.connect(stored.dbModel().getId());
         }
         /*
          * 除了检查MModel以外还要检查 Schema的内容
@@ -76,8 +76,8 @@ class AoRefineCombine implements AoRefine {
             // 先查找相匹配的Schema
             .stream().filter(jsonRef::equals).findFirst()
             // 再过滤发生了主键变化的Schema
-            .filter(storedRef -> !storedRef.getEntity().getKey().equals(jsonRef.getEntity().getKey()))
+            .filter(storedRef -> !storedRef.getEntity().getId().equals(jsonRef.getEntity().getId()))
             // 如果找到就执行关联关系的重新设置
-            .ifPresent(storedRef -> jsonRef.connect(storedRef.getEntity().getKey())));
+            .ifPresent(storedRef -> jsonRef.connect(storedRef.getEntity().getId())));
     }
 }

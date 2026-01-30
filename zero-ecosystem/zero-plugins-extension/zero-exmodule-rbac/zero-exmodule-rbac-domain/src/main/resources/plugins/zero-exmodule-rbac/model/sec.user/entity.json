@@ -1,12 +1,12 @@
 {
-    "name": "user",
-    "daoCls": "S_USER",
-    "field": {
-        "unique": [
-            [
-                "username",
-                "sigma"
-            ]
-        ]
-    }
+  "name": "user",
+  "daoCls": "S_USER",
+  "field": {
+    "unique": [
+      [
+        "username",
+        "sigma"
+      ]
+    ]
+  }
 }

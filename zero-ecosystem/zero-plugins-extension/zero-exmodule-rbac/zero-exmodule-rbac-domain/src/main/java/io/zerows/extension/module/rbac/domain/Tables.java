@@ -4,14 +4,35 @@
 package io.zerows.extension.module.rbac.domain;
 
 
-import io.zerows.extension.module.rbac.domain.tables.*;
+import io.zerows.extension.module.rbac.domain.tables.OAccessToken;
+import io.zerows.extension.module.rbac.domain.tables.OUser;
+import io.zerows.extension.module.rbac.domain.tables.RGroupRole;
+import io.zerows.extension.module.rbac.domain.tables.RRolePerm;
+import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
+import io.zerows.extension.module.rbac.domain.tables.RUserRole;
+import io.zerows.extension.module.rbac.domain.tables.SAction;
+import io.zerows.extension.module.rbac.domain.tables.SGroup;
+import io.zerows.extension.module.rbac.domain.tables.SPacket;
+import io.zerows.extension.module.rbac.domain.tables.SPath;
+import io.zerows.extension.module.rbac.domain.tables.SPermSet;
+import io.zerows.extension.module.rbac.domain.tables.SPermission;
+import io.zerows.extension.module.rbac.domain.tables.SResource;
+import io.zerows.extension.module.rbac.domain.tables.SRole;
+import io.zerows.extension.module.rbac.domain.tables.SUser;
+import io.zerows.extension.module.rbac.domain.tables.SView;
+import io.zerows.extension.module.rbac.domain.tables.SVisitant;
 
 
 /**
  * Convenience access to all tables in ZDB.
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>ZDB.O_ACCESS_TOKEN</code>.
+     */
+    public static final OAccessToken O_ACCESS_TOKEN = OAccessToken.O_ACCESS_TOKEN;
 
     /**
      * The table <code>ZDB.O_USER</code>.
@@ -19,77 +40,77 @@ public class Tables {
     public static final OUser O_USER = OUser.O_USER;
 
     /**
-     * The table <code>ZDB.R_GROUP_ROLE</code>.
+     * 关联表
      */
     public static final RGroupRole R_GROUP_ROLE = RGroupRole.R_GROUP_ROLE;
 
     /**
-     * The table <code>ZDB.R_ROLE_PERM</code>.
+     * 角色 - 权限
      */
     public static final RRolePerm R_ROLE_PERM = RRolePerm.R_ROLE_PERM;
 
     /**
-     * The table <code>ZDB.R_USER_GROUP</code>.
+     * 账号 - 组
      */
     public static final RUserGroup R_USER_GROUP = RUserGroup.R_USER_GROUP;
 
     /**
-     * The table <code>ZDB.R_USER_ROLE</code>.
+     * 账号-角色
      */
     public static final RUserRole R_USER_ROLE = RUserRole.R_USER_ROLE;
 
     /**
-     * The table <code>ZDB.S_ACTION</code>.
+     * S_ACTION
      */
     public static final SAction S_ACTION = SAction.S_ACTION;
 
     /**
-     * The table <code>ZDB.S_GROUP</code>.
+     * 组
      */
     public static final SGroup S_GROUP = SGroup.S_GROUP;
 
     /**
-     * The table <code>ZDB.S_PACKET</code>.
+     * S_PACKET
      */
     public static final SPacket S_PACKET = SPacket.S_PACKET;
 
     /**
-     * The table <code>ZDB.S_PATH</code>.
+     * S_PATH
      */
     public static final SPath S_PATH = SPath.S_PATH;
 
     /**
-     * The table <code>ZDB.S_PERM_SET</code>.
+     * S_PERM_SET
      */
     public static final SPermSet S_PERM_SET = SPermSet.S_PERM_SET;
 
     /**
-     * The table <code>ZDB.S_PERMISSION</code>.
+     * S_PERMISSION
      */
     public static final SPermission S_PERMISSION = SPermission.S_PERMISSION;
 
     /**
-     * The table <code>ZDB.S_RESOURCE</code>.
+     * 资源
      */
     public static final SResource S_RESOURCE = SResource.S_RESOURCE;
 
     /**
-     * The table <code>ZDB.S_ROLE</code>.
+     * 角色
      */
     public static final SRole S_ROLE = SRole.S_ROLE;
 
     /**
-     * The table <code>ZDB.S_USER</code>.
+     * 账号
      */
     public static final SUser S_USER = SUser.S_USER;
 
     /**
-     * The table <code>ZDB.S_VIEW</code>.
+     * S_VIEW
      */
     public static final SView S_VIEW = SView.S_VIEW;
 
     /**
-     * The table <code>ZDB.S_VISITANT</code>.
+     * S_VISITANT
      */
     public static final SVisitant S_VISITANT = SVisitant.S_VISITANT;
 }

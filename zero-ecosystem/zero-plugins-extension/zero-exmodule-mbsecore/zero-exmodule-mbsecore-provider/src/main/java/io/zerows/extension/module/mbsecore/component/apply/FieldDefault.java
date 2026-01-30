@@ -47,7 +47,7 @@ class FieldDefault implements AoDefault {
             } else if (columnType.startsWith("DECIMAL")) {
                 AoDefault.apply(field, "precision", 2);
             }
-            AoDefault.apply(field, "entityId", this.entity.getKey());
+            AoDefault.apply(field, "entityId", this.entity.getId());
             AoDefault.apply(field);
         }
     }

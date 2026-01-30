@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
 public abstract class ExAttributeComponent {
     /**
      * Here are json formatFail of `definition`
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      *     {
@@ -42,7 +42,6 @@ public abstract class ExAttributeComponent {
      * ```
      *
      * @param definition {@link JsonObject} The input definition
-     *
      * @return {@link ConcurrentMap} The dict source map ( key = JsonArray )
      */
     public ConcurrentMap<String, JsonArray> source(final JsonObject definition) {

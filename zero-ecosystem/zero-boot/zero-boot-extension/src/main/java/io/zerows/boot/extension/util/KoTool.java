@@ -5,10 +5,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.ambient.domain.tables.daos.XLogDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XLog;
+import io.zerows.extension.module.mbsecore.metadata.Model;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -60,7 +60,7 @@ class KoTool {
 
     private static XLog create(final Class<?> clazz, final DataAtom atom) {
         final XLog log = new XLog();
-        log.setKey(UUID.randomUUID().toString());
+        log.setId(UUID.randomUUID().toString());
         final LocalDateTime eventTime = LocalDateTime.now();
         log.setInfoAt(eventTime);
         log.setActive(Boolean.TRUE);

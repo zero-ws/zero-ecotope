@@ -7,22 +7,22 @@ import io.zerows.mbse.metadata.ActOut;
 
 /**
  * ## 「Channel」读取数据通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * - 根据 key 值读取记录集
  * - 请求`GET /api/ox/:identifier/:key`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * 无请求体（Body）数据，直接传入identifier读取。
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {

@@ -46,7 +46,6 @@ public class ExModulatCommon implements ExModulat {
      * @param open    是否开启 open 模式
      *                - open = true / 开放模式不屏蔽敏感数据
      *                - open = false / 关闭模式屏蔽敏感数据（必须要求认证）
-     *
      * @return 最终返回应用配置
      */
     @Override

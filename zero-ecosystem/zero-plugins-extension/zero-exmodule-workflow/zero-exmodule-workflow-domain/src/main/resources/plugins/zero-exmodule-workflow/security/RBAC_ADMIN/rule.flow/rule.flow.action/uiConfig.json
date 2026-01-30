@@ -1,6 +1,6 @@
 {
-    "dao": "cn.vertxup.ui.domain.tables.daos.UiOpDao",
-    "output": {
-        "group": "controlId"
-    }
+  "dao": "cn.vertxup.ui.domain.tables.daos.UiOpDao",
+  "output": {
+    "group": "controlId"
+  }
 }

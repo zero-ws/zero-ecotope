@@ -34,27 +34,27 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
-     * The table <code>ZDB.G_CLUSTER</code>.
+     * G_CLUSTER
      */
     public final GCluster G_CLUSTER = GCluster.G_CLUSTER;
 
     /**
-     * The table <code>ZDB.G_EDGE</code>.
+     * G_EDGE
      */
     public final GEdge G_EDGE = GEdge.G_EDGE;
 
     /**
-     * The table <code>ZDB.G_GRAPHIC</code>.
+     * G_GRAPHIC
      */
     public final GGraphic G_GRAPHIC = GGraphic.G_GRAPHIC;
 
     /**
-     * The table <code>ZDB.G_NODE</code>.
+     * G_NODE
      */
     public final GNode G_NODE = GNode.G_NODE;
 
     /**
-     * The table <code>ZDB.R_CLUSTER_NODE</code>.
+     * 集群 - 节点
      */
     public final RClusterNode R_CLUSTER_NODE = RClusterNode.R_CLUSTER_NODE;
 

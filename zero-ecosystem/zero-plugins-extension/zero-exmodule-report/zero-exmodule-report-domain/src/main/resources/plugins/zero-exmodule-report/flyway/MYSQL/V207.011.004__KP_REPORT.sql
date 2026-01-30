@@ -1,47 +1,53 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `KP_REPORT`;
+CREATE TABLE IF NOT EXISTS `KP_REPORT` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`             VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                       -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:kp-report-1
--- 报表主表：KP_REPORT
--- 一份报表定义：REPORT x 1 + DIMENSION x 1 + FEATURE x N
---   特征是字段需要特殊处理时才会出现，所以 N 可能会是 0
-DROP TABLE IF EXISTS KP_REPORT;
-CREATE TABLE IF NOT EXISTS KP_REPORT
-(
-    `KEY`           VARCHAR(36) COMMENT '「key」- 报表主键',
-    `NAME`          VARCHAR(255) COMMENT '「name」- 表表名称',
-    `CODE`          VARCHAR(36) COMMENT '「code」- 报表编码',
-    `STATUS`        VARCHAR(255) COMMENT '「status」- 报表状态',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `CODE`           VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `DATA_SET_ID`    VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「dataSetId」- 数据源ID',
+    `DATA_TPL_ID`    VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「dataTplId」- 关联报表模板',
+    `NAME`           VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `REPORT_AT`      DATETIME      DEFAULT NULL COMMENT '「reportAt」- 模板创建时间',
+    `REPORT_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「reportBy」- 模板创建人',
+    `REPORT_CONFIG`  LONGTEXT      COLLATE utf8mb4_bin COMMENT '「reportConfig」- 主表基础配置',
+    `REPORT_PARAM`   LONGTEXT      COLLATE utf8mb4_bin COMMENT '「reportParam」- 报表参数配置',
+    `TITLE`          VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「title」- 标题',
 
-    `TITLE`         VARCHAR(255) COMMENT '「title」- 报表标题',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `STATUS`         VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「status」- 状态',
 
-    `REPORT_PARAM`  LONGTEXT COMMENT '「reportParam」- 报表参数配置',
-    `REPORT_CONFIG` LONGTEXT COMMENT '「reportConfig」- 主表基础配置',
-    `REPORT_BY`     VARCHAR(36) COMMENT '「reportBy」- 模板创建人',
-    `REPORT_AT`     DATETIME COMMENT '「reportAt」- 模板创建时间',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`          VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',            -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',             -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`         VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`         BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                               -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`       VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',         -- [国际化] 如: zh_CN, en_US,
+    `METADATA`       TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                        -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`        VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`     DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                            -- [审计] 创建时间
+    `CREATED_BY`     VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',          -- [审计] 创建人
+    `UPDATED_AT`     DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                            -- [审计] 更新时间
+    `UPDATED_BY`     VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',          -- [审计] 更新人
 
-    -- 关联数据源
-    `DATA_SET_ID`   VARCHAR(36) COMMENT '「dataSetId」- 数据源ID',
-    `DATA_TPL_ID`   VARCHAR(36) COMMENT '「dataTplId」- 关联报表模板',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_KP_REPORT_NAME_SIGMA` (`NAME`, `SIGMA`) USING BTREE,
+    UNIQUE KEY `UK_KP_REPORT_CODE_SIGMA` (`CODE`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='KP_REPORT';
 
--- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:kp-report-2
--- Unique Key: 独立唯一键定义
-ALTER TABLE KP_REPORT
-    ADD UNIQUE (`NAME`, `SIGMA`) USING BTREE;
-ALTER TABLE KP_REPORT
-    ADD UNIQUE (`CODE`, `SIGMA`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)
+-- - TYPE (类型)

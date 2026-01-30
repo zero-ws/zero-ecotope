@@ -4,7 +4,7 @@ import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.epoch.assembly.DiProxyInstance;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;

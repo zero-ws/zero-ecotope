@@ -27,7 +27,6 @@ public interface HBundle {
      *
      * @param bundle 模块实例
      * @param clazz  核心组件类型
-     *
      * @return 缓存键
      */
     static String id(final HBundle bundle, final Class<?> clazz) {
@@ -38,7 +37,7 @@ public interface HBundle {
     }
 
     // --------------------------------------------------------------
-    
+
     /**
      * 热部署模式下用于处理缓存的 Key，此处和底层的 Bundle 对接，未来版本用于 OSIG 的基础桥接
      */

@@ -4,15 +4,15 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.mbse.metadata.AbstractHModel;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
-import io.zerows.extension.module.mbsecore.metadata.element.DataKey;
+import io.zerows.extension.module.mbsecore.component.apply.AoDefault;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel;
-import io.zerows.extension.module.mbsecore.component.apply.AoDefault;
+import io.zerows.extension.module.mbsecore.metadata.Model;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
+import io.zerows.extension.module.mbsecore.metadata.element.DataKey;
+import io.zerows.mbse.metadata.AbstractHModel;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAttribute;
@@ -167,7 +167,7 @@ public class DataModel extends AbstractHModel implements Model {
     @Override
     public void connect(final String key) {
         // 修改 MModel 主键
-        this.model.setKey(key);
+        this.model.setId(key);
         // 修改 MAttribute 关联主键
         this.attributes.values().forEach(attribute -> attribute.setModelId(key));
     }

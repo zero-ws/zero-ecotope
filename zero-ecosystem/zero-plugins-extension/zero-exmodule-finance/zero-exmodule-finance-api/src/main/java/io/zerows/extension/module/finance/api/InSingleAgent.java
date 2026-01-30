@@ -81,7 +81,6 @@ public interface InSingleAgent {
      * </code></pre>
      *
      * @param data {@link JsonObject}
-     *
      * @return {@link JsonObject}
      */
     @POST

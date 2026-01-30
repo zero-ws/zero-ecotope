@@ -43,7 +43,7 @@ public class PersonalService implements PersonalStub {
         }
         view.setCreatedAt(LocalDateTime.now());
         view.setUpdatedAt(LocalDateTime.now());
-        view.setKey(UUID.randomUUID().toString());
+        view.setId(UUID.randomUUID().toString());
         view.setActive(Boolean.TRUE);
         return DB.on(SViewDao.class).insertAsync(view);
     }

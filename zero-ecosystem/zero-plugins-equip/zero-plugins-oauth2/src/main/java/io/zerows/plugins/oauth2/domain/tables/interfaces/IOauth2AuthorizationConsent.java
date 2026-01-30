@@ -9,7 +9,7 @@ import org.jooq.JSON;
 
 import java.io.Serializable;
 
-import static io.r2mo.vertx.jooq.shared.internal.VertxPojo.*;
+import static io.r2mo.vertx.jooq.shared.internal.VertxPojo.setOrThrow;
 
 /**
  * OAuth2 授权同意（Consent）记录表

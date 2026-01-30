@@ -84,11 +84,11 @@ class DimProcImpl extends DimProcBase {
                             }
                             return Future.succeededFuture(result);
                         });
-                        resultMap.put(kpDataSet.getKey(), compose);
+                        resultMap.put(kpDataSet.getId(), compose);
                     } else {
                         dataSets.forEach(dataSetItem -> {
                             final Future<JsonArray> result = DataSet.Tool.outputArray(params, dataSetItem);
-                            resultMap.put(dataSetItem.getKey(), result);
+                            resultMap.put(dataSetItem.getId(), result);
                         });
                     }
                     return Fx.combineM(resultMap);
@@ -106,7 +106,7 @@ class DimProcImpl extends DimProcBase {
         final EmDim.Type typeOf = Ut.toEnum(dimension.getType(), EmDim.Type.class, null);
         if (Objects.isNull(typeOf)) {
             // ERR-80703
-            return FnVertx.failOut(_80703Exception400ReportDimType.class, dimension.getReportId(), dimension.getKey());
+            return FnVertx.failOut(_80703Exception400ReportDimType.class, dimension.getReportId(), dimension.getId());
         }
         // 状态处理
         final EmReport.UcaStatus statusOf = Ut.toEnum(dimension.getStatus(), EmReport.UcaStatus.class, EmReport.UcaStatus.ACTIVE);

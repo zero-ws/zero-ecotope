@@ -6,7 +6,7 @@ import io.zerows.specification.atomic.HExecutor;
 /**
  * 「模块执行器」Module Component
  * <hr/>
- *
+ * <p>
  * 执行器分为不同的类型，且不同类型携带的业务属性不相同，核心分类如下：
  * <pre><code>
  * -- 系统级执行器，不隶属于任何一个模块，不支持热部署

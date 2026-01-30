@@ -24,7 +24,9 @@ public class InMutliActor {
     @Inject
     private transient InBillStub billStub;
 
-    /** 参考：{@link InMultiAgent#inMulti} 接口注释 */
+    /**
+     * 参考：{@link InMultiAgent#inMulti} 接口注释
+     */
     @Me
     @Address(Addr.Bill.IN_MULTI)
     public Future<JsonObject> inMulti(final JsonObject data) {

@@ -1,7 +1,7 @@
 package io.zerows.plugins.excel;
 
-import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.epoch.web.MDConnect;
 import io.zerows.platform.constant.VValue;
 import io.zerows.plugins.excel.component.ExBound;
 import io.zerows.plugins.excel.component.ExBoundCol;

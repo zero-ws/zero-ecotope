@@ -156,7 +156,7 @@ class StepGeneratorData extends StepGeneratorBase {
                     final ConcurrentMap<String, Object> featureMap = matrixMap.getOrDefault(feature.getName(), new ConcurrentHashMap<>());
                     // 特征名称填充
                     final Object value = featureMap.getOrDefault(recordKey, null);
-                    if (feature.getKey().equals(featureOfDim.getKey())) {
+                    if (feature.getId().equals(featureOfDim.getId())) {
                         // 维度字段，一定不会出现在 featureMap 中
                         dataRecord.put(feature.getName(), dimValue);
                     } else {

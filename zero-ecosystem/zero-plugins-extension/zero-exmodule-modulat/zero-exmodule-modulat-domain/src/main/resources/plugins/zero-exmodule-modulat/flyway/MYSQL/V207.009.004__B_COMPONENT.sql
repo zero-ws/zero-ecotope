@@ -1,48 +1,48 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `B_COMPONENT`;
+CREATE TABLE IF NOT EXISTS `B_COMPONENT` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`              VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                      -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:b-component-1
-/*
- * BLOCK 中的界面资源定义（按页面分）
- * Java中的组件管理（Zero组件大盘点）
- * （管理端）
- */
-DROP TABLE IF EXISTS B_COMPONENT;
-CREATE TABLE IF NOT EXISTS B_COMPONENT
-(
-    `KEY`            VARCHAR(36) COMMENT '「key」- 主键',
-    `BLOCK_ID`       VARCHAR(36) COMMENT '「blockId」- 所属模块ID',
-    /*
-     * 类型综述
-     * 1. SL，ServiceLoader组件
-     * 2. INNER，Zero内部专用组件
-     * 3. EXTENSION，Zero Extension专用组件
-     * 4. JET-API，zero-jet中定义的 API
-     * 5. JET-JOB, zero-jet中定义的 JOB
-     */
-    `TYPE`           VARCHAR(64) COMMENT '「type」- 类型保留，单独区分',
-    `MAVEN_AID`      VARCHAR(255) COMMENT '「mavenAid」- 所在项目ID',
-    `MAVEN_GID`      VARCHAR(255) COMMENT '「mavenGid」- 所在Group的ID',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `BLOCK_ID`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「blockId」- 所属模块ID',
+    `INTEGRATED`      BIT(1)        DEFAULT NULL COMMENT '「integrated」- 是否用于外部集成',
+    `MAVEN_AID`       VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「mavenAid」- 所在项目ID',
+    `MAVEN_GID`       VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「mavenGid」- 所在Group的ID',
+    `SPEC_IMPL`       VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「specImpl」- 实现组件',
+    `SPEC_INTERFACE`  VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「specInterface」- 接口名称',
 
-    `SPEC_INTERFACE` VARCHAR(255) COMMENT '「specInterface」- 接口名称',
-    `SPEC_IMPL`      VARCHAR(255) COMMENT '「specImpl」- 实现组件',
-    `INTEGRATED`     BIT DEFAULT NULL COMMENT '「integrated」- 是否用于外部集成',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`            VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',                -- [类型],
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`          VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`       VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`         BIT COMMENT '「active」- 是否启用',
-    `METADATA`       TEXT COMMENT '「metadata」- 附加配置数据',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`           VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',           -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',            -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`          VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',               -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`          BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                              -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`        VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',        -- [国际化] 如: zh_CN, en_US,
+    `METADATA`        TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                       -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`         VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`      DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                           -- [审计] 创建时间
+    `CREATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',         -- [审计] 创建人
+    `UPDATED_AT`      DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                           -- [审计] 更新时间
+    `UPDATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',         -- [审计] 更新人
 
-    -- Auditor字段
-    `CREATED_AT`     DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`     VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`     DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`     VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_B_COMPONENT_SPEC_IMPL_BLOCK_ID` (`SPEC_IMPL`, `BLOCK_ID`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='B_COMPONENT';
 
-    `APP_ID`         VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`      VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:b-component-2
-ALTER TABLE B_COMPONENT
-    ADD UNIQUE (`SPEC_IMPL`, `BLOCK_ID`);
+-- 缺失公共字段：
+-- - VERSION (版本)

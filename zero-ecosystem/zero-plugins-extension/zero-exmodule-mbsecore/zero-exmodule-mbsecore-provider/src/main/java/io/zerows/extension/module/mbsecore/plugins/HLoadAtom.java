@@ -4,7 +4,7 @@ import io.zerows.extension.module.mbsecore.boot.AoCache;
 import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.mbse.exception._80510Exception404ModelNotFound;
-import io.zerows.platform.metadata.KPivot;
+import io.zerows.platform.apps.KPivot;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;

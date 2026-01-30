@@ -23,7 +23,6 @@ public interface InVarietyAgent {
      *
      * @param key  被拆的账单明细记录
      * @param data 拆账的数据
-     *
      * @return 拆账结果
      */
     @PUT
@@ -36,7 +35,6 @@ public interface InVarietyAgent {
      *
      * @param key  被冲账的账单明细记录
      * @param data 冲账的数据
-     *
      * @return 冲账结果
      */
     @PUT
@@ -50,7 +48,6 @@ public interface InVarietyAgent {
      *
      * @param bookId 账本ID
      * @param data   转账数据
-     *
      * @return 转账结果
      */
     @PUT

@@ -12,13 +12,13 @@ import java.util.function.Supplier;
 
 /**
  * ## 数据模拟工具
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 数据模拟专用工具类，根据集成配置模拟数据内容。
- *
+ * <p>
  * ### 2. 核心
- *
+ * <p>
  * - 根据{@link KIntegration}中的`debug`配置决定执行器。
  * - 模拟数据三种类型`JsonObject, JsonArray, String`等。
  *
@@ -37,7 +37,6 @@ final class OxMocker {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link JsonObject} 返回最终数据记录
      */
     static JsonObject mockJ(final KIntegration integration, final String file, final Supplier<JsonObject> supplier) {
@@ -53,7 +52,6 @@ final class OxMocker {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link JsonArray} 返回最终数据记录
      */
     static JsonArray mockA(final KIntegration integration, final String file, final Supplier<JsonArray> supplier) {
@@ -69,7 +67,6 @@ final class OxMocker {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link String} 返回最终数据记录
      */
     static String mockS(final KIntegration integration, final String file, final Supplier<String> supplier) {
@@ -83,7 +80,6 @@ final class OxMocker {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link JsonObject} 返回最终数据记录
      */
     static Future<JsonObject> mockAsyncJ(final KIntegration integration, final String file, final Supplier<Future<JsonObject>> supplier) {
@@ -100,7 +96,6 @@ final class OxMocker {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link JsonArray} 返回最终数据记录
      */
     static Future<JsonArray> mockAsyncA(final KIntegration integration, final String file, final Supplier<Future<JsonArray>> supplier) {
@@ -117,7 +112,6 @@ final class OxMocker {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link String} 返回最终数据记录
      */
     static Future<String> mockAsyncS(final KIntegration integration, final String file, final Supplier<Future<String>> supplier) {
@@ -134,7 +128,6 @@ final class OxMocker {
      * @param mockSupplier   {@link Supplier} 模拟数据执行器
      * @param actualSupplier {@link Supplier} 真实执行器
      * @param <T>            真实执行器中构造的数据类型
-     *
      * @return 返回最终执行结果数据（二选一环境）
      */
     private static <T> T mock(final KIntegration integration, final Supplier<T> mockSupplier, final Supplier<T> actualSupplier) {

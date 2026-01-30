@@ -29,7 +29,7 @@ class Step07TransDebt implements Step<List<FDebt>, FTrans> {
                         nameList.add(debt.getCode());
                     }
                 }
-                trans.setKey(null);
+                trans.setId(null);
                 trans.setName("DR: " + Ut.fromJoin(nameList));
                 // 此处构造完成
                 return Ux.future(trans);

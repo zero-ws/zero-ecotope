@@ -7,19 +7,19 @@ import io.zerows.specification.modeling.HRecord;
 
 /**
  * ## Nerve System
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * It's plug-in channel for `M_MODEL` to process different attribute in Sync mode ( Jooq < 3.10.8 ), the work phases are
  * as following:
- *
+ * <p>
  * #### 1.1. Input
- *
+ * <p>
  * - 1. IComponent ( Record )
  * - 2. INormalizer ( Attribute )
- *
+ * <p>
  * #### 1.2. Output
- *
+ * <p>
  * - 1. OComponent ( Record )
  * - 2. Reference Calculation
  * - 3. OExpression ( Attribute )
@@ -41,7 +41,6 @@ public interface IoHub {
      *
      * @param record {@link HRecord} Input data record
      * @param tpl    {@link DataTpl} The model template definition
-     *
      * @return {@link HRecord}
      */
     HRecord in(HRecord record, DataTpl tpl);
@@ -51,7 +50,6 @@ public interface IoHub {
      *
      * @param records {@link HRecord}[] Input data record
      * @param tpl     {@link DataTpl} The model template definition
-     *
      * @return {@link HRecord}[]
      */
     HRecord[] in(HRecord[] records, DataTpl tpl);
@@ -61,7 +59,6 @@ public interface IoHub {
      *
      * @param record {@link HRecord} Input data record
      * @param tpl    {@link DataTpl} The model template definition
-     *
      * @return {@link HRecord}
      */
     HRecord out(HRecord record, DataTpl tpl);
@@ -73,7 +70,6 @@ public interface IoHub {
      *
      * @param records {@link HRecord}[] Input data record
      * @param tpl     {@link DataTpl} The model template definition
-     *
      * @return {@link HRecord}[]
      */
     HRecord[] out(HRecord[] records, DataTpl tpl);

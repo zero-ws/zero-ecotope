@@ -2,8 +2,8 @@ package io.zerows.extension.module.mbsecore.metadata.builtin;
 
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.mbsecore.boot.Ao;
-import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel;
+import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.mbse.metadata.AbstractHAtom;
 import io.zerows.specification.app.HApp;
 

@@ -22,16 +22,24 @@ import java.util.concurrent.ConcurrentMap;
 @Data
 public class KDictUse implements Serializable, HJson, HCopier<KDictUse> {
 
-    /** 消费的字典名，{@link KDictConfig.Source} 中的 key 定义 */
+    /**
+     * 消费的字典名，{@link KDictConfig.Source} 中的 key 定义
+     */
     private String source;
 
-    /** 显示端属性名 */
+    /**
+     * 显示端属性名
+     */
     private String in;
 
-    /** 存储端属性名 */
+    /**
+     * 存储端属性名
+     */
     private String out;
 
-    /** 如果出现继承专用的字典结构 */
+    /**
+     * 如果出现继承专用的字典结构
+     */
     private boolean parent;
 
     public static ConcurrentMap<String, KDictUse> epsilon(final JsonObject epsilonJson) {

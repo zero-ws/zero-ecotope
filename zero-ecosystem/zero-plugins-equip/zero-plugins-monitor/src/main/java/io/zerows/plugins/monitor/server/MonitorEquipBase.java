@@ -42,7 +42,7 @@ public abstract class MonitorEquipBase implements MonitorEquip {
             .setJvmMetricsEnabled(true); // 建议开启，看内存/GC很有用
 
         this.registryOption(serverJ, micrometerOptions);
-        
+
         options.setMetricsOptions(micrometerOptions);
         this.log().info("[ MNTR ] JMX 监控服务已启用，端口：{}，域名：{}。", port, host);
     }

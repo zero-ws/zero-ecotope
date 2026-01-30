@@ -35,7 +35,6 @@ public interface StoreServer extends OCache<RunServer> {
      * 扩展的移除方法，直接通过 key 值移除相关数据
      *
      * @param name key 值
-     *
      * @return 移除后的 StoreServer 实例
      */
     StoreServer remove(String name);

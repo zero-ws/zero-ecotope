@@ -1,9 +1,9 @@
 package io.zerows.epoch.jigsaw;
 
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.basicore.MDId;
-import io.zerows.epoch.basicore.MDWorkflow;
 import io.zerows.epoch.boot.ZeroFs;
+import io.zerows.epoch.web.MDConfiguration;
+import io.zerows.epoch.web.MDId;
+import io.zerows.epoch.web.MDWorkflow;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
 
@@ -13,6 +13,8 @@ import java.util.List;
  * @author lang : 2024-06-17
  */
 class EquipWorkflow implements EquipAt {
+    private static final String WORKFLOW_DIR = "workflow/RUNNING";
+
     @Override
     public void initialize(final MDConfiguration configuration) {
 
@@ -33,8 +35,6 @@ class EquipWorkflow implements EquipAt {
             })
             .forEach(configuration::addWorkflow);
     }
-
-    private static final String WORKFLOW_DIR = "workflow/RUNNING";
 
     private MDWorkflow buildWorkflow(final String workflowDir, final MDId id) {
         final MDWorkflow workflow = new MDWorkflow(id);

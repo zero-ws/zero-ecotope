@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.component.log.LogOf;
 import io.zerows.platform.constant.VName;
 import io.zerows.platform.constant.VString;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.metadata.HMetaField;
+import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -19,9 +19,9 @@ import java.util.function.Supplier;
 
 /**
  * ## Diff Container ( New Version )
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * Store definition of each model for diff ( comparing workflow )
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -32,17 +32,17 @@ public class Vs implements Serializable {
 
     /**
      * Here are new `typeMap` of name = HTField
-     *
+     * <p>
      * Because HTField contains `type, name, alias` and etc, it means that you can determine the formatFail
      * Elementary / JsonObject / JsonArray by `isComplex` here.
-     *
+     * <p>
      * When formatFail = Elementary ( Not Complex )
-     *
+     * <p>
      * 1. name is the attribute name of model ( HAttribute ).
      * 2. type is the java type that could be reflected ( stored in HTField )
-     *
+     * <p>
      * When formatFail = JsonObject / JsonArray ( Complex )
-     *
+     * <p>
      * 1. name is the attribute name of model ( HAttribute ).
      * 2. The data type is fixed: JsonObject / JsonArray.
      * 3. And the HTField type contains `children` and isComplex = true
@@ -50,7 +50,7 @@ public class Vs implements Serializable {
     private transient final ConcurrentMap<String, HMetaField> typeMap = new ConcurrentHashMap<>();
     /**
      * Ignored field that could be set from object.
-     *
+     * <p>
      * 1. Default ignore set
      * 2. System ignore set that could not be compared.
      * 3. The ignore fields that could be set by developer.

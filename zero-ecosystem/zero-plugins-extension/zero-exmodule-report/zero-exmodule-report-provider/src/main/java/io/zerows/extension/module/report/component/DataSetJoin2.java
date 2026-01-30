@@ -6,11 +6,11 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConnect;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheConfiguration;
 import io.zerows.epoch.store.jooq.ADJ;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.epoch.web.MDConnect;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +74,7 @@ class DataSetJoin2 extends DataSetBase {
      *          ]
      *     }
      * </code></pre>
-     *
+     * <p>
      * 此处针对数据结构要做一个说明，此处的数据结构
      * <pre>
      *     {

@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap;
  *     1. identifier()：容器的系统标识（系统级）
  *     2. version()：版本号
  * </code></pre>
- *
+ * <p>
  * 此接口用于描述容器类属性，整个系统中的所有组件主要分为三类：
  * <pre><code>
  *     1. 研发中心专用组件，隶属于 {@link HRAD}

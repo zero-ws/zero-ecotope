@@ -14,11 +14,11 @@ import java.io.Serializable;
 
 /**
  * ## 「Pojo」测试输入请求
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 构造Ox平台测试输入请求对象，它提供如下功能
- *
+ * <p>
  * - 构造统一请求传输模型对象{@link Envelop}（Zero专用）。
  * - 构造请求头封装对象{@link MultiMap}。
  *
@@ -40,9 +40,9 @@ public class QRequest implements Serializable {
 
     /**
      * 根据Json数据构造`QRequest`请求对象
-     *
+     * <p>
      * 输入数据结构如下：
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      *     {

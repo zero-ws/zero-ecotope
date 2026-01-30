@@ -2,10 +2,10 @@ package io.zerows.epoch.jigsaw;
 
 import io.r2mo.function.Fn;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheDao;
+import io.zerows.epoch.web.MDConnect;
+import io.zerows.epoch.web.MDMeta;
 import io.zerows.support.Ut;
 
 import java.util.Objects;
@@ -38,7 +38,6 @@ class ReplacerConnect implements Replacer<MDConnect> {
      * </code></pre>
      *
      * @param configJ 核心格式
-     *
      * @return {@link MDConnect}
      */
     @Override

@@ -4,7 +4,7 @@
 package io.zerows.extension.module.ambient.domain;
 
 
-import io.zerows.extension.module.ambient.domain.tables.RTagObject;
+import io.zerows.extension.module.ambient.domain.tables.RTagEntity;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
@@ -46,87 +46,87 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
-     * The table <code>ZDB.R_TAG_OBJECT</code>.
+     * 标签-实体
      */
-    public final RTagObject R_TAG_OBJECT = RTagObject.R_TAG_OBJECT;
+    public final RTagEntity R_TAG_ENTITY = RTagEntity.R_TAG_ENTITY;
 
     /**
-     * The table <code>ZDB.X_ACTIVITY</code>.
+     * X_ACTIVITY
      */
     public final XActivity X_ACTIVITY = XActivity.X_ACTIVITY;
 
     /**
-     * The table <code>ZDB.X_ACTIVITY_CHANGE</code>.
+     * X_ACTIVITY_CHANGE
      */
     public final XActivityChange X_ACTIVITY_CHANGE = XActivityChange.X_ACTIVITY_CHANGE;
 
     /**
-     * The table <code>ZDB.X_ACTIVITY_RULE</code>.
+     * X_ACTIVITY_RULE
      */
     public final XActivityRule X_ACTIVITY_RULE = XActivityRule.X_ACTIVITY_RULE;
 
     /**
-     * The table <code>ZDB.X_APP</code>.
+     * X_APP
      */
     public final XApp X_APP = XApp.X_APP;
 
     /**
-     * The table <code>ZDB.X_ATTACHMENT</code>.
+     * X_ATTACHMENT
      */
     public final XAttachment X_ATTACHMENT = XAttachment.X_ATTACHMENT;
 
     /**
-     * The table <code>ZDB.X_CATEGORY</code>.
+     * X_CATEGORY
      */
     public final XCategory X_CATEGORY = XCategory.X_CATEGORY;
 
     /**
-     * The table <code>ZDB.X_LINKAGE</code>.
+     * X_LINKAGE
      */
     public final XLinkage X_LINKAGE = XLinkage.X_LINKAGE;
 
     /**
-     * The table <code>ZDB.X_LOG</code>.
+     * X_LOG
      */
     public final XLog X_LOG = XLog.X_LOG;
 
     /**
-     * The table <code>ZDB.X_MENU</code>.
+     * X_MENU
      */
     public final XMenu X_MENU = XMenu.X_MENU;
 
     /**
-     * The table <code>ZDB.X_MODULE</code>.
+     * X_MODULE
      */
     public final XModule X_MODULE = XModule.X_MODULE;
 
     /**
-     * The table <code>ZDB.X_NOTICE</code>.
+     * X_NOTICE
      */
     public final XNotice X_NOTICE = XNotice.X_NOTICE;
 
     /**
-     * The table <code>ZDB.X_NUMBER</code>.
+     * X_NUMBER
      */
     public final XNumber X_NUMBER = XNumber.X_NUMBER;
 
     /**
-     * The table <code>ZDB.X_SOURCE</code>.
+     * X_SOURCE
      */
     public final XSource X_SOURCE = XSource.X_SOURCE;
 
     /**
-     * The table <code>ZDB.X_TABULAR</code>.
+     * X_TABULAR
      */
     public final XTabular X_TABULAR = XTabular.X_TABULAR;
 
     /**
-     * The table <code>ZDB.X_TAG</code>.
+     * X_TAG
      */
     public final XTag X_TAG = XTag.X_TAG;
 
     /**
-     * The table <code>ZDB.X_TENANT</code>.
+     * X_TENANT
      */
     public final XTenant X_TENANT = XTenant.X_TENANT;
 
@@ -146,7 +146,7 @@ public class Zdb extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            RTagObject.R_TAG_OBJECT,
+            RTagEntity.R_TAG_ENTITY,
             XActivity.X_ACTIVITY,
             XActivityChange.X_ACTIVITY_CHANGE,
             XActivityRule.X_ACTIVITY_RULE,

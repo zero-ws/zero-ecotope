@@ -2,7 +2,7 @@ package io.zerows.epoch.assembly;
 
 import com.google.inject.Injector;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.epoch.management.OCacheClass;
 import lombok.extern.slf4j.Slf4j;
 

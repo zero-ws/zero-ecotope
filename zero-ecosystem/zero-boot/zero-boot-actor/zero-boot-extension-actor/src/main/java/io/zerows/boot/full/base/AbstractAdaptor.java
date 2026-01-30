@@ -35,20 +35,20 @@ import static io.zerows.boot.extension.util.Ox.LOG;
 
 /**
  * ## 「Adaptor」顶层适配器
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 直接从`{@link AbstractComponent}`中继承构造的Ox平台专用的顶层组件。
- *
+ * <p>
  * ### 2. 组件功能
- *
+ * <p>
  * - 提供数据库实例，对应`I_SERVICE`中的数据库配置{@link Database}对象（configDatabase属性）。
  * - 数据库访问Dao的专用创建，Dao分为两种：<strong>配置型</strong>（不传参数）和<strong>切换型</strong>（传入参数）。
- *
+ * <p>
  * ### 3. 配置数据结构
- *
+ * <p>
  * #### 3.1. 数据库配置结构
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -63,35 +63,35 @@ import static io.zerows.boot.extension.util.Ox.LOG;
  * }
  * // </code></pre>
  * ```
- *
+ * <p>
  * #### 3.2. 关于模型定义
- *
+ * <p>
  * 模型定义在Ox中使用类型{@link DataAtom}模型定义类型
- *
+ * <p>
  * - 不传参的方法，直接获取原生配置`I_SERVICE`中的`identifier`相关模型定义（配置型）。
  * - 传入参数的方法，可获取动态的模型定义（切换型）。
- *
+ * <p>
  * 子类在使用{@link DataAtom}时可使用<strong>静态</strong>和<strong>动态</strong>两种，而且动态只能调用
  * {@link Switcher}执行切换。
- *
+ * <p>
  * #### 3.3. 标识规则
- *
+ * <p>
  * 标识规则的绑定会区分优先级
- *
+ * <p>
  * 1. 先从通道中构造{@link HRule}对象（通道定义，高优先级）。
  * 2. 再读取模型定义{@link DataAtom}中的标识规则（模型定义，低优先级）。
- *
+ * <p>
  * ### 4. 关于四种组件
- *
+ * <p>
  * |父类|组件名|含义|
  * |:---|:---|:---|
  * |AbstractComponent|AbstractAdaptor|适配器（数据库配置）|
  * |AbstractAdaptor|AbstractConnector|连接器（追加集成配置）|
  * |AbstractAdaptor|AbstractDirector|执行器（追加任务配置）|
  * |AbstractConnector|AbstractActor|调度器（追加任务配置）|
- *
+ * <p>
  * 四种组件的支持如下：
- *
+ * <p>
  * |组件名|数据库配置|集成配置|任务配置|
  * |:---|---|---|---|
  * |AbstractAdaptor|OkOld|x|x|
@@ -106,9 +106,9 @@ public abstract class AbstractAdaptor extends AbstractComponent {
     // ------------ 数据库实例引用 -------------------------
     /**
      * 「合约」成员实例，`I_SERVICE`表中的`configDatabase`属性设置，关联{@link Database}对象。
-     *
+     * <p>
      * 该实例是通过{@link Contract}注解赋值，配置结构如上述文档中所描述，下边是其中一个示例：
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      * {
@@ -145,20 +145,20 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     /**
      * 成员函数，读取静态模型定义对象{@link DataAtom}。
-     *
+     * <p>
      * 静态{@link DataAtom}计算方法如下：
-     *
+     * <p>
      * 1. 如果`internalAtom`为空，重算该值。
      * 2. 若`internalAtom`不为空，返回该模型定义。
-     *
+     * <p>
      * 重算流程如：
-     *
+     * <p>
      * 1. 使用`this.options()`返回结果，构造{@link DataAtom}（从缓存中提取新的）。
      * 2. 将{@link DataAtom}和当前模型中的<strong>标识规则</strong>对象绑定。
      * 3. 挂外置的通道专用{@link HRule}，默认信息DataAtom和通道中的标识规则连接，该方法是静态场景专用的标识规则对象（通道规则优先）。
-     *
+     * <p>
      * 内部调用`Ao.toAtom`方法的数据结构如下：
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      *     {
@@ -167,7 +167,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      *     }
      * // </code></pre>
      * ```
-     *
+     * <p>
      * > 该方法会对`this.internalAtom`执行重算，若为 null 则直接重算当前通道内的`this.internalAtom`对象（通常用于动态通道）。
      *
      * @return {@link DataAtom}计算过后的模型定义
@@ -193,14 +193,14 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     /**
      * 根据通道中是否配置了<strong>标识选择器</strong>来获取{@link DataAtom}模型定义的切换器。
-     *
+     * <p>
      * 基本逻辑：
-     *
+     * <p>
      * - 如果{@link KIdentity}为null或内部配置的`identifierComponent`为null，则直接返回空。
      * - 如果存在，则使用参数构造标识规则切换器。
-     *
+     * <p>
      * 参数结构：
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      * {
@@ -239,10 +239,10 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     /**
      * 「静态」数据库访问器获取。
-     *
+     * <p>
      * - 数据库实例{@link Database}。
      * - 模型定义{@link DataAtom}。
-     *
+     * <p>
      * > 如果系统中未配置`identifier`属性——即通道和模型未绑定，则调用`this.argument()`执行运算修改`this.internalAtom`再构造数据库访问器。
      *
      * @return {@link HDao}数据库访问器
@@ -253,12 +253,11 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     /**
      * 「动态」数据库访问器获取。
-     *
+     * <p>
      * - 数据库实例{@link Database}。
      * - 模型定义从外置传入，但在这个过程中需要执行<strong>标识规则</strong>绑定，绑定到当前通道中的标识规则。
      *
      * @param atom 传入的{@link DataAtom}模型定义对象。
-     *
      * @return {@link HDao}数据库访问器
      */
     protected HDao dao(final DataAtom atom) {
@@ -268,11 +267,10 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     /**
      * 「单量」使用{@link ActIn}输入对象构造{@link HRecord}数据记录。
-     *
+     * <p>
      * > 内部合约{@link Contract}调用注入{@link DataAtom}模型定义实例。
      *
      * @param request {@link ActIn} 通道专用的请求对象。
-     *
      * @return {@link HRecord} 动态构造数据记录对象
      */
     protected HRecord activeRecord(final ActIn request) {
@@ -285,7 +283,6 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      * 「批量」使用{@link ActIn}输入对象构造{@link HRecord}[]数据记录。
      *
      * @param request {@link ActIn} 通道专用的请求对象。
-     *
      * @return {@link HRecord}[] 动态构造数据记录对象
      */
     protected HRecord[] activeRecords(final ActIn request) {
@@ -299,7 +296,6 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      *
      * @param request {@link ActIn} 通道专用的请求对象。
      * @param <ID>    泛型对象，主键类型。
-     *
      * @return 返回泛型主键
      */
     protected <ID> ID activeKey(final ActIn request) {
@@ -308,12 +304,11 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     /**
      * 「批量」使用{@link ActIn}输入对象构造{@link HRecord}[]数据记录的主键集。
-     *
+     * <p>
      * 若定义长度有问题，则抛出`-80527`异常{@link _80527Exception400KeyLength}。
      *
      * @param request {@link ActIn} 通道专用的请求对象。
      * @param <ID>    泛型对象，主键类型。
-     *
      * @return 返回泛型主键集
      */
     @SuppressWarnings("unchecked")
@@ -339,7 +334,7 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     /**
      * 「静态」字典翻译器获取
-     *
+     * <p>
      * - Dictionary：字典数据
      * - Epsilon：字典消费组件配置
      * - DualItem：字典映射配置
@@ -352,13 +347,12 @@ public abstract class AbstractAdaptor extends AbstractComponent {
 
     /**
      * 「动态」字典翻译器获取
-     *
+     * <p>
      * - Dictionary：字典数据
      * - Epsilon：字典消费组件配置
      * - DualItem：字典映射配置
      *
      * @param atom 传入的{@link DataAtom}模型定义对象。
-     *
      * @return {@link KFabric} 字典翻译器
      */
     public KFabric fabric(final DataAtom atom) {
@@ -397,7 +391,6 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      * 「Async」异常专用方法，如果未实现，则直接抛出异常{@link _501NotSupportException}标识API未实现。
      *
      * @param <T> 返回的元素泛型
-     *
      * @return {@link Future}
      */
     protected <T> Future<T> transferFailure() {
@@ -413,7 +406,6 @@ public abstract class AbstractAdaptor extends AbstractComponent {
      * @param jsonExecutor  {@link Function} 单记录执行函数。
      * @param arrayExecutor {@link Function} 多记录执行函数。
      * @param <T>           返回的元素泛型（执行元素泛型）
-     *
      * @return {@link Future}
      */
     @SuppressWarnings("unchecked")

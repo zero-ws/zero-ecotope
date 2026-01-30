@@ -2,7 +2,7 @@ package io.zerows.epoch.boot;
 
 import io.r2mo.base.io.HStore;
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.basicore.YmConfiguration;
+import io.zerows.epoch.spec.YmConfiguration;
 import io.zerows.specification.configuration.HEnvironment;
 import io.zerows.specification.configuration.HSetting;
 

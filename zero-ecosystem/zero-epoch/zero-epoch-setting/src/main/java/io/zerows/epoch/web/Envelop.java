@@ -16,8 +16,8 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.zerows.epoch.annotations.Format;
-import io.zerows.epoch.basicore.exception._40032Exception500IndexExceed;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.web.exception._40032Exception500IndexExceed;
 import io.zerows.platform.enums.modeling.EmValue;
 import io.zerows.sdk.security.Acl;
 import io.zerows.support.Ut;
@@ -36,7 +36,7 @@ public class Envelop implements Serializable {
     private final JsonObject data;
 
     /* Additional Data for Envelop, Assist Data here. */
-    private final Assist assist = new Assist();
+    private final EnAssist assist = new EnAssist();
     /* Communicate Key in Event Bus, to identify the Envelop */
     private String key;
     private Acl acl;
@@ -55,7 +55,7 @@ public class Envelop implements Serializable {
      * @param <T>    The type of stored data
      */
     private <T> Envelop(final T data, final WebState status) {
-        this.data = Rib.input(data);
+        this.data = EnRib.input(data);
         this.error = null;
         this.status = status;
     }
@@ -109,7 +109,7 @@ public class Envelop implements Serializable {
     // default error 500 ( JVM Error )
     public static Envelop failure(final Throwable ex) {
         // Action, 异常处理
-        return Action.outFailure(ex);
+        return EnAction.outFailure(ex);
     }
 
     // other error with WebException
@@ -122,7 +122,7 @@ public class Envelop implements Serializable {
      */
     public static <T> Envelop moveOn(final T entity) {
         // Action, 为空时的基本操作
-        return Action.outNext(entity);
+        return EnAction.outNext(entity);
     }
 
     // ------------------ Above are initialization method -------------------
@@ -141,12 +141,12 @@ public class Envelop implements Serializable {
     // ------------------ Below are data part -------------------
     /* Get `data` part */
     public <T> T data() {
-        return Rib.get(this.data);
+        return EnRib.get(this.data);
     }
 
     /* Get `Http Body` part only */
     public JsonObject body() {
-        return Rib.getBody(this.data);
+        return EnRib.getBody(this.data);
     }
 
     public JsonObject request() {
@@ -155,23 +155,23 @@ public class Envelop implements Serializable {
 
     /* Get `data` part by type */
     public <T> T data(final Class<T> clazz) {
-        return Rib.get(this.data, clazz);
+        return EnRib.get(this.data, clazz);
     }
 
     /* Get `data` part by argIndex here */
     public <T> T data(final Integer argIndex, final Class<T> clazz) {
-        Fn.jvmKo(!Rib.isIndex(argIndex), _40032Exception500IndexExceed.class, argIndex);
-        return Rib.get(this.data, clazz, argIndex);
+        Fn.jvmKo(!EnRib.isIndex(argIndex), _40032Exception500IndexExceed.class, argIndex);
+        return EnRib.get(this.data, clazz, argIndex);
     }
 
     /* Set findRunning in `data` part */
     public void value(final String field, final Object value) {
-        Rib.set(this.data, field, value, null);
+        EnRib.set(this.data, field, value, null);
     }
 
     /* Set findRunning in `data` part ( with Index ) */
     public void value(final Integer argIndex, final String field, final Object value) {
-        Rib.set(this.data, field, value, argIndex);
+        EnRib.set(this.data, field, value, argIndex);
     }
 
     // ------------------ Below are response Part -------------------
@@ -187,7 +187,7 @@ public class Envelop implements Serializable {
 
     /* InJson */
     public JsonObject outJson() {
-        final JsonObject outJ = Rib.outJson(this.data, this.error);
+        final JsonObject outJ = EnRib.outJson(this.data, this.error);
         // 为空直接返回
         if (Objects.isNull(outJ)) {
             return null;
@@ -210,7 +210,7 @@ public class Envelop implements Serializable {
 
     /* Buffer */
     public Buffer outBuffer() {
-        return Rib.outBuffer(this.data, this.error);
+        return EnRib.outBuffer(this.data, this.error);
     }
 
     /* Future */
@@ -246,7 +246,7 @@ public class Envelop implements Serializable {
 
     // ------------------ Below are JqTool part ----------------
     private void reference(final Consumer<JsonObject> consumer) {
-        final JsonObject reference = Rib.getBody(this.data);
+        final JsonObject reference = EnRib.getBody(this.data);
         if (Objects.nonNull(reference)) {
             consumer.accept(reference);
         }
@@ -272,13 +272,13 @@ public class Envelop implements Serializable {
 
     public void onMe(final EmValue.Bool active, final boolean app) {
         // Me Action
-        Action.inMe(this, active, app);
+        EnAction.inMe(this, active, app);
     }
 
 
     public void onAcl(final Acl acl) {
         // Acl Action
-        Action.outAcl(acl, this.data);
+        EnAction.outAcl(acl, this.data);
     }
 
     // ------------------ Below are assist method -------------------
@@ -347,7 +347,7 @@ public class Envelop implements Serializable {
      * Bind Routing Context to process Assist structure
      */
     public Envelop bind(final RoutingContext context) {
-        Action.copyFrom(this.assist, context);
+        EnAction.copyFrom(this.assist, context);
         return this;
     }
 
@@ -363,7 +363,7 @@ public class Envelop implements Serializable {
         if (Objects.isNull(to)) {
             return null;
         }
-        Action.copyTo(this, to);
+        EnAction.copyTo(this, to);
         return to;
     }
 
@@ -372,7 +372,7 @@ public class Envelop implements Serializable {
      * return this;
      */
     public Envelop from(final Envelop from) {
-        Action.copyFrom(this, from);
+        EnAction.copyFrom(this, from);
         return this;
     }
 

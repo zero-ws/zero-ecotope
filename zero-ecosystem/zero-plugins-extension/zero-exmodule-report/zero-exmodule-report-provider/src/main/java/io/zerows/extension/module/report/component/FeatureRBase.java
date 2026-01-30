@@ -27,7 +27,7 @@ public abstract class FeatureRBase implements FeatureR {
 
     static FeatureR of(final KpFeature feature, final Class<?> implCls, final HBundle owner) {
         Objects.requireNonNull(feature);
-        final String keyCache = HBundle.id(owner, implCls) + VString.SLASH + feature.getKey();
+        final String keyCache = HBundle.id(owner, implCls) + VString.SLASH + feature.getId();
         return CC_SKELETON.pick(() -> Ut.instance(implCls, feature), keyCache);
     }
 

@@ -4,7 +4,7 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.WebException;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.metadata.WebEpsilon;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.enums.EmWeb;
 import io.zerows.specification.configuration.HConfig;

@@ -24,13 +24,13 @@ import java.util.Objects;
 
 /**
  * ## 视图工具
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 视图专用处理工具，全列执行和我的列执行专用函数。
- *
+ * <p>
  * ### 2. 支持功能
- *
+ * <p>
  * - 全列视图
  * - 我的列视图
  *
@@ -48,20 +48,19 @@ final class OxView {
 
     /**
      * 我的视图全列工具执行器
-     *
+     * <p>
      * `GET /api/ox/columns/:identifier/all`全列读取请求
-     *
+     * <p>
      * 请求数据格式
-     *
+     * <p>
      * - identifier：模型标识符
      * - dynamic：是否动态视图（存储在`S_VIEW`中）
      * - view：视图类型，默认值`DEFAULT`
-     *
+     * <p>
      * 除开上述参数后，还包含`Http Header`的所有信息。
      *
      * @param envelop    {@link Envelop} Zero标准请求模型
      * @param identifier {@link String} 模型标识符
-     *
      * @return {@link Future}<{@link JsonArray}>
      */
     @SuppressWarnings("all")
@@ -87,17 +86,17 @@ final class OxView {
 
     /**
      * 我的视图列工具执行器
-     *
+     * <p>
      * `GET /api/ox/columns/:identifier/my`我的视图列读取请求
-     *
+     * <p>
      * 请求数据格式
-     *
+     * <p>
      * - uri：当前请求路径
      * - method：当前HTTP方法
      * - 合并了所有`Http Header`的内容
-     *
+     * <p>
      * 返回数据格式：
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      * {
@@ -110,7 +109,6 @@ final class OxView {
      *
      * @param envelop    {@link Envelop} Zero标准请求模型
      * @param identifier {@link String} 模型标识符
-     *
      * @return {@link Future}<{@link JsonArray}>
      */
     @SuppressWarnings("all")

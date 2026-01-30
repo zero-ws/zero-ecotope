@@ -4,11 +4,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.support.Ut;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.platform.metadata.KDictConfig;
 import io.zerows.platform.metadata.KDictUse;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentMap;
@@ -26,20 +26,28 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class KTransform implements Serializable {
-    /** 字典转换 */
+    /**
+     * 字典转换
+     */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject fabric;
 
-    /** 树型转换 */
+    /**
+     * 树型转换
+     */
     private KTree tree;
 
-    /** 默认值转换 */
+    /**
+     * 默认值转换
+     */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject initial;
 
-    /** 字段别名 */
+    /**
+     * 字段别名
+     */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject mapping;

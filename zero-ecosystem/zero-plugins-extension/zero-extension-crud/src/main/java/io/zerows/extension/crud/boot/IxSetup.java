@@ -1,7 +1,7 @@
 package io.zerows.extension.crud.boot;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.extension.crud.common.IxConfig;
 
 import java.util.Set;

@@ -59,7 +59,7 @@ public class QuinnVivid implements Quinn {
     @Override
     @SuppressWarnings("unchecked")
     public <T> Future<T> fetchAsync(final SResource resource, final ScOwner owner) {
-        return this.<DataBound>fetchAsync(resource.getKey(), owner).compose(bound -> {
+        return this.<DataBound>fetchAsync(resource.getId(), owner).compose(bound -> {
             final Boolean virtual = resource.getVirtual();
             /*
              * Check whether current resource is virtual resource

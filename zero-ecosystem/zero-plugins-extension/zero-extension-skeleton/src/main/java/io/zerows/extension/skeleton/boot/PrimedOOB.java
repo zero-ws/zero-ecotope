@@ -3,7 +3,7 @@ package io.zerows.extension.skeleton.boot;
 import io.r2mo.typed.annotation.SPID;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.extension.skeleton.underway.Primed;
 
 import java.util.Set;

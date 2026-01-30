@@ -1,44 +1,44 @@
 {
-    "name": "company",
-    "daoCls": "E_COMPANY",
-    "field": {
-        "numbers": {
-            "code": "NUM.COMPANY"
-        },
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ]
+  "name": "company",
+  "daoCls": "E_COMPANY",
+  "field": {
+    "numbers": {
+      "code": "NUM.COMPANY"
     },
-    "transform": {
-        "fabric": {
-            "source": [
-                {
-                    "source": "ASSIST",
-                    "key": "resource.companys",
-                    "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.CompanyDict"
-                },
-                {
-                    "source": "TABULAR",
-                    "types": [
-                        "zero.company"
-                    ]
-                }
-            ],
-            "epsilon": {
-                "companyId": {
-                    "source": "resource.companys",
-                    "in": "name",
-                    "out": "key"
-                },
-                "type": {
-                    "source": "zero.company",
-                    "in": "name",
-                    "out": "key"
-                }
-            }
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ]
+  },
+  "transform": {
+    "fabric": {
+      "source": [
+        {
+          "source": "ASSIST",
+          "key": "resource.companys",
+          "component": "io.zerows.extension.commerce.erp.osgi.spi.dict.CompanyDict"
+        },
+        {
+          "source": "TABULAR",
+          "types": [
+            "zero.company"
+          ]
         }
+      ],
+      "epsilon": {
+        "companyId": {
+          "source": "resource.companys",
+          "in": "name",
+          "out": "key"
+        },
+        "type": {
+          "source": "zero.company",
+          "in": "name",
+          "out": "key"
+        }
+      }
     }
+  }
 }

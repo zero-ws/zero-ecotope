@@ -32,13 +32,12 @@ interface VsSame {
 
     /**
      * Comparing
-     *
+     * <p>
      * 1. Internal Vs
      * 2. Extension VsPlugin -> Adjuster ( For Extension Here )
      *
      * @param valueOld {@link Object} input old
      * @param valueNew {@link Object} input new
-     *
      * @return {@link Boolean} true when Same.
      */
     boolean is(Object valueOld, Object valueNew);
@@ -47,7 +46,6 @@ interface VsSame {
      * Check findRunning is ok
      *
      * @param value {@link Object}
-     *
      * @return {@link Boolean}
      */
     boolean ok(Object value);
@@ -58,7 +56,6 @@ interface VsSame {
      *
      * @param valueOld {@link Object} input old
      * @param valueNew {@link Object} input new
-     *
      * @return {@link Boolean} true when Same.
      */
     default boolean isXor(final Object valueOld, final Object valueNew) {

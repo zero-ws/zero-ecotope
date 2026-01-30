@@ -1,7 +1,7 @@
 package io.zerows.epoch.management;
 
 import io.zerows.epoch.assembly.ClassScanner;
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.management.AbstractAmbiguity;
 import io.zerows.specification.development.compiled.HBundle;

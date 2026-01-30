@@ -27,7 +27,6 @@ public interface InCancelAgent {
      *
      * @param type 撤销类型
      * @param data 基本请求数据
-     *
      * @return 撤销结果
      */
     @PUT

@@ -26,9 +26,9 @@ import static io.zerows.boot.extension.util.Ox.LOG;
 
 /**
  * ## 导入专用顶层通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 该通道为文件上传专用通道
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -36,14 +36,13 @@ import static io.zerows.boot.extension.util.Ox.LOG;
 public abstract class AbstractHFile extends AbstractHMore {
     /**
      * 「批量」重写上传的`transferIn`来完成
-     *
+     * <p>
      * 1. 单文件读取
      * 2. 文件读取解析`ExTable`导入表格
      * 3. 读取表格相关数据（包括字典预处理）
      * 4. 翻译后按条件查询
      *
      * @param request {@link ActIn} 输入业务请求
-     *
      * @return {@link io.vertx.core.Future}<{@link ActOut}> 业务层输出
      */
     @Override
@@ -109,7 +108,6 @@ public abstract class AbstractHFile extends AbstractHMore {
      * 旧数据直接读取，重载方法`transferIn`方法。
      *
      * @param current {@link JsonArray} 当前数据
-     *
      * @return {@link io.vertx.core.Future}<{@link JsonArray}>
      */
     public abstract Future<JsonArray> transferIn(JsonArray current);

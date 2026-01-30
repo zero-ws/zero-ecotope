@@ -2,7 +2,7 @@ package io.zerows.specification.development.program;
 
 import io.zerows.platform.annotations.meta.One2One;
 import io.zerows.specification.development.compiled.HLibrary;
-import io.zerows.specification.security.identity.HOwner;
+import io.zerows.specification.security.HOwner;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentMap;
  *     2. 多个工作空间
  *     3. 多个设计器
  * </code></pre>
- *
+ * <p>
  * 工程文件和工作空间在边界属性上实现绑定，如
  * <pre><code>
  *     1. 如一个工程文件名为：.xproject | .jproject

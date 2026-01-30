@@ -1,42 +1,42 @@
 {
-    "name": "contract",
-    "daoCls": "E_CONTRACT",
-    "field": {
-        "numbers": {
-            "code": "NUM.CONTRACT"
-        },
-        "unique": [
-            [
-                "code",
-                "sigma"
-            ]
-        ],
-        "attachment": [
-            {
-                "field": "files",
-                "condition": {
-                    "modelId": "res.contract"
-                }
-            }
-        ]
+  "name": "contract",
+  "daoCls": "E_CONTRACT",
+  "field": {
+    "numbers": {
+      "code": "NUM.CONTRACT"
     },
-    "transform": {
-        "fabric": {
-            "source": [
-                {
-                    "source": "TABULAR",
-                    "types": [
-                        "zero.contract"
-                    ]
-                }
-            ],
-            "epsilon": {
-                "type": {
-                    "source": "zero.contract",
-                    "in": "name",
-                    "out": "code"
-                }
-            }
+    "unique": [
+      [
+        "code",
+        "sigma"
+      ]
+    ],
+    "attachment": [
+      {
+        "field": "files",
+        "condition": {
+          "modelId": "res.contract"
         }
+      }
+    ]
+  },
+  "transform": {
+    "fabric": {
+      "source": [
+        {
+          "source": "TABULAR",
+          "types": [
+            "zero.contract"
+          ]
+        }
+      ],
+      "epsilon": {
+        "type": {
+          "source": "zero.contract",
+          "in": "name",
+          "out": "code"
+        }
+      }
     }
+  }
 }

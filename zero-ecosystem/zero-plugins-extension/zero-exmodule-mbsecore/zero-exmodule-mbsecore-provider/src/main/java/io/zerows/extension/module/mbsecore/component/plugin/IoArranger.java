@@ -10,7 +10,11 @@ import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.metadata.element.DataTpl;
 import io.zerows.specification.modeling.HAttribute;
 import io.zerows.specification.modeling.HRecord;
-import io.zerows.specification.modeling.property.*;
+import io.zerows.specification.modeling.property.IComponent;
+import io.zerows.specification.modeling.property.INormalizer;
+import io.zerows.specification.modeling.property.IoSource;
+import io.zerows.specification.modeling.property.OComponent;
+import io.zerows.specification.modeling.property.OExpression;
 import io.zerows.support.TiConsumer;
 import io.zerows.support.Ut;
 

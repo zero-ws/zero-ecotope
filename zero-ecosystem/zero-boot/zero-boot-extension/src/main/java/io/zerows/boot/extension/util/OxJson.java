@@ -27,7 +27,6 @@ final class OxJson {
      *
      * @param input {@link JsonArray} 待处理数组数据
      * @param atom  {@link DataAtom} 模型定义
-     *
      * @return {@link JsonArray} 处理后的数据
      */
     static JsonArray elementCompress(final JsonArray input, final DataAtom atom) {
@@ -57,7 +56,6 @@ final class OxJson {
      *
      * @param data {@link JsonObject} 数据信息
      * @param atom {@link DataAtom} 模型定义
-     *
      * @return {@link JsonObject} 处理过的数据信息
      */
     static JsonObject elementUuid(final JsonObject data, final DataAtom atom) {

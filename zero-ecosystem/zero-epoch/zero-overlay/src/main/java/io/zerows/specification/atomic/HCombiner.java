@@ -21,7 +21,6 @@ public interface HCombiner<T> {
      * 组合器核心方法，根据传入的参数执行组合
      *
      * @param input 输入参数，参数中包含了所有待组合的数据，使用不同 key 加以区分
-     *
      * @return 返回异步结果
      */
     Future<T> executeAsync(T input);

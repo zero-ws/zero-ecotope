@@ -27,13 +27,19 @@ import java.io.Serializable;
  */
 @Data
 public class KColumn implements Serializable {
-    /** 动态配置开关，若是动态列则 dynamic = true */
+    /**
+     * 动态配置开关，若是动态列则 dynamic = true
+     */
     private transient Boolean dynamic = Boolean.FALSE;
 
-    /** 开启动态列的条件，identifier = null，否则直接从 JSON 文件中提取 */
+    /**
+     * 开启动态列的条件，identifier = null，否则直接从 JSON 文件中提取
+     */
     private transient String identifier;
 
-    /** 视图名称，和安全视图提取相关 **/
+    /**
+     * 视图名称，和安全视图提取相关
+     **/
     private transient String view = "DEFAULT";  // Default name
 
     public Boolean getDynamic() {

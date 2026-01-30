@@ -51,13 +51,27 @@ import java.util.stream.Collectors;
  */
 @Data
 public class KMap implements Serializable {
-    /** 根节点 {@link Node} */
+    private static final ConcurrentMap<String, Class<?>> TYPES = new ConcurrentHashMap<String, Class<?>>() {
+        {
+            this.put("BOOLEAN", Boolean.class);
+            this.put("INT", Integer.class);
+            this.put("LONG", Long.class);
+            this.put("DECIMAL", BigDecimal.class);
+            this.put("DATE1", LocalDate.class);
+            this.put("DATE2", LocalDateTime.class);
+            this.put("DATE3", Long.class);
+            this.put("DATE4", LocalTime.class);
+        }
+    };
+    /**
+     * 根节点 {@link Node}
+     */
     private final Node root = new Node();
-
-    /** 子模型 identifier = {@link Node} */
+    /**
+     * 子模型 identifier = {@link Node}
+     */
     private final ConcurrentMap<String, Node> mapping =
         new ConcurrentHashMap<>();
-
     /**
      * 作用效果，作用效果主要用于 zero-jet 中的通道定义部分
      * <pre><code>
@@ -68,7 +82,6 @@ public class KMap implements Serializable {
      * </code></pre>
      */
     private EmAop.Effect mode = EmAop.Effect.NONE;
-
     /**
      * 当前配置对应的映射组件，最终对应底层的 MAPPING_COMPONENT 中的配置
      */
@@ -372,17 +385,4 @@ public class KMap implements Serializable {
                 '}';
         }
     }
-
-    private static final ConcurrentMap<String, Class<?>> TYPES = new ConcurrentHashMap<String, Class<?>>() {
-        {
-            this.put("BOOLEAN", Boolean.class);
-            this.put("INT", Integer.class);
-            this.put("LONG", Long.class);
-            this.put("DECIMAL", BigDecimal.class);
-            this.put("DATE1", LocalDate.class);
-            this.put("DATE2", LocalDateTime.class);
-            this.put("DATE3", Long.class);
-            this.put("DATE4", LocalTime.class);
-        }
-    };
 }

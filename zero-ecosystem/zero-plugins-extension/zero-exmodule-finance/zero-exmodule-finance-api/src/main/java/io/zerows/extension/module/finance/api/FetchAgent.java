@@ -27,7 +27,6 @@ public interface FetchAgent {
      * 底层调用 {@link FetchStub} 中的方法来实现四个流程的读取整合，读取过程会有一个依赖关系
      *
      * @param orderId 订单ID
-     *
      * @return {@link io.vertx.core.json.JsonObject}
      */
     @GET

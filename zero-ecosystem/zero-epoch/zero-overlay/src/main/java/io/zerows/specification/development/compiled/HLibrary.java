@@ -3,7 +3,7 @@ package io.zerows.specification.development.compiled;
 /**
  * 「研发」库信息
  * <hr/>
- *
+ * <p>
  * 库信息用于描述当前环境中RAD中包含的所有系统级的库相关信息：
  * <pre><code>
  *     1. identifier：库的唯一标识

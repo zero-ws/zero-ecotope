@@ -9,7 +9,7 @@ import io.zerows.epoch.assembly.exception._40044Exception500IpcReturn;
 import io.zerows.epoch.assembly.exception._40045Exception500IpcDirection;
 import io.zerows.epoch.assembly.exception._40046Exception500IpcArgument;
 import io.zerows.epoch.assembly.exception._40048Exception500RpcAgentAbsence;
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,6 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
 
     /**
      * @param classes all classes must be annotated with @Queue
-     *
      * @return scanned classes.
      */
     @Override
@@ -60,7 +59,6 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
      * Method with @Ipc must contain return type
      *
      * @param method method reference that scanned by zero
-     *
      * @return Whether this method is valid
      */
     private Method ensureSpec(final Method method) {
@@ -80,7 +78,6 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
      * If declaring class is interface, it must contains implementation classes.
      *
      * @param classes all classes that be sure to consider as agent
-     *
      * @return valid method reference
      */
     private Method ensureAgent(final Method method, final Set<Class<?>> classes) {
@@ -102,7 +99,6 @@ public class InquirerForIpc implements Inquirer<ConcurrentMap<String, Method>> {
      * If set to or name, must not be null/empty at the sametime.
      *
      * @param method the method that should be checked here.
-     *
      * @return valid method reference in the container
      */
     private Method ensureTarget(final Method method) {

@@ -2,8 +2,8 @@ package io.zerows.cortex.metadata;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Route;
-import io.zerows.epoch.basicore.WebEvent;
-import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.jigsaw.NodeVertx;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.support.Ut;
 
 import java.util.Objects;

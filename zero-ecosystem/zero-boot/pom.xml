@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -24,6 +24,7 @@
 
         2）核心应用（微服务）启动
         - zero-boot-epoch-actor, Actor启动器（核心模块，不带任何扩展模块）
+        - zero-boot-cloud-actor, Actor启动器（云端模块，内置云端配置中心等功能模块）
 
         3）工具模块启动
         - zero-boot-inst, 工具模块启动器
@@ -34,6 +35,7 @@
     <modules>
         <!-- 核心模块启动器 -->
         <module>zero-boot-epoch-actor</module>
+        <module>zero-boot-cloud-actor</module>
         <!-- 扩展模块启动（继承模式）-->
         <module>zero-boot-import</module>
         <module>zero-boot-extension</module>

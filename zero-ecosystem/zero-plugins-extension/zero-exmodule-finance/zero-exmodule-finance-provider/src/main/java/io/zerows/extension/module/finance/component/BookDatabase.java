@@ -60,14 +60,14 @@ class BookDatabase implements Book {
                     final List<FBill> billEach = mapBill.get(key);
                     billEach.forEach(billItem -> {
                         final FBook updatedBook = BookAction.doAmount(book, billItem, items);
-                        if (keysClosed.contains(updatedBook.getKey())) {
+                        if (keysClosed.contains(updatedBook.getId())) {
                             /*
                              * It means that this book has been finished
                              * All finished book couldn't do any other things
                              */
                             updatedBook.setStatus(FmConstant.Status.FINISHED);
                             Ke.umCreated(updatedBook, item);
-                            bookKeys.remove(updatedBook.getKey());
+                            bookKeys.remove(updatedBook.getId());
                         }
                         bookList.add(updatedBook);
                     });

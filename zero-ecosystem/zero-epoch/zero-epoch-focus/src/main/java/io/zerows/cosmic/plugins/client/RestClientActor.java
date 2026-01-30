@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.zerows.component.module.AbstractHActor;
 import io.zerows.epoch.annotations.Actor;
 import io.zerows.epoch.assembly.DiRegistry;
-import io.zerows.epoch.configuration.ConfigNorm;
+import io.zerows.epoch.jigsaw.ConfigNorm;
 import io.zerows.sdk.plugins.AddOn;
 import io.zerows.specification.configuration.HConfig;
 import jakarta.inject.Provider;

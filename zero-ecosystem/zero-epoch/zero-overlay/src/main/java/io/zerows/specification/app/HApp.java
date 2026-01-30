@@ -75,6 +75,35 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
      */
 
     /**
+     * 根据输入数据计算当前系统的 namespace 名空间信息，其中此方法会在两个核心场景使用
+     * <pre>
+     *     1. 提取应用名空间
+     *     2. 提取模型（identifier）的名空间
+     * </pre>
+     * 名空间计算会根据 {@link AtomNs} 的 SPI 接口进行计算，最终提取名空间信息让全环境统一
+     *
+     * @param appName    应用名称
+     * @param identifier 标识符
+     * @return 名空间
+     */
+    static String nsOf(final String appName, final String identifier) {
+        // 查找合法的 HPI
+        final AtomNs atomNs = HPI.findOne(AtomNs.class);
+        if (Objects.isNull(appName)) {
+            return null;
+        }
+        if (UtBase.isNil(identifier)) {
+            return atomNs.ns(appName);
+        } else {
+            return atomNs.ns(appName, identifier);
+        }
+    }
+
+    static String nsOf(final String appName) {
+        return nsOf(appName, null);
+    }
+
+    /**
      * 🌐 应用所属的 Boundary 信息 🧭，该 Boundary 可用于设置三方向的应用所属。
      * <pre><code>
      *     1. 🌐 {@link HFrontier}
@@ -106,21 +135,6 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
         return new ConcurrentHashMap<>();
     }
 
-    /**
-     * 📁 当前应用之下的所有模块列表 🗂️，集合软引用，不做强引用 🔗
-     *
-     * @return 📄 模块列表
-     */
-    default Set<String> modules() {
-        return Set.of();
-    }
-
-
-    @Override
-    default HApp apply(final HApp app) {
-        return this;
-    }
-
 
     // 🚀 配置/数据：----------------------------------------------------------
     /*
@@ -146,11 +160,24 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
      */
 
     /**
+     * 📁 当前应用之下的所有模块列表 🗂️，集合软引用，不做强引用 🔗
+     *
+     * @return 📄 模块列表
+     */
+    default Set<String> modules() {
+        return Set.of();
+    }
+
+    @Override
+    default HApp apply(final HApp app) {
+        return this;
+    }
+
+    /**
      * 📤 提取单独的应用程序配置 ⚙️
      *
      * @param key 🔑 配置项
      * @param <T> 🧬 配置项类型
-     *
      * @return 📥 {@link String}
      */
     <T> T option(String key);
@@ -165,10 +192,6 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
     <T> HApp option(String key, T value);
 
     HApp option(JsonObject configurationJ);
-
-    JsonObject data();
-
-    HApp data(JsonObject data);
 
     // 🚀 高频属性部分：----------------------------------------------------------
     /*
@@ -192,6 +215,10 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
      *     - 应用与模块：1:N 关系
      * </pre>
      */
+
+    JsonObject data();
+
+    HApp data(JsonObject data);
 
     /**
      * 🏷️ 应用程序名 🏢，对应到环境变量 Z_APP 中
@@ -230,25 +257,6 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
 
     HApp id(String id);
 
-    /**
-     * 加载应用表示当前应用彻底加载完成，这种模式下 id 一定有值，通常应用分成两类
-     * <pre>
-     *     1. 和持久化设备无关：zero-extension-ambient 未启用
-     *        这种模式下只会包含
-     *        - name
-     *        - ns
-     *        两个属性值
-     *     2. 和持久化设备有关：zero-extension-ambient 启用
-     *        这种模式下会包含完整的应用属性值，特别是 id 属性，这种模式才表示加载完成
-     * </pre>
-     * 应用未加载完成时使用 name 作为唯一标识符，加载完成之后使用 id 作为唯一标识符
-     *
-     * @return 是否加载完成
-     */
-    boolean isLoad();
-
-    HApp vLog();
-
     // 🚀 名空间工具类----------------------------------------------------------
     /*
      * 🌐 名空间工具类模块 🛠️
@@ -271,32 +279,21 @@ public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
      */
 
     /**
-     * 根据输入数据计算当前系统的 namespace 名空间信息，其中此方法会在两个核心场景使用
+     * 加载应用表示当前应用彻底加载完成，这种模式下 id 一定有值，通常应用分成两类
      * <pre>
-     *     1. 提取应用名空间
-     *     2. 提取模型（identifier）的名空间
+     *     1. 和持久化设备无关：zero-extension-ambient 未启用
+     *        这种模式下只会包含
+     *        - name
+     *        - ns
+     *        两个属性值
+     *     2. 和持久化设备有关：zero-extension-ambient 启用
+     *        这种模式下会包含完整的应用属性值，特别是 id 属性，这种模式才表示加载完成
      * </pre>
-     * 名空间计算会根据 {@link AtomNs} 的 SPI 接口进行计算，最终提取名空间信息让全环境统一
+     * 应用未加载完成时使用 name 作为唯一标识符，加载完成之后使用 id 作为唯一标识符
      *
-     * @param appName    应用名称
-     * @param identifier 标识符
-     *
-     * @return 名空间
+     * @return 是否加载完成
      */
-    static String nsOf(final String appName, final String identifier) {
-        // 查找合法的 HPI
-        final AtomNs atomNs = HPI.findOne(AtomNs.class);
-        if (Objects.isNull(appName)) {
-            return null;
-        }
-        if (UtBase.isNil(identifier)) {
-            return atomNs.ns(appName);
-        } else {
-            return atomNs.ns(appName, identifier);
-        }
-    }
+    boolean isLoad();
 
-    static String nsOf(final String appName) {
-        return nsOf(appName, null);
-    }
+    HApp vLog();
 }

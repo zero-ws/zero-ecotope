@@ -1,6 +1,6 @@
 package io.zerows.extension.module.integration.common;
 
-import io.zerows.epoch.basicore.MDConfig;
+import io.zerows.epoch.web.MDConfig;
 import lombok.Data;
 
 /**

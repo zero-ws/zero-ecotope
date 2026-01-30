@@ -4,9 +4,9 @@ import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Router;
-import io.zerows.epoch.basicore.option.CorsOptions;
-import io.zerows.epoch.basicore.option.SockOptions;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeStore;
+import io.zerows.epoch.spec.options.CorsOptions;
+import io.zerows.epoch.spec.options.SockOptions;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 

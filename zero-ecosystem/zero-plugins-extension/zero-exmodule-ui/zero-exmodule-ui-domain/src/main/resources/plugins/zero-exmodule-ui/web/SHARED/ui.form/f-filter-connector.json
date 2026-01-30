@@ -1,8 +1,8 @@
 {
-    "config": {
-        "items": [
-            "OR,或（OR）",
-            "AND,并（AND）"
-        ]
-    }
+  "config": {
+    "items": [
+      "OR,或（OR）",
+      "AND,并（AND）"
+    ]
+  }
 }

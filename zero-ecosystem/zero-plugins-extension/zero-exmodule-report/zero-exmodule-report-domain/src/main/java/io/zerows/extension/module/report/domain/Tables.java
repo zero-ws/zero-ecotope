@@ -18,27 +18,27 @@ import io.zerows.extension.module.report.domain.tables.KpReportInstance;
 public class Tables {
 
     /**
-     * The table <code>ZDB.KP_DATA_SET</code>.
+     * KP_DATA_SET
      */
     public static final KpDataSet KP_DATA_SET = KpDataSet.KP_DATA_SET;
 
     /**
-     * The table <code>ZDB.KP_DIMENSION</code>.
+     * KP_DIMENSION
      */
     public static final KpDimension KP_DIMENSION = KpDimension.KP_DIMENSION;
 
     /**
-     * The table <code>ZDB.KP_FEATURE</code>.
+     * KP_FEATURE
      */
     public static final KpFeature KP_FEATURE = KpFeature.KP_FEATURE;
 
     /**
-     * The table <code>ZDB.KP_REPORT</code>.
+     * KP_REPORT
      */
     public static final KpReport KP_REPORT = KpReport.KP_REPORT;
 
     /**
-     * The table <code>ZDB.KP_REPORT_INSTANCE</code>.
+     * KP_REPORT_INSTANCE
      */
     public static final KpReportInstance KP_REPORT_INSTANCE = KpReportInstance.KP_REPORT_INSTANCE;
 }

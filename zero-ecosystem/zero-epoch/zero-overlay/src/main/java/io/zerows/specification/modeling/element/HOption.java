@@ -8,7 +8,7 @@ package io.zerows.specification.modeling.element;
  * - findRunning       「EMF」元素值
  * - label       「EMF」元素标签
  * </code></pre>
- *
+ * <p>
  * 此处 Literal 主要针对 EMF 中的 Literal 类型，如：
  * <pre><code>
  * 后端：EMF

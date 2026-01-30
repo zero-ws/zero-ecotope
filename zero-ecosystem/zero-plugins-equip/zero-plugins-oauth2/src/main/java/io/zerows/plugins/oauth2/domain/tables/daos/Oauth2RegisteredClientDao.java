@@ -4,276 +4,274 @@
 package io.zerows.plugins.oauth2.domain.tables.daos;
 
 
+import io.r2mo.vertx.jooq.classic.jdbc.JDBCClassicQueryExecutor;
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.Future;
 import io.zerows.plugins.oauth2.domain.tables.Oauth2RegisteredClient;
 import io.zerows.plugins.oauth2.domain.tables.records.Oauth2RegisteredClientRecord;
+import org.jooq.Configuration;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-
-import org.jooq.Configuration;
-
-
 import java.util.List;
-import io.vertx.core.Future;
-import io.r2mo.vertx.jooq.classic.jdbc.JDBCClassicQueryExecutor;
+
 /**
  * OAuth2 注册客户端表
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
-public class Oauth2RegisteredClientDao extends AbstractVertxDAO<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient, String, Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>>, Future<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>, Future<Integer>, Future<String>> implements io.r2mo.vertx.jooq.classic.VertxDAO<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient,String> {
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+public class Oauth2RegisteredClientDao extends AbstractVertxDAO<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient, String, Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>>, Future<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>, Future<Integer>, Future<String>> implements io.r2mo.vertx.jooq.classic.VertxDAO<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient, String> {
 
-        /**
+    /**
      * @param configuration The Configuration used for rendering and query
-     * execution.
-     * @param vertx the vertx instance
+     *                      execution.
+     * @param vertx         the vertx instance
      */
-        public Oauth2RegisteredClientDao(Configuration configuration, io.vertx.core.Vertx vertx) {
-                super(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient.class, new JDBCClassicQueryExecutor<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient,String>(configuration, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient.class,vertx));
-        }
+    public Oauth2RegisteredClientDao(Configuration configuration, io.vertx.core.Vertx vertx) {
+        super(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient.class, new JDBCClassicQueryExecutor<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient, String>(configuration, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient.class, vertx));
+    }
 
-        @Override
-        protected String getId(io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient object) {
-                return object.getId();
-        }
+    @Override
+    protected String getId(io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient object) {
+        return object.getId();
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_ID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientId(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_ID.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientId(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_ID.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_ID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientId(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_ID.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientId(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_ID.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_ID_ISSUED_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientIdIssuedAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_ID_ISSUED_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientIdIssuedAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_ID_ISSUED_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_ID_ISSUED_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientIdIssuedAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_ID_ISSUED_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientIdIssuedAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_ID_ISSUED_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_SECRET IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSecret(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSecret(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_SECRET IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSecret(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSecret(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_SECRET_EXPIRES_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSecretExpiresAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET_EXPIRES_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSecretExpiresAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET_EXPIRES_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_SECRET_EXPIRES_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSecretExpiresAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET_EXPIRES_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSecretExpiresAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SECRET_EXPIRES_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_NAME IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientName(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_NAME.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientName(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_NAME.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_NAME IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientName(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_NAME.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientName(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_NAME.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_AUTHENTICATION_METHODS IN
      * (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientAuthenticationMethods(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_AUTHENTICATION_METHODS.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientAuthenticationMethods(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_AUTHENTICATION_METHODS.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_AUTHENTICATION_METHODS IN
      * (values)</code> asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientAuthenticationMethods(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_AUTHENTICATION_METHODS.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientAuthenticationMethods(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_AUTHENTICATION_METHODS.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_GRANT_TYPES IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByAuthorizationGrantTypes(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.AUTHORIZATION_GRANT_TYPES.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByAuthorizationGrantTypes(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.AUTHORIZATION_GRANT_TYPES.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_GRANT_TYPES IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByAuthorizationGrantTypes(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.AUTHORIZATION_GRANT_TYPES.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByAuthorizationGrantTypes(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.AUTHORIZATION_GRANT_TYPES.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>REDIRECT_URIS IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByRedirectUris(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.REDIRECT_URIS.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByRedirectUris(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.REDIRECT_URIS.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>REDIRECT_URIS IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByRedirectUris(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.REDIRECT_URIS.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByRedirectUris(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.REDIRECT_URIS.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>POST_LOGOUT_REDIRECT_URIS IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByPostLogoutRedirectUris(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.POST_LOGOUT_REDIRECT_URIS.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByPostLogoutRedirectUris(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.POST_LOGOUT_REDIRECT_URIS.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>POST_LOGOUT_REDIRECT_URIS IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByPostLogoutRedirectUris(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.POST_LOGOUT_REDIRECT_URIS.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByPostLogoutRedirectUris(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.POST_LOGOUT_REDIRECT_URIS.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>SCOPES IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByScopes(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.SCOPES.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByScopes(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.SCOPES.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>SCOPES IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByScopes(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.SCOPES.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByScopes(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.SCOPES.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_SETTINGS IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSettings(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SETTINGS.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSettings(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SETTINGS.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>CLIENT_SETTINGS IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSettings(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SETTINGS.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByClientSettings(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.CLIENT_SETTINGS.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>TOKEN_SETTINGS IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByTokenSettings(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.TOKEN_SETTINGS.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByTokenSettings(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.TOKEN_SETTINGS.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>TOKEN_SETTINGS IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByTokenSettings(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.TOKEN_SETTINGS.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByTokenSettings(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.TOKEN_SETTINGS.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>TENANT_ID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByTenantId(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.TENANT_ID.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByTenantId(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.TENANT_ID.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>TENANT_ID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByTenantId(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.TENANT_ID.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByTenantId(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.TENANT_ID.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>APP_ID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByAppId(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.APP_ID.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByAppId(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.APP_ID.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>APP_ID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByAppId(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.APP_ID.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByAppId(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.APP_ID.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>EXT IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByExt(Collection<String> values) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.EXT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByExt(Collection<String> values) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.EXT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>EXT IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByExt(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.EXT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient>> findManyByExt(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2RegisteredClient.OAUTH2_REGISTERED_CLIENT.EXT.in(values), limit);
+    }
 
-        @Override
-        public JDBCClassicQueryExecutor<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient,String> queryExecutor(){
-                return (JDBCClassicQueryExecutor<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient,String>) super.queryExecutor();
-        }
+    @Override
+    public JDBCClassicQueryExecutor<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient, String> queryExecutor() {
+        return (JDBCClassicQueryExecutor<Oauth2RegisteredClientRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2RegisteredClient, String>) super.queryExecutor();
+    }
 }

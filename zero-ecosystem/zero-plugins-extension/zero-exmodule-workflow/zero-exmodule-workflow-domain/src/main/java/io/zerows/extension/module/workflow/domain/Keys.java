@@ -27,13 +27,13 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<WFlowRecord> KEY_W_FLOW_CODE = Internal.createUniqueKey(WFlow.W_FLOW, DSL.name("KEY_W_FLOW_CODE"), new TableField[] { WFlow.W_FLOW.CODE, WFlow.W_FLOW.SIGMA }, true);
-    public static final UniqueKey<WFlowRecord> KEY_W_FLOW_NAME = Internal.createUniqueKey(WFlow.W_FLOW, DSL.name("KEY_W_FLOW_NAME"), new TableField[] { WFlow.W_FLOW.NAME, WFlow.W_FLOW.SIGMA }, true);
-    public static final UniqueKey<WFlowRecord> KEY_W_FLOW_PRIMARY = Internal.createUniqueKey(WFlow.W_FLOW, DSL.name("KEY_W_FLOW_PRIMARY"), new TableField[] { WFlow.W_FLOW.KEY }, true);
-    public static final UniqueKey<WTicketRecord> KEY_W_TICKET_PRIMARY = Internal.createUniqueKey(WTicket.W_TICKET, DSL.name("KEY_W_TICKET_PRIMARY"), new TableField[] { WTicket.W_TICKET.KEY }, true);
-    public static final UniqueKey<WTicketRecord> KEY_W_TICKET_SIGMA = Internal.createUniqueKey(WTicket.W_TICKET, DSL.name("KEY_W_TICKET_SIGMA"), new TableField[] { WTicket.W_TICKET.SIGMA, WTicket.W_TICKET.CODE }, true);
-    public static final UniqueKey<WTicketRecord> KEY_W_TICKET_SIGMA_2 = Internal.createUniqueKey(WTicket.W_TICKET, DSL.name("KEY_W_TICKET_SIGMA_2"), new TableField[] { WTicket.W_TICKET.SIGMA, WTicket.W_TICKET.SERIAL }, true);
-    public static final UniqueKey<WTodoRecord> KEY_W_TODO_PRIMARY = Internal.createUniqueKey(WTodo.W_TODO, DSL.name("KEY_W_TODO_PRIMARY"), new TableField[] { WTodo.W_TODO.KEY }, true);
-    public static final UniqueKey<WTodoRecord> KEY_W_TODO_SIGMA = Internal.createUniqueKey(WTodo.W_TODO, DSL.name("KEY_W_TODO_SIGMA"), new TableField[] { WTodo.W_TODO.SIGMA, WTodo.W_TODO.CODE }, true);
-    public static final UniqueKey<WTodoRecord> KEY_W_TODO_SIGMA_2 = Internal.createUniqueKey(WTodo.W_TODO, DSL.name("KEY_W_TODO_SIGMA_2"), new TableField[] { WTodo.W_TODO.SIGMA, WTodo.W_TODO.SERIAL }, true);
+    public static final UniqueKey<WFlowRecord> KEY_W_FLOW_PRIMARY = Internal.createUniqueKey(WFlow.W_FLOW, DSL.name("KEY_W_FLOW_PRIMARY"), new TableField[] { WFlow.W_FLOW.ID }, true);
+    public static final UniqueKey<WFlowRecord> KEY_W_FLOW_UK_W_FLOW_CODE_SIGMA = Internal.createUniqueKey(WFlow.W_FLOW, DSL.name("KEY_W_FLOW_UK_W_FLOW_CODE_SIGMA"), new TableField[] { WFlow.W_FLOW.CODE, WFlow.W_FLOW.SIGMA }, true);
+    public static final UniqueKey<WFlowRecord> KEY_W_FLOW_UK_W_FLOW_NAME_SIGMA = Internal.createUniqueKey(WFlow.W_FLOW, DSL.name("KEY_W_FLOW_UK_W_FLOW_NAME_SIGMA"), new TableField[] { WFlow.W_FLOW.NAME, WFlow.W_FLOW.SIGMA }, true);
+    public static final UniqueKey<WTicketRecord> KEY_W_TICKET_PRIMARY = Internal.createUniqueKey(WTicket.W_TICKET, DSL.name("KEY_W_TICKET_PRIMARY"), new TableField[] { WTicket.W_TICKET.ID }, true);
+    public static final UniqueKey<WTicketRecord> KEY_W_TICKET_UK_W_TICKET_SIGMA_CODE = Internal.createUniqueKey(WTicket.W_TICKET, DSL.name("KEY_W_TICKET_UK_W_TICKET_SIGMA_CODE"), new TableField[] { WTicket.W_TICKET.SIGMA, WTicket.W_TICKET.CODE }, true);
+    public static final UniqueKey<WTicketRecord> KEY_W_TICKET_UK_W_TICKET_SIGMA_SERIAL = Internal.createUniqueKey(WTicket.W_TICKET, DSL.name("KEY_W_TICKET_UK_W_TICKET_SIGMA_SERIAL"), new TableField[] { WTicket.W_TICKET.SIGMA, WTicket.W_TICKET.SERIAL }, true);
+    public static final UniqueKey<WTodoRecord> KEY_W_TODO_PRIMARY = Internal.createUniqueKey(WTodo.W_TODO, DSL.name("KEY_W_TODO_PRIMARY"), new TableField[] { WTodo.W_TODO.ID }, true);
+    public static final UniqueKey<WTodoRecord> KEY_W_TODO_UK_W_TODO_SIGMA_CODE = Internal.createUniqueKey(WTodo.W_TODO, DSL.name("KEY_W_TODO_UK_W_TODO_SIGMA_CODE"), new TableField[] { WTodo.W_TODO.SIGMA, WTodo.W_TODO.CODE }, true);
+    public static final UniqueKey<WTodoRecord> KEY_W_TODO_UK_W_TODO_SIGMA_SERIAL = Internal.createUniqueKey(WTodo.W_TODO, DSL.name("KEY_W_TODO_UK_W_TODO_SIGMA_SERIAL"), new TableField[] { WTodo.W_TODO.SIGMA, WTodo.W_TODO.SERIAL }, true);
 }

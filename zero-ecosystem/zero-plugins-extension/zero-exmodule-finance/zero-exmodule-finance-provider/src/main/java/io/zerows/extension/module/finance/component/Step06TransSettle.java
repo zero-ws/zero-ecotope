@@ -36,7 +36,7 @@ class Step06TransSettle implements Step<List<FSettlement>, FTrans> {
                 }
                 trans.setType(EmTran.Type.SETTLEMENT.name());
                 trans.setName("ST:" + Ut.fromJoin(nameList));
-                trans.setKey(UUID.randomUUID().toString());
+                trans.setId(UUID.randomUUID().toString());
                 // 此处构造完成
                 return Ux.future(trans);
             })

@@ -1,35 +1,47 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `X_MODULE`;
+CREATE TABLE IF NOT EXISTS `X_MODULE` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`          VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                          -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-module-1
--- 应用程序中的模块表：X_MODULE
-DROP TABLE IF EXISTS X_MODULE;
-CREATE TABLE IF NOT EXISTS X_MODULE
-(
-    `KEY`        VARCHAR(36) COMMENT '「key」- 模块唯一主键',
-    `NAME`       VARCHAR(255) COMMENT '「name」- 模块名称',
-    `CODE`       VARCHAR(36) COMMENT '「code」- 模块编码',
-    `ENTRY`      VARCHAR(255) COMMENT '「entry」— 模块入口地址',
-    `BLOCK_CODE` VARCHAR(255) COMMENT '「blockCode」— 所属模块系统编码',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `BLOCK_CODE`  VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「blockCode」— 所属模块系统编码',
+    `CODE`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `ENTRY`       VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「entry」— 模块入口地址',
+    `NAME`        VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
 
-    `MODEL_ID`   VARCHAR(36) COMMENT '「modelId」- 当前模块关联的主模型ID',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `MODEL_ID`    VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「modelId」- 模型标识',             -- 当前模块关联的主模型ID
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`      VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`   VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`     BIT COMMENT '「active」- 是否启用',
-    `METADATA`   TEXT COMMENT '「metadata」- 附加配置数据',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`       VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',               -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',                -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`      VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                   -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`      BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                                  -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`    VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',            -- [国际化] 如: zh_CN, en_US,
+    `METADATA`    TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                           -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`     VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`  DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                               -- [审计] 创建时间
+    `CREATED_BY`  VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',             -- [审计] 创建人
+    `UPDATED_AT`  DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                               -- [审计] 更新时间
+    `UPDATED_BY`  VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',             -- [审计] 更新人
 
-    -- Auditor字段
-    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY` VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY` VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_X_MODULE_ENTRY_APP_ID` (`ENTRY`, `APP_ID`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='X_MODULE';
 
-    `APP_ID`     VARCHAR(255) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`  VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
-
--- changeset Lang:ox-module-2
-ALTER TABLE X_MODULE
-    ADD UNIQUE (`ENTRY`, `APP_ID`) USING BTREE; -- 页面入口地址
+-- 缺失公共字段：
+-- - VERSION (版本)
+-- - TYPE (类型)

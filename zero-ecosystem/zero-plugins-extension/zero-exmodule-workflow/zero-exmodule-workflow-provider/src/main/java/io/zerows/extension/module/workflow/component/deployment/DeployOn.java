@@ -1,7 +1,7 @@
 package io.zerows.extension.module.workflow.component.deployment;
 
 import io.vertx.core.Future;
-import io.zerows.epoch.basicore.MDWorkflow;
+import io.zerows.epoch.web.MDWorkflow;
 import io.zerows.extension.module.workflow.metadata.WfPool;
 
 /**

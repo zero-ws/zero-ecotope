@@ -122,7 +122,6 @@ final class Io {
      * Read to property object
      *
      * @param filename input filename
-     *
      * @return Properties that will be returned
      */
     static Properties ioProp(final String filename) {
@@ -201,7 +200,6 @@ final class Io {
      * Read to Path
      *
      * @param filename input filename
-     *
      * @return file content that converted to String
      */
     static String ioPath(final String filename) {

@@ -171,7 +171,7 @@ public class RightsService implements RightsStub {
         final List<SPermSet> list = new ArrayList<>();
         codes.forEach(each -> {
             final SPermSet inserted = new SPermSet();
-            inserted.setKey(UUID.randomUUID().toString());
+            inserted.setId(UUID.randomUUID().toString());
             inserted.setCode(each);
             inserted.setType(permSet.getType());
             /*
@@ -208,7 +208,7 @@ public class RightsService implements RightsStub {
              * 1) Old List - original
              * 2) New List - current
              */
-            return Ux.future(Ux.compare(original, current, SPermission::getKey));
+            return Ux.future(Ux.compare(original, current, SPermission::getId));
         });
     }
 }

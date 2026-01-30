@@ -29,7 +29,6 @@ public interface FetchStub {
      * </code></pre>
      *
      * @param orderId 订单ID
-     *
      * @return {@link io.vertx.core.Future}
      */
     Future<List<FBill>> fetchByOrder(String orderId);
@@ -48,7 +47,6 @@ public interface FetchStub {
      * </code></pre>
      *
      * @param bills 账单列表
-     *
      * @return {@link io.vertx.core.Future}
      */
     Future<List<FBillItem>> fetchByBills(List<FBill> bills);
@@ -67,7 +65,6 @@ public interface FetchStub {
      * </code></pre>
      *
      * @param items 账单明细列表
-     *
      * @return {@link io.vertx.core.Future}
      */
     Future<List<FSettlement>> fetchSettlements(List<FBillItem> items);
@@ -86,7 +83,6 @@ public interface FetchStub {
      * </code></pre>
      *
      * @param settlements 结算单列表
-     *
      * @return {@link io.vertx.core.Future}
      */
     Future<List<FSettlementItem>> fetchBySettlements(List<FSettlement> settlements);

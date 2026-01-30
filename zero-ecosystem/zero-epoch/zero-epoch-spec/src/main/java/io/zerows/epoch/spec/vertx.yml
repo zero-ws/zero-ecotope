@@ -1,0 +1,365 @@
+# =================================================================
+# 🚀 YmBoot Zero Framework 核心配置文件 (Final Complete Version)
+# -----------------------------------------------------------------
+# 💡 版本说明：
+# 1. 结构：Server / Vertx (含Datasource/Redis/Flyway) / Security / Integrations
+# 2. 注释：已完整恢复新版关于 OAuth2 生命周期、策略建议及微信配置的详细说明。
+# 3. 脱敏：敏感信息已使用占位符处理。
+# =================================================================
+
+# -----------------------------------------------------------------
+# 1. 🌐 服务器专用配置 (Server)
+# -----------------------------------------------------------------
+server:
+  port: ${Z_API_PORT:7185}                   # ---> 💻️ HTTP 服务端口
+  address: ${Z_API_HOST:0.0.0.0}
+  session:
+    options:
+      httpOnly: true
+  options:
+    ssl: ${Z_API_SSL:false}
+    useAlpn: true
+  websocket:
+    config:
+      stomp:
+        port: ${Z_API_PORT:7185}             # ⚠️ 必须与 HTTP 端口一致
+        secured: true
+        websocketBridge: true
+        websocketPath: /api/web-socket
+
+# -----------------------------------------------------------------
+# 2. ⚡ Vert.x 核心容器 (Vertx)
+# -----------------------------------------------------------------
+vertx:
+  application:
+    name: ${Z_APP:r2mo-app-momo}
+
+  # 🏗️ 线程池与实例配置
+  config:
+    instance:
+      - name: app-zero-secure-001
+        options:
+          maxEventLoopExecuteTime: 1200_000_000_000
+          maxWorkerExecuteTime: 1200_000_000_000
+          eventLoopPoolSize: 24              # 🚀 CPU * 2
+          workerPoolSize: 128                # 🚀 IO 密集型建议值
+          internalBlockingPoolSize: 32
+
+    delivery:
+      timeout: 180_000
+
+    deployment:
+      worker:
+        instances: 32                        # 🚀 CPU * 2 ~ 4
+        workerPoolSize: 128
+      agent:
+        instances: 24                        # 🚀 必须 == eventLoopPoolSize
+
+  mvc:
+    cors:
+      allow-credentials: true
+      allowed-origins:
+        - "*"
+
+  # ---------------------------------------------------------------
+  # 2.1 🗄️ 数据源配置 (Datasource) - [In Vertx]
+  # ---------------------------------------------------------------
+  datasource:
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        # 🏆 Master (新版配置)
+        master:
+          url: ${Z_DBS_URL:jdbc:mysql://ox.engine.cn:3306/DB_HOTEL_004?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+          instance: ${Z_DBS_INSTANCE:DB_HOTEL_004}
+          hostname: ${vertx.datasource.hostname}
+          port: ${vertx.datasource.port}
+          username: ${vertx.datasource.username}
+          password: ${vertx.datasource.password}
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+        # 📚 History (旧版结构)
+        master-history:
+          url: ${Z_DBS_HIS_URL:jdbc:mysql://...}
+          username: ${Z_DBS_HIS_USER:root}
+          password: ${Z_DBS_HIS_PASS:root}
+          instance: ${Z_DBS_HIS_INSTANCE:DB_HIS}
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+        # 🔄 Workflow (旧版结构)
+        master-workflow:
+          url: ${Z_DBS_WF_URL:jdbc:mysql://...}
+          username: ${Z_DBS_WF_USER:root}
+          password: ${Z_DBS_WF_PASS:root}
+          instance: ${Z_DBS_WF_INSTANCE:DB_WF}
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+    hostname: ${Z_DB_HOST:ox.engine.cn}
+    port: ${Z_DB_PORT:3306}
+    username: ${Z_DB_APP_USER:r2mo}
+    password: ${Z_DB_APP_PASS:r2mo}
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+
+    hikari:
+      minimum-idle: 10
+
+  # ---------------------------------------------------------------
+  # 2.2 🗄️ Redis 配置 (Data) - [In Vertx]
+  # ---------------------------------------------------------------
+  data:
+    redis:
+      host: ${R2MO_REDIS_HOST:127.0.0.1}
+      port: ${R2MO_REDIS_PORT:6379}
+      password: ${R2MO_REDIS_PASS:password}
+      database: ${R2MO_REDIS_DB:0}
+      timeout: 3000
+
+  # ---------------------------------------------------------------
+  # 2.3 🔄 数据库迁移 (Flyway) - [In Vertx]
+  # ---------------------------------------------------------------
+  flyway:
+    enabled: true
+    locations:
+      - classpath:database/oauth2/${Z_DB_TYPE:MYSQL}/
+      - classpath:plugins/${vertx.application.name}/flyway/${Z_DB_TYPE:MYSQL}/
+      - classpath:plugins/${vertx.application.name}/database/${Z_DB_TYPE:MYSQL}/
+    encoding: UTF-8
+    sql-migration-prefix: V
+    sql-migration-separator: __
+    sql-migration-suffixes: .sql
+    validate-on-migrate: false
+    baseline-on-migrate: true
+    baseline-version: 1
+    clean-disabled: true
+
+# -----------------------------------------------------------------
+# 3. 🛡️ 安全策略 (Security) - [Root Node]
+# -----------------------------------------------------------------
+security:
+  # 📌 LDAP 配置
+  ldap:
+    enabled: true
+    options:
+      url: ldap://localhost:10389
+      base: ou=system
+      username: uid=admin,ou=system
+      password: secret
+      user-query:
+        - "(uid={0})"
+        - "(mail={0})"
+      user-email: "mail"
+      user-id: "uid"
+
+  # 📌 验证码配置
+  captcha:
+    enabled: false
+  captcha-email:
+    length: 6
+    expiredAt: 300
+    subject: 登录验证码邮件
+  captcha-sms:
+    expiredAt: 60
+    length: 6
+    template: SMS_498945473
+
+  # 📌 基础安全
+  basic:
+    realm: "Realm Default Zero"
+
+  # 📌 JWT 配置
+  jwt:
+    enabled: true
+    options:
+      jwtOptions:
+        algorithm: HS256
+      keyStore:
+        type: jceks
+        path: keys/keystore.jceks
+        password: zerows
+
+  # -----------------------------------------
+  # 📌 OAuth2服务端策略配置 (对应 OAuth2Configuration 类)
+  # -----------------------------------------
+  oauth2:
+    # 1. 基础开关
+    enabled: true             # 启用 OAuth2 模块
+    mode: JWT                 # 模式: JWT (无状态) | OIDC | OPAQUE
+    issuer: "https://auth.r2mo.io" # 发行者标识 (非常重要，对应 payload 的 iss)
+    resourceEnabled: true     # 是否作为资源服务器拦截请求
+
+    # 2. 生命周期管理 (Time-to-Live Policy)
+    # [新增] 授权码：极短，防止中间人拦截 (建议 5-10m)
+    authorizationCodeAt: 5m
+    # 访问令牌：中等，平衡体验与安全 (建议 30m-2h)
+    accessTokenAt: 2h
+    # 刷新令牌：长，用于维持登录态 (建议 7d-30d)
+    refreshTokenAt: 30d
+    # [新增] 设备码：用于 TV/IoT 设备登录 (建议 15m-30m)
+    deviceCodeAt: 15m
+    # [新增] 时间偏差：允许服务器时钟有 60秒 的误差
+    skew: 60
+
+    # 3. 令牌行为策略
+    # 建议设为 false (每次刷新都换新的 RefreshToken)，安全性更高
+    # 如果设为 true，Refresh Token 泄露后如果不手动撤销，黑客可以一直用
+    reuseRefreshToken: false
+
+    # 4. [新增] 密钥库配置 (Server 核心心脏)
+    # 必须生成 jks 文件放在 resources/keystore 目录下
+    keyStore:
+      type: jks                               # 类型: jks 或 pfx
+      path: "keys/oauth2.jks"                 # 路径: classpath 下
+      alias: "zero-jwt-key"                   # 别名: 生成证书时指定的 -alias
+      password: "${KEYSTORE_PASS:changeit}"   # 密码: 建议使用环境变量注入
+
+    # 5. OIDC 协议配置
+    oidc:
+      userClaims: true        # 是否在 UserInfo 端点返回自定义 Claims
+
+    # 6. 预置客户端 ID 列表
+    # 具体 Client 详情请配置在 JDBC 数据库或 oauth2.registration 中
+    clients: [ ]
+
+# -----------------------------------------------------------------
+# 4. 🔑 OAuth2 客户端注册 (Registration) - [Root Node]
+# -----------------------------------------------------------------
+oauth2:
+  endpoint: "http://${Z_API_HOST:localhost}:${Z_API_PORT:7185}/"
+  registration:
+    zero-desktop-app:
+      provider: zero-provider
+      client-id: zero-desktop-app
+      client-authentication-method: none
+      authorization-grant-type: authorization_code
+      redirect-uri: ${oauth2.endpoint}oauth2/authorized/zero-desktop-app
+      scope: openid,profile,email
+      client-name: ZERO Desktop Application
+      client-setting:
+        require-proof-key: true
+        require-authorization-consent: true
+
+    zero-web-app:
+      provider: zero-provider
+      client-id: zero-web-app
+      client-secret: "{bcrypt}$2a$10$XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" # [已脱敏]
+      client-authentication-method: client_secret_basic
+      authorization-grant-type: authorization_code
+      redirect-uri: ${oauth2.endpoint}oauth2/authorized/zero-web-app
+      scope: openid,profile,email,api.read,api.write
+      client-name: ZERO Web Application
+
+    # ==========================================
+    # 📌 [新增] 用于测试 client_credentials 的客户端
+    # ==========================================
+    zero-client-app:
+      provider: zero-provider
+      client-id: zero-client-app           # ID
+      client-secret: zero-client-secret    # 密码 (明文，适配你当前代码)
+      client-authentication-method: client_secret_basic
+      authorization-grant-type: client_credentials  # 关键：必须匹配代码逻辑
+      redirect-uri: ""                     # 机器模式不需要回调地址
+      scope: api:read,api:write            # 权限范围
+      client-name: ZERO Client Application
+
+  provider:
+    zero-provider:
+      # 使用完整的配置而不是依赖 issuer-uri
+      authorization-uri: ${oauth2.endpoint}/oauth2/authorize
+      token-uri: ${oauth2.endpoint}/oauth2/token
+      user-info-uri: ${oauth2.endpoint}/userinfo
+      jwk-set-uri: ${oauth2.endpoint}/oauth2/jwks
+      user-name-attribute: username
+
+# -----------------------------------------------------------------
+# 5. 🔌 第三方集成 (Integrations) - [Root Nodes]
+# -----------------------------------------------------------------
+# 📌 微信相关配置
+weco:
+  # 微信公众号配置
+  wechat-mp:
+    expire-seconds: 300
+    app-id: ${R2MO_WECHAT_MP_APP}
+    secret: ${R2MO_WECHAT_MP_SECRET}
+    token: ${R2MO_WECHAT_MP_TOKEN}
+  # 开放平台配置
+  # wechat-open:
+  #   app-id: ${R2MO_WECHAT_OPEN_APP}
+  #   secret: ${R2MO_WECHAT_OPEN_SECRET}
+  #   redirect-uri: https://jacque-nonbusiness-leslee.ngrok-free.dev/auth/wechat-callback
+
+  # 企业配置
+  wecom-cp:
+    corp-id: ${R2MO_WECOM_CORP_ID}
+    secret: ${R2MO_WECOM_SECRET}
+    agent-id: 1000002
+    url-callback: https://auth.r2mo.io/auth/wecom-login
+
+# 📌 邮箱服务器（独立配置）
+email:
+  username: admin@example.com
+  password: ${R2MO_EMAIL_PASS}
+  smtp:
+    host: smtp.126.com
+    port: 465
+    ssl: true
+    timeout: 10000
+
+# 📌 短信验证（独立配置）
+sms:
+  access_id: ${R2MO_ALI_ID}
+  access_secret: ${R2MO_ALI_SECRET}
+  sign_name: "虞浪"
+
+# -----------------------------------------------------------------
+# 6. 🏢 业务与应用配置 (Business)
+# -----------------------------------------------------------------
+app:
+  id: "UUID-APP-ID-PLACEHOLDER"
+  ns: "io.zerows.apps"
+  tenant: "UUID-TENANT-ID-PLACEHOLDER"
+  data:
+    copyright: "R2MO Tech"
+  config:
+    demo: false
+
+storage:
+# type: local
+# path: /var/tmp/
+
+plugins:
+  io.zerows.extension.commerce.rbac.plugins.request.DataRegion:
+    prefix: /api/
+  io.zerows.extension.commerce.rbac.plugins.request.AuditorPin:
+    include:
+      - /api/mcard/publish
+      - /api/order/standard/submit
+      - /api/order/direct/submit
+      - /api/order/check-in/submit
+      - /api/cancel-work/order
+
+excel:
+  pen: "io.zerows.plugins.office.excel.tpl.BlueTpl"
+  temp: /tmp/
+  tenant: "init/environment.json"
+
+# -----------------------------------------------------------------
+# 7. ⚙️ 监控与任务 (System & Monitor)
+# -----------------------------------------------------------------
+job:
+  enabled: true
+
+cache:
+  ehcache:
+    expiredAt: 3m
+  caffeine:
+    expiredAt: 3m
+  redis:
+    expiredAt: 30s
+
+monitor:
+  server:
+    jmx-port: 7188
+    monitor-type: PROMETHEUS_GRAFANA
+    monitor-config:
+      port: 17190

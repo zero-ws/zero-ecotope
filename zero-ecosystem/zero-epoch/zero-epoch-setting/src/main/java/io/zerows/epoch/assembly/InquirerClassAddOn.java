@@ -1,6 +1,6 @@
 package io.zerows.epoch.assembly;
 
-import io.zerows.epoch.configuration.Inquirer;
+import io.zerows.epoch.jigsaw.Inquirer;
 import io.zerows.sdk.plugins.AddOn;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;

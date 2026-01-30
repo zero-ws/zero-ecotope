@@ -16,7 +16,6 @@ interface Analyzer {
      * Create new QrDo stored.
      *
      * @param data {@link io.vertx.core.json.JsonObject} Input json object.
-     *
      * @return {@link Analyzer}
      */
     static Analyzer create(final JsonObject data) {
@@ -29,7 +28,6 @@ interface Analyzer {
      * 2. otherwise the result is false.
      *
      * @param source {@link io.vertx.core.json.JsonObject} input json
-     *
      * @return {@link java.lang.Boolean}
      */
     static boolean isComplex(final JsonObject source) {
@@ -57,7 +55,6 @@ interface Analyzer {
      *
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}
-     *
      * @return {@link Analyzer}
      */
     Analyzer save(String fieldExpr, Object value);
@@ -65,7 +62,6 @@ interface Analyzer {
     /**
      * @param fieldExpr {@link java.lang.String} Removed fieldExpr
      * @param fully     {@link java.lang.Boolean} Removed fully or ?
-     *
      * @return {@link Analyzer}
      */
     Analyzer remove(String fieldExpr, boolean fully);
@@ -73,7 +69,6 @@ interface Analyzer {
     /**
      * @param fieldExpr {@link java.lang.String}
      * @param value     {@link java.lang.Object}
-     *
      * @return {@link Analyzer}
      */
     Analyzer update(String fieldExpr, Object value);

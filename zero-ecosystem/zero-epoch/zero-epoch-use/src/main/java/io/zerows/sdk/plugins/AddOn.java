@@ -30,7 +30,7 @@ import java.util.UUID;
  *                                                   -> {@link Named} -> {@link #createInstance(String)}
  *                                                   -> {@link Singleton} -> {@link #createSingleton()}
  * </pre>
- *
+ * <p>
  * 此处的 {@link DI} 就是实际所需的对象类型，也是最终使用 {@link Inject} 注解进行依赖注入的对象。
  *
  * @author lang : 2025-10-14

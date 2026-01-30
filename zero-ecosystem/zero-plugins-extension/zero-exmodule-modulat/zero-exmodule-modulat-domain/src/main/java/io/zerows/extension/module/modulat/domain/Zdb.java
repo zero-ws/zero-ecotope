@@ -34,27 +34,27 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
-     * The table <code>ZDB.B_AUTHORITY</code>.
+     * B_AUTHORITY
      */
     public final BAuthority B_AUTHORITY = BAuthority.B_AUTHORITY;
 
     /**
-     * The table <code>ZDB.B_BAG</code>.
+     * B_BAG
      */
     public final BBag B_BAG = BBag.B_BAG;
 
     /**
-     * The table <code>ZDB.B_BLOCK</code>.
+     * B_BLOCK
      */
     public final BBlock B_BLOCK = BBlock.B_BLOCK;
 
     /**
-     * The table <code>ZDB.B_COMPONENT</code>.
+     * B_COMPONENT
      */
     public final BComponent B_COMPONENT = BComponent.B_COMPONENT;
 
     /**
-     * The table <code>ZDB.B_WEB</code>.
+     * B_WEB
      */
     public final BWeb B_WEB = BWeb.B_WEB;
 

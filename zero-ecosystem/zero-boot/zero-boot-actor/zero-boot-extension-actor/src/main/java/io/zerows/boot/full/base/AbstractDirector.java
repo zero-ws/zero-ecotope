@@ -5,7 +5,7 @@ import io.zerows.epoch.annotations.Contract;
 
 /**
  * ## 「Director」顶层执行器
- *
+ * <p>
  * 在适配器{@link AbstractAdaptor}上追加任务配置{@link Mission}。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

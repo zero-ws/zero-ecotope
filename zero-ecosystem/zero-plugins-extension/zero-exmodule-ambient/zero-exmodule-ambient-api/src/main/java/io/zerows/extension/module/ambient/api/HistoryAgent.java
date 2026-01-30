@@ -13,10 +13,10 @@ import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * # Zero History Api Definition
- *
+ * <p>
  * This is interface to query history of each records from zero framework.
  * It's for `X_ACTIVITY` and `X_ACTIVITY_CHANGE` table that enabled following features.
- *
+ * <p>
  * 1. Trash to findRunning all the records that have been deleted from our system.
  * 2. Query all records' histories that have been removed.
  */

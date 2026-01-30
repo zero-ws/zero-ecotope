@@ -6,9 +6,9 @@ import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfig;
-import io.zerows.epoch.basicore.YmSpec;
-import io.zerows.epoch.basicore.YmVertx;
+import io.zerows.epoch.spec.YmSpec;
+import io.zerows.epoch.spec.YmVertx;
+import io.zerows.epoch.web.MDConfig;
 import io.zerows.extension.module.mbseapi.plugins.JetPollux;
 import io.zerows.support.Ut;
 import lombok.Data;
@@ -43,33 +43,6 @@ public class MDCMetamodel implements MDConfig {
     private YmVertx.Deployment deployment;
 
     private Web web;
-
-    /**
-     * Web 组件配置
-     */
-    @Data
-    public static class Web implements Serializable {
-        @JsonSerialize(using = ClassSerializer.class)
-        @JsonDeserialize(using = ClassDeserializer.class)
-        private Class<?> ingest;    // Ingest 组件类全名
-    }
-
-    @Data
-    public static class Router implements Serializable {
-        private String wall = "/api";       // 安全路径
-        /**
-         * 动态上下文和安全路径之间的关系：
-         * <pre>
-         *     动态上下文通常是位于 / 之后的动态 API 发布专用上下文，此上下文会配合 Uri 表结构中的动态路径执行计算，产生最终的动态路径等相关信息
-         *     多用于核心系统的 API 发布路径计算，安全路径则作为备用！安全路径在动态之下
-         * </pre>
-         */
-        private String context = "/";      // 动态上下文
-
-        @JsonSerialize(using = ClassSerializer.class)
-        @JsonDeserialize(using = ClassDeserializer.class)
-        private Class<?> component = JetPollux.class;
-    }
 
     public String apiContext() {
         return Objects.requireNonNull(this.router).context;
@@ -112,5 +85,32 @@ public class MDCMetamodel implements MDConfig {
             options = this.deployment.getAgent();
         }
         return new DeploymentOptions(options);
+    }
+
+    /**
+     * Web 组件配置
+     */
+    @Data
+    public static class Web implements Serializable {
+        @JsonSerialize(using = ClassSerializer.class)
+        @JsonDeserialize(using = ClassDeserializer.class)
+        private Class<?> ingest;    // Ingest 组件类全名
+    }
+
+    @Data
+    public static class Router implements Serializable {
+        private String wall = "/api";       // 安全路径
+        /**
+         * 动态上下文和安全路径之间的关系：
+         * <pre>
+         *     动态上下文通常是位于 / 之后的动态 API 发布专用上下文，此上下文会配合 Uri 表结构中的动态路径执行计算，产生最终的动态路径等相关信息
+         *     多用于核心系统的 API 发布路径计算，安全路径则作为备用！安全路径在动态之下
+         * </pre>
+         */
+        private String context = "/";      // 动态上下文
+
+        @JsonSerialize(using = ClassSerializer.class)
+        @JsonDeserialize(using = ClassDeserializer.class)
+        private Class<?> component = JetPollux.class;
     }
 }

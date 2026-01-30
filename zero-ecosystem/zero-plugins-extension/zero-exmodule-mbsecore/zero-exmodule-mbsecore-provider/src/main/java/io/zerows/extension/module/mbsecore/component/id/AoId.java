@@ -1,9 +1,9 @@
 package io.zerows.extension.module.mbsecore.component.id;
 
-import io.zerows.platform.enums.modeling.EmKey;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
 import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.metadata.element.DataMatrix;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
+import io.zerows.platform.enums.modeling.EmKey;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.Set;

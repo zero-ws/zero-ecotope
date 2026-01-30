@@ -2,7 +2,7 @@ package io.zerows.specification.cloud;
 
 import io.zerows.platform.annotations.meta.One2One;
 import io.zerows.specification.atomic.HBoundary;
-import io.zerows.specification.security.identity.HAccount;
+import io.zerows.specification.security.HAccount;
 
 /**
  * 「云端标准租户」
@@ -15,7 +15,7 @@ import io.zerows.specification.security.identity.HAccount;
  *     2. 平台系统（多租户模式）
  *     3. 单点应用系统（SaaS模式）
  * </code></pre>
- *
+ * <p>
  * 此类与其说是账号不如说是容器系统，它标识了整个账号所具备的基础容器，且内部会包含多个子账号相关信息，实现
  * 完整的账号统一管理。
  *

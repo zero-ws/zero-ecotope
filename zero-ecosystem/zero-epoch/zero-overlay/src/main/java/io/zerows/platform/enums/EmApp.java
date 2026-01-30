@@ -13,7 +13,9 @@ public final class EmApp {
      * <pre>
      *     1. 🌍 维度一：语言容器：             X-Lang / language        （不同语言配置空间不同）
      *     2. 🏘️ 维度二：租户容器：             X-Tenant / tenant        （不同租户配置空间不同）
+     *     3. 🛠️ 维度三：应用容器：             X-App / app              （不同应用配置空间不同）
      * </pre>
+     * sigma 值游离于上述三个维度之外，sigma 代表统一标识符，sigma 的值可以和上述三个维度任意绑定。
      *
      * @author <a href="http://www.origin-x.cn">Lang</a>
      */

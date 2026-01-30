@@ -5,11 +5,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.support.Ut;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
 import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.support.Ut;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -78,47 +78,63 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class KField implements Serializable {
-    /** 主键属性值，默认 `key` */
+    /**
+     * 主键属性值，默认 `key`
+     */
     private String key;
 
 
-    /** 业务标识规则，可自定义，二维数组结构 `[[]]` */
+    /**
+     * 业务标识规则，可自定义，二维数组结构 `[[]]`
+     */
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
     private JsonArray unique;
 
 
-    /** Auditor字段，创建人、创建时间 */
+    /**
+     * Auditor字段，创建人、创建时间
+     */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject created;
 
 
-    /** Auditor字段，更新人、更新时间 */
+    /**
+     * Auditor字段，更新人、更新时间
+     */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject updated;
 
 
-    /** 序号字段定义，定义不同的字段集 */
+    /**
+     * 序号字段定义，定义不同的字段集
+     */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject numbers;
 
 
-    /** {@link JsonObject} 类型的字段定义 */
+    /**
+     * {@link JsonObject} 类型的字段定义
+     */
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
     private JsonArray object;
 
 
-    /** {@link JsonArray} 类型的字段定义 */
+    /**
+     * {@link JsonArray} 类型的字段定义
+     */
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
     private JsonArray array;
 
 
-    /** 附件字段，系统会根据字段信息计算带有文件的属性信息 */
+    /**
+     * 附件字段，系统会根据字段信息计算带有文件的属性信息
+     */
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
     private JsonArray attachment;

@@ -1,8 +1,8 @@
 package io.zerows.epoch.jigsaw;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.basicore.MDId;
+import io.zerows.epoch.web.MDConfiguration;
+import io.zerows.epoch.web.MDId;
 
 /**
  * 🧩 模块化扩展初始化器，主要用于构造扩展配置相关信息，执行模块化扩展的完整解析流程
@@ -28,7 +28,7 @@ public interface EquipAt {
      *    普通环境则直接使用 EquipEntry.class 作为 Key
      * 2. 之后追加上配置对应的 id 信息，内层系统标识的核心 id（一般是目录名）
      * </code></pre>
-     *
+     * <p>
      * 📝 注：虽然 owner() -> Bundle 时，此处的 id 和 Bundle 本身信息相同，但是为了兼容不同模块化环境相关操作，此处依旧保留了不同的语义
      * <pre><code>
      *     语义1：owner 中的数据包含了 bundle 的 SymbolicName 信息以及版本信息 🏷️

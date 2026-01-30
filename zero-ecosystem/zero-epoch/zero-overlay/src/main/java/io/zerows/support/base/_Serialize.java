@@ -20,7 +20,6 @@ class _Serialize extends _Reflect {
      *
      * @param t   传入对象
      * @param <T> 泛型
-     *
      * @return 序列化后的字符串
      */
     public static <T> String serialize(final T t) {
@@ -33,7 +32,6 @@ class _Serialize extends _Reflect {
      * @param t   传入对象
      * @param <T> 输入类型
      * @param <R> 返回类型
-     *
      * @return 序列化好的对象
      */
     public static <T, R extends Iterable> R serializeJson(final T t) {
@@ -55,7 +53,6 @@ class _Serialize extends _Reflect {
      * @param value JsonObject / JsonArray
      * @param type  指定类型
      * @param <T>   泛型
-     *
      * @return 反序列化后的对象
      */
     public static <T> T deserialize(final JsonObject value, final Class<T> type) {
@@ -68,7 +65,6 @@ class _Serialize extends _Reflect {
      * @param value JsonObject / JsonArray
      * @param type  指定类型
      * @param <T>   泛型
-     *
      * @return 反序列化后的对象
      */
     public static <T> T deserialize(final JsonArray value, final Class<T> type) {
@@ -81,7 +77,6 @@ class _Serialize extends _Reflect {
      * @param value JsonObject / JsonArray
      * @param type  指定类型
      * @param <T>   泛型
-     *
      * @return 反序列化后的对象
      */
     public static <T> List<T> deserialize(final JsonArray value, final TypeReference<List<T>> type) {
@@ -94,7 +89,6 @@ class _Serialize extends _Reflect {
      * @param value String
      * @param type  指定类型
      * @param <T>   泛型
-     *
      * @return 反序列化后的对象
      */
     public static <T> T deserialize(final String value, final TypeReference<T> type) {
@@ -107,7 +101,6 @@ class _Serialize extends _Reflect {
      * @param value String
      * @param type  指定类型
      * @param <T>   泛型
-     *
      * @return 反序列化后的对象
      */
     public static <T> T deserialize(final String value, final Class<T> type) {

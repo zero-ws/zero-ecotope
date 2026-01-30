@@ -36,7 +36,6 @@ public interface HSetting {
      * 🔍 返回插件配置
      *
      * @param name 插件名称
-     *
      * @return {@link HConfig}
      */
     HConfig infix(String name);
@@ -48,7 +47,6 @@ public interface HSetting {
      * 🔍 检查是否存在插件配置
      *
      * @param name 插件名称
-     *
      * @return boolean 是否存在
      */
     @Deprecated
@@ -62,7 +60,6 @@ public interface HSetting {
      * 📋 返回扩展配置
      *
      * @param name 扩展名称
-     *
      * @return {@link HConfig}
      */
     HConfig extension(String name);

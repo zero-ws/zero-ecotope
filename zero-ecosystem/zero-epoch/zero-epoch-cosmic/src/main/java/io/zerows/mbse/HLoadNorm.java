@@ -5,7 +5,7 @@ import io.zerows.mbse.exception._80510Exception404ModelNotFound;
 import io.zerows.mbse.exception._80547Exception409IdentifierConflict;
 import io.zerows.mbse.metadata.NormAtom;
 import io.zerows.mbse.metadata.NormModel;
-import io.zerows.platform.metadata.KPivot;
+import io.zerows.platform.apps.KPivot;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;

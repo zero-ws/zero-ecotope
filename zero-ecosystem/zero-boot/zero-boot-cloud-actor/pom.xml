@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>zero-boot</artifactId>
+        <groupId>io.zerows</groupId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>zero-boot-cloud-actor</artifactId>
+    <name>✅️ - Zero::Boot::Cloud Actor</name>
+    <dependencies>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-skeleton</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-crud</artifactId>
+        </dependency>
+        <!--
+        云端插件
+        - CloudServer/nacos 配置中心
+        -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-epoch-spec-nacos</artifactId>
+        </dependency>
+        <!--
+        - 缓存 Redis 插件
+        server:
+          session:  -> 此处打开之后需要设置缓存存储的 AtSession 组件
+        -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-redis</artifactId>
+        </dependency>
+        <!--
+        Boot专用
+        -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-boot-inst-load</artifactId>
+            <version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.zerows</groupId>
+                    <artifactId>zero-extension-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-boot-inst-menu</artifactId>
+            <version>${revision}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.zerows</groupId>
+                    <artifactId>zero-extension-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</project>

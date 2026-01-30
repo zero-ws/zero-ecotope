@@ -18,27 +18,27 @@ import io.zerows.extension.module.graphic.domain.tables.RClusterNode;
 public class Tables {
 
     /**
-     * The table <code>ZDB.G_CLUSTER</code>.
+     * G_CLUSTER
      */
     public static final GCluster G_CLUSTER = GCluster.G_CLUSTER;
 
     /**
-     * The table <code>ZDB.G_EDGE</code>.
+     * G_EDGE
      */
     public static final GEdge G_EDGE = GEdge.G_EDGE;
 
     /**
-     * The table <code>ZDB.G_GRAPHIC</code>.
+     * G_GRAPHIC
      */
     public static final GGraphic G_GRAPHIC = GGraphic.G_GRAPHIC;
 
     /**
-     * The table <code>ZDB.G_NODE</code>.
+     * G_NODE
      */
     public static final GNode G_NODE = GNode.G_NODE;
 
     /**
-     * The table <code>ZDB.R_CLUSTER_NODE</code>.
+     * 集群 - 节点
      */
     public static final RClusterNode R_CLUSTER_NODE = RClusterNode.R_CLUSTER_NODE;
 }

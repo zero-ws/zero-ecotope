@@ -14,9 +14,9 @@
     <name>(POM) 📚️ - Zero::Extension</name>
     <modules>
         <!-- 扩展模块骨架 -->
-        <module>zero-extension-skeleton</module>                            <!-- Skeleton -->
-        <module>zero-extension-crud</module>                                <!-- CRUD 引擎 -->
-        <module>zero-extension-api</module>                                 <!-- API 规范 -->
+        <module>zero-extension-skeleton</module>                           <!-- Skeleton -->
+        <module>zero-extension-crud</module>                               <!-- CRUD 引擎 -->
+        <module>zero-extension-api</module>                                <!-- API 规范 -->
 
         <!-- Module -->
         <module>zero-exmodule-erp</module>                                 <!-- ERP -->
@@ -51,7 +51,7 @@
                     <dependency>
                         <groupId>org.flywaydb</groupId>
                         <artifactId>flyway-mysql</artifactId>
-                        <version>11.19.0</version>
+                        <version>${database-flyway.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

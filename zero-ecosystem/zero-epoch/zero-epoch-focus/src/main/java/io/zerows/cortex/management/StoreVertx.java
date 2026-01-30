@@ -15,7 +15,7 @@ import java.util.Objects;
  *     name-01 = {@link Vertx}
  *     name-02 = {@link Vertx}
  * </code></pre>
- *
+ * <p>
  * StoreVertx 处理
  * <pre><code>
  *       StoreVertx

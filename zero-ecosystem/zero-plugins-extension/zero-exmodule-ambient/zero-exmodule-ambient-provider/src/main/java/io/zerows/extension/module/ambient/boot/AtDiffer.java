@@ -29,7 +29,7 @@ class AtDiffer {
         Objects.requireNonNull(activity);
         if (!changes.isEmpty()) {
             changes.forEach(change -> {
-                change.setActivityId(activity.getKey());
+                change.setActivityId(activity.getId());
                 change.setStatus(ActivityStatus.CONFIRMED.name());
                 Ke.umCreated(change, activity);
             });
@@ -98,7 +98,7 @@ class AtDiffer {
 
     private static XActivityChange createChange(final HAttribute attribute) {
         final XActivityChange change = new XActivityChange();
-        change.setKey(UUID.randomUUID().toString());
+        change.setId(UUID.randomUUID().toString());
         final HMetaField field = attribute.field();
         Objects.requireNonNull(field);
         change.setFieldName(field.name());

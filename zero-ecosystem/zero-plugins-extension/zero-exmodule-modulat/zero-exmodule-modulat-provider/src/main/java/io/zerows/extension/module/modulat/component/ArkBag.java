@@ -12,7 +12,6 @@ import io.zerows.extension.module.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.module.modulat.domain.tables.pojos.BBag;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.program.Ux;
-import org.jooq.Log;
 
 class ArkBag extends ArkBase {
     /*
@@ -27,13 +26,13 @@ class ArkBag extends ArkBase {
     public Future<ClusterSerializable> modularize(final String appId,
                                                   final boolean open,
                                                   final EmModel.By by) {
-       return ASYNC_BAG_DATA.pick(()->{
-           final JsonObject condition = this.buildQr(appId, by);
-           condition.put(KName.ENTRY, Boolean.TRUE);
-           Bk.LOG.Spi.info(this.getClass(), "Modulat condition = {0}", condition.encode());
-           return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
-                    .compose(Ux::futureA);
-        },appId).compose(Ux::future);
+        return ASYNC_BAG_DATA.pick(() -> {
+            final JsonObject condition = this.buildQr(appId, by);
+            condition.put(KName.ENTRY, Boolean.TRUE);
+            Bk.LOG.Spi.info(this.getClass(), "Modulat condition = {0}", condition.encode());
+            return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
+                .compose(Ux::futureA);
+        }, appId).compose(Ux::future);
 
     }
 }

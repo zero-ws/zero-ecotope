@@ -46,7 +46,6 @@ class ExcelIngest {
      * @param in       输入流
      * @param isXlsx   Excel 格式切换
      * @param metaAtom 元模型定义
-     *
      * @return 加载的表格数据
      */
     Set<ExTable> ingest(final InputStream in, final boolean isXlsx, final HMetaAtom metaAtom) {

@@ -39,52 +39,52 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
-     * The table <code>ZDB.MY_APP</code>.
+     * MY_APP
      */
     public final MyApp MY_APP = MyApp.MY_APP;
 
     /**
-     * The table <code>ZDB.MY_DESKTOP</code>.
+     * 个人工作台
      */
     public final MyDesktop MY_DESKTOP = MyDesktop.MY_DESKTOP;
 
     /**
-     * The table <code>ZDB.MY_FAVOR</code>.
+     * MY_FAVOR
      */
     public final MyFavor MY_FAVOR = MyFavor.MY_FAVOR;
 
     /**
-     * The table <code>ZDB.MY_MENU</code>.
+     * MY_MENU
      */
     public final MyMenu MY_MENU = MyMenu.MY_MENU;
 
     /**
-     * The table <code>ZDB.MY_NOTIFY</code>.
+     * MY_NOTIFY
      */
     public final MyNotify MY_NOTIFY = MyNotify.MY_NOTIFY;
 
     /**
-     * The table <code>ZDB.MY_SETTING</code>.
+     * MY_SETTING
      */
     public final MySetting MY_SETTING = MySetting.MY_SETTING;
 
     /**
-     * The table <code>ZDB.MY_TPL</code>.
+     * MY_TPL
      */
     public final MyTpl MY_TPL = MyTpl.MY_TPL;
 
     /**
-     * The table <code>ZDB.TPL_MESSAGE</code>.
+     * TPL_MESSAGE
      */
     public final TplMessage TPL_MESSAGE = TplMessage.TPL_MESSAGE;
 
     /**
-     * The table <code>ZDB.TPL_MODEL</code>.
+     * TPL_MODEL
      */
     public final TplModel TPL_MODEL = TplModel.TPL_MODEL;
 
     /**
-     * The table <code>ZDB.TPL_TICKET</code>.
+     * TPL_TICKET
      */
     public final TplTicket TPL_TICKET = TplTicket.TPL_TICKET;
 

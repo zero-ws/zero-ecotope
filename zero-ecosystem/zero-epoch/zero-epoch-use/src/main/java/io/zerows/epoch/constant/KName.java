@@ -45,6 +45,7 @@ public interface KName extends VName {
         String TITLE = "title";
         String EMAIL = "email";
         String LOGO = "logo";
+        String FAVICON = "favicon";
 
         String DOMAIN = "domain";
         String PORT = "port";
@@ -55,6 +56,7 @@ public interface KName extends VName {
 
         String URL_LOGIN = "urlLogin";
         String URL_ADMIN = "urlAdmin";
+        String URL_HEALTH = "urlHealth";
 
         // Modulat
         String BAG_ID = "bagId";

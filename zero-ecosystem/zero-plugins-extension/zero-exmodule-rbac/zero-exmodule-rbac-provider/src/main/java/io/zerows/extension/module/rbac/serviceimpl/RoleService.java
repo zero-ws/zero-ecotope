@@ -4,9 +4,9 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.Account;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
@@ -41,7 +41,7 @@ public class RoleService implements RoleStub {
         final SRole sRole = Ut.fromJson(data, SRole.class);
 
         return DB.on(SRoleDao.class).insertAsync(sRole)
-            .compose(role -> this.savePermissions(role.getKey(), queryCondition))
+            .compose(role -> this.savePermissions(role.getId(), queryCondition))
             .compose(nil -> this.saveDefaultView(sRole, user, initializePermissions))
             .map(role -> (Ux.toJson(sRole)));
     }
@@ -56,7 +56,7 @@ public class RoleService implements RoleStub {
                 for (final SPermission permission : permissions) {
                     relations.add(new JsonObject()
                         .put(ScAuthKey.F_ROLE_ID, roleId)
-                        .put(ScAuthKey.F_PERM_ID, permission.getKey()));
+                        .put(ScAuthKey.F_PERM_ID, permission.getId()));
                 }
                 return DB.on(RRolePermDao.class).insertAsync(relations);
             }).compose(niv -> Ux.future());
@@ -67,9 +67,9 @@ public class RoleService implements RoleStub {
      */
     private Future<Void> saveDefaultView(final SRole role, final User user, final JsonObject initPermissions) {
         final SView view = new SView();
-        view.setKey(UUID.randomUUID().toString());
+        view.setId(UUID.randomUUID().toString());
         view.setName(ScAuthKey.DEFAULT);
-        view.setOwner(role.getKey());
+        view.setOwner(role.getId());
         view.setOwnerType(ScAuthKey.OWNER_TYPE_ROLE);
         view.setResourceId(ScAuthKey.DEFAULT_RESOURCE_ID);
         view.setProjection("{}");

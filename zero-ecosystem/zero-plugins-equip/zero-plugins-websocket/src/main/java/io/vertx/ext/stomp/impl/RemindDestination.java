@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  * Copy from EventBusBridge, here we'll modify some code logical and involve
  * the @Subscribe proxy method instead, in this kind of situation the default
  * operation will be modified
- *
+ * <p>
  * I'm not sure whether the default implementation is a bug because the
  * InBound, OutBound configure have issues.
  *

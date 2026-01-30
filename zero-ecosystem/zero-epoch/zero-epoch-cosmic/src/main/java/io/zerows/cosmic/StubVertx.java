@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.component.log.LogO;
 import io.zerows.cortex.metadata.RunVertx;
-import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.jigsaw.NodeVertx;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 
@@ -15,13 +15,13 @@ import io.zerows.support.Ut;
  *     1. 单点环境 / 集群环境
  *     2. OSGI 环境
  * </code></pre>
- *
+ * <p>
  * 正常组件在使用过程中都指定 Bundle 来构建，所以从这点意义上讲，BundleInternalConfig 只用于配置管理，而且用于
  * 前置提供服务消费的对应传递，如
  * <pre><code>
  *     Bundle A  ---> 调用 Bundle B 的服务，而又要将 Bundle A 本身传过去时会使用
  * </code></pre>
- *
+ * <p>
  * 在实际环境中，不同组件前缀（都可以发布成 Service 服务）
  * <pre><code>
  *     1. Energy-：（对外开放的服务）负责配置管理、静态模式，运行之后直接放到内存或缓存中，多为数据结构。
@@ -45,7 +45,6 @@ public interface StubVertx {
      * 创建 Vertx 实例，异步返回用于统一 Cluster 模式和非 Cluster 模式下的 Vertx 对应实例信息
      *
      * @param nodeVertx {@link NodeVertx}
-     *
      * @return {@link Vertx}
      */
     Future<RunVertx> createAsync(NodeVertx nodeVertx, boolean clustered);

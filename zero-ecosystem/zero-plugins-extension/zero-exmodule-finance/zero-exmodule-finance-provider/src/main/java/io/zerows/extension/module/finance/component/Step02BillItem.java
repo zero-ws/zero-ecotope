@@ -66,7 +66,7 @@ class Step02BillItem implements Step<FSettlement, FBillItem> {
     @Override
     public Future<List<FBillItem>> flatter(final JsonArray data, final List<FSettlement> inserted) {
         final ConcurrentMap<String, JsonArray> grouped = Ut.elementGroup(data, KName.KEY);
-        final ConcurrentMap<String, FSettlement> mapped = Ut.elementMap(inserted, FSettlement::getKey);
+        final ConcurrentMap<String, FSettlement> mapped = Ut.elementMap(inserted, FSettlement::getId);
 
         final List<Future<List<FBillItem>>> futures = new ArrayList<>();
         mapped.forEach((key, settlement) -> {

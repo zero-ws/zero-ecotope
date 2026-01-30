@@ -1,9 +1,9 @@
 package io.zerows.extension.module.mbsecore.metadata;
 
-import io.zerows.extension.module.mbsecore.metadata.element.DataKey;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel;
+import io.zerows.extension.module.mbsecore.metadata.element.DataKey;
 import io.zerows.specification.modeling.HLife;
 import io.zerows.specification.modeling.HModel;
 import io.zerows.specification.modeling.operation.HLinkage;

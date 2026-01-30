@@ -3,13 +3,13 @@ package io.zerows.extension.module.mbsecore.metadata.builtin;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.support.Ut;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
+import io.zerows.extension.module.mbsecore.component.apply.AoDefault;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MEntity;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey;
-import io.zerows.extension.module.mbsecore.component.apply.AoDefault;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
+import io.zerows.support.Ut;
 import org.jooq.tools.StringUtils;
 
 import java.util.List;
@@ -127,7 +127,7 @@ public class DataSchema implements Schema {
     @Override
     public void connect(final String key) {
         // 设置 MEntity 主键
-        this.entity.setKey(key);
+        this.entity.setId(key);
         // 修改 MKey 关联主键
         this.keys.values().forEach(keyItem -> keyItem.setEntityId(key));
         // 修改 MField 关联主键

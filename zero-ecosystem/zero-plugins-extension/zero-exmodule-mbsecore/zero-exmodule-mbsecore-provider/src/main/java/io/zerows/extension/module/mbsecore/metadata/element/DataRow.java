@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 /**
  * ## DataRow
- *
+ * <p>
  * ### 1. Intro
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -113,7 +113,6 @@ public class DataRow implements Serializable {
      * Request Data Processing
      *
      * @param record {@link HRecord} Input new record or existing data record here.
-     *
      * @return {@link DataRow}
      */
     public DataRow request(final HRecord record) {
@@ -136,7 +135,6 @@ public class DataRow implements Serializable {
      * @param table      {@link java.lang.String} Input table name to web record ( include Joined multi tables )
      * @param record     {@link HRecord} Output data record
      * @param projection {@link java.util.Set}
-     *
      * @return
      */
     @SuppressWarnings("all")

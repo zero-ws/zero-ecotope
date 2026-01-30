@@ -117,12 +117,11 @@ public abstract class AbstractHOne extends AbstractHub implements HWay<JsonObjec
 
     /**
      * 「Async」动态`DataAtom`选择，调用顶层的标识规则选择器
-     *
+     * <p>
      * 1. 根据输入数据记录{@link io.vertx.core.json.JsonObject}执行标识规则选择。
      * 2. 如果没有配置标识规则选择器，那么该方法会返回当前环境中的默认`internalAtom`。
      *
      * @param input {@link io.vertx.core.json.JsonObject} 数据记录
-     *
      * @return {@link io.vertx.core.Future}<{@link DataAtom}>
      */
     protected Future<DataAtom> atom(final JsonObject input) {
@@ -138,12 +137,11 @@ public abstract class AbstractHOne extends AbstractHub implements HWay<JsonObjec
 
     /**
      * 「Async」动态`DataAtom`选择，根据输入的identifier创建合法模型
-     *
+     * <p>
      * 1. 创造的新的`DataAtom`和当前配置的`DataAtom`同属一个应用。
      * 2. 如果无法创建和`identifier`绑定的模型定义对象，直接返回null。
      *
      * @param identifier {@link java.lang.String} 模型统一标识符
-     *
      * @return {@link io.vertx.core.Future}<{@link DataAtom}>
      */
     protected Future<DataAtom> atom(final String identifier) {
@@ -162,7 +160,6 @@ public abstract class AbstractHOne extends AbstractHub implements HWay<JsonObjec
      * 内部调用`argument(JsonObject)`方法切换动态模型，然后使用动态模型构造`AoDao`的动态数据访问器。
      *
      * @param input {@link io.vertx.core.json.JsonObject} 数据记录
-     *
      * @return {@link io.vertx.core.Future}<{@link HDao}>
      */
     protected Future<HDao> dao(final JsonObject input) {

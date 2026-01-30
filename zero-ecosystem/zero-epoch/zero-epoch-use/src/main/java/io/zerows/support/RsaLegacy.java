@@ -17,7 +17,6 @@ class RsaLegacy {
      * rsa encript for input string.
      *
      * @param strText input string that will be encoded
-     *
      * @return The encoded string with rsa
      */
     static String encryptRSALegacy(final String strText, final String keyPath) {

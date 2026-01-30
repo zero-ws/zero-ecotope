@@ -62,7 +62,6 @@ public class MonitorActor extends AbstractHActor {
      * 调用 SPI 抓取默认组件
      *
      * @param monitorConfig 监控配置
-     *
      * @return 修改之后的监控配置
      */
     private Future<YmMonitor> startConfigure(final YmMonitor monitorConfig) {

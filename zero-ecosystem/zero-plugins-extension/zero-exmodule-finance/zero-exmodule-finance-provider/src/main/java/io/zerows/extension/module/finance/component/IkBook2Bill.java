@@ -27,8 +27,8 @@ class IkBook2Bill implements IkWay<FBook, FBill> {
      */
     @Override
     public void transfer(final FBook book, final FBill bill) {
-        bill.setKey(null);
-        bill.setBookId(book.getKey());
+        bill.setId(null);
+        bill.setBookId(book.getId());
         bill.setOrderId(book.getOrderId());
         bill.setModelId(book.getModelId());
         bill.setModelKey(book.getModelKey());

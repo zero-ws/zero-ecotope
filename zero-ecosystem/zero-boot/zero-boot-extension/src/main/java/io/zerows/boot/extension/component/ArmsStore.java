@@ -143,7 +143,6 @@ public class ArmsStore {
      *
      * @param type  {@link ChangeFlag}
      * @param batch {@link Boolean}
-     *
      * @return {@link JsonObject}
      */
     public static JsonObject six(final ChangeFlag type, final Boolean batch) {

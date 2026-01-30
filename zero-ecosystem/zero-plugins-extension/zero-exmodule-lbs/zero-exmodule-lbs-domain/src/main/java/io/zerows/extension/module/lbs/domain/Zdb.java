@@ -37,42 +37,42 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
-     * The table <code>ZDB.L_CITY</code>.
+     * L_CITY
      */
     public final LCity L_CITY = LCity.L_CITY;
 
     /**
-     * The table <code>ZDB.L_COUNTRY</code>.
+     * L_COUNTRY
      */
     public final LCountry L_COUNTRY = LCountry.L_COUNTRY;
 
     /**
-     * The table <code>ZDB.L_FLOOR</code>.
+     * L_FLOOR
      */
     public final LFloor L_FLOOR = LFloor.L_FLOOR;
 
     /**
-     * The table <code>ZDB.L_LOCATION</code>.
+     * L_LOCATION
      */
     public final LLocation L_LOCATION = LLocation.L_LOCATION;
 
     /**
-     * The table <code>ZDB.L_REGION</code>.
+     * L_REGION
      */
     public final LRegion L_REGION = LRegion.L_REGION;
 
     /**
-     * The table <code>ZDB.L_STATE</code>.
+     * L_STATE
      */
     public final LState L_STATE = LState.L_STATE;
 
     /**
-     * The table <code>ZDB.L_TENT</code>.
+     * L_TENT
      */
     public final LTent L_TENT = LTent.L_TENT;
 
     /**
-     * The table <code>ZDB.L_YARD</code>.
+     * L_YARD
      */
     public final LYard L_YARD = LYard.L_YARD;
 

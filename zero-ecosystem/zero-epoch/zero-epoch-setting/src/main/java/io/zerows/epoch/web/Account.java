@@ -134,7 +134,11 @@ public class Account {
         if (Ut.isNil(principal)) {
             return null;
         }
-        return principal.getString(KName.ID);
+        if (principal.containsKey(KName.ID)) {
+            return principal.getString(KName.ID);
+        }
+        // 遗留系统
+        return principal.getString(KName.KEY);
     }
 
     /**

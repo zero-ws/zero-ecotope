@@ -4,12 +4,14 @@ excalidraw-plugin: parsed
 tags: [excalidraw]
 
 ---
-==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in plugin settings under 'Saving'
 
+==⚠ Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠== You can decompress Drawing data with the command palette: 'Decompress current Excalidraw file'. For more info check in
+plugin settings under 'Saving'
 
 # Excalidraw Data
 
 ## Text Elements
+
 name = app.micro.hotel ^VDZgrOla
 
 APP/应用 ^d0XYLL5J
@@ -41,7 +43,9 @@ bagId ^l9y7CJ90
 bagId ^pJW5TW2S
 
 %%
+
 ## Drawing
+
 ```compressed-json
 N4KAkARALgngDgUwgLgAQQQDwMYEMA2AlgCYBOuA7hADTgQBuCpAzoQPYB2KqATLZMzYBXUtiRoIACyhQ4zZAHoFAc0JRJQgEYA6bGwC2CgF7N6hbEcK4OCtptbErHALRY8RMpWdx8Q1TdIEfARcZgRmBShcZQUebQBGAA5tAGYaOiCEfQQOKGZuAG1wMFAwMogSbggAZWJJbABrACsABmZEgEd9AEl8AAUAJQBVDskObABxdLLIWEQqwOwojmVg
 
@@ -159,4 +163,5 @@ AAUpkUhPAukdSPqASIa9AAEo+Q4cZQEGG5ALAxHuASRyN3keo29HujhRycGUeEO37SULuwgEnsqxOA4p
 
 Xg0QEsYp6U/KekxCihDxwGGySe4gFYW4Z8DkEUzwm5+JC8IH4KKxpggAA===
 ```
+
 %%

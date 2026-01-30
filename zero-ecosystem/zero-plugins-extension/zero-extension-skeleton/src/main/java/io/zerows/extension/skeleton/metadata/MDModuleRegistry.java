@@ -4,10 +4,10 @@ import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.extension.skeleton.common.KeConstant;
-import io.zerows.platform.metadata.KPivot;
+import io.zerows.platform.apps.KPivot;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -79,22 +79,27 @@ public class MDModuleRegistry {
      *     1. 单个应用启动时会执行初始化
      *     2. 单个服务（微服务）启动时会执行初始化
      * </pre>
+     * 判断运行模式的核心标记
      *
      * @param config   配置
      * @param vertxRef Vertx实例引用
-     *
      * @return 多个应用容器环境
      */
     public Future<HAmbient> withAmbient(final HConfig config, final Vertx vertxRef) {
-        final HAmbient ambient = KPivot.running();
-        if (Objects.nonNull(ambient)) {
-            return Future.succeededFuture(ambient);
-        }
-
+        // 模块配置先加载
         final OCacheConfiguration store = OCacheConfiguration.of();
         final JsonObject configurationJ = store.configurationJ(this.mid);
         log.info("{} 配置数据加载：{}", KeConstant.K_PREFIX_BOOT, configurationJ.encode());
 
+
+        // APP-0011: 运行环境检查
+        final HAmbient ambient = KPivot.running();
+        if (Objects.nonNull(ambient) && ambient.isReady()) {
+            return Future.succeededFuture(ambient);
+        }
+
+
+        // APP-0012: 运行环境注册（首次启动检查为空）
         final KPivot<Vertx> pivot = KPivot.of(vertxRef);
         return pivot.registryAsync(config)
             .compose(arkSet -> Future.succeededFuture(KPivot.running()));

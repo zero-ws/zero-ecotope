@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * ## Multi Reference Processor
- *
+ * <p>
  * It's the sub-class of {@link AbstractRay} with {@link HRecord}[] element.
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -22,7 +22,6 @@ public class RayBatch extends AbstractRay<HRecord[]> {
      * Critical code logical
      *
      * @param input Input element of {@link HRecord} for multi
-     *
      * @return Processed Return the modified data records.
      */
     @Override

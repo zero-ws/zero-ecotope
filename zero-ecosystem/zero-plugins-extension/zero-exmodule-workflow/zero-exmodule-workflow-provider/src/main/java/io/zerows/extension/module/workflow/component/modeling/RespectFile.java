@@ -32,7 +32,7 @@ public class RespectFile extends AbstractRespect {
          */
         final WTicket ticket = record.ticket();
         final JsonObject condition = this.queryTpl(ticket);
-        condition.put(KName.MODEL_KEY, ticket.getKey());
+        condition.put(KName.MODEL_KEY, ticket.getId());
         return HPI.of(ExAttachment.class).waitAsync(
             file -> file.saveAsync(condition, dataArray, params),
             JsonArray::new
@@ -43,7 +43,7 @@ public class RespectFile extends AbstractRespect {
     public Future<JsonArray> fetchAsync(final WRecord record) {
         final WTicket ticket = record.ticket();
         final JsonObject condition = this.queryTpl(ticket);
-        condition.put(KName.MODEL_KEY, ticket.getKey());
+        condition.put(KName.MODEL_KEY, ticket.getId());
         return HPI.of(ExAttachment.class).waitAsync(
             link -> link.fetchAsync(condition),
             JsonArray::new
@@ -56,6 +56,6 @@ public class RespectFile extends AbstractRespect {
     @Override
     protected void syncPre(final JsonObject data, final JsonObject params, final WRecord record) {
         final WTicket ticket = record.ticket();
-        data.put(KName.MODEL_KEY, ticket.getKey());
+        data.put(KName.MODEL_KEY, ticket.getId());
     }
 }

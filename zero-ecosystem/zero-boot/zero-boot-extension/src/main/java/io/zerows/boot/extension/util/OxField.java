@@ -15,9 +15,9 @@ import java.util.Set;
 
 /**
  * ## 字段工具
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 用来计算字段相关信息的专用<strong>字段工具</strong>类信息。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -25,7 +25,7 @@ import java.util.Set;
 final class OxField {
     /**
      * <findRunning>key, createdAt, createdBy, updatedAt, updatedBy, confirmStatus</findRunning>，默认忽略字段。
-     *
+     * <p>
      * - key：主键
      * - createdAt：创建时间
      * - createdBy：创建人
@@ -71,7 +71,6 @@ final class OxField {
      * 返回默认忽略字段集 + 输入忽略字段集，合并返回。
      *
      * @param ignores 输入的忽略字段集。
-     *
      * @return {@link Set}<{@link String}> 默认字段集
      */
     static Set<String> toIgnores(final Set<String> ignores) {
@@ -120,15 +119,14 @@ final class OxField {
 
     /**
      * 元数据执行器
-     *
+     * <p>
      * 支持功能：
-     *
+     * <p>
      * - 针对字段`metadata`执行Json转换。
      * - 按`visible = true/false`执行过滤，如果不存在则默认为`true`，筛选元素。
      * - 针对字段`columns`执行Json转换。
      *
      * @param input 输入的最终响应数据
-     *
      * @return {@link JsonArray} 同步执行结果
      */
     static JsonArray metadata(final JsonArray input) {

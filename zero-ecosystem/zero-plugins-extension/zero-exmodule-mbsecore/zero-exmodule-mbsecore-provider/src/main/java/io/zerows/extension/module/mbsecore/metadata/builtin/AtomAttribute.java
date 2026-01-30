@@ -22,7 +22,7 @@ import java.util.Objects;
 
 /**
  * ## 「Pojo」SourceConfig
- *
+ * <p>
  * Here are one implementation of HAttribute ( New )
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

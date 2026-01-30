@@ -84,22 +84,268 @@
                 <artifactId>zero-boot-extension-actor</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-boot-cloud-actor</artifactId>
+                <version>${revision}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
         <maven.main.class>WaitFor</maven.main.class>
+        <!-- Flyway Location -->
+        <db.slot.01>filesystem:${project.basedir}/src/main/resources</db.slot.01>
+        <db.slot.02>filesystem:${project.basedir}/src/main/resources</db.slot.02>
+        <db.slot.03>filesystem:${project.basedir}/src/main/resources</db.slot.03>
+        <db.slot.04>filesystem:${project.basedir}/src/main/resources</db.slot.04>
+        <db.slot.05>filesystem:${project.basedir}/src/main/resources</db.slot.05>
+        <db.slot.06>filesystem:${project.basedir}/src/main/resources</db.slot.06>
+        <db.slot.07>filesystem:${project.basedir}/src/main/resources</db.slot.07>
+        <db.slot.08>filesystem:${project.basedir}/src/main/resources</db.slot.08>
+        <db.slot.09>filesystem:${project.basedir}/src/main/resources</db.slot.09>
+        <db.slot.10>filesystem:${project.basedir}/src/main/resources</db.slot.10>
+        <db.slot.11>filesystem:${project.basedir}/src/main/resources</db.slot.11>
+        <db.slot.12>filesystem:${project.basedir}/src/main/resources</db.slot.12>
+        <db.slot.13>filesystem:${project.basedir}/src/main/resources</db.slot.13>
+        <db.slot.14>filesystem:${project.basedir}/src/main/resources</db.slot.14>
+        <db.slot.15>filesystem:${project.basedir}/src/main/resources</db.slot.15>
+        <db.slot.16>filesystem:${project.basedir}/src/main/resources</db.slot.16>
+        <db.slot.17>filesystem:${project.basedir}/src/main/resources</db.slot.17>
+        <db.slot.18>filesystem:${project.basedir}/src/main/resources</db.slot.18>
+        <db.slot.19>filesystem:${project.basedir}/src/main/resources</db.slot.19>
+        <db.slot.20>filesystem:${project.basedir}/src/main/resources</db.slot.20>
+        <db.slot.21>filesystem:${project.basedir}/src/main/resources</db.slot.21>
+        <db.slot.22>filesystem:${project.basedir}/src/main/resources</db.slot.22>
+        <db.slot.23>filesystem:${project.basedir}/src/main/resources</db.slot.23>
+        <db.slot.24>filesystem:${project.basedir}/src/main/resources</db.slot.24>
+        <db.slot.25>filesystem:${project.basedir}/src/main/resources</db.slot.25>
+        <db.slot.26>filesystem:${project.basedir}/src/main/resources</db.slot.26>
+        <db.slot.27>filesystem:${project.basedir}/src/main/resources</db.slot.27>
+        <db.slot.28>filesystem:${project.basedir}/src/main/resources</db.slot.28>
+        <db.slot.29>filesystem:${project.basedir}/src/main/resources</db.slot.29>
+        <db.slot.30>filesystem:${project.basedir}/src/main/resources</db.slot.30>
+        <db.slot.31>filesystem:${project.basedir}/src/main/resources</db.slot.31>
+        <db.slot.32>filesystem:${project.basedir}/src/main/resources</db.slot.32>
     </properties>
+    <profiles>
+        <profile>
+            <id>r2-matrix</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                </resources>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <configuration>
+                            <filesets>
+                                <!-- 实例依赖包相关信息 -->
+                                <fileset>
+                                    <directory>${project.basedir}/instance/__lib/</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </fileset>
+                                <fileset>
+                                    <directory>${project.basedir}/deployment/</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-dependencies</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <type>jar</type>
+                                    <includeTypes>jar</includeTypes>
+                                    <!-- 存放服务依赖的jar包，存放在服务相同目录的lib文件夹下 -->
+                                    <outputDirectory>
+                                        target/lib
+                                    </outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-instance</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- <includeScope>compile</includeScope> -->
+                                    <type>jar</type>
+                                    <includeTypes>jar</includeTypes>
+                                    <!-- 存放服务依赖的jar包，存放在服务相同目录的lib文件夹下 -->
+                                    <outputDirectory>
+                                        ${project.basedir}/instance/__lib
+                                    </outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--
+                    依赖程序拷贝
+                    -->
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.basedir}/deployment/</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/src/main/resources/</directory>
+                                            <includes>
+                                                <include>**/*</include>
+                                            </includes>
+                                            <excludes>
+                                                <!--
+                                                1. 数据库已经是成品，所以不需要拷贝
+                                                2. env.properties 仅用于开发过程 @PropertySource 读取
+                                                -->
+                                                <exclude>**/flyway.conf</exclude>
+                                                <exclude>**/env.properties</exclude>
+                                            </excludes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>copy-scripts</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>target</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/script</directory>
+                                            <includes>
+                                                <include>**/*.sh</include>
+                                                <include>**/*.bat</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>app</id>
+            <build>
+                <plugins>
+                    <!--
+                    打包 JAR 可执行程序，并对之前的程序执行备份
+                    -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <configuration>
+                            <!-- 把target/classes/下的文件导入到jar内 -->
+                            <classesDirectory>target/classes</classesDirectory>
+                            <finalName>app</finalName>
+                            <archive>
+                                <manifest>
+                                    <!-- 指定程序入口 -->
+                                    <mainClass>${maven.main.class}</mainClass>
+                                    <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+                                    <useUniqueVersions>false</useUniqueVersions>
+                                    <addClasspath>true</addClasspath>
+                                    <!-- 服务依赖的jar包放在lib目录下 -->
+                                    <classpathPrefix>lib/</classpathPrefix>
+                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                </manifest>
+                                <manifestEntries>
+                                    <Class-Path>conf/</Class-Path>
+                                </manifestEntries>
+                            </archive>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>issue-jar</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <classifier>bak</classifier>
+                                    <classesDirectory>${project.build.directory}/target/</classesDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <configuration>
+                    <validateMigrationNaming>true</validateMigrationNaming>
+                    <failOnMissingLocations>false</failOnMissingLocations>
                     <configFiles>
                         <configFile>${project.build.outputDirectory}/flyway.conf</configFile>
                     </configFiles>
                     <locations>
                         <location>filesystem:${project.basedir}/src/main/resources/plugins/${project.parent.artifactId}/flyway/MYSQL</location>
+                        <location>${db.slot.01}</location>
+                        <location>${db.slot.02}</location>
+                        <location>${db.slot.03}</location>
+                        <location>${db.slot.04}</location>
+                        <location>${db.slot.05}</location>
+                        <location>${db.slot.06}</location>
+                        <location>${db.slot.07}</location>
+                        <location>${db.slot.08}</location>
+                        <location>${db.slot.09}</location>
+                        <location>${db.slot.10}</location>
+                        <location>${db.slot.11}</location>
+                        <location>${db.slot.12}</location>
+                        <location>${db.slot.13}</location>
+                        <location>${db.slot.14}</location>
+                        <location>${db.slot.15}</location>
+                        <location>${db.slot.16}</location>
+                        <location>${db.slot.17}</location>
+                        <location>${db.slot.18}</location>
+                        <location>${db.slot.19}</location>
+                        <location>${db.slot.20}</location>
+                        <location>${db.slot.21}</location>
+                        <location>${db.slot.22}</location>
+                        <location>${db.slot.23}</location>
+                        <location>${db.slot.24}</location>
+                        <location>${db.slot.25}</location>
+                        <location>${db.slot.26}</location>
+                        <location>${db.slot.27}</location>
+                        <location>${db.slot.28}</location>
+                        <location>${db.slot.29}</location>
+                        <location>${db.slot.30}</location>
+                        <location>${db.slot.31}</location>
+                        <location>${db.slot.32}</location>
                     </locations>
                 </configuration>
                 <dependencies>
@@ -128,46 +374,6 @@
                             <outputDirectory>
                                 target/lib
                             </outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--
-            打包 JAR 可执行程序，并对之前的程序执行备份
-            -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <!-- 把target/classes/下的文件导入到jar内 -->
-                    <classesDirectory>target/classes</classesDirectory>
-                    <finalName>app</finalName>
-                    <archive>
-                        <manifest>
-                            <!-- 指定程序入口 -->
-                            <mainClass>${maven.main.class}</mainClass>
-                            <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
-                            <useUniqueVersions>false</useUniqueVersions>
-                            <addClasspath>true</addClasspath>
-                            <!-- 服务依赖的jar包放在lib目录下 -->
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                        <manifestEntries>
-                            <Class-Path>conf/</Class-Path>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>issue-jar</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>bak</classifier>
-                            <classesDirectory>${project.build.directory}/target/</classesDirectory>
                         </configuration>
                     </execution>
                 </executions>

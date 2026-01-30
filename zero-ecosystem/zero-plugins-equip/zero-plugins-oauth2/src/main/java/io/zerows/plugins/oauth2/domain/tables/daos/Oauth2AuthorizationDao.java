@@ -4,613 +4,611 @@
 package io.zerows.plugins.oauth2.domain.tables.daos;
 
 
+import io.r2mo.vertx.jooq.classic.jdbc.JDBCClassicQueryExecutor;
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.Future;
 import io.zerows.plugins.oauth2.domain.tables.Oauth2Authorization;
 import io.zerows.plugins.oauth2.domain.tables.records.Oauth2AuthorizationRecord;
-
-import java.time.LocalDateTime;
-import java.util.Collection;
-
 import org.jooq.Configuration;
 import org.jooq.JSON;
 
-
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
-import io.vertx.core.Future;
-import io.r2mo.vertx.jooq.classic.jdbc.JDBCClassicQueryExecutor;
+
 /**
  * OAuth2 授权与 Token 信息表
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
-public class Oauth2AuthorizationDao extends AbstractVertxDAO<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization, String, Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>>, Future<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>, Future<Integer>, Future<String>> implements io.r2mo.vertx.jooq.classic.VertxDAO<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization,String> {
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+public class Oauth2AuthorizationDao extends AbstractVertxDAO<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization, String, Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>>, Future<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>, Future<Integer>, Future<String>> implements io.r2mo.vertx.jooq.classic.VertxDAO<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization, String> {
 
-        /**
+    /**
      * @param configuration The Configuration used for rendering and query
-     * execution.
-     * @param vertx the vertx instance
+     *                      execution.
+     * @param vertx         the vertx instance
      */
-        public Oauth2AuthorizationDao(Configuration configuration, io.vertx.core.Vertx vertx) {
-                super(Oauth2Authorization.OAUTH2_AUTHORIZATION, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization.class, new JDBCClassicQueryExecutor<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization,String>(configuration, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization.class,vertx));
-        }
+    public Oauth2AuthorizationDao(Configuration configuration, io.vertx.core.Vertx vertx) {
+        super(Oauth2Authorization.OAUTH2_AUTHORIZATION, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization.class, new JDBCClassicQueryExecutor<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization, String>(configuration, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization.class, vertx));
+    }
 
-        @Override
-        protected String getId(io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization object) {
-                return object.getId();
-        }
+    @Override
+    protected String getId(io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization object) {
+        return object.getId();
+    }
 
-        /**
+    /**
      * Find records that have <code>REGISTERED_CLIENT_ID IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRegisteredClientId(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REGISTERED_CLIENT_ID.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRegisteredClientId(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REGISTERED_CLIENT_ID.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>REGISTERED_CLIENT_ID IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRegisteredClientId(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REGISTERED_CLIENT_ID.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRegisteredClientId(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REGISTERED_CLIENT_ID.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>PRINCIPAL_NAME IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByPrincipalName(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.PRINCIPAL_NAME.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByPrincipalName(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.PRINCIPAL_NAME.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>PRINCIPAL_NAME IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByPrincipalName(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.PRINCIPAL_NAME.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByPrincipalName(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.PRINCIPAL_NAME.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_GRANT_TYPE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationGrantType(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_GRANT_TYPE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationGrantType(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_GRANT_TYPE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_GRANT_TYPE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationGrantType(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_GRANT_TYPE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationGrantType(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_GRANT_TYPE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZED_SCOPES IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizedScopes(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZED_SCOPES.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizedScopes(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZED_SCOPES.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZED_SCOPES IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizedScopes(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZED_SCOPES.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizedScopes(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZED_SCOPES.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>ATTRIBUTES IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAttributes(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ATTRIBUTES.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAttributes(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ATTRIBUTES.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>ATTRIBUTES IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAttributes(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ATTRIBUTES.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAttributes(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ATTRIBUTES.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>STATE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByState(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.STATE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByState(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.STATE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>STATE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByState(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.STATE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByState(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.STATE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_CODE_VALUE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeValue(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_VALUE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeValue(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_VALUE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_CODE_VALUE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeValue(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_VALUE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeValue(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_VALUE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_CODE_ISSUED_AT IN
      * (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeIssuedAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_ISSUED_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeIssuedAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_ISSUED_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_CODE_ISSUED_AT IN
      * (values)</code> asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeIssuedAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_ISSUED_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeIssuedAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_ISSUED_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_CODE_EXPIRES_AT IN
      * (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeExpiresAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_EXPIRES_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeExpiresAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_EXPIRES_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_CODE_EXPIRES_AT IN
      * (values)</code> asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeExpiresAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_EXPIRES_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeExpiresAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_EXPIRES_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_CODE_METADATA IN
      * (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeMetadata(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_METADATA.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeMetadata(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_METADATA.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORIZATION_CODE_METADATA IN
      * (values)</code> asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeMetadata(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_METADATA.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAuthorizationCodeMetadata(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.AUTHORIZATION_CODE_METADATA.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_VALUE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenValue(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_VALUE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenValue(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_VALUE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_VALUE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenValue(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_VALUE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenValue(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_VALUE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_ISSUED_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenIssuedAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_ISSUED_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenIssuedAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_ISSUED_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_ISSUED_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenIssuedAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_ISSUED_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenIssuedAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_ISSUED_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_EXPIRES_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenExpiresAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_EXPIRES_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenExpiresAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_EXPIRES_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_EXPIRES_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenExpiresAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_EXPIRES_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenExpiresAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_EXPIRES_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_METADATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenMetadata(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_METADATA.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenMetadata(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_METADATA.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_METADATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenMetadata(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_METADATA.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenMetadata(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_METADATA.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_TYPE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenType(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_TYPE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenType(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_TYPE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_TYPE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenType(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_TYPE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenType(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_TYPE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_SCOPES IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenScopes(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_SCOPES.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenScopes(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_SCOPES.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>ACCESS_TOKEN_SCOPES IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenScopes(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_SCOPES.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAccessTokenScopes(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.ACCESS_TOKEN_SCOPES.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_VALUE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenValue(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_VALUE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenValue(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_VALUE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_VALUE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenValue(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_VALUE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenValue(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_VALUE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_ISSUED_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenIssuedAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_ISSUED_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenIssuedAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_ISSUED_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_ISSUED_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenIssuedAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_ISSUED_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenIssuedAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_ISSUED_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_EXPIRES_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenExpiresAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_EXPIRES_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenExpiresAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_EXPIRES_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_EXPIRES_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenExpiresAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_EXPIRES_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenExpiresAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_EXPIRES_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_METADATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenMetadata(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_METADATA.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenMetadata(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_METADATA.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_METADATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenMetadata(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_METADATA.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenMetadata(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_METADATA.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_CLAIMS IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenClaims(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_CLAIMS.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenClaims(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_CLAIMS.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>OIDC_ID_TOKEN_CLAIMS IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenClaims(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_CLAIMS.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByOidcIdTokenClaims(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.OIDC_ID_TOKEN_CLAIMS.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>REFRESH_TOKEN_VALUE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenValue(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_VALUE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenValue(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_VALUE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>REFRESH_TOKEN_VALUE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenValue(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_VALUE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenValue(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_VALUE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>REFRESH_TOKEN_ISSUED_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenIssuedAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_ISSUED_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenIssuedAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_ISSUED_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>REFRESH_TOKEN_ISSUED_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenIssuedAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_ISSUED_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenIssuedAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_ISSUED_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>REFRESH_TOKEN_EXPIRES_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenExpiresAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_EXPIRES_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenExpiresAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_EXPIRES_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>REFRESH_TOKEN_EXPIRES_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenExpiresAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_EXPIRES_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenExpiresAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_EXPIRES_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>REFRESH_TOKEN_METADATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenMetadata(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_METADATA.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenMetadata(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_METADATA.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>REFRESH_TOKEN_METADATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenMetadata(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_METADATA.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByRefreshTokenMetadata(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.REFRESH_TOKEN_METADATA.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>USER_CODE_VALUE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeValue(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_VALUE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeValue(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_VALUE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>USER_CODE_VALUE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeValue(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_VALUE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeValue(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_VALUE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>USER_CODE_ISSUED_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeIssuedAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_ISSUED_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeIssuedAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_ISSUED_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>USER_CODE_ISSUED_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeIssuedAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_ISSUED_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeIssuedAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_ISSUED_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>USER_CODE_EXPIRES_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeExpiresAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_EXPIRES_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeExpiresAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_EXPIRES_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>USER_CODE_EXPIRES_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeExpiresAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_EXPIRES_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeExpiresAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_EXPIRES_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>USER_CODE_METADATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeMetadata(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_METADATA.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeMetadata(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_METADATA.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>USER_CODE_METADATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeMetadata(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_METADATA.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByUserCodeMetadata(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.USER_CODE_METADATA.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>DEVICE_CODE_VALUE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeValue(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_VALUE.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeValue(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_VALUE.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>DEVICE_CODE_VALUE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeValue(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_VALUE.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeValue(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_VALUE.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>DEVICE_CODE_ISSUED_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeIssuedAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_ISSUED_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeIssuedAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_ISSUED_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>DEVICE_CODE_ISSUED_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeIssuedAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_ISSUED_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeIssuedAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_ISSUED_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>DEVICE_CODE_EXPIRES_AT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeExpiresAt(Collection<LocalDateTime> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_EXPIRES_AT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeExpiresAt(Collection<LocalDateTime> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_EXPIRES_AT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>DEVICE_CODE_EXPIRES_AT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeExpiresAt(Collection<LocalDateTime> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_EXPIRES_AT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeExpiresAt(Collection<LocalDateTime> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_EXPIRES_AT.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>DEVICE_CODE_METADATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeMetadata(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_METADATA.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeMetadata(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_METADATA.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>DEVICE_CODE_METADATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeMetadata(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_METADATA.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByDeviceCodeMetadata(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.DEVICE_CODE_METADATA.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>TENANT_ID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByTenantId(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.TENANT_ID.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByTenantId(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.TENANT_ID.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>TENANT_ID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByTenantId(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.TENANT_ID.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByTenantId(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.TENANT_ID.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>APP_ID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAppId(Collection<String> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.APP_ID.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAppId(Collection<String> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.APP_ID.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>APP_ID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAppId(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.APP_ID.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByAppId(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.APP_ID.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>EXT IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByExt(Collection<JSON> values) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.EXT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByExt(Collection<JSON> values) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.EXT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>EXT IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByExt(Collection<JSON> values, int limit) {
-                return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.EXT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization>> findManyByExt(Collection<JSON> values, int limit) {
+        return findManyByCondition(Oauth2Authorization.OAUTH2_AUTHORIZATION.EXT.in(values), limit);
+    }
 
-        @Override
-        public JDBCClassicQueryExecutor<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization,String> queryExecutor(){
-                return (JDBCClassicQueryExecutor<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization,String>) super.queryExecutor();
-        }
+    @Override
+    public JDBCClassicQueryExecutor<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization, String> queryExecutor() {
+        return (JDBCClassicQueryExecutor<Oauth2AuthorizationRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2Authorization, String>) super.queryExecutor();
+    }
 }

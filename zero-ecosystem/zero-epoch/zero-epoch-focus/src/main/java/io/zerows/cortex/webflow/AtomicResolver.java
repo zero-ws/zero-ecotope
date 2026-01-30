@@ -2,7 +2,7 @@ package io.zerows.cortex.webflow;
 
 import io.vertx.core.json.JsonObject;
 import io.zerows.cortex.metadata.WebEpsilon;
-import io.zerows.epoch.basicore.YmSpec;
+import io.zerows.epoch.spec.YmSpec;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 import jakarta.ws.rs.BeanParam;

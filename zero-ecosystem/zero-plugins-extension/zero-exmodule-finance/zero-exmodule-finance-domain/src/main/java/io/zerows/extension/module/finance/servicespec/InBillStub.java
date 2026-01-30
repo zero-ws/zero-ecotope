@@ -26,7 +26,6 @@ public interface InBillStub {
      * @param bill      账单
      * @param billItem  账单明细
      * @param authorize 授权信息
-     *
      * @return {@link Future}
      */
     Future<JsonObject> singleAsync(FBill bill, FBillItem billItem, FPreAuthorize authorize);
@@ -37,7 +36,6 @@ public interface InBillStub {
      *
      * @param bill     账单
      * @param billItem 账单明细
-     *
      * @return {@link Future}
      */
     default Future<JsonObject> singleAsync(final FBill bill, final FBillItem billItem) {
@@ -49,7 +47,6 @@ public interface InBillStub {
      *
      * @param bill  账单
      * @param items 账单明细
-     *
      * @return {@link Future}
      */
     Future<JsonObject> multiAsync(FBill bill, List<FBillItem> items);

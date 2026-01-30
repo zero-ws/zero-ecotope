@@ -1,73 +1,54 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `I_PORTFOLIO`;
+CREATE TABLE IF NOT EXISTS `I_PORTFOLIO` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`                VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                    -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-o_portfolio-1
--- IPortfolio表：I_PORTFOLIO
--- 文件夹，公事包，组合
-DROP TABLE IF EXISTS I_PORTFOLIO;
-CREATE TABLE IF NOT EXISTS I_PORTFOLIO
-(
-    `KEY`              VARCHAR(36) COMMENT '「key」- 目录专用ID',
-    `NAME`             VARCHAR(255) COMMENT '「name」- 目录名称',
-    `CODE`             VARCHAR(255) COMMENT '「code」- 目录系统编码',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `CODE`              VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `DATA_CONFIG`       LONGTEXT      COLLATE utf8mb4_bin COMMENT '「dataConfig」- 数据基础配置',
+    `DATA_INTEGRATION`  LONGTEXT      COLLATE utf8mb4_bin COMMENT '「dataIntegration」- 绑定好过后',          -- 绑定好过后，导入/导出数据专用配置
+    `DATA_KEY`          VARCHAR(512)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「dataKey」- LDAP路径做完',   -- LDAP路径做完整标识
+    `DATA_SECURE`       LONGTEXT      COLLATE utf8mb4_bin COMMENT '「dataSecure」- 安全专用配置',
+    `INTEGRATION_ID`    VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「integrationId」- 是否关联集成配置', -- 是否关联集成配置，管理时直接同步
+    `NAME`              VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `OWNER`             VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「owner」- 关联主体主键',
+    `OWNER_TYPE`        VARCHAR(20)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「ownerType」- 关联主体类型',
+    `RUN_COMPONENT`     TEXT          COLLATE utf8mb4_bin COMMENT '「runComponent」- 执行组件',               -- 执行组件，LDAP执行专用
+    `RUN_CONFIG`        LONGTEXT      COLLATE utf8mb4_bin COMMENT '「runConfig」- 执行组件额外配置',
 
-    /*
-     * -- CREATED,   新创建
-     * -- CONNECTED, 已连接（验证过）
-     * -- EXPIRED,   更新后
-     * -- FAILURE,   连接失败
-     */
-    `STATUS`           VARCHAR(255) COMMENT '「status」- 目录状态',
-    -- 目录类型，此处目录类型和集成类型一致，如 ldap / ldap 标识 LDAP 集成类型和目录类型
-    `TYPE`             VARCHAR(255) COMMENT '「type」- 目录类型',
-    `INTEGRATION_ID`   VARCHAR(36) COMMENT '「integrationId」- 是否关联集成配置，管理时直接同步',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`              VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',              -- [类型],
+    `STATUS`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「status」- 状态',
 
-    /*
-     * 目录的关联，使用
-     * OWNER_TYPE + OWNER 执行关联
-     * 如果拥有集成ID，则消费集成配置，否则不消费集成配置执行关联
-     * -- OWNER_TYPE的值列表
-     * -- COMPANY       -- E_COMPANY
-     * -- CUSTOMER      -- E_CUSTOMER
-     * -- DEPARTMENT    -- E_DEPT
-     * -- TEAM          -- E_TEAM
-     * -- GROUP         -- S_GROUP
-     * -- ROLE          -- S_ROLE
-     * -- USER          -- S_USER
-     * LDAP处理流程
-     * 1）一个用户可配置多个LDAP的 IPortfolio，对于它所绑定的集成部分可以是相同的也可以是不同的
-     * 2）根据用户所配置的目录，可选择手动同步，如果是自动同步所有，则提取优先级比较高的数据作为核心数据
-     * 3）I_PORTFOLIO 中存储的配置可提供子账号功能
-     */
-    `OWNER_TYPE`       VARCHAR(20) COMMENT '「ownerType」- 关联主体类型',
-    `OWNER`            VARCHAR(36) COMMENT '「owner」- 关联主体主键',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`             VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',         -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`         VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',          -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`            VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',             -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`            BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                            -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`          VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',      -- [国际化] 如: zh_CN, en_US,
+    `METADATA`          TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                     -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`           VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`        DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                         -- [审计] 创建时间
+    `CREATED_BY`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',       -- [审计] 创建人
+    `UPDATED_AT`        DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                         -- [审计] 更新时间
+    `UPDATED_BY`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',       -- [审计] 更新人
 
-    /* runComponent 会直接消费对应的几个字段中存储的配置值 */
-    -- 执行组件专用处理，加载基础规则
-    `RUN_COMPONENT`    TEXT COMMENT '「runComponent」- 执行组件，LDAP执行专用',
-    `RUN_CONFIG`       LONGTEXT COMMENT '「runConfig」- 执行组件额外配置',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_I_PORTFOLIO_CODE_SIGMA` (`CODE`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='I_PORTFOLIO';
 
-    -- 执行系统专用的数据内容
-    `DATA_KEY`         VARCHAR(512) COMMENT '「dataKey」- LDAP路径做完整标识',
-    `DATA_CONFIG`      LONGTEXT COMMENT '「dataConfig」- 数据基础配置',
-    `DATA_SECURE`      LONGTEXT COMMENT '「dataSecure」- 安全专用配置',
-    `DATA_INTEGRATION` LONGTEXT COMMENT '「dataIntegration」- 绑定好过后，导入/导出数据专用配置',
-
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`            VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`         VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`           BIT COMMENT '「active」- 是否启用',
-    `METADATA`         TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT`       DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`       VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`       DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`       VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`           VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`        VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:ox-o_portfolio-2
-ALTER TABLE I_PORTFOLIO
-    ADD UNIQUE (`CODE`, `SIGMA`);
+-- 缺失公共字段：
+-- - VERSION (版本)

@@ -33,22 +33,22 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
-     * The table <code>ZDB.I_DIRECTORY</code>.
+     * I_DIRECTORY
      */
     public final IDirectory I_DIRECTORY = IDirectory.I_DIRECTORY;
 
     /**
-     * The table <code>ZDB.I_INTEGRATION</code>.
+     * I_INTEGRATION
      */
     public final IIntegration I_INTEGRATION = IIntegration.I_INTEGRATION;
 
     /**
-     * The table <code>ZDB.I_MESSAGE</code>.
+     * I_MESSAGE
      */
     public final IMessage I_MESSAGE = IMessage.I_MESSAGE;
 
     /**
-     * The table <code>ZDB.I_PORTFOLIO</code>.
+     * I_PORTFOLIO
      */
     public final IPortfolio I_PORTFOLIO = IPortfolio.I_PORTFOLIO;
 

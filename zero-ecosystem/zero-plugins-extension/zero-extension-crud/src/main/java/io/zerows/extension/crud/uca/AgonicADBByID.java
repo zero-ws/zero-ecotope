@@ -61,7 +61,6 @@ class AgonicADBByID implements Agonic {
      * @param inputJ {@link JsonObject} 输入数据
      * @param in     {@link IxMod} 当前模块
      * @param dataJ  {@link JsonObject} 主模型数据
-     *
      * @return {@link Future}<{@link JsonObject}>
      */
     @SuppressWarnings("all")
@@ -89,7 +88,6 @@ class AgonicADBByID implements Agonic {
      *
      * @param criteria 输入条件
      * @param in       {@link IxMod} 可代表主模块，也可以代表连接模块
-     *
      * @return {@link Future}<{@link JsonObject}>
      */
     private Future<JsonObject> fetchAsync(final JsonObject criteria, final IxMod in) {

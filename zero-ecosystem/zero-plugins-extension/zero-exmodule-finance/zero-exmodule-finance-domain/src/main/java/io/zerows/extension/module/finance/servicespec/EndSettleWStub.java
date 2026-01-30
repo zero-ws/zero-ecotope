@@ -43,7 +43,6 @@ public interface EndSettleWStub {
      *
      * @param body 结算数据
      * @param user 用户信息
-     *
      * @return 结算结果
      */
     Future<List<FSettlement>> updateAsync(JsonObject body, User user);

@@ -1,66 +1,48 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `S_ACTION`;
+CREATE TABLE IF NOT EXISTS `S_ACTION` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`              VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                      -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-action-1
--- 操作专用表：S_ACTION
-DROP TABLE IF EXISTS S_ACTION;
-CREATE TABLE IF NOT EXISTS S_ACTION
-(
-    `KEY`            VARCHAR(36) COMMENT '「key」- 操作ID',
-    `NAME`           VARCHAR(255) COMMENT '「name」- 操作名称',
-    `CODE`           VARCHAR(255) COMMENT '「code」- 操作码',
-    `RESOURCE_ID`    VARCHAR(36) COMMENT '「resourceId」- 操作关联资源ID',
-    `PERMISSION_ID`  VARCHAR(36) COMMENT '「permissionId」- 操作所属权限',
-    `LEVEL`          INTEGER COMMENT '「level」- 操作级别, ACL控制',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `CODE`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `LEVEL`           INTEGER       DEFAULT NULL COMMENT '「level」- 操作级别',                               -- 操作级别, ACL控制
+    `METHOD`          VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「method」- 资源方法',
+    `NAME`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `PERMISSION_ID`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「permissionId」- 操作所属权限',
+    `RENEWAL_CREDIT`  TEXT          COLLATE utf8mb4_bin COMMENT '「renewalCredit」- 被刷新的凭证',
+    `RESOURCE_ID`     VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「resourceId」- 操作关联资源ID',
+    `URI`             VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uri」- 资源地址',
 
-    -- 操作行为捕捉
-    `URI`            VARCHAR(255) COMMENT '「uri」- 资源地址',
-    `METHOD`         VARCHAR(32) COMMENT '「method」- 资源方法',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`           VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',           -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',            -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`          VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',               -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`          BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                              -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`        VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',        -- [国际化] 如: zh_CN, en_US,
+    `METADATA`        TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                       -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`         VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`      DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                           -- [审计] 创建时间
+    `CREATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',         -- [审计] 创建人
+    `UPDATED_AT`      DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                           -- [审计] 更新时间
+    `UPDATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',         -- [审计] 更新人
 
-    /*
-     * 刷新的凭证，刷新的凭证限制条件：
-     * 1. 视图不可变更（只能同一个视图刷新）
-     * 2. 只能刷新 User 的视图，因为如果是 Role 的视图，刷新自己的没有作用，需要发送通知让其他人重新登录
-     * 3. 只能同一个 sigma 的资源视图被刷新
-     * 4. 凭证为 JsonArray 格式，每一个元素都是
-     *    -- METHOD URI
-     */
-    `RENEWAL_CREDIT` TEXT COMMENT '「renewalCredit」- 被刷新的凭证',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_S_ACTION_CODE_SIGMA` (`CODE`, `SIGMA`) USING BTREE,
+    UNIQUE KEY `UK_S_ACTION_RESOURCE_ID` (`RESOURCE_ID`) USING BTREE,
+    UNIQUE KEY `UK_S_ACTION_URI_METHOD_SIGMA` (`URI`, `METHOD`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='S_ACTION';
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`          VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`       VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`         BIT COMMENT '「active」- 是否启用',
-    `METADATA`       TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT`     DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`     VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`     DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`     VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`         VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`      VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
-
--- changeset Lang:ox-action-2
--- Unique Key：独立唯一主键
-ALTER TABLE S_ACTION
-    ADD UNIQUE (`CODE`, `SIGMA`) USING BTREE;
-ALTER TABLE S_ACTION
-    ADD UNIQUE (`RESOURCE_ID`) USING BTREE; -- 操作和资源一对一绑定
-ALTER TABLE S_ACTION
-    ADD UNIQUE (`URI`, `METHOD`, `SIGMA`) USING BTREE;
--- 操作和资源一对一绑定
-
--- S_ACTION，读取 ACTION，由于这里有 uri 做保证，所以不需用 sigma
-ALTER TABLE S_ACTION
-    ADD
-        INDEX IDXM_S_ACTION_URI_METHOD (`URI`, `METHOD`) USING BTREE;
-ALTER TABLE S_ACTION
-    ADD
-        INDEX IDXM_S_ACTION_SIGMA_URI_METHOD (`SIGMA`, `URI`, `METHOD`) USING BTREE;
--- 按权限查询
-ALTER TABLE S_ACTION
-    ADD
-        INDEX IDX_S_ACTION_PERMISSION_ID (`PERMISSION_ID`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)
+-- - TYPE (类型)

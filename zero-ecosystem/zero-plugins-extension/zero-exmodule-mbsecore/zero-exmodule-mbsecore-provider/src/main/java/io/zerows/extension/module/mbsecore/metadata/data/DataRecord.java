@@ -2,11 +2,11 @@ package io.zerows.extension.module.mbsecore.metadata.data;
 
 import io.zerows.epoch.annotations.Contract;
 import io.zerows.extension.module.mbsecore.boot.Ao;
+import io.zerows.extension.module.mbsecore.component.id.AoId;
+import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
 import io.zerows.extension.module.mbsecore.metadata.Model;
 import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.metadata.element.DataKey;
-import io.zerows.extension.module.mbsecore.component.id.AoId;
-import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
 import io.zerows.mbse.metadata.ActiveRecord;
 import io.zerows.specification.modeling.HRecord;
 

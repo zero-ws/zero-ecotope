@@ -1,63 +1,53 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `MY_MENU`;
+CREATE TABLE IF NOT EXISTS `MY_MENU` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`           VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                         -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:my-menu-1
--- 个人菜单表：MY_MENU
-DROP TABLE IF EXISTS MY_MENU;
-CREATE TABLE IF NOT EXISTS MY_MENU
-(
-    `KEY`         VARCHAR(36) COMMENT '「key」- 菜单主键',
-    -- UI呈现
-    `ICON`        VARCHAR(255) COMMENT '「icon」- 菜单使用的icon',
-    `TEXT`        VARCHAR(255) COMMENT '「text」- 菜单显示文字',
-    `URI`         VARCHAR(255) COMMENT '「uri」- 菜单地址（不包含应用的path）',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `ICON`         VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「icon」- 图标',
+    `OWNER`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「owner」- 拥有者ID',              -- 拥有者ID，我的 / 角色级
+    `OWNER_TYPE`   VARCHAR(5)    COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「ownerType」- ROLE 角色',         -- ROLE 角色，USER 用户
+    `PAGE`         VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「page」- 菜单所在页面',
+    `POSITION`     VARCHAR(16)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「position」- 菜单位置',
+    `TEXT`         VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「text」- 菜单显示文字',
+    `UI_COLOR_BG`  VARCHAR(16)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uiColorBg」- 背景色',
+    `UI_COLOR_FG`  VARCHAR(16)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uiColorFg」- 前景色',
+    `UI_PARENT`    VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uiParent」- 菜单父ID',
+    `UI_SORT`      BIGINT        DEFAULT NULL COMMENT '「uiSort」- 菜单排序',
+    `URI`          VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uri」- 菜单地址',                -- 菜单地址（不包含应用的path）
 
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`         VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',                   -- [类型],
 
-    -- 主菜单定制专用（呈现效果）
-    `UI_SORT`     BIGINT COMMENT '「uiSort」- 菜单排序',
-    `UI_PARENT`   VARCHAR(36) COMMENT '「uiParent」- 菜单父ID',
-    `UI_COLOR_FG` VARCHAR(16) COMMENT '「uiColorFg」- 前景色',
-    `UI_COLOR_BG` VARCHAR(16) COMMENT '「uiColorBg」- 背景色',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`        VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',              -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`    VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',               -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                  -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`       BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                                 -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`     VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',           -- [国际化] 如: zh_CN, en_US,
+    `METADATA`     TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                          -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`      VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`   DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                              -- [审计] 创建时间
+    `CREATED_BY`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',            -- [审计] 创建人
+    `UPDATED_AT`   DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                              -- [审计] 更新时间
+    `UPDATED_BY`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',            -- [审计] 更新人
 
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_MY_MENU_OWNER_TYPE_OWNER_TYPE_PAGE_POSITION_URI` (`OWNER_TYPE`, `OWNER`, `TYPE`, `PAGE`, `POSITION`, `URI`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='MY_MENU';
 
-    -- 维度控制
-    `TYPE`        VARCHAR(32) COMMENT '「type」- 菜单类型',
-    `PAGE`        VARCHAR(64) COMMENT '「page」- 菜单所在页面',
-    `POSITION`    VARCHAR(16) COMMENT '「position」- 菜单位置',
-
-    `OWNER`       VARCHAR(36) COMMENT '「owner」- 拥有者ID，我的 / 角色级',
-    `OWNER_TYPE`  VARCHAR(5) COMMENT '「ownerType」- ROLE 角色，USER 用户',
-
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`       VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`    VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`      BIT COMMENT '「active」- 是否启用',
-    `METADATA`    TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT`  DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`  VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`  DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`  VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`      VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`   VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
-
--- changeset Lang:my-menu-2
-/*
- * 五个维度，近似于视图
- * - owner：用户ID
- * - type：个人菜单类型
- *   - NAV：导航菜单（主页/工作台）
- *   - MENU：主菜单
- *   - CONTEXT：右键菜单
- * - page：页面路径
- * - position：位置（双导航模式）
- * - uiMenu：菜单关联ID
- *
- * 1）如果 type = MENU，则 PAGE = ALL, POSITION = APP
- * 2）其他情况，必须 page 和 position 参数
- */
-ALTER TABLE MY_MENU
-    ADD UNIQUE (`OWNER_TYPE`, `OWNER`, `TYPE`, `PAGE`, `POSITION`, `URI`);
+-- 缺失公共字段：
+-- - VERSION (版本)

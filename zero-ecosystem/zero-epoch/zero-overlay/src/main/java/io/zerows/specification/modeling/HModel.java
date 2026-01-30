@@ -78,7 +78,6 @@ public interface HModel extends HLife {
      * </code></pre>
      *
      * @param name 属性名
-     *
      * @return {@link HAttribute}
      */
     HAttribute attribute(String name);

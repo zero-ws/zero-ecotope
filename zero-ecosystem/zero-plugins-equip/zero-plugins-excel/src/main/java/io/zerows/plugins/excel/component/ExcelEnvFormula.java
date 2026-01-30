@@ -2,7 +2,7 @@ package io.zerows.plugins.excel.component;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.YmSpec;
+import io.zerows.epoch.spec.YmSpec;
 import io.zerows.platform.constant.VString;
 import io.zerows.plugins.excel.ExcelConstant;
 import io.zerows.support.Ut;

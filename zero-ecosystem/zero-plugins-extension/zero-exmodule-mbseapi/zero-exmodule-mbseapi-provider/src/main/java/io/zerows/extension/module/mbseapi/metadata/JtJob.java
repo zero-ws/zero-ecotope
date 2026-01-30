@@ -33,7 +33,7 @@ public class JtJob extends JtCommercial {
         super(service);
         this.job = job;
         /* */
-        this.key = job.getKey();
+        this.key = job.getId();
     }
     // ----------- override
 

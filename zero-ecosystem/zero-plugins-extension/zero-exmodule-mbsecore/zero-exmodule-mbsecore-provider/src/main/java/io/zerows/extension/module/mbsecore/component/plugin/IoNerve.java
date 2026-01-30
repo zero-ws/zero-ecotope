@@ -2,10 +2,10 @@ package io.zerows.extension.module.mbsecore.component.plugin;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
-import io.zerows.extension.module.mbsecore.metadata.element.DataTpl;
 import io.zerows.extension.module.mbsecore.component.reference.AoRay;
 import io.zerows.extension.module.mbsecore.component.reference.RayBatch;
 import io.zerows.extension.module.mbsecore.component.reference.RaySingle;
+import io.zerows.extension.module.mbsecore.metadata.element.DataTpl;
 import io.zerows.specification.modeling.HRecord;
 
 import java.util.Objects;
@@ -18,7 +18,7 @@ import java.util.Objects;
 public class IoNerve implements IoHub {
     /**
      * The Pool of Tpl definition of `Ray`
-     *
+     * <p>
      * 1. The key is `identifier`.
      * 2. The findRunning is `AoRay` reference with content `Record`.
      */
@@ -26,7 +26,7 @@ public class IoNerve implements IoHub {
     private static final Cc<String, AoRay<HRecord>> CC_RAY_ASYNC = Cc.open();
     /**
      * The Pool of Tpl definition of `Ray` ( Batch )
-     *
+     * <p>
      * 1. The key is `identifier`.
      * 2. The findRunning is `AoRay` reference with content `Records`.
      */

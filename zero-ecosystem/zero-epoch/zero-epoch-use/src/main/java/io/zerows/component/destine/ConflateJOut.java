@@ -25,7 +25,6 @@ class ConflateJOut extends ConflateBase<JsonObject, JsonObject> {
      * @param active     主数据
      * @param assist     连接部分数据
      * @param identifier 被连接的 identifier
-     *
      * @return 处理完成后数据
      */
     @Override

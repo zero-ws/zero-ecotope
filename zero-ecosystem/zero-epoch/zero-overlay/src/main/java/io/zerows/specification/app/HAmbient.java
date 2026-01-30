@@ -10,6 +10,8 @@ import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.compiled.HDeployment;
 import io.zerows.support.base.UtBase;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -32,6 +34,8 @@ public interface HAmbient {
      * @return {@link EmApp.Mode}
      */
     EmApp.Mode mode();
+
+    HAmbient mode(EmApp.Mode mode);
 
     /**
      * 不论单多，获取当前运行的所有信息
@@ -73,7 +77,6 @@ public interface HAmbient {
      * @param name      模块名称
      * @param configCls 模块配置类
      * @param <T>       模块配置泛型
-     *
      * @return 模块配置
      */
     default <T> T extension(final String name, final Class<T> configCls) {
@@ -97,10 +100,28 @@ public interface HAmbient {
      * </code></pre>
      *
      * @param ark 应用容器
-     *
      * @return {@link HAmbient}
      */
     HAmbient registry(HArk ark);
 
+    default HAmbient registry(final Set<HArk> arkSet) {
+        if (Objects.isNull(arkSet) || arkSet.isEmpty()) {
+            return this;
+        }
+        arkSet.forEach(this::registry);
+        return this;
+    }
+
     HAmbient registry(String extension, JsonObject configuration);
+
+    /**
+     * 判断当前 Ambient 环境是否就绪，就绪基本条件
+     * <pre>
+     *     1. HArk 容器中至少包含一个应用容器
+     *     2. HArk 容器中的应用包含的 HApp 信息检查通过
+     * </pre>
+     *
+     * @return 就绪返回 true，否则返回 false
+     */
+    boolean isReady();
 }

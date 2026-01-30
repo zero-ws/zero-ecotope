@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 public class BookService implements BookStub {
     @Override
     public Future<List<FPreAuthorize>> fetchAuthorize(final List<FBook> books) {
-        final Set<String> bookIds = books.stream().map(FBook::getKey)
+        final Set<String> bookIds = books.stream().map(FBook::getId)
             .filter(Objects::nonNull)
             .collect(Collectors.toSet());
         final JsonObject condition = new JsonObject();
@@ -66,7 +66,7 @@ public class BookService implements BookStub {
             return DB.on(FBillDao.class).<FBill>fetchAsync("bookId", key).compose(bills -> {
                 // Bills to fetch items
                 final Set<String> billIds = bills.stream()
-                    .map(FBill::getKey)
+                    .map(FBill::getId)
                     .filter(Ut::isNotNil)
                     .collect(Collectors.toSet());
                 // Bill items
@@ -78,7 +78,7 @@ public class BookService implements BookStub {
                     final JsonObject bookJson = Ux.toJson(book);
                     final JsonArray billA = new JsonArray();
                     bills.forEach(bill -> {
-                        final List<FBillItem> billItems = itemMap.getOrDefault(bill.getKey(), new ArrayList<>());
+                        final List<FBillItem> billItems = itemMap.getOrDefault(bill.getId(), new ArrayList<>());
                         final JsonObject billJ = Ux.toJson(bill);
                         if (billItems.isEmpty()) {
                             billJ.put(KName.CHILDREN, new JsonArray());

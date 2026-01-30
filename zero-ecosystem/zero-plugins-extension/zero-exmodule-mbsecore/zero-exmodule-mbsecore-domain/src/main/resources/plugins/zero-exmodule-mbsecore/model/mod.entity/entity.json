@@ -1,12 +1,12 @@
 {
-    "name": "entity",
-    "daoCls": "M_ENTITY",
-    "field": {
-        "unique": [
-            [
-                "sigma",
-                "tableName"
-            ]
-        ]
-    }
+  "name": "entity",
+  "daoCls": "M_ENTITY",
+  "field": {
+    "unique": [
+      [
+        "sigma",
+        "tableName"
+      ]
+    ]
+  }
 }

@@ -1,8 +1,8 @@
 package io.zerows.cortex.metadata;
 
 import io.zerows.cortex.webflow.Filler;
-import io.zerows.epoch.basicore.WebEvent;
 import io.zerows.epoch.constant.KWeb;
+import io.zerows.epoch.web.WebEvent;
 import io.zerows.support.Ut;
 
 import java.io.Serializable;

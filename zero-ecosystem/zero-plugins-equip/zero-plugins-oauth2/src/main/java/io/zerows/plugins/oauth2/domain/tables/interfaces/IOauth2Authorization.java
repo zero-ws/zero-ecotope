@@ -10,7 +10,7 @@ import org.jooq.JSON;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import static io.r2mo.vertx.jooq.shared.internal.VertxPojo.*;
+import static io.r2mo.vertx.jooq.shared.internal.VertxPojo.setOrThrow;
 
 /**
  * OAuth2 授权与 Token 信息表

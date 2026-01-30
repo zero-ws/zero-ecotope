@@ -2,8 +2,8 @@ package io.zerows.extension.skeleton.underway;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.zerows.epoch.basicore.MDConfiguration;
 import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.extension.skeleton.metadata.MDModuleManager;
 
 import java.util.Set;
@@ -38,7 +38,6 @@ public interface Primed {
      *
      * @param waitSet  所有已经启动的模块信息
      * @param vertxRef Vertx 实例引用
-     *
      * @return 异步处理结果
      */
     Future<Boolean> afterAsync(Set<MDConfiguration> waitSet, Vertx vertxRef);

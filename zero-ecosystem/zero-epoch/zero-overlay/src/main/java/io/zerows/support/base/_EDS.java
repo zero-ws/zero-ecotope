@@ -13,7 +13,6 @@ class _EDS extends _Date {
      * MD5加密算法（全大写）
      *
      * @param input 输入
-     *
      * @return 加密后的字符串
      */
     public static String encryptMD5(final String input) {
@@ -24,7 +23,6 @@ class _EDS extends _Date {
      * SHA256加密算法
      *
      * @param input 输入
-     *
      * @return 加密后的字符串
      */
     public static String encryptSHA256(final String input) {
@@ -35,7 +33,6 @@ class _EDS extends _Date {
      * SHA512加密算法
      *
      * @param input 输入
-     *
      * @return 加密后的字符串
      */
     public static String encryptSHA512(final String input) {
@@ -46,7 +43,6 @@ class _EDS extends _Date {
      * Base64加密算法
      *
      * @param input 输入
-     *
      * @return 加密后的字符串
      */
     public static String encryptBase64(final String input) {
@@ -57,7 +53,6 @@ class _EDS extends _Date {
      * Base64解密算法
      *
      * @param input 输入
-     *
      * @return 加密后的字符串
      */
     public static String decryptBase64(final String input) {
@@ -68,7 +63,6 @@ class _EDS extends _Date {
      * URL Encoding 专用加密
      *
      * @param input 输入
-     *
      * @return 加密后的字符串
      */
     public static String encryptUrl(final String input) {
@@ -79,7 +73,6 @@ class _EDS extends _Date {
      * URL Decoding 专用解密
      *
      * @param input 输入
-     *
      * @return 加密后的字符串
      */
     public static String encryptUrl(final JsonObject input) {
@@ -91,7 +84,6 @@ class _EDS extends _Date {
      * URL Decoding 专用解密
      *
      * @param input 输入
-     *
      * @return 加密后的字符串
      */
     public static String decryptUrl(final String input) {

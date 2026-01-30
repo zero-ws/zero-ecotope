@@ -3,7 +3,7 @@ package io.zerows.cortex.webflow;
 import io.r2mo.function.Fn;
 import io.r2mo.typed.exception.WebException;
 import io.zerows.cortex.exception._60006Exception415MediaNotSupport;
-import io.zerows.epoch.basicore.WebEvent;
+import io.zerows.epoch.web.WebEvent;
 import jakarta.ws.rs.core.MediaType;
 
 import java.util.Set;

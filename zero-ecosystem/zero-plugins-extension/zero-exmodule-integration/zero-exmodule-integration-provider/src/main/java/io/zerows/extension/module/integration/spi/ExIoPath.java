@@ -19,7 +19,11 @@ import io.zerows.support.Ut;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -183,7 +187,7 @@ public class ExIoPath implements ExIo {
                 return jq.updateAsync(directory)
                     .compose(updated -> Is.directoryBranch(directoryId, updatedBy));
             })
-            .compose(directory -> Is.fsComponent(directory.getKey()))
+            .compose(directory -> Is.fsComponent(directory.getId()))
             .compose(fs -> fs.rename(renameKv));
     }
 

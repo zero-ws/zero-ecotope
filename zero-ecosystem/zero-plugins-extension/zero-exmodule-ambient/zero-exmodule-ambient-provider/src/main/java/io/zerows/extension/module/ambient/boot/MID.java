@@ -7,4 +7,6 @@ import io.zerows.specification.development.HMaven;
  */
 interface MID extends HMaven {
     String BUNDLE_SYMBOLIC_NAME = "zero-exmodule-ambient";
+    
+    String REGISTRY_ID = "registry@ambient";
 }

@@ -25,7 +25,6 @@ final class CArithmetic {
      * @param left  First Set
      * @param right Second Set
      * @param <T>   The element type in Set
-     *
      * @return The result set
      */
     static <T> Set<T> intersect(final Set<T> left,
@@ -66,7 +65,6 @@ final class CArithmetic {
      * @param left  First Set
      * @param right Second Set
      * @param <T>   The element type in Set
-     *
      * @return The result Set
      */
     static <T> Set<T> union(final Set<T> left,
@@ -102,7 +100,6 @@ final class CArithmetic {
      * @param subtrahend Subtrahend set
      * @param minuend    Minuend set
      * @param <T>        The element type in Set
-     *
      * @return The result SEt
      */
     static <T> Set<T> diff(final Set<T> subtrahend,

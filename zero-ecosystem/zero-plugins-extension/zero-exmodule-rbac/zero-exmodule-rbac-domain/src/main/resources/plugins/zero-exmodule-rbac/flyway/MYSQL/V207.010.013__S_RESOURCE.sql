@@ -1,55 +1,54 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `S_RESOURCE`;
+CREATE TABLE IF NOT EXISTS `S_RESOURCE` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`              VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                      -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-resource-1
--- 资源表：S_RESOURCE
-DROP TABLE IF EXISTS S_RESOURCE;
-CREATE TABLE IF NOT EXISTS S_RESOURCE
-(
-    `KEY`            VARCHAR(36) COMMENT '「key」- 资源对应的ID',
-    `CODE`           VARCHAR(255) COMMENT '「code」- 资源编号',
-    `NAME`           VARCHAR(255) COMMENT '「name」- 资源名称',
-    `TYPE`           VARCHAR(60) COMMENT '「type」- 资源分类',
-    `IDENTIFIER`     VARCHAR(255) COMMENT '「identifier」- 当前资源所属的Model的标识',
-    `COMMENT`        TEXT COMMENT '「comment」- 备注信息',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `CODE`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
+    `COMMENT`         TEXT          COLLATE utf8mb4_bin COMMENT '「comment」- 备注',                          -- [备注] 备注信息
+    `IDENTIFIER`      VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「identifier」- 模型标识',      -- [关联] 当前资源所属的Model的标识
+    `LEVEL`           INTEGER       DEFAULT NULL COMMENT '「level」- 需求级别',                               -- [级别] 资源需求级别
+    `MODE_GROUP`      VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「modeGroup」- 组模式',         -- [模式] 该资源查找组的模式
+    `MODE_ROLE`       VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「modeRole」- 角色模式',        -- [模式] 该资源查找角色的模式
+    `MODE_TREE`       VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「modeTree」- 树模式',          -- [模式] 该资源处理树（用户组）的模式
+    `NAME`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
+    `SEEK_COMPONENT`  VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「seekComponent」- 访问组件',   -- [访问] 访问者组件
+    `SEEK_CONFIG`     LONGTEXT      COLLATE utf8mb4_bin COMMENT '「seekConfig」- 访问配置',                   -- [访问] 访问者配置
+    `SEEK_SYNTAX`     LONGTEXT      COLLATE utf8mb4_bin COMMENT '「seekSyntax」- 访问语法',                   -- [访问] 访问者语法
+    `VIRTUAL`         BIT(1)        DEFAULT NULL COMMENT '「virtual」- 是否虚拟',                             -- [类型] 虚拟资源
 
-    -- 资源属性（正向查询专用）
-    `LEVEL`          INTEGER COMMENT '「level」- 资源需求级别',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`            VARCHAR(60)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',
 
-    -- 计算Profile专用（资源所需的Profile详细信息）=
-    `MODE_ROLE`      VARCHAR(32) COMMENT '「modeRole」- 该资源查找角色的模式',
-    `MODE_GROUP`     VARCHAR(32) COMMENT '「modeGroup」- 该资源查找组的模式',
-    `MODE_TREE`      VARCHAR(32) COMMENT '「modeTree」- 该资源处理树（用户组）的模式',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`           VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',           -- [物理隔离] 核心分片键/顶层租户标识
+    `TENANT_ID`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',            -- [业务隔离] SaaS 租户/具体公司标识
+    `APP_ID`          VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',               -- [逻辑隔离] 区分同一租户下的不同应用
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`          BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                              -- [状态] 1=启用/正常, 0=禁用/冻结
+    `LANGUAGE`        VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',        -- [国际化] 如: zh_CN, en_US
+    `METADATA`        TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                       -- [扩展] JSON格式，存储非结构化配置
+    `VERSION`         VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`      DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT`      DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',
 
-    -- 资源访问者配置，动态资源定义
-    `VIRTUAL`        BIT COMMENT '「virtual」- 虚拟资源',
-    /*
-     * 访问者扩展：针对 seekConfig 进行分类，分类位于配置中详细定义
-     * 访问者类型是抽象过程中单独定义
-     */
-    `SEEK_SYNTAX`    LONGTEXT COMMENT '「seekSyntax」- 访问者语法',
-    `SEEK_CONFIG`    LONGTEXT COMMENT '「seekConfig」- 访问者配置',
-    `SEEK_COMPONENT` VARCHAR(255) COMMENT '「seekComponent」- 访问者组件',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_S_RESOURCE_CODE_SIGMA` (`CODE`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='资源';
 
-    -- 资源标识
-
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`          VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`       VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`         BIT COMMENT '「active」- 是否启用',
-    `METADATA`       TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT`     DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`     VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`     DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`     VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`         VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`      VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
-
--- changeset Lang:ox-resource-2
--- Unique Key：独立唯一主键，同一个Sigma中的资源code不可重复
-ALTER TABLE S_RESOURCE
-    ADD UNIQUE (`CODE`, `SIGMA`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)

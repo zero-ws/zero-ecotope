@@ -46,7 +46,6 @@ public interface Ruler {
      * @param field Input field of the data structure
      * @param value The input field reflect findRunning literal
      * @param rule  The rule that has been defined.
-     *
      * @return WebException that the validated error here.
      */
     WebException verify(final String field,

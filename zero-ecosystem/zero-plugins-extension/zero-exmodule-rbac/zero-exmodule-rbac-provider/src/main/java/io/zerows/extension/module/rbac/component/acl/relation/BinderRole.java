@@ -56,8 +56,8 @@ public class BinderRole extends AbstractBind<SRole> {
                     final List<SRole> roles = roleMap.getOrDefault(user.getUsername(), new ArrayList<>());
                     Ut.itList(roles, (role, index) -> {
                         final RUserRole relation = new RUserRole();
-                        relation.setRoleId(role.getKey());
-                        relation.setUserId(user.getKey());
+                        relation.setRoleId(role.getId());
+                        relation.setUserId(user.getId());
                         relation.setPriority(index);
                         relationList.add(relation);
                     });
@@ -74,7 +74,7 @@ public class BinderRole extends AbstractBind<SRole> {
 
     @Override
     protected Function<SRole, String> keyFn() {
-        return SRole::getKey;
+        return SRole::getId;
     }
 
     @Override

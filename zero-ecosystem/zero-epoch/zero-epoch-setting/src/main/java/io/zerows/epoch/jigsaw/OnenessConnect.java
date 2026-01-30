@@ -1,9 +1,9 @@
 package io.zerows.epoch.jigsaw;
 
 import io.vertx.core.json.JsonArray;
-import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.basicore.MDMeta;
 import io.zerows.epoch.metadata.MMAdapt;
+import io.zerows.epoch.web.MDConnect;
+import io.zerows.epoch.web.MDMeta;
 import io.zerows.support.Ut;
 
 import java.util.HashSet;
@@ -22,7 +22,6 @@ class OnenessConnect implements Oneness<MDConnect> {
      * </code></pre>
      *
      * @param connect 连接对象 {@link MDConnect}
-     *
      * @return 主键
      */
     @Override
@@ -38,11 +37,11 @@ class OnenessConnect implements Oneness<MDConnect> {
         // 实体表，非 R_ 前缀
         final String pojoFile = connect.getPojoFile();
         if (Ut.isNil(pojoFile)) {
-            return connect.getKey();
+            return connect.getId();
         } else {
             // 带有 pojoFile 映射的主键
             final MMAdapt adapt = MMAdapt.of(pojoFile).ofType(connect.getDao());
-            return adapt.mapBy(connect.getKey());
+            return adapt.mapBy(connect.getId());
         }
     }
 

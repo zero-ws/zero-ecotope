@@ -41,7 +41,7 @@ class IkBill2BillItem implements IkWay<FBill, FBillItem> {
      */
     @Override
     public void transfer(final FBill bill, final FBillItem item) {
-        item.setBillId(bill.getKey());
+        item.setBillId(bill.getId());
         item.setSerial(bill.getSerial() + "-01");
         item.setCode(bill.getCode() + "-01");
         item.setStatus(FmConstant.Status.PENDING);
@@ -80,7 +80,7 @@ class IkBill2BillItem implements IkWay<FBill, FBillItem> {
         for (int idx = 0; idx < items.size(); idx++) {
             final FBillItem item = items.get(idx);
             final int number = (idx + 1);
-            item.setBillId(bill.getKey());
+            item.setBillId(bill.getId());
             item.setSerial(bill.getSerial() + "-" + Ut.fromAdjust(number, 2));
             item.setCode(bill.getCode() + "-" + Ut.fromAdjust(number, 2));
             item.setAmountTotal(item.getAmount());

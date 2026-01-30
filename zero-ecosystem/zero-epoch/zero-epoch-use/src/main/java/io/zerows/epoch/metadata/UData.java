@@ -16,7 +16,7 @@ import java.util.Objects;
  *         "config": {}
  *     }
  * // </code></pre>
- *
+ * <p>
  * 1. `data` part contains different data of types here, the common situation is as following:
  * -- JsonObject: json object
  * -- JsonArray: json array

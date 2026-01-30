@@ -38,11 +38,11 @@ import java.util.function.Supplier;
 
 /**
  * ## 统一工具类
- *
+ * <p>
  * 可在环境中直接使用`Ox.xxx`的方式调用工具类。
- *
+ * <p>
  * ### 1. 内置工具类列表
- *
+ * <p>
  * |类名|说明|
  * |:---|:---|
  * |{@link OxAmbient}|环境工具|
@@ -61,13 +61,13 @@ import java.util.function.Supplier;
 public final class Ox {
     /**
      * ## 日志器
-     *
+     * <p>
      * ### 1. 基本介绍
-     *
+     * <p>
      * Ox平台专用内部日志器，外部日志器。
-     *
+     * <p>
      * ### 2. 日志器种类
-     *
+     * <p>
      * - Atom模型日志器
      * - UCA日志器
      * - Shell日志器
@@ -118,7 +118,6 @@ public final class Ox {
      * 「After」读取<findRunning>plugin.ticket</findRunning>值提取ITSM开单专用插件。
      *
      * @param options {@link JsonObject} ServiceConfig配置原始数据
-     *
      * @return {@link AfterPlugin}
      */
     public static AfterPlugin pluginTicket(final JsonObject options) {
@@ -129,7 +128,6 @@ public final class Ox {
      * 「Around」读取<findRunning>plugin.activity</findRunning>值构造历史记录生成专用插件。
      *
      * @param options {@link JsonObject} ServiceConfig配置原始数据
-     *
      * @return {@link AspectPlugin}
      */
     public static AspectPlugin pluginActivity(final JsonObject options) {
@@ -140,7 +138,6 @@ public final class Ox {
      * 「Around」读取<findRunning>plugin.todo</findRunning>值构造待办确认单生成专用插件。
      *
      * @param options {@link JsonObject} ServiceConfig配置原始数据
-     *
      * @return {@link AspectPlugin}
      */
     public static AspectPlugin pluginTodo(final JsonObject options) {
@@ -149,12 +146,11 @@ public final class Ox {
 
     /**
      * 「Around」读取<findRunning>plugin.component</findRunning>值构造标准的AOP插件，执行Before和After两个核心流程
-     *
+     * <p>
      * - <findRunning>plugin.component.before</findRunning>：前置插件表（数组）
      * - <findRunning>plugin.component.after</findRunning>：后置插件表（数组）
      *
      * @param options {@link JsonObject} ServiceConfig配置原始数据
-     *
      * @return {@link AspectPlugin}
      */
     public static AspectPlugin pluginComponent(final JsonObject options) {
@@ -165,7 +161,6 @@ public final class Ox {
      * 构造标识规则选择器，读取插件<findRunning>plugin.identifier</findRunning>值提取标识规则选择器，使用默认配置项`options`。
      *
      * @param atom {@link DataAtom} 模型定义
-     *
      * @return {@link KIdentity} 构造好的标识规则选择器
      */
     public static KIdentity pluginIdentifier(final DataAtom atom) {
@@ -174,7 +169,7 @@ public final class Ox {
 
     /**
      * 构造初始化专用接口，用于初始化某个`X_APP`的应用配置。
-     *
+     * <p>
      * - 初始化接口{@link InitStub}，执行应用初始化。
      * - 应用访问接口{@link AppStub}。
      *
@@ -188,7 +183,6 @@ public final class Ox {
      * 读取前置插件链：`plugin.component.before`。
      *
      * @param options {@link JsonObject} 服务配置数据，对应ServiceConfig字段
-     *
      * @return {@link List}<{@link Class}>
      */
     public static List<Class<?>> pluginBefore(final JsonObject options) {
@@ -199,7 +193,6 @@ public final class Ox {
      * 读取后置插件链：`plugin.component.after`。
      *
      * @param options {@link JsonObject} 服务配置数据，对应ServiceConfig字段
-     *
      * @return {@link List}<{@link Class}>
      */
     public static List<Class<?>> pluginAfter(final JsonObject options) {
@@ -210,7 +203,6 @@ public final class Ox {
      * 读取后置异步插件：`plugin.component.job`。
      *
      * @param options {@link JsonObject} 服务配置数据，对应ServiceConfig字段
-     *
      * @return {@link List}<{@link Class}>
      */
     public static List<Class<?>> pluginJob(final JsonObject options) {
@@ -219,14 +211,13 @@ public final class Ox {
 
     /**
      * 从原始配置数据中读取`plugin.config`节点，根据传入的`clazz`读取和当前插件相关的配置信息。
-     *
+     * <p>
      * - 从原始配置中读取基础配置，上层传入的`options`数据。
      * - 提取`plugin.config`中和`clazz`绑定的配置数据。
      * - 合并二者所有配置数据构造最终配置数据。
      *
      * @param clazz   {@link Class} 执行初始化的类信息，反射调用
      * @param options {@link JsonObject} 服务配置数据，对应ServiceConfig字段
-     *
      * @return {@link JsonObject}
      */
     public static JsonObject pluginOptions(final Class<?> clazz, final JsonObject options) {
@@ -241,7 +232,6 @@ public final class Ox {
      * @param supplier {@link Supplier} 插件提取器，提取{@link AspectPlugin}插件
      * @param atom     {@link DataAtom} 模型定义
      * @param executor {@link Function} 函数执行器
-     *
      * @return 返回执行的最终结果{@link io.vertx.core.Future}<{@link JsonObject}>
      */
     public static Future<JsonObject> runAop(final JsonObject input, final JsonObject config,
@@ -252,13 +242,12 @@ public final class Ox {
 
     /**
      * 分组运行器，将数据分组后执行分组过后的运行。
-     *
+     * <p>
      * - 每一组有相同的模型定义{@link DataAtom}。
      * - 每一组有相同的数据输入{@link JsonArray}
      *
      * @param groupSet {@link Set}<{@link DataGroup}> 分组集合
      * @param consumer {@link BiFunction} 双输入函数
-     *
      * @return {@link Future}<{@link JsonArray}>
      */
     public static Future<JsonArray> runGroup(final Set<DataGroup> groupSet,
@@ -273,7 +262,6 @@ public final class Ox {
      * @param input    `executor`的输入
      * @param executor {@link Function} 外部传入执行器
      * @param <T>      `executor`执行器处理类型
-     *
      * @return `executor`执行结果
      */
     public static <T> Future<T> runSafe(final Class<?> clazz, final T input, final Function<T, Future<T>> executor) {
@@ -287,7 +275,6 @@ public final class Ox {
      * @param input    `executor`的输入
      * @param supplier {@link Supplier} 外部传入数据构造器
      * @param <T>      `executor`执行器处理类型
-     *
      * @return `executor`执行结果
      */
     public static <T> Future<T> runSafe(final Class<?> clazz, final T input, final Supplier<T> supplier) {
@@ -300,7 +287,6 @@ public final class Ox {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link JsonObject} 返回最终数据记录
      */
     public static JsonObject mockJ(final KIntegration integration, final String file, final Supplier<JsonObject> supplier) {
@@ -313,7 +299,6 @@ public final class Ox {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link JsonArray} 返回最终数据记录
      */
     public static JsonArray mockA(final KIntegration integration, final String file, final Supplier<JsonArray> supplier) {
@@ -326,7 +311,6 @@ public final class Ox {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link String} 返回最终数据记录
      */
     public static String mockS(final KIntegration integration, final String file, final Supplier<String> supplier) {
@@ -339,7 +323,6 @@ public final class Ox {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link JsonObject} 返回最终数据记录
      */
     public static Future<JsonObject> mockAsyncJ(final KIntegration integration, final String file, final Supplier<Future<JsonObject>> supplier) {
@@ -352,7 +335,6 @@ public final class Ox {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link JsonArray} 返回最终数据记录
      */
     public static Future<JsonArray> mockAsyncA(final KIntegration integration, final String file, final Supplier<Future<JsonArray>> supplier) {
@@ -365,7 +347,6 @@ public final class Ox {
      * @param integration {@link KIntegration} 集成配置对象
      * @param file        {@link String} 模拟数据读取文件
      * @param supplier    {@link Supplier} 真实执行器
-     *
      * @return {@link String} 返回最终数据记录
      */
     public static Future<String> mockAsyncS(final KIntegration integration, final String file, final Supplier<Future<String>> supplier) {
@@ -376,7 +357,6 @@ public final class Ox {
      * 基本平台级忽略字段
      *
      * @param atom {@link DataAtom}
-     *
      * @return {@link Set}
      */
     public static Set<String> ignorePure(final DataAtom atom) {
@@ -387,7 +367,6 @@ public final class Ox {
      * syncIn = false 的忽略字段
      *
      * @param atom {@link DataAtom}
-     *
      * @return {@link Set}
      */
     public static Set<String> ignoreIn(final DataAtom atom) {
@@ -398,7 +377,6 @@ public final class Ox {
      * 从第三方拉取数据的忽略字段
      *
      * @param atom {@link DataAtom}
-     *
      * @return {@link Set}
      */
     public static Set<String> ignorePull(final DataAtom atom) {
@@ -409,7 +387,6 @@ public final class Ox {
      * 开放API部分的忽略字段
      *
      * @param atom {@link DataAtom}
-     *
      * @return {@link Set}
      */
     public static Set<String> ignoreApi(final DataAtom atom) {
@@ -420,7 +397,6 @@ public final class Ox {
      * 推送过程中的忽略字段
      *
      * @param atom {@link DataAtom}
-     *
      * @return {@link Set}
      */
     public static Set<String> ignorePush(final DataAtom atom) {
@@ -429,16 +405,15 @@ public final class Ox {
 
     /**
      * 将输入数据构造成集合{@link Set}<{@link DataGroup}>封装对象。
-     *
+     * <p>
      * {@link DataGroup}中包含了三个核心数据：
-     *
+     * <p>
      * - 数据部分：{@link JsonArray}数据信息。
      * - identifier：{@link String}模型标识符。
      * - 元数据部分：{@link DataAtom} 模型定义对象。
      *
      * @param atom  {@link DataAtom} 模型定义
      * @param input {@link JsonArray} 数据信息
-     *
      * @return {@link Set}<{@link DataGroup}>
      */
     public static Set<DataGroup> toGroup(final DataAtom atom, final JsonArray input) {
@@ -449,14 +424,13 @@ public final class Ox {
 
     /**
      * 根据传入路径执行路径解析工作，解析三种不同环境的路径。
-     *
+     * <p>
      * - Development：开发环境
      * - Production：生产环境
      * - Mockito：模拟测试环境（integration中的debug = true）
      *
      * @param path        {@link String} 构造的环境读取数据专用路径
      * @param environment {@link Environment} 传入环境数据
-     *
      * @return {@link String} 返回不同环境处理过的绝对路径信息
      */
     public static String toRoot(final String path, final Environment environment) {
@@ -467,7 +441,6 @@ public final class Ox {
      * 根据传入路径执行解析工作，解析`Development`开发环境的路径。
      *
      * @param path {@link String} 构造的环境读取数据专用路径
-     *
      * @return {@link String} 返回不同环境处理过的绝对路径信息
      */
     public static String toRootDev(final String path) {
@@ -478,7 +451,6 @@ public final class Ox {
      * 「Async」元数据执行器
      *
      * @param input 输入的最终响应数据，内部调用`metadata(JsonArray)`方法执行转换。
-     *
      * @return {@link Future}<{@link JsonArray}> 异步执行结果
      */
     public static Future<JsonArray> metadataAsync(final JsonArray input) {
@@ -487,15 +459,14 @@ public final class Ox {
 
     /**
      * 元数据执行器
-     *
+     * <p>
      * 支持功能：
-     *
+     * <p>
      * - 针对字段`metadata`执行Json转换。
      * - 按`visible = true/false`执行过滤，如果不存在则默认为`true`，筛选元素。
      * - 针对字段`columns`执行Json转换。
      *
      * @param input 输入的最终响应数据
-     *
      * @return {@link JsonArray} 同步执行结果
      */
     public static JsonArray metadata(final JsonArray input) {
@@ -504,14 +475,13 @@ public final class Ox {
 
     /**
      * 「Node」图节点数组格式化专用方法。
-     *
+     * <p>
      * 格式化判断：
-     *
+     * <p>
      * - 如果出现相同的`globalId`则直接忽略，先执行节点合并（按`globalId`执行压缩）。
      * - 每一个节点内部调用`toNode`重载方法（{@link JsonObject}类型处理）。
      *
      * @param nodes {@link JsonArray} 待格式化的图节点数组
-     *
      * @return {@link JsonArray} 完成格式化的图节点数组
      */
     public static JsonArray toNode(final JsonArray nodes) {
@@ -520,16 +490,15 @@ public final class Ox {
 
     /**
      * 「Node」图节点格式化专用方法。
-     *
+     * <p>
      * 格式化细节：
-     *
+     * <p>
      * - 将`globalId`赋值给`key`属性。
      * - 拷贝`name`属性。
      * - 拷贝`code`属性。
      * - 将原始数据{@link JsonObject}拷贝到`data`属性中。
      *
      * @param node {@link JsonObject} 待格式化的图节点对象
-     *
      * @return {@link JsonObject} 完成格式化的图节点
      */
     public static JsonObject toNode(final JsonObject node) {
@@ -538,11 +507,10 @@ public final class Ox {
 
     /**
      * 「Edge」图边数组格式化专用方法。
-     *
+     * <p>
      * > 内部调用`toEdge`的重载方法（{@link JsonObject}类型）。
      *
      * @param edges {@link JsonArray} 待格式化的边数据数组
-     *
      * @return {@link JsonArray} 已格式化的边数据数组
      */
     public static JsonArray toEdge(final JsonArray edges) {
@@ -551,16 +519,15 @@ public final class Ox {
 
     /**
      * 「Edge」图边格式化专用方法
-     *
+     * <p>
      * 格式化细节：
-     *
+     * <p>
      * - 拷贝`sourceGlobalId`到`source`属性中。
      * - 拷贝`targetGlobalId`到`ofMain`属性中。
      * - 拷贝`type`边类型到`type`属性中。
      * - 将原始数据{@link JsonObject}拷贝到`data`属性中。
      *
      * @param edge {@link JsonObject} 待格式化的边对象
-     *
      * @return {@link JsonObject} 已格式化的边对象
      */
     public static JsonObject toEdge(final JsonObject edge) {
@@ -569,13 +536,12 @@ public final class Ox {
 
     /**
      * 提取上下游关系合并到一起。
-     *
+     * <p>
      * - down：下游属性。
      * - up：上游属性。
      *
      * @param source 输入的源类型数据
      * @param <T>    输入的源中元素的Java类型
-     *
      * @return 拉平过后的关系信息
      */
     public static <T> JsonArray toLinker(final T source) {
@@ -588,7 +554,6 @@ public final class Ox {
      * @param atom  {@link DataAtom}
      * @param forms {@link JsonArray} 当前模型关联的表单集`UI_FORM`
      * @param lists {@link JsonArray} 当前模型关联的列表集`UI_LIST`
-     *
      * @return {@link JsonObject} 返回比对报表
      */
     public static JsonArray compareUi(final DataAtom atom, final JsonArray forms, final JsonArray lists) {
@@ -597,20 +562,19 @@ public final class Ox {
 
     /**
      * 统一视图工具执行器
-     *
+     * <p>
      * `GET /api/ox/columns/:identifier/all`全列读取请求
-     *
+     * <p>
      * 请求数据格式
-     *
+     * <p>
      * - identifier：模型标识符
      * - dynamic：是否动态视图（存储在`S_VIEW`中）
      * - view：视图类型，默认值`DEFAULT`
-     *
+     * <p>
      * 除开上述参数后，还包含`Http Header`的所有信息。
      *
      * @param envelop
      * @param identifier
-     *
      * @return {@link Future}<{@link JsonArray}>
      */
     public static Future<JsonArray> viewFull(final Envelop envelop, final String identifier) {
@@ -619,17 +583,17 @@ public final class Ox {
 
     /**
      * 我的视图列工具执行器
-     *
+     * <p>
      * `GET /api/ox/columns/:identifier/my`我的视图列读取请求
-     *
+     * <p>
      * 请求数据格式
-     *
+     * <p>
      * - uri：当前请求路径
      * - method：当前HTTP方法
      * - 合并了所有`Http Header`的内容
-     *
+     * <p>
      * 返回数据格式：
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      * {
@@ -642,7 +606,6 @@ public final class Ox {
      *
      * @param envelop    {@link Envelop} Zero标准请求模型
      * @param identifier {@link String} 模型标识符
-     *
      * @return {@link Future}<{@link JsonArray}>
      */
     public static Future<JsonObject> viewMy(final Envelop envelop, final String identifier) {
@@ -654,7 +617,6 @@ public final class Ox {
      *
      * @param key        {@link String} 应用标识，可以是`id`、也可以是`sigma`
      * @param identifier {@link String} 模型统一标识符
-     *
      * @return {@link HDao} 数据库访问对象
      */
     public static HDao toDao(final String key, final String identifier) {
@@ -670,7 +632,6 @@ public final class Ox {
      *
      * @param key        {@link String} 应用标识，可以是`id`、也可以是`sigma`
      * @param identifier {@link String} 模型统一标识符
-     *
      * @return {@link DataAtom} 模型定义
      */
     public static DataAtom toAtom(final String key, final String identifier) {
@@ -682,7 +643,6 @@ public final class Ox {
      *
      * @param clazz {@link Class} 调用该函数的类
      * @param <T>   函数Monad输入和输出相关数据类型
-     *
      * @return {@link Function} 返回异步函数
      */
     public static <T> Function<T[], Future<T[]>> toArray(final Class<?> clazz) {
@@ -697,7 +657,6 @@ public final class Ox {
      *
      * @param data {@link JsonObject} 数据信息
      * @param atom {@link DataAtom} 模型定义
-     *
      * @return {@link JsonObject} 处理过的数据信息
      */
     public static JsonObject elementUuid(final JsonObject data, final DataAtom atom) {
@@ -709,7 +668,6 @@ public final class Ox {
      *
      * @param data {@link JsonArray} 数据信息
      * @param atom {@link DataAtom} 模型定义
-     *
      * @return {@link JsonArray} 处理过的数据信息
      */
     public static JsonArray elementUuid(final JsonArray data, final DataAtom atom) {
@@ -722,7 +680,6 @@ public final class Ox {
      *
      * @param input {@link JsonArray} 待处理数组数据
      * @param atom  {@link DataAtom} 模型定义
-     *
      * @return {@link JsonArray} 处理后的数据
      */
     public static JsonArray elementCompress(final JsonArray input, final DataAtom atom) {
@@ -733,7 +690,6 @@ public final class Ox {
      * 针对插件配置的处理
      *
      * @param key 插件所需的Key
-     *
      * @return
      */
     public static boolean onOff(final String key) {
@@ -742,9 +698,9 @@ public final class Ox {
 
     /**
      * ## 环境静态类
-     *
+     * <p>
      * ### 1. 基本介绍
-     *
+     * <p>
      * 读取配置文件`running/configuration.json`构造CMDB基础环境。
      *
      * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -756,7 +712,6 @@ public final class Ox {
          * <findRunning>cmdb.commutator</findRunning>，反射专用生命周期处理器配置（下层调用上层，使用反射，不能直接使用类型）。
          *
          * @param commutator `io.zerows.epoch.bootplus.extension.operation.workflow.Commutator`类型默认值
-         *
          * @return {@link Class} 返回最终的 clazz 值
          */
         static Class<?> commutator(final Class<?> commutator) {
@@ -767,7 +722,6 @@ public final class Ox {
          * 根据日志类型读取日志信息。
          *
          * @param type {@link TypeLog} 日志类型
-         *
          * @return 返回该日志类型中的打印日志内容
          */
         static String message(final TypeLog type) {

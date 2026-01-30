@@ -1,33 +1,33 @@
 [
-    "serial,单号,,true",
-    "amount,金额,CURRENCY",
-    {
-        "metadata": "type,类型,MAPPING",
-        "$mapping": {
-            "DEBT": "应收,link,16,#0e8be6",
-            "REFUND": "退款,link,16,#ff686b"
-        }
-    },
-    {
-        "metadata": "customerId,客户,USER",
-        "$config": {
-            "uri": "/api/customer/:key",
-            "field": "name"
-        },
-        "$empty": "（未知）"
-    },
-    "signName,联系人",
-    "signMobile,联系电话",
-    {
-        "metadata": "createdBy,创建人,USER",
-        "$config": {
-            "uri": "/api/user/:key",
-            "field": "realname"
-        },
-        "$empty": "（系统）"
-    },
-    {
-        "metadata": "createdAt,创建时间,DATE",
-        "$format": "YYYY-MM-DD HH:mm:ss"
+  "serial,单号,,true",
+  "amount,金额,CURRENCY",
+  {
+    "metadata": "type,类型,MAPPING",
+    "$mapping": {
+      "DEBT": "应收,link,16,#0e8be6",
+      "REFUND": "退款,link,16,#ff686b"
     }
+  },
+  {
+    "metadata": "customerId,客户,USER",
+    "$config": {
+      "uri": "/api/customer/:key",
+      "field": "name"
+    },
+    "$empty": "（未知）"
+  },
+  "signName,联系人",
+  "signMobile,联系电话",
+  {
+    "metadata": "createdBy,创建人,USER",
+    "$config": {
+      "uri": "/api/user/:key",
+      "field": "realname"
+    },
+    "$empty": "（系统）"
+  },
+  {
+    "metadata": "createdAt,创建时间,DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss"
+  }
 ]

@@ -33,7 +33,6 @@ class MakerBill implements Maker<String, FBill> {
      *
      * @param data   输入数据
      * @param indent 序号
-     *
      * @return {@link FBill}
      */
     @Override

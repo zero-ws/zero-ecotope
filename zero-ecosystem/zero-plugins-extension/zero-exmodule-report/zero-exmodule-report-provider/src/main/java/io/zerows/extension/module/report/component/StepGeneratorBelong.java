@@ -37,7 +37,7 @@ class StepGeneratorBelong extends StepGeneratorBase {
     @Override
     public Future<KpReportInstance> build(final KpReportInstance instance, final JsonObject request, final JsonArray sourceData) {
         final KpReport report = this.metadata().reportMeta();
-        instance.setReportId(report.getKey());
+        instance.setReportId(report.getId());
 
         final String user = Ut.valueString(request, KName.USER);        // user
         instance.setReportBy(user);
@@ -47,7 +47,7 @@ class StepGeneratorBelong extends StepGeneratorBase {
          * 补充 refType / refId
          */
         instance.setRefType(report.getClass().getName());
-        instance.setRefId(report.getKey());
+        instance.setRefId(report.getId());
         return Future.succeededFuture(instance);
     }
 }

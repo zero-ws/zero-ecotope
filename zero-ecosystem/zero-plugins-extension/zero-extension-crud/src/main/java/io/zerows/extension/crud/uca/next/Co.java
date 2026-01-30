@@ -12,20 +12,20 @@ import java.util.List;
 /**
  * The interface for module selection
  * Phase 1: Combine input request into IxOpt and pass to IxPanel
- *
+ * <p>
  * 1) Combine input ( Envelop, Body, Module ) three formatFail
  * 2) Calculate the result to IxOpt
- *
+ * <p>
  * > This component will be called by IxOpt internal
- *
- *
+ * <p>
+ * <p>
  * 「Sequence」
  * Phase 2: For sequence only
- *
+ * <p>
  * 1) Execute `active` function
  * 2) Pass the result of `active` into `standBy` ( Tran Component )
  * 3) Execute `standBy` function
- *
+ * <p>
  * Phase 3: Response building
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

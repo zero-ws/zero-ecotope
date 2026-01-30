@@ -1,5 +1,5 @@
 {
-    "sigma": "`${sigma}`",
-    "appId": "`${appId}`",
-    "": true
+  "sigma": "`${sigma}`",
+  "appId": "`${appId}`",
+  "": true
 }

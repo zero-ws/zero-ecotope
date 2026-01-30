@@ -5,19 +5,38 @@
 DROP TABLE IF EXISTS UI_OP;
 CREATE TABLE IF NOT EXISTS UI_OP
 (
-    `KEY`          VARCHAR(36) COMMENT '「key」- 操作主键',
-    `ACTION`       VARCHAR(255) COMMENT '「action」- S_ACTION中的code（权限检查专用）',
-    `TEXT`         VARCHAR(255) COMMENT '「text」- 该操作上的文字信息',
-    `EVENT`        VARCHAR(128) COMMENT '「event」- 操作中的 event 事件名称',
-    `CLIENT_KEY`   VARCHAR(128) COMMENT '「clientKey」- 一般是Html中对应的key信息，如 $opSave',
-    `CLIENT_ID`    VARCHAR(128) COMMENT '「clientId」- 没有特殊情况，clientId = clientKey',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 操作主键',
+    `ACTION` VARCHAR
+(
+    255
+) COMMENT '「action」- S_ACTION中的code（权限检查专用）',
+    `TEXT` VARCHAR
+(
+    255
+) COMMENT '「text」- 该操作上的文字信息',
+    `EVENT` VARCHAR
+(
+    128
+) COMMENT '「event」- 操作中的 event 事件名称',
+    `CLIENT_KEY` VARCHAR
+(
+    128
+) COMMENT '「clientKey」- 一般是Html中对应的key信息，如 $opSave',
+    `CLIENT_ID` VARCHAR
+(
+    128
+) COMMENT '「clientId」- 没有特殊情况，clientId = clientKey',
 
     -- 配置数据
-    `CONFIG`       TEXT COMMENT '「config」- 该按钮操作对应的配置数据信息, icon, type',
-    `PLUGIN`       TEXT COMMENT '「plugin」- 该按钮中的插件，如 tooltip，component等',
+    `CONFIG` TEXT COMMENT '「config」- 该按钮操作对应的配置数据信息, icon, type',
+    `PLUGIN` TEXT COMMENT '「plugin」- 该按钮中的插件，如 tooltip，component等',
 
     -- 管理专用属性
-    `UI_SORT`      INT COMMENT '「uiSort」- 按钮在管理过程中的排序',
+    `UI_SORT` INT COMMENT '「uiSort」- 按钮在管理过程中的排序',
     -- 直接从 control 这个级别处理 OP
     /*
      * 1）列表类：CONTROL - LIST - COLUMN - OP（列表ID）
@@ -37,25 +56,52 @@ CREATE TABLE IF NOT EXISTS UI_OP
      *    -- clientId,clientKey, 一般是同样的值
      * -- FREEDOM 类型，绑定的自由控件，此时（controlType = WEB）
      */
-    `CONTROL_ID`   VARCHAR(128) COMMENT '「controlId」- 挂载专用的ID',
-    `CONTROL_TYPE` VARCHAR(255) COMMENT '「controlType」- 操作关联的控件类型',
+    `CONTROL_ID` VARCHAR
+(
+    128
+) COMMENT '「controlId」- 挂载专用的ID',
+    `CONTROL_TYPE` VARCHAR
+(
+    255
+) COMMENT '「controlType」- 操作关联的控件类型',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`        VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`     VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`       BIT COMMENT '「active」- 是否启用',
-    `METADATA`     TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`   DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`   VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`   DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`   VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`       VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`    VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 
 -- changeset Lang:ox-op-2
 ALTER TABLE UI_OP

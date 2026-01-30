@@ -27,12 +27,12 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<IApiRecord> KEY_I_API_PRIMARY = Internal.createUniqueKey(IApi.I_API, DSL.name("KEY_I_API_PRIMARY"), new TableField[] { IApi.I_API.KEY }, true);
-    public static final UniqueKey<IApiRecord> KEY_I_API_URI = Internal.createUniqueKey(IApi.I_API, DSL.name("KEY_I_API_URI"), new TableField[] { IApi.I_API.URI, IApi.I_API.METHOD, IApi.I_API.SIGMA }, true);
-    public static final UniqueKey<IJobRecord> KEY_I_JOB_NAMESPACE = Internal.createUniqueKey(IJob.I_JOB, DSL.name("KEY_I_JOB_NAMESPACE"), new TableField[] { IJob.I_JOB.NAMESPACE, IJob.I_JOB.NAME }, true);
-    public static final UniqueKey<IJobRecord> KEY_I_JOB_PRIMARY = Internal.createUniqueKey(IJob.I_JOB, DSL.name("KEY_I_JOB_PRIMARY"), new TableField[] { IJob.I_JOB.KEY }, true);
-    public static final UniqueKey<IJobRecord> KEY_I_JOB_SIGMA = Internal.createUniqueKey(IJob.I_JOB, DSL.name("KEY_I_JOB_SIGMA"), new TableField[] { IJob.I_JOB.SIGMA, IJob.I_JOB.CODE }, true);
-    public static final UniqueKey<IJobRecord> KEY_I_JOB_SIGMA_2 = Internal.createUniqueKey(IJob.I_JOB, DSL.name("KEY_I_JOB_SIGMA_2"), new TableField[] { IJob.I_JOB.SIGMA, IJob.I_JOB.NAME }, true);
-    public static final UniqueKey<IServiceRecord> KEY_I_SERVICE_NAME = Internal.createUniqueKey(IService.I_SERVICE, DSL.name("KEY_I_SERVICE_NAME"), new TableField[] { IService.I_SERVICE.NAME, IService.I_SERVICE.NAMESPACE }, true);
-    public static final UniqueKey<IServiceRecord> KEY_I_SERVICE_PRIMARY = Internal.createUniqueKey(IService.I_SERVICE, DSL.name("KEY_I_SERVICE_PRIMARY"), new TableField[] { IService.I_SERVICE.KEY }, true);
+    public static final UniqueKey<IApiRecord> KEY_I_API_PRIMARY = Internal.createUniqueKey(IApi.I_API, DSL.name("KEY_I_API_PRIMARY"), new TableField[] { IApi.I_API.ID }, true);
+    public static final UniqueKey<IApiRecord> KEY_I_API_UK_I_API_URI_METHOD_SIGMA = Internal.createUniqueKey(IApi.I_API, DSL.name("KEY_I_API_UK_I_API_URI_METHOD_SIGMA"), new TableField[] { IApi.I_API.URI, IApi.I_API.METHOD, IApi.I_API.SIGMA }, true);
+    public static final UniqueKey<IJobRecord> KEY_I_JOB_PRIMARY = Internal.createUniqueKey(IJob.I_JOB, DSL.name("KEY_I_JOB_PRIMARY"), new TableField[] { IJob.I_JOB.ID }, true);
+    public static final UniqueKey<IJobRecord> KEY_I_JOB_UK_I_JOB_NAMESPACE_NAME = Internal.createUniqueKey(IJob.I_JOB, DSL.name("KEY_I_JOB_UK_I_JOB_NAMESPACE_NAME"), new TableField[] { IJob.I_JOB.NAMESPACE, IJob.I_JOB.NAME }, true);
+    public static final UniqueKey<IJobRecord> KEY_I_JOB_UK_I_JOB_SIGMA_CODE = Internal.createUniqueKey(IJob.I_JOB, DSL.name("KEY_I_JOB_UK_I_JOB_SIGMA_CODE"), new TableField[] { IJob.I_JOB.SIGMA, IJob.I_JOB.CODE }, true);
+    public static final UniqueKey<IJobRecord> KEY_I_JOB_UK_I_JOB_SIGMA_NAME = Internal.createUniqueKey(IJob.I_JOB, DSL.name("KEY_I_JOB_UK_I_JOB_SIGMA_NAME"), new TableField[] { IJob.I_JOB.SIGMA, IJob.I_JOB.NAME }, true);
+    public static final UniqueKey<IServiceRecord> KEY_I_SERVICE_PRIMARY = Internal.createUniqueKey(IService.I_SERVICE, DSL.name("KEY_I_SERVICE_PRIMARY"), new TableField[] { IService.I_SERVICE.ID }, true);
+    public static final UniqueKey<IServiceRecord> KEY_I_SERVICE_UK_I_SERVICE_NAME_NAMESPACE = Internal.createUniqueKey(IService.I_SERVICE, DSL.name("KEY_I_SERVICE_UK_I_SERVICE_NAME_NAMESPACE"), new TableField[] { IService.I_SERVICE.NAME, IService.I_SERVICE.NAMESPACE }, true);
 }

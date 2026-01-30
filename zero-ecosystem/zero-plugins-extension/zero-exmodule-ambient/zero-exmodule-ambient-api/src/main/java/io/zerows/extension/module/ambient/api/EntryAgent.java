@@ -37,7 +37,6 @@ public interface EntryAgent {
      * </code></pre>
      *
      * @param name 应用名称
-     *
      * @return 应用基础数据
      */
     @Path("/app/name/{name}")
@@ -49,7 +48,6 @@ public interface EntryAgent {
      * 读取应用之下所有的菜单
      *
      * @param appId 应用ID
-     *
      * @return 菜单数据
      */
     @Path("/api/menus")
@@ -67,7 +65,6 @@ public interface EntryAgent {
      * </code></pre>
      *
      * @param appId 应用ID
-     *
      * @return 应用基础数据
      */
     @Path("/api/app")

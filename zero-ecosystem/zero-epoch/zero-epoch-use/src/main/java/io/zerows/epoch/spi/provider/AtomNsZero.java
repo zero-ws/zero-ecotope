@@ -45,7 +45,6 @@ public class AtomNsZero implements AtomNs {
      * </pre>
      *
      * @param appName 🏷️ 应用名称
-     *
      * @return 📁 名空间信息
      */
     @Override

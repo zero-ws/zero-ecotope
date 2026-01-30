@@ -57,7 +57,7 @@ class IsStore {
         if (!directoryMap.isEmpty()) {
             directoryMap.values().forEach(item -> {
                 final JsonObject record = Ux.toJson(item);
-                record.put(KName.DIRECTORY_ID, item.getKey());
+                record.put(KName.DIRECTORY_ID, item.getId());
                 queueDft.add(record);
             });
         }
@@ -112,7 +112,7 @@ class IsStore {
                 final IDirectory store = storeMap.get(storePath);
                 if (Objects.nonNull(store)) {
                     // 拷贝 directoryId
-                    json.put(KName.DIRECTORY_ID, store.getKey());
+                    json.put(KName.DIRECTORY_ID, store.getId());
                     /*
                      * 拷贝访问信息
                      * -- visit ( owner )       访问者

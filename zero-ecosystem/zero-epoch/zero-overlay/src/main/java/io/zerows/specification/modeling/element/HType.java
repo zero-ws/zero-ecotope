@@ -14,7 +14,7 @@ import java.util.Objects;
  *     2. Vert.x 中可用于解析Json文件生成对应的模型
  *     3. Zero 中的 zero-atom 可用于解析 Excel 文件生成对应的模型
  * </code></pre>
- *
+ * <p>
  * 字段类型的属性定义：
  * <pre><code>
  *     1. type: Java类型

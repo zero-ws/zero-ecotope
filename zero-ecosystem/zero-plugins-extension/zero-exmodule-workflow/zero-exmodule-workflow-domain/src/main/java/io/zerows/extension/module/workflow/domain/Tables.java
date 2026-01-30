@@ -16,17 +16,17 @@ import io.zerows.extension.module.workflow.domain.tables.WTodo;
 public class Tables {
 
     /**
-     * The table <code>ZDB.W_FLOW</code>.
+     * W_FLOW
      */
     public static final WFlow W_FLOW = WFlow.W_FLOW;
 
     /**
-     * The table <code>ZDB.W_TICKET</code>.
+     * W_TICKET
      */
     public static final WTicket W_TICKET = WTicket.W_TICKET;
 
     /**
-     * The table <code>ZDB.W_TODO</code>.
+     * W_TODO
      */
     public static final WTodo W_TODO = WTodo.W_TODO;
 }

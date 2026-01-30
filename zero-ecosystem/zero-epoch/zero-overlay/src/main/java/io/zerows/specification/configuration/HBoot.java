@@ -84,7 +84,7 @@ public interface HBoot {
      *     - 支持启动器的前置初始化操作
      *     - 为容器启动前的准备工作提供配置支持
      * </pre>
-     *
+     * <p>
      * ⚠️ 注意：泛型 C 代表 Container（容器），与 HLauncher 中的容器类型一致
      *
      * @return 🧩 {@link HLauncher.Pre} - 预启动组件
@@ -101,7 +101,7 @@ public interface HBoot {
      *     - 管理启动时的依赖注入和组件初始化
      *     - 为应用启动提供完整的配置上下文
      * </pre>
-     *
+     * <p>
      * ⚠️ 注意：泛型 T 代表 HConfig 的子类，表示配置类型
      *
      * @return 🧩 {@link HConfig.HOn} - 启动配置组件
@@ -116,7 +116,7 @@ public interface HBoot {
      *     - 支持运行时的配置更新和刷新
      *     - 提供运行时环境的配置管理
      * </pre>
-     *
+     * <p>
      * ⚠️ 注意：泛型 T 代表 HConfig 的子类，表示配置类型
      *
      * @return 🧩 {@link HConfig.HRun} - 运行配置组件
@@ -131,7 +131,7 @@ public interface HBoot {
      *     - 管理资源释放和状态保存
      *     - 确保优雅停机和状态持久化
      * </pre>
-     *
+     * <p>
      * ⚠️ 注意：泛型 T 代表 HConfig 的子类，表示配置类型
      *
      * @return 🧩 {@link HConfig.HOff} - 停止配置组件

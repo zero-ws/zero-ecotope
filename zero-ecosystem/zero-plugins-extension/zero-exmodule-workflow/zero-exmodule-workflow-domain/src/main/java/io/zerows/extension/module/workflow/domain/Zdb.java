@@ -32,17 +32,17 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
-     * The table <code>ZDB.W_FLOW</code>.
+     * W_FLOW
      */
     public final WFlow W_FLOW = WFlow.W_FLOW;
 
     /**
-     * The table <code>ZDB.W_TICKET</code>.
+     * W_TICKET
      */
     public final WTicket W_TICKET = WTicket.W_TICKET;
 
     /**
-     * The table <code>ZDB.W_TODO</code>.
+     * W_TODO
      */
     public final WTodo W_TODO = WTodo.W_TODO;
 

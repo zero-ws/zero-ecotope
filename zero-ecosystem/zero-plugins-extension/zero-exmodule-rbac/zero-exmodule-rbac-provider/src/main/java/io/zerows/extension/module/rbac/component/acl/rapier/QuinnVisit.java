@@ -43,7 +43,7 @@ public class QuinnVisit implements Quinn {
         Ut.itJArray(visitantData).forEach(visitantJ -> Ut.valueCopy(visitantJ, viewData,
             KName.SIGMA, KName.LANGUAGE, KName.UPDATED_BY
         ));
-        return Quinn.view().<SView>saveAsync(resource.getKey(), owner, viewData).compose(view -> {
+        return Quinn.view().<SView>saveAsync(resource.getId(), owner, viewData).compose(view -> {
             final Boolean virtual = Objects.isNull(resource.getVirtual()) ? Boolean.FALSE : resource.getVirtual();
             if (!virtual) {
                 return Ux.futureJ(view);
@@ -78,7 +78,7 @@ public class QuinnVisit implements Quinn {
         // 同一个SView中的 ADD / SAVE
         final ConcurrentMap<String, JsonObject> seekMap = Ut.elementMap(visitData, KName.Rbac.SEEK_KEY);
         final ADB jq = DB.on(SVisitantDao.class);
-        return jq.<SVisitant>fetchAsync(KName.VIEW_ID, viewInput.getKey()).compose(visitors -> {
+        return jq.<SVisitant>fetchAsync(KName.VIEW_ID, viewInput.getId()).compose(visitors -> {
             // If existing seekKey
             final ConcurrentMap<String, SVisitant> visitorM = Ut.elementMap(visitors, SVisitant::getSeekKey);
             final List<SVisitant> qUp = new ArrayList<>();
@@ -98,8 +98,8 @@ public class QuinnVisit implements Quinn {
                     final SVisitant insert = Ux.fromJson(updateData, SVisitant.class);
                     {
                         // Add Data
-                        insert.setKey(UUID.randomUUID().toString());
-                        insert.setViewId(viewInput.getKey());
+                        insert.setId(UUID.randomUUID().toString());
+                        insert.setViewId(viewInput.getId());
                         insert.setCreatedBy(insert.getUpdatedBy());
                         insert.setCreatedAt(at);
                         insert.setUpdatedAt(at);
@@ -126,7 +126,7 @@ public class QuinnVisit implements Quinn {
             if (Objects.isNull(view)) {
                 return Ux.futureJ();
             }
-            return DB.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getKey())
+            return DB.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getId())
                 .compose(visitants -> this.syntaxRegion.regionJ(view, visitants));
         }).compose(json -> Ux.future((T) json));
     }

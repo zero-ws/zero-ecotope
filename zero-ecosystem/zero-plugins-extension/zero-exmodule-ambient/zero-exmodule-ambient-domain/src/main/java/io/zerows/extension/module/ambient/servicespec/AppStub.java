@@ -39,7 +39,6 @@ public interface AppStub {
      * </ul>
      *
      * @param name 应用程序名称
-     *
      * @return 应用配置，Json格式
      */
     Future<JsonObject> fetchByName(String name);

@@ -49,7 +49,7 @@ public class QSiteMap {
 
         return jooq.<XMenu>fetchAllAsync().compose(menus -> {
             // 先构造一个Map ( name = key )
-            final ConcurrentMap<String, String> mapped = Ut.elementMap(menus, XMenu::getName, XMenu::getKey);
+            final ConcurrentMap<String, String> mapped = Ut.elementMap(menus, XMenu::getName, XMenu::getId);
             // Remove Set（移除菜单处理）
             final ConcurrentMap<String, JsonObject> parsed = planTree(menuMap, mapped);
             /*

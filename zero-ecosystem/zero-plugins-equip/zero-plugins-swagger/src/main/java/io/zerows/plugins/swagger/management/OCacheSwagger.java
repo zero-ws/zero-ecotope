@@ -1,8 +1,8 @@
 package io.zerows.plugins.swagger.management;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.plugins.swagger.SwaggerData;
 import io.zerows.platform.management.OCache;
+import io.zerows.plugins.swagger.SwaggerData;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.Objects;

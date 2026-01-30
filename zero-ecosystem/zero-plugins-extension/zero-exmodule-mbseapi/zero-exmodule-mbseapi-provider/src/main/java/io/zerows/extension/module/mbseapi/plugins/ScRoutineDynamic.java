@@ -56,7 +56,7 @@ public class ScRoutineDynamic implements ScRoutine {
             apis.forEach(api -> {
                 final UriMeta meta = new UriMeta();
                 meta.setDynamic(Boolean.TRUE);
-                meta.setKey(api.getKey());
+                meta.setKey(api.getId());
                 /*
                  * Api Processing
                  */

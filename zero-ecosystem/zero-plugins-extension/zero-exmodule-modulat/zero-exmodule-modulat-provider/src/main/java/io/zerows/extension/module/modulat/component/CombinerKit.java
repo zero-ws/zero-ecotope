@@ -25,7 +25,7 @@ class CombinerKit {
         bagJ.put(KName.UI_ICON, bag.getUiIcon());
         bagJ.put(KName.UI_STYLE, Ut.toJObject(bag.getUiStyle()));
         bagJ.put(KName.UI_SORT, bag.getUiSort());
-        bagJ.put(KName.KEY, bag.getKey());
+        bagJ.put(KName.KEY, bag.getId());
         return bagJ;
     }
 }

@@ -2,8 +2,8 @@ package io.zerows.specification.configuration;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.platform.apps.KPivot;
 import io.zerows.platform.exception._80413Exception501NotImplement;
-import io.zerows.platform.metadata.KPivot;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -25,7 +25,7 @@ import java.util.function.Consumer;
  *         // 真正的启动周期，之前可以针对 server 做相关调整以及配置
  *     });
  * </code></pre>
- *
+ * <p>
  * 所有在启动之前和停止之后的动作都在实现类内部处理，而保证实现类的自由度，如：
  * <pre><code>
  *     1. 配置文件加载

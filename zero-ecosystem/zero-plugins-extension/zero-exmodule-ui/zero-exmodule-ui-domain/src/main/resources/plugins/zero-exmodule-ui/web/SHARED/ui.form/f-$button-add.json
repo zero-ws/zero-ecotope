@@ -1,6 +1,6 @@
 {
-    "extension": [
-        "$opAdd,添加,SUBMIT,primary",
-        "$opReset,重置,RESET"
-    ]
+  "extension": [
+    "$opAdd,添加,SUBMIT,primary",
+    "$opReset,重置,RESET"
+  ]
 }

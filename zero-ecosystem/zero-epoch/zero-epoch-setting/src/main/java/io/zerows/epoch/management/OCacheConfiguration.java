@@ -2,9 +2,9 @@ package io.zerows.epoch.management;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.MDConfiguration;
-import io.zerows.epoch.basicore.MDConnect;
-import io.zerows.epoch.basicore.MDPage;
+import io.zerows.epoch.web.MDConfiguration;
+import io.zerows.epoch.web.MDConnect;
+import io.zerows.epoch.web.MDPage;
 import io.zerows.platform.management.OCache;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
@@ -84,7 +84,6 @@ public interface OCacheConfiguration extends OCache<MDConfiguration> {
      * </code></pre>
      *
      * @param id 配置 id
-     *
      * @return 是否已经初始化
      */
     static boolean initialized(final String id) {

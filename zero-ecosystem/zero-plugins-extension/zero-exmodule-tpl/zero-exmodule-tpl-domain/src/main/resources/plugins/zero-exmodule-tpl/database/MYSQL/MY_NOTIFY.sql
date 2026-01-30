@@ -22,37 +22,68 @@
 DROP TABLE IF EXISTS MY_NOTIFY;
 CREATE TABLE IF NOT EXISTS MY_NOTIFY
 (
-    `KEY`             VARCHAR(36) COMMENT '「key」- 设置主键',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 设置主键',
     /*
      * 1. 拥有者为角色时证明这些角色下所有账号都需要发送
      * 2. 拥有者为用户时证明这个用户已经自定义过了配置信息，这种场景下
      *    不会生成 I_MESSAGE 的队列，所以此处计算会变得稍微复杂
      * 3. 先提取 OWNER_TYPE = ROLE 下的所有用户，再提取 OWNER_ID 为对应用户的配置信息
      */
-    `OWNER_TYPE`      VARCHAR(128) COMMENT '「ownerType」- 拥有者类型',
-    `OWNER_ID`        VARCHAR(36) COMMENT '「ownerId」- 拥有者ID',
+    `OWNER_TYPE` VARCHAR
+(
+    128
+) COMMENT '「ownerType」- 拥有者类型',
+    `OWNER_ID` VARCHAR
+(
+    36
+) COMMENT '「ownerId」- 拥有者ID',
 
     -- 提醒设置
     `CONFIG_INTERNAL` LONGTEXT COMMENT '「configInternal」- 站内信配置',
-    `CONFIG_EMAIL`    LONGTEXT COMMENT '「configEmail」- 邮件配置',
-    `CONFIG_SMS`      LONGTEXT COMMENT '「configSms」- 短信配置',
+    `CONFIG_EMAIL` LONGTEXT COMMENT '「configEmail」- 邮件配置',
+    `CONFIG_SMS` LONGTEXT COMMENT '「configSms」- 短信配置',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`           VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`        VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`          BIT COMMENT '「active」- 是否启用',
-    `METADATA`        TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`      DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`      VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`      DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`      VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`          VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`       VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 
 -- changeset Lang:ox-my_notify-2
 ALTER TABLE MY_NOTIFY

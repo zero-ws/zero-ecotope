@@ -37,7 +37,6 @@ public interface OCache<T> {
      *
      * @param configuration 配置对象
      * @param <C>           配置类型
-     *
      * @return {@link OCache} 实例
      */
     default <C> OCache<T> configure(final C configuration) {
@@ -74,7 +73,6 @@ public interface OCache<T> {
      * 这种方法通常仅用于 Hash 表
      *
      * @param key 键值
-     *
      * @return 需筛选的类型
      */
     default T valueGet(final String key) {

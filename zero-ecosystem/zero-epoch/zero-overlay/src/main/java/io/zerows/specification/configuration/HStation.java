@@ -41,7 +41,6 @@ public interface HStation {
      *
      * @param mainClass 主类
      * @param args      启动参数
-     *
      * @return {@link HStation}
      */
     HStation bind(Class<?> mainClass, String[] args);

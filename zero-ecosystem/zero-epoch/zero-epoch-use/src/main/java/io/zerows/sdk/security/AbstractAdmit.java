@@ -4,13 +4,13 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.platform.metadata.KPivot;
 import io.zerows.epoch.metadata.security.KPermit;
+import io.zerows.platform.apps.KPivot;
 import io.zerows.platform.enums.EmApp;
-import io.zerows.support.Ut;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
+import io.zerows.support.Ut;
 
 import java.util.Optional;
 import java.util.function.Function;

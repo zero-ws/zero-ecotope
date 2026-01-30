@@ -31,7 +31,6 @@ public class LogFactory {
      * 配置化系统专用日志处理器程序，生成基于配置的 {@link LogModule} 专用日志记录器，动态配置系统专用日志器
      *
      * @param type 日志类型，日志类型决定了日志的颜色和输出文字基本信息
-     *
      * @return {@link LogModule}
      */
     public LogModule configure(final String type) {
@@ -43,7 +42,6 @@ public class LogFactory {
      * OSGI 专用系统日志器，通常用于 OSGI 中的日志系统，如 Bundle / Launcher
      *
      * @param type 日志类型，日志类型决定了日志的颜色和输出文字基本信息
-     *
      * @return {@link LogModule}
      */
     public LogModule osgi(final String type) {
@@ -56,7 +54,6 @@ public class LogFactory {
      * zero-equip 扩展模块专用日志器，对应到项目中的所有模块创建的日志系统
      *
      * @param type 日志类型，日志类型决定了日志的颜色和输出文字基本信息
-     *
      * @return {@link LogModule}
      */
     public LogModule infix(final String type) {
@@ -68,7 +65,6 @@ public class LogFactory {
      * zero-extension 扩展模块专用日志器，对应到项目中的所有模块创建的日志系统
      *
      * @param type 日志类型，日志类型决定了日志的颜色和输出文字基本信息
-     *
      * @return {@link LogModule}
      */
     public LogModule extension(final String type) {
@@ -80,7 +76,6 @@ public class LogFactory {
      * aeon 系统专用日志器，对应到项目中所有的云端日志系统
      *
      * @param type 日志类型，日志类型决定了日志的颜色和输出文字基本信息
-     *
      * @return {@link LogModule}
      */
     public LogModule cloud(final String type) {

@@ -1,8 +1,8 @@
 package io.zerows.platform.metadata;
 
 import io.zerows.platform.enums.modeling.EmKey;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.element.HKey;
+import io.zerows.support.base.UtBase;
 
 import java.util.HashSet;
 import java.util.Objects;

@@ -19,9 +19,9 @@ import java.util.function.Supplier;
 
 /**
  * ## 界面比对工具
- *
+ * <p>
  * > 该工具类在`UI`报表命令中专用，主要用于生成属性报表，判断属性差异！
- *
+ * <p>
  * 参考`{@link  FieldReport}`查看属性报表的基础数据结构。
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -40,7 +40,6 @@ final class OxCompareUi {
      * @param atom  {@link DataAtom}
      * @param forms {@link JsonArray} 当前模型关联的表单集`UI_FORM`
      * @param lists {@link JsonArray} 当前模型关联的列表集`UI_LIST`
-     *
      * @return {@link JsonObject} 返回比对报表
      */
     static JsonArray compareUi(final DataAtom atom, final JsonArray forms, final JsonArray lists) {
@@ -61,7 +60,6 @@ final class OxCompareUi {
      *
      * @param list {@link JsonObject} 当前模型关联的列表集`UI_LIST`
      * @param atom {@link DataAtom}
-     *
      * @return {@link JsonObject} 返回列表报表
      */
     private static List<FieldReport> toList(final JsonObject list, final DataAtom atom) {
@@ -85,7 +83,6 @@ final class OxCompareUi {
      * @param uiSet    {@link Set}<{@link String}> UI中的配置属性集
      * @param modelSet {@link Set}<{@link String}> 模型中的配置属性集
      * @param supplier {@link Supplier}<{@link  FieldReport}> 生成属性报表的专用函数
-     *
      * @return {@link List}<{@link  FieldReport}> 返回属性报表列表
      */
     private static List<FieldReport> toDiff(final Set<String> uiSet, final Set<String> modelSet, final Supplier<FieldReport> supplier) {
@@ -118,7 +115,6 @@ final class OxCompareUi {
      *
      * @param form {@link JsonObject} 当前模型关联的表单集`UI_FORM`
      * @param atom {@link DataAtom} 模型定义
-     *
      * @return {@link JsonObject} 返回表单配置报表
      */
     private static List<FieldReport> toForm(final JsonObject form, final DataAtom atom) {

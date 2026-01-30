@@ -42,7 +42,7 @@ class TIs {
             return Objects.nonNull(left) && Objects.nonNull(right) && left.equals(right);
         }
     }
-    
+
     static boolean isMatch(final String value, final String regex) {
         if (isNil(value) || isNil(regex)) {
             return false;

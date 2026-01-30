@@ -1,7 +1,7 @@
 package io.zerows.extension.crud.boot;
 
 import io.zerows.cortex.metadata.WebRule;
-import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
 import io.zerows.extension.crud.common.IxConfig;
 import io.zerows.extension.skeleton.metadata.MDModuleManager;
 import io.zerows.mbse.metadata.KModule;
@@ -27,19 +27,19 @@ public class MDCRUDManager extends MDModuleManager<Boolean, IxConfig> {
         super(MID.BUNDLE_SYMBOLIC_NAME);
     }
 
+    public static MDCRUDManager of() {
+        if (INSTANCE == null) {
+            INSTANCE = new MDCRUDManager();
+        }
+        return INSTANCE;
+    }
+
     @Override
     public void config(final IxConfig config) {
         // 重写后先调用父类
         super.config(config);
         this.setupModule = IxSetup.of(IxSetupModule::new, config);
         this.setupRule = IxSetup.of(IxSetupRule::new, config);
-    }
-
-    public static MDCRUDManager of() {
-        if (INSTANCE == null) {
-            INSTANCE = new MDCRUDManager();
-        }
-        return INSTANCE;
     }
 
     void handleAfter(final Set<MDConfiguration> configurationSet) {

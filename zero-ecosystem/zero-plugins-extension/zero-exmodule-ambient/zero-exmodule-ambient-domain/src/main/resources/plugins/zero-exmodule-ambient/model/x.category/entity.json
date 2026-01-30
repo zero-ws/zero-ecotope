@@ -1,22 +1,22 @@
 {
-    "name": "x-category",
-    "daoCls": "X_CATEGORY",
-    "field": {
-        "unique": [
-            [
-                "code",
-                "type",
-                "sigma"
-            ]
-        ]
+  "name": "x-category",
+  "daoCls": "X_CATEGORY",
+  "field": {
+    "unique": [
+      [
+        "code",
+        "type",
+        "sigma"
+      ]
+    ]
+  },
+  "transform": {
+    "initial": {
+      "type": "`${type}`",
+      "identifier": "`${module}`"
     },
-    "transform": {
-        "initial": {
-            "type": "`${type}`",
-            "identifier": "`${module}`"
-        },
-        "tree": {
-            "in": "code"
-        }
+    "tree": {
+      "in": "code"
     }
+  }
 }

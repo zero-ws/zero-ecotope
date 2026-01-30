@@ -56,7 +56,7 @@ public abstract class TubeBase implements Tube {
          * key          ( System Generated )
          * type         ( Came from Rule )
          */
-        activity.setKey(UUID.randomUUID().toString());
+        activity.setId(UUID.randomUUID().toString());
         activity.setType(rule.getType());
         activity.setSerial(data.getString(KName.Flow.TRACE_SERIAL));
         data.remove(KName.Flow.TRACE_SERIAL);

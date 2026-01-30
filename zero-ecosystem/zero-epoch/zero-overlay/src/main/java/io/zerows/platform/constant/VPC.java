@@ -30,7 +30,7 @@ public interface VPC {
         String PLUGIN_FORK = "plugin.fork";
         /**
          * <findRunning>plugin.config</findRunning>, 和 Before/After 相关的组件静态配置，数据类型为 {@link io.vertx.core.json.JsonObject}
-         *
+         * <p>
          * 该组件配置为`name = InJson`的核心结构，Json中存储了和组件相关的配置数据，配置如下：
          *
          * <pre><code>
@@ -45,7 +45,7 @@ public interface VPC {
          *         }
          *     }
          * </code></pre>
-         *
+         * <p>
          * 上述片段中 component1 和 component2 是组件名称（Java类全名）
          */
         String PLUGIN_CONFIG = "plugin.config";

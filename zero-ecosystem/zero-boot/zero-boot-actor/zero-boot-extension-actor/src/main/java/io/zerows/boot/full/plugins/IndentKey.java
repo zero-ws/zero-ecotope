@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.boot.extension.constant.OxConstant;
+import io.zerows.boot.full.ExtensionActorConstant;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XCategoryDao;
@@ -11,17 +12,17 @@ import io.zerows.extension.module.ambient.domain.tables.pojos.XCategory;
 import io.zerows.program.Ux;
 import io.zerows.spi.modeler.AtomId;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static io.zerows.boot.extension.util.Ox.LOG;
-
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public class IndentKey implements AtomId {
 
     @Override
@@ -29,14 +30,14 @@ public class IndentKey implements AtomId {
         final JsonObject data = Ut.valueJObject(input.getJsonObject(KName.DATA));
         final String hitKey = this.key(data, config);
         if (Ut.isNil(data) || Ut.isNil(hitKey)) {
-            LOG.Plugin.warn(this.getClass(), "未读取到标识信息：{0}, 配置：{1}",
-                data.encode(), config.encode());
+            log.warn("{} 未读取到标识信息：{}, 配置：{}",
+                ExtensionActorConstant.K_PREFIX, data.encode(), config.encode());
             return Ux.future(null);
         } else {
             return DB.on(XCategoryDao.class).<XCategory>fetchByIdAsync(hitKey).compose(category -> {
                 final String identifier = this.identifier(category);
-                LOG.Plugin.info(this.getClass(), "标识选择：key = `{0}`, identifier = `{1}`, data = `{2}`",
-                    hitKey, identifier, data.encode());
+                log.info("{} 标识选择：key = `{}`, identifier = `{}`, data = `{}`",
+                    ExtensionActorConstant.K_PREFIX, hitKey, identifier, data.encode());
                 return Ux.future(identifier);
             });
         }
@@ -48,7 +49,7 @@ public class IndentKey implements AtomId {
         if (Ut.isNil(dataArray)) {
             return Ux.future(new ConcurrentHashMap<>());
         } else {
-            LOG.Plugin.info(this.getClass(), "标识选择输入数据（批量）：data = `{0}`", dataArray.encode());
+            log.info("{} 标识选择输入数据（批量）：data = `{}`", ExtensionActorConstant.K_PREFIX, dataArray.encode());
             final ConcurrentMap<String, JsonArray> sourceMap = Ut.elementGroup(dataArray, (json) -> this.key(json, config));
             // `key` field collect into array
             final JsonArray values = Ut.toJArray(sourceMap.keySet());
@@ -66,7 +67,7 @@ public class IndentKey implements AtomId {
         /*
          * 按 identifier 分组
          */
-        final ConcurrentMap<String, XCategory> grouped = Ut.elementMap(categories, XCategory::getKey);
+        final ConcurrentMap<String, XCategory> grouped = Ut.elementMap(categories, XCategory::getId);
         final JsonArray defaultQueue = new JsonArray();
         sourceMap.forEach((key, data) -> {
             final XCategory category = grouped.get(key);

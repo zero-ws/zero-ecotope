@@ -48,7 +48,7 @@ class IkBillItemTransfer implements IkWay<List<FBillItem>, FBillItem> {
             fromItem.setCode(fromItem.getCode() + "F");
         });
         to.forEach(toItem -> {
-            toItem.setKey(null);
+            toItem.setId(null);
             toItem.setBillId(null);
             toItem.setSerial(toItem.getSerial() + "Tool");
             toItem.setCode(toItem.getCode() + "Tool");

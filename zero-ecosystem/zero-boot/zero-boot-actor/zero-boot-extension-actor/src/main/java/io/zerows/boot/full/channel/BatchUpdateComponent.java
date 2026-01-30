@@ -11,20 +11,20 @@ import io.zerows.mbse.metadata.ActOut;
 
 /**
  * ## 「Channel」批量更新通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 不带任何<strong>集成功能</strong>的标准批量更新组件，支持如下功能：
- *
+ * <p>
  * - 批量更新（只更新传入的字段）
  * - 请求`PUT /api/ox/batch/:identifier/update`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * [
@@ -41,9 +41,9 @@ import io.zerows.mbse.metadata.ActOut;
  * ]
  * // </code></pre>
  * ```
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -69,7 +69,7 @@ public class BatchUpdateComponent extends AbstractHMore {
 
     /**
      * 「Async」通道主方法
-     *
+     * <p>
      * // <pre><code class="json">
      * {
      *      "keys": [
@@ -83,7 +83,6 @@ public class BatchUpdateComponent extends AbstractHMore {
      * // </code></pre>
      *
      * @param request 通道的标准请求参数，类型{@link ActIn}。
-     *
      * @return 返回`{@link Future}<{@link ActOut}>`
      */
     @Override

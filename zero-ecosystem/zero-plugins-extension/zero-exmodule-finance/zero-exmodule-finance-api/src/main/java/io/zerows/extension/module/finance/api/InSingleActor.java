@@ -22,7 +22,9 @@ public class InSingleActor {
     @Inject
     private transient InBillStub billStub;
 
-    /** 参考：{@link InSingleAgent#inPre} 接口注释 */
+    /**
+     * 参考：{@link InSingleAgent#inPre} 接口注释
+     */
     @Me
     @Address(Addr.Bill.IN_PRE)
     public Future<JsonObject> inPre(final JsonObject data) {
@@ -38,7 +40,9 @@ public class InSingleActor {
     }
 
 
-    /** 参考：{@link InSingleAgent#inCommon} 接口注释 **/
+    /**
+     * 参考：{@link InSingleAgent#inCommon} 接口注释
+     **/
     @Me
     @Address(Addr.Bill.IN_COMMON)
     public Future<JsonObject> inCommon(final JsonObject data) {

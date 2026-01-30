@@ -4,119 +4,117 @@
 package io.zerows.plugins.oauth2.domain.tables.daos;
 
 
+import io.r2mo.vertx.jooq.classic.jdbc.JDBCClassicQueryExecutor;
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.Future;
 import io.zerows.plugins.oauth2.domain.tables.Oauth2AuthorizationConsent;
 import io.zerows.plugins.oauth2.domain.tables.records.Oauth2AuthorizationConsentRecord;
-
-import java.util.Collection;
-
 import org.jooq.Configuration;
 import org.jooq.JSON;
 import org.jooq.Record2;
 
-
+import java.util.Collection;
 import java.util.List;
-import io.vertx.core.Future;
-import io.r2mo.vertx.jooq.classic.jdbc.JDBCClassicQueryExecutor;
+
 /**
  * OAuth2 授权同意（Consent）记录表
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
-public class Oauth2AuthorizationConsentDao extends AbstractVertxDAO<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent, Record2<String, String>, Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>>, Future<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>, Future<Integer>, Future<Record2<String, String>>> implements io.r2mo.vertx.jooq.classic.VertxDAO<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent,Record2<String, String>> {
+@SuppressWarnings({"all", "unchecked", "rawtypes", "this-escape"})
+public class Oauth2AuthorizationConsentDao extends AbstractVertxDAO<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent, Record2<String, String>, Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>>, Future<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>, Future<Integer>, Future<Record2<String, String>>> implements io.r2mo.vertx.jooq.classic.VertxDAO<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent, Record2<String, String>> {
 
-        /**
+    /**
      * @param configuration The Configuration used for rendering and query
-     * execution.
-     * @param vertx the vertx instance
+     *                      execution.
+     * @param vertx         the vertx instance
      */
-        public Oauth2AuthorizationConsentDao(Configuration configuration, io.vertx.core.Vertx vertx) {
-                super(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent.class, new JDBCClassicQueryExecutor<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent,Record2<String, String>>(configuration, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent.class,vertx));
-        }
+    public Oauth2AuthorizationConsentDao(Configuration configuration, io.vertx.core.Vertx vertx) {
+        super(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent.class, new JDBCClassicQueryExecutor<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent, Record2<String, String>>(configuration, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent.class, vertx));
+    }
 
-        @Override
-        protected Record2<String, String> getId(io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent object) {
-                return compositeKeyRecord(object.getRegisteredClientId(), object.getPrincipalName());
-        }
+    @Override
+    protected Record2<String, String> getId(io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent object) {
+        return compositeKeyRecord(object.getRegisteredClientId(), object.getPrincipalName());
+    }
 
-        /**
+    /**
      * Find records that have <code>PRINCIPAL_NAME IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByPrincipalName(Collection<String> values) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.PRINCIPAL_NAME.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByPrincipalName(Collection<String> values) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.PRINCIPAL_NAME.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>PRINCIPAL_NAME IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByPrincipalName(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.PRINCIPAL_NAME.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByPrincipalName(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.PRINCIPAL_NAME.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORITIES IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByAuthorities(Collection<String> values) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.AUTHORITIES.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByAuthorities(Collection<String> values) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.AUTHORITIES.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>AUTHORITIES IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByAuthorities(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.AUTHORITIES.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByAuthorities(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.AUTHORITIES.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>TENANT_ID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByTenantId(Collection<String> values) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.TENANT_ID.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByTenantId(Collection<String> values) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.TENANT_ID.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>TENANT_ID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByTenantId(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.TENANT_ID.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByTenantId(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.TENANT_ID.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>APP_ID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByAppId(Collection<String> values) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.APP_ID.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByAppId(Collection<String> values) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.APP_ID.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>APP_ID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByAppId(Collection<String> values, int limit) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.APP_ID.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByAppId(Collection<String> values, int limit) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.APP_ID.in(values), limit);
+    }
 
-        /**
+    /**
      * Find records that have <code>EXT IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByExt(Collection<JSON> values) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.EXT.in(values));
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByExt(Collection<JSON> values) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.EXT.in(values));
+    }
 
-        /**
+    /**
      * Find records that have <code>EXT IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByExt(Collection<JSON> values, int limit) {
-                return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.EXT.in(values),limit);
-        }
+    public Future<List<io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent>> findManyByExt(Collection<JSON> values, int limit) {
+        return findManyByCondition(Oauth2AuthorizationConsent.OAUTH2_AUTHORIZATION_CONSENT.EXT.in(values), limit);
+    }
 
-        @Override
-        public JDBCClassicQueryExecutor<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent,Record2<String, String>> queryExecutor(){
-                return (JDBCClassicQueryExecutor<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent,Record2<String, String>>) super.queryExecutor();
-        }
+    @Override
+    public JDBCClassicQueryExecutor<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent, Record2<String, String>> queryExecutor() {
+        return (JDBCClassicQueryExecutor<Oauth2AuthorizationConsentRecord, io.zerows.plugins.oauth2.domain.tables.pojos.Oauth2AuthorizationConsent, Record2<String, String>>) super.queryExecutor();
+    }
 }

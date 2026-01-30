@@ -2,7 +2,8 @@
 
 -- changeset Lang:l-yard-1
 SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET
+FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for L_YARD
@@ -37,4 +38,5 @@ CREATE TABLE `L_YARD`
 ALTER TABLE L_YARD
     ADD UNIQUE (`CODE`, `SIGMA`);
 
-SET FOREIGN_KEY_CHECKS = 1;
+SET
+FOREIGN_KEY_CHECKS = 1;

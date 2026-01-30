@@ -1,10 +1,10 @@
 package io.zerows.cortex.management.uri;
 
 import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.basicore.WebActor;
-import io.zerows.epoch.basicore.WebEvent;
-import io.zerows.epoch.basicore.WebReceipt;
 import io.zerows.epoch.management.OCacheActor;
+import io.zerows.epoch.web.WebActor;
+import io.zerows.epoch.web.WebEvent;
+import io.zerows.epoch.web.WebReceipt;
 import io.zerows.support.Ut;
 
 import java.lang.reflect.Method;

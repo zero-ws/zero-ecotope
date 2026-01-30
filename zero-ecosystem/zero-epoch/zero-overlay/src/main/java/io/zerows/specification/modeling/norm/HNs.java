@@ -13,7 +13,7 @@ import io.zerows.specification.modeling.HLife;
  *     <myNS nsURI="" nsPrefix="">
  *     </myNS>
  * </code></pre>
- *
+ * <p>
  * 所以名空间中通常会包含如下元素集：
  *
  * <ol>
@@ -21,7 +21,7 @@ import io.zerows.specification.modeling.HLife;
  *     <li>uri：当前名空间绑定的URI，可转换成 nsURI 部分</li>
  *     <li>prefix：当前名空间使用的默认的前缀，通常是 XML 中的前缀信息，默认为 ""</li>
  * </ol>
- *
+ * <p>
  * 和原始建模项目的区别 zero-atom，zero-atom 是不跨应用部分的建模处理，而高阶建模部分是跨应用部分的建模，该模型由于包含了 uri 部分，
  * Domain部分的区别直接限定了其名空间信息，该接口和 {@link HLife} 接口的属性含义和对应关系：
  *

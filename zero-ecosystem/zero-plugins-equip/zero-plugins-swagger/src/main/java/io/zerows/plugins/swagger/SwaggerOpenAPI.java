@@ -9,7 +9,12 @@ import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.MediaType;
 import io.swagger.v3.oas.models.responses.ApiResponses;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -38,18 +43,18 @@ class SwaggerOpenAPI {
      * @param handlerClasses 所有待扫描的接口类集合（必须为 @Path 标注的接口）
      * @return OpenAPI 对象，包含 paths、info 等结构
      */
-    public static OpenAPI generate(Set<Class<?>> handlerClasses) {
-        OpenAPI openAPI = new OpenAPI();
+    public static OpenAPI generate(final Set<Class<?>> handlerClasses) {
+        final OpenAPI openAPI = new OpenAPI();
 
         // 添加基础信息
         openAPI.setInfo(new Info()
-                .title("Vert.x Swagger API")
-                .version("1.0.0")
-                .description("自动生成的 OpenAPI 文档"));
+            .title("Vert.x Swagger API")
+            .version("1.0.0")
+            .description("自动生成的 OpenAPI 文档"));
 
         // 生成路径信息
-        Paths paths = new Paths();
-        for (Class<?> cls : handlerClasses) {
+        final Paths paths = new Paths();
+        for (final Class<?> cls : handlerClasses) {
             processClass(cls, paths);
         }
         openAPI.setPaths(paths);
@@ -63,27 +68,29 @@ class SwaggerOpenAPI {
      * @param cls   接口类
      * @param paths OpenAPI 的路径集合
      */
-    private static void processClass(Class<?> cls, Paths paths) {
+    private static void processClass(final Class<?> cls, final Paths paths) {
         // 类上的 @Path 注解作为基路径
-        String basePath = cls.isAnnotationPresent(Path.class)
-                ? cls.getAnnotation(Path.class).value() : "";
+        final String basePath = cls.isAnnotationPresent(Path.class)
+            ? cls.getAnnotation(Path.class).value() : "";
 
-        for (Method method : cls.getDeclaredMethods()) {
+        for (final Method method : cls.getDeclaredMethods()) {
             // 获取 HTTP 方法（如 GET/POST）
-            PathItem.HttpMethod httpMethod = extractHttpMethod(method);
-            if (httpMethod == null) continue;
+            final PathItem.HttpMethod httpMethod = extractHttpMethod(method);
+            if (httpMethod == null) {
+                continue;
+            }
 
             // 方法上的 @Path 注解为子路径
-            String methodPath = method.isAnnotationPresent(Path.class)
-                    ? method.getAnnotation(Path.class).value() : "";
+            final String methodPath = method.isAnnotationPresent(Path.class)
+                ? method.getAnnotation(Path.class).value() : "";
 
-            String fullPath = normalizePath(basePath, methodPath);
+            final String fullPath = normalizePath(basePath, methodPath);
 
             // 构建 Operation 描述
-            io.swagger.v3.oas.models.Operation operation = buildOperation(method, cls);
+            final io.swagger.v3.oas.models.Operation operation = buildOperation(method, cls);
 
             // 合并 PathItem 进 paths
-            PathItem pathItem = paths.computeIfAbsent(fullPath, k -> new PathItem());
+            final PathItem pathItem = paths.computeIfAbsent(fullPath, k -> new PathItem());
             pathItem.operation(httpMethod, operation);
         }
     }
@@ -95,11 +102,11 @@ class SwaggerOpenAPI {
      * @param cls    接口类
      * @return Swagger Operation 对象，若无 @Operation 注解则返回 null
      */
-    private static io.swagger.v3.oas.models.Operation buildOperation(Method method, Class<?> cls) {
-        io.swagger.v3.oas.models.Operation operation = new io.swagger.v3.oas.models.Operation();
-        
+    private static io.swagger.v3.oas.models.Operation buildOperation(final Method method, final Class<?> cls) {
+        final io.swagger.v3.oas.models.Operation operation = new io.swagger.v3.oas.models.Operation();
+
         // 处理 @Operation 注解
-        Operation anno = method.getAnnotation(Operation.class);
+        final Operation anno = method.getAnnotation(Operation.class);
         if (anno != null) {
             operation.setOperationId(anno.operationId());
             operation.setSummary(anno.summary());
@@ -111,24 +118,24 @@ class SwaggerOpenAPI {
         }
 
         // 设置 tags
-        if (anno!=null &&anno.tags().length > 0) {
+        if (anno != null && anno.tags().length > 0) {
             operation.setTags(Arrays.asList(anno.tags()));
         }
 
         // 处理参数
-        List<io.swagger.v3.oas.models.parameters.Parameter> parameters = buildParameters(method);
+        final List<io.swagger.v3.oas.models.parameters.Parameter> parameters = buildParameters(method);
         if (!parameters.isEmpty()) {
             operation.setParameters(parameters);
         }
 
         // 处理请求体
-        io.swagger.v3.oas.models.parameters.RequestBody requestBody = buildRequestBody(method);
+        final io.swagger.v3.oas.models.parameters.RequestBody requestBody = buildRequestBody(method);
         if (requestBody != null) {
             operation.setRequestBody(requestBody);
         }
 
         // 处理响应
-        ApiResponses responses = buildResponses(method);
+        final ApiResponses responses = buildResponses(method);
         operation.setResponses(responses);
 
         return operation;
@@ -140,26 +147,26 @@ class SwaggerOpenAPI {
      * @param method 方法对象
      * @return 参数列表
      */
-    private static List<io.swagger.v3.oas.models.parameters.Parameter> buildParameters(Method method) {
-        List<io.swagger.v3.oas.models.parameters.Parameter> parameters = new ArrayList<>();
-        java.lang.reflect.Parameter[] methodParams = method.getParameters();
+    private static List<io.swagger.v3.oas.models.parameters.Parameter> buildParameters(final Method method) {
+        final List<io.swagger.v3.oas.models.parameters.Parameter> parameters = new ArrayList<>();
+        final java.lang.reflect.Parameter[] methodParams = method.getParameters();
 
         for (int i = 0; i < methodParams.length; i++) {
-            java.lang.reflect.Parameter param = methodParams[i];
-            io.swagger.v3.oas.annotations.Parameter paramAnno = param.getAnnotation(io.swagger.v3.oas.annotations.Parameter.class);
-            
+            final java.lang.reflect.Parameter param = methodParams[i];
+            final io.swagger.v3.oas.annotations.Parameter paramAnno = param.getAnnotation(io.swagger.v3.oas.annotations.Parameter.class);
+
             if (paramAnno != null) {
-                io.swagger.v3.oas.models.parameters.Parameter parameter = new io.swagger.v3.oas.models.parameters.Parameter();
+                final io.swagger.v3.oas.models.parameters.Parameter parameter = new io.swagger.v3.oas.models.parameters.Parameter();
                 parameter.setName(paramAnno.name().isEmpty() ? param.getName() : paramAnno.name());
                 parameter.setDescription(paramAnno.description());
                 parameter.setRequired(paramAnno.required());
                 parameter.setIn(paramAnno.in().toString().toLowerCase());
-                
+
                 // 处理 Schema
                 if (paramAnno.schema() != null) {
                     parameter.setSchema(buildSchema(paramAnno.schema()));
                 }
-                
+
                 parameters.add(parameter);
             }
         }
@@ -173,19 +180,21 @@ class SwaggerOpenAPI {
      * @param method 方法对象
      * @return RequestBody 对象，如果没有 @RequestBody 注解则返回 null
      */
-    private static io.swagger.v3.oas.models.parameters.RequestBody buildRequestBody(Method method) {
-        RequestBody requestBodyAnno = method.getAnnotation(RequestBody.class);
-        if (requestBodyAnno == null) return null;
+    private static io.swagger.v3.oas.models.parameters.RequestBody buildRequestBody(final Method method) {
+        final RequestBody requestBodyAnno = method.getAnnotation(RequestBody.class);
+        if (requestBodyAnno == null) {
+            return null;
+        }
 
-        io.swagger.v3.oas.models.parameters.RequestBody requestBody = new io.swagger.v3.oas.models.parameters.RequestBody();
+        final io.swagger.v3.oas.models.parameters.RequestBody requestBody = new io.swagger.v3.oas.models.parameters.RequestBody();
         requestBody.setDescription(requestBodyAnno.description());
         requestBody.setRequired(requestBodyAnno.required());
 
         // 处理内容
         if (requestBodyAnno.content().length > 0) {
-            io.swagger.v3.oas.models.media.Content content = new io.swagger.v3.oas.models.media.Content();
-            for (io.swagger.v3.oas.annotations.media.Content contentAnno : requestBodyAnno.content()) {
-                MediaType mediaType = new MediaType();
+            final io.swagger.v3.oas.models.media.Content content = new io.swagger.v3.oas.models.media.Content();
+            for (final io.swagger.v3.oas.annotations.media.Content contentAnno : requestBodyAnno.content()) {
+                final MediaType mediaType = new MediaType();
                 if (contentAnno.schema() != null) {
                     mediaType.setSchema(buildSchema(contentAnno.schema()));
                 }
@@ -203,20 +212,20 @@ class SwaggerOpenAPI {
      * @param method 方法对象
      * @return ApiResponses 对象
      */
-    private static ApiResponses buildResponses(Method method) {
-        ApiResponses responses = new ApiResponses();
-        
+    private static ApiResponses buildResponses(final Method method) {
+        final ApiResponses responses = new ApiResponses();
+
         // 处理 @ApiResponse 注解
-        ApiResponse[] apiResponses = method.getAnnotationsByType(ApiResponse.class);
-        for (ApiResponse apiResponse : apiResponses) {
-            io.swagger.v3.oas.models.responses.ApiResponse response = new io.swagger.v3.oas.models.responses.ApiResponse();
+        final ApiResponse[] apiResponses = method.getAnnotationsByType(ApiResponse.class);
+        for (final ApiResponse apiResponse : apiResponses) {
+            final io.swagger.v3.oas.models.responses.ApiResponse response = new io.swagger.v3.oas.models.responses.ApiResponse();
             response.setDescription(apiResponse.description());
-            
+
             // 处理响应内容
             if (apiResponse.content().length > 0) {
-                io.swagger.v3.oas.models.media.Content content = new io.swagger.v3.oas.models.media.Content();
-                for (io.swagger.v3.oas.annotations.media.Content contentAnno : apiResponse.content()) {
-                    MediaType mediaType = new MediaType();
+                final io.swagger.v3.oas.models.media.Content content = new io.swagger.v3.oas.models.media.Content();
+                for (final io.swagger.v3.oas.annotations.media.Content contentAnno : apiResponse.content()) {
+                    final MediaType mediaType = new MediaType();
                     if (contentAnno.schema() != null) {
                         mediaType.setSchema(buildSchema(contentAnno.schema()));
                     }
@@ -224,7 +233,7 @@ class SwaggerOpenAPI {
                 }
                 response.setContent(content);
             }
-            
+
             responses.addApiResponse(apiResponse.responseCode(), response);
         }
 
@@ -242,9 +251,9 @@ class SwaggerOpenAPI {
      * @param schemaAnno Schema 注解
      * @return Schema 对象
      */
-    private static io.swagger.v3.oas.models.media.Schema<?> buildSchema(io.swagger.v3.oas.annotations.media.Schema schemaAnno) {
-        io.swagger.v3.oas.models.media.Schema<?> schema = new io.swagger.v3.oas.models.media.Schema<>();
-        
+    private static io.swagger.v3.oas.models.media.Schema<?> buildSchema(final io.swagger.v3.oas.annotations.media.Schema schemaAnno) {
+        final io.swagger.v3.oas.models.media.Schema<?> schema = new io.swagger.v3.oas.models.media.Schema<>();
+
         if (!schemaAnno.type().isEmpty()) {
             schema.setType(schemaAnno.type());
         }
@@ -257,12 +266,12 @@ class SwaggerOpenAPI {
         if (!schemaAnno.example().isEmpty()) {
             schema.setExample(schemaAnno.example());
         }
-        
+
         schema.setNullable(schemaAnno.nullable());
         // Note: readOnly and writeOnly are deprecated in newer versions
         // schema.setReadOnly(schemaAnno.readOnly());
         // schema.setWriteOnly(schemaAnno.writeOnly());
-        
+
         return schema;
     }
 
@@ -272,12 +281,22 @@ class SwaggerOpenAPI {
      * @param method 方法对象
      * @return PathItem.HttpMethod 枚举，未识别则返回 null
      */
-    private static PathItem.HttpMethod extractHttpMethod(Method method) {
-        if (method.isAnnotationPresent(GET.class)) return PathItem.HttpMethod.GET;
-        if (method.isAnnotationPresent(POST.class)) return PathItem.HttpMethod.POST;
-        if (method.isAnnotationPresent(PUT.class)) return PathItem.HttpMethod.PUT;
-        if (method.isAnnotationPresent(DELETE.class)) return PathItem.HttpMethod.DELETE;
-        if (method.isAnnotationPresent(PATCH.class)) return PathItem.HttpMethod.PATCH;
+    private static PathItem.HttpMethod extractHttpMethod(final Method method) {
+        if (method.isAnnotationPresent(GET.class)) {
+            return PathItem.HttpMethod.GET;
+        }
+        if (method.isAnnotationPresent(POST.class)) {
+            return PathItem.HttpMethod.POST;
+        }
+        if (method.isAnnotationPresent(PUT.class)) {
+            return PathItem.HttpMethod.PUT;
+        }
+        if (method.isAnnotationPresent(DELETE.class)) {
+            return PathItem.HttpMethod.DELETE;
+        }
+        if (method.isAnnotationPresent(PATCH.class)) {
+            return PathItem.HttpMethod.PATCH;
+        }
         return null;
     }
 
@@ -288,8 +307,8 @@ class SwaggerOpenAPI {
      * @param methodPath 方法级别的路径
      * @return 格式化后的完整路径（以 / 开头）
      */
-    private static String normalizePath(String basePath, String methodPath) {
-        String full = (basePath + "/" + methodPath).replaceAll("//+", "/");
+    private static String normalizePath(final String basePath, final String methodPath) {
+        final String full = (basePath + "/" + methodPath).replaceAll("//+", "/");
         return full.startsWith("/") ? full : "/" + full;
     }
 }

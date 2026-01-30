@@ -31,7 +31,6 @@ public interface EndAdjustStub {
      *
      * @param trans      交易记录
      * @param settlement 结算单
-     *
      * @return 修正后的交易记录
      */
     Future<FTrans> adjustAsync(FTrans trans, FSettlement settlement);

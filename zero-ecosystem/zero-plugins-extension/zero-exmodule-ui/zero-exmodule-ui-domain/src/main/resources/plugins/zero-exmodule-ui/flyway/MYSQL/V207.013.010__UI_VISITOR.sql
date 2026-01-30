@@ -1,55 +1,50 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `UI_VISITOR`;
 
--- changeset Lang:ui-visitor-1
--- 向量表：UI_VISITOR
-DROP TABLE IF EXISTS UI_VISITOR;
-CREATE TABLE IF NOT EXISTS UI_VISITOR
-(
-    /*
-     * 四个维护的核心设计
-     * - page:           页面ID定位
-     * - identifier：     模型标识定位
-     * - path:            路径信息
-     *
-     * 1. 资产管理界面
-     * - 1.1. 先进入页面（页面ID唯一）
-     * - 1.2. 左侧菜单选择执行（动态可变，限定identifier）
-     * - 1.3. 路径信息：配置部分 + 视图View + 位置Position
-     *
-     * 2. 权限管理界面
-     * - 2.1. 左侧菜单选择执行（动态可变）
-     * - 2.2. 选择该操作关联资源，和资源访问者协同更改
-     *
-     * 3. 唯一标识：identifier + page + path 可计算得到唯一的 control_id 值
-     */
-    `IDENTIFIER`    VARCHAR(36) COMMENT '「identifier」- 维度1：标识模型',
-    `PAGE`          VARCHAR(36) COMMENT '「page」- 维度2：页面ID',
-    `PATH`          VARCHAR(128) COMMENT '「path」- 维度3：路径信息，view + position',
-    `TYPE`          VARCHAR(36) COMMENT '「type」- 维度4：操作类型：List / Form 或其他',
+CREATE TABLE IF NOT EXISTS `UI_VISITOR` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `IDENTIFIER`    VARCHAR(36)  NOT NULL COLLATE utf8mb4_bin COMMENT '「identifier」- 标识模型',          -- [主键] 维度1：标识模型 (原定义为空，主键强制修正为非空)
 
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `CONTROL_ID`    VARCHAR(36)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「controlId」- 挂载ID',        -- 挂载专用的ID：List / Form 都可用
+    `PAGE`          VARCHAR(36)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「page」- 页面ID',             -- 维度2：页面ID
+    `PATH`          VARCHAR(128) DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「path」- 路径信息',           -- 维度3：路径信息，view + position
+    `RESOURCE_ID`   VARCHAR(36)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「resourceId」- 资源ID',       -- 关联资源ID
+    `RUN_COMPONENT` TEXT         COLLATE utf8mb4_bin COMMENT '「runComponent」- 执行组件',               -- 执行组件，扩展时专用
 
-    /*
-     * 核心的两个ID
-     * - controlId 负责消费和使用
-     * - resourceId 负责管理
-     */
-    `CONTROL_ID`    VARCHAR(36) COMMENT '「controlId」- 挂载专用的ID：List / Form 都可用',
-    `RESOURCE_ID`   VARCHAR(36) COMMENT '「resourceId」- 关联资源ID',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`          VARCHAR(36)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「type」- 类型',               -- [类型]
 
-    `RUN_COMPONENT` TEXT COMMENT '「runComponent」- 执行组件，扩展时专用',
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`         VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`         VARCHAR(128) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',          -- [物理隔离] 核心分片键/顶层租户标识
+    `TENANT_ID`     VARCHAR(36)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',         -- [业务隔离] SaaS 租户/具体公司标识
+    `APP_ID`        VARCHAR(36)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',            -- [逻辑隔离] 区分同一租户下的不同应用
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`        BIT(1)       DEFAULT NULL COMMENT '「active」- 是否启用',                             -- [状态] 1=启用/正常, 0=禁用/冻结
+    `LANGUAGE`      VARCHAR(10)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',       -- [国际化] 如: zh_CN, en_US
+    `METADATA`      TEXT         COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                      -- [扩展] JSON格式，存储非结构化配置
+    `VERSION`       VARCHAR(64)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
 
-    -- Auditor字段
-    `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    -- ==================================================================================================
+    -- 🕒 5. 审计字段 (Audit Fields)
+    -- ==================================================================================================
+    `CREATED_AT`    DATETIME     DEFAULT NULL COMMENT '「createdAt」- 创建时间',                          -- [审计] 创建时间
+    `CREATED_BY`    VARCHAR(36)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',        -- [审计] 创建人
+    `UPDATED_AT`    DATETIME     DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                          -- [审计] 更新时间
+    `UPDATED_BY`    VARCHAR(36)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',        -- [审计] 更新人
 
-    `APP_ID`        VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`     VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`IDENTIFIER`, `PAGE`, `PATH`, `TYPE`, `SIGMA`)
-);
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`IDENTIFIER`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='资源访问者';
+
+-- 缺失公共字段：
+-- - VERSION (版本)

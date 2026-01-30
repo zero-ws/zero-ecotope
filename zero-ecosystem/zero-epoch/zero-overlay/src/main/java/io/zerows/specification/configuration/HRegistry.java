@@ -1,14 +1,15 @@
 package io.zerows.specification.configuration;
 
+import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
-import io.zerows.platform.metadata.KTenement;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.app.HLot;
 import io.zerows.specification.app.HMod;
 import io.zerows.specification.cloud.HTenant;
-import io.zerows.specification.security.identity.HOwner;
-import io.zerows.specification.vital.HOI;
+import io.zerows.specification.security.HOwner;
+import io.zerows.spi.HPI;
 
 import java.util.Set;
 
@@ -42,9 +43,9 @@ import java.util.Set;
  * 上下文环境中必定会存在的东西：
  * <pre><code>
  *     1. {@link HApp} 应用池
- *     2. {@link KTenement} 租户池
+ *     2. {@link HLot} 租户池
  * </code></pre>
- *
+ * <p>
  * 上下文环境在启动时会执行初始化，初始化过程中加载应用对应的配置信息
  * <pre><code>
  *     1. {@link HApp} 应用加载，加载过程中有不同流程
@@ -59,7 +60,7 @@ import java.util.Set;
  *        - 基本环境使用 zero-ambient 中的 SPI 注册器
  *        - 云环境使用新的 SPI 注册器
  *     2. 注册之后的内容依赖 {@link HAmbient} 实现请求级别的连接，提取的每个 {@link HArk}
- *        中都包含了 {@link HOI} 部分，此部分依赖内置 {@see HAmbientContext}
+ *        中都包含了 {@link HLot} 部分，此部分依赖内置 {@see HAmbientContext}
  *        上下文环境处理
  *     3. 对接模式搜寻路径
  *        3.1. 名称转换
@@ -81,12 +82,18 @@ import java.util.Set;
  */
 public interface HRegistry<T> {
 
+    Cc<String, HRegistry<?>> CC_REGISTRY = Cc.openThread();
+
+    @SuppressWarnings("unchecked")
+    static <T> HRegistry<T> of(final String spiId) {
+        return (HRegistry<T>) CC_REGISTRY.pick(() -> HPI.findOne(HRegistry.class, spiId), spiId);
+    }
+
     /**
      * 初始化上下文环境，生成当前上下文对应的 {@link HArk} 对象
      *
      * @param container 容器对象
      * @param config    配置信息
-     *
      * @return {@link Set<HArk>}
      */
     Set<HArk> registry(T container, HConfig config);
@@ -96,7 +103,6 @@ public interface HRegistry<T> {
      *
      * @param container 容器对象
      * @param config    配置信息
-     *
      * @return {@link Future}
      */
     default Future<Set<HArk>> registryAsync(final T container, final HConfig config) {

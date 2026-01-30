@@ -1,12 +1,12 @@
 {
-    "name": "field",
-    "daoCls": "M_FIELD",
-    "field": {
-        "unique": [
-            [
-                "name",
-                "entityId"
-            ]
-        ]
-    }
+  "name": "field",
+  "daoCls": "M_FIELD",
+  "field": {
+    "unique": [
+      [
+        "name",
+        "entityId"
+      ]
+    ]
+  }
 }

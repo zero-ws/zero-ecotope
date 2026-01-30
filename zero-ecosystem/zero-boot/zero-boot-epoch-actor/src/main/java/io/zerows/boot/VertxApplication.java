@@ -7,23 +7,21 @@ import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.EventBusOptions;
 import io.vertx.core.http.HttpServerOptions;
-import io.zerows.cortex.AxisDynamicFactory;
-import io.zerows.cortex.AxisSockFactory;
-import io.zerows.cortex.AxisSwaggerFactory;
+import io.zerows.cortex.AxisFactory;
 import io.zerows.cortex.management.StoreVertx;
 import io.zerows.cortex.metadata.RunRoute;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.metadata.RunVertx;
 import io.zerows.cortex.sdk.AtSession;
 import io.zerows.cosmic.bootstrap.Linear;
-import io.zerows.epoch.basicore.YmSpec;
-import io.zerows.epoch.basicore.option.ClusterOptions;
-import io.zerows.epoch.basicore.option.RpcOptions;
-import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.boot.ZeroLauncher;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeVertx;
+import io.zerows.epoch.jigsaw.NodeNetwork;
+import io.zerows.epoch.jigsaw.NodeVertx;
 import io.zerows.epoch.management.OCacheClass;
+import io.zerows.epoch.spec.YmSpec;
+import io.zerows.epoch.spec.options.ClusterOptions;
+import io.zerows.epoch.spec.options.RpcOptions;
+import io.zerows.epoch.spec.options.SockOptions;
 import io.zerows.platform.EnvironmentVariable;
 import io.zerows.platform.enums.VertxComponent;
 import io.zerows.platform.metadata.KRunner;
@@ -137,9 +135,7 @@ public class VertxApplication {
             AtSession.class,            // 🧾 会话管理组件，处理用户会话和状态维护
             WallProvider.class,         // 🛡️ 安全提供者组件，实现具体的安全策略和防护机制
             FactoryDBAsync.class,       // 🚀 异步DBE，基于 Vert.x 提供异步数据库操作能力
-            AxisSockFactory.class,      // 🧦 WebSocket工厂，处理 WebSocket 连接和通信
-            AxisSwaggerFactory.class,   // 📖 Swagger文档工厂，生成和管理 API 文档
-            AxisDynamicFactory.class    // 🔄 动态路由工厂，支持运行时动态路由配置
+            AxisFactory.class           // ⚙️ 核心工厂，负责创建和管理核心组件实例
         );
 
 

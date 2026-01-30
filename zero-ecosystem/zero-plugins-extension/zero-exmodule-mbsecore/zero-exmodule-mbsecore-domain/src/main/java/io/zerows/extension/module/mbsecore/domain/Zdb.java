@@ -12,6 +12,7 @@ import io.zerows.extension.module.mbsecore.domain.tables.MIndex;
 import io.zerows.extension.module.mbsecore.domain.tables.MJoin;
 import io.zerows.extension.module.mbsecore.domain.tables.MKey;
 import io.zerows.extension.module.mbsecore.domain.tables.MModel;
+import io.zerows.extension.module.mbsecore.domain.tables.MModelCat;
 import io.zerows.extension.module.mbsecore.domain.tables.MRelation;
 
 import java.util.Arrays;
@@ -38,47 +39,52 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
-     * The table <code>ZDB.M_ACC</code>.
+     * M_ACC
      */
     public final MAcc M_ACC = MAcc.M_ACC;
 
     /**
-     * The table <code>ZDB.M_ATTRIBUTE</code>.
+     * M_ATTRIBUTE
      */
     public final MAttribute M_ATTRIBUTE = MAttribute.M_ATTRIBUTE;
 
     /**
-     * The table <code>ZDB.M_ENTITY</code>.
+     * M_ENTITY
      */
     public final MEntity M_ENTITY = MEntity.M_ENTITY;
 
     /**
-     * The table <code>ZDB.M_FIELD</code>.
+     * M_FIELD
      */
     public final MField M_FIELD = MField.M_FIELD;
 
     /**
-     * The table <code>ZDB.M_INDEX</code>.
+     * M_INDEX
      */
     public final MIndex M_INDEX = MIndex.M_INDEX;
 
     /**
-     * The table <code>ZDB.M_JOIN</code>.
+     * M_JOIN
      */
     public final MJoin M_JOIN = MJoin.M_JOIN;
 
     /**
-     * The table <code>ZDB.M_KEY</code>.
+     * M_KEY
      */
     public final MKey M_KEY = MKey.M_KEY;
 
     /**
-     * The table <code>ZDB.M_MODEL</code>.
+     * M_MODEL
      */
     public final MModel M_MODEL = MModel.M_MODEL;
 
     /**
-     * The table <code>ZDB.M_RELATION</code>.
+     * M_MODEL_CAT
+     */
+    public final MModelCat M_MODEL_CAT = MModelCat.M_MODEL_CAT;
+
+    /**
+     * M_RELATION
      */
     public final MRelation M_RELATION = MRelation.M_RELATION;
 
@@ -106,6 +112,7 @@ public class Zdb extends SchemaImpl {
             MJoin.M_JOIN,
             MKey.M_KEY,
             MModel.M_MODEL,
+            MModelCat.M_MODEL_CAT,
             MRelation.M_RELATION
         );
     }

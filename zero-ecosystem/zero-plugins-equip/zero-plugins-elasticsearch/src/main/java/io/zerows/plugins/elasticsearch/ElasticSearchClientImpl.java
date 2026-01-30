@@ -4,9 +4,9 @@ import io.r2mo.function.Fn;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.zerows.component.log.LogOf;
 import io.zerows.epoch.annotations.Defer;
 import io.zerows.platform.enums.typed.ChangeFlag;
-import io.zerows.component.log.LogOf;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 
     ElasticSearchClientImpl(final Vertx vertx, final HConfig config) {
         this.vertx = vertx;
-        JsonObject options = config.options();
+        final JsonObject options = config.options();
         if (Ut.isNotNil(options)) {
             LOGGER.info("[ PLUG ] Elastic Search initialized: {0}", options.encode());
             this.options.mergeIn(options);
@@ -120,15 +120,15 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 
         try {
             final GetRequest request = new GetRequest()
-                    .index(index)
-                    .id(documentId);
+                .index(index)
+                .id(documentId);
 
             final GetResponse response = client.get(request, RequestOptions.DEFAULT);
 
             result
-                    .put("index", response.getIndex())
-                    .put("id", response.getId())
-                    .put("result", response.isExists());
+                .put("index", response.getIndex())
+                .put("id", response.getId())
+                .put("result", response.isExists());
             if (response.isExists()) {
                 result.put("data", response.getSource());
             }

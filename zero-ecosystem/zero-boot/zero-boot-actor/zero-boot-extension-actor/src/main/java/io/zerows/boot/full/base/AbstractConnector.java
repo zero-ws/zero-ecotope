@@ -5,21 +5,21 @@ import io.zerows.platform.metadata.KIntegration;
 
 /**
  * ## 「Connector」顶层连接器
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 在适配器{@link AbstractAdaptor}上追加集成配置{@link KIntegration}。
- *
+ * <p>
  * ### 2. 组件功能
- *
+ * <p>
  * 提供集成实例，对应`I_SERVICE`表中的`configIntegration`属性设置集成配置{@link KIntegration}。
- *
+ * <p>
  * > 集成配置中包含了`debug`属性用于模拟数据接口。
- *
+ * <p>
  * ### 3. 配置数据结构
- *
+ * <p>
  * #### 3.1. 集成配置结构
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {
@@ -49,9 +49,9 @@ import io.zerows.platform.metadata.KIntegration;
 public abstract class AbstractConnector extends AbstractAdaptor {
     /**
      * 「合约」成员实例，`I_SERVICE`表中的`configIntegration`属性设置，关联{@link KIntegration}对象。
-     *
+     * <p>
      * 该实例是通过{@link Contract}注解赋值，配置结构如上述文档中所描述，下边是其中一个示例：
-     *
+     * <p>
      * ```json
      * // <pre><code class="json">
      * {

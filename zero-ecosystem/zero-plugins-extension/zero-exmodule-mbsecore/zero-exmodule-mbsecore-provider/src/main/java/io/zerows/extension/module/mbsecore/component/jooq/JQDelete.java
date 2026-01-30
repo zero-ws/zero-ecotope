@@ -1,9 +1,13 @@
 package io.zerows.extension.module.mbsecore.component.jooq;
 
+import io.zerows.extension.module.mbsecore.component.jooq.internal.Jq;
 import io.zerows.extension.module.mbsecore.metadata.data.DataEvent;
 import io.zerows.extension.module.mbsecore.metadata.element.DataMatrix;
-import io.zerows.extension.module.mbsecore.component.jooq.internal.Jq;
-import org.jooq.*;
+import org.jooq.Batch;
+import org.jooq.Condition;
+import org.jooq.DSLContext;
+import org.jooq.DeleteWhereStep;
+import org.jooq.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;

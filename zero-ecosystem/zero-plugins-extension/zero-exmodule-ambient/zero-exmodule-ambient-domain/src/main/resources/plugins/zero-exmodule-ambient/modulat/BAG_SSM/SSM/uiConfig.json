@@ -1,43 +1,43 @@
 {
-    "store": "mSetting",
-    "open": [
-        "pLoginWechat",
-        "pLoginSMS"
-    ],
-    "config": {
-        "_page": {
-            "title": "系统参数设置",
-            "left": [
-                "btnSave,保存,$opSaveArg,primary",
-                "btnReset,重置,$opReset"
+  "store": "mSetting",
+  "open": [
+    "pLoginWechat",
+    "pLoginSMS"
+  ],
+  "config": {
+    "_page": {
+      "title": "系统参数设置",
+      "left": [
+        "btnSave,保存,$opSaveArg,primary",
+        "btnReset,重置,$opReset"
+      ]
+    },
+    "_form": {
+      "columns": 3,
+      "className": "web-form-bottom-16",
+      "ui": [
+        [
+          {
+            "field": "$button",
+            "hidden": true,
+            "optionJsx.extension": [
+              "$opSaveArg,保存,SUBMIT_REDUX,primary",
+              "$opReset,重置,RESET"
             ]
-        },
-        "_form": {
-            "columns": 3,
-            "className": "web-form-bottom-16",
-            "ui": [
-                [
-                    {
-                        "field": "$button",
-                        "hidden": true,
-                        "optionJsx.extension": [
-                            "$opSaveArg,保存,SUBMIT_REDUX,primary",
-                            "$opReset,重置,RESET"
-                        ]
-                    }
-                ],
-                "ZERO-E.SEC"
-            ],
-            "hidden": [
-            ],
-            "op": {
-                "$opSaveArg": "act.app.modulat.extension-configure"
-            }
-        },
-        "_modal": {
-            "success": {
-                "saved": "恭喜，该模块的配置参数已成功保存！"
-            }
-        }
+          }
+        ],
+        "ZERO-E.SEC"
+      ],
+      "hidden": [
+      ],
+      "op": {
+        "$opSaveArg": "act.app.modulat.extension-configure"
+      }
+    },
+    "_modal": {
+      "success": {
+        "saved": "恭喜，该模块的配置参数已成功保存！"
+      }
     }
+  }
 }

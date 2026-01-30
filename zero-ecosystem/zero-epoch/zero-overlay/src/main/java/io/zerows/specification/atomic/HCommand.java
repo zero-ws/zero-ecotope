@@ -18,7 +18,6 @@ import io.zerows.platform.exception._60050Exception501NotSupport;
  *
  * @param <I> 输入参数类型
  * @param <R> 返回值类型
- *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public interface HCommand<I, R> {
@@ -26,7 +25,6 @@ public interface HCommand<I, R> {
      * 步骤1：初始化/配置
      *
      * @param input 输入参数
-     *
      * @return 返回值
      */
     R configure(I input);
@@ -36,7 +34,6 @@ public interface HCommand<I, R> {
      *
      * @param input   输入参数
      * @param request 原始请求：原始请求用于中间 Monad 捕捉最初输入专用
-     *
      * @return 返回值
      */
     default R synchro(final I input, final JsonObject request) {
@@ -49,7 +46,6 @@ public interface HCommand<I, R> {
      *
      * @param input   输入参数
      * @param request 原始请求：原始请求用于中间 Monad 捕捉最初输入专用
-     *
      * @return 返回值
      */
     default R compile(final I input, final JsonObject request) {
@@ -70,7 +66,6 @@ public interface HCommand<I, R> {
          *
          * @param vertx {@link Vertx} 实例
          * @param <T>   泛型
-         *
          * @return {@link T} 绑定后的实例
          */
         @SuppressWarnings("unchecked")
@@ -82,7 +77,6 @@ public interface HCommand<I, R> {
          * 步骤1：初始化/配置
          *
          * @param input 输入参数
-         *
          * @return 返回值
          */
         @Override
@@ -95,7 +89,6 @@ public interface HCommand<I, R> {
          *
          * @param input   输入参数
          * @param request 原始请求：原始请求用于中间 Monad 捕捉最初输入专用
-         *
          * @return 返回值
          */
         @Override
@@ -108,7 +101,6 @@ public interface HCommand<I, R> {
          *
          * @param input   输入参数
          * @param request 原始请求：原始请求用于中间 Monad 捕捉最初输入专用
-         *
          * @return 返回值
          */
         @Override

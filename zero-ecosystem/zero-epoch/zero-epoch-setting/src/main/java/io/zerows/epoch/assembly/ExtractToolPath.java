@@ -24,7 +24,6 @@ class ExtractToolPath {
      * Parse the api endpoint for @Path ( Class Level )
      *
      * @param path JSR311 annotation
-     *
      * @return normalized uri
      */
     public static String resolve(final Path path) {
@@ -38,7 +37,6 @@ class ExtractToolPath {
      *
      * @param path JSR311 annotation
      * @param root root folder or path
-     *
      * @return normalized uri
      */
     @SuppressWarnings("all")
@@ -59,7 +57,6 @@ class ExtractToolPath {
      * Named: /query/:name ( Vertx Format )
      *
      * @param path JSR311 annotation
-     *
      * @return resolved Vert.x and JSR311
      */
     @SuppressWarnings("all")
@@ -85,7 +82,6 @@ class ExtractToolPath {
      * 3. Replaced all duplicated '//';
      *
      * @param path input path no normalized.
-     *
      * @return calculated uri
      */
     @SuppressWarnings("all")

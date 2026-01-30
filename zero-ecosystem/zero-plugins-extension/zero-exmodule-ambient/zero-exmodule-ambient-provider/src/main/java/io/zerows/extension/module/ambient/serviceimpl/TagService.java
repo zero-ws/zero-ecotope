@@ -4,9 +4,9 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.ambient.domain.tables.daos.RTagObjectDao;
+import io.zerows.extension.module.ambient.domain.tables.daos.RTagEntityDao;
 import io.zerows.extension.module.ambient.domain.tables.daos.XTagDao;
-import io.zerows.extension.module.ambient.domain.tables.pojos.RTagObject;
+import io.zerows.extension.module.ambient.domain.tables.pojos.RTagEntity;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XTag;
 import io.zerows.extension.module.ambient.servicespec.TagStub;
 import io.zerows.program.Ux;
@@ -38,7 +38,7 @@ public class TagService implements TagStub {
                 }
             })
             .compose(synced -> {
-                final String tagId = synced.getKey();
+                final String tagId = synced.getId();
                 final String entityType = Ut.valueString(body, "entityType");
                 final String entityId = Ut.valueString(body, "entityId");
                 return this.saveObjects(entityType, entityId, tagId)
@@ -53,13 +53,13 @@ public class TagService implements TagStub {
         qr.put("entityType", entityType);
         qr.put("entityId", entityId);
         qr.put("tagId", tagId);
-        return DB.on(RTagObjectDao.class).<RTagObject>fetchOneAsync(qr).compose(entity -> {
+        return DB.on(RTagEntityDao.class).<RTagEntity>fetchOneAsync(qr).compose(entity -> {
             if (Objects.isNull(entity)) {
-                final RTagObject rTagObject = new RTagObject();
+                final RTagEntity rTagObject = new RTagEntity();
                 rTagObject.setEntityType(entityType);
                 rTagObject.setEntityId(entityId);
                 rTagObject.setTagId(tagId);
-                return DB.on(RTagObjectDao.class).insertAsync(rTagObject);
+                return DB.on(RTagEntityDao.class).insertAsync(rTagObject);
             } else {
                 return Ux.future();
             }
@@ -72,15 +72,15 @@ public class TagService implements TagStub {
         // 删除和当前 Tag 相关的所有 TagObject
         final JsonObject qr = Ux.whereAnd();
         qr.put("tagId", key);
-        return DB.on(RTagObjectDao.class).deleteByAsync(qr)
+        return DB.on(RTagEntityDao.class).deleteByAsync(qr)
             .compose(nil -> DB.on(XTagDao.class).deleteByIdAsync(key));
     }
 
     @Override
-    public Future<List<RTagObject>> fetchAsync(final String modelId, final String modelKey) {
+    public Future<List<RTagEntity>> fetchAsync(final String modelId, final String modelKey) {
         final JsonObject qr = Ux.whereAnd();
         qr.put("entityType", modelId);
         qr.put("entityId", modelKey);
-        return DB.on(RTagObjectDao.class).fetchAsync(qr);
+        return DB.on(RTagEntityDao.class).fetchAsync(qr);
     }
 }

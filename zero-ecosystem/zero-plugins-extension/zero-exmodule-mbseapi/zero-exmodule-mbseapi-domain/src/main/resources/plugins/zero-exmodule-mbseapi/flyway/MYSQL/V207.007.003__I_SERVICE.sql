@@ -1,115 +1,85 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `I_SERVICE`;
 
--- changeset Lang:ox-service-1
--- 服务定义表：I_SERVICE
-DROP TABLE IF EXISTS I_SERVICE;
-CREATE TABLE IF NOT EXISTS I_SERVICE
-(
-    `KEY`                  VARCHAR(36) COMMENT '「key」- 服务ID',
+CREATE TABLE IF NOT EXISTS `I_SERVICE` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`                    VARCHAR(36)   NOT NULL COLLATE utf8mb4_bin COMMENT '「id」- 主键',                -- [主键] 采用 Snowflake/UUID，避开自增ID
 
-    -- 名空间处理
-    `NAMESPACE`            VARCHAR(255) COMMENT '「namespace」- 服务所在名空间',
-    `NAME`                 VARCHAR(255) COMMENT '「name」- 服务名称',
-    `COMMENT`              TEXT COMMENT '「comment」- 备注信息',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    -- 基础信息
+    `NAME`                  VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「name」- 名称',
+    `NAMESPACE`             VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「namespace」- 名空间',     -- 服务所在名空间
+    `COMMENT`               TEXT          COLLATE utf8mb4_bin COMMENT '「comment」- 备注',
 
-    -- 特殊流程触发定义
-    `IS_WORKFLOW`          BIT COMMENT '「isWorkflow」- 是否驱动工作流引擎',
-    `IS_GRAPHIC`           BIT COMMENT '「isGraphic」- 是否驱动图引擎',
+    -- 标识与规则
+    `IDENTIFIER`            VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「identifier」- 模型标识',  -- 当前类型描述的Model的标识
+    `IDENTIFIER_COMPONENT`  VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「identifierComponent」- 标识组件', -- 当前业务接口使用的标识选择器
+    `RULE_UNIQUE`           MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「ruleUnique」- 唯一规则',             -- 第二标识规则，当前通道的专用标识规则RuleUnique
 
-    -- 前置脚本和后置脚本
-    `IN_SCRIPT`            MEDIUMTEXT COMMENT '「inScript」- 本次不使用，加载脚本引擎ScriptEngine前置脚本',
-    `OUT_SCRIPT`           MEDIUMTEXT COMMENT '「outScript」- 本次不使用，加载脚本引擎ScriptEngine后置脚本',
+    -- 通道配置 (Channel)
+    `CHANNEL_TYPE`          VARCHAR(20)   DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「channelType」- 通道类型', -- ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE
+    `CHANNEL_COMPONENT`     VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「channelComponent」- 通道组件', -- 自定义通道专用组件
+    `CHANNEL_CONFIG`        MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「channelConfig」- 通道配置',          -- 通道（自定义）配置信息，Channel专用
 
-    /*
-     * 通道定义，主要目的是创建：ActIn 并且传给 Service 层，通道的输入为：Envelop（数据） 和 ZApi（配置）
-     * 通道主要包含五种基本类型：
-     * ADAPTOR：「适配器模式」访问自身数据库专用（需要初始化DAO）
-     *          Input --> Database
-     *
-     * CONNECTOR：「连接器模式」访问第三方数据源（初始化DAO，并且初始化第三方配置）
-     *          Input --> Database
-     *                --> Third Part（第三方被动）
-     *
-     * ACTOR：「演员模式」服务端主动通道（初始化DAO，并且初始化第三方配置）
-     *         Output <-- Database
-     *                <-- Third Part（第三方主动）
-     *
-     * DIRECTOR：「导演模式」服务端主动处理（需要初始化DAO）
-     *         Output <-- Database
-     *
-     * DEFINE：「自定义」自定义模式，这种情况下才会启用`CHANNEL_COMPONENT`字段
-     */
-    `CHANNEL_TYPE`         VARCHAR(20) COMMENT '「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE',
-    `CHANNEL_COMPONENT`    VARCHAR(255) COMMENT '「channelComponent」- 自定义通道专用组件',
-    `CHANNEL_CONFIG`       MEDIUMTEXT COMMENT '「channelConfig」- 通道（自定义）配置信息，Channel专用',
+    -- 字典配置 (Dict)
+    `DICT_COMPONENT`        VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「dictComponent」- 字典组件', -- 字典配置中的插件
+    `DICT_CONFIG`           MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「dictConfig」- 字典配置',             -- 字典的配置信息
+    `DICT_EPSILON`          MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「dictEpsilon」- 字典消费配置',        -- 字典的消费配置
 
-    /*
-     * 中间层专用信息
-     * Channel：只可见 Envelop，生成 ActIn，并且传入
-     * Component：只可见 Record，生成 ActOut
-     *
-     * 构造最终对象：io.modello.argument.app.KIntegrationn
-     * 构造最终对象：io.zerows.epoch.corpus.atom.database.Database
-     */
-    `CONFIG_INTEGRATION`   MEDIUMTEXT COMMENT '「configIntegration」- 集成配置信息，第三方专用',
-    `CONFIG_DATABASE`      MEDIUMTEXT COMMENT '「configDatabase」- 数据库配置，当前通道访问的Database',
+    -- 映射配置 (Mapping)
+    `MAPPING_MODE`          VARCHAR(20)   DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「mappingMode」- 映射模式',
+    `MAPPING_COMPONENT`     VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「mappingComponent」- 映射组件',
+    `MAPPING_CONFIG`        MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「mappingConfig」- 映射配置',          -- 映射专用配置
 
-    /*
-     * 字典专用配置信息
-     * 构造最终对象：io.vertx.up.commune.config.Dict
-     * 并且生成最终的字典相关信息，字典数据想对独立
-     * 主要提供 TABULAR / CATEGORY / ASSIST
-     *
-     * ！！！：dictComponent 在启用字典的时候必须配置
-     */
-    `DICT_CONFIG`          MEDIUMTEXT COMMENT '「dictConfig」- 字典的配置信息',
-    `DICT_COMPONENT`       VARCHAR(255) COMMENT '「dictComponent」- 字典配置中的插件',
-    `DICT_EPSILON`         MEDIUMTEXT COMMENT '「dictEpsilon」- 字典的消费配置',
+    -- 服务与集成 (Service & Integration)
+    `SERVICE_COMPONENT`     VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「serviceComponent」- 服务组件', -- 服务组件定义
+    `SERVICE_CONFIG`        MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「serviceConfig」- 业务配置',          -- 业务组件配置，业务组件专用
+    `SERVICE_RECORD`        VARCHAR(255)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「serviceRecord」- 服务记录', -- 服务记录定义
+    `CONFIG_DATABASE`       MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「configDatabase」- 数据库配置',       -- 当前通道访问的Database
+    `CONFIG_INTEGRATION`    MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「configIntegration」- 集成配置',      -- 第三方专用集成配置
 
-    /*
-     * 映射专用配置信息
-     * 映射模式有三种：
-     * 1）BEFORE / AFTER / AROUND
-     * 2）映射组件可配置，可不用配置
-     * 3）如果不配置的时候，则直接使用系统默认的转换方式
-     */
-    `MAPPING_CONFIG`       MEDIUMTEXT COMMENT '「mappingConfig」- 映射专用配置',
-    `MAPPING_MODE`         VARCHAR(20) COMMENT '「mappingMode」- 映射的模式',
-    `MAPPING_COMPONENT`    VARCHAR(255) COMMENT '「mappingComponent」- 映射组件类型',
+    -- 脚本与引擎 (Script & Engine)
+    `IN_SCRIPT`             MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「inScript」- 前置脚本',               -- 加载脚本引擎ScriptEngine前置脚本
+    `OUT_SCRIPT`            MEDIUMTEXT    COLLATE utf8mb4_bin COMMENT '「outScript」- 后置脚本',              -- 加载脚本引擎ScriptEngine后置脚本
+    `IS_GRAPHIC`            BIT(1)        DEFAULT NULL COMMENT '「isGraphic」- 图引擎',                       -- 是否驱动图引擎
+    `IS_WORKFLOW`           BIT(1)        DEFAULT NULL COMMENT '「isWorkflow」- 工作流',                      -- 是否驱动工作流引擎
 
-    /*
-     * 服务组件定义，消费 ActIn，并且生成 ActOut
-     * 1）只消费 ActIn，不消费 Envelop（下层转换成 ZRecord 和 ActRequest执行，不再处理 Envelop）
-     * 2）当前服务组件需要使用的 Record 类型（框架初始化，提交给内置使用），必须实现 Record 接口（ZRecord对Channel不可见）
-     *
-     * serviceConfig 用于构造 in / out 中的特殊结构 Diode
-     */
-    `SERVICE_RECORD`       VARCHAR(255) COMMENT '「serviceRecord」- 服务记录定义',
-    `SERVICE_COMPONENT`    VARCHAR(255) COMMENT '「serviceComponent」- 服务组件定义',
-    `SERVICE_CONFIG`       MEDIUMTEXT COMMENT '「serviceConfig」- 业务组件配置，业务组件专用',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`                  VARCHAR(64)   DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「type」- 类型',            -- [类型] 服务类型
 
-    -- 当前服务描述的模型identifier
-    `IDENTIFIER`           VARCHAR(255) COMMENT '「identifier」- 当前类型描述的Model的标识',
-    `IDENTIFIER_COMPONENT` VARCHAR(255) COMMENT '「identifierComponent」- 当前业务接口使用的标识选择器',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`                 VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',       -- [物理隔离] 核心分片键/顶层租户标识
+    `TENANT_ID`             VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',      -- [业务隔离] SaaS 租户/具体公司标识
+    `APP_ID`                VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',         -- [逻辑隔离] 区分同一租户下的不同应用
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`                BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                        -- [状态] 1=启用/正常, 0=禁用/冻结
+    `LANGUAGE`              VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',  -- [国际化] 如: zh_CN, en_US
+    `METADATA`              TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                 -- [扩展] JSON格式，存储非结构化配置
+    `VERSION`               VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',     -- [版本] 乐观锁
 
-    `RULE_UNIQUE`          MEDIUMTEXT COMMENT '「ruleUnique」- 第二标识规则，当前通道的专用标识规则RuleUnique',
+    -- ==================================================================================================
+    -- 🕒 5. 审计字段 (Audit Fields)
+    -- ==================================================================================================
+    `CREATED_AT`            DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                     -- [审计] 创建时间
+    `CREATED_BY`            VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',   -- [审计] 创建人
+    `UPDATED_AT`            DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                     -- [审计] 更新时间
+    `UPDATED_BY`            VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',   -- [审计] 更新人
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`                VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`             VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`               BIT COMMENT '「active」- 是否启用',
-    `METADATA`             TEXT COMMENT '「metadata」- 附加配置数据',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_I_SERVICE_NAME_NAMESPACE` (`NAME`, `NAMESPACE`) USING BTREE,
+    KEY `IDX_I_SERVICE_SIGMA` (`SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='服务';
 
-    -- Auditor字段
-    `CREATED_AT`           DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`           VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`           DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`           VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`               VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`            VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:ox-service-2
-ALTER TABLE I_SERVICE
-    ADD UNIQUE (`NAME`, `NAMESPACE`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)
+-- - TYPE (类型)

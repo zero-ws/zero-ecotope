@@ -29,7 +29,6 @@ class ExtractToolMedia {
      * Capture the consume mime types
      *
      * @param method method reference
-     *
      * @return return MIME
      */
     public static Set<MediaType> consumes(final Method method) {
@@ -40,7 +39,6 @@ class ExtractToolMedia {
      * Capture the produces mime types
      *
      * @param method method reference
-     *
      * @return return MIME
      */
     public static Set<MediaType> produces(final Method method) {

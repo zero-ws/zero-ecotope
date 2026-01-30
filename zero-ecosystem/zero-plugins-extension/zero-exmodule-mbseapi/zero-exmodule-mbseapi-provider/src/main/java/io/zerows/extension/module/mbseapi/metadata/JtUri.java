@@ -43,7 +43,7 @@ public class JtUri extends JtCommercial implements Api {
         /*
          * Api Key
          *  */
-        this.key = api.getKey();
+        this.key = api.getId();
 
         /*
          * Default Component Value

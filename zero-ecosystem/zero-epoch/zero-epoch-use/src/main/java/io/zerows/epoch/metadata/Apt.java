@@ -6,8 +6,8 @@ import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.exception._15000Exception500AptParameter;
 import io.zerows.component.log.LogO;
+import io.zerows.epoch.exception._15000Exception500AptParameter;
 import io.zerows.platform.enums.typed.ChangeFlag;
 import io.zerows.support.Ut;
 
@@ -18,18 +18,18 @@ import java.util.function.Supplier;
 
 /**
  * ## Compared Apt Tool
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * This tool is for calculation of two data source ( original & current ).
- *
+ * <p>
  * ### 2. Critical Api
- *
+ * <p>
  * 1. original: The old data
  * 2. current: The new data
- *
+ * <p>
  * ### 3. Upgrade Operation
- *
+ * <p>
  * 1. Connect to HAtom Part here
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>

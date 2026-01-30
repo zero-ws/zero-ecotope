@@ -1,8 +1,8 @@
 package io.zerows.platform.metadata;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.modeling.HAttribute;
+import io.zerows.support.base.UtBase;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,23 +10,23 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * ##「Pojo」Quote Definition Object
- *
+ * <p>
  * ### 1. Intro
- *
+ * <p>
  * Here are basic definition in `X_ATTRIBUTE` for calculation.
- *
+ * <p>
  * - source: Defined `identifier` in our environment ( Static Model & Dynamic Model )
  * - sourceField: Defined `field` of critical stored or it will not be used.
- *
+ * <p>
  * ### 2. Level
- *
+ * <p>
  * Here are mapping relations
- *
+ * <p>
  * 1. Quote: Model/Entity level, it provides features to process the whole model.
  * 2. Rule: Attribute/Field level, it provides rules to process attributes/fields only.
- *
+ * <p>
  * ### 3. Category
- *
+ * <p>
  * When create DataQuote, it's distinguish by `source` field, it means that the `source` could not produce duplicated
  * `sourceField` here.
  *
@@ -40,7 +40,7 @@ public class RQuote implements Serializable {
     private final String appName;
     /**
      * Stored `attr -> type`
-     *
+     * <p>
      * In current version, the type support two only:
      * - {@link io.vertx.core.json.JsonObject} for json object.
      * - {@link io.vertx.core.json.JsonArray} for json array.
@@ -83,7 +83,6 @@ public class RQuote implements Serializable {
      * The factory method to create new instance.
      *
      * @param appName {@link java.lang.String} application name.
-     *
      * @return {@link RQuote}
      */
     public static RQuote create(final String appName) {
@@ -97,24 +96,23 @@ public class RQuote implements Serializable {
 
     /**
      * 「Fluent」Add new attribute in current Quote instance.
-     *
+     * <p>
      * Here the dao class could be unique, it means that when `source` is fixed, here are only
      * one dao class that has been mapped to current DataQuote
-     *
+     * <p>
      * DataQuote created by pooled with
-     *
+     * <p>
      * ```java
      * // <pre><code class="java">
      *     final DataQuote stored = Cc.pick(() -> DataQuote.create(source), source);
      * // </code></pre>
      * ```
-     *
+     * <p>
      * > Here are specification that only one source must be unique dao class instead.
      *
      * @param referenceConfig {@link JsonObject} Input attribute object
      * @param service         {@link HAttribute}
      * @param dao             {@link RDao}
-     *
      * @return {@link RQuote}
      */
     public RQuote add(final HAttribute service, final JsonObject referenceConfig,
@@ -157,7 +155,6 @@ public class RQuote implements Serializable {
 
     /**
      * @param field {@link java.lang.String} Input attribute name.
-     *
      * @return {@link RDao}
      */
     public RDao dao(final String field) {
@@ -167,7 +164,6 @@ public class RQuote implements Serializable {
 
     /**
      * @param field Input attribute name
-     *
      * @return Data type of attribute
      */
     public Class<?> type(final String field) {

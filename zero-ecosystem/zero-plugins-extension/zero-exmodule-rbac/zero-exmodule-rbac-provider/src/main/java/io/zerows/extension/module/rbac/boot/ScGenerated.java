@@ -27,7 +27,7 @@ class ScGenerated {
     static Future<List<SUser>> valueAuth(final JsonArray userA, final String sigma) {
         final List<SUser> users = Ux.fromJson(userA, SUser.class);
         users.forEach(user -> {
-            user.setKey(UUID.randomUUID().toString());
+            user.setId(UUID.randomUUID().toString());
             user.setActive(Boolean.TRUE);
             /* 12345678 */
             final String initPwd = valuePassword();

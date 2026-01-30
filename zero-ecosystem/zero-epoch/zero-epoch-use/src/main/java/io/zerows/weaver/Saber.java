@@ -9,7 +9,6 @@ public interface Saber {
      *
      * @param type    数据类型
      * @param literal 字面量
-     *
      * @return 转换后的对象
      */
     Object from(Class<?> type, String literal);
@@ -19,7 +18,6 @@ public interface Saber {
      *
      * @param input 输入数据
      * @param <T>   泛型类型
-     *
      * @return 转换后的对象
      */
     <T> Object from(T input);

@@ -2,13 +2,13 @@ package io.zerows.extension.module.mbsecore.metadata.element;
 
 import io.r2mo.typed.cc.Cc;
 import io.zerows.extension.module.mbsecore.boot.Ao;
-import io.zerows.extension.module.mbsecore.metadata.Model;
-import io.zerows.extension.module.mbsecore.metadata.Schema;
-import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.extension.module.mbsecore.component.metadata.AoSentence;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MField;
 import io.zerows.extension.module.mbsecore.domain.tables.pojos.MJoin;
+import io.zerows.extension.module.mbsecore.metadata.Model;
+import io.zerows.extension.module.mbsecore.metadata.Schema;
+import io.zerows.extension.module.mbsecore.metadata.builtin.DataAtom;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.specification.modeling.HRecord;
 

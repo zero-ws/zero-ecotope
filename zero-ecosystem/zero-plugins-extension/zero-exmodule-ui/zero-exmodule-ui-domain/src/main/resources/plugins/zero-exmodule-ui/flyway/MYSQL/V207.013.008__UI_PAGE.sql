@@ -1,60 +1,50 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `UI_PAGE`;
+CREATE TABLE IF NOT EXISTS `UI_PAGE` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`                VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                    -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-page-1
--- 应用程序中的页面表：UI_PAGE
-DROP TABLE IF EXISTS UI_PAGE;
-CREATE TABLE IF NOT EXISTS UI_PAGE
-(
-    `KEY`              VARCHAR(36) COMMENT '「key」- 页面唯一主键',
-    /*
-     * /APP/MODULE/PAGE?PARAMS_STRING,
-     * 三个参数构造唯一标识，路径统一，使用这三个条件查询页面信息
-     * 1）page：查询的基本信息
-     * 2）layout：查询对应的模板信息（无模板时则不使用模板）
-     */
-    `APP`              VARCHAR(32) COMMENT '「app」- 入口APP名称，APP中的path',
-    `MODULE`           VARCHAR(32) COMMENT '「module」- 模块相关信息',
-    `PAGE`             VARCHAR(32) COMMENT '「page」- 页面路径信息',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `APP`               VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「app」- 入口APP名称',        -- 入口APP名称，APP中的path
+    `ASSIST`            TEXT          COLLATE utf8mb4_bin COMMENT '「assist」- 当前页面',                     -- 当前页面的辅助数据Ajax配置
+    `CONTAINER_CONFIG`  TEXT          COLLATE utf8mb4_bin COMMENT '「containerConfig」- 当前页面容器相关配置',
+    `CONTAINER_NAME`    VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「containerName」- 当前页面是否存在容器', -- 当前页面是否存在容器，如果有容器，那么设置容器名称
+    `GRID`              TEXT          COLLATE utf8mb4_bin COMMENT '「grid」- 当前页面的布局信息',             -- 当前页面的布局信息，Grid布局格式
+    `LAYOUT_ID`         VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「layoutId」- 使用的模板ID',  -- 使用的模板ID，最终生成 layout 顶层节点数据
+    `MODULE`            VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「module」- 模块相关信息',
+    `PAGE`              VARCHAR(32)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「page」- 页面路径信息',
+    `PARAM_MAP`         TEXT          COLLATE utf8mb4_bin COMMENT '「paramMap」- URL地址中',                  -- URL地址中的配置key=findRunning
+    `SECURE`            BIT(1)        DEFAULT NULL COMMENT '「secure」- 是否执行安全检查',                    -- 是否执行安全检查（安全检查才会被权限系统捕捉）
+    `STATE`             TEXT          COLLATE utf8mb4_bin COMMENT '「state」- 当前页面',                      -- 当前页面的初始化状态信息
 
-    -- 关联的 LAYOUT_ID （顶层模板信息，用于渲染模板专用）
-    `LAYOUT_ID`        VARCHAR(36) COMMENT '「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据',
-    -- 是否执行登录控制，安全页面需要执行登录控制炎症
-    `SECURE`           BIT COMMENT '「secure」- 是否执行安全检查（安全检查才会被权限系统捕捉）',
-    -- 当前页面是否包含了 InJson 格式的参数信息：key = findRunning，如果包含则存储对应的格式 ? 之后的内容，不考虑路径参数
-    `PARAM_MAP`        TEXT COMMENT '「paramMap」- URL地址中的配置key=findRunning',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`             VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',         -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`         VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',          -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`            VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',             -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`            BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                            -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`          VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',      -- [国际化] 如: zh_CN, en_US,
+    `METADATA`          TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                     -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`           VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`        DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                         -- [审计] 创建时间
+    `CREATED_BY`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',       -- [审计] 创建人
+    `UPDATED_AT`        DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                         -- [审计] 更新时间
+    `UPDATED_BY`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',       -- [审计] 更新人
 
-    /*
-     * 界面主要配置，深入到页面级别的基本配置
-     * 针对页面进行处理
-     * 1）容器名称：import Ox from 'oi'
-     * 2) grid 布局用于解析当前页面的 grid 布局信息，并且和 control 连接
-     */
-    `CONTAINER_NAME`   VARCHAR(32) COMMENT '「containerName」- 当前页面是否存在容器，如果有容器，那么设置容器名称',
-    `CONTAINER_CONFIG` TEXT COMMENT '「containerConfig」- 当前页面容器相关配置',
-    `STATE`            TEXT COMMENT '「state」- 当前页面的初始化状态信息',
-    `GRID`             TEXT COMMENT '「grid」- 当前页面的布局信息，Grid布局格式',
-    `ASSIST`           TEXT COMMENT '「assist」- 当前页面的辅助数据Ajax配置',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_UI_PAGE_APP_MODULE_PAGE_SIGMA` (`APP`, `MODULE`, `PAGE`, `SIGMA`) USING BTREE,
+    KEY `IDXM_UI_PAGE_APP_MODULE_PAGE_LANGUAGE_SIGMA` (`APP`, `MODULE`, `PAGE`, `LANGUAGE`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='UI_PAGE';
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`            VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`         VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`           BIT COMMENT '「active」- 是否启用',
-    `METADATA`         TEXT COMMENT '「metadata」- 附加配置数据',
-
-    -- Auditor字段
-    `CREATED_AT`       DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`       VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`       DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`       VARCHAR(36) COMMENT '「updatedBy」- 更新人',
-
-    `APP_ID`           VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`        VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
-
--- changeset Lang:ox-page-2
-ALTER TABLE UI_PAGE
-    ADD UNIQUE (`APP`, `MODULE`, `PAGE`, `SIGMA`) USING BTREE; -- 页面唯一地址，同一个应用内唯一
-
-ALTER TABLE UI_PAGE
-    ADD INDEX IDXM_UI_PAGE_APP_MODULE_PAGE_LANGUAGE_SIGMA (`APP`, `MODULE`, `PAGE`, `LANGUAGE`, `SIGMA`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)
+-- - TYPE (类型)

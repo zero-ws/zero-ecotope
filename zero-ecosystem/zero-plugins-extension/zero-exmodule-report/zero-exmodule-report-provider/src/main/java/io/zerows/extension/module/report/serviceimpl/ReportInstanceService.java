@@ -127,7 +127,7 @@ public class ReportInstanceService implements ReportInstanceStub {
             /*
              * - key
              */
-            instance.setKey(UUID.randomUUID().toString());
+            instance.setId(UUID.randomUUID().toString());
 
             return generator.build(instance, paramsMiddle, data);
         });

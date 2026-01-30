@@ -16,19 +16,19 @@ import java.util.Objects;
 
 /**
  * ## 环境工具
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * Ox平台系统中定义了三种核心环境：
- *
+ * <p>
  * - Development：开发环境。
  * - Production：生产环境。
  * - Mockito：模拟测试环境（集成debug=true）。
- *
+ * <p>
  * ### 2. 工具介绍：
- *
+ * <p>
  * 当前工具类为包域，它的执行功能如：
- *
+ * <p>
  * 1. 从`UQUIP`中提取字典翻译器。
  * 2. 构造专用初始化执行器。
  * 3. 辅助执行通道专用的插件组件、服务配置构造。
@@ -44,14 +44,13 @@ final class OxAmbient {
 
     /**
      * 从原始配置数据中读取`plugin.config`节点，根据传入的`clazz`读取和当前插件相关的配置信息。
-     *
+     * <p>
      * - 从原始配置中读取基础配置，上层传入的`options`数据。
      * - 提取`plugin.config`中和`clazz`绑定的配置数据。
      * - 合并二者所有配置数据构造最终配置数据。
      *
      * @param clazz   {@link Class} 执行初始化的类信息，反射调用
      * @param options {@link JsonObject} 服务配置数据，对应ServiceConfig字段
-     *
      * @return {@link JsonObject}
      */
     static JsonObject pluginOptions(final Class<?> clazz, final JsonObject options) {
@@ -80,7 +79,6 @@ final class OxAmbient {
      *
      * @param options {@link JsonObject} 服务配置数据，对应ServiceConfig字段
      * @param key     {@link String} 传入的固定`key`值
-     *
      * @return {@link List}<{@link Class}>
      */
     static List<Class<?>> pluginClass(final JsonObject options, final String key) {
@@ -102,14 +100,13 @@ final class OxAmbient {
 
     /**
      * 根据传入路径执行路径解析工作，解析三种不同环境的路径。
-     *
+     * <p>
      * - Development：开发环境
      * - Production：生产环境
      * - Mockito：模拟测试环境（integration中的debug = true）
      *
      * @param path        {@link String} 构造的环境读取数据专用路径
      * @param environment {@link Environment} 传入环境数据
-     *
      * @return {@link String} 返回不同环境处理过的绝对路径信息
      */
     static String resolve(final String path, final Environment environment) {
@@ -122,7 +119,7 @@ final class OxAmbient {
 
     /**
      * 构造初始化专用接口，用于初始化某个`X_APP`的应用配置。
-     *
+     * <p>
      * - 初始化接口{@link InitStub}，执行应用初始化。
      * - 应用访问接口{@link AppStub}。
      *

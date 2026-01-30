@@ -46,4 +46,9 @@ public interface ERR {
     VertxE _40102 = VertxE.of(-40102).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _40103 = VertxE.of(-40103).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _40104 = VertxE.of(-40104).state(HttpResponseStatus.CONFLICT);
+
+    // 初始化过程失败
+    VertxE _80306 = VertxE.of(-80306).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
+    VertxE _80307 = VertxE.of(-80307).state(HttpResponseStatus.NOT_IMPLEMENTED);
+    VertxE _80308 = VertxE.of(-80308).state(HttpResponseStatus.NOT_FOUND);
 }

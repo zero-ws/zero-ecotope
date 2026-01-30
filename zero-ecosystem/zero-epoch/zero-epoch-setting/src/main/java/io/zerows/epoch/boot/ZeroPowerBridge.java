@@ -1,8 +1,8 @@
 package io.zerows.epoch.boot;
 
 import io.r2mo.typed.cc.Cc;
-import io.zerows.epoch.basicore.YmConfiguration;
-import io.zerows.epoch.configuration.Equip;
+import io.zerows.epoch.jigsaw.Equip;
+import io.zerows.epoch.spec.YmConfiguration;
 import io.zerows.platform.management.StoreSetting;
 import io.zerows.specification.configuration.HSetting;
 import io.zerows.support.Ut;

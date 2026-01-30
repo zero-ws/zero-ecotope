@@ -1,11 +1,14 @@
 package io.zerows.extension.module.mbsecore.component.jooq.internal;
 
-import io.zerows.platform.constant.VValue;
 import io.zerows.component.log.LogOf;
 import io.zerows.extension.module.mbsecore.metadata.element.DataMatrix;
 import io.zerows.extension.module.mbsecore.metadata.element.DataRow;
-import org.jooq.*;
+import io.zerows.platform.constant.VValue;
+import org.jooq.Condition;
+import org.jooq.Field;
 import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.Table;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,41 +1,45 @@
--- liquibase formatted sql
+DROP TABLE IF EXISTS `M_RELATION`;
+CREATE TABLE IF NOT EXISTS `M_RELATION` (
+    -- ==================================================================================================
+    -- 🆔 1. 核心主键区 (Primary Key Strategy)
+    -- ==================================================================================================
+    `ID`          VARCHAR(36)   COLLATE utf8mb4_bin NOT NULL COMMENT '「id」- 主键',                          -- [主键] 采用 Snowflake/UUID，避开自增ID
 
--- changeset Lang:ox-define-relation-1
--- 【定义】定义模型和模型之间的关系信息
-DROP TABLE IF EXISTS M_RELATION;
-CREATE TABLE IF NOT EXISTS M_RELATION
-(
-    `KEY`        VARCHAR(36) COMMENT '「key」- 关系定义的主键',
-    `TYPE`       VARCHAR(36) COMMENT '「type」- 关系类型 - 来自（字典）',
-    /*
-     *
-     * 1）根据 upstream = 当前 读取；- 读取当前模型的下级
-     * 2）根据 downstream = 当前 读取；- 读取当前模型的上级
-     * 值节点为 JSON 格式，用于存储一些相关的配置信息，在业务场景中使用
-     */
-    `UPSTREAM`   VARCHAR(255) COMMENT '「upstream」- 当前关系是 upstream，表示上级',
-    `DOWNSTREAM` VARCHAR(255) COMMENT '「downstream」- 当前关系是 downstream，表示下级',
+    -- ==================================================================================================
+    -- 📝 2. 业务字段区 (Business Fields)
+    -- ==================================================================================================
+    `COMMENTS`    TEXT          COLLATE utf8mb4_bin COMMENT '「comments」- 关系定义的描述信息',
+    `DOWNSTREAM`  VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「downstream」- 当前关系',          -- 当前关系是 downstream，表示下级
+    `UPSTREAM`    VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「upstream」- 当前关系',            -- 当前关系是 upstream，表示上级
 
-    `COMMENTS`   TEXT COMMENT '「comments」- 关系定义的描述信息',
+    -- ==================================================================================================
+    -- 🧩 3. 模型关联与多态 (Polymorphic Associations)
+    -- ==================================================================================================
+    `TYPE`        VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「type」- 类型',                    -- [类型],
 
-    -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`      VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`   VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`     BIT COMMENT '「active」- 是否启用',
-    `METADATA`   TEXT COMMENT '「metadata」- 附加配置数据',
+    -- ==================================================================================================
+    -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
+    -- ==================================================================================================
+    `SIGMA`       VARCHAR(128)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「sigma」- 统一标识',               -- [物理隔离] 核心分片键/顶层租户标识,
+    `TENANT_ID`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',                -- [业务隔离] SaaS 租户/具体公司标识,
+    `APP_ID`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',                   -- [逻辑隔离] 区分同一租户下的不同应用,
+    -- --------------------------------------------------------------------------------------------------
+    `ACTIVE`      BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                                  -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`    VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',            -- [国际化] 如: zh_CN, en_US,
+    `METADATA`    TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                           -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`     VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号',
+    -- ==================================================================================================
+    `CREATED_AT`  DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                               -- [审计] 创建时间
+    `CREATED_BY`  VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',             -- [审计] 创建人
+    `UPDATED_AT`  DATETIME      DEFAULT NULL COMMENT '「updatedAt」- 更新时间',                               -- [审计] 更新时间
+    `UPDATED_BY`  VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「updatedBy」- 更新人',             -- [审计] 更新人
 
-    -- Auditor字段
-    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY` VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY` VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    -- ==================================================================================================
+    -- ⚡ 6. 索引定义 (Index Definition)
+    -- ==================================================================================================
+    PRIMARY KEY (`ID`) USING BTREE,
+    UNIQUE KEY `UK_M_RELATION_TYPE_UPSTREAM_DOWNSTREAM_SIGMA` (`TYPE`, `UPSTREAM`, `DOWNSTREAM`, `SIGMA`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_bin COMMENT='M_RELATION';
 
-    `APP_ID`     VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`  VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
--- changeset Lang:ox-define-relation-2
-ALTER TABLE M_RELATION
-    ADD UNIQUE (`TYPE`, `UPSTREAM`, `DOWNSTREAM`, `SIGMA`) USING BTREE;
-ALTER TABLE M_RELATION
-    ADD INDEX (`UPSTREAM`, `DOWNSTREAM`, `SIGMA`) USING BTREE;
+-- 缺失公共字段：
+-- - VERSION (版本)

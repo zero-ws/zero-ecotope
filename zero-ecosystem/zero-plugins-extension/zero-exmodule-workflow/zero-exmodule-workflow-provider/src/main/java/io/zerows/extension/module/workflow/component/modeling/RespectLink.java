@@ -34,7 +34,7 @@ public class RespectLink extends AbstractRespect {
          */
         final WTicket ticket = record.ticket();
         final JsonObject condition = this.queryTpl();
-        condition.put(KName.SOURCE_KEY, ticket.getKey());
+        condition.put(KName.SOURCE_KEY, ticket.getId());
         /*
          * Exclude the data stored in database here
          */
@@ -64,7 +64,7 @@ public class RespectLink extends AbstractRespect {
         final WTicket ticket = record.ticket();
         final JsonObject sourceData = Ux.toJson(ticket);
         // If not `sourceKey`, here put sourceKey
-        data.put(KName.SOURCE_KEY, ticket.getKey());
+        data.put(KName.SOURCE_KEY, ticket.getId());
         data.put(KName.SOURCE_DATA, sourceData);
 
         final JsonObject parameters = new JsonObject();
@@ -82,7 +82,7 @@ public class RespectLink extends AbstractRespect {
     public Future<JsonArray> fetchAsync(final WRecord record) {
         final WTicket ticket = record.ticket();
         final JsonObject condition = this.queryTpl();
-        condition.put(KName.SOURCE_KEY, ticket.getKey());
+        condition.put(KName.SOURCE_KEY, ticket.getId());
         return HPI.of(ExLinkage.class).waitAsync(link -> link.fetch(condition), JsonArray::new);
     }
 }

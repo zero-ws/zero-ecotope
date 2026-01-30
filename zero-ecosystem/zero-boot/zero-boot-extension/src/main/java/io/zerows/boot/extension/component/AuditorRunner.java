@@ -22,7 +22,12 @@ import io.zerows.specification.modeling.HAttribute;
 import io.zerows.support.Ut;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
@@ -127,7 +132,7 @@ class AuditorRunner {
                      * 关联设置和初始化状态信息
                      */
                     changeList.forEach(change -> {
-                        change.setActivityId(inserted.getKey());
+                        change.setActivityId(inserted.getId());
                         /*
                          * 待确认字段为 PENDING / 未设置字段为 CONFIRMED
                          * ATOM-02:
@@ -302,7 +307,7 @@ class AuditorRunner {
             final MAttribute attribute = model.dbAttribute(attributeName);
             final MField field = this.onField(attribute, model);
             final XActivityChange change = new XActivityChange();
-            change.setKey(UUID.randomUUID().toString());
+            change.setId(UUID.randomUUID().toString());
             change.setActive(Boolean.TRUE);
             change.setSigma(model.dbModel().getSigma());
             change.setLanguage(model.dbModel().getLanguage());

@@ -7,16 +7,16 @@ import io.vertx.ext.web.handler.StaticHandler;
 
 class SwaggerRouteMount {
 
-    public static void mount(Router router, OpenAPI openAPI) {
+    public static void mount(final Router router, final OpenAPI openAPI) {
         // Static UI
         router.route("/docs/*").handler(StaticHandler.create("swagger-ui"));
 
         // Serve YAML
-        String yaml = Yaml.pretty(openAPI);
+        final String yaml = Yaml.pretty(openAPI);
         router.route("/openapi.yaml").handler(ctx -> {
             ctx.response()
-                    .putHeader("Content-Type", "application/yaml")
-                    .end(yaml);
+                .putHeader("Content-Type", "application/yaml")
+                .end(yaml);
         });
     }
 }

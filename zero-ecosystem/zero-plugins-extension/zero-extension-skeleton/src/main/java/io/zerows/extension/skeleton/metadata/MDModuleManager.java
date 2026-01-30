@@ -1,6 +1,6 @@
 package io.zerows.extension.skeleton.metadata;
 
-import io.zerows.epoch.basicore.MDConfiguration;
+import io.zerows.epoch.web.MDConfiguration;
 
 /**
  * 统一管理三层配置
@@ -14,9 +14,9 @@ import io.zerows.epoch.basicore.MDConfiguration;
  */
 public abstract class MDModuleManager<Y, C> implements MDManager<Y, C> {
 
+    private final String mid;
     private Y setting;
     private C config;
-    private final String mid;
 
     protected MDModuleManager(final String mid) {
         this.mid = mid;

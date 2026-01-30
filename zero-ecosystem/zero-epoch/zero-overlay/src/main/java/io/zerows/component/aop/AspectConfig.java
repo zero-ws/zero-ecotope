@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VPC;
 import io.zerows.platform.exception._60050Exception501NotSupport;
-import io.zerows.support.base.UtBase;
 import io.zerows.specification.atomic.HReturn;
+import io.zerows.support.base.UtBase;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -53,7 +53,6 @@ class AspectConfig {
      *
      * @param input 输入参数（JsonObject、JsonArray、T）
      * @param <T>   输入类型
-     *
      * @return 选择计算的值
      */
     <T> String forkKey(final T input) {

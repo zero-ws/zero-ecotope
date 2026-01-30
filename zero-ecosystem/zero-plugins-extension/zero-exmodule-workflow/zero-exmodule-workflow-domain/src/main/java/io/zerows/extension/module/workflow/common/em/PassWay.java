@@ -10,14 +10,14 @@ public enum PassWay {
     /**
      * Fork/Join Mode,
      * ( n: 1 )
-     *
+     * <p>
      * - 1) n means the next node will be `n` types.
      * - 2) 1 means each type contains `1` task.
-     *
-     *
-     *
+     * <p>
+     * <p>
+     * <p>
      * The request data:
-     *
+     * <p>
      * ```json
      * <pre><code class="json">
      * {
@@ -38,14 +38,14 @@ public enum PassWay {
     /**
      * Multi Mode,
      * ( 1: n )
-     *
+     * <p>
      * - 1) 1 means the next node is unique ( only one ), should be `1` type.
      * - 2) n means each type contains `n` tasks.
-     *
-     *
-     *
+     * <p>
+     * <p>
+     * <p>
      * The request data:
-     *
+     * <p>
      * ```json
      * <pre><code class="json">
      * {
@@ -64,14 +64,14 @@ public enum PassWay {
     /**
      * Standard Mode,
      * ( 1: 1 )
-     *
+     * <p>
      * - 1) 1 means the next node is unique ( only one ), should be `1` type.
      * - 2) 1 means each type contains `1` task.
-     *
-     *
-     *
+     * <p>
+     * <p>
+     * <p>
      * The request data:
-     *
+     * <p>
      * ```json
      * <pre><code class="json">
      * {
@@ -84,14 +84,14 @@ public enum PassWay {
     /**
      * Grid Mode,
      * ( n: n )
-     *
+     * <p>
      * - 1) n means the next node will be `n` types.
      * - 2) n means each type contains `n` tasks.
-     *
-     *
-     *
+     * <p>
+     * <p>
+     * <p>
      * The request data:
-     *
+     * <p>
      * ```json
      * <pre><code class="json">
      * {

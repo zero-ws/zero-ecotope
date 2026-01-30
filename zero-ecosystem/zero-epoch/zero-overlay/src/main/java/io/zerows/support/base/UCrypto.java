@@ -38,7 +38,6 @@ final class UCrypto {
      * SHA-512
      *
      * @param input input string that will be encoded
-     *
      * @return The encoded string with sha512
      */
     static String sha512(final String input) {

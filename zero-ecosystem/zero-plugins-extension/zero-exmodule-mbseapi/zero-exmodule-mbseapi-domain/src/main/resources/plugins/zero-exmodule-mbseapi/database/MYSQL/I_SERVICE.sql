@@ -5,20 +5,30 @@
 DROP TABLE IF EXISTS I_SERVICE;
 CREATE TABLE IF NOT EXISTS I_SERVICE
 (
-    `KEY`                  VARCHAR(36) COMMENT '「key」- 服务ID',
+    `KEY`
+    VARCHAR
+(
+    36
+) COMMENT '「key」- 服务ID',
 
     -- 名空间处理
-    `NAMESPACE`            VARCHAR(255) COMMENT '「namespace」- 服务所在名空间',
-    `NAME`                 VARCHAR(255) COMMENT '「name」- 服务名称',
-    `COMMENT`              TEXT COMMENT '「comment」- 备注信息',
+    `NAMESPACE` VARCHAR
+(
+    255
+) COMMENT '「namespace」- 服务所在名空间',
+    `NAME` VARCHAR
+(
+    255
+) COMMENT '「name」- 服务名称',
+    `COMMENT` TEXT COMMENT '「comment」- 备注信息',
 
     -- 特殊流程触发定义
-    `IS_WORKFLOW`          BIT COMMENT '「isWorkflow」- 是否驱动工作流引擎',
-    `IS_GRAPHIC`           BIT COMMENT '「isGraphic」- 是否驱动图引擎',
+    `IS_WORKFLOW` BIT COMMENT '「isWorkflow」- 是否驱动工作流引擎',
+    `IS_GRAPHIC` BIT COMMENT '「isGraphic」- 是否驱动图引擎',
 
     -- 前置脚本和后置脚本
-    `IN_SCRIPT`            MEDIUMTEXT COMMENT '「inScript」- 本次不使用，加载脚本引擎ScriptEngine前置脚本',
-    `OUT_SCRIPT`           MEDIUMTEXT COMMENT '「outScript」- 本次不使用，加载脚本引擎ScriptEngine后置脚本',
+    `IN_SCRIPT` MEDIUMTEXT COMMENT '「inScript」- 本次不使用，加载脚本引擎ScriptEngine前置脚本',
+    `OUT_SCRIPT` MEDIUMTEXT COMMENT '「outScript」- 本次不使用，加载脚本引擎ScriptEngine后置脚本',
 
     /*
      * 通道定义，主要目的是创建：ActIn 并且传给 Service 层，通道的输入为：Envelop（数据） 和 ZApi（配置）
@@ -39,9 +49,15 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      *
      * DEFINE：「自定义」自定义模式，这种情况下才会启用`CHANNEL_COMPONENT`字段
      */
-    `CHANNEL_TYPE`         VARCHAR(20) COMMENT '「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE',
-    `CHANNEL_COMPONENT`    VARCHAR(255) COMMENT '「channelComponent」- 自定义通道专用组件',
-    `CHANNEL_CONFIG`       MEDIUMTEXT COMMENT '「channelConfig」- 通道（自定义）配置信息，Channel专用',
+    `CHANNEL_TYPE` VARCHAR
+(
+    20
+) COMMENT '「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE',
+    `CHANNEL_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「channelComponent」- 自定义通道专用组件',
+    `CHANNEL_CONFIG` MEDIUMTEXT COMMENT '「channelConfig」- 通道（自定义）配置信息，Channel专用',
 
     /*
      * 中间层专用信息
@@ -51,8 +67,8 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      * 构造最终对象：io.modello.argument.app.KIntegrationn
      * 构造最终对象：io.zerows.epoch.corpus.atom.database.Database
      */
-    `CONFIG_INTEGRATION`   MEDIUMTEXT COMMENT '「configIntegration」- 集成配置信息，第三方专用',
-    `CONFIG_DATABASE`      MEDIUMTEXT COMMENT '「configDatabase」- 数据库配置，当前通道访问的Database',
+    `CONFIG_INTEGRATION` MEDIUMTEXT COMMENT '「configIntegration」- 集成配置信息，第三方专用',
+    `CONFIG_DATABASE` MEDIUMTEXT COMMENT '「configDatabase」- 数据库配置，当前通道访问的Database',
 
     /*
      * 字典专用配置信息
@@ -62,9 +78,12 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      *
      * ！！！：dictComponent 在启用字典的时候必须配置
      */
-    `DICT_CONFIG`          MEDIUMTEXT COMMENT '「dictConfig」- 字典的配置信息',
-    `DICT_COMPONENT`       VARCHAR(255) COMMENT '「dictComponent」- 字典配置中的插件',
-    `DICT_EPSILON`         MEDIUMTEXT COMMENT '「dictEpsilon」- 字典的消费配置',
+    `DICT_CONFIG` MEDIUMTEXT COMMENT '「dictConfig」- 字典的配置信息',
+    `DICT_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「dictComponent」- 字典配置中的插件',
+    `DICT_EPSILON` MEDIUMTEXT COMMENT '「dictEpsilon」- 字典的消费配置',
 
     /*
      * 映射专用配置信息
@@ -73,9 +92,15 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      * 2）映射组件可配置，可不用配置
      * 3）如果不配置的时候，则直接使用系统默认的转换方式
      */
-    `MAPPING_CONFIG`       MEDIUMTEXT COMMENT '「mappingConfig」- 映射专用配置',
-    `MAPPING_MODE`         VARCHAR(20) COMMENT '「mappingMode」- 映射的模式',
-    `MAPPING_COMPONENT`    VARCHAR(255) COMMENT '「mappingComponent」- 映射组件类型',
+    `MAPPING_CONFIG` MEDIUMTEXT COMMENT '「mappingConfig」- 映射专用配置',
+    `MAPPING_MODE` VARCHAR
+(
+    20
+) COMMENT '「mappingMode」- 映射的模式',
+    `MAPPING_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「mappingComponent」- 映射组件类型',
 
     /*
      * 服务组件定义，消费 ActIn，并且生成 ActOut
@@ -84,32 +109,65 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      *
      * serviceConfig 用于构造 in / out 中的特殊结构 Diode
      */
-    `SERVICE_RECORD`       VARCHAR(255) COMMENT '「serviceRecord」- 服务记录定义',
-    `SERVICE_COMPONENT`    VARCHAR(255) COMMENT '「serviceComponent」- 服务组件定义',
-    `SERVICE_CONFIG`       MEDIUMTEXT COMMENT '「serviceConfig」- 业务组件配置，业务组件专用',
+    `SERVICE_RECORD` VARCHAR
+(
+    255
+) COMMENT '「serviceRecord」- 服务记录定义',
+    `SERVICE_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「serviceComponent」- 服务组件定义',
+    `SERVICE_CONFIG` MEDIUMTEXT COMMENT '「serviceConfig」- 业务组件配置，业务组件专用',
 
     -- 当前服务描述的模型identifier
-    `IDENTIFIER`           VARCHAR(255) COMMENT '「identifier」- 当前类型描述的Model的标识',
-    `IDENTIFIER_COMPONENT` VARCHAR(255) COMMENT '「identifierComponent」- 当前业务接口使用的标识选择器',
+    `IDENTIFIER` VARCHAR
+(
+    255
+) COMMENT '「identifier」- 当前类型描述的Model的标识',
+    `IDENTIFIER_COMPONENT` VARCHAR
+(
+    255
+) COMMENT '「identifierComponent」- 当前业务接口使用的标识选择器',
 
-    `RULE_UNIQUE`          MEDIUMTEXT COMMENT '「ruleUnique」- 第二标识规则，当前通道的专用标识规则RuleUnique',
+    `RULE_UNIQUE` MEDIUMTEXT COMMENT '「ruleUnique」- 第二标识规则，当前通道的专用标识规则RuleUnique',
 
     -- ------------------------------ 公共字段 --------------------------------
-    `SIGMA`                VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
-    `LANGUAGE`             VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`               BIT COMMENT '「active」- 是否启用',
-    `METADATA`             TEXT COMMENT '「metadata」- 附加配置数据',
+    `SIGMA` VARCHAR
+(
+    128
+) COMMENT '「sigma」- 用户组绑定的统一标识',
+    `LANGUAGE` VARCHAR
+(
+    10
+) COMMENT '「language」- 使用的语言',
+    `ACTIVE` BIT COMMENT '「active」- 是否启用',
+    `METADATA` TEXT COMMENT '「metadata」- 附加配置数据',
 
     -- Auditor字段
-    `CREATED_AT`           DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`           VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`           DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`           VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT` DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY` VARCHAR
+(
+    36
+) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT` DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY` VARCHAR
+(
+    36
+) COMMENT '「updatedBy」- 更新人',
 
-    `APP_ID`               VARCHAR(36) COMMENT '「appId」- 应用ID',
-    `TENANT_ID`            VARCHAR(36) COMMENT '「tenantId」- 租户ID',
-    PRIMARY KEY (`KEY`) USING BTREE
-);
+    `APP_ID` VARCHAR
+(
+    36
+) COMMENT '「appId」- 应用ID',
+    `TENANT_ID` VARCHAR
+(
+    36
+) COMMENT '「tenantId」- 租户ID',
+    PRIMARY KEY
+(
+    `KEY`
+) USING BTREE
+    );
 -- changeset Lang:ox-service-2
 ALTER TABLE I_SERVICE
     ADD UNIQUE (`NAME`, `NAMESPACE`) USING BTREE;

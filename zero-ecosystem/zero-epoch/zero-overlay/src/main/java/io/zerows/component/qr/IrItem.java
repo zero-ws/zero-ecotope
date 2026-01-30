@@ -64,7 +64,6 @@ public class IrItem implements Serializable {
      * Bind the findRunning in current Qr item.
      *
      * @param value {@link java.lang.Object} findRunning input here.
-     *
      * @return {@link IrItem}
      */
     public IrItem value(final Object value) {

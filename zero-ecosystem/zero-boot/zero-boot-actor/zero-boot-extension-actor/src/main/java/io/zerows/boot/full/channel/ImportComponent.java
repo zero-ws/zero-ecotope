@@ -13,24 +13,24 @@ import io.zerows.support.Ut;
 
 /**
  * ## 「Channel」上传通道
- *
+ * <p>
  * ### 1. 基本介绍
- *
+ * <p>
  * 不带任何<strong>集成功能</strong>的标准上传通道，支持如下功能
- *
+ * <p>
  * - 上传专用（导入完成）
  * - 请求`POST /api/ox/:identifier/import`
- *
+ * <p>
  * ### 2. 通道详细
- *
+ * <p>
  * - 类型：ADAPTOR
- *
+ * <p>
  * ### 3. 请求格式
- *
+ * <p>
  * > 文件上传直接处理
- *
+ * <p>
  * ### 4. 响应格式
- *
+ * <p>
  * ```json
  * // <pre><code class="json">
  * {

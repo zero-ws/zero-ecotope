@@ -19,7 +19,6 @@ class _Date extends _Compare {
      *
      * @param date    LocalDate
      * @param pattern 时间格式模式
-     *
      * @return 格式化后的字符串
      */
     public static String fromDate(final LocalDate date, final String pattern) {
@@ -31,7 +30,6 @@ class _Date extends _Compare {
      *
      * @param datetime LocalDateTime
      * @param pattern  时间格式模式
-     *
      * @return 格式化后的字符串
      */
     public static String fromDate(final LocalDateTime datetime, final String pattern) {
@@ -43,7 +41,6 @@ class _Date extends _Compare {
      *
      * @param time    LocalTime
      * @param pattern 时间格式模式
-     *
      * @return 格式化后的字符串
      */
     public static String fromDate(final LocalTime time, final String pattern) {
@@ -55,7 +52,6 @@ class _Date extends _Compare {
      *
      * @param date    Date
      * @param pattern 时间格式模式
-     *
      * @return 格式化后的字符串
      */
     public static String fromDate(final Date date, final String pattern) {
@@ -67,7 +63,6 @@ class _Date extends _Compare {
      *
      * @param instant Instant
      * @param pattern 时间格式模式
-     *
      * @return 格式化后的字符串
      */
     public static String fromDate(final Instant instant, final String pattern) {
@@ -80,7 +75,6 @@ class _Date extends _Compare {
      * 2. > 1.8 使用 Temporal.class 检查
      *
      * @param clazz 类型
-     *
      * @return 是否时间类型
      */
     public static boolean isDate(final Class<?> clazz) {
@@ -91,7 +85,6 @@ class _Date extends _Compare {
      * 检查对象是否是一个合法时间格式，或可转换成时间的格式
      *
      * @param value 对象
-     *
      * @return 是否是一个合法时间格式
      */
     public static boolean isDate(final Object value) {
@@ -104,7 +97,6 @@ class _Date extends _Compare {
      * @param current 当前时间
      * @param start   开始时间
      * @param end     结束时间
-     *
      * @return 是否位于某个区间内
      */
     public static boolean isDuration(final LocalDateTime current, final LocalDateTime start, final LocalDateTime end) {
@@ -116,7 +108,6 @@ class _Date extends _Compare {
      * 将字符串literal转换成 Date类型（和JDK老版本对接）
      *
      * @param literal 字符串
-     *
      * @return Date
      */
     public static Date parse(final String literal) {
@@ -127,7 +118,6 @@ class _Date extends _Compare {
      * 将LocalTime转换成 Date类型（和JDK老版本对接）
      *
      * @param time LocalTime
-     *
      * @return Date
      */
     public static Date parse(final LocalTime time) {
@@ -138,7 +128,6 @@ class _Date extends _Compare {
      * 将LocalDateTime转换成 Date类型（和JDK老版本对接）
      *
      * @param datetime LocalDateTime
-     *
      * @return Date
      */
     public static Date parse(final LocalDateTime datetime) {
@@ -149,7 +138,6 @@ class _Date extends _Compare {
      * 将LocalDate转换成 Date类型（和JDK老版本对接）
      *
      * @param date LocalDate
-     *
      * @return Date
      */
     public static Date parse(final LocalDate date) {
@@ -160,7 +148,6 @@ class _Date extends _Compare {
      * 将字符串literal转换成 Date类型（和JDK老版本对接）
      *
      * @param literal 字符串
-     *
      * @return Date
      */
     public static Date parseFull(final String literal) {
@@ -239,7 +226,6 @@ class _Date extends _Compare {
      * 合法时间格式中字符串转成月
      *
      * @param literal 时间字符串
-     *
      * @return 月份
      */
     public static int toMonth(final String literal) {
@@ -250,7 +236,6 @@ class _Date extends _Compare {
      * 提取时间中的月份
      *
      * @param date 时间
-     *
      * @return 月份
      */
     public static int toMonth(final Date date) {
@@ -261,7 +246,6 @@ class _Date extends _Compare {
      * 合法时间格式中字符串转成年
      *
      * @param literal 时间字符串
-     *
      * @return 年份
      */
     public static int toYear(final String literal) {
@@ -272,7 +256,6 @@ class _Date extends _Compare {
      * 提取时间中的年份
      *
      * @param date 时间
-     *
      * @return 年份
      */
     public static int toYear(final Date date) {
@@ -283,7 +266,6 @@ class _Date extends _Compare {
      * 合法时间格式中字符串转成LocalDateTime
      *
      * @param literal 时间字符串
-     *
      * @return LocalDateTime
      */
 
@@ -295,7 +277,6 @@ class _Date extends _Compare {
      * Date转换成LocalDateTime
      *
      * @param date Date
-     *
      * @return LocalDateTime
      */
     public static LocalDateTime toDateTime(final Date date) {
@@ -306,7 +287,6 @@ class _Date extends _Compare {
      * Instant转换成LocalDateTime
      *
      * @param date Instant
-     *
      * @return LocalDateTime
      */
     public static LocalDateTime toDateTime(final Instant date) {
@@ -317,7 +297,6 @@ class _Date extends _Compare {
      * 合法时间格式中字符串转成LocalDate
      *
      * @param literal 时间字符串
-     *
      * @return LocalDate
      */
     public static LocalDate toDate(final String literal) {
@@ -328,7 +307,6 @@ class _Date extends _Compare {
      * 合法时间格式中字符串转成LocalTime
      *
      * @param literal 时间字符串
-     *
      * @return LocalTime
      */
     public static LocalTime toTime(final String literal) {
@@ -339,7 +317,6 @@ class _Date extends _Compare {
      * 毫秒值转换成 LocalDateTime
      *
      * @param millSeconds 毫秒值
-     *
      * @return LocalDateTime
      */
     public static LocalDateTime toDuration(final long millSeconds) {
@@ -350,7 +327,6 @@ class _Date extends _Compare {
      * Date类型的时间转换成 LocalDate，Java 8+
      *
      * @param date Date
-     *
      * @return LocalDate
      */
     public static LocalDate toDate(final Date date) {
@@ -361,7 +337,6 @@ class _Date extends _Compare {
      * Date类型的时间转换成 LocalTime，Java 8+
      *
      * @param date Date
-     *
      * @return LocalTime
      */
     public static LocalTime toTime(final Date date) {
@@ -372,7 +347,6 @@ class _Date extends _Compare {
      * Instant类型的时间转换成 LocalDate，Java 8+
      *
      * @param date Instant
-     *
      * @return LocalDate
      */
     public static LocalDate toDate(final Instant date) {
@@ -383,7 +357,6 @@ class _Date extends _Compare {
      * Instant类型的时间转换成 LocalTime，Java 8+
      *
      * @param date Instant
-     *
      * @return LocalTime
      */
     public static LocalTime toTime(final Instant date) {

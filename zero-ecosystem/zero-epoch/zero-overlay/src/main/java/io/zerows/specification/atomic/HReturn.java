@@ -25,7 +25,6 @@ public interface HReturn<I, O> {
      *
      * @param data   数据
      * @param config 配置
-     *
      * @return {@link O}
      */
     O execute(I data, JsonObject config);
@@ -35,7 +34,6 @@ public interface HReturn<I, O> {
      *
      * @param data   数据
      * @param config 配置
-     *
      * @return {@link Future}
      */
     default Future<O> executeAsync(final I data, final JsonObject config) {
@@ -47,7 +45,6 @@ public interface HReturn<I, O> {
      *
      * @param data   数据
      * @param config 配置
-     *
      * @return {@link O}
      */
     O executeJ(final ClusterSerializable data, final JsonObject config);
@@ -57,7 +54,6 @@ public interface HReturn<I, O> {
      *
      * @param data   数据
      * @param config 配置
-     *
      * @return {@link Future}
      */
     default Future<O> executeJAsync(final ClusterSerializable data, final JsonObject config) {

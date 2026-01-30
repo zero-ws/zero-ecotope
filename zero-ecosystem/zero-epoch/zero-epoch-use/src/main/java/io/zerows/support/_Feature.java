@@ -33,7 +33,7 @@ class _Feature extends _Element {
     public static Future<JsonArray> futureA() {
         return Future.succeededFuture(new JsonArray());
     }
-    
+
     public static <T> Future<JsonArray> futureA(final List<T> list) {
         return Future.succeededFuture(Json.toJArray(list, ""));
     }

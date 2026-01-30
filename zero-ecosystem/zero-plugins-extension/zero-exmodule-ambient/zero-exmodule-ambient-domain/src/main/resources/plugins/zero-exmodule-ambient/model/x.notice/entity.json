@@ -1,20 +1,20 @@
 {
-    "name": "x-notice",
-    "daoCls": "X_NOTICE",
-    "field": {
-        "unique": [
-            [
-                "name",
-                "appId"
-            ]
-        ],
-        "attachment": [
-            {
-                "field": "files",
-                "condition": {
-                    "modelId": "x.notice"
-                }
-            }
-        ]
-    }
+  "name": "x-notice",
+  "daoCls": "X_NOTICE",
+  "field": {
+    "unique": [
+      [
+        "name",
+        "appId"
+      ]
+    ],
+    "attachment": [
+      {
+        "field": "files",
+        "condition": {
+          "modelId": "x.notice"
+        }
+      }
+    ]
+  }
 }

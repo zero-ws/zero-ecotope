@@ -3,7 +3,7 @@ package io.zerows.cosmic.plugins.websocket;
 import io.vertx.core.http.HttpServerOptions;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.epoch.basicore.option.SockOptions;
+import io.zerows.epoch.spec.options.SockOptions;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;

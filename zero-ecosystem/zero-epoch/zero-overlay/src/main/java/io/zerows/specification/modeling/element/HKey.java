@@ -31,7 +31,6 @@ public interface HKey {
      * 设置单字段键相关信息
      *
      * @param key 单字段键
-     *
      * @return 单字段键
      */
     HKey key(String key);
@@ -40,7 +39,6 @@ public interface HKey {
      * 设置多字段键相关信息
      *
      * @param keys 多字段键
-     *
      * @return 多字段键
      */
     HKey key(Set<String> keys);

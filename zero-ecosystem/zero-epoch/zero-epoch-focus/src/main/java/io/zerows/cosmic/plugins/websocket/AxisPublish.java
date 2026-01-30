@@ -8,8 +8,8 @@ import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
-import io.zerows.epoch.basicore.option.SockOptions;
 import io.zerows.epoch.constant.KWeb;
+import io.zerows.epoch.spec.options.SockOptions;
 import io.zerows.specification.development.compiled.HBundle;
 
 import java.util.HashSet;

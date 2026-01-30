@@ -1,8 +1,8 @@
 package io.zerows.plugins.excel.component;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.basicore.YmSpec;
 import io.zerows.epoch.boot.ZeroFs;
+import io.zerows.epoch.spec.YmSpec;
 import io.zerows.plugins.excel.ExcelConstant;
 import io.zerows.plugins.excel.metadata.ExTenant;
 import io.zerows.support.Ut;

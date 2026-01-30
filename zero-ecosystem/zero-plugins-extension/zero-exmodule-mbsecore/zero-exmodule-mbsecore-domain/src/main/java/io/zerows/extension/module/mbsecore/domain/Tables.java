@@ -12,6 +12,7 @@ import io.zerows.extension.module.mbsecore.domain.tables.MIndex;
 import io.zerows.extension.module.mbsecore.domain.tables.MJoin;
 import io.zerows.extension.module.mbsecore.domain.tables.MKey;
 import io.zerows.extension.module.mbsecore.domain.tables.MModel;
+import io.zerows.extension.module.mbsecore.domain.tables.MModelCat;
 import io.zerows.extension.module.mbsecore.domain.tables.MRelation;
 
 
@@ -22,47 +23,52 @@ import io.zerows.extension.module.mbsecore.domain.tables.MRelation;
 public class Tables {
 
     /**
-     * The table <code>ZDB.M_ACC</code>.
+     * M_ACC
      */
     public static final MAcc M_ACC = MAcc.M_ACC;
 
     /**
-     * The table <code>ZDB.M_ATTRIBUTE</code>.
+     * M_ATTRIBUTE
      */
     public static final MAttribute M_ATTRIBUTE = MAttribute.M_ATTRIBUTE;
 
     /**
-     * The table <code>ZDB.M_ENTITY</code>.
+     * M_ENTITY
      */
     public static final MEntity M_ENTITY = MEntity.M_ENTITY;
 
     /**
-     * The table <code>ZDB.M_FIELD</code>.
+     * M_FIELD
      */
     public static final MField M_FIELD = MField.M_FIELD;
 
     /**
-     * The table <code>ZDB.M_INDEX</code>.
+     * M_INDEX
      */
     public static final MIndex M_INDEX = MIndex.M_INDEX;
 
     /**
-     * The table <code>ZDB.M_JOIN</code>.
+     * M_JOIN
      */
     public static final MJoin M_JOIN = MJoin.M_JOIN;
 
     /**
-     * The table <code>ZDB.M_KEY</code>.
+     * M_KEY
      */
     public static final MKey M_KEY = MKey.M_KEY;
 
     /**
-     * The table <code>ZDB.M_MODEL</code>.
+     * M_MODEL
      */
     public static final MModel M_MODEL = MModel.M_MODEL;
 
     /**
-     * The table <code>ZDB.M_RELATION</code>.
+     * M_MODEL_CAT
+     */
+    public static final MModelCat M_MODEL_CAT = MModelCat.M_MODEL_CAT;
+
+    /**
+     * M_RELATION
      */
     public static final MRelation M_RELATION = MRelation.M_RELATION;
 }

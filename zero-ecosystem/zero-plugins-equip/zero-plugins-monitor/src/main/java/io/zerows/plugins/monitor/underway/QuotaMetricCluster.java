@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Monitor;
-import io.zerows.epoch.configuration.NodeNetwork;
-import io.zerows.epoch.configuration.NodeStore;
+import io.zerows.epoch.jigsaw.NodeNetwork;
+import io.zerows.epoch.jigsaw.NodeStore;
 import io.zerows.plugins.monitor.client.QuotaMetricBase;
 import io.zerows.plugins.monitor.metadata.MetricRow;
 

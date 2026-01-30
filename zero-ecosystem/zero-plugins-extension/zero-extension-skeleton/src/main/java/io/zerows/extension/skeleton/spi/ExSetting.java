@@ -19,7 +19,6 @@ public interface ExSetting {
      *
      * @param user   用户key
      * @param dimKey 维度key
-     *
      * @return 读取结果
      */
     Future<JsonObject> settingAsync(String user, String dimKey);
