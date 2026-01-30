@@ -3,7 +3,6 @@ package io.zerows.platform.apps;
 import io.r2mo.base.dbe.DBS;
 import io.r2mo.typed.annotation.SPID;
 import io.zerows.platform.EnvironmentVariable;
-import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.management.StoreApp;
 import io.zerows.specification.app.HAmbient;
@@ -16,7 +15,6 @@ import io.zerows.specification.development.ncloud.HCube;
 import io.zerows.specification.development.program.HProject;
 import io.zerows.specification.security.HOwner;
 import io.zerows.specification.vital.HRAD;
-import io.zerows.support.base.UtBase;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Set;
@@ -135,14 +133,12 @@ public class RegistryCommon<T> implements HRegistry<T> {
         if (!app.isLoad()) {
             return Set.of();
         }
-        final String modeStr = config.options(VName.MODE);
-        final EmApp.Mode mode = UtBase.toEnum(modeStr, EmApp.Mode.class, EmApp.Mode.CUBE);
 
 
         // 初始化 Ambient
-        final HAmbient ambient = RegistryAmbient.of(mode);
+        final HAmbient ambient = KPivot.of(container).getOrCreate(config);
         log.info("[ ZERO ] ( App ) 主应用模式 mode = `{}` / name = `{}` / ns = `{}` | 托管者：{}",
-            mode, app.name(), app.ns(), System.identityHashCode(ambient));
+            ambient.mode(), app.name(), app.ns(), System.identityHashCode(ambient));
 
 
         // 注册应用容器

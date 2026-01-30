@@ -10,11 +10,11 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XSource;
-import io.zerows.extension.module.ambient.exception._80306Exception500AppConnect;
-import io.zerows.extension.module.ambient.exception._80307Exception501KDSNone;
 import io.zerows.platform.apps.KApp;
 import io.zerows.platform.apps.KArk;
 import io.zerows.platform.apps.KDS;
+import io.zerows.platform.apps.KPivot;
+import io.zerows.platform.exception._80307Exception501KDSNone;
 import io.zerows.platform.management.StoreApp;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
@@ -81,7 +81,6 @@ public class BuilderOfHApp extends AbstractBuilder<HArk> {
             // 配置部分 / option
             final JsonObject option = this.createOption(app);
             appH.data(data).option(option);
-            StoreApp.of().add(appH);
 
 
             // 构造 HArk
@@ -179,37 +178,14 @@ public class BuilderOfHApp extends AbstractBuilder<HArk> {
     private HApp ensureConnect(final XApp app) {
         // 连接检查
         final HApp appH = StoreApp.of().valueGet(app.getId());
-        // 截断构造
+        final HApp appT = new KApp(app.getName())
+            .ns(app.getNamespace())
+            .tenant(app.getTenantId())
+            .id(app.getId());
+        // 截断构造，直接返回
         if (Objects.isNull(appH)) {
-            return new KApp(app.getName())
-                .ns(app.getNamespace())
-                .tenant(app.getTenantId())
-                .id(app.getId());
+            return appT;
         }
-        // id 检查对接
-        if (!appH.id().equals(app.getId())) {
-            throw new _80306Exception500AppConnect("id", appH.id(), app.getId());
-        }
-        // name 对接检查
-        if (!appH.name().equals(app.getName())) {
-            throw new _80306Exception500AppConnect("name", appH.name(), app.getName());
-        }
-        // ns 对接检查 / Store -> HApp
-        if (Objects.isNull(appH.ns())) {
-            appH.ns(app.getNamespace());
-        } else {
-            if (!appH.ns().equals(app.getNamespace())) {
-                throw new _80306Exception500AppConnect("ns", appH.ns(), app.getNamespace());
-            }
-        }
-        // 组户可能为空 / Store -> HApp
-        if (Objects.isNull(appH.tenant())) {
-            appH.tenant(app.getTenantId());
-        } else {
-            if (!appH.tenant().equals(app.getTenantId())) {
-                throw new _80306Exception500AppConnect("tenant", appH.tenant(), app.getTenantId());
-            }
-        }
-        return appH;
+        return KPivot.tryConnect(appT, appH);
     }
 }

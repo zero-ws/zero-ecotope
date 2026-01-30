@@ -10,6 +10,8 @@ import io.zerows.specification.configuration.HRegistry;
 import io.zerows.specification.development.compiled.HDeployment;
 import io.zerows.support.base.UtBase;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 /**
@@ -101,6 +103,14 @@ public interface HAmbient {
      * @return {@link HAmbient}
      */
     HAmbient registry(HArk ark);
+
+    default HAmbient registry(final Set<HArk> arkSet) {
+        if (Objects.isNull(arkSet) || arkSet.isEmpty()) {
+            return this;
+        }
+        arkSet.forEach(this::registry);
+        return this;
+    }
 
     HAmbient registry(String extension, JsonObject configuration);
 

@@ -1,13 +1,14 @@
 package io.zerows.platform.apps;
 
+import cn.hutool.core.util.StrUtil;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.zerows.platform.enums.EmApp;
+import io.zerows.platform.exception._80306Exception500AppConnect;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HArk;
-import io.zerows.specification.app.HLot;
 import io.zerows.specification.atomic.HBelong;
 import io.zerows.specification.cloud.HFrontier;
 import io.zerows.specification.cloud.HGalaxy;
@@ -15,14 +16,12 @@ import io.zerows.specification.cloud.HSpace;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.specification.configuration.HRegistry;
 import io.zerows.spi.HPI;
-import io.zerows.support.base.UtBase;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * 上下文环境桥
@@ -106,23 +105,94 @@ public class KPivot<T> {
         return (KPivot<T>) CC_PIVOT.pick(() -> new KPivot<>(container), System.identityHashCode(container));
     }
 
-    private static Set<HArk> combine(final Set<HArk> sources, final Set<HArk> extensions) {
-        sources.forEach(source -> {
-            // 1. 先做租户过滤
-            final HLot owner = source.owner();
-            final List<HArk> ownerList = extensions.stream()
-                .filter(item -> item.owner().equals(owner))
-                .collect(Collectors.toList());
 
-            // 2. 再做二次查找到唯一记录
-            final HArk found = UtBase.elementFind(ownerList,
-                item -> source.app().equals(item.app()));
-            if (Objects.nonNull(found)) {
-                source.apply(found);
+    // ------------------------ 静态部分，可直接使用 -----------------------
+    public static Future<Set<HArk>> combineAsync(final Set<HArk> source, final Set<HArk> extension) {
+        return Future.succeededFuture(combine(source, extension));
+    }
+
+    public static Set<HArk> combine(final Set<HArk> sources, final Set<HArk> extensions) {
+        // - 源处理
+        final Set<HArk> arkSet = new HashSet<>();
+        for (final HArk source : sources) {
+            final HArk matched = findMatched(source, extensions);
+
+            // 2.1. 合并执行
+            if (Objects.isNull(matched)) {
+                arkSet.add(source);
+                continue;
             }
-        });
+            // 2.2. 查找扩展集合中是否存在相同的 Ark
+            final HApp sourceApp = source.app();
+            final HApp targetApp = matched.app();
+            tryConnect(sourceApp, targetApp);           // 连接检查
+
+            // 2.3. 查找成功
+            source.apply(matched);
+            arkSet.add(source);
+        }
+        // - 目标处理
+        for (final HArk extension : extensions) {
+            final HArk source = findMatched(extension, sources);
+            if (Objects.isNull(source)) {
+                arkSet.add(extension);
+            }
+        }
         // 3. 构造线程安全的集合
-        return Collections.synchronizedSet(sources);
+        return Collections.synchronizedSet(arkSet);
+    }
+
+    @Nullable
+    private static HArk findMatched(final HArk source, final Set<HArk> extensions) {
+        final HApp sourceApp = source.app();
+        return extensions.stream().filter(ark -> {
+            final HApp targetApp = ark.app();
+            if (Objects.isNull(targetApp)) {
+                return false;
+            }
+            if (StrUtil.isEmpty(targetApp.id())) {
+                return false;
+            }
+            if (StrUtil.isEmpty(sourceApp.id())) {
+                return false;
+            }
+            return sourceApp.id().equals(targetApp.id());
+        }).findAny().orElse(null);
+    }
+
+    public static HApp tryConnect(final HApp appH, final HApp appT) {
+        // id 检查对接
+        if (!appH.id().equals(appT.id())) {
+            throw new _80306Exception500AppConnect("id", appH.id(), appT.id());
+        }
+        // name 对接检查
+        if (!appH.name().equals(appT.name())) {
+            throw new _80306Exception500AppConnect("name", appH.name(), appT.name());
+        }
+        // ns 对接检查 / Store -> HApp
+        if (Objects.isNull(appH.ns())) {
+            appH.ns(appT.ns());
+        } else {
+            if (!appH.ns().equals(appT.ns())) {
+                throw new _80306Exception500AppConnect("ns", appH.ns(), appT.ns());
+            }
+        }
+        // 组户可能为空 / Store -> HApp
+        if (Objects.isNull(appH.tenant())) {
+            appH.tenant(appT.tenant());
+        } else {
+            if (!appH.tenant().equals(appT.tenant())) {
+                throw new _80306Exception500AppConnect("tenant", appH.tenant(), appT.tenant());
+            }
+        }
+        return appH;
+    }
+
+    public HAmbient getOrCreate(final HConfig config) {
+        if (Objects.isNull(RUNNING)) {
+            RUNNING = RegistryAmbient.of(config);
+        }
+        return RUNNING;
     }
 
     /**
@@ -157,14 +227,10 @@ public class KPivot<T> {
                 Future.succeededFuture(Set.of()) :
                 this.extension.registryAsync(this.container, config),
             // 将构造好的 HArk 合并到一起
-            this::registryOut
-        );
-    }
-
-    // ------------------------ 私有部分 -----------------------
-    private Future<Set<HArk>> registryOut(final Set<HArk> source, final Set<HArk> extension) {
-        final Set<HArk> combine = combine(source, extension);
-        combine.forEach(RUNNING::registry);
-        return Future.succeededFuture(combine);
+            KPivot::combineAsync
+        ).compose(arkSet -> {
+            this.getOrCreate(config).registry(arkSet);
+            return Future.succeededFuture(arkSet);
+        });
     }
 }

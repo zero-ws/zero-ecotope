@@ -1,11 +1,14 @@
 package io.zerows.platform.apps;
 
 import io.vertx.core.json.JsonObject;
+import io.zerows.platform.constant.VName;
 import io.zerows.platform.enums.EmApp;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.platform.management.StoreArk;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
+import io.zerows.specification.configuration.HConfig;
+import io.zerows.support.base.UtBase;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -38,7 +41,12 @@ class RegistryAmbient implements HAmbient {
         this.mode = mode;
     }
 
-    static HAmbient of(final EmApp.Mode mode) {
+    static HAmbient of(final HConfig config) {
+        if (Objects.isNull(config)) {
+            return new RegistryAmbient(EmApp.Mode.CUBE);
+        }
+        final String modeStr = config.options(VName.MODE);
+        final EmApp.Mode mode = UtBase.toEnum(modeStr, EmApp.Mode.class, EmApp.Mode.CUBE);
         return new RegistryAmbient(mode);
     }
 

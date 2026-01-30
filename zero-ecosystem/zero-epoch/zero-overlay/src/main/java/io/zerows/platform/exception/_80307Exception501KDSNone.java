@@ -1,4 +1,4 @@
-package io.zerows.extension.module.ambient.exception;
+package io.zerows.platform.exception;
 
 import io.r2mo.vertx.common.exception.VertxWebException;
 
