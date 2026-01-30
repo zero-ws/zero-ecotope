@@ -29,4 +29,10 @@ public interface Axis extends HAxis<RunServer> {
     }
 
     void mount(RunServer server, HBundle bundle);
+
+    interface EID {
+        String SOCK = "Axis/SOCK";
+        String MBSE = "Axis/MBSE";
+        String OPEN = "Axis/OPEN";
+    }
 }

@@ -1,6 +1,7 @@
 package io.zerows.extension.module.mbseapi.plugins;
 
-import io.zerows.cortex.AxisDynamicFactory;
+import io.r2mo.typed.annotation.SPID;
+import io.zerows.cortex.AxisFactory;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.extension.module.mbseapi.boot.MDMBSEManager;
 import io.zerows.specification.development.compiled.HBundle;
@@ -10,11 +11,12 @@ import java.util.Objects;
 /**
  * @author lang : 2024-06-26
  */
-public class JetAxisManager implements AxisDynamicFactory {
+@SPID(Axis.EID.MBSE)
+public class JetAxisFactory implements AxisFactory {
 
     private final MDMBSEManager manager;
 
-    public JetAxisManager() {
+    public JetAxisFactory() {
         this.manager = MDMBSEManager.of();
     }
 

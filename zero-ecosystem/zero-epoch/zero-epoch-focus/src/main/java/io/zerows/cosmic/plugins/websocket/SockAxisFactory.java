@@ -1,6 +1,7 @@
 package io.zerows.cosmic.plugins.websocket;
 
-import io.zerows.cortex.AxisSockFactory;
+import io.r2mo.typed.annotation.SPID;
+import io.zerows.cortex.AxisFactory;
 import io.zerows.cortex.sdk.Axis;
 import io.zerows.epoch.jigsaw.NodeNetwork;
 import io.zerows.epoch.jigsaw.NodeStore;
@@ -11,7 +12,8 @@ import java.util.Objects;
 /**
  * @author lang : 2024-06-26
  */
-public class AxisSockManager implements AxisSockFactory {
+@SPID(Axis.EID.SOCK)
+public class SockAxisFactory implements AxisFactory {
 
     @Override
     public Axis getAxis() {
