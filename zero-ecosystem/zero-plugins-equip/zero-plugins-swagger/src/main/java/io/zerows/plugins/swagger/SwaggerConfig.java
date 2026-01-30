@@ -12,6 +12,8 @@ public class SwaggerConfig implements Serializable {
 
     private String version = "v3";
 
+    private boolean output = true;
+
     @JsonProperty("swagger-ui")
     private SwaggerUi swaggerUi = new SwaggerUi();
 
