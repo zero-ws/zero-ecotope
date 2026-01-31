@@ -7,9 +7,8 @@ import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.cortex.metadata.WebRule;
 import io.zerows.cosmic.plugins.validation.exception._60000Exception400Validation;
 import io.zerows.epoch.constant.KWeb;
-import io.zerows.epoch.web.WebEvent;
+import io.zerows.epoch.web.WebApi;
 import io.zerows.management.OCacheStore;
-import io.zerows.platform.constant.VString;
 import io.zerows.support.Ut;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -101,7 +100,7 @@ public class ValidatorEntry {
             // 1. Check whether contains @BodyParam
             .any(item -> BodyParam.class == item || BeanParam.class == item)
             // 2. Build rulers
-            .map(item -> this.buildKey(wrapRequest.getEvent()))
+            .map(item -> WebApi.nameOf(wrapRequest.getEvent()))
             .map(this::buildRulers)
             .subscribe(rulers::putAll).dispose();
         return rulers;
@@ -138,13 +137,5 @@ public class ValidatorEntry {
             });
         }
         return rulers;
-    }
-
-    private String buildKey(final WebEvent event) {
-        String prefix = event.getPath().trim().substring(1);
-        prefix = prefix.replace(VString.SLASH, VString.DOT);
-        prefix = prefix.replace(VString.COLON, VString.DOLLAR);
-        final String suffix = event.getMethod().name().toLowerCase(Locale.getDefault());
-        return prefix + VString.DOT + suffix;
     }
 }
