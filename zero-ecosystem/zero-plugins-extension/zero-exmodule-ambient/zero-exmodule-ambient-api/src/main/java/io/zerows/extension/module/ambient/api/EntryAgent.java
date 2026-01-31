@@ -1,9 +1,11 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.annotations.OpenApi;
 import io.zerows.epoch.constant.KWeb;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
@@ -25,6 +27,7 @@ import jakarta.ws.rs.PathParam;
  * @author lang : 2024-07-26
  */
 @EndPoint
+@Tag(name = "应用管理", description = "应用入口管理：负责应用基础信息读取、菜单加载及环境初始化")
 public interface EntryAgent {
     /**
      * 登录主界面根据应用名读取应用基础数据
@@ -42,6 +45,7 @@ public interface EntryAgent {
     @Path("/app/name/{name}")
     @GET
     @Address(Addr.App.BY_NAME)
+    @OpenApi
     JsonObject byName(@PathParam("name") String name);
 
     /**
