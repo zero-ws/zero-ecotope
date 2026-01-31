@@ -25,18 +25,29 @@ class SwaggerAnalyzer {
             .description(ymOpen.getDescription());
         openAPI.setInfo(info);
 
+        // ==========================================
+        // 【核心修改点】必须在此处加载 Schema
+        // ==========================================
+        // 这会将 openapi/components/schemas 下的定义
+        // 注册到 openAPI.components 中，解决 $ref 找不到的问题
+        LoaderSchema.load(openAPI);
+
         // 2. 初始化解析策略
-        // 顺序很重要：先 JAX-RS 生成骨架，再 Swagger 进行装修
         final DocSpec jaxrsSpec = DocSpec.of(DocSpecJAXRS::new);
         final DocSpec swaggerSpec = DocSpec.of(DocSpecSwagger::new);
+        final DocSpec openApiSpec = DocSpec.of(DocSpecOpenAPI::new);
 
         // 3. 扫描所有 WebEvent
         final Set<WebEvent> events = ACTOR.value().getEvents();
         for (final WebEvent event : events) {
-            // 第一步：JAX-RS 基础解析
+            // 3.1 生成骨架
             jaxrsSpec.compile(openAPI, event);
-            // 第二步：Swagger 注解增强
+
+            // 3.2 注解增强
             swaggerSpec.compile(openAPI, event);
+
+            // 3.3 文档覆盖 (Operation)
+            openApiSpec.compile(openAPI, event);
         }
 
         return openAPI;

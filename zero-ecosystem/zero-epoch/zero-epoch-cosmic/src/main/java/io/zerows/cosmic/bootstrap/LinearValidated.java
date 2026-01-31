@@ -22,7 +22,7 @@ class LinearValidated extends AbstractAmbiguity implements Linear {
     private static final HFS fs = HFS.of();
 
     // 1. 扫描的根目录
-    private static final String RULE_DIRECTORY = "openapi/operation";
+    private static final String RULE_DIRECTORY = "openapi/operations";
     // 2. 每个目录下的目标文件名
     private static final String TARGET_FILE = "validated.yml";
 
