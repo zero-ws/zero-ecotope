@@ -1,0 +1,31 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XActivity
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XActivity {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string description = 2; // [Java:description] 描述
+  string record_new = 3; // [Java:recordNew] 变更后数据 变更之后的数据用于更新
+  string record_old = 4; // [Java:recordOld] 变更前数据 变更之前的数据用于回滚
+  string serial = 5; // [Java:serial] 记录单号 (最大长度:255)
+  string task_name = 6; // [Java:taskName] 任务名称 (最大长度:255)
+  string task_serial = 7; // [Java:taskSerial] 任务单号 (最大长度:255)
+  string type = 8; // [Java:type] 类型 类型 (最大长度:64)
+  string model_id = 9; // [Java:modelId] 模型标识 组所关联的模型用于描述 (最大长度:255)
+  string model_key = 10; // [Java:modelKey] 模型记录ID 组所关联的模型记录用于描述哪一个中的记录 (最大长度:36)
+  string model_category = 11; // [Java:modelCategory] 模型类别 关联的记录只包含叶节点 (最大长度:128)
+  string sigma = 12; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 13; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 14; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:36)
+  bool active = 15; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 16; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 17; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 18; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 19; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 20; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 21; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 22; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

@@ -1,0 +1,36 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XActivityRule {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string definition_key = 2; // [Java:definitionKey] 流程节点名 流程对应的用于查询所有规则用 (最大长度:128)
+  string hook_component = 3; // [Java:hookComponent] 钩子组件 (最大长度:255)
+  string hook_config = 4; // [Java:hookConfig] 钩子配置 回调钩子组件配置
+  bool logging = 5; // [Java:logging] 是否记录日志
+  string rule_config = 6; // [Java:ruleConfig] 规则配置
+  string rule_expression = 7; // [Java:ruleExpression] 规则表达式 规则触发表达式可以是多个格式
+  string rule_field = 8; // [Java:ruleField] 规则源字段 (最大长度:128)
+  string rule_identifier = 9; // [Java:ruleIdentifier] 规则源模型 对应模型的 (最大长度:255)
+  string rule_message = 10; // [Java:ruleMessage] 输出消息 输出消息专用解析特殊解析
+  string rule_name = 11; // [Java:ruleName] 规则名称 规则名称如果时读取并设置到中 (最大长度:255)
+  string rule_ns = 12; // [Java:ruleNs] 规则名空间 (最大长度:255)
+  int64 rule_order = 13; // [Java:ruleOrder] 触发顺序 规则触发顺序修正两个时间戳生成时序号统一先生成的规则排序在上边
+  string rule_tpl = 14; // [Java:ruleTpl] 参数模版 参数模板专用结构
+  string task_key = 15; // [Java:taskKey] 任务节点名 和待办绑定的 (最大长度:255)
+  string type = 16; // [Java:type] 规则类型 类型 (最大长度:64)
+  string sigma = 17; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 18; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 19; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:36)
+  bool active = 20; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 21; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 22; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 23; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 24; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 25; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 26; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 27; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

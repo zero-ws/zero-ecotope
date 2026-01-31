@@ -1,0 +1,29 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XMenu
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XMenu {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string icon = 2; // [Java:icon] 图标 (最大长度:255)
+  int64 level = 3; // [Java:level] 菜单层级
+  string name = 4; // [Java:name] 名称 (最大长度:255)
+  int64 order = 5; // [Java:order] 顺序
+  string parent_id = 6; // [Java:parentId] 父节点 (最大长度:36)
+  string text = 7; // [Java:text] 菜单文字 (最大长度:255)
+  string uri = 8; // [Java:uri] 菜单地址 菜单地址不包含应用的 (最大长度:255)
+  string type = 9; // [Java:type] 类型 类型 (最大长度:255)
+  string sigma = 10; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 11; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 12; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:36)
+  bool active = 13; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 14; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 15; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 16; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 17; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 18; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 19; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 20; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}
