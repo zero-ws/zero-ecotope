@@ -2,6 +2,12 @@ syntax = "proto3";
 package domain;
 
 // Generated from io.zerows.extension.module.ambient.domain.tables.pojos.RTagEntity
+// name: RTagEntity
+// alias: 标签-对象
+// identifier: rel.tag.entity
+// table: R_TAG_ENTITY
+// java: RTagEntityRelation
+// sql: V207.001.001
 option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
 option java_multiple_files = true;
 

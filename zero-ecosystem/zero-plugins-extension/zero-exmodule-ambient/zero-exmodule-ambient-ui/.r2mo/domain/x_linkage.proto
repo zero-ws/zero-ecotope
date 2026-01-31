@@ -2,6 +2,12 @@ syntax = "proto3";
 package domain;
 
 // Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XLinkage
+// name: XLinkage
+// alias: 全局关联
+// identifier: sys.linkage
+// table: X_LINKAGE
+// java: XLinkageEntity
+// sql: V207.001.008
 option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
 option java_multiple_files = true;
 

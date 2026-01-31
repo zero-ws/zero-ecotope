@@ -2,6 +2,12 @@ syntax = "proto3";
 package domain;
 
 // Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XNumber
+// name: XNumber
+// alias: 序号
+// identifier: sys.number
+// table: X_NUMBER
+// java: XNumberEntity
+// sql: V207.001.013
 option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
 option java_multiple_files = true;
 

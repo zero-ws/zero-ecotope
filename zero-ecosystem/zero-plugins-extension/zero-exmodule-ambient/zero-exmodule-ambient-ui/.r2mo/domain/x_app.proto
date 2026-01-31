@@ -2,6 +2,13 @@ syntax = "proto3";
 package domain;
 
 // Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XApp
+// name: XApp
+// alias: 应用
+// identifier: sys.app
+// table: X_APP
+// java: XAppEntity
+// sql: V207.001.005
+// actor: x-app
 option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
 option java_multiple_files = true;
 

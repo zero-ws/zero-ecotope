@@ -2,6 +2,12 @@ syntax = "proto3";
 package domain;
 
 // Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XActivityChange
+// name: XActivityChange
+// alias: 变更记录
+// identifier: sys.activitychange
+// table: X_ACTIVITY_CHANGE
+// java: XActivityChangeEntity
+// sql: V207.001.003
 option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
 option java_multiple_files = true;
 

@@ -2,6 +2,12 @@ syntax = "proto3";
 package domain;
 
 // Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XAttachment
+// name: XAttachment
+// alias: 附件
+// identifier: sys.attachment
+// table: X_ATTACHMENT
+// java: XAttachmentEntity
+// sql: V207.001.006
 option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
 option java_multiple_files = true;
 

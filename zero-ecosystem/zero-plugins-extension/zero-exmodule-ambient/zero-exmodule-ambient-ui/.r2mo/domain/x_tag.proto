@@ -2,6 +2,12 @@ syntax = "proto3";
 package domain;
 
 // Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XTag
+// name: XTag
+// alias: 标签
+// identifier: sys.tag
+// table: X_TAG
+// java: XTagEntity
+// sql: V207.001.016
 option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
 option java_multiple_files = true;
 
