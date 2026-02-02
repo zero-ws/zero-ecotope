@@ -11,13 +11,16 @@ import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.XApp;
 import io.zerows.extension.module.ambient.domain.tables.XAttachment;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
+import io.zerows.extension.module.ambient.domain.tables.XLicense;
 import io.zerows.extension.module.ambient.domain.tables.XLinkage;
 import io.zerows.extension.module.ambient.domain.tables.XLog;
 import io.zerows.extension.module.ambient.domain.tables.XMenu;
 import io.zerows.extension.module.ambient.domain.tables.XModule;
 import io.zerows.extension.module.ambient.domain.tables.XNotice;
 import io.zerows.extension.module.ambient.domain.tables.XNumber;
+import io.zerows.extension.module.ambient.domain.tables.XPlan;
 import io.zerows.extension.module.ambient.domain.tables.XSource;
+import io.zerows.extension.module.ambient.domain.tables.XSubscription;
 import io.zerows.extension.module.ambient.domain.tables.XTabular;
 import io.zerows.extension.module.ambient.domain.tables.XTag;
 import io.zerows.extension.module.ambient.domain.tables.XTenant;
@@ -81,6 +84,11 @@ public class Zdb extends SchemaImpl {
     public final XCategory X_CATEGORY = XCategory.X_CATEGORY;
 
     /**
+     * X_LICENSE
+     */
+    public final XLicense X_LICENSE = XLicense.X_LICENSE;
+
+    /**
      * X_LINKAGE
      */
     public final XLinkage X_LINKAGE = XLinkage.X_LINKAGE;
@@ -111,9 +119,19 @@ public class Zdb extends SchemaImpl {
     public final XNumber X_NUMBER = XNumber.X_NUMBER;
 
     /**
+     * X_PLAN
+     */
+    public final XPlan X_PLAN = XPlan.X_PLAN;
+
+    /**
      * X_SOURCE
      */
     public final XSource X_SOURCE = XSource.X_SOURCE;
+
+    /**
+     * X_SUBSCRIPTION
+     */
+    public final XSubscription X_SUBSCRIPTION = XSubscription.X_SUBSCRIPTION;
 
     /**
      * X_TABULAR
@@ -153,13 +171,16 @@ public class Zdb extends SchemaImpl {
             XApp.X_APP,
             XAttachment.X_ATTACHMENT,
             XCategory.X_CATEGORY,
+            XLicense.X_LICENSE,
             XLinkage.X_LINKAGE,
             XLog.X_LOG,
             XMenu.X_MENU,
             XModule.X_MODULE,
             XNotice.X_NOTICE,
             XNumber.X_NUMBER,
+            XPlan.X_PLAN,
             XSource.X_SOURCE,
+            XSubscription.X_SUBSCRIPTION,
             XTabular.X_TABULAR,
             XTag.X_TAG,
             XTenant.X_TENANT

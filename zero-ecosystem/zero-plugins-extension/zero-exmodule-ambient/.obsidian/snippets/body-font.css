@@ -1,0 +1,27 @@
+/* 1. 编辑模式 (Live Preview / Source Mode) */
+.markdown-source-view.mod-cm6 .cm-line {
+    line-height: 2.4 !important;
+}
+
+/* 2. 阅读模式 (Reading View) */
+.markdown-preview-view p {
+    line-height: 2.4 !important;
+
+    /* 可选：增加段落之间的间距，让大段文字呼吸感更强 */
+    margin-bottom: 24px !important;
+}
+
+/* 2. 阅读模式 (Reading View) */
+.markdown-preview-view li{
+    line-height: 2.4 !important;
+}
+
+/* 调整“阅读视图”和“编辑视图”的默认宽度 */
+body {
+    /* 默认通常是 700px - 800px */
+    /* 修改为你想要的宽度，比如 1000px, 1200px, 或者 90% */
+    --file-line-width: 1024px !important;
+
+    /* 如果你觉得大纲/宽屏模式下的内容太宽，也可以限制最大宽度 */
+    /* --max-width: 95% !important; */
+}

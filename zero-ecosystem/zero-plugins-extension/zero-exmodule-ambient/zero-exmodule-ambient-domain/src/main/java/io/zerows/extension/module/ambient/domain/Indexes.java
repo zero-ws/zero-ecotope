@@ -9,9 +9,12 @@ import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.XApp;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
+import io.zerows.extension.module.ambient.domain.tables.XLicense;
 import io.zerows.extension.module.ambient.domain.tables.XLinkage;
 import io.zerows.extension.module.ambient.domain.tables.XLog;
 import io.zerows.extension.module.ambient.domain.tables.XMenu;
+import io.zerows.extension.module.ambient.domain.tables.XPlan;
+import io.zerows.extension.module.ambient.domain.tables.XSubscription;
 import io.zerows.extension.module.ambient.domain.tables.XTabular;
 
 import org.jooq.Index;
@@ -34,6 +37,9 @@ public class Indexes {
     public static final Index X_ACTIVITY_CHANGE_IDX_X_ACTIVITY_CHANGE_CREATED_AT = Internal.createIndex(DSL.name("IDX_X_ACTIVITY_CHANGE_CREATED_AT"), XActivityChange.X_ACTIVITY_CHANGE, new OrderField[] { XActivityChange.X_ACTIVITY_CHANGE.CREATED_AT }, false);
     public static final Index X_ACTIVITY_IDX_X_ACTIVITY_CREATED_AT = Internal.createIndex(DSL.name("IDX_X_ACTIVITY_CREATED_AT"), XActivity.X_ACTIVITY, new OrderField[] { XActivity.X_ACTIVITY.CREATED_AT }, false);
     public static final Index X_APP_IDX_X_APP_NAME = Internal.createIndex(DSL.name("IDX_X_APP_NAME"), XApp.X_APP, new OrderField[] { XApp.X_APP.NAME }, false);
+    public static final Index X_LICENSE_IDX_X_LICENSE_BIND_TENANT_ID = Internal.createIndex(DSL.name("IDX_X_LICENSE_BIND_TENANT_ID"), XLicense.X_LICENSE, new OrderField[] { XLicense.X_LICENSE.BIND_TENANT_ID }, false);
+    public static final Index X_LICENSE_IDX_X_LICENSE_EXPIRED_AT = Internal.createIndex(DSL.name("IDX_X_LICENSE_EXPIRED_AT"), XLicense.X_LICENSE, new OrderField[] { XLicense.X_LICENSE.EXPIRED_AT }, false);
+    public static final Index X_LICENSE_IDX_X_LICENSE_STATUS = Internal.createIndex(DSL.name("IDX_X_LICENSE_STATUS"), XLicense.X_LICENSE, new OrderField[] { XLicense.X_LICENSE.STATUS }, false);
     public static final Index X_LINKAGE_IDX_X_LINKAGE_R_SOURCE_KEY = Internal.createIndex(DSL.name("IDX_X_LINKAGE_R_SOURCE_KEY"), XLinkage.X_LINKAGE, new OrderField[] { XLinkage.X_LINKAGE.SOURCE_KEY }, false);
     public static final Index X_LINKAGE_IDX_X_LINKAGE_R_SOURCE_TYPE = Internal.createIndex(DSL.name("IDX_X_LINKAGE_R_SOURCE_TYPE"), XLinkage.X_LINKAGE, new OrderField[] { XLinkage.X_LINKAGE.SOURCE_TYPE }, false);
     public static final Index X_LINKAGE_IDX_X_LINKAGE_R_TARGET_KEY = Internal.createIndex(DSL.name("IDX_X_LINKAGE_R_TARGET_KEY"), XLinkage.X_LINKAGE, new OrderField[] { XLinkage.X_LINKAGE.TARGET_KEY }, false);
@@ -42,6 +48,12 @@ public class Indexes {
     public static final Index X_LINKAGE_IDX_X_LINKAGE_SIGMA = Internal.createIndex(DSL.name("IDX_X_LINKAGE_SIGMA"), XLinkage.X_LINKAGE, new OrderField[] { XLinkage.X_LINKAGE.SIGMA, XLinkage.X_LINKAGE.TYPE }, false);
     public static final Index X_MENU_IDX_X_MENU_APP_ID = Internal.createIndex(DSL.name("IDX_X_MENU_APP_ID"), XMenu.X_MENU, new OrderField[] { XMenu.X_MENU.APP_ID }, false);
     public static final Index X_MENU_IDX_X_MENU_APP_ID_SIGMA = Internal.createIndex(DSL.name("IDX_X_MENU_APP_ID_SIGMA"), XMenu.X_MENU, new OrderField[] { XMenu.X_MENU.APP_ID, XMenu.X_MENU.SIGMA }, false);
+    public static final Index X_PLAN_IDX_X_PLAN_SIGMA = Internal.createIndex(DSL.name("IDX_X_PLAN_SIGMA"), XPlan.X_PLAN, new OrderField[] { XPlan.X_PLAN.SIGMA }, false);
+    public static final Index X_PLAN_IDX_X_PLAN_STATUS = Internal.createIndex(DSL.name("IDX_X_PLAN_STATUS"), XPlan.X_PLAN, new OrderField[] { XPlan.X_PLAN.STATUS }, false);
+    public static final Index X_SUBSCRIPTION_IDX_X_SUBSCRIPTION_END_AT = Internal.createIndex(DSL.name("IDX_X_SUBSCRIPTION_END_AT"), XSubscription.X_SUBSCRIPTION, new OrderField[] { XSubscription.X_SUBSCRIPTION.END_AT }, false);
+    public static final Index X_SUBSCRIPTION_IDX_X_SUBSCRIPTION_PLAN_ID = Internal.createIndex(DSL.name("IDX_X_SUBSCRIPTION_PLAN_ID"), XSubscription.X_SUBSCRIPTION, new OrderField[] { XSubscription.X_SUBSCRIPTION.PLAN_ID }, false);
+    public static final Index X_SUBSCRIPTION_IDX_X_SUBSCRIPTION_STATUS = Internal.createIndex(DSL.name("IDX_X_SUBSCRIPTION_STATUS"), XSubscription.X_SUBSCRIPTION, new OrderField[] { XSubscription.X_SUBSCRIPTION.STATUS }, false);
+    public static final Index X_SUBSCRIPTION_IDX_X_SUBSCRIPTION_TENANT_ID = Internal.createIndex(DSL.name("IDX_X_SUBSCRIPTION_TENANT_ID"), XSubscription.X_SUBSCRIPTION, new OrderField[] { XSubscription.X_SUBSCRIPTION.TENANT_ID }, false);
     public static final Index X_ACTIVITY_IDXM_X_ACTIVITY_MODEL_ID_MODEL_KEY = Internal.createIndex(DSL.name("IDXM_X_ACTIVITY_MODEL_ID_MODEL_KEY"), XActivity.X_ACTIVITY, new OrderField[] { XActivity.X_ACTIVITY.MODEL_ID, XActivity.X_ACTIVITY.MODEL_KEY, XActivity.X_ACTIVITY.ACTIVE }, false);
     public static final Index X_ACTIVITY_RULE_IDXM_X_ACTIVITY_RULE_DEFINITION_TASK_KEY = Internal.createIndex(DSL.name("IDXM_X_ACTIVITY_RULE_DEFINITION_TASK_KEY"), XActivityRule.X_ACTIVITY_RULE, new OrderField[] { XActivityRule.X_ACTIVITY_RULE.DEFINITION_KEY, XActivityRule.X_ACTIVITY_RULE.TASK_KEY, XActivityRule.X_ACTIVITY_RULE.SIGMA }, false);
     public static final Index X_ACTIVITY_IDXM_X_ACTIVITY_SIGMA_ACTIVE = Internal.createIndex(DSL.name("IDXM_X_ACTIVITY_SIGMA_ACTIVE"), XActivity.X_ACTIVITY, new OrderField[] { XActivity.X_ACTIVITY.SIGMA, XActivity.X_ACTIVITY.ACTIVE }, false);

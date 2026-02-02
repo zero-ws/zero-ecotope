@@ -1,0 +1,10 @@
+{
+  "theme": "moonstone",
+  "cssTheme": "",
+  "interfaceFontFamily": "",
+  "baseFontSize": 20,
+  "textFontFamily": "STFangsong",
+  "enabledCssSnippets": [
+    "body-font"
+  ]
+}
