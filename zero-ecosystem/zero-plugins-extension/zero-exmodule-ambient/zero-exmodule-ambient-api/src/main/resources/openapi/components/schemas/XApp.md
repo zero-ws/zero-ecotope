@@ -1,6 +1,6 @@
 ---
 title: 应用
-description: "应用基本信息实体 (X_APP)"
+description: "应用 (X_APP)"
 ---
 
 ## Entity
@@ -8,7 +8,7 @@ description: "应用基本信息实体 (X_APP)"
 ```yaml
 type: object
 title: XApp
-description: "应用基本信息实体 (X_APP)"
+description: "应用 (X_APP)"
 properties:
   id:
     type: string
@@ -84,13 +84,13 @@ properties:
     description: "父应用ID"
   active:
     type: boolean
-    description: "是否启用"
+    description: "启用"
   language:
     type: string
     description: "语言偏好"
   metadata:
     type: string
-    description: "元配置 (JSON String)"
+    description: "元配置"
   version:
     type: string
     description: "版本号"
@@ -119,28 +119,28 @@ properties:
 | `name`      | String        | 名称       |                  |
 | `title`     | String        | 应用标题     |                  |
 | `copyRight` | String        | 版权       |                  |
-| `email`     | String        | 管理员Email |                  |
-| `icp`       | String        | ICP备案号   |                  |
-| `logo`      | String        | 图标       |                  |
-| `favicon`   | String        | 小图标      |                  |
-| `entry`     | String        | 入口菜单     |                  |
-| `domain`    | String        | 服务器域     |                  |
-| `port`      | Integer       | 端口号      |                  |
-| `context`   | String        | 应用路径     |                  |
-| `endpoint`  | String        | Web服务端地址 |                  |
-| `urlAdmin`  | String        | 管理页URL   |                  |
-| `urlLogin`  | String        | 登录页URL   |                  |
-| `urlHealth` | String        | 健康检查URL  |                  |
-| `appKey`    | String        | 敏感标识符    |                  |
-| `appSecret` | String        | 应用密钥     |                  |
-| `status`    | String        | 状态       |                  |
-| `namespace` | String        | 名空间      |                  |
-| `sigma`     | String        | 统一标识     |                  |
-| `tenantId`  | String        | 租户ID     |                  |
-| `appId`     | String        | 父应用ID    | 自关联 (Parent App) |
+| `email`     | String        | 邮箱   | - |
+| `icp`       | String        | ICP  | - |
+| `logo`      | String        | 图标   | - |
+| `favicon`   | String        | 小图标  | - |
+| `entry`     | String        | 入口   | - |
+| `domain`    | String        | 域    | - |
+| `port`      | Integer       | 端口   | - |
+| `context`   | String        | 路径   | - |
+| `endpoint`  | String        | API 根路径 | - |
+| `urlAdmin`  | String        | 管理页  | - |
+| `urlLogin`  | String        | 登录页  | - |
+| `urlHealth` | String        | 健康检查 | - |
+| `appKey`    | String        | 应用Key | - |
+| `appSecret` | String        | 应用密钥 | - |
+| `status`    | String        | 状态   | - |
+| `namespace` | String        | 名空间  | - |
+| `sigma`     | String        | 统一标识 | - |
+| `tenantId`  | String        | 租户ID | - |
+| `appId`     | String        | 父应用ID | - |
 | `active`    | Boolean       | 是否启用     |                  |
-| `language`  | String        | 语言偏好     |                  |
-| `metadata`  | String        | 元配置      | 通常存储 Json 结构字符串  |
+| `language`  | String        | 语言   | - |
+| `metadata`  | String        | 元配置      | JSON |
 | `version`   | String        | 版本号      |                  |
 | `createdAt` | LocalDateTime | 创建时间     |                  |
 | `createdBy` | String        | 创建人      |                  |
@@ -151,5 +151,5 @@ properties:
 
 | 字段         | 关联实体      | 关系类型               | 说明                     |
 |:-----------|:----------|:-------------------|:-----------------------|
-| `appId`    | `XApp`    | One-to-Many / Self | 父子应用关系，指向父应用的 ID       |
-| `tenantId` | `XTenant` | Many-to-One        | 所属租户 (推测关联 X_TENANT 表) |
+| `appId`    | `XApp`    | One-to-Many / Self | 父应用 |
+| `tenantId` | `XTenant` | Many-to-One        | 租户   |
