@@ -4,8 +4,6 @@
 package io.zerows.extension.module.rbac.domain;
 
 
-import io.zerows.extension.module.rbac.domain.tables.OAccessToken;
-import io.zerows.extension.module.rbac.domain.tables.OUser;
 import io.zerows.extension.module.rbac.domain.tables.RGroupRole;
 import io.zerows.extension.module.rbac.domain.tables.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
@@ -44,16 +42,6 @@ public class Zdb extends SchemaImpl {
      * The reference instance of <code>ZDB</code>
      */
     public static final Zdb ZDB = new Zdb();
-
-    /**
-     * The table <code>ZDB.O_ACCESS_TOKEN</code>.
-     */
-    public final OAccessToken O_ACCESS_TOKEN = OAccessToken.O_ACCESS_TOKEN;
-
-    /**
-     * The table <code>ZDB.O_USER</code>.
-     */
-    public final OUser O_USER = OUser.O_USER;
 
     /**
      * 关联表
@@ -146,8 +134,6 @@ public class Zdb extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            OAccessToken.O_ACCESS_TOKEN,
-            OUser.O_USER,
             RGroupRole.R_GROUP_ROLE,
             RRolePerm.R_ROLE_PERM,
             RUserGroup.R_USER_GROUP,
