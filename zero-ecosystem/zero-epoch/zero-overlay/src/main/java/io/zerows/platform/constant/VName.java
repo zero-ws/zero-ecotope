@@ -75,6 +75,7 @@ public interface VName {
     String USERNAME = "username";                /* Security Object: user name ( X_USER username) field*/
     String REAL_NAME = "realname";               /* Security Object: user real name field */
     String GROUP = "group";                      /* Security Object: group */
+    String GROUP_ID = "groupId";                 /* Security Object: group id ( X_GROUP key ) field */
     String GROUPS = "groups";                    /* Security Object: groups */
     String ALIAS = "alias";                      /* Security Object: another name for current */
     String PASSWORD = "password";                /* Security Object: Password belong to field of security framework, ( X_USER password ) field */

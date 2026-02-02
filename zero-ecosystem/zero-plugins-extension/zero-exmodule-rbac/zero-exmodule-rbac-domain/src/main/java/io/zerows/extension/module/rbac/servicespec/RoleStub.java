@@ -7,4 +7,5 @@ import io.vertx.ext.auth.User;
 public interface RoleStub {
 
     Future<JsonObject> roleSave(JsonObject data, User user);
+
 }

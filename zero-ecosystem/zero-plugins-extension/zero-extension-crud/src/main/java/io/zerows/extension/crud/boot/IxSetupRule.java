@@ -38,11 +38,11 @@ class IxSetupRule extends IxSetupBase<ConcurrentMap<String, List<WebRule>>> {
     /**
      * 由于 {@link Validated} 注解的限制，必须指定配置文件，所以这里统一定义配置的路径用来解决验证问题
      * <pre>
-     *     1. 旧版的 {@link Validated} 配置路径位于：codex/{uri}
-     *     2. CRUD 模块配置的部分位于：codex/_crud/????
+     *     1. 旧版的 {@link Validated} 配置路径位于：openapi/{uri}
+     *     2. CRUD 模块配置的部分位于：openapi/_crud/authorized/????
      * </pre>
      */
-    private static final String CFG_VALIDATOR = "codex/_crud/";
+    private static final String CFG_VALIDATOR = "openapi/_crud/authorized/";
     private static final ZeroFs FS = ZeroFs.of();
 
     IxSetupRule(final IxConfig config) {
@@ -53,7 +53,7 @@ class IxSetupRule extends IxSetupBase<ConcurrentMap<String, List<WebRule>>> {
     public Boolean configure(final Set<MDConfiguration> waitFor) {
         // 加载 yml 配置文件
         final List<String> files = FS.inFiles(CFG_VALIDATOR, VValue.SUFFIX.YML);
-        files.forEach(filename -> {
+        files.stream().filter(filename -> !filename.startsWith(".")).forEach(filename -> {
 
 
             /*
