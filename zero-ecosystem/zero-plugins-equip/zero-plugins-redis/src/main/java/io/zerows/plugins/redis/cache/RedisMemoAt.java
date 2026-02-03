@@ -1,6 +1,5 @@
 package io.zerows.plugins.redis.cache;
 
-import io.r2mo.base.util.R2MO;
 import io.r2mo.typed.common.Kv;
 import io.r2mo.vertx.common.cache.MemoAtBase;
 import io.r2mo.vertx.common.cache.MemoOptions;
@@ -33,7 +32,6 @@ import java.util.stream.Collectors;
 public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
 
     private static final Redis REDIS = RedisActor.ofClient();
-    private static final Buffer NULL_BUFFER = Buffer.buffer("__NULL__");
     private static final int BATCH_SIZE = 1000;
 
     private final RedisYmConfig config;
@@ -45,71 +43,8 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
         Objects.requireNonNull(REDIS, "[ PLUG ] ( Redis ) 客户端未初始化，无法使用 Redis 作为缓存，请检查 Redis 配置！");
         this.config = options.configuration() != null ? options.configuration() : new RedisYmConfig();
     }
-    // ----------------------------------------------------
-
-    /**
-     * 序列化策略
-     */
-    private Buffer encode(final V value) {
-        if (value == null) {
-            return null;
-        }
-        // 兼容 JSON 模式 (纯文本存储)
-        if ("json".equalsIgnoreCase(this.config.getFormat())) {
-            return Buffer.buffer(Ut.serialize(value));
-        }
-
-        // 二进制序列化
-        final Object converted;
-        if (value instanceof final JsonObject json) {
-            // 包装为可序列化的 Container
-            converted = new JsonContainer(json.encode(), true);
-        } else if (value instanceof final JsonArray jarr) {
-            // 包装为可序列化的 Container
-            converted = new JsonContainer(jarr.encode(), false);
-        } else {
-            // 其他实现了 Serializable 的 POJO 或基本类型
-            converted = value;
-        }
-
-        final byte[] bytes = R2MO.serialize(converted);
-        return Buffer.buffer(bytes);
-    }
 
     // ---------------- 私有辅助方法：Codec ----------------
-
-    /**
-     * 反序列化策略
-     */
-    @SuppressWarnings("unchecked")
-    private V decode(final Response resp) {
-        if (resp == null) {
-            return null;
-        }
-        final Buffer buffer = resp.toBuffer();
-        if (buffer == null || buffer.length() == 0) {
-            return null;
-        }
-        if (NULL_BUFFER.equals(buffer)) {
-            return null;
-        }
-
-        // 兼容 JSON 模式
-        if ("json".equalsIgnoreCase(this.config.getFormat())) {
-            return Ut.deserialize(buffer.toString(), this.options().classV());
-        }
-
-        // 二进制反序列化
-        final Object raw = R2MO.deserialize(buffer.getBytes());
-
-        // 检查是否为 JSON 包装器，如果是则还原
-        if (raw instanceof JsonContainer) {
-            return (V) ((JsonContainer) raw).toOriginal();
-        }
-
-        // 普通对象直接返回
-        return (V) raw;
-    }
 
     private String wrapKey(final K key) {
         return key == null ? null : this.config.getPrefix() + ":" + this.name() + ":" + key;
@@ -147,7 +82,8 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
                 if (nullTtl <= 0) {
                     nullTtl = 60;
                 }
-                final Request req = Request.cmd(Command.SETEX).arg(redisKey).arg(nullTtl).arg(NULL_BUFFER);
+                final Request req = Request.cmd(Command.SETEX).arg(redisKey).arg(nullTtl)
+                    .arg(RedisEnc.NULL_BUFFER);
                 return Objects.requireNonNull(REDIS).send(req)
                     .onFailure(t -> log.error("[ PLUG ] ( Redis ) 写入空值异常: Key={}, Error={}", redisKey, t.getMessage()))
                     .map(r -> Kv.create(key, null));
@@ -157,7 +93,7 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
 
         try {
             // 调用修复后的 encode
-            final Buffer binValue = this.encode(value);
+            final Buffer binValue = RedisEnc.encode(value, this.config);
             final Request req;
 
             if (ttl > 0) {
@@ -182,7 +118,7 @@ public class RedisMemoAt<K, V> extends MemoAtBase<K, V> {
         final String redisKey = this.wrapKey(key);
         return Objects.requireNonNull(REDIS).send(Request.cmd(Command.GET).arg(redisKey))
             .onFailure(t -> log.error("[ PLUG ] ( Redis ) 读取缓存失败: Key={}, Error={}", redisKey, t.getMessage()))
-            .map(this::decode); // 调用修复后的 decode
+            .map(response -> RedisEnc.decode(response, this.config, this.options())); // 调用修复后的 decode
     }
 
     @Override

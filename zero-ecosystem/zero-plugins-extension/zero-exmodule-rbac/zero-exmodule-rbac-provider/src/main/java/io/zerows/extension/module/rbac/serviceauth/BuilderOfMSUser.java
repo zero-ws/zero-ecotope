@@ -102,6 +102,8 @@ public class BuilderOfMSUser extends AbstractBuilder<MSUser> {
                 user::getUpdatedBy,
                 user::getUpdatedAt
             );
+
+            return entity;
         }
         return null;
     }

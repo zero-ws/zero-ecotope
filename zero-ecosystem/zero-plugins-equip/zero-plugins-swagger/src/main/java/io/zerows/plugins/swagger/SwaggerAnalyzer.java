@@ -1,12 +1,17 @@
 package io.zerows.plugins.swagger;
 
+import io.r2mo.openapi.metadata.DocApi;
+import io.r2mo.openapi.metadata.DocMeta;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.info.Info;
 import io.zerows.epoch.management.OCacheActor;
 import io.zerows.epoch.web.WebEvent;
+import jakarta.ws.rs.HttpMethod;
 
+import java.lang.annotation.Annotation;
+import java.util.List;
 import java.util.Set;
 
 class SwaggerAnalyzer {
@@ -25,31 +30,48 @@ class SwaggerAnalyzer {
             .description(ymOpen.getDescription());
         openAPI.setInfo(info);
 
-        // ==========================================
-        // 【核心修改点】必须在此处加载 Schema
-        // ==========================================
-        // 这会将 openapi/components/schemas 下的定义
-        // 注册到 openAPI.components 中，解决 $ref 找不到的问题
-        LoaderSchema.load(openAPI);
-
-        // 2. 初始化解析策略
-        final DocSpec jaxrsSpec = DocSpec.of(DocSpecJAXRS::new);
-        final DocSpec swaggerSpec = DocSpec.of(DocSpecSwagger::new);
-        final DocSpec openApiSpec = DocSpec.of(DocSpecOpenAPI::new);
-
-        // 3. 扫描所有 WebEvent
         final Set<WebEvent> events = ACTOR.value().getEvents();
-        for (final WebEvent event : events) {
-            // 3.1 生成骨架
-            jaxrsSpec.compile(openAPI, event);
 
-            // 3.2 注解增强
-            swaggerSpec.compile(openAPI, event);
+        final List<DocApi> apis = events.stream().map(event -> {
+            final DocApi api = new DocApi();
+            api.path(event.getPath());
+            api.invoker(event.getAction());
 
-            // 3.3 文档覆盖 (Operation)
-            openApiSpec.compile(openAPI, event);
-        }
+            // --- 新增：Http Method 解析适配 ---
+            // 将 Vert.x 的 HttpMethod 转换为 Jakarta 的 HttpMethod 注解实例
+            if (event.getMethod() != null) {
+                api.method(adaptMethod(event.getMethod()));
+            }
+            // ------------------------------------
 
+            return api;
+        }).toList();
+
+        DocMeta.load(openAPI, apis);
         return openAPI;
+    }
+
+    /**
+     * 适配器：将 Vert.x HttpMethod 包装为 JAX-RS HttpMethod 注解接口
+     */
+    private static HttpMethod adaptMethod(final io.vertx.core.http.HttpMethod vertxMethod) {
+        return new HttpMethod() {
+            @Override
+            public String value() {
+                // 返回标准的方法名字符串 (GET, POST, etc.)
+                return vertxMethod.name();
+            }
+
+            @Override
+            public Class<? extends Annotation> annotationType() {
+                // 必须返回对应的注解类型，否则部分反射工具可能会报错
+                return HttpMethod.class;
+            }
+
+            @Override
+            public String toString() {
+                return vertxMethod.name();
+            }
+        };
     }
 }

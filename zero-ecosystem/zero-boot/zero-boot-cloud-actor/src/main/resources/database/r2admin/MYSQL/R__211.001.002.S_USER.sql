@@ -11,7 +11,7 @@ VALUES (UUID(), NULL, 'r2dev', '$sha512$D88mO6p7WAHmb+6ikgqygpRV7WLb3iH8evu2WXNb
         NULL, NULL, NULL, NULL, NULL, NULL,
         NULL, NULL, NULL, NULL,
         '${SIGMA}', '${APP_ID}', '${TENANT_ID}', NULL, 'zh_CN', 1, NULL,
-        NOW(), 'rachel-momo', NOW(), 'rachel-momo');
+        NOW(), '9a0d5018-33ad-4c64-80bf-8ae7947c482f', NOW(), '9a0d5018-33ad-4c64-80bf-8ae7947c482f');
 
 -- 插入管理人员账号 r2admin
 INSERT INTO `S_USER` (`ID`, `CODE`, `USERNAME`, `PASSWORD`, `REALNAME`, `ALIAS`, `AVATAR`, `DESCRIPTION`,
@@ -26,7 +26,7 @@ VALUES (UUID(), NULL, 'r2admin', '$sha512$D88mO6p7WAHmb+6ikgqygpRV7WLb3iH8evu2WX
         NULL, NULL, NULL, NULL, NULL, NULL,
         NULL, NULL, NULL, NULL,
         '${SIGMA}', '${APP_ID}', '${TENANT_ID}', NULL, 'zh_CN', 1, NULL,
-        NOW(), 'rachel-momo', NOW(), 'rachel-momo');
+        NOW(), '9a0d5018-33ad-4c64-80bf-8ae7947c482f', NOW(), '9a0d5018-33ad-4c64-80bf-8ae7947c482f');
 
 -- 插入普通用户账号 r2user
 INSERT INTO `S_USER` (`ID`, `CODE`, `USERNAME`, `PASSWORD`, `REALNAME`, `ALIAS`, `AVATAR`, `DESCRIPTION`,
@@ -41,4 +41,4 @@ VALUES (UUID(), NULL, 'r2user', '$sha512$D88mO6p7WAHmb+6ikgqygpRV7WLb3iH8evu2WXN
         NULL, NULL, NULL, NULL, NULL, NULL,
         NULL, NULL, NULL, NULL,
         '${SIGMA}', '${APP_ID}', '${TENANT_ID}', NULL, 'zh_CN', 1, NULL,
-        NOW(), 'rachel-momo', NOW(), 'rachel-momo');
+        NOW(), '9a0d5018-33ad-4c64-80bf-8ae7947c482f', NOW(), '9a0d5018-33ad-4c64-80bf-8ae7947c482f');

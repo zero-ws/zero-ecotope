@@ -1,10 +1,10 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
-import io.zerows.epoch.annotations.OpenApi;
 import io.zerows.epoch.constant.KWeb;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
