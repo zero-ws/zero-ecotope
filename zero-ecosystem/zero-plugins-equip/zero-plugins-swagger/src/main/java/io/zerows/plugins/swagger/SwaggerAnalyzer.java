@@ -11,6 +11,7 @@ import io.zerows.epoch.web.WebEvent;
 import jakarta.ws.rs.HttpMethod;
 
 import java.lang.annotation.Annotation;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -33,19 +34,24 @@ class SwaggerAnalyzer {
         final Set<WebEvent> events = ACTOR.value().getEvents();
 
         final List<DocApi> apis = events.stream().map(event -> {
-            final DocApi api = new DocApi();
-            api.path(event.getPath());
-            api.invoker(event.getAction());
+                final DocApi api = new DocApi();
+                api.path(event.getPath());
+                api.invoker(event.getAction());
 
-            // --- 新增：Http Method 解析适配 ---
-            // 将 Vert.x 的 HttpMethod 转换为 Jakarta 的 HttpMethod 注解实例
-            if (event.getMethod() != null) {
-                api.method(adaptMethod(event.getMethod()));
-            }
-            // ------------------------------------
+                // --- 新增：Http Method 解析适配 ---
+                // 将 Vert.x 的 HttpMethod 转换为 Jakarta 的 HttpMethod 注解实例
+                if (event.getMethod() != null) {
+                    api.method(adaptMethod(event.getMethod()));
+                }
+                // ------------------------------------
 
-            return api;
-        }).toList();
+                return api;
+            })// 2. 【核心修改】按 path 字典序排序 (如果 path 相同，建议按 method 排序以保证稳定性)
+            .sorted(
+                Comparator.comparing((DocApi api) -> api.path())
+                    .thenComparing(api -> api.method().value())
+            )
+            .toList();
 
         DocMeta.load(openAPI, apis);
         return openAPI;

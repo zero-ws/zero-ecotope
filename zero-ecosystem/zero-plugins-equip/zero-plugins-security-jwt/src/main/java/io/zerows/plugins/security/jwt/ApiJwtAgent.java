@@ -1,7 +1,7 @@
 package io.zerows.plugins.security.jwt;
 
-import io.r2mo.openapi.components.schemas.security.RequestLoginCommon;
-import io.r2mo.openapi.components.schemas.security.ResponseLoginJwt;
+import io.r2mo.openapi.components.schemas.RequestLoginCommon;
+import io.r2mo.openapi.components.schemas.ResponseLoginJwt;
 import io.r2mo.openapi.operations.DescAuth;
 import io.r2mo.openapi.operations.DescMeta;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +26,7 @@ public interface ApiJwtAgent {
     @Path("/auth/jwt-login")
     @Address(ApiAddr.API_AUTH_JWT_LOGIN)
     @Operation(
-        summary = DescAuth._auth_jwt_login_summary, description = DescAuth._auth_jwt_login_description,
+        summary = DescAuth._auth_jwt_login_summary, description = DescAuth._auth_jwt_login_desc,
         requestBody = @RequestBody(
             required = true, description = DescMeta.request_post,
             /*
@@ -43,7 +43,7 @@ public interface ApiJwtAgent {
         responses = {
             @ApiResponse(
                 responseCode = DescMeta.response_code_200,
-                description = DescMeta.response_success,
+                description = DescMeta.response_ok_json,
                 /*
                  * - data
                  *   - token

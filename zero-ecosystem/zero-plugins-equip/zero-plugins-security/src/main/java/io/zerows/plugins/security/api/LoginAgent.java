@@ -1,7 +1,7 @@
 package io.zerows.plugins.security.api;
 
-import io.r2mo.openapi.components.schemas.security.RequestLoginCommon;
-import io.r2mo.openapi.components.schemas.security.ResponseLoginCommon;
+import io.r2mo.openapi.components.schemas.RequestLoginCommon;
+import io.r2mo.openapi.components.schemas.ResponseLoginCommon;
 import io.r2mo.openapi.operations.DescAuth;
 import io.r2mo.openapi.operations.DescMeta;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,7 +36,7 @@ public interface LoginAgent {
     @Path("/auth/login")
     @Address(Addr.API_AUTH_LOGIN)
     @Operation(
-        summary = DescAuth._auth_login_summary, description = DescAuth._auth_login_description,
+        summary = DescAuth._auth_login_summary, description = DescAuth._auth_login_desc,
         requestBody = @RequestBody(
             required = true, description = DescMeta.request_post,
             /*
@@ -53,7 +53,7 @@ public interface LoginAgent {
         responses = {
             @ApiResponse(
                 responseCode = DescMeta.response_code_200,
-                description = DescMeta.response_success,
+                description = DescMeta.response_ok_json,
                 /*
                  * - data
                  *   - token

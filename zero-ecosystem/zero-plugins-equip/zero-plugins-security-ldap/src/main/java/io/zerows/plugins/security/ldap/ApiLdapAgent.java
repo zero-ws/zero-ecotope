@@ -1,7 +1,7 @@
 package io.zerows.plugins.security.ldap;
 
-import io.r2mo.openapi.components.schemas.security.RequestLoginCommon;
-import io.r2mo.openapi.components.schemas.security.ResponseLoginDynamic;
+import io.r2mo.openapi.components.schemas.RequestLoginCommon;
+import io.r2mo.openapi.components.schemas.ResponseLoginDynamic;
 import io.r2mo.openapi.operations.DescAuth;
 import io.r2mo.openapi.operations.DescMeta;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +26,7 @@ public interface ApiLdapAgent {
     @Path("/auth/ldap-login")
     @Address(ApiAddr.API_AUTH_LDAP_LOGIN)
     @Operation(
-        summary = DescAuth._auth_ldap_login_summary, description = DescAuth._auth_ldap_login_description,
+        summary = DescAuth._auth_ldap_login_summary, description = DescAuth._auth_ldap_login_desc,
         requestBody = @RequestBody(
             required = true, description = DescMeta.request_post,
             /*
@@ -43,7 +43,7 @@ public interface ApiLdapAgent {
         responses = {
             @ApiResponse(
                 responseCode = DescMeta.response_code_200,
-                description = DescMeta.response_success,
+                description = DescMeta.response_ok_json,
                 /*
                  * - data
                  *   - id
