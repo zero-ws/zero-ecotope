@@ -59,7 +59,7 @@ class _Io extends _Inverse {
      * @param file   文件
      * @return 拼接后的路径
      */
-    public static String ioPath(final String folder, final String file) {
+    public static String ioPath(final String folder, final String... file) {
         return IoPath.resolve(folder, file);
     }
 

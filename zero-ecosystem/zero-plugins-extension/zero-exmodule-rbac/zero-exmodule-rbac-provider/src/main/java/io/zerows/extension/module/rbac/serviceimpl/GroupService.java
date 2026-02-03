@@ -52,7 +52,7 @@ public class GroupService implements GroupStub {
     }
 
     @Override
-    public Future<JsonArray> fetchGroups(final String sigma) {
+    public Future<JsonArray> fetchGroupsBySigma(final String sigma) {
         return DB.on(SGroupDao.class)
             /* Fetch by sigma */
             .<SGroup>fetchAsync(KName.SIGMA, sigma)

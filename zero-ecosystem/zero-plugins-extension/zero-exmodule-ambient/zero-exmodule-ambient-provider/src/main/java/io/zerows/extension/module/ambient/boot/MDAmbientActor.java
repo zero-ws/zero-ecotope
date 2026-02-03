@@ -24,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 此处 Ambient 模块本应该作为提供者存在，但是上层调用过程中还有一层预启动模型
@@ -58,6 +59,7 @@ import java.util.Set;
 @Slf4j
 public class MDAmbientActor extends MDModuleActor {
     private static final DI PLUGIN = DI.create(MDAmbientActor.class);
+    private static final AtomicBoolean IS_DOC = new AtomicBoolean(Boolean.TRUE);
 
     @Override
     protected String MID() {
@@ -81,7 +83,9 @@ public class MDAmbientActor extends MDModuleActor {
     private Future<Boolean> startDocAsync(final HArk v, final AtConfig config) {
         final boolean disabled = Ut.isNil(config.getFileIntegration());
         if (disabled) {
-            log.info("{} 文档平台已禁用 Document Platform Disabled !!", AtConstant.K_PREFIX);
+            if (IS_DOC.getAndSet(Boolean.FALSE)) {
+                log.info("{} 文档平台已禁用 Document Platform Disabled !!", AtConstant.K_PREFIX);
+            }
             return Future.succeededFuture(Boolean.TRUE);
         }
         // 此处提前调用 initialize 方法，此方法保证无副作用的多次调用即可

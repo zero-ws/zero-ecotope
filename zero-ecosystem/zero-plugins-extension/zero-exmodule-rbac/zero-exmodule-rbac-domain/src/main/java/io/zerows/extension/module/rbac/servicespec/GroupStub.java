@@ -27,5 +27,6 @@ public interface GroupStub {
     /*
      * Get groups by : sigma = {xxx}
      */
-    Future<JsonArray> fetchGroups(String sigma);
+    Future<JsonArray> fetchGroupsBySigma(String sigma);
+
 }

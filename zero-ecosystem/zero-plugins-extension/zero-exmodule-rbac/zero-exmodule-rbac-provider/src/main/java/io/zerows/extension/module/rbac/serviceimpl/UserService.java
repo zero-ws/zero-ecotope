@@ -2,14 +2,10 @@ package io.zerows.extension.module.rbac.serviceimpl;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.metadata.UObject;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.component.acl.relation.Junc;
-import io.zerows.extension.module.rbac.domain.tables.daos.OUserDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserRoleDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
@@ -17,7 +13,6 @@ import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.module.rbac.servicespec.UserStub;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
-import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -54,26 +49,27 @@ public class UserService implements UserStub {
 
     @Override
     public Future<JsonObject> fetchAuthorized(final SUser query) {
-        return DB.on(OUserDao.class).fetchOneAsync(ScAuthKey.F_CLIENT_ID, query.getId())
-            .compose(Ux::futureJ)
-            .compose(ouserJson -> {
-                final JsonObject userJson = Ut.serializeJson(query);
-                final JsonObject merged = Ut.valueAppend(userJson, ouserJson);
-                return UObject.create(merged).pickup(
-                    KName.KEY,                /* client_id parameter */
-                    ScAuthKey.SCOPE,              /* scope parameter */
-                    ScAuthKey.STATE,              /* state parameter */
-                    ScAuthKey.F_CLIENT_SECRET,    /* client_secret parameter */
-                    ScAuthKey.F_GRANT_TYPE        /* grant_type parameter */
-                ).denull().toFuture();
-            }).compose(response -> {
-                final String initPwd = Sc.valuePassword();
-                if (initPwd.equals(query.getPassword())) {
-                    /* Password Init */
-                    response.put(KName.PASSWORD, false);
-                }
-                return Ux.future(response);
-            });
+        return null;
+//        return DB.on(OUserDao.class).fetchOneAsync(ScAuthKey.F_CLIENT_ID, query.getId())
+//            .compose(Ux::futureJ)
+//            .compose(ouserJson -> {
+//                final JsonObject userJson = Ut.serializeJson(query);
+//                final JsonObject merged = Ut.valueAppend(userJson, ouserJson);
+//                return UObject.create(merged).pickup(
+//                    KName.KEY,                /* client_id parameter */
+//                    ScAuthKey.SCOPE,              /* scope parameter */
+//                    ScAuthKey.STATE,              /* state parameter */
+//                    ScAuthKey.F_CLIENT_SECRET,    /* client_secret parameter */
+//                    ScAuthKey.F_GRANT_TYPE        /* grant_type parameter */
+//                ).denull().toFuture();
+//            }).compose(response -> {
+//                final String initPwd = Sc.valuePassword();
+//                if (initPwd.equals(query.getPassword())) {
+//                    /* Password Init */
+//                    response.put(KName.PASSWORD, false);
+//                }
+//                return Ux.future(response);
+//            });
     }
 
     /*
@@ -114,18 +110,19 @@ public class UserService implements UserStub {
     @Override
     public Future<Boolean> deleteUser(final String userKey) {
         final ADB sUserDao = DB.on(SUserDao.class);
-        final ADB oUserDao = DB.on(OUserDao.class);
+        // final ADB oUserDao = DB.on(OUserDao.class);
         final ADB rUserRoleDao = DB.on(RUserRoleDao.class);
         final ADB rUserGroupDao = DB.on(RUserGroupDao.class);
 
-        return oUserDao.fetchOneAsync(new JsonObject().put(KName.CLIENT_ID, userKey))
-            /* delete OUser record */
-            .compose(item -> oUserDao.deleteByIdAsync(Ux.toJson(item).getString(KName.KEY)))
-            /* delete related role records */
-            .compose(oUserFlag -> rUserRoleDao.deleteByAsync(new JsonObject().put(KName.USER_ID, userKey)))
-            /* delete related group records */
-            .compose(rUserRoleFlag -> rUserGroupDao.deleteByAsync(new JsonObject().put(KName.USER_ID, userKey)))
-            /* delete SUser record */
-            .compose(rUserGroupFlag -> sUserDao.deleteByIdAsync(userKey));
+        return null;
+//        return oUserDao.fetchOneAsync(new JsonObject().put(KName.CLIENT_ID, userKey))
+//            /* delete OUser record */
+//            // .compose(item -> oUserDao.deleteByIdAsync(Ux.toJson(item).getString(KName.KEY)))
+//            /* delete related role records */
+//            .compose(oUserFlag -> rUserRoleDao.deleteByAsync(new JsonObject().put(KName.USER_ID, userKey)))
+//            /* delete related group records */
+//            .compose(rUserRoleFlag -> rUserGroupDao.deleteByAsync(new JsonObject().put(KName.USER_ID, userKey)))
+//            /* delete SUser record */
+//            .compose(rUserGroupFlag -> sUserDao.deleteByIdAsync(userKey));
     }
 }

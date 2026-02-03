@@ -40,6 +40,10 @@
             <groupId>io.zerows</groupId>
             <artifactId>zero-plugins-neo4j</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-swagger</artifactId>
+        </dependency>
         <!--
         R2MO插件
         - 代码生成
@@ -52,6 +56,10 @@
         <dependency>
             <groupId>io.zerows</groupId>
             <artifactId>r2mo-io-local</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-spec</artifactId>
         </dependency>
         <!-- MySQL -->
         <dependency>

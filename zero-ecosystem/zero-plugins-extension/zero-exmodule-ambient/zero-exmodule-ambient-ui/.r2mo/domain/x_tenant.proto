@@ -1,0 +1,43 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XTenant
+// name: XTenant
+// alias: 租户
+// identifier: sys.tenant
+// table: X_TENANT
+// java: XTenantEntity
+// sql: V207.001.017
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XTenant {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string name = 2; // [Java:name] 名称 (最大长度:255)
+  string code = 3; // [Java:code] 编号 (最大长度:36)
+  string alias = 4; // [Java:alias] 简称/别名 推荐用于显示较短的名字 (最大长度:255)
+  string description = 5; // [Java:desc] 简介 推荐企业简介
+  string email = 6; // [Java:email] 管理员邮箱 用于接收账单系统通知 (最大长度:255)
+  string phone = 7; // [Java:phone] 联系电话 (最大长度:20)
+  string contact = 8; // [Java:contact] 联系人姓名 (最大长度:64)
+  string address = 9; // [Java:address] 联系地址 (最大长度:512)
+  string id_type = 10; // [Java:idType] 证件类型 推荐区分个人企业 (最大长度:32)
+  string id_number = 11; // [Java:idNumber] 身份证号 (最大长度:255)
+  string id_back = 12; // [Java:idBack] 身份证反面 (最大长度:255)
+  string id_front = 13; // [Java:idFront] 身份证正面 (最大长度:255)
+  string bank_card = 14; // [Java:bankCard] 开户行账号 (最大长度:255)
+  string bank_id = 15; // [Java:bankId] 开户行 (最大长度:36)
+  string type = 16; // [Java:type] 类型 类型 (最大长度:255)
+  string status = 17; // [Java:status] 状态 (最大长度:255)
+  string sigma = 18; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 19; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 20; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:255)
+  bool active = 21; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 22; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 23; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 24; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 25; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 26; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 27; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 28; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

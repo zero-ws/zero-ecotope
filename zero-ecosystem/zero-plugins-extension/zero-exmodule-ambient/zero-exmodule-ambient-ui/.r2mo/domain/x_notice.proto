@@ -1,0 +1,33 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XNotice
+// name: XNotice
+// alias: 公告
+// identifier: sys.notice
+// table: X_NOTICE
+// java: XNoticeEntity
+// sql: V207.001.012
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XNotice {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string code = 2; // [Java:code] 编号 (最大长度:255)
+  string content = 3; // [Java:content] 公告内容
+  string expired_at = 4; // [Java:expiredAt] 到期时间
+  string name = 5; // [Java:name] 名称 (最大长度:255)
+  string type = 6; // [Java:type] 类型 类型 (最大长度:255)
+  string status = 7; // [Java:status] 状态 (最大长度:255)
+  string sigma = 8; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 9; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 10; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:36)
+  bool active = 11; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 12; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 13; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 14; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 15; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 16; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 17; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 18; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

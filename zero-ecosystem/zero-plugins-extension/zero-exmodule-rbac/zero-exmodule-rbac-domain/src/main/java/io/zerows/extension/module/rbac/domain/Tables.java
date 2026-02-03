@@ -4,8 +4,6 @@
 package io.zerows.extension.module.rbac.domain;
 
 
-import io.zerows.extension.module.rbac.domain.tables.OAccessToken;
-import io.zerows.extension.module.rbac.domain.tables.OUser;
 import io.zerows.extension.module.rbac.domain.tables.RGroupRole;
 import io.zerows.extension.module.rbac.domain.tables.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
@@ -28,16 +26,6 @@ import io.zerows.extension.module.rbac.domain.tables.SVisitant;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
-
-    /**
-     * The table <code>ZDB.O_ACCESS_TOKEN</code>.
-     */
-    public static final OAccessToken O_ACCESS_TOKEN = OAccessToken.O_ACCESS_TOKEN;
-
-    /**
-     * The table <code>ZDB.O_USER</code>.
-     */
-    public static final OUser O_USER = OUser.O_USER;
 
     /**
      * 关联表

@@ -4,8 +4,6 @@
 package io.zerows.extension.module.rbac.domain;
 
 
-import io.zerows.extension.module.rbac.domain.tables.OAccessToken;
-import io.zerows.extension.module.rbac.domain.tables.OUser;
 import io.zerows.extension.module.rbac.domain.tables.RGroupRole;
 import io.zerows.extension.module.rbac.domain.tables.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
@@ -21,8 +19,6 @@ import io.zerows.extension.module.rbac.domain.tables.SRole;
 import io.zerows.extension.module.rbac.domain.tables.SUser;
 import io.zerows.extension.module.rbac.domain.tables.SView;
 import io.zerows.extension.module.rbac.domain.tables.SVisitant;
-import io.zerows.extension.module.rbac.domain.tables.records.OAccessTokenRecord;
-import io.zerows.extension.module.rbac.domain.tables.records.OUserRecord;
 import io.zerows.extension.module.rbac.domain.tables.records.RGroupRoleRecord;
 import io.zerows.extension.module.rbac.domain.tables.records.RRolePermRecord;
 import io.zerows.extension.module.rbac.domain.tables.records.RUserGroupRecord;
@@ -55,10 +51,6 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<OAccessTokenRecord> KEY_O_ACCESS_TOKEN_PRIMARY = Internal.createUniqueKey(OAccessToken.O_ACCESS_TOKEN, DSL.name("KEY_O_ACCESS_TOKEN_PRIMARY"), new TableField[] { OAccessToken.O_ACCESS_TOKEN.KEY }, true);
-    public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_ID = Internal.createUniqueKey(OUser.O_USER, DSL.name("KEY_O_USER_CLIENT_ID"), new TableField[] { OUser.O_USER.CLIENT_ID }, true);
-    public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_SECRET = Internal.createUniqueKey(OUser.O_USER, DSL.name("KEY_O_USER_CLIENT_SECRET"), new TableField[] { OUser.O_USER.CLIENT_SECRET }, true);
-    public static final UniqueKey<OUserRecord> KEY_O_USER_PRIMARY = Internal.createUniqueKey(OUser.O_USER, DSL.name("KEY_O_USER_PRIMARY"), new TableField[] { OUser.O_USER.KEY }, true);
     public static final UniqueKey<RGroupRoleRecord> KEY_R_GROUP_ROLE_PRIMARY = Internal.createUniqueKey(RGroupRole.R_GROUP_ROLE, DSL.name("KEY_R_GROUP_ROLE_PRIMARY"), new TableField[] { RGroupRole.R_GROUP_ROLE.GROUP_ID, RGroupRole.R_GROUP_ROLE.ROLE_ID }, true);
     public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = Internal.createUniqueKey(RRolePerm.R_ROLE_PERM, DSL.name("KEY_R_ROLE_PERM_PRIMARY"), new TableField[] { RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID }, true);
     public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = Internal.createUniqueKey(RUserGroup.R_USER_GROUP, DSL.name("KEY_R_USER_GROUP_PRIMARY"), new TableField[] { RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID }, true);

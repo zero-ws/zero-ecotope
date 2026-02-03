@@ -2,8 +2,13 @@ package io.zerows.plugins.flyway;
 
 import io.r2mo.base.dbe.DBS;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.store.DBFlyway;
 import io.zerows.epoch.store.DBSActor;
+import io.zerows.platform.ENV;
+import io.zerows.platform.EnvironmentVariable;
 import io.zerows.specification.configuration.HConfig;
+import io.zerows.spi.HPI;
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationVersion;
@@ -67,6 +72,16 @@ final class Flyway11Configurator {
             locations = valueA.getList();
         } else {
             locations = asStringList(config.options(FlywayKeys.LOCATIONS));
+        }
+        /* ========= DBFlyway ========== */
+        final List<DBFlyway> flywayList = HPI.findMany(DBFlyway.class);
+        final String dbType = ENV.of().get(EnvironmentVariable.DB_TYPE);
+        for (final DBFlyway flyway : flywayList) {
+            final List<String> pluginLocs = flyway.waitFlyway(dbType);
+            if (Objects.nonNull(pluginLocs) || !pluginLocs.isEmpty()) {
+                log.info("[ PLUG ] ( Flyway ) 检测到 DBFlyway 插件: {} / size = {}", flyway.getClass().getName(), pluginLocs.size());
+                locations.addAll(pluginLocs);
+            }
         }
         if (!locations.isEmpty()) {
             final StringBuilder content = new StringBuilder();
@@ -280,17 +295,32 @@ final class Flyway11Configurator {
     }
 
     private static Map<String, String> asStringMap(final Object raw) {
-        if (raw == null) {
-            return Map.of();
-        }
-        if (raw instanceof final Map<?, ?> src) {
-            final Map<String, String> out = new LinkedHashMap<>(src.size());
-            src.forEach((k, v) -> {
-                if (k != null && v != null) {
-                    out.put(String.valueOf(k), String.valueOf(v));
-                }
-            });
-            return out;
+        switch (raw) {
+            case null -> {
+                return Map.of();
+            }
+            case final JsonObject srcJ -> {
+                final Map<String, String> out = new LinkedHashMap<>();
+                srcJ.forEach(entry -> {
+                    final String k = entry.getKey();
+                    final Object v = entry.getValue();
+                    if (v != null) {
+                        out.put(k, String.valueOf(v));
+                    }
+                });
+                return out;
+            }
+            case final Map<?, ?> src -> {
+                final Map<String, String> out = new LinkedHashMap<>(src.size());
+                src.forEach((k, v) -> {
+                    if (k != null && v != null) {
+                        out.put(String.valueOf(k), String.valueOf(v));
+                    }
+                });
+                return out;
+            }
+            default -> {
+            }
         }
         return Map.of();
     }

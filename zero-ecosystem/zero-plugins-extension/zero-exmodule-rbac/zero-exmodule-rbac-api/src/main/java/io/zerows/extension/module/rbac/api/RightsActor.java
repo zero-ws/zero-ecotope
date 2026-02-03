@@ -18,7 +18,7 @@ public class RightsActor {
 
     @Address(Addr.Group.GROUP_SIGMA)
     public Future<JsonArray> fetchGroups(final String sigma) {
-        return this.groupStub.fetchGroups(sigma);
+        return this.groupStub.fetchGroupsBySigma(sigma);
     }
 
     @Address(Addr.Role.ROLE_PERM_UPDATE)

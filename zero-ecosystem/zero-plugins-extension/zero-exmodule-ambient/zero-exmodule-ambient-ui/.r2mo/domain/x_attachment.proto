@@ -1,0 +1,44 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XAttachment
+// name: XAttachment
+// alias: 附件
+// identifier: sys.attachment
+// table: X_ATTACHMENT
+// java: XAttachmentEntity
+// sql: V207.001.006
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XAttachment {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string directory_id = 2; // [Java:directoryId] 存储目录 (最大长度:36)
+  string extension = 3; // [Java:extension] 文件扩展名 (最大长度:10)
+  string file_key = 4; // [Java:fileKey] 文件下载Key 模式中的文件唯一的全局唯一 (最大长度:255)
+  string file_name = 5; // [Java:fileName] 原始文件名 原始文件名不带扩展名 (最大长度:255)
+  string file_path = 6; // [Java:filePath] 文件存储地址 该文件的存储地址时使用 (最大长度:255)
+  string file_url = 7; // [Java:fileUrl] 文件下载链接 该文件的下载链接全局唯一 (最大长度:255)
+  string mime = 8; // [Java:mime] MIME类型 (最大长度:128)
+  string name = 9; // [Java:name] 附件名称 文件名带扩展名 (最大长度:255)
+  int32 size = 10; // [Java:size] 附件尺寸
+  string store_path = 11; // [Java:storePath] 存储路径 远程存储的目录信息显示专用去服务器和协议部分 (最大长度:1024)
+  string store_uri = 12; // [Java:storeUri] 存储URI 远程存储的目录部分 (最大长度:1024)
+  string store_way = 13; // [Java:storeWay] 存储方式 存储方式 (最大长度:255)
+  string type = 14; // [Java:type] 附件类型 类型 (最大长度:128)
+  string status = 15; // [Java:status] 附件状态 状态 (最大长度:12)
+  string model_id = 16; // [Java:modelId] 模型标识 关联的模型用于描述 (最大长度:255)
+  string model_key = 17; // [Java:modelKey] 模型记录ID 关联的模型记录用于描述哪一个中的记录 (最大长度:36)
+  string model_category = 18; // [Java:modelCategory] 模型类别 如果一个模型记录包含多种附件则需要设置模型相关字段等价于 (最大长度:36)
+  string sigma = 19; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 20; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 21; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:36)
+  bool active = 22; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 23; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 24; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 25; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 26; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 27; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 28; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 29; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

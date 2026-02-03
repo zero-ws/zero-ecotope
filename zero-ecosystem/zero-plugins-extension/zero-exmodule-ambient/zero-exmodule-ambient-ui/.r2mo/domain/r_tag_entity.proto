@@ -1,0 +1,21 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.RTagEntity
+// name: RTagEntity
+// alias: 标签-对象
+// identifier: rel.tag.entity
+// table: R_TAG_ENTITY
+// java: RTagEntityRelation
+// sql: V207.001.001
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message RTagEntity {
+  string tag_id = 1; // [Java:tagId] 标签ID 主键关联联合主键 (必填, 最大长度:36)
+  string entity_type = 2; // [Java:entityType] 实体类型 主键关联实体的类型联合主键 (必填, 最大长度:64)
+  string entity_id = 3; // [Java:entityId] 实体ID 主键关联实体的主键联合主键 (必填, 最大长度:36)
+  string link_component = 4; // [Java:linkComponent] 执行组件 关联执行组件 (最大长度:255)
+  string link_config = 5; // [Java:linkConfig] 执行配置
+  string comment = 6; // [Java:comment] 关联备注
+}

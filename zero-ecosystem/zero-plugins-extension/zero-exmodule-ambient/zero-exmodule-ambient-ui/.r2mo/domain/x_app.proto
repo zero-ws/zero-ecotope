@@ -1,0 +1,48 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XApp
+// name: XApp
+// alias: 应用
+// identifier: sys.app
+// table: X_APP
+// java: XAppEntity
+// sql: V207.001.005
+// actor: x-app
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XApp {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string code = 2; // [Java:code] 编号 (最大长度:36)
+  string name = 3; // [Java:name] 名称 (最大长度:255)
+  string title = 4; // [Java:title] 应用标题 (最大长度:64)
+  string copy_right = 5; // [Java:copyRight] 版权 版权信息 (最大长度:255)
+  string email = 6; // [Java:email] 管理员Email (最大长度:255)
+  string icp = 7; // [Java:icp] ICP备案号 (最大长度:64)
+  string logo = 8; // [Java:logo] 图标
+  string favicon = 9; // [Java:favicon] 小图标 (最大长度:64)
+  string entry = 10; // [Java:entry] 入口菜单 关联的入口菜单 (最大长度:255)
+  string domain = 11; // [Java:domain] 服务器域 (最大长度:255)
+  int32 port = 12; // [Java:port] 端口号 应用程序端口号和的端口号区别开
+  string context = 13; // [Java:context] 应用路径 (最大长度:255)
+  string endpoint = 14; // [Java:endpoint] Web服务端地址 后端的根路径启动时需要 (最大长度:255)
+  string url_admin = 15; // [Java:urlAdmin] 管理业URL 应用程序内置主页带安全 (最大长度:255)
+  string url_login = 16; // [Java:urlLogin] 登录页URL (最大长度:255)
+  string url_health = 17; // [Java:urlHealth] 健康检查URL (最大长度:255)
+  string app_key = 18; // [Java:appKey] 敏感标识符 应用程序专用唯一 (最大长度:128)
+  string app_secret = 19; // [Java:appSecret] 应用密钥 (最大长度:128)
+  string status = 20; // [Java:status] 状态 (最大长度:255)
+  string namespace = 21; // [Java:namespace] 名空间 名空间信息 (最大长度:64)
+  string sigma = 22; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 23; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 24; // [Java:appId] 父应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:36)
+  bool active = 25; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 26; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 27; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 28; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 29; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 30; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 31; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 32; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

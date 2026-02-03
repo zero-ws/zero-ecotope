@@ -31,5 +31,10 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-captcha</artifactId>
         </dependency>
+        <!-- OpenApi 规范 -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-spec</artifactId>
+        </dependency>
     </dependencies>
 </project>

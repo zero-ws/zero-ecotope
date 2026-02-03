@@ -1,0 +1,38 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XSource
+// name: XSource
+// alias: 数据源
+// identifier: sys.source
+// table: X_SOURCE
+// java: XSourceEntity
+// sql: V207.001.014
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XSource {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string driver_class_name = 2; // [Java:driverClassName] 数据库驱动指定 数据库驱动指定之前 (最大长度:255)
+  string hostname = 3; // [Java:hostname] 主机地址 (最大长度:255)
+  string instance = 4; // [Java:instance] 实例名称 (最大长度:255)
+  string ip_v4 = 5; // [Java:ipV4] IP v4地址 (最大长度:15)
+  string ip_v6 = 6; // [Java:ipV6] IP v6地址 (最大长度:40)
+  string jdbc_config = 7; // [Java:jdbcConfig] 连接字符串中 连接字符串中的配置
+  string jdbc_url = 8; // [Java:jdbcUrl] JDBC连接字符串 (最大长度:1024)
+  string password = 9; // [Java:password] 密码 (最大长度:255)
+  int32 port = 10; // [Java:port] 端口号
+  string username = 11; // [Java:username] 账号 (最大长度:255)
+  string category = 12; // [Java:category] 类别 (最大长度:32)
+  string sigma = 13; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 14; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 15; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:255)
+  bool active = 16; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 17; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 18; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 19; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 20; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 21; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 22; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 23; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

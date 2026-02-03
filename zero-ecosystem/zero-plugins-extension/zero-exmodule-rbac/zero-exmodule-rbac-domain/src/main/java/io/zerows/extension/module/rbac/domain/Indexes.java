@@ -4,7 +4,6 @@
 package io.zerows.extension.module.rbac.domain;
 
 
-import io.zerows.extension.module.rbac.domain.tables.OUser;
 import io.zerows.extension.module.rbac.domain.tables.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
 import io.zerows.extension.module.rbac.domain.tables.RUserRole;
@@ -39,8 +38,6 @@ public class Indexes {
     public static final Index S_USER_IDX_S_USER_MODEL = Internal.createIndex(DSL.name("IDX_S_USER_MODEL"), SUser.S_USER, new OrderField[] { SUser.S_USER.MODEL_KEY, SUser.S_USER.MODEL_ID }, false);
     public static final Index S_USER_IDX_S_USER_USERNAME = Internal.createIndex(DSL.name("IDX_S_USER_USERNAME"), SUser.S_USER, new OrderField[] { SUser.S_USER.USERNAME }, false);
     public static final Index S_USER_IDX_S_USER_WE_UNION = Internal.createIndex(DSL.name("IDX_S_USER_WE_UNION"), SUser.S_USER, new OrderField[] { SUser.S_USER.WE_UNION }, false);
-    public static final Index O_USER_IDXM_O_USER_OAUTH_AUTHORIZE_APP = Internal.createIndex(DSL.name("IDXM_O_USER_OAUTH_AUTHORIZE_APP"), OUser.O_USER, new OrderField[] { OUser.O_USER.SCOPE, OUser.O_USER.CLIENT_ID, OUser.O_USER.CLIENT_SECRET }, false);
-    public static final Index O_USER_IDXM_O_USER_OAUTH_AUTHORIZE_FULL = Internal.createIndex(DSL.name("IDXM_O_USER_OAUTH_AUTHORIZE_FULL"), OUser.O_USER, new OrderField[] { OUser.O_USER.SCOPE, OUser.O_USER.CLIENT_ID, OUser.O_USER.CLIENT_SECRET, OUser.O_USER.LANGUAGE }, false);
     public static final Index S_VISITANT_IDXM_S_VISITANT_VIEW_ID_TYPE_CONFIG = Internal.createIndex(DSL.name("IDXM_S_VISITANT_VIEW_ID_TYPE_CONFIG"), SVisitant.S_VISITANT, new OrderField[] { SVisitant.S_VISITANT.VIEW_ID, SVisitant.S_VISITANT.TYPE, SVisitant.S_VISITANT.SEEK_KEY }, false);
     public static final Index S_VISITANT_IDXM_S_VISITANT_VIEW_ID_TYPE_IDENTIFIER = Internal.createIndex(DSL.name("IDXM_S_VISITANT_VIEW_ID_TYPE_IDENTIFIER"), SVisitant.S_VISITANT, new OrderField[] { SVisitant.S_VISITANT.VIEW_ID, SVisitant.S_VISITANT.TYPE, SVisitant.S_VISITANT.IDENTIFIER }, false);
 }

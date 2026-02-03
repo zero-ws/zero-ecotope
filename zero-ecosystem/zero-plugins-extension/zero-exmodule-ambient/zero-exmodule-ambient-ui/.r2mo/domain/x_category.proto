@@ -1,0 +1,40 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XCategory
+// name: XCategory
+// alias: 分类树
+// identifier: sys.category
+// table: X_CATEGORY
+// java: XCategoryEntity
+// sql: V207.001.007
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XCategory {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string code = 2; // [Java:code] 编号 (最大长度:255)
+  string comment = 3; // [Java:comment] 备注
+  string icon = 4; // [Java:icon] 图标 (最大长度:255)
+  string identifier = 5; // [Java:identifier] 关联标识 当前类型描述的的标识 (最大长度:255)
+  bool leaf = 6; // [Java:leaf] 是否叶节点
+  string name = 7; // [Java:name] 名称 (最大长度:255)
+  string parent_id = 8; // [Java:parentId] 父节点ID (最大长度:36)
+  string run_component = 9; // [Java:runComponent] 执行组件
+  string run_config = 10; // [Java:runConfig] 执行配置
+  int32 sort = 11; // [Java:sort] 排序
+  string tree_component = 12; // [Java:treeComponent] 目录组件 目录组件构造树专用
+  string tree_config = 13; // [Java:treeConfig] 目录配置 目录组件运行配置特殊场景专用
+  string type = 14; // [Java:type] 类型 类型 (最大长度:255)
+  string sigma = 15; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 16; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 17; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:255)
+  bool active = 18; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 19; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 20; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 21; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 22; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 23; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 24; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 25; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

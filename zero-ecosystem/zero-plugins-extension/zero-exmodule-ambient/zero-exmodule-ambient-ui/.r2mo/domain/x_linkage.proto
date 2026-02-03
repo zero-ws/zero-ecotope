@@ -1,0 +1,40 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XLinkage
+// name: XLinkage
+// alias: 全局关联
+// identifier: sys.linkage
+// table: X_LINKAGE
+// java: XLinkageEntity
+// sql: V207.001.008
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XLinkage {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string alias = 2; // [Java:alias] 别名 (最大长度:128)
+  string link_data = 3; // [Java:linkData] 关系数据
+  string link_key = 4; // [Java:linkKey] 双向Key 双向计算根据计算 (最大长度:255)
+  string link_type = 5; // [Java:linkType] 关系类型 (最大长度:255)
+  string name = 6; // [Java:name] 名称 (必填, 最大长度:255)
+  string region = 7; // [Java:region] 关系区域 连接区域标识同一个区域算一个连接批次 (最大长度:255)
+  string source_data = 8; // [Java:sourceData] 源内容
+  string source_key = 9; // [Java:sourceKey] 源实体ID (最大长度:255)
+  string source_type = 10; // [Java:sourceType] 源类型 (最大长度:255)
+  string target_data = 11; // [Java:targetData] 目标内容
+  string target_key = 12; // [Java:targetKey] 目标实体ID (最大长度:255)
+  string target_type = 13; // [Java:targetType] 目标类型 (最大长度:255)
+  string type = 14; // [Java:type] 类型 类型 (必填, 最大长度:64)
+  string sigma = 15; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 16; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 17; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:36)
+  bool active = 18; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 19; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 20; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 21; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 22; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 23; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 24; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 25; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

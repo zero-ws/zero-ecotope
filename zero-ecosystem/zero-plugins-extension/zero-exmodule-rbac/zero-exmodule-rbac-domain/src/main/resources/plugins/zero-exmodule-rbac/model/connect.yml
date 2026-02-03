@@ -2,9 +2,6 @@
   unique:
     - username
     - sigma
-- dao: O_USER
-  unique:
-    - clientId
 - dao: S_ROLE
   unique:
     - code

@@ -1,0 +1,40 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.domain.tables.pojos.XNumber
+// name: XNumber
+// alias: 序号
+// identifier: sys.number
+// table: X_NUMBER
+// java: XNumberEntity
+// sql: V207.001.013
+option java_package = "io.zerows.extension.module.ambient.domain.tables.pojos";
+option java_multiple_files = true;
+
+message XNumber {
+  string id = 1; // [Java:id] 主键 主键采用避开自增 (必填, 最大长度:36)
+  string code = 2; // [Java:code] 编号 (最大长度:36)
+  string comment = 3; // [Java:comment] 备注 描述编号数据 (最大长度:255)
+  int64 current = 4; // [Java:current] 当前值 对应每次变化更新为 (必填)
+  bool decrement = 5; // [Java:decrement] 递减模式 递减递增 (必填, 默认:b'0')
+  string format = 6; // [Java:format] 格式化串 格式信息用于处理最终格式 (最大长度:255)
+  string identifier = 7; // [Java:identifier] 标识符 查询当前使用的序号信息 (最大长度:64)
+  int32 length = 8; // [Java:length] 长度 编号长度不包含和部分 (必填)
+  string prefix = 9; // [Java:prefix] 前缀 编号前缀 (最大长度:64)
+  bool renewal = 10; // [Java:renewal] 是否循环 是否循环生成 (默认:b'0')
+  string run_component = 11; // [Java:runComponent] 执行组件 发号器执行组件雪花算法所需
+  int32 step = 12; // [Java:step] 步进系数 每次按照进行变化 (必填)
+  string suffix = 13; // [Java:suffix] 后缀 编号后缀 (最大长度:64)
+  string time = 14; // [Java:time] 时间格式 对应用于生成时间部分 (最大长度:20)
+  string sigma = 15; // [Java:sigma] 统一标识 物理隔离核心分片键顶层租户标识 (最大长度:128)
+  string tenant_id = 16; // [Java:tenantId] 租户ID 业务隔离租户具体公司标识 (最大长度:36)
+  string app_id = 17; // [Java:appId] 应用ID 逻辑隔离区分同一租户下的不同应用 (最大长度:255)
+  bool active = 18; // [Java:active] 是否启用 状态启用正常禁用冻结
+  string language = 19; // [Java:language] 语言偏好 国际化如 (最大长度:10)
+  string metadata = 20; // [Java:metadata] 元配置 扩展格式存储非结构化配置
+  string version = 21; // [Java:version] 版本号 (最大长度:64)
+  string created_at = 22; // [Java:createdAt] 创建时间 审计创建时间
+  string created_by = 23; // [Java:createdBy] 创建人 审计创建人 (最大长度:36)
+  string updated_at = 24; // [Java:updatedAt] 更新时间 审计更新时间
+  string updated_by = 25; // [Java:updatedBy] 更新人 审计更新人 (最大长度:36)
+}

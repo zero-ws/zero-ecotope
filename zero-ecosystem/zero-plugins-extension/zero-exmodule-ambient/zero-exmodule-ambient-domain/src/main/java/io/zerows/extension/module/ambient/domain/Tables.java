@@ -11,13 +11,16 @@ import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.XApp;
 import io.zerows.extension.module.ambient.domain.tables.XAttachment;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
+import io.zerows.extension.module.ambient.domain.tables.XLicense;
 import io.zerows.extension.module.ambient.domain.tables.XLinkage;
 import io.zerows.extension.module.ambient.domain.tables.XLog;
 import io.zerows.extension.module.ambient.domain.tables.XMenu;
 import io.zerows.extension.module.ambient.domain.tables.XModule;
 import io.zerows.extension.module.ambient.domain.tables.XNotice;
 import io.zerows.extension.module.ambient.domain.tables.XNumber;
+import io.zerows.extension.module.ambient.domain.tables.XPlan;
 import io.zerows.extension.module.ambient.domain.tables.XSource;
+import io.zerows.extension.module.ambient.domain.tables.XSubscription;
 import io.zerows.extension.module.ambient.domain.tables.XTabular;
 import io.zerows.extension.module.ambient.domain.tables.XTag;
 import io.zerows.extension.module.ambient.domain.tables.XTenant;
@@ -65,6 +68,11 @@ public class Tables {
     public static final XCategory X_CATEGORY = XCategory.X_CATEGORY;
 
     /**
+     * X_LICENSE
+     */
+    public static final XLicense X_LICENSE = XLicense.X_LICENSE;
+
+    /**
      * X_LINKAGE
      */
     public static final XLinkage X_LINKAGE = XLinkage.X_LINKAGE;
@@ -95,9 +103,19 @@ public class Tables {
     public static final XNumber X_NUMBER = XNumber.X_NUMBER;
 
     /**
+     * X_PLAN
+     */
+    public static final XPlan X_PLAN = XPlan.X_PLAN;
+
+    /**
      * X_SOURCE
      */
     public static final XSource X_SOURCE = XSource.X_SOURCE;
+
+    /**
+     * X_SUBSCRIPTION
+     */
+    public static final XSubscription X_SUBSCRIPTION = XSubscription.X_SUBSCRIPTION;
 
     /**
      * X_TABULAR

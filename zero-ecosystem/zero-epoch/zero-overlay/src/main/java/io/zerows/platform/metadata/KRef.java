@@ -18,6 +18,7 @@ import io.vertx.core.Future;
 public final class KRef {
 
     private Object reference;
+    private Object standBy;
 
     public <T> KRef add(final T reference) {
         this.reference = reference;
@@ -32,6 +33,11 @@ public final class KRef {
         return Future.succeededFuture(reference);
     }
 
+    public <T> Future<T> standBy(final T reference) {
+        this.standBy = reference;
+        return Future.succeededFuture(reference);
+    }
+
     public <T> Future<T> future() {
         return Future.succeededFuture((T) this.reference);
     }
@@ -43,5 +49,10 @@ public final class KRef {
     @SuppressWarnings("unchecked")
     public <T> T get() {
         return (T) this.reference;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getStandBy() {
+        return (T) this.standBy;
     }
 }

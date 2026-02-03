@@ -1,5 +1,7 @@
 package io.zerows.program;
 
+import io.r2mo.function.Actuator;
+import io.r2mo.function.Fn;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -260,6 +262,13 @@ public final class Ux extends _Where {
 
     public static <T> Future<T> waitVirtual(Supplier<T> executor) {
         return Task.asyncVirtual(executor);
+    }
+
+    public static <T> void waitVirtualAt(Actuator actuator) {
+        waitVirtual(() -> {
+            Fn.jvmAt(actuator::exec);
+            return null;
+        });
     }
 
     // NEW END -------------------------------------------------

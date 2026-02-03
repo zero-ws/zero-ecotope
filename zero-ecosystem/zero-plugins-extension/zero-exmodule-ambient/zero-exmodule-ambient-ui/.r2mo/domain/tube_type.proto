@@ -1,0 +1,17 @@
+syntax = "proto3";
+package domain;
+
+// Generated from io.zerows.extension.module.ambient.common.em.TubeType
+option java_package = "io.zerows.extension.module.ambient.common.em";
+option java_multiple_files = true;
+
+enum TubeType {
+  ATOM = 0;
+  PHASE = 1;
+  EXPRESSION = 2;
+  APPROVAL = 3;
+  ATTACHMENT = 4;
+  NOTIFY = 5;
+  SCHEDULER = 6;
+  JOB = 7;
+}

@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -42,6 +43,7 @@ public interface EntryAgent {
     @Path("/app/name/{name}")
     @GET
     @Address(Addr.App.BY_NAME)
+    @OpenApi
     JsonObject byName(@PathParam("name") String name);
 
     /**

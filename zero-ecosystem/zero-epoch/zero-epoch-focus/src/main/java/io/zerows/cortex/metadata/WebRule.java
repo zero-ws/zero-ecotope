@@ -1,9 +1,11 @@
 package io.zerows.cortex.metadata;
 
 import io.vertx.core.json.JsonObject;
+import lombok.Getter;
 
 import java.io.Serializable;
 
+@Getter
 public class WebRule implements Serializable {
 
     private final String type;
@@ -22,18 +24,6 @@ public class WebRule implements Serializable {
 
     public static WebRule create(final JsonObject data) {
         return new WebRule(data);
-    }
-
-    public String getMessage() {
-        return this.message;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public JsonObject getConfig() {
-        return this.config;
     }
 
     @Override
