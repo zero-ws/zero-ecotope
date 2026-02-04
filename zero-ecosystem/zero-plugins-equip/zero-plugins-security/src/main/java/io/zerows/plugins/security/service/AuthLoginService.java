@@ -7,7 +7,6 @@ import io.r2mo.jaas.session.UserCache;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.zerows.plugins.security.exception._80245Exception404AuthService;
-import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 
 import java.time.Duration;
@@ -22,13 +21,11 @@ public class AuthLoginService implements AuthLoginStub {
             return Fx.failOut(_80245Exception404AuthService.class, "PreAuth/" + request.type().name());
         }
         // 直接执行生成
-        return authService.authorize(request.getId()).compose(generated -> {
+        return authService.authorize(request.getId()).map(generated -> {
             final UserCache cache = UserCache.of();
             final CaptchaArgs captchaArgs = CaptchaArgs.of(request.type(), expiredAt);
-            return Ux.waitVirtual(() -> {
-                cache.authorize(generated, captchaArgs);
-                return generated;
-            });
+            cache.authorize(generated, captchaArgs);
+            return generated;
         }).map(Kv::value);
     }
 

@@ -15,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * <pre>
@@ -82,7 +85,7 @@ public class AsyncUserCache implements UserCache {
         // 1. 直接获取缓存实例
         final var cache = this.factory().userContext();
         // 2. 阻塞等待写入完成
-        Future.await(cache.put(context.id().toString(), context));
+        this.waitAsync(cache.put(context.id().toString(), context));
 
         this.cacheVector(context.logged());
     }
@@ -103,7 +106,7 @@ public class AsyncUserCache implements UserCache {
         }
 
         final var cache = this.factory().userAt();
-        Future.await(cache.put(userAt.id().toString(), userAt));
+        this.waitAsync(cache.put(userAt.id().toString(), userAt));
 
         this.cacheVector(userAt.logged());
     }
@@ -128,7 +131,7 @@ public class AsyncUserCache implements UserCache {
         final var vectorCache = this.factory().userVector();
 
         // 循环同步写入
-        idKeys.forEach(idKey -> Future.await(vectorCache.put(idKey, uidStr)));
+        idKeys.forEach(idKey -> this.waitAsync(vectorCache.put(idKey, uidStr)));
     }
 
     /**
@@ -147,8 +150,8 @@ public class AsyncUserCache implements UserCache {
         }
         final String uidStr = userId.toString();
 
-        Future.await(this.factory().userAt().remove(uidStr));
-        Future.await(this.factory().userContext().remove(uidStr));
+        this.waitAsync(this.factory().userAt().remove(uidStr));
+        this.waitAsync(this.factory().userContext().remove(uidStr));
     }
 
     // -------------------------------------------------------------------------
@@ -171,7 +174,7 @@ public class AsyncUserCache implements UserCache {
             return null;
         }
 
-        return Future.await(this.factory().userContext().find(id.toString()));
+        return this.waitAsync(this.factory().userContext().find(id.toString()));
     }
 
     /**
@@ -217,7 +220,7 @@ public class AsyncUserCache implements UserCache {
             return found;
         }
 
-        final String uidStr = Future.await(this.factory().userVector().find(idOr));
+        final String uidStr = this.waitAsync(this.factory().userVector().find(idOr));
         if (Objects.isNull(uidStr)) {
             return null;
         }
@@ -241,7 +244,7 @@ public class AsyncUserCache implements UserCache {
             return null;
         }
 
-        return Future.await(this.factory().userAt().find(id.toString()));
+        return this.waitAsync(this.factory().userAt().find(id.toString()));
     }
 
     // -------------------------------------------------------------------------
@@ -264,7 +267,7 @@ public class AsyncUserCache implements UserCache {
             return;
         }
 
-        Future.await(
+        this.waitAsync(
             this.factory().ofAuthorize(config)
                 .put(generated.key(), generated.value())
         );
@@ -290,7 +293,7 @@ public class AsyncUserCache implements UserCache {
             return null;
         }
 
-        return Future.await(
+        return this.waitAsync(
             this.factory().ofAuthorize(config).find(consumerId)
         );
     }
@@ -311,7 +314,7 @@ public class AsyncUserCache implements UserCache {
             return;
         }
 
-        Future.await(
+        this.waitAsync(
             this.factory().ofAuthorize(config).remove(consumerId)
         );
 
@@ -338,7 +341,7 @@ public class AsyncUserCache implements UserCache {
             return;
         }
 
-        Future.await(
+        this.waitAsync(
             this.factory().ofToken().put(token, userId.toString())
         );
     }
@@ -359,7 +362,7 @@ public class AsyncUserCache implements UserCache {
             return null;
         }
 
-        final String uidStr = Future.await(
+        final String uidStr = this.waitAsync(
             this.factory().ofToken().find(token)
         );
 
@@ -382,7 +385,7 @@ public class AsyncUserCache implements UserCache {
             return false;
         }
 
-        Future.await(this.factory().ofToken().remove(token));
+        this.waitAsync(this.factory().ofToken().remove(token));
         return true;
     }
 
@@ -402,7 +405,7 @@ public class AsyncUserCache implements UserCache {
             return;
         }
 
-        Future.await(
+        this.waitAsync(
             this.factory().ofRefresh().put(refreshToken, userId.toString())
         );
     }
@@ -423,7 +426,7 @@ public class AsyncUserCache implements UserCache {
             return null;
         }
 
-        final String uidStr = Future.await(
+        final String uidStr = this.waitAsync(
             this.factory().ofRefresh().find(refreshToken)
         );
 
@@ -446,8 +449,32 @@ public class AsyncUserCache implements UserCache {
             return false;
         }
 
-        Future.await(this.factory().ofRefresh().remove(refreshToken));
+        this.waitAsync(this.factory().ofRefresh().remove(refreshToken));
         return true;
+    }
+
+    /**
+     * 安全地将异步 Future 转换为同步结果。
+     * 1. 避开了 this.waitAsync() 对协程/线程上下文的强依赖。
+     * 2. 使用 join() 配合超时检查，防止 Worker 线程由于底层死锁而被耗尽。
+     */
+    private <T> T waitAsync(final Future<T> future) {
+        if (Objects.isNull(future)) {
+            return null;
+        }
+        try {
+            // 转换为标准 Java CompletableFuture，避开 Vert.x 内部的 checkCorrectThread 检查
+            return future.toCompletionStage()
+                .toCompletableFuture()
+                .get(10, TimeUnit.SECONDS); // 建议设置明确超时，防止底层挂起导致全站崩溃
+        } catch (final InterruptedException e) {
+            Thread.currentThread().interrupt();
+            log.error("[ PLUG ] ( Wait ) 线程中断，缓存操作失败: {}", e.getMessage());
+            return null;
+        } catch (final ExecutionException | TimeoutException e) {
+            log.error("[ PLUG ] ( Wait ) 异步转同步执行异常 (Timeout/Execution): {}", e.getMessage());
+            return null;
+        }
     }
 }
 

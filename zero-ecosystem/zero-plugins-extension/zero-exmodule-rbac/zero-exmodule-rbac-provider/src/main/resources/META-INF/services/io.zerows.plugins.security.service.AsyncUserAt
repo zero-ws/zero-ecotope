@@ -1,1 +1,2 @@
 io.zerows.extension.module.rbac.serviceauth.UserAtPassword
+io.zerows.extension.module.rbac.serviceauth.UserAtJwt

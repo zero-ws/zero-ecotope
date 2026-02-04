@@ -5,7 +5,6 @@ import io.r2mo.jaas.session.UserCache;
 import io.r2mo.typed.annotation.SPID;
 import io.r2mo.typed.common.Kv;
 import io.r2mo.typed.enums.TypeLogin;
-import io.zerows.program.Ux;
 
 import java.time.Duration;
 
@@ -16,8 +15,7 @@ public class WeCoSessionVertx implements WeCoAsyncSession {
     public void save(final String cacheKey, final String statusOr, final Duration expiredAt) {
         final CaptchaArgs captchaArgs = CaptchaArgs.of(TypeLogin.ID_WECHAT, expiredAt);
         final Kv<String, String> generated = Kv.create(cacheKey, statusOr);
-        Ux.waitVirtualAt(() -> UserCache.of().authorize(generated, captchaArgs));
-
+        UserCache.of().authorize(generated, captchaArgs);
     }
 
     @Override

@@ -17,7 +17,6 @@ import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Account;
 import io.zerows.plugins.cache.HMM;
 import io.zerows.plugins.security.metadata.YmSecurity;
-import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
 import java.time.Duration;
@@ -92,6 +91,6 @@ public class SecuritySession {
          */
         final HMM<String, JsonObject> mm = HMM.of(token);
         return mm.put(KWeb.SESSION.AUTHENTICATE, userData, this.msExpiredAt())
-            .compose(stored -> Ux.waitVirtual(() -> UserSession.of().userAt(userAt)));
+            .map(stored -> UserSession.of().userAt(userAt));
     }
 }
