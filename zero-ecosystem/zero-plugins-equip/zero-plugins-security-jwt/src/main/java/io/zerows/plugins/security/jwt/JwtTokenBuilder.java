@@ -8,6 +8,9 @@ import io.r2mo.jaas.session.UserCache;
 import io.r2mo.jaas.token.TokenBuilderBase;
 import io.r2mo.jaas.token.TokenType;
 import io.r2mo.typed.common.Kv;
+import io.r2mo.typed.webflow.Akka;
+import io.r2mo.vertx.common.cache.AkkaOr;
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
@@ -63,34 +66,34 @@ public class JwtTokenBuilder extends TokenBuilderBase {
      * @return 用户 ID (sub)，如果无效或解析失败返回 null
      */
     @Override
-    public String accessOf(final String token) {
-        final Kv<String, TokenType> kv = this.tokenOf(token);
-        return Objects.isNull(kv) ? null : kv.key();
+    public Akka<String> accessOf(final String token) {
+        return AkkaOr.of(this.tokenOf(token).<Future<Kv<String, TokenType>>>compose()
+            .map(kv -> Objects.isNull(kv) ? null : kv.key()));
     }
 
     @Override
-    public Kv<String, TokenType> tokenOf(final String token) {
+    public Akka<Kv<String, TokenType>> tokenOf(final String token) {
         if (Objects.isNull(token) || token.trim().isEmpty()) {
-            return null;
+            return AkkaOr.of();
         }
         if (!this.tokenValidate(token)) {
-            return null;
+            return AkkaOr.of();
         }
         try {
             // 使用 LeeJwt 解码，如果验证失败内部通常会返回空 JsonObject 或抛出异常
             final JsonObject payload = this.codec.decode(token);
 
             if (payload == null || payload.isEmpty()) {
-                return null;
+                return AkkaOr.of();
             }
             // 检查过期时间 (Vert.x decode 方法通常已验证 exp，此处为双重保险或读取业务字段)
             // 提取 standard claim: sub
             final String value = payload.getString(NAME_SUBJECT);
-            return Kv.create(value, TokenType.JWT);
+            return AkkaOr.of(Future.succeededFuture(Kv.create(value, TokenType.JWT)));
         } catch (final Exception e) {
             // 解码失败（签名错误、过期等）
             log.error(e.getMessage(), e);
-            return null;
+            return AkkaOr.of();
         }
     }
 
@@ -101,14 +104,14 @@ public class JwtTokenBuilder extends TokenBuilderBase {
      * @return JWT 字符串
      */
     @Override
-    public String accessOf(final UserAt userAt) {
+    public Akka<String> accessOf(final UserAt userAt) {
         // 1. 确保用户已授权/数据完整 (调用父类逻辑)
         final MSUser logged = this.ensureAuthorized(userAt);
         // 2. 构造 Token Payload
         final String identifier = userAt.id().toString();
         final JsonObject payload = this.tokenGenerate(userAt.id().toString(), logged.token());
         if (Objects.isNull(payload)) {
-            return null;
+            return AkkaOr.of();
         }
         // ------------------ 非标准属性
         // habitus / Fix: 用户会话标识缺失，无法获取缓存！
@@ -117,7 +120,7 @@ public class JwtTokenBuilder extends TokenBuilderBase {
         payload.put(KName.ID, identifier);
         // ---------------------------
         // 3. 编码生成 Token
-        return this.codec.encode(payload);
+        return AkkaOr.of(Future.succeededFuture(this.codec.encode(payload)));
     }
 
     /**
@@ -127,7 +130,7 @@ public class JwtTokenBuilder extends TokenBuilderBase {
      * @return Refresh Token 字符串 (UUID)
      */
     @Override
-    public String refreshOf(final UserAt userAt) {
+    public Akka<String> refreshOf(final UserAt userAt) {
         this.ensureAuthorized(userAt);
         // 提取配置信息
         final SecurityConfig config = SecurityActor.configJwt();
@@ -141,9 +144,9 @@ public class JwtTokenBuilder extends TokenBuilderBase {
         final UserCache userCache = UserCache.of();
 
         // 3. 将 Refresh Token 与用户 ID 存储到缓存
-        userCache.tokenRefresh(refreshToken, userAt.id()); // 假设 userId 是 UUID 字符串
-
-        return refreshToken;
+        return AkkaOr.of(userCache.tokenRefresh(refreshToken, userAt.id()).<Future<Void>>compose()
+            .map(done -> refreshToken)
+        ); // 假设 userId 是 UUID 字符串
     }
 
     private boolean tokenValidate(final String token) {

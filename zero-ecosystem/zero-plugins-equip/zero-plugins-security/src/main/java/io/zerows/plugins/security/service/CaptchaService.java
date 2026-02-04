@@ -70,7 +70,7 @@ public class CaptchaService implements CaptchaStub {
      * 2. 虚拟线程阶段 (Virtual Thread) \uD83D\uDD78️
      *    - Redis/缓存存储属于 I/O 密集型任务。
      *    - 关键约束：{@link io.r2mo.jaas.session.UserCache} 组件使用了 await() 同步转异步机制。
-     *    - 必须使用 {@link io.zerows.program.Ux#waitVirtual} 切换到虚拟线程上下文。
+     *    - 旧版！！！！必须使用 {@link io.zerows.program.Ux} 切换到虚拟线程上下文。
      *    - \uD83D\uDEA8 如果在 EventLoop 或普通 Worker 中调用 UserCache，可能导致死锁或线程耗尽。
      *
      * 流程总结：
@@ -89,7 +89,7 @@ public class CaptchaService implements CaptchaStub {
         return Ux.waitAsync(() -> this.execHeavyGeneration(config))
             // 2. 【虚拟线程】Redis 存储 (I/O 密集 + await 调用)
             // 这里必须切换到 Virtual Thread，因为 UserCache.authorize 用了 Future.await()
-            .compose(result -> Ux.waitVirtual(() -> {
+            .map(result -> {
                 final String captchaId = result.get(KEY_ID);
                 final Kv<String, String> cacheEntry = Kv.create(captchaId, result.get(KEY_CODE));
 
@@ -99,7 +99,7 @@ public class CaptchaService implements CaptchaStub {
                 return new JsonObject()
                     .put(CaptchaRequest.ID, captchaId)
                     .put("image", result.get(KEY_IMAGE));
-            }));
+            });
     }
 
     /**
@@ -148,11 +148,10 @@ public class CaptchaService implements CaptchaStub {
             // 未启用验证码，直接通过
             return Future.succeededFuture(Boolean.TRUE);
         }
-        return Ux.waitVirtual(() -> {
-            // 这里调用 await() 提取 captchaId
-            final CaptchaConfig configCaptcha = SecurityActor.configCaptcha();
-            final CaptchaArgs arguments = Objects.requireNonNull(configCaptcha.captchaConfig()).forArguments();
-            final String cached = UserCache.of().authorize(captchaId, arguments);
+        // 这里调用 await() 提取 captchaId
+        final CaptchaConfig configCaptcha = SecurityActor.configCaptcha();
+        final CaptchaArgs arguments = Objects.requireNonNull(configCaptcha.captchaConfig()).forArguments();
+        return UserCache.of().authorize(captchaId, arguments).<Future<String>>compose().compose(cached -> {
             if (Objects.isNull(cached)) {
                 throw new _80201Exception401CaptchaExpired(captchaId, captcha);
             }
@@ -161,7 +160,8 @@ public class CaptchaService implements CaptchaStub {
             }
             // 移除验证码 / 认证成功之后再移除
             UserCache.of().authorizeKo(captchaId, arguments);
-            return Boolean.TRUE;
+            return Future.succeededFuture(Boolean.TRUE);
         });
+
     }
 }

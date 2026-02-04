@@ -42,6 +42,11 @@ class NacosClientImpl implements NacosClient {
             // 2. 创建 ConfigService
             final ConfigService configService = NacosFactory.createConfigService(properties);
 
+            final String status = configService.getServerStatus();
+            if ("DOWN".equals(status)) {
+                log.warn("[ ZERO ] ( Nacos ) 连接 Nacos 服务器失败: DataID={}, Group={} / 配置来自于本地快照，有可能不是最新！", dataId, group);
+            }
+
             log.info("[ ZERO ] ( Nacos ) 开始拉取配置: DataID={}, Group={}, Timeout={}ms", dataId, group, timeout);
 
             // 3. 拉取原始内容 (String)

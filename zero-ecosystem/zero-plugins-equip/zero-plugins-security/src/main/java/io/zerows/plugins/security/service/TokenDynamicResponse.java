@@ -3,6 +3,7 @@ package io.zerows.plugins.security.service;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.token.TokenBuilderManager;
 import io.r2mo.jaas.token.TokenType;
+import io.r2mo.typed.webflow.Akka;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
@@ -24,12 +25,13 @@ public class TokenDynamicResponse extends AsyncLoginResponse {
         CONFIG = SecurityActor.configuration();
     }
 
-    public Future<JsonObject> response() {
+    @Override
+    public Future<JsonObject> replyToken(final String token, final String refreshToken) {
         final JsonObject response = new JsonObject();
         response.put(KName.ID, this.getId().toString());
-        response.put(KName.TOKEN, this.getToken());
-        response.put("refreshToken", this.getRefreshToken());
-        return this.replyAsync(response);
+        response.put(KName.TOKEN, token);
+        response.put("refreshToken", refreshToken);
+        return Future.succeededFuture(response);
     }
 
     private TokenType determineTokenType() {
@@ -45,14 +47,14 @@ public class TokenDynamicResponse extends AsyncLoginResponse {
     }
 
     @Override
-    protected String getToken(final UserAt user) {
+    public Akka<String> getTokenAsync() {
         // token
-        return TokenBuilderManager.of().getOrCreate(this.determineTokenType()).accessOf(user);
+        return TokenBuilderManager.of().getOrCreate(this.determineTokenType()).accessOf(this.userAt);
     }
 
     @Override
-    protected String getRefreshToken(final UserAt user) {
+    public Akka<String> getTokenRefresh() {
         // refreshToken
-        return TokenBuilderManager.of().getOrCreate(this.determineTokenType()).refreshOf(user);
+        return TokenBuilderManager.of().getOrCreate(this.determineTokenType()).refreshOf(this.userAt);
     }
 }

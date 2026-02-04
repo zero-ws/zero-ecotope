@@ -8,11 +8,15 @@ import io.r2mo.jaas.session.UserContext;
 import io.r2mo.typed.annotation.SPID;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.common.Kv;
+import io.r2mo.typed.webflow.Akka;
+import io.r2mo.vertx.common.cache.AkkaOr;
 import io.r2mo.vertx.common.cache.MemoAtSecurity;
 import io.vertx.core.Future;
-import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -75,17 +79,18 @@ public class AsyncUserCache implements UserCache {
      * @param context 用户上下文对象
      */
     @Override
-    public void login(final UserContext context) {
+    public Akka<UserContext> login(final UserContext context) {
         if (context == null) {
-            return;
+            return AkkaOr.of();
         }
 
         // 1. 直接获取缓存实例
         final var cache = this.factory().userContext();
         // 2. 阻塞等待写入完成
-        Future.await(cache.put(context.id().toString(), context));
-
-        this.cacheVector(context.logged());
+        return AkkaOr.of(cache.put(context.id().toString(), context)
+            .compose(done -> this.cacheVector(context.logged()))
+            .compose(stored -> Future.succeededFuture(context))
+        );
     }
 
     /**
@@ -98,15 +103,16 @@ public class AsyncUserCache implements UserCache {
      * @param userAt 用户核心数据
      */
     @Override
-    public void login(final UserAt userAt) {
+    public Akka<UserAt> login(final UserAt userAt) {
         if (userAt == null) {
-            return;
+            return AkkaOr.of();
         }
 
         final var cache = this.factory().userAt();
-        Future.await(cache.put(userAt.id().toString(), userAt));
-
-        this.cacheVector(userAt.logged());
+        return AkkaOr.of(cache.put(userAt.id().toString(), userAt)
+            .compose(done -> this.cacheVector(userAt.logged()))
+            .compose(stored -> Future.succeededFuture(userAt))
+        );
     }
 
     /**
@@ -118,9 +124,9 @@ public class AsyncUserCache implements UserCache {
      *
      * @param user 用户数据
      */
-    private void cacheVector(final MSUser user) {
+    private Future<Void> cacheVector(final MSUser user) {
         if (user == null) {
-            return;
+            return Future.succeededFuture();
         }
         final Set<String> idKeys = user.ids();
         final String uidStr = user.getId().toString();
@@ -129,7 +135,10 @@ public class AsyncUserCache implements UserCache {
         final var vectorCache = this.factory().userVector();
 
         // 循环同步写入
-        idKeys.forEach(idKey -> Future.await(vectorCache.put(idKey, uidStr)));
+        final List<Future<Kv<String, String>>> future = new ArrayList<>();
+        idKeys.forEach(idKey -> future.add(vectorCache.put(idKey, uidStr)));
+        return Fx.combineT(future)
+            .compose(done -> Future.succeededFuture());
     }
 
     /**
@@ -142,14 +151,16 @@ public class AsyncUserCache implements UserCache {
      * @param userId 用户ID
      */
     @Override
-    public void logout(final UUID userId) {
+    public Akka<Void> logout(final UUID userId) {
         if (userId == null) {
-            return;
+            return AkkaOr.of();
         }
         final String uidStr = userId.toString();
 
-        Future.await(this.factory().userAt().remove(uidStr));
-        Future.await(this.factory().userContext().remove(uidStr));
+        return AkkaOr.of(this.factory().userAt().remove(uidStr)
+            .compose(removed -> this.factory().userContext().remove(uidStr))
+            .compose(removed -> Future.succeededFuture())
+        );
     }
 
     // -------------------------------------------------------------------------
@@ -167,12 +178,11 @@ public class AsyncUserCache implements UserCache {
      * @return UserContext 用户上下文
      */
     @Override
-    public UserContext context(final UUID id) {
+    public Akka<UserContext> context(final UUID id) {
         if (id == null) {
-            return null;
+            return AkkaOr.of();
         }
-
-        return Future.await(this.factory().userContext().find(id.toString()));
+        return AkkaOr.of(this.factory().userContext().find(id.toString()));
     }
 
     /**
@@ -198,32 +208,34 @@ public class AsyncUserCache implements UserCache {
      * @return UserAt 用户详情，若双重查找均未命中则返回 null
      */
     @Override
-    public UserAt find(final String idOr) {
+    public Akka<UserAt> find(final String idOr) {
         if (idOr == null) {
-            return null;
+            return AkkaOr.of();
         }
 
         // 1. 查找索引
-        final UserAt found = this.find(UUID.fromString(idOr));
-        /*
-         * 修复查找不到的问题，输入的值可能是 id 也可能是其他标识如
-         * - username
-         * - mobile
-         * - email
-         * 查找顺序
-         * 1. 优先使用 id 查找
-         * 2. 其次使用索引查找
-         */
-        if (Objects.nonNull(found)) {
-            return found;
-        }
+        return AkkaOr.of(this.find(UUID.fromString(idOr)).<Future<UserAt>>compose().compose(found -> {
+            /*
+             * 修复查找不到的问题，输入的值可能是 id 也可能是其他标识如
+             * - username
+             * - mobile
+             * - email
+             * 查找顺序
+             * 1. 优先使用 id 查找
+             * 2. 其次使用索引查找
+             */
+            if (Objects.nonNull(found)) {
+                return Future.succeededFuture(found);
+            }
 
-        final String uidStr = Future.await(this.factory().userVector().find(idOr));
-        if (Objects.isNull(uidStr)) {
-            return null;
-        }
-        // 2. 递归查找详情
-        return this.find(UUID.fromString(uidStr));
+            return this.factory().userVector().find(idOr).compose(uidStr -> {
+                if (Objects.isNull(uidStr)) {
+                    return Future.succeededFuture();
+                }
+                // 2. 递归查找详情
+                return this.find(UUID.fromString(uidStr)).compose();
+            });
+        }));
     }
 
     /**
@@ -237,12 +249,12 @@ public class AsyncUserCache implements UserCache {
      * @return UserAt 用户详情
      */
     @Override
-    public UserAt find(final UUID id) {
+    public Akka<UserAt> find(final UUID id) {
         if (id == null) {
             return null;
         }
 
-        return Future.await(this.factory().userAt().find(id.toString()));
+        return AkkaOr.of(this.factory().userAt().find(id.toString()));
     }
 
     // -------------------------------------------------------------------------
@@ -260,18 +272,18 @@ public class AsyncUserCache implements UserCache {
      * @param config    验证码配置 (包含过期时间)
      */
     @Override
-    public void authorize(final Kv<String, String> generated, final CaptchaArgs config) {
+    public Akka<Void> authorize(final Kv<String, String> generated, final CaptchaArgs config) {
         if (generated == null) {
-            return;
+            return AkkaOr.of();
         }
 
-        Future.await(
-            this.factory().ofAuthorize(config)
-                .put(generated.key(), generated.value())
+        return AkkaOr.of(this.factory().ofAuthorize(config).put(generated.key(), generated.value())
+            .map(done -> {
+                log.info("[ ZERO ] 验证码缓存写入：Key = {}, Code = {}, expiredAt = {}",
+                    generated.key(), generated.value(), config.duration());
+                return null;
+            })
         );
-
-        log.info("[ ZERO ] 验证码缓存写入：Key = {}, Code = {}, expiredAt = {}",
-            generated.key(), generated.value(), config.duration());
     }
 
     /**
@@ -286,14 +298,12 @@ public class AsyncUserCache implements UserCache {
      * @return String 验证码
      */
     @Override
-    public String authorize(final String consumerId, final CaptchaArgs config) {
+    public Akka<String> authorize(final String consumerId, final CaptchaArgs config) {
         if (consumerId == null) {
-            return null;
+            return AkkaOr.of();
         }
 
-        return Future.await(
-            this.factory().ofAuthorize(config).find(consumerId)
-        );
+        return AkkaOr.of(this.factory().ofAuthorize(config).find(consumerId));
     }
 
     /**
@@ -307,16 +317,18 @@ public class AsyncUserCache implements UserCache {
      * @param config     配置信息
      */
     @Override
-    public void authorizeKo(final String consumerId, final CaptchaArgs config) {
+    public Akka<Void> authorizeKo(final String consumerId, final CaptchaArgs config) {
         if (consumerId == null) {
-            return;
+            return AkkaOr.of();
         }
 
-        Future.await(
-            this.factory().ofAuthorize(config).remove(consumerId)
+        return AkkaOr.of(this.factory().ofAuthorize(config).remove(consumerId)
+            .map(done -> {
+                log.info("[ ZERO ] 验证码缓存清除：Key = {}", consumerId);
+                return null;
+            })
         );
 
-        log.info("[ ZERO ] 验证码缓存清除：Key = {}", consumerId);
     }
 
     // -------------------------------------------------------------------------
@@ -334,13 +346,13 @@ public class AsyncUserCache implements UserCache {
      * @param userId 用户ID
      */
     @Override
-    public void token(final String token, final UUID userId) {
+    public Akka<Void> token(final String token, final UUID userId) {
         if (token == null || userId == null) {
-            return;
+            return AkkaOr.of();
         }
 
-        Future.await(
-            this.factory().ofToken().put(token, userId.toString())
+        return AkkaOr.of(this.factory().ofToken().put(token, userId.toString())
+            .map(done -> null)
         );
     }
 
@@ -355,16 +367,14 @@ public class AsyncUserCache implements UserCache {
      * @return UUID 用户ID
      */
     @Override
-    public UUID token(final String token) {
+    public Akka<UUID> token(final String token) {
         if (token == null) {
-            return null;
+            return AkkaOr.of();
         }
 
-        final String uidStr = Future.await(
-            this.factory().ofToken().find(token)
+        return AkkaOr.of(this.factory().ofToken().find(token)
+            .map(uidStr -> uidStr == null ? null : UUID.fromString(uidStr))
         );
-
-        return uidStr == null ? null : UUID.fromString(uidStr);
     }
 
     /**
@@ -378,13 +388,14 @@ public class AsyncUserCache implements UserCache {
      * @return boolean 是否成功
      */
     @Override
-    public boolean tokenKo(final String token) {
+    public Akka<Boolean> tokenKo(final String token) {
         if (token == null) {
-            return false;
+            return AkkaOr.of(false);
         }
 
-        Future.await(this.factory().ofToken().remove(token));
-        return true;
+        return AkkaOr.of(this.factory().ofToken().remove(token)
+            .map(done -> true)
+        );
     }
 
     /**
@@ -398,15 +409,14 @@ public class AsyncUserCache implements UserCache {
      * @param userId       用户ID
      */
     @Override
-    public void tokenRefresh(final String refreshToken, final UUID userId) {
+    public Akka<Void> tokenRefresh(final String refreshToken, final UUID userId) {
         if (refreshToken == null || userId == null) {
-            return;
+            return AkkaOr.of();
         }
-        // FIX:在vertx中，异转同需要此处在其虚拟线程进行，否则会线程阻塞
-        Ux.waitVirtual(()-> Future.await(
-                 this.factory().ofRefresh().put(refreshToken, userId.toString())
-         ));
 
+        return AkkaOr.of(this.factory().ofRefresh().put(refreshToken, userId.toString())
+            .map(v -> null)
+        );
     }
 
     /**
@@ -420,16 +430,14 @@ public class AsyncUserCache implements UserCache {
      * @return UUID 用户ID
      */
     @Override
-    public UUID tokenRefresh(final String refreshToken) {
+    public Akka<UUID> tokenRefresh(final String refreshToken) {
         if (refreshToken == null) {
-            return null;
+            return AkkaOr.of();
         }
 
-        final String uidStr = Future.await(
-            this.factory().ofRefresh().find(refreshToken)
+        return AkkaOr.of(this.factory().ofRefresh().find(refreshToken)
+            .map(uidStr -> uidStr == null ? null : UUID.fromString(uidStr))
         );
-
-        return uidStr == null ? null : UUID.fromString(uidStr);
     }
 
     /**
@@ -443,13 +451,14 @@ public class AsyncUserCache implements UserCache {
      * @return boolean 是否成功
      */
     @Override
-    public boolean tokenRefreshKo(final String refreshToken) {
+    public Akka<Boolean> tokenRefreshKo(final String refreshToken) {
         if (refreshToken == null) {
-            return false;
+            return AkkaOr.of(false);
         }
 
-        Future.await(this.factory().ofRefresh().remove(refreshToken));
-        return true;
+        return AkkaOr.of(this.factory().ofRefresh().remove(refreshToken)
+            .map(done -> true)
+        );
     }
 }
 

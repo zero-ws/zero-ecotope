@@ -21,6 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Flyway 11 配置构造器：
@@ -295,6 +296,7 @@ final class Flyway11Configurator {
     }
 
     private static Map<String, String> asStringMap(final Object raw) {
+        final Map<String, String> outMap = new LinkedHashMap<>();
         switch (raw) {
             case null -> {
                 return Map.of();
@@ -308,7 +310,7 @@ final class Flyway11Configurator {
                         out.put(k, String.valueOf(v));
                     }
                 });
-                return out;
+                outMap.putAll(out);
             }
             case final Map<?, ?> src -> {
                 final Map<String, String> out = new LinkedHashMap<>(src.size());
@@ -317,12 +319,22 @@ final class Flyway11Configurator {
                         out.put(String.valueOf(k), String.valueOf(v));
                     }
                 });
-                return out;
+                outMap.putAll(out);
             }
             default -> {
             }
         }
-        return Map.of();
+        // 环境变量的执行和处理
+        final ENV env = ENV.of();
+        Set.of(
+            "DEV_MOBILE",
+            "DEV_EMAIL",
+            "DEV_ALIPAY"
+        ).forEach(varName -> {
+            final String devMobile = env.get(varName);
+            outMap.put(varName, devMobile);
+        });
+        return outMap;
     }
 
     private static MigrationVersion toVersion(final Object raw) {

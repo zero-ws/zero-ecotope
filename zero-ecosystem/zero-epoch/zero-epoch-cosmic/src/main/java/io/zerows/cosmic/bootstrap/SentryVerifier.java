@@ -2,12 +2,12 @@ package io.zerows.cosmic.bootstrap;
 
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.typed.exception.WebException;
+import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.cortex.metadata.WebRequest;
 import io.zerows.epoch.web.Account;
-import io.zerows.program.Ux;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -42,12 +42,10 @@ public class SentryVerifier extends AimBase implements Sentry<RoutingContext> {
                 final User logged = context.user();
                 if (Objects.nonNull(logged)) {
                     // 有账号状态，先做 Token 检查
-                    Ux.waitVirtual(() -> Account.userAt(logged)).onComplete(res -> {
-                        if (res.succeeded()) {
-                            final UserAt userAt = res.result();
-                            // 放入上下文，供后续使用
-                            context.put(UserAt.class.getName(), userAt);
-                        }
+                    final Future<UserAt> userAsync = Account.userAt(logged);
+                    userAsync.onComplete(userAt -> {
+                        // 放入上下文，供后续使用
+                        context.put(UserAt.class.getName(), userAt);
                         // 执行前置校验
                         this.executePre(context, wrapRequest);
                     });

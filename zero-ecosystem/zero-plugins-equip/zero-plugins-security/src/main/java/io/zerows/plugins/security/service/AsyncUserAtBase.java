@@ -12,7 +12,6 @@ import io.vertx.ext.auth.hashing.HashingStrategy;
 import io.zerows.plugins.security.exception._80203Exception404UserNotFound;
 import io.zerows.plugins.security.exception._80204Exception401PasswordWrong;
 import io.zerows.plugins.security.exception._80244Exception401LoginTypeWrong;
-import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,12 +59,13 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
     @Override
     public Future<UserAt> loadLogged(final String identifier) {
         // 缓存中加载账号数据
-        final UserAt cached = UserSession.of().find(identifier);
-        if (Objects.nonNull(cached) && cached.isOk()) {
-            return Future.succeededFuture(cached);
-        }
-        log.info("[ ZERO ] 验证加载：identifier = {} / provider = {}", identifier, this.getClass().getName());
-        return this.findUser(identifier);
+        return UserSession.of().find(identifier).<Future<UserAt>>compose().compose(cached -> {
+            if (Objects.nonNull(cached) && cached.isOk()) {
+                return Future.succeededFuture(cached);
+            }
+            log.info("[ ZERO ] 验证加载：identifier = {} / provider = {}", identifier, this.getClass().getName());
+            return this.findUser(identifier);
+        });
     }
 
     // --------------- 子类必须实现的方法
@@ -73,7 +73,7 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
 
     // Could not run in worker thread.
     protected Future<UserAt> userAtEphemeral(final MSUser user) {
-        return Ux.waitVirtual(() -> UserSession.of().userAtEphemeral(user));
+        return Future.succeededFuture(UserSession.of().userAtEphemeral(user));
     }
 
     // --------------- 检查专用方法
@@ -91,12 +91,12 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
                                         final Duration duration) {
         final CaptchaArgs captchaArgs = CaptchaArgs.of(this.loginType(), duration);
         final String id = request.getId();
-        return Ux.waitVirtual(() -> UserCache.of().authorize(id, captchaArgs)).map(codeStored -> {
+        return UserCache.of().authorize(id, captchaArgs).<Future<String>>compose().compose(codeStored -> {
             if (Objects.isNull(codeStored)) {
-                return Boolean.FALSE;
+                return Future.succeededFuture(Boolean.FALSE);
             }
             final String code = request.getCredential();
-            return codeStored.equals(code);
+            return Future.succeededFuture(codeStored.equals(code));
         });
     }
 }

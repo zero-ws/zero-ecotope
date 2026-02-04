@@ -54,12 +54,16 @@ public final class ADJ {
     }
 
     static ADJ of(final Join join, final DBS dbs, final Kv<String, String> vectorPojo) {
-        // 修正 id -> key
-        if (Objects.isNull(join.fromField()) || KName.ID.equals(join.fromField())) {
-            join.from(KName.KEY);
+        /*
+         * 旧版升级修正，id 作为核心主键
+         * - 如果没有指定 fromField，则使用 ID 作为关联字段
+         * - 如果没有指定 toField，则使用 ID 作为关联字段
+         */
+        if (Objects.isNull(join.fromField()) || KName.KEY.equals(join.fromField())) {
+            join.from(KName.ID);
         }
-        if (Objects.isNull(join.toField()) || KName.ID.equals(join.toField())) {
-            join.to(KName.KEY);
+        if (Objects.isNull(join.toField()) || KName.KEY.equals(join.toField())) {
+            join.to(KName.ID);
         }
         if (Objects.nonNull(vectorPojo.key())) {
             join.from(MMAdapt.of(vectorPojo.key()).vector());

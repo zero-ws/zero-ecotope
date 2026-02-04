@@ -1,7 +1,7 @@
 package io.zerows.plugins.security.service;
 
 import io.r2mo.jaas.session.UserCache;
-import io.r2mo.jaas.token.TokenBuilder;
+import io.vertx.core.Future;
 import io.zerows.epoch.metadata.security.SecurityConfig;
 import io.zerows.plugins.security.SecurityActor;
 import io.zerows.plugins.security.SecurityConstant;
@@ -43,7 +43,7 @@ public class TokenAESRefresher {
      * @param userId 用户 ID
      * @return 随机 UUID 字符串 (Refresh Token)
      */
-    public String tokenGenerate(final String userId) {
+    public Future<String> tokenGenerate(final String userId) {
         // 1. 检查配置开关
         if (Objects.isNull(this.config()) || this.isDisabled()) {
             return null;
@@ -57,14 +57,8 @@ public class TokenAESRefresher {
 
         // 4. 将 Refresh Token 与用户 ID 绑定存储
         // 这里假设 userId 是 UUID 格式的字符串，如果不是需自行调整逻辑
-        try {
-            userCache.tokenRefresh(refreshToken, UUID.fromString(userId));
-        } catch (final IllegalArgumentException e) {
-            // 如果 userId 不是标准 UUID，UserCache 可能需要调整 Key 类型，或者这里不做转换
-            // userCache.tokenRefresh(refreshToken, userId); // 视 UserCache API 而定
-        }
-
-        return refreshToken;
+        return userCache.tokenRefresh(refreshToken, UUID.fromString(userId)).<Future<Void>>compose()
+            .map(stored -> refreshToken);
     }
 
     /**
@@ -75,15 +69,15 @@ public class TokenAESRefresher {
      * @param refreshToken 客户端提供的旧 Refresh Token
      * @return 新的 Access Token (AES 加密串)。如果验证失败返回 null。
      */
-    public String tokenRefresh(final String refreshToken) {
-        // 1. 检查配置与入参
-        if (Objects.isNull(this.config()) || this.isDisabled()) {
-            return null;
-        }
-
-        return TokenBuilder.withRefresh(refreshToken,
-            (loginId) -> this.tokenGenerator.tokenGenerate(loginId, null));
-    }
+//    public String tokenRefresh(final String refreshToken) {
+//        // 1. 检查配置与入参
+//        if (Objects.isNull(this.config()) || this.isDisabled()) {
+//            return null;
+//        }
+//
+//        return TokenBuilder.withRefresh(refreshToken,
+//            (loginId) -> this.tokenGenerator.tokenGenerate(loginId, null));
+//    }
 
     /**
      * 撤销 Refresh Token

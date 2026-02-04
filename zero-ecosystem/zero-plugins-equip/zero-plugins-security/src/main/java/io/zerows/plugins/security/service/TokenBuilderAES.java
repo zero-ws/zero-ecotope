@@ -5,6 +5,9 @@ import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.token.TokenBuilderBase;
 import io.r2mo.jaas.token.TokenType;
 import io.r2mo.typed.common.Kv;
+import io.r2mo.typed.webflow.Akka;
+import io.r2mo.vertx.common.cache.AkkaOr;
+import io.vertx.core.Future;
 
 import java.util.Objects;
 
@@ -18,29 +21,34 @@ public class TokenBuilderAES extends TokenBuilderBase {
     }
 
     @Override
-    public String accessOf(final UserAt userAt) {
+    public Akka<String> accessOf(final UserAt userAt) {
         final MSUser logged = this.ensureAuthorized(userAt);
-        return this.generator.tokenGenerate(userAt.id().toString(), logged.token());
+        final Future<String> generated = Future.succeededFuture(this.generator.tokenGenerate(userAt.id().toString(), logged.token()));
+        return AkkaOr.of(generated);
     }
 
     /**
      * ✅ [Optimized] Single-pass decryption and validation
      */
     @Override
-    public String accessOf(final String token) {
+    public Akka<String> accessOf(final String token) {
         // 原来的写法是先 tokenValidate (解密1次) 再 tokenSubject (解密2次)
         // 现在直接调用 validateAndExtract，只解密1次
-        final Kv<String, TokenType> kv = this.tokenOf(token);
-        return Objects.isNull(kv) ? null : kv.key();
+        final Kv<String, TokenType> validated = this.generator.validateAndExtract(token);
+        if (Objects.isNull(validated)) {
+            return AkkaOr.of();
+        }
+        return AkkaOr.of(Future.succeededFuture(validated.key()));
     }
 
     @Override
-    public Kv<String, TokenType> tokenOf(final String token) {
-        return this.generator.validateAndExtract(token);
+    public Akka<Kv<String, TokenType>> tokenOf(final String token) {
+        final Kv<String, TokenType> validated = this.generator.validateAndExtract(token);
+        return AkkaOr.of(Future.succeededFuture(validated));
     }
 
     @Override
-    public String refreshOf(final UserAt userAt) {
-        return this.refresher.tokenGenerate(userAt.id().toString());
+    public Akka<String> refreshOf(final UserAt userAt) {
+        return AkkaOr.of(this.refresher.tokenGenerate(userAt.id().toString()));
     }
 }

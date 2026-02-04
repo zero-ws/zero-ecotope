@@ -11,10 +11,10 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.User;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.epoch.web.Account;
 import io.zerows.plugins.security.service.AsyncSession;
-import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -117,12 +117,13 @@ public class ExtensionAuthenticationAES implements ExtensionAuthentication {
             final String header = authorization.substring(idx + 1);
             // AES Token 认证方式
             final TokenBuilder builder = TokenBuilderManager.of().getOrCreate(TokenType.AES);
-            final String userId = builder.accessOf(header);
-            if (Objects.isNull(userId)) {
-                return Future.failedFuture(UNAUTHORIZED);
-            }
-            return Ux.waitVirtual(() -> {
-                final UserAt userAt = UserSession.of().find(userId);
+            return builder.accessOf(header).<Future<String>>compose().compose(userId -> {
+                if (Objects.isNull(userId)) {
+                    return Future.failedFuture(UNAUTHORIZED);
+                }
+
+                return UserSession.of().find(userId).<Future<UserAt>>compose();
+            }).compose(userAt -> {
                 /*
                  * 修正逻辑：
                  * 此处如果是 AES 模式，其实已经拿到了 UserAt，这是一个完整的用户会话对象。
@@ -133,13 +134,12 @@ public class ExtensionAuthenticationAES implements ExtensionAuthentication {
                  *
                  * 注意：这要求 MSUser 中的 password 是 AuthProvider 可识别的（明文或特定哈希）。
                  */
-                return Account.userVx(userAt);
-            }).map(authorized -> {
+                final User authorized = Account.userVx(userAt);
                 if (Objects.isNull(authorized)) {
                     // 用户不存在或会话丢失
                     throw UNAUTHORIZED;
                 }
-                return AsyncSession.bindAsync(authorized, authorization);
+                return Future.succeededFuture(AsyncSession.bindAsync(authorized, authorization));
             });
         } catch (final Throwable e) {
             log.error(e.getMessage(), e);

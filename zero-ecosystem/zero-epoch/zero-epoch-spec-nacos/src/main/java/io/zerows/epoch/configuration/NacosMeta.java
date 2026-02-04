@@ -25,7 +25,7 @@ class NacosMeta implements Serializable {
      * 是否可选 (optional)。
      * true: 加载失败时忽略；false: 必须加载成功。
      */
-    private boolean isOptional = true;
+    private boolean isOptional = false;
 
     /**
      * 配置协议源 (NACOS, ZOOKEEPER...)
