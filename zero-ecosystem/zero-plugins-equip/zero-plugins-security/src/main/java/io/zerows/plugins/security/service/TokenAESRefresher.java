@@ -57,7 +57,7 @@ public class TokenAESRefresher {
 
         // 4. 将 Refresh Token 与用户 ID 绑定存储
         // 这里假设 userId 是 UUID 格式的字符串，如果不是需自行调整逻辑
-        return userCache.tokenRefresh(refreshToken, UUID.fromString(userId)).<Future<Void>>a()
+        return userCache.tokenRefresh(refreshToken, UUID.fromString(userId)).<Future<Void>>compose()
             .map(stored -> refreshToken);
     }
 

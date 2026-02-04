@@ -214,7 +214,7 @@ public class AsyncUserCache implements UserCache {
         }
 
         // 1. 查找索引
-        return AkkaOr.of(this.find(UUID.fromString(idOr)).<Future<UserAt>>a().compose(found -> {
+        return AkkaOr.of(this.find(UUID.fromString(idOr)).<Future<UserAt>>compose().compose(found -> {
             /*
              * 修复查找不到的问题，输入的值可能是 id 也可能是其他标识如
              * - username
@@ -233,7 +233,7 @@ public class AsyncUserCache implements UserCache {
                     return Future.succeededFuture();
                 }
                 // 2. 递归查找详情
-                return this.find(UUID.fromString(uidStr)).a();
+                return this.find(UUID.fromString(uidStr)).compose();
             });
         }));
     }

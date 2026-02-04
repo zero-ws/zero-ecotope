@@ -59,7 +59,7 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
     @Override
     public Future<UserAt> loadLogged(final String identifier) {
         // 缓存中加载账号数据
-        return UserSession.of().find(identifier).<Future<UserAt>>a().compose(cached -> {
+        return UserSession.of().find(identifier).<Future<UserAt>>compose().compose(cached -> {
             if (Objects.nonNull(cached) && cached.isOk()) {
                 return Future.succeededFuture(cached);
             }
@@ -91,7 +91,7 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
                                         final Duration duration) {
         final CaptchaArgs captchaArgs = CaptchaArgs.of(this.loginType(), duration);
         final String id = request.getId();
-        return UserCache.of().authorize(id, captchaArgs).<Future<String>>a().compose(codeStored -> {
+        return UserCache.of().authorize(id, captchaArgs).<Future<String>>compose().compose(codeStored -> {
             if (Objects.isNull(codeStored)) {
                 return Future.succeededFuture(Boolean.FALSE);
             }

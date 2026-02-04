@@ -117,12 +117,12 @@ public class ExtensionAuthenticationAES implements ExtensionAuthentication {
             final String header = authorization.substring(idx + 1);
             // AES Token 认证方式
             final TokenBuilder builder = TokenBuilderManager.of().getOrCreate(TokenType.AES);
-            return builder.accessOf(header).<Future<String>>a().compose(userId -> {
+            return builder.accessOf(header).<Future<String>>compose().compose(userId -> {
                 if (Objects.isNull(userId)) {
                     return Future.failedFuture(UNAUTHORIZED);
                 }
 
-                return UserSession.of().find(userId).<Future<UserAt>>a();
+                return UserSession.of().find(userId).<Future<UserAt>>compose();
             }).compose(userAt -> {
                 /*
                  * 修正逻辑：

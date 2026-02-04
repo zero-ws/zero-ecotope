@@ -67,7 +67,7 @@ public class JwtTokenBuilder extends TokenBuilderBase {
      */
     @Override
     public Akka<String> accessOf(final String token) {
-        return AkkaOr.of(this.tokenOf(token).<Future<Kv<String, TokenType>>>a()
+        return AkkaOr.of(this.tokenOf(token).<Future<Kv<String, TokenType>>>compose()
             .map(kv -> Objects.isNull(kv) ? null : kv.key()));
     }
 
@@ -144,7 +144,7 @@ public class JwtTokenBuilder extends TokenBuilderBase {
         final UserCache userCache = UserCache.of();
 
         // 3. 将 Refresh Token 与用户 ID 存储到缓存
-        return AkkaOr.of(userCache.tokenRefresh(refreshToken, userAt.id()).<Future<Void>>a()
+        return AkkaOr.of(userCache.tokenRefresh(refreshToken, userAt.id()).<Future<Void>>compose()
             .map(done -> refreshToken)
         ); // 假设 userId 是 UUID 字符串
     }

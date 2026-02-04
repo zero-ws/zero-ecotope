@@ -151,7 +151,7 @@ public class CaptchaService implements CaptchaStub {
         // 这里调用 await() 提取 captchaId
         final CaptchaConfig configCaptcha = SecurityActor.configCaptcha();
         final CaptchaArgs arguments = Objects.requireNonNull(configCaptcha.captchaConfig()).forArguments();
-        return UserCache.of().authorize(captchaId, arguments).<Future<String>>a().compose(cached -> {
+        return UserCache.of().authorize(captchaId, arguments).<Future<String>>compose().compose(cached -> {
             if (Objects.isNull(cached)) {
                 throw new _80201Exception401CaptchaExpired(captchaId, captcha);
             }

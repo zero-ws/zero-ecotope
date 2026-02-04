@@ -40,9 +40,9 @@ public abstract class AsyncLoginResponse extends LoginResponse {
 
     public Future<JsonObject> response() {
         final KRef ref = new KRef();
-        return this.getTokenAsync().<Future<String>>a()
+        return this.getTokenAsync().<Future<String>>compose()
             .compose(ref::future)
-            .compose(token -> this.getTokenRefresh().<Future<String>>a())
+            .compose(token -> this.getTokenRefresh().<Future<String>>compose())
             .compose(refreshToken -> this.replyToken(ref.get(), refreshToken))
             .compose(this::replyAsync);
     }

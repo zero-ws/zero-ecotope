@@ -55,7 +55,7 @@ public class Account {
     public static Future<UserAt> userAt(final User user) {
         final String userId = userId(user);
         // 同步提取会话信息
-        return UserSession.of().find(userId).a();
+        return UserSession.of().find(userId).compose();
     }
 
     /**

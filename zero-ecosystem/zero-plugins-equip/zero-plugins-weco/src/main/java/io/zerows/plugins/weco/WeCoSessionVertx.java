@@ -28,6 +28,6 @@ public class WeCoSessionVertx implements WeCoAsyncSession {
     @Override
     public Future<String> getAsync(final String cacheKey, final Duration expiredAt) {
         final CaptchaArgs captchaArgs = CaptchaArgs.of(TypeLogin.ID_WECHAT, expiredAt);
-        return UserCache.of().authorize(cacheKey, captchaArgs).a();
+        return UserCache.of().authorize(cacheKey, captchaArgs).compose();
     }
 }
