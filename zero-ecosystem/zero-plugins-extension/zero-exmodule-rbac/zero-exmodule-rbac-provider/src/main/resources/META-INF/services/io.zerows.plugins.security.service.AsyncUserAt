@@ -1,2 +1,7 @@
-io.zerows.extension.module.rbac.serviceauth.UserAtPassword
+io.zerows.extension.module.rbac.serviceauth.UserAtEmail
 io.zerows.extension.module.rbac.serviceauth.UserAtJwt
+io.zerows.extension.module.rbac.serviceauth.UserAtLDAP
+io.zerows.extension.module.rbac.serviceauth.UserAtPassword
+io.zerows.extension.module.rbac.serviceauth.UserAtSMS
+io.zerows.extension.module.rbac.serviceauth.UserAtWeChat
+io.zerows.extension.module.rbac.serviceauth.UserAtWeCom

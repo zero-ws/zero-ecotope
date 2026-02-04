@@ -22,11 +22,20 @@
             <artifactId>zero-plugins-security</artifactId>
             <version>${revision}</version>
         </dependency>
-        <!-- 短信扩展 -->
+        <!-- WeChat / WeCom -->
         <dependency>
             <groupId>io.zerows</groupId>
-            <artifactId>zero-plugins-sms</artifactId>
-            <version>${revision}</version>
+            <artifactId>zero-plugins-security-weco</artifactId>
+        </dependency>
+        <!-- Security Email -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-security-email</artifactId>
+        </dependency>
+        <!-- Security SMS -->
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-security-sms</artifactId>
         </dependency>
     </dependencies>
 </project>
