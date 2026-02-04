@@ -91,6 +91,6 @@ public class SecuritySession {
          */
         final HMM<String, JsonObject> mm = HMM.of(token);
         return mm.put(KWeb.SESSION.AUTHENTICATE, userData, this.msExpiredAt())
-            .map(stored -> UserSession.of().userAt(userAt));
+            .compose(stored -> UserSession.of().userAt(userAt).a());
     }
 }

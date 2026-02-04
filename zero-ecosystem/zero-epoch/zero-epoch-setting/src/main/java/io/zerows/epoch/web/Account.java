@@ -5,6 +5,7 @@ import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.session.UserContext;
 import io.r2mo.jaas.session.UserSession;
 import io.r2mo.jaas.token.TokenType;
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.Credentials;
@@ -51,9 +52,10 @@ public class Account {
      * @param user Vert.x Web 上下文中的 User 对象
      * @return UserAt 内部会话操作对象，若未找到则返回 null
      */
-    public static UserAt userAt(final User user) {
+    public static Future<UserAt> userAt(final User user) {
         final String userId = userId(user);
-        return UserSession.of().find(userId);
+        // 同步提取会话信息
+        return UserSession.of().find(userId).a();
     }
 
     /**

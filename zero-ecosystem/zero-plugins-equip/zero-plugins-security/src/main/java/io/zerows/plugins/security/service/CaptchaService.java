@@ -151,15 +151,17 @@ public class CaptchaService implements CaptchaStub {
         // 这里调用 await() 提取 captchaId
         final CaptchaConfig configCaptcha = SecurityActor.configCaptcha();
         final CaptchaArgs arguments = Objects.requireNonNull(configCaptcha.captchaConfig()).forArguments();
-        final String cached = UserCache.of().authorize(captchaId, arguments);
-        if (Objects.isNull(cached)) {
-            throw new _80201Exception401CaptchaExpired(captchaId, captcha);
-        }
-        if (!cached.equalsIgnoreCase(captcha)) {
-            throw new _80200Exception401CaptchaWrong(captcha);
-        }
-        // 移除验证码 / 认证成功之后再移除
-        UserCache.of().authorizeKo(captchaId, arguments);
-        return Future.succeededFuture(Boolean.TRUE);
+        return UserCache.of().authorize(captchaId, arguments).<Future<String>>a().compose(cached -> {
+            if (Objects.isNull(cached)) {
+                throw new _80201Exception401CaptchaExpired(captchaId, captcha);
+            }
+            if (!cached.equalsIgnoreCase(captcha)) {
+                throw new _80200Exception401CaptchaWrong(captcha);
+            }
+            // 移除验证码 / 认证成功之后再移除
+            UserCache.of().authorizeKo(captchaId, arguments);
+            return Future.succeededFuture(Boolean.TRUE);
+        });
+
     }
 }

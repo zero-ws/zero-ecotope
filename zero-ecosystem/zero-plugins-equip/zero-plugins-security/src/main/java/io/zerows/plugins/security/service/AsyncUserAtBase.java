@@ -59,12 +59,13 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
     @Override
     public Future<UserAt> loadLogged(final String identifier) {
         // 缓存中加载账号数据
-        final UserAt cached = UserSession.of().find(identifier);
-        if (Objects.nonNull(cached) && cached.isOk()) {
-            return Future.succeededFuture(cached);
-        }
-        log.info("[ ZERO ] 验证加载：identifier = {} / provider = {}", identifier, this.getClass().getName());
-        return this.findUser(identifier);
+        return UserSession.of().find(identifier).<Future<UserAt>>a().compose(cached -> {
+            if (Objects.nonNull(cached) && cached.isOk()) {
+                return Future.succeededFuture(cached);
+            }
+            log.info("[ ZERO ] 验证加载：identifier = {} / provider = {}", identifier, this.getClass().getName());
+            return this.findUser(identifier);
+        });
     }
 
     // --------------- 子类必须实现的方法
@@ -90,11 +91,12 @@ public abstract class AsyncUserAtBase implements AsyncUserAt {
                                         final Duration duration) {
         final CaptchaArgs captchaArgs = CaptchaArgs.of(this.loginType(), duration);
         final String id = request.getId();
-        final String codeStored = UserCache.of().authorize(id, captchaArgs);
-        if (Objects.isNull(codeStored)) {
-            return Future.succeededFuture(Boolean.FALSE);
-        }
-        final String code = request.getCredential();
-        return Future.succeededFuture(codeStored.equals(code));
+        return UserCache.of().authorize(id, captchaArgs).<Future<String>>a().compose(codeStored -> {
+            if (Objects.isNull(codeStored)) {
+                return Future.succeededFuture(Boolean.FALSE);
+            }
+            final String code = request.getCredential();
+            return Future.succeededFuture(codeStored.equals(code));
+        });
     }
 }

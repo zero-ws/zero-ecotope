@@ -4,6 +4,7 @@ import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.token.TokenBuilderManager;
 import io.r2mo.jaas.token.TokenType;
+import io.r2mo.typed.webflow.Akka;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
@@ -21,17 +22,17 @@ public class BasicLoginResponse extends AsyncLoginResponse {
         this.username = user.getUsername();
     }
 
-    public Future<JsonObject> response() {
+    @Override
+    public Future<JsonObject> replyToken(final String token, final String refreshToken) {
         final JsonObject response = new JsonObject();
         response.put(KName.ID, this.getId());
-        response.put(KName.TOKEN, this.getToken());
+        response.put(KName.TOKEN, token);
         response.put(KName.USERNAME, this.username);
-        return this.replyAsync(response);
+        return Future.succeededFuture(response);
     }
 
     @Override
-    public String getToken(final UserAt user) {
-        // 该方法已被覆盖，不会调用父类方法
-        return TokenBuilderManager.of().getOrCreate(TokenType.AES).accessOf(user);
+    public Akka<String> getTokenAsync() {
+        return TokenBuilderManager.of().getOrCreate(TokenType.AES).accessOf(this.userAt);
     }
 }

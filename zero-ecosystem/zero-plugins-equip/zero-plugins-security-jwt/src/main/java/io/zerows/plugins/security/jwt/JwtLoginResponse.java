@@ -4,6 +4,7 @@ import io.r2mo.base.util.R2MO;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.token.TokenBuilderManager;
 import io.r2mo.jaas.token.TokenType;
+import io.r2mo.typed.webflow.Akka;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
@@ -32,22 +33,23 @@ public class JwtLoginResponse extends AsyncLoginResponse {
     }
 
 
-    public Future<JsonObject> response() {
+    @Override
+    public Future<JsonObject> replyToken(final String token, final String refreshToken) {
         final JsonObject response = new JsonObject();
         response.put("tokenType", this.tokenType);
         response.put("expiresIn", this.expiresIn);
-        response.put(KName.TOKEN, this.getToken());
-        response.put("refreshToken", this.getRefreshToken());
-        return this.replyAsync(response);
+        response.put(KName.TOKEN, token);
+        response.put("refreshToken", refreshToken);
+        return Future.succeededFuture(response);
     }
 
     @Override
-    public String getToken(final UserAt userAt) {
-        return MANAGER.getOrCreate(TokenType.JWT).accessOf(userAt);
+    public Akka<String> getTokenAsync() {
+        return MANAGER.getOrCreate(TokenType.JWT).accessOf(this.userAt);
     }
 
     @Override
-    public String getRefreshToken(final UserAt userAt) {
-        return MANAGER.getOrCreate(TokenType.JWT).refreshOf(userAt);
+    public Akka<String> getTokenRefresh() {
+        return MANAGER.getOrCreate(TokenType.JWT).refreshOf(this.userAt);
     }
 }

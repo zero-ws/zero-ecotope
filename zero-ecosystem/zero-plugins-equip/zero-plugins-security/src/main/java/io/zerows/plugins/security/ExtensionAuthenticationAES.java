@@ -117,28 +117,30 @@ public class ExtensionAuthenticationAES implements ExtensionAuthentication {
             final String header = authorization.substring(idx + 1);
             // AES Token 认证方式
             final TokenBuilder builder = TokenBuilderManager.of().getOrCreate(TokenType.AES);
-            final String userId = builder.accessOf(header);
-            if (Objects.isNull(userId)) {
-                return Future.failedFuture(UNAUTHORIZED);
-            }
+            return builder.accessOf(header).<Future<String>>a().compose(userId -> {
+                if (Objects.isNull(userId)) {
+                    return Future.failedFuture(UNAUTHORIZED);
+                }
 
-            final UserAt userAt = UserSession.of().find(userId);
-            /*
-             * 修正逻辑：
-             * 此处如果是 AES 模式，其实已经拿到了 UserAt，这是一个完整的用户会话对象。
-             * 如果想走这里直接返回 User，可以使用 Account.userVx(userAt) 将其转换为 Vert.x User。
-             *
-             * 但为了配合默认的 AuthProvider (SPI) 统一加载行为（如加载角色、权限），
-             * 这里选择 "降级" 为 Credentials，让 AuthProvider 重新 "登录" 一次。
-             *
-             * 注意：这要求 MSUser 中的 password 是 AuthProvider 可识别的（明文或特定哈希）。
-             */
-            final User authorized = Account.userVx(userAt);
-            if (Objects.isNull(authorized)) {
-                // 用户不存在或会话丢失
-                throw UNAUTHORIZED;
-            }
-            return Future.succeededFuture(AsyncSession.bindAsync(authorized, authorization));
+                return UserSession.of().find(userId).<Future<UserAt>>a();
+            }).compose(userAt -> {
+                /*
+                 * 修正逻辑：
+                 * 此处如果是 AES 模式，其实已经拿到了 UserAt，这是一个完整的用户会话对象。
+                 * 如果想走这里直接返回 User，可以使用 Account.userVx(userAt) 将其转换为 Vert.x User。
+                 *
+                 * 但为了配合默认的 AuthProvider (SPI) 统一加载行为（如加载角色、权限），
+                 * 这里选择 "降级" 为 Credentials，让 AuthProvider 重新 "登录" 一次。
+                 *
+                 * 注意：这要求 MSUser 中的 password 是 AuthProvider 可识别的（明文或特定哈希）。
+                 */
+                final User authorized = Account.userVx(userAt);
+                if (Objects.isNull(authorized)) {
+                    // 用户不存在或会话丢失
+                    throw UNAUTHORIZED;
+                }
+                return Future.succeededFuture(AsyncSession.bindAsync(authorized, authorization));
+            });
         } catch (final Throwable e) {
             log.error(e.getMessage(), e);
             return Future.failedFuture(UNAUTHORIZED);
