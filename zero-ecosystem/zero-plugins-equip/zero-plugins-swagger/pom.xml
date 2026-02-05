@@ -28,6 +28,11 @@
             <groupId>io.zerows</groupId>
             <artifactId>r2mo-spec</artifactId>
         </dependency>
+        <!-- Knife4j -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-ui</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <resources>

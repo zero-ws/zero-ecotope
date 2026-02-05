@@ -24,7 +24,7 @@ public class SwaggerConfig implements Serializable {
     @Data
     public static class ApiDocs implements Serializable {
         private Boolean enabled = true;
-        private String path = "openapi.yaml";
+        private String path = "openapi.json";   // openapi.yaml 对 Knife4j 支持不友好，统一使用 json
         private String version = "1.0.0";
         private String title = "Zero Ecotope API Docs";
         private String description = "";
