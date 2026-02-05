@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -34,6 +35,7 @@ public interface AdminAgent {
     @Path("/apps/usable")
     @GET
     @Address(Addr.App.ADMIN_USABLE)
+    @OpenApi
     JsonArray fetchUsable(
         @HeaderParam(KWeb.HEADER.X_TENANT_ID) String tenantId);
 }

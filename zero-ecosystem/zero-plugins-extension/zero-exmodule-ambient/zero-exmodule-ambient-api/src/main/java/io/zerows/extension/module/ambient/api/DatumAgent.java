@@ -34,20 +34,23 @@ public interface DatumAgent {
     @Path("/type/categories/{type}")
     @GET
     @Address(Addr.Datum.CATEGORY_TYPE)
-    JsonArray categoryByType(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonArray categoryByType(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                              @PathParam("type") String type,
                              @QueryParam("leaf") @DefaultValue("true") Boolean includeLeaf);
 
     @Path("/types/categories")
     @POST
     @Address(Addr.Datum.CATEGORY_TYPES)
-    JsonObject fetchCategories(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonObject fetchCategories(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                                @BodyParam JsonArray types);
 
     @Path("/{type}/category/{code}")
     @GET
     @Address(Addr.Datum.CATEGORY_CODE)
-    JsonArray fetchCategory(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonArray fetchCategory(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                             @PathParam("type") String type,
                             @PathParam("code") String code);
 
@@ -61,13 +64,15 @@ public interface DatumAgent {
     @Path("/types/tabulars")
     @POST
     @Address(Addr.Datum.TABULAR_TYPES)
-    JsonObject fetchTabulars(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonObject fetchTabulars(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                              @BodyParam JsonArray types);
 
     @Path("/{type}/tabular/{code}")
     @GET
     @Address(Addr.Datum.TABULAR_CODE)
-    JsonArray fetchTabular(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonArray fetchTabular(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                            @PathParam("type") String type,
                            @PathParam("code") String code);
 

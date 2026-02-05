@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * @author lang : 2025-10-17
  */
-@Actor(value = "vertxdoc")
+@Actor(value = "vertxdoc", sequence = Short.MAX_VALUE + 207)
 @Slf4j
 public class SwaggerActor extends AbstractHActor {
     private static final SwaggerManager MANAGER = SwaggerManager.of();

@@ -1,5 +1,7 @@
 package io.zerows.extension.crud.api;
 
+import io.r2mo.openapi.operations.DescCrud;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -20,6 +22,7 @@ import jakarta.ws.rs.extension.PointParam;
  */
 @EndPoint
 @Path("/api")
+@Tag(name = DescCrud.group, description = DescCrud.description)
 public interface PutAgent {
     @PUT
     @Path("/{actor}/{key}")

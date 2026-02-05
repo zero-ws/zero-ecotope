@@ -1,5 +1,7 @@
 package io.zerows.extension.crud.api;
 
+import io.r2mo.openapi.operations.DescCrud;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.vertx.core.json.JsonArray;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Adjust;
@@ -18,6 +20,7 @@ import jakarta.ws.rs.extension.PointParam;
  */
 @EndPoint
 @Path("/api")
+@Tag(name = DescCrud.group, description = DescCrud.description)
 public interface ViewAgent {
     @GET
     @Path("/columns/{actor}/full")

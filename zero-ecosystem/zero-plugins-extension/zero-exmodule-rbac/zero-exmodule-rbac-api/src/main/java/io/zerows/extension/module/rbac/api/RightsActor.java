@@ -21,7 +21,6 @@ public class RightsActor {
         return this.groupStub.fetchGroupsBySigma(sigma);
     }
 
-    @Address(Addr.Role.ROLE_PERM_UPDATE)
     public Future<JsonArray> updateRolePerm(final String roleId, final JsonArray data) {
         return this.setStub.saveRoles(roleId, data);
     }

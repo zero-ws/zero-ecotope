@@ -5,7 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
+import io.zerows.epoch.constant.KWeb;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -58,4 +60,14 @@ public interface HistoryAgent {
     @GET
     @Address(Addr.History.ACTIVITY_GET)
     Future<JsonObject> fetchActivity(@PathParam("key") String key);
+
+    /*
+     * 1. Step 1: Update the Notice by `expiredAt` first
+     * 2. Step 2: Query the valid `notice` records from the system
+     */
+    @POST
+    @Path("/notice-dashboard")
+    @Address(Addr.Init.NOTICE)
+    JsonArray notice(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+                     @BodyParam JsonObject condition);
 }

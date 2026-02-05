@@ -117,7 +117,7 @@ class SwaggerAxis implements Axis {
                     "        enableOpenApi: true,\n" +
                     "        enableFooter: false,\n" +
                     /* 🔥 强制覆盖 Knife4j 的路径拼接逻辑 */
-                    "        basePath: '',\n" +  // 禁用自动前缀
+                    "        basePath: '/',\n" +  // 禁用自动前缀
                     "        apisSorter: 'alpha'\n" +
                     "    };\n" +
                     "</script>\n";

@@ -1,5 +1,7 @@
 package io.zerows.extension.crud.api;
 
+import io.r2mo.openapi.operations.DescCrud;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
@@ -29,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @EndPoint
 @Path("/api")
 @Slf4j
+@Tag(name = DescCrud.group, description = DescCrud.description)
 public class FileAgent {
 
     @Path("/{actor}/import")

@@ -7,6 +7,7 @@ import io.zerows.extension.skeleton.metadata.MDModuleManager;
 import io.zerows.mbse.metadata.KModule;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -52,6 +53,10 @@ public class MDCRUDManager extends MDModuleManager<Boolean, IxConfig> {
     // ------------------- 获取相关数据 -------------------
     public KModule getActor(final String actor) {
         return this.setupModule.map(actor);
+    }
+
+    public Set<KModule> getActor() {
+        return new HashSet<>(this.setupModule.map().values());
     }
 
     public ConcurrentMap<String, List<WebRule>> getRules(final String actor) {
