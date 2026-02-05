@@ -37,30 +37,40 @@ public class SentryVerifier extends AimBase implements Sentry<RoutingContext> {
     @Override
     public Handler<RoutingContext> signal(final WebRequest wrapRequest) {
         return (context) -> {
-            try {
-                // 认证结果
-                final User logged = context.user();
-                if (Objects.nonNull(logged)) {
-                    // 有账号状态，先做 Token 检查
-                    final Future<UserAt> userAsync = Account.userAt(logged);
-                    userAsync.onComplete(userAt -> {
-                        // 放入上下文，供后续使用
-                        context.put(UserAt.class.getName(), userAt);
-                        // 执行前置校验
+            // 1. 准备 UserAt 的异步任务
+            final User logged = context.user();
+            final Future<UserAt> userAtFuture = (Objects.nonNull(logged))
+                ? Account.userAt(logged)
+                : Future.succeededFuture(null);
+
+            userAtFuture
+                .onSuccess(userAt -> {
+                    // 2. 统一处理逻辑
+                    try {
+                        // 如果获取到了 UserAt，注入上下文
+                        if (userAt != null) {
+                            context.put(UserAt.class.getName(), userAt);
+                        }
+
+                        // 3. 执行前置校验 (此处是同步调用)
                         this.executePre(context, wrapRequest);
-                    });
-                } else {
-                    // 无账号状态
-                    this.executePre(context, wrapRequest);
-                }
-            } catch (final WebException error) {
-                // Bad Request 返回 400 异常分流
-                AckFlow.replyError(context, error, wrapRequest.getEvent());
-            } catch (final Throwable ex) {
-                // DEBUG: 特殊流程
-                log.error(ex.getMessage(), ex);
-                context.fail(ex);
-            }
+
+                    } catch (final WebException error) {
+                        // 4. 捕获业务校验异常 (如 400 Bad Request)
+                        // 建议：业务校验失败属于预期内异常，可以用 warn 级别，但也加上统一前缀方便排查
+                        log.warn("[ ZERO-ERROR ] ⚠️ 业务校验未通过 (WebException): {}", error.getMessage());
+                        AckFlow.replyError(context, error, wrapRequest.getEvent());
+                    } catch (final Throwable ex) {
+                        // 5. 捕获其他运行时异常 (空指针、类转换等代码错误)
+                        log.error("[ ZERO-ERROR ] ❌ 前置校验执行期间发生严重错误", ex);
+                        context.fail(ex);
+                    }
+                })
+                .onFailure(ex -> {
+                    // 6. 处理 Account.userAt 自身发生的异步错误 (如 DB 连接失败)
+                    log.error("[ ZERO-ERROR ] ❌ 异步获取用户账户信息失败 (Account.userAt)", ex);
+                    context.fail(ex);
+                });
         };
     }
 

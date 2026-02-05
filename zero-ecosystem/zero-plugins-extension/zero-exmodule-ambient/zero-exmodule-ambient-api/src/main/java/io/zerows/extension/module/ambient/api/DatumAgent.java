@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KWeb;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
@@ -49,7 +50,7 @@ public interface DatumAgent {
     @Path("/type/tabulars/{type}")
     @GET
     @Address(Addr.Datum.TABULAR_TYPE)
-    JsonArray tabularByType(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    JsonArray tabularByType(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                             @PathParam("type") String type);
 
     @Path("/types/tabulars")
