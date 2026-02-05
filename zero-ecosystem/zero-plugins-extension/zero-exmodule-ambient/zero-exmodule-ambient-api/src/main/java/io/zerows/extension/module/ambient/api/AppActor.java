@@ -12,6 +12,7 @@ import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XNoticeDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XNotice;
 import io.zerows.extension.module.ambient.servicespec.AppStub;
+import io.zerows.extension.module.ambient.servicespec.InitStub;
 import io.zerows.platform.apps.KDS;
 import io.zerows.program.Ux;
 import jakarta.inject.Inject;
@@ -25,6 +26,18 @@ public class AppActor {
     @Inject
     private transient AppStub appStub;
 
+    @Inject
+    private transient InitStub stub;
+
+    @Address(Addr.Init.INIT)
+    public Future<JsonObject> initApp(final String appId, final JsonObject data) {
+        return this.stub.initCreation(appId, data);
+    }
+
+    @Address(Addr.Init.PREPARE)
+    public Future<JsonObject> prepare(final String appName) {
+        return this.stub.prerequisite(appName);
+    }
 
     @Address(Addr.App.UP_BY_ID)
     public Future<JsonObject> updateBy(final String appId, final JsonObject data) {

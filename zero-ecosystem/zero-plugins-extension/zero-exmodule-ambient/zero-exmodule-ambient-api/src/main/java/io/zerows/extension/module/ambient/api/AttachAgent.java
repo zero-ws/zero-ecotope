@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
@@ -35,6 +36,7 @@ public class AttachAgent {
     @Path("/file/upload/{identifier}")
     @POST
     @Address(Addr.File.UPLOAD)
+    @OpenApi
     public JsonObject upload(@PathParam(KName.IDENTIFIER) final String identifier,
                              @QueryParam(KName.CATEGORY) final String category,
                              @QueryParam(KName.DIRECTORY) final String directory,
@@ -80,6 +82,7 @@ public class AttachAgent {
     @Address(Addr.File.DOWNLOAD)
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+    @OpenApi
     public JsonObject download(@PathParam("fileKey") final String key) {
         return new JsonObject().put(KName.KEY, key);
     }

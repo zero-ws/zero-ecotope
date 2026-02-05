@@ -53,7 +53,8 @@ class SwaggerAnalyzer {
         // 修正后的 Comparator
         final Comparator<DocApi> apiSorter = Comparator
             // 1. 显式指定 (DocApi api)，消除方法引用歧义和类型推断问题
-            .comparing((DocApi api) -> api.path())
+            .comparing((DocApi api) -> api.tag())
+            .thenComparing((DocApi api) -> api.path())
 
             // 2. 这里的 api 类型现在可以被正确推断了
             // 注意：如果 api.method() 可能为 null，这里运行时会报空指针，建议加个防护

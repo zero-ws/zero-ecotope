@@ -26,20 +26,20 @@ import jakarta.ws.rs.extension.BodyParam;
 @Path("/api")
 public interface HistoryAgent {
 
-    @Path("/history/:identifier/:key")
+    @Path("/history/{identifier}/{key}")
     @GET
     @Address(Addr.History.HISTORIES)
     Future<JsonArray> fetch(@PathParam("identifier") String identifier,
                             @PathParam("key") String key);
 
-    @Path("/history/:identifier/:key/:field")
+    @Path("/history/{identifier}/{key}/{field}")
     @GET
     @Address(Addr.History.HISTORY_BY_FIELDS)
     Future<JsonArray> fetch(@PathParam("identifier") String identifier,
                             @PathParam("key") String key,
                             @PathParam("field") String field);
 
-    @Path("/history/:key")
+    @Path("/history/{key}")
     @GET
     @Address(Addr.History.HISTORY_ITEMS)
     Future<JsonArray> fetchItems(@PathParam("key") String key);
@@ -56,7 +56,7 @@ public interface HistoryAgent {
     @Address(Addr.History.ACTIVITY_SEARCH)
     Future<JsonObject> searchActivities(@BodyParam JsonObject body);
 
-    @Path("/x-activity/:key")
+    @Path("/x-activity/{key}")
     @GET
     @Address(Addr.History.ACTIVITY_GET)
     Future<JsonObject> fetchActivity(@PathParam("key") String key);

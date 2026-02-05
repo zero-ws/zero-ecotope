@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -20,10 +21,12 @@ public interface FileAgent {
     @POST
     @Path("/file/my/search")
     @Address(Addr.File.MY_QUEUE)
+    @OpenApi
     JsonObject searchMy(@BodyParam JsonObject query);
 
     @GET
     @Path("/file/my/:key")
     @Address(Addr.File.BY_KEY)
+    @OpenApi
     JsonObject fileByKey(@PathParam(KName.KEY) String key);
 }
