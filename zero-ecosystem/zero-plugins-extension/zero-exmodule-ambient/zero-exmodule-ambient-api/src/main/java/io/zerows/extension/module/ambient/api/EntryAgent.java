@@ -1,6 +1,8 @@
 package io.zerows.extension.module.ambient.api;
 
 import io.r2mo.openapi.annotations.OpenApi;
+import io.r2mo.openapi.operations.DescSystem;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -26,6 +28,7 @@ import jakarta.ws.rs.PathParam;
  * @author lang : 2024-07-26
  */
 @EndPoint
+@Tag(name = DescSystem.group, description = DescSystem.description)
 public interface EntryAgent {
     /**
      * 登录主界面根据应用名读取应用基础数据

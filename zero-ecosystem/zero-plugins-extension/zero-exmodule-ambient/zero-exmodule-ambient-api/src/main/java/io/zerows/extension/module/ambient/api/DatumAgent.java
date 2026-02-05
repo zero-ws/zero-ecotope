@@ -1,5 +1,8 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
+import io.r2mo.openapi.operations.DescSystem;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -25,6 +28,7 @@ import jakarta.ws.rs.extension.BodyParam;
  */
 @EndPoint
 @Path("/api")
+@Tag(name = DescSystem.group, description = DescSystem.description)
 public interface DatumAgent {
 
     @Path("/type/categories/{type}")
@@ -50,6 +54,7 @@ public interface DatumAgent {
     @Path("/type/tabulars/{type}")
     @GET
     @Address(Addr.Datum.TABULAR_TYPE)
+    @OpenApi
     JsonArray tabularByType(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                             @PathParam("type") String type);
 
