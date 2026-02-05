@@ -31,11 +31,22 @@ public class OriginalNamingStrategy extends PropertyNamingStrategy {
                                       final AnnotatedMethod method, final String defaultName) {
         final String methodName = method.getName();
         String fieldName = "";
-        if (methodName.startsWith("get")) {
+
+        if (methodName.startsWith("get") && methodName.length() > 3) {
             fieldName = methodName.substring(3);
-        } else if (methodName.startsWith("is")) {
+        } else if (methodName.startsWith("is") && methodName.length() > 2) {
             fieldName = methodName.substring(2);
+        } else {
+            // Fluent 模式：方法名即字段名 (例如 data() -> fieldName = "data")
+            fieldName = methodName;
         }
+
+        // 安全检查：防止处理匿名类或空方法名导致的异常
+        if (fieldName.isEmpty()) {
+            return defaultName;
+        }
+
+        // 转换首字母为小写
         final String firstLetter = String.valueOf(fieldName.charAt(VValue.IDX));
         return firstLetter.toLowerCase(Locale.getDefault()) + fieldName.substring(1);
     }

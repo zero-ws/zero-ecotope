@@ -25,11 +25,6 @@ public abstract class AsyncLoginResponse extends LoginResponse {
         this.userAt = userAt;
     }
 
-    private Future<JsonObject> replyAsync(final JsonObject response) {
-        return SecuritySession.of().authorized401(this.userAt, this.getToken())
-            .map(v -> response);
-    }
-
     public abstract Akka<String> getTokenAsync();
 
     public Akka<String> getTokenRefresh() {
@@ -42,9 +37,21 @@ public abstract class AsyncLoginResponse extends LoginResponse {
         final KRef ref = new KRef();
         return this.getTokenAsync().<Future<String>>compose()
             .compose(ref::future)
-            .compose(token -> this.getTokenRefresh().<Future<String>>compose())
-            .compose(refreshToken -> this.replyToken(ref.get(), refreshToken))
-            .compose(this::replyAsync);
+            .compose(token -> {
+                // token = null 表示登录失败，所以此处要同步
+                this.setToken(token);
+                return this.getTokenRefresh().<Future<String>>compose();
+            })
+            .compose(refreshToken -> {
+                // refreshToken = null 登录失败，此处同步
+                this.setRefreshToken(refreshToken);
+                return this.replyToken(ref.get(), refreshToken);
+            })
+            .compose(response ->
+                // 上边两次 set 此处才有 token 的值
+                SecuritySession.of().authorized401(this.userAt, this.getToken())
+                    .map(v -> response)
+            );
     }
 
     @Override

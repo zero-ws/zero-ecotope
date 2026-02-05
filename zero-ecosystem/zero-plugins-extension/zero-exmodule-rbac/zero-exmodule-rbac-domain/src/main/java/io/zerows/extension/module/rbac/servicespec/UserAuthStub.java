@@ -1,6 +1,7 @@
 package io.zerows.extension.module.rbac.servicespec;
 
 import io.r2mo.jaas.element.MSUser;
+import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
 
 public interface UserAuthStub {
@@ -12,5 +13,5 @@ public interface UserAuthStub {
      */
     Future<MSUser> whereUsername(String username);
 
-    Future<MSUser> whereEmail(String email);
+    Future<MSUser> whereBy(String id, TypeLogin typeID);
 }

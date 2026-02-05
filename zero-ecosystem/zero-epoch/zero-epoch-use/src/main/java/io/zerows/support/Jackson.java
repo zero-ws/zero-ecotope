@@ -162,6 +162,10 @@ final class Jackson {
 
     static <T, R extends Iterable> R serializeJson(final T t, final boolean isSmart) {
         final String content = UtBase.serialize(t);
+        // ( Redis ) 序列化前置检查失败: Cannot invoke "String.trim()" because "content" is null
+        if (Objects.isNull(content)) {
+            return null;
+        }
         if (content.trim().startsWith(VString.LEFT_BRACE)) {
             return isSmart ?
                 serializeSmart(new JsonObject(content)) : ((R) new JsonObject(content));

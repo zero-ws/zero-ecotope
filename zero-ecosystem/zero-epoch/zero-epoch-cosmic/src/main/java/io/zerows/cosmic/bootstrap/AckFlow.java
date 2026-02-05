@@ -104,7 +104,8 @@ public final class AckFlow {
             return;
         }
 
-        final Method sessionAction = event.getAction();
+
+        final Method sessionAction = sessionAction(event);
         /*
          * FIX: 追加新逻辑 / Redirect
          */
@@ -170,7 +171,7 @@ public final class AckFlow {
              * 🐛 修复BUG：在旧工作流中，下面的代码不在`OAmbit`的compose中，异步会影响这里的响应数据，可能导致
              * 响应保持原始状态，并且ACL工作流无法正常处理响应数据序列化。
              */
-            final Format format = sessionAction.getDeclaredAnnotation(Format.class);
+            final Format format = Objects.isNull(sessionAction) ? null : sessionAction.getDeclaredAnnotation(Format.class);
             Ack.of(context).handle(processed.format(format), response, mediaTypes);
 
 
@@ -298,5 +299,12 @@ public final class AckFlow {
             .bind(context);     // Bind Data Here.
 
         return Ambit.of(AmbitNext.class).then(context, envelop);
+    }
+
+    private static Method sessionAction(final WebEvent event) {
+        if (Objects.isNull(event)) {
+            return null;
+        }
+        return event.getAction();
     }
 }

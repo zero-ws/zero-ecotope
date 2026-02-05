@@ -1,9 +1,11 @@
 package io.zerows.extension.module.rbac.serviceauth;
 
+import cn.hutool.core.util.StrUtil;
 import io.r2mo.jaas.element.MSGroup;
 import io.r2mo.jaas.element.MSRole;
 import io.r2mo.jaas.element.MSUser;
 import io.r2mo.typed.domain.builder.BuilderOf;
+import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
@@ -54,7 +56,23 @@ public class UserAuthService implements UserAuthStub {
     }
 
     @Override
-    public Future<MSUser> whereEmail(final String email) {
-        return null;
+    public Future<MSUser> whereBy(final String id, final TypeLogin typeID) {
+        final String field = this.whereField(typeID);
+        if (StrUtil.isEmpty(field)) {
+            return Future.succeededFuture();
+        }
+        return this.dbUser.<SUser>fetchOneAsync(field, id)
+            .compose(this::fetchComplex);
+    }
+
+    private String whereField(final TypeLogin typeId) {
+        return switch (typeId) {
+            case LDAP -> "ldapEmail";
+            case SMS -> "mobile";
+            case EMAIL -> "email";
+            case ID_WECHAT -> "weUnionId";
+            case ID_WECOM -> "cpUnionId";
+            default -> null;
+        };
     }
 }
