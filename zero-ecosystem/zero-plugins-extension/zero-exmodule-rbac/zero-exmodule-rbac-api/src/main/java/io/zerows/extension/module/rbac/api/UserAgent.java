@@ -1,5 +1,6 @@
 package io.zerows.extension.module.rbac.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -25,6 +26,7 @@ public interface UserAgent {
     @POST
     @Path("user/password")
     @Address(Addr.User.PASSWORD)
+    @OpenApi
     JsonObject password(@BodyParam JsonObject params);
 
     /*
@@ -34,6 +36,7 @@ public interface UserAgent {
     @POST
     @Path("user/profile")
     @Address(Addr.User.PROFILE)
+    @OpenApi
     JsonObject profile(@BodyParam JsonObject params);
 
     /*
@@ -44,6 +47,7 @@ public interface UserAgent {
     @POST
     @Path("user/logout")
     @Address(Addr.Auth.LOGOUT)
+    @OpenApi
     JsonObject logout();
 
     /**
@@ -53,22 +57,26 @@ public interface UserAgent {
     @GET
     @Path("/user/:key")
     @Address(Addr.User.GET)
+    @OpenApi
     JsonObject getById(@PathParam("key") String key);
 
     @POST
     @Path("/user")
     @Address(Addr.User.ADD)
+    @OpenApi
     JsonObject create(@BodyParam JsonObject data);
 
     @PUT
     @Path("/user/:key")
     @Address(Addr.User.UPDATE)
+    @OpenApi
     JsonObject update(@PathParam("key") String key,
                       @BodyParam JsonObject data);
 
     @DELETE
     @Path("/user/:key")
     @Address(Addr.User.DELETE)
+    @OpenApi
     Boolean delete(@PathParam("key") String key);
 
     // ---------------- All Usage income api for `user + type` extracting
@@ -83,6 +91,7 @@ public interface UserAgent {
     @POST
     @Path("/user/search/:identifier")
     @Address(Addr.User.QR_USER_SEARCH)
+    @OpenApi
     JsonObject searchByType(@PathParam(KName.IDENTIFIER) String identifier,
                             @BodyParam JsonObject criteria);
 
@@ -111,5 +120,6 @@ public interface UserAgent {
     @GET
     @Path("user")
     @Address(Addr.User.INFORMATION)
+    @OpenApi
     JsonObject information();
 }

@@ -14,8 +14,6 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 @SPID(DocSpec.DEFAULT_DOC_SPEC)
 public class DocExtensionActor implements DocExtension {
@@ -43,17 +41,14 @@ public class DocExtensionActor implements DocExtension {
         final Set<KModule> modules = MDCRUDManager.of().getActor();
         final String path = resource.path();
         // 每个模块进行 Path 的提取
-        final ConcurrentMap<String, String> uriMap = new ConcurrentHashMap<>();
+        final Set<DocApi> apiSet = new HashSet<>();
         modules.forEach(module -> {
             final String actor = module.getName();
             final String normalized = path.replace(ACTOR, actor);
-            uriMap.put(actor, normalized);
-        });
-        final Set<DocApi> apiSet = new HashSet<>();
-        uriMap.keySet().forEach(actor -> {
+
             final DocApi apiDoc = new DocApi();
-            apiDoc.tag(actor);                // 特殊排序种子
-            apiDoc.path(uriMap.get(actor));
+            apiDoc.tag(module.getTag());
+            apiDoc.path(normalized);
             apiDoc.method(resource.method());
             apiDoc.invoker(resource.invoker());
             apiSet.add(apiDoc);

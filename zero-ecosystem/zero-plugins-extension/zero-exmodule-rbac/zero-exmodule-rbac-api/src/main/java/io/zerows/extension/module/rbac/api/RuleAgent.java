@@ -1,5 +1,6 @@
 package io.zerows.extension.module.rbac.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -30,6 +31,7 @@ public interface RuleAgent {
     @GET
     @Path("/authority/region/:type")
     @Address(Addr.Rule.FETCH_REGION)
+    @OpenApi
     Future<JsonArray> fetchRegions(@PathParam(KName.TYPE) String type);
 
     /*
@@ -39,6 +41,7 @@ public interface RuleAgent {
     @GET
     @Path("/authority/region-d/:key")
     @Address(Addr.Rule.FETCH_REGION_DEFINE)
+    @OpenApi
     Future<JsonObject> fetchRegion(@PathParam(KName.KEY) String key);
 
     /*
@@ -53,6 +56,7 @@ public interface RuleAgent {
      **/
     @POST
     @Path("/authority/region-v/:owner")
+    @OpenApi
     @Address(Addr.Rule.FETCH_REGION_VALUES)
     Future<JsonObject> fetchInitials(
         @PathParam(KName.OWNER) String owner,
@@ -99,6 +103,7 @@ public interface RuleAgent {
      */
     @POST
     @Path("/authority/region/:path")
+    @OpenApi
     @Address(Addr.Rule.SAVE_REGION)
     Future<JsonObject> saveRegion(
         @PathParam(KName.PATH) String path,

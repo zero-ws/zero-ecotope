@@ -1,5 +1,6 @@
 package io.zerows.extension.module.rbac.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.zerows.epoch.annotations.Address;
@@ -27,6 +28,7 @@ public class FileAgent {
     @Path("/user/import")
     @POST
     @Address(Addr.User.IMPORT)
+    @OpenApi
     public JsonObject importUser(@StreamParam @Validated final FileUpload fileUpload) {
         /* File stored */
         final String filename = fileUpload.uploadedFileName();

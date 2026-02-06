@@ -1,5 +1,6 @@
 package io.zerows.extension.module.erp.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -20,5 +21,6 @@ public interface CompanyAgent {
     @GET
     @Path("company/employee/:eid")
     @Address(Addr.Company.INFORMATION)
+    @OpenApi
     JsonObject company(@PathParam("eid") String eid);
 }

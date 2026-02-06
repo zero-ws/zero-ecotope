@@ -1,5 +1,6 @@
 package io.zerows.extension.module.rbac.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -24,21 +25,25 @@ public interface PermAgent {
     @Path("/permission/groups/by/sigma")
     @GET
     @Address(Addr.Authority.PERMISSION_GROUP)
+    @OpenApi
     JsonArray calculate();
 
     @Path("/permission/definition/saving")
     @PUT
     @Address(Addr.Authority.PERMISSION_DEFINITION_SAVE)
+    @OpenApi
     JsonObject saveDefinition(@BodyParam JsonObject body);
 
     @Path("/permission/role/:roleId")
     @GET
     @Address(Addr.Authority.PERMISSION_BY_ROLE)
+    @OpenApi
     JsonArray fetchAsync(@PathParam("roleId") String roleId);
 
     @Path("/permission/role/:roleId")
     @PUT
     @Address(Addr.Authority.PERMISSION_SAVE)
+    @OpenApi
     JsonArray savePerm(@PathParam("roleId") String roleId,
                        @BodyParam JsonArray permissions);
 
@@ -61,25 +66,30 @@ public interface PermAgent {
     @Path("/permission/by/freedom")
     @POST
     @Address(Addr.Perm.PERMISSION_UN_READY)
+    @OpenApi
     JsonArray searchUnReady(@BodyParam JsonObject query);
 
     @Path("/permission/:key")
     @GET
     @Address(Addr.Perm.BY_ID)
+    @OpenApi
     JsonObject fetchById(@PathParam("key") String key);
 
     @Path("/permission")
     @POST
     @Address(Addr.Perm.ADD)
+    @OpenApi
     JsonObject add(@BodyParam JsonObject param);
 
     @Path("/permission/:key")
     @PUT
     @Address(Addr.Perm.EDIT)
+    @OpenApi
     JsonObject update(@PathParam("key") String key, @BodyParam JsonObject params);
 
     @Path("/permission/:key")
     @DELETE
     @Address(Addr.Perm.DELETE)
+    @OpenApi
     JsonObject remove(@PathParam("key") String key);
 }

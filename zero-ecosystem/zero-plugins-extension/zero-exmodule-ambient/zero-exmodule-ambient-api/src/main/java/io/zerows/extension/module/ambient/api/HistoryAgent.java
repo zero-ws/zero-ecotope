@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -29,12 +30,14 @@ public interface HistoryAgent {
     @Path("/history/{identifier}/{key}")
     @GET
     @Address(Addr.History.HISTORIES)
+    @OpenApi
     Future<JsonArray> fetch(@PathParam("identifier") String identifier,
                             @PathParam("key") String key);
 
     @Path("/history/{identifier}/{key}/{field}")
     @GET
     @Address(Addr.History.HISTORY_BY_FIELDS)
+    @OpenApi
     Future<JsonArray> fetch(@PathParam("identifier") String identifier,
                             @PathParam("key") String key,
                             @PathParam("field") String field);
@@ -42,6 +45,7 @@ public interface HistoryAgent {
     @Path("/history/{key}")
     @GET
     @Address(Addr.History.HISTORY_ITEMS)
+    @OpenApi
     Future<JsonArray> fetchItems(@PathParam("key") String key);
 
     /*
@@ -54,11 +58,13 @@ public interface HistoryAgent {
     @Path("/x-activity/search")
     @POST
     @Address(Addr.History.ACTIVITY_SEARCH)
+    @OpenApi
     Future<JsonObject> searchActivities(@BodyParam JsonObject body);
 
     @Path("/x-activity/{key}")
     @GET
     @Address(Addr.History.ACTIVITY_GET)
+    @OpenApi
     Future<JsonObject> fetchActivity(@PathParam("key") String key);
 
     /*
@@ -68,6 +74,7 @@ public interface HistoryAgent {
     @POST
     @Path("/notice-dashboard")
     @Address(Addr.Init.NOTICE)
+    @OpenApi
     JsonArray notice(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                      @BodyParam JsonObject condition);
 }
