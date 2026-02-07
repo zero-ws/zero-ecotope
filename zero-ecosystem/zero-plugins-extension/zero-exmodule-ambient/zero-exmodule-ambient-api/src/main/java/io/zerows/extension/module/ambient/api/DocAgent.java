@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -27,16 +28,19 @@ public interface DocAgent {
     @GET
     @Path("/document/by/directory")
     @Address(Addr.Doc.BY_DIRECTORY)
+    @OpenApi
     JsonArray byDirectory(@QueryParam(KName.DIRECTORY_ID) String directoryId);
 
     @GET
     @Path("/document/by/keyword/:keyword")
     @Address(Addr.Doc.BY_KEYWORD)
+    @OpenApi
     JsonArray byKeyword(@PathParam(KName.KEY_WORD) String keyword);
 
     @GET
     @Path("/document/by/trashed")
     @Address(Addr.Doc.BY_TRASHED)
+    @OpenApi
     JsonArray byTrashed();
 
 
@@ -50,6 +54,7 @@ public interface DocAgent {
     @Path("/document/start/:type")
     @GET
     @Address(Addr.Doc.DOCUMENT)
+    @OpenApi
     JsonArray start(@PathParam(KName.TYPE) String type,
                     @HeaderParam(KWeb.HEADER.X_APP_ID) String appId);
 
@@ -63,31 +68,37 @@ public interface DocAgent {
     @Path("/document/trash")
     @DELETE
     @Address(Addr.Doc.DOCUMENT_TRASH)
+    @OpenApi
     JsonArray trashIn(@BodyParam JsonArray documentA);
 
     @Path("/document/purge")
     @DELETE
     @Address(Addr.Doc.DOCUMENT_PURGE)
+    @OpenApi
     JsonArray trashKo(@BodyParam JsonArray documentA);
 
     @Path("/document/rollback")
     @PUT
     @Address(Addr.Doc.DOCUMENT_ROLLBACK)
+    @OpenApi
     JsonArray trashOut(@BodyParam JsonArray documentA);
 
     @Path("/file/rename")
     @PUT
     @Address(Addr.File.RENAME)
+    @OpenApi
     JsonObject rename(@BodyParam JsonObject documentJ);
 
     // ----------------- File Batch Operation ----------------------
     @Path("/file/upload")
     @POST
     @Address(Addr.File.UPLOAD_CREATION)
+    @OpenApi
     JsonArray upload(@BodyParam JsonArray documentA);
 
     @Path("/file/download")
     @POST
     @Address(Addr.File.DOWNLOADS)
+    @OpenApi
     JsonArray download(@BodyParam JsonArray keys);
 }

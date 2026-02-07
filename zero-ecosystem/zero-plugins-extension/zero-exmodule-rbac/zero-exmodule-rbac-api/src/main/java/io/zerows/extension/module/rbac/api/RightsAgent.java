@@ -1,16 +1,13 @@
 package io.zerows.extension.module.rbac.api;
 
-import io.vertx.core.json.JsonArray;
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KWeb;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
-import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.extension.BodyParam;
 
 @EndPoint
 public interface RightsAgent {
@@ -18,11 +15,6 @@ public interface RightsAgent {
     @Path("/api/groups")
     @GET
     @Address(Addr.Group.GROUP_SIGMA)
+    @OpenApi
     JsonObject fetchGroups(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma);
-
-    @Path("/role-perm/{roleId}")
-    @PUT
-    @Address(Addr.Role.ROLE_PERM_UPDATE)
-    JsonArray updateRolePerm(@PathParam("roleId") String roleId,
-                             @BodyParam JsonArray data);
 }

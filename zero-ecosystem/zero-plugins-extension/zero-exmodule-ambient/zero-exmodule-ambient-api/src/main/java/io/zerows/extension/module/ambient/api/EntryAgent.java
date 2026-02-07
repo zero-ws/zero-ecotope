@@ -55,6 +55,7 @@ public interface EntryAgent {
     @Path("/api/menus")
     @GET
     @Address(Addr.Menu.BY_APP_ID)
+    @OpenApi
     JsonArray menuByApp(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId);
 
     /**
@@ -72,5 +73,6 @@ public interface EntryAgent {
     @Path("/api/app")
     @GET
     @Address(Addr.App.BY_ID)
+    @OpenApi
     JsonObject appById(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId);
 }

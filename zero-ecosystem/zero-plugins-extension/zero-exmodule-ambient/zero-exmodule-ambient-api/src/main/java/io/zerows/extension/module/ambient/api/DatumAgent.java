@@ -1,5 +1,8 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
+import io.r2mo.openapi.operations.DescSystem;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -25,44 +28,51 @@ import jakarta.ws.rs.extension.BodyParam;
  */
 @EndPoint
 @Path("/api")
+@Tag(name = DescSystem.group, description = DescSystem.description)
 public interface DatumAgent {
 
     @Path("/type/categories/{type}")
     @GET
     @Address(Addr.Datum.CATEGORY_TYPE)
-    JsonArray categoryByType(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonArray categoryByType(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                              @PathParam("type") String type,
                              @QueryParam("leaf") @DefaultValue("true") Boolean includeLeaf);
 
     @Path("/types/categories")
     @POST
     @Address(Addr.Datum.CATEGORY_TYPES)
-    JsonObject fetchCategories(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonObject fetchCategories(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                                @BodyParam JsonArray types);
 
     @Path("/{type}/category/{code}")
     @GET
     @Address(Addr.Datum.CATEGORY_CODE)
-    JsonArray fetchCategory(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonArray fetchCategory(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                             @PathParam("type") String type,
                             @PathParam("code") String code);
 
     @Path("/type/tabulars/{type}")
     @GET
     @Address(Addr.Datum.TABULAR_TYPE)
+    @OpenApi
     JsonArray tabularByType(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                             @PathParam("type") String type);
 
     @Path("/types/tabulars")
     @POST
     @Address(Addr.Datum.TABULAR_TYPES)
-    JsonObject fetchTabulars(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonObject fetchTabulars(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                              @BodyParam JsonArray types);
 
     @Path("/{type}/tabular/{code}")
     @GET
     @Address(Addr.Datum.TABULAR_CODE)
-    JsonArray fetchTabular(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
+    @OpenApi
+    JsonArray fetchTabular(@NotNull @HeaderParam(KWeb.HEADER.X_APP_ID) String appId,
                            @PathParam("type") String type,
                            @PathParam("code") String code);
 

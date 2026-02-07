@@ -1,5 +1,6 @@
 package io.zerows.extension.skeleton.boot;
 
+import io.r2mo.openapi.metadata.DocExtension;
 import io.zerows.cortex.sdk.HQBE;
 import io.zerows.epoch.configuration.ConfigMod;
 import io.zerows.epoch.management.OCacheClass;
@@ -50,6 +51,7 @@ class ExBoot {
             this.add(ConfigMod.class);
             this.add(HQBE.class);
             this.add(Dictionary.class);
+            this.add(DocExtension.class);
             // -- 扩展接口处理
             this.add(ExActivity.class);           // 🚶 活动跟踪器接口，用于追踪系统中的各种活动
             this.add(ExApp.class);                // 📱 应用扩展接口，定义应用级别的扩展点

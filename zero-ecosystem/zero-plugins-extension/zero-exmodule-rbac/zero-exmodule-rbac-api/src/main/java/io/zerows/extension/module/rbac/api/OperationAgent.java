@@ -1,5 +1,6 @@
 package io.zerows.extension.module.rbac.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -32,6 +33,7 @@ public interface OperationAgent {
     @POST
     @Path("action/seek")
     @Address(Addr.Authority.ACTION_SEEK)
+    @OpenApi
     JsonArray searchAuthorized(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
                                @BodyParam JsonObject params);
 
@@ -51,6 +53,7 @@ public interface OperationAgent {
     @POST
     @Path("action/ready")
     @Address(Addr.Authority.ACTION_READY)
+    @OpenApi
     JsonArray searchAll(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
                         @BodyParam JsonObject params);
 }
