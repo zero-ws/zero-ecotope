@@ -89,6 +89,15 @@
                 <artifactId>zero-boot-cloud-actor</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <!--
+            ## 版本修复必须：由于 Alibaba Cloud 中已经包含了 nacos 2.3.4 的依赖
+            nacos-client 2.3.4 / nacos-client-3.1.1 版本不兼容，后续需要升级到 3.1.1 版本
+            -->
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${cloud-nacos.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>

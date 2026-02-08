@@ -57,3 +57,9 @@
 - dao: X_TENANT           # X_TENANT
   unique:
     - code
+- dao: X_LICENSE
+  unique:
+    - licenseKey
+- dao: X_SUBSCRIPTION
+  unique:
+    - code

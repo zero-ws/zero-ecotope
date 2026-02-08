@@ -1,12 +1,12 @@
 {
-  "name": "license",
-  "daoCls": "X_LICENSE",
+  "name": "subscription",
+  "daoCls": "X_SUBSCRIPTION",
   "field": {
     "unique": [
       [
-        "licenseKey"
+        "planId"
       ]
     ]
   },
-  "tag": "云端管理/许可"
+  "tag": "云端管理/订阅"
 }
