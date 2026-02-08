@@ -1,0 +1,12 @@
+{
+  "name": "license",
+  "daoCls": "X_LICENSE",
+  "field": {
+    "unique": [
+      [
+        "licenseKey"
+      ]
+    ]
+  },
+  "tag": "云端管理/许可"
+}
