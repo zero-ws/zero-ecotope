@@ -61,8 +61,8 @@ public class ExInitSource implements ExInit {
         source.setActive(Boolean.TRUE);
         source.setAppId(appJson.getString(KName.KEY));
         /* Basic Configuration */
-        source.setJdbcConfig(new JsonObject().encode());
-        source.setMetadata(new JsonObject().encode());
+        source.setJdbcConfig(new JsonObject());
+        source.setMetadata(new JsonObject());
         source.setLanguage(appJson.getString(KName.LANGUAGE));
         if (Objects.isNull(source.getId())) {
             source.setId(UUID.randomUUID().toString());

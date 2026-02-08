@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XTenant;
 import io.zerows.extension.module.ambient.domain.tables.records.XTenantRecord;
 
@@ -356,7 +357,7 @@ public class XTenantDao extends AbstractVertxDAO<XTenantRecord, io.zerows.extens
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XTenant.X_TENANT.METADATA.in(values));
         }
 
@@ -364,7 +365,7 @@ public class XTenantDao extends AbstractVertxDAO<XTenantRecord, io.zerows.extens
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTenant>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XTenant.X_TENANT.METADATA.in(values),limit);
         }
 

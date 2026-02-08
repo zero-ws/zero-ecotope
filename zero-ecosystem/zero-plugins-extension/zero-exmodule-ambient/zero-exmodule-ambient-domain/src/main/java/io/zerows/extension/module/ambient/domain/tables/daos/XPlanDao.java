@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XPlan;
 import io.zerows.extension.module.ambient.domain.tables.records.XPlanRecord;
 
@@ -238,7 +239,7 @@ public class XPlanDao extends AbstractVertxDAO<XPlanRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XPlan>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XPlan>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XPlan.X_PLAN.METADATA.in(values));
         }
 
@@ -246,7 +247,7 @@ public class XPlanDao extends AbstractVertxDAO<XPlanRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XPlan>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XPlan>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XPlan.X_PLAN.METADATA.in(values),limit);
         }
 

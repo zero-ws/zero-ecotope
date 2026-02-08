@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XLinkage;
 import io.zerows.extension.module.ambient.domain.tables.records.XLinkageRecord;
 
@@ -314,7 +315,7 @@ public class XLinkageDao extends AbstractVertxDAO<XLinkageRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XLinkage>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XLinkage>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XLinkage.X_LINKAGE.METADATA.in(values));
         }
 
@@ -322,7 +323,7 @@ public class XLinkageDao extends AbstractVertxDAO<XLinkageRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XLinkage>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XLinkage>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XLinkage.X_LINKAGE.METADATA.in(values),limit);
         }
 

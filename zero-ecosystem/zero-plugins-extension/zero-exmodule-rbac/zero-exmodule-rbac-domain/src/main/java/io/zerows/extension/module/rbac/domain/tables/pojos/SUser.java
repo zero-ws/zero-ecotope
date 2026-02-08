@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISUser;
 
 import java.time.LocalDateTime;
@@ -49,7 +50,7 @@ public class SUser implements VertxPojo, ISUser {
     private String directoryId;
     private String language;
     private Boolean active;
-    private String metadata;
+    private JsonObject metadata;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
@@ -126,7 +127,7 @@ public class SUser implements VertxPojo, ISUser {
         String directoryId,
         String language,
         Boolean active,
-        String metadata,
+        JsonObject metadata,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime updatedAt,
@@ -688,7 +689,7 @@ public class SUser implements VertxPojo, ISUser {
      * Getter for <code>ZDB.S_USER.METADATA</code>. 「metadata」- 扩展配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -696,7 +697,7 @@ public class SUser implements VertxPojo, ISUser {
      * Setter for <code>ZDB.S_USER.METADATA</code>. 「metadata」- 扩展配置
      */
     @Override
-    public SUser setMetadata(String metadata) {
+    public SUser setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

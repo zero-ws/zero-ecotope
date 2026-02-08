@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XLicense;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXLicense;
 
@@ -267,7 +268,7 @@ public class XLicenseRecord extends UpdatableRecordImpl<XLicenseRecord> implemen
      * Setter for <code>ZDB.X_LICENSE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XLicenseRecord setMetadata(String value) {
+    public XLicenseRecord setMetadata(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -276,8 +277,8 @@ public class XLicenseRecord extends UpdatableRecordImpl<XLicenseRecord> implemen
      * Getter for <code>ZDB.X_LICENSE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(14);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(14);
     }
 
     /**
@@ -423,7 +424,7 @@ public class XLicenseRecord extends UpdatableRecordImpl<XLicenseRecord> implemen
     /**
      * Create a detached, initialised XLicenseRecord
      */
-    public XLicenseRecord(String id, String code, String licenseKey, String bindTenantId, Integer concurrency, LocalDateTime expiredAt, String machineCode, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XLicenseRecord(String id, String code, String licenseKey, String bindTenantId, Integer concurrency, LocalDateTime expiredAt, String machineCode, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XLicense.X_LICENSE);
 
         setId(id);

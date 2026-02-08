@@ -4,6 +4,8 @@
 package io.zerows.extension.module.ambient.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.Indexes;
 import io.zerows.extension.module.ambient.domain.Keys;
 import io.zerows.extension.module.ambient.domain.Zdb;
@@ -67,12 +69,12 @@ public class XActivity extends TableImpl<XActivityRecord> {
     /**
      * The column <code>ZDB.X_ACTIVITY.RECORD_NEW</code>. 「recordNew」- 变更后数据
      */
-    public final TableField<XActivityRecord, String> RECORD_NEW = createField(DSL.name("RECORD_NEW"), SQLDataType.CLOB, this, "「recordNew」- 变更后数据");
+    public final TableField<XActivityRecord, JsonObject> RECORD_NEW = createField(DSL.name("RECORD_NEW"), SQLDataType.CLOB, this, "「recordNew」- 变更后数据", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更前数据
      */
-    public final TableField<XActivityRecord, String> RECORD_OLD = createField(DSL.name("RECORD_OLD"), SQLDataType.CLOB, this, "「recordOld」- 变更前数据");
+    public final TableField<XActivityRecord, JsonObject> RECORD_OLD = createField(DSL.name("RECORD_OLD"), SQLDataType.CLOB, this, "「recordOld」- 变更前数据", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_ACTIVITY.SERIAL</code>. 「serial」- 记录单号
@@ -138,7 +140,7 @@ public class XActivity extends TableImpl<XActivityRecord> {
     /**
      * The column <code>ZDB.X_ACTIVITY.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<XActivityRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<XActivityRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_ACTIVITY.VERSION</code>. 「version」- 版本号

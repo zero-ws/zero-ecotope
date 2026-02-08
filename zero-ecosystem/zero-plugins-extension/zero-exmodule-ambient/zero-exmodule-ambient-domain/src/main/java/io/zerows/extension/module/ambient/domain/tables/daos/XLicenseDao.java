@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XLicense;
 import io.zerows.extension.module.ambient.domain.tables.records.XLicenseRecord;
 
@@ -239,7 +240,7 @@ public class XLicenseDao extends AbstractVertxDAO<XLicenseRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XLicense>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XLicense>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XLicense.X_LICENSE.METADATA.in(values));
         }
 
@@ -247,7 +248,7 @@ public class XLicenseDao extends AbstractVertxDAO<XLicenseRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XLicense>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XLicense>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XLicense.X_LICENSE.METADATA.in(values),limit);
         }
 

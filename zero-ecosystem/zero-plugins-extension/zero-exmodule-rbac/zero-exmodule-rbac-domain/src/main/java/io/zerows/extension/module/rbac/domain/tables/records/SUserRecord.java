@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SUser;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISUser;
 
@@ -537,7 +538,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Ver
      * Setter for <code>ZDB.S_USER.METADATA</code>. 「metadata」- 扩展配置
      */
     @Override
-    public SUserRecord setMetadata(String value) {
+    public SUserRecord setMetadata(JsonObject value) {
         set(30, value);
         return this;
     }
@@ -546,8 +547,8 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Ver
      * Getter for <code>ZDB.S_USER.METADATA</code>. 「metadata」- 扩展配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(30);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(30);
     }
 
     /**
@@ -691,7 +692,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Ver
     /**
      * Create a detached, initialised SUserRecord
      */
-    public SUserRecord(String id, String code, String username, String password, String realname, String alias, String avatar, String description, String mobile, String email, String alipay, String ldapId, String ldapPath, String ldapMail, String weId, String weOpen, String weUnion, String cpId, String cpOpen, String cpUnion, String type, String category, String modelId, String modelKey, String sigma, String appId, String tenantId, String directoryId, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SUserRecord(String id, String code, String username, String password, String realname, String alias, String avatar, String description, String mobile, String email, String alipay, String ldapId, String ldapPath, String ldapMail, String weId, String weOpen, String weUnion, String cpId, String cpOpen, String cpUnion, String type, String category, String modelId, String modelKey, String sigma, String appId, String tenantId, String directoryId, String language, Boolean active, JsonObject metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SUser.S_USER);
 
         setId(id);

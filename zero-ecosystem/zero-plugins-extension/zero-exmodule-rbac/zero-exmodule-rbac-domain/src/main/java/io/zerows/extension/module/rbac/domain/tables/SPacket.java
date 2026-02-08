@@ -4,6 +4,8 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Indexes;
 import io.zerows.extension.module.rbac.domain.Keys;
 import io.zerows.extension.module.rbac.domain.Zdb;
@@ -163,7 +165,7 @@ public class SPacket extends TableImpl<SPacketRecord> {
     /**
      * The column <code>ZDB.S_PACKET.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<SPacketRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<SPacketRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.VERSION</code>. 「version」- 版本号

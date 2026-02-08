@@ -4,6 +4,8 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Indexes;
 import io.zerows.extension.module.rbac.domain.Keys;
 import io.zerows.extension.module.rbac.domain.Zdb;
@@ -207,7 +209,7 @@ public class SUser extends TableImpl<SUserRecord> {
     /**
      * The column <code>ZDB.S_USER.METADATA</code>. 「metadata」- 扩展配置
      */
-    public final TableField<SUserRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 扩展配置");
+    public final TableField<SUserRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 扩展配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间

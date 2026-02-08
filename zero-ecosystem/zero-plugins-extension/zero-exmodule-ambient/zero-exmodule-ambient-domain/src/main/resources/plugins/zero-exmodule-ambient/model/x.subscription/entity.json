@@ -1,0 +1,12 @@
+{
+  "name": "subscription",
+  "daoCls": "X_SUBSCRIPTION",
+  "field": {
+    "unique": [
+      [
+        "planId"
+      ]
+    ]
+  },
+  "tag": "云端管理/订阅"
+}

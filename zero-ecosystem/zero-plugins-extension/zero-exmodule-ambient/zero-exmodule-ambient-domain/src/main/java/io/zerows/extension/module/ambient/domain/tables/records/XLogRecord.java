@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XLog;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXLog;
 
@@ -282,7 +283,7 @@ public class XLogRecord extends UpdatableRecordImpl<XLogRecord> implements Vertx
      * Setter for <code>ZDB.X_LOG.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XLogRecord setMetadata(String value) {
+    public XLogRecord setMetadata(JsonObject value) {
         set(15, value);
         return this;
     }
@@ -291,8 +292,8 @@ public class XLogRecord extends UpdatableRecordImpl<XLogRecord> implements Vertx
      * Getter for <code>ZDB.X_LOG.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(15);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(15);
     }
 
     /**
@@ -439,7 +440,7 @@ public class XLogRecord extends UpdatableRecordImpl<XLogRecord> implements Vertx
     /**
      * Create a detached, initialised XLogRecord
      */
-    public XLogRecord(String id, LocalDateTime infoAt, String infoReadable, String infoStack, String infoSystem, String level, String logAgent, String logIp, String logUser, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XLogRecord(String id, LocalDateTime infoAt, String infoReadable, String infoStack, String infoSystem, String level, String logAgent, String logIp, String logUser, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XLog.X_LOG);
 
         setId(id);

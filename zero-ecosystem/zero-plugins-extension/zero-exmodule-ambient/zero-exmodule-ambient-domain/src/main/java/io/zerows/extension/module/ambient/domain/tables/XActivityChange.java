@@ -4,6 +4,8 @@
 package io.zerows.extension.module.ambient.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.Indexes;
 import io.zerows.extension.module.ambient.domain.Keys;
 import io.zerows.extension.module.ambient.domain.Zdb;
@@ -131,7 +133,7 @@ public class XActivityChange extends TableImpl<XActivityChangeRecord> {
     /**
      * The column <code>ZDB.X_ACTIVITY_CHANGE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<XActivityChangeRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<XActivityChangeRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_ACTIVITY_CHANGE.VERSION</code>. 「version」- 版本号

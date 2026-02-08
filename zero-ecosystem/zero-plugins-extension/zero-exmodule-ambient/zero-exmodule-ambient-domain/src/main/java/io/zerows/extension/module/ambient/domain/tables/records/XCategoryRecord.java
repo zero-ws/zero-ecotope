@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXCategory;
 
@@ -182,7 +183,7 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
      * Setter for <code>ZDB.X_CATEGORY.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
     @Override
-    public XCategoryRecord setRunConfig(String value) {
+    public XCategoryRecord setRunConfig(JsonObject value) {
         set(9, value);
         return this;
     }
@@ -191,8 +192,8 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
      * Getter for <code>ZDB.X_CATEGORY.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
     @Override
-    public String getRunConfig() {
-        return (String) get(9);
+    public JsonObject getRunConfig() {
+        return (JsonObject) get(9);
     }
 
     /**
@@ -235,7 +236,7 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
      * Setter for <code>ZDB.X_CATEGORY.TREE_CONFIG</code>. 「treeConfig」- 目录配置
      */
     @Override
-    public XCategoryRecord setTreeConfig(String value) {
+    public XCategoryRecord setTreeConfig(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -244,8 +245,8 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
      * Getter for <code>ZDB.X_CATEGORY.TREE_CONFIG</code>. 「treeConfig」- 目录配置
      */
     @Override
-    public String getTreeConfig() {
-        return (String) get(12);
+    public JsonObject getTreeConfig() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -354,7 +355,7 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
      * Setter for <code>ZDB.X_CATEGORY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XCategoryRecord setMetadata(String value) {
+    public XCategoryRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -363,8 +364,8 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
      * Getter for <code>ZDB.X_CATEGORY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -515,7 +516,7 @@ public class XCategoryRecord extends UpdatableRecordImpl<XCategoryRecord> implem
     /**
      * Create a detached, initialised XCategoryRecord
      */
-    public XCategoryRecord(String id, String code, String comment, String icon, String identifier, Boolean leaf, String name, String parentId, String runComponent, String runConfig, Integer sort, String treeComponent, String treeConfig, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XCategoryRecord(String id, String code, String comment, String icon, String identifier, Boolean leaf, String name, String parentId, String runComponent, JsonObject runConfig, Integer sort, String treeComponent, JsonObject treeConfig, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XCategory.X_CATEGORY);
 
         setId(id);

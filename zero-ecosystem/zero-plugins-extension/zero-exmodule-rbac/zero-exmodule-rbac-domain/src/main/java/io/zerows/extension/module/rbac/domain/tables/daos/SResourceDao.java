@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SResource;
 import io.zerows.extension.module.rbac.domain.tables.records.SResourceRecord;
 
@@ -177,7 +178,7 @@ public class SResourceDao extends AbstractVertxDAO<SResourceRecord, io.zerows.ex
      * Find records that have <code>SEEK_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyBySeekConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyBySeekConfig(Collection<JsonObject> values) {
                 return findManyByCondition(SResource.S_RESOURCE.SEEK_CONFIG.in(values));
         }
 
@@ -185,7 +186,7 @@ public class SResourceDao extends AbstractVertxDAO<SResourceRecord, io.zerows.ex
      * Find records that have <code>SEEK_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyBySeekConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyBySeekConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SResource.S_RESOURCE.SEEK_CONFIG.in(values),limit);
         }
 
@@ -193,7 +194,7 @@ public class SResourceDao extends AbstractVertxDAO<SResourceRecord, io.zerows.ex
      * Find records that have <code>SEEK_SYNTAX IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyBySeekSyntax(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyBySeekSyntax(Collection<JsonObject> values) {
                 return findManyByCondition(SResource.S_RESOURCE.SEEK_SYNTAX.in(values));
         }
 
@@ -201,7 +202,7 @@ public class SResourceDao extends AbstractVertxDAO<SResourceRecord, io.zerows.ex
      * Find records that have <code>SEEK_SYNTAX IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyBySeekSyntax(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyBySeekSyntax(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SResource.S_RESOURCE.SEEK_SYNTAX.in(values),limit);
         }
 
@@ -313,7 +314,7 @@ public class SResourceDao extends AbstractVertxDAO<SResourceRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(SResource.S_RESOURCE.METADATA.in(values));
         }
 
@@ -321,7 +322,7 @@ public class SResourceDao extends AbstractVertxDAO<SResourceRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SResource>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SResource.S_RESOURCE.METADATA.in(values),limit);
         }
 

@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISVisitant;
 
 import java.time.LocalDateTime;
@@ -39,7 +40,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -98,7 +99,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -486,7 +487,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Getter for <code>ZDB.S_VISITANT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -494,7 +495,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Setter for <code>ZDB.S_VISITANT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SVisitant setMetadata(String metadata) {
+    public SVisitant setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

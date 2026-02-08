@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XTag;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXTag;
 
@@ -282,7 +283,7 @@ public class XTagRecord extends UpdatableRecordImpl<XTagRecord> implements Vertx
      * Setter for <code>ZDB.X_TAG.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XTagRecord setMetadata(String value) {
+    public XTagRecord setMetadata(JsonObject value) {
         set(15, value);
         return this;
     }
@@ -291,8 +292,8 @@ public class XTagRecord extends UpdatableRecordImpl<XTagRecord> implements Vertx
      * Getter for <code>ZDB.X_TAG.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(15);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(15);
     }
 
     /**
@@ -439,7 +440,7 @@ public class XTagRecord extends UpdatableRecordImpl<XTagRecord> implements Vertx
     /**
      * Create a detached, initialised XTagRecord
      */
-    public XTagRecord(String id, String color, String description, String icon, String name, Boolean show, Long sort, String uiConfig, String uiStyle, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XTagRecord(String id, String color, String description, String icon, String name, Boolean show, Long sort, String uiConfig, String uiStyle, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XTag.X_TAG);
 
         setId(id);

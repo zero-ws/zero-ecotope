@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SPermSet;
 import io.zerows.extension.module.rbac.domain.tables.records.SPermSetRecord;
 
@@ -175,7 +176,7 @@ public class SPermSetDao extends AbstractVertxDAO<SPermSetRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(SPermSet.S_PERM_SET.METADATA.in(values));
         }
 
@@ -183,7 +184,7 @@ public class SPermSetDao extends AbstractVertxDAO<SPermSetRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPermSet.S_PERM_SET.METADATA.in(values),limit);
         }
 

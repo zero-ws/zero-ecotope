@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SView;
 import io.zerows.extension.module.rbac.domain.tables.records.SViewRecord;
 
@@ -266,7 +267,7 @@ public class SViewDao extends AbstractVertxDAO<SViewRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(SView.S_VIEW.METADATA.in(values));
         }
 
@@ -274,7 +275,7 @@ public class SViewDao extends AbstractVertxDAO<SViewRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SView.S_VIEW.METADATA.in(values),limit);
         }
 

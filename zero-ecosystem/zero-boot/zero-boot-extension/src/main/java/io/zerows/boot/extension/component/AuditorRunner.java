@@ -117,7 +117,7 @@ class AuditorRunner {
                  * 移除BUG修改
                  */
                 if (Objects.nonNull(newRecord)) {
-                    activity.setRecordNew(newRecord.encode());
+                    activity.setRecordNew(newRecord);
                 }
             }
             /*

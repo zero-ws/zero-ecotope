@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXLicense;
 
 import java.time.LocalDateTime;
@@ -33,7 +34,7 @@ public class XLicense implements VertxPojo, IXLicense {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -80,7 +81,7 @@ public class XLicense implements VertxPojo, IXLicense {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -358,7 +359,7 @@ public class XLicense implements VertxPojo, IXLicense {
      * Getter for <code>ZDB.X_LICENSE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -366,7 +367,7 @@ public class XLicense implements VertxPojo, IXLicense {
      * Setter for <code>ZDB.X_LICENSE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XLicense setMetadata(String metadata) {
+    public XLicense setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

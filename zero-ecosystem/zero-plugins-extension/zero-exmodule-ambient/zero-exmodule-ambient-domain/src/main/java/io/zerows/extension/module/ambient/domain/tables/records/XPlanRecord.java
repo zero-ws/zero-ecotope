@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XPlan;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXPlan;
 
@@ -266,7 +267,7 @@ public class XPlanRecord extends UpdatableRecordImpl<XPlanRecord> implements Ver
      * Setter for <code>ZDB.X_PLAN.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XPlanRecord setMetadata(String value) {
+    public XPlanRecord setMetadata(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -275,8 +276,8 @@ public class XPlanRecord extends UpdatableRecordImpl<XPlanRecord> implements Ver
      * Getter for <code>ZDB.X_PLAN.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(14);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(14);
     }
 
     /**
@@ -422,7 +423,7 @@ public class XPlanRecord extends UpdatableRecordImpl<XPlanRecord> implements Ver
     /**
      * Create a detached, initialised XPlanRecord
      */
-    public XPlanRecord(String id, String code, String name, String billingCycle, BigDecimal price, String currency, String description, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XPlanRecord(String id, String code, String name, String billingCycle, BigDecimal price, String currency, String description, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XPlan.X_PLAN);
 
         setId(id);

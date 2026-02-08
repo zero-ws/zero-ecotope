@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XSource;
 import io.zerows.extension.module.ambient.domain.tables.records.XSourceRecord;
 
@@ -117,7 +118,7 @@ public class XSourceDao extends AbstractVertxDAO<XSourceRecord, io.zerows.extens
      * Find records that have <code>JDBC_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XSource>> findManyByJdbcConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XSource>> findManyByJdbcConfig(Collection<JsonObject> values) {
                 return findManyByCondition(XSource.X_SOURCE.JDBC_CONFIG.in(values));
         }
 
@@ -125,7 +126,7 @@ public class XSourceDao extends AbstractVertxDAO<XSourceRecord, io.zerows.extens
      * Find records that have <code>JDBC_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XSource>> findManyByJdbcConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XSource>> findManyByJdbcConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XSource.X_SOURCE.JDBC_CONFIG.in(values),limit);
         }
 
@@ -282,7 +283,7 @@ public class XSourceDao extends AbstractVertxDAO<XSourceRecord, io.zerows.extens
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XSource>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XSource>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XSource.X_SOURCE.METADATA.in(values));
         }
 
@@ -290,7 +291,7 @@ public class XSourceDao extends AbstractVertxDAO<XSourceRecord, io.zerows.extens
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XSource>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XSource>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XSource.X_SOURCE.METADATA.in(values),limit);
         }
 

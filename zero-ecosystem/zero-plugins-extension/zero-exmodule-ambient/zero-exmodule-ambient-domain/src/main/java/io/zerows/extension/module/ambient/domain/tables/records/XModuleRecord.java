@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XModule;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXModule;
 
@@ -214,7 +215,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
      * Setter for <code>ZDB.X_MODULE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XModuleRecord setMetadata(String value) {
+    public XModuleRecord setMetadata(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -223,8 +224,8 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
      * Getter for <code>ZDB.X_MODULE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(11);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -367,7 +368,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     /**
      * Create a detached, initialised XModuleRecord
      */
-    public XModuleRecord(String id, String blockCode, String code, String entry, String name, String modelId, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XModuleRecord(String id, String blockCode, String code, String entry, String name, String modelId, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XModule.X_MODULE);
 
         setId(id);

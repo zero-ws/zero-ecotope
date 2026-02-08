@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SGroup;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISGroup;
 
@@ -231,7 +232,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements V
      * Setter for <code>ZDB.S_GROUP.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SGroupRecord setMetadata(String value) {
+    public SGroupRecord setMetadata(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -240,8 +241,8 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements V
      * Getter for <code>ZDB.S_GROUP.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(12);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -385,7 +386,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements V
     /**
      * Create a detached, initialised SGroupRecord
      */
-    public SGroupRecord(String id, String code, String name, String parentId, String category, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SGroupRecord(String id, String code, String name, String parentId, String category, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SGroup.S_GROUP);
 
         setId(id);

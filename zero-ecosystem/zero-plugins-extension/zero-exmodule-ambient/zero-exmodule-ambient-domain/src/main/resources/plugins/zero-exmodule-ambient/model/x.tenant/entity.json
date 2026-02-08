@@ -1,0 +1,12 @@
+{
+  "name": "tenant",
+  "daoCls": "X_TENANT",
+  "field": {
+    "unique": [
+      [
+        "name"
+      ]
+    ]
+  },
+  "tag": "云端管理/租户"
+}

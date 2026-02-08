@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SAction;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISAction;
 
@@ -269,7 +270,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
      * Setter for <code>ZDB.S_ACTION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SActionRecord setMetadata(String value) {
+    public SActionRecord setMetadata(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -278,8 +279,8 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
      * Getter for <code>ZDB.S_ACTION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(14);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(14);
     }
 
     /**
@@ -425,7 +426,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     /**
      * Create a detached, initialised SActionRecord
      */
-    public SActionRecord(String id, String code, Integer level, String method, String name, String permissionId, String renewalCredit, String resourceId, String uri, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SActionRecord(String id, String code, Integer level, String method, String name, String permissionId, String renewalCredit, String resourceId, String uri, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SAction.S_ACTION);
 
         setId(id);

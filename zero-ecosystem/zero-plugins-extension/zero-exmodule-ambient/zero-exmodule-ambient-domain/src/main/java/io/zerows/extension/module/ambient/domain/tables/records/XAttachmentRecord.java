@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XAttachment;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXAttachment;
 
@@ -422,7 +423,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
      * Setter for <code>ZDB.X_ATTACHMENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XAttachmentRecord setMetadata(String value) {
+    public XAttachmentRecord setMetadata(JsonObject value) {
         set(23, value);
         return this;
     }
@@ -431,8 +432,8 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
      * Getter for <code>ZDB.X_ATTACHMENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(23);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(23);
     }
 
     /**
@@ -587,7 +588,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     /**
      * Create a detached, initialised XAttachmentRecord
      */
-    public XAttachmentRecord(String id, String directoryId, String extension, String fileKey, String fileName, String filePath, String fileUrl, String mime, String name, Integer size, String storePath, String storeUri, String storeWay, String type, String status, String modelId, String modelKey, String modelCategory, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XAttachmentRecord(String id, String directoryId, String extension, String fileKey, String fileName, String filePath, String fileUrl, String mime, String name, Integer size, String storePath, String storeUri, String storeWay, String type, String status, String modelId, String modelKey, String modelCategory, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XAttachment.X_ATTACHMENT);
 
         setId(id);

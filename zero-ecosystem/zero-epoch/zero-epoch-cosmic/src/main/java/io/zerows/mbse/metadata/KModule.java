@@ -4,6 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.r2mo.base.dbe.DBMany;
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.typed.json.jackson.ClassDeserializer;
 import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.vertx.core.json.JsonObject;
@@ -15,6 +17,7 @@ import io.zerows.epoch.metadata.KTransform;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
+import io.zerows.platform.apps.KDS;
 import io.zerows.platform.enums.EmDS;
 import io.zerows.support.Ut;
 import lombok.Data;
@@ -35,10 +38,9 @@ import java.util.Objects;
  * 数据结构如下
  * <pre><code>
  * {
+ *     "ds": "数据源名称，默认是 `master`",
  *     "name": "模型名称，此名称会作为 /api/:actor 中的 actor 参数",
  *     "pojo": "（一般转换成遗留系统）当模型启用 Pojo 映射时专用",
- *     "mode": "数据库存储位置，{@link EmDS.DB} 枚举值，有五种",
- *     "modeKey": "当 mode = EXTENSION 时，此值必须，用于存储在 Extension 中的 key 值",
  *     "field": "{@link KField}",
  *     "column": "{@link KColumn}"
  * }
@@ -50,17 +52,30 @@ import java.util.Objects;
 public class KModule implements Serializable {
     private String tag;     // OpenAPI 对接
     /**
-     * 模块名称，此名称并非模型的 identifier，而是 /api/:actor 中的 actor 参数，最终会转换成 API 定义中的路径，需要注意的是此路径在整个容器环境中都是唯一的，且您的项目一旦启用了 zero-crud 之后，此名称必须是全容器中唯一的，而且开发人员必须特别熟悉 CRUD 中提供的十五个标准化接口，否则会导致 RESTful 接口规范的冲突。
+     * 模块名称，此名称并非模型的 identifier，而是 /api/:actor 中的 actor 参数，最终会转换成 API 定义中的路径，需要注意的是此路径在整个容器环境中都是唯一的，且您的项目
+     * 一旦启用了 zero-extension-curd 之后，此名称必须是全容器中唯一的，而且开发人员必须特别熟悉 CRUD 中提供的十五个标准化接口，否则会导致 RESTful 接口规范的冲突。
      */
     private String name;
     /**
-     * 针对部分遗留系统，zero 中支持在 /pojo 目录之下存储一层属性映射，映射会存储在 yml 文件中，描述了旧属性和新属性之间的映射关系，这种映射关系会在数据格式转换过程中使用，且 Zero 框架本身带了这层映射的逻辑，直接配置就可以了。即您不需要做任何开发部分的工作就可以实现模型的属性映射
+     * 针对部分遗留系统，zero 中支持在 /pojo 目录之下存储一层属性映射，映射会存储在 yml 文件中，描述了旧属性和新属性之间的映射关系，这种映射关系会在数据格式转换过程中使用，
+     * 且 Zero 框架本身带了这层映射的逻辑，直接配置就可以了。即您不需要做任何开发部分的工作就可以实现模型的属性映射
      */
     private String pojo;
     /**
-     * 跟随 mode = EXTENSION 的专用配置，当您需要自定义数据源时，自定义数据源的 modeKey 会让您的模型仓库中支持模型查找相关功能，如此一来您就可以直接在模型仓库中根据 modeKey 查找对应的模型定义，而不需要在代码中写死。从模型库中搜索模型信息具备唯一检索的主动权，这是 Zero 框架的核心功能之一。
+     * 此处的数据源提取代码：
+     * <pre>
+     *     {@link io.r2mo.base.dbe.DBMany} 可直接访问此类提取数据源信息
+     *     <code class="java>
+     *         DBS dbs = DBMany.of().get("数据源名称");
+     *         DBS dbs = DBMany.of().get(this.ds);
+     *     </code>
+     *     此处提取 {@link DBS} 即可，暂不考虑 {@link KDS} 模式，因为 CRUD 仅限静态配置的方式使用，简单说：
+     *     - {@link DBMany} 的方式提取的是 static 可共享的数据源相关信息。
+     *     - {@link KDS} 则是按照 appId = ?? 可从 X_SOURCE 中提取动态数据源信息（启动时注册到 {@link KDS} 中）。
+     *     注：KDS 模式下不可能会有 daoCls，所以当前 KModule 只能绑定 DBS（静态数据源）
+     * </pre>
      */
-    private String modeKey;     // mode = EXTENSION
+    private String ds;     // mode = EXTENSION
     /**
      * 当前主模型的特殊属性描述，详情参考 {@link KField}
      * <pre><code>
@@ -180,7 +195,7 @@ public class KModule implements Serializable {
         return "IxModule{" +
             "name='" + this.name + '\'' +
             ", pojo='" + this.pojo + '\'' +
-            ", modeKey='" + this.modeKey + '\'' +
+            ", ds='" + this.ds + '\'' +
             ", field=" + this.field +
             ", column=" + this.column +
             ", connect=" + this.connect +

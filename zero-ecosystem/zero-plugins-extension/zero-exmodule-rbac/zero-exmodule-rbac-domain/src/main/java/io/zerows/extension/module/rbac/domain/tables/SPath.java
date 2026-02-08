@@ -4,6 +4,8 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Indexes;
 import io.zerows.extension.module.rbac.domain.Keys;
 import io.zerows.extension.module.rbac.domain.Zdb;
@@ -173,7 +175,7 @@ public class SPath extends TableImpl<SPathRecord> {
     /**
      * The column <code>ZDB.S_PATH.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<SPathRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<SPathRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PATH.VERSION</code>. 「version」- 版本号

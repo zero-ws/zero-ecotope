@@ -4,6 +4,8 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Keys;
 import io.zerows.extension.module.rbac.domain.Zdb;
 import io.zerows.extension.module.rbac.domain.tables.records.SResourceRecord;
@@ -106,12 +108,12 @@ public class SResource extends TableImpl<SResourceRecord> {
     /**
      * The column <code>ZDB.S_RESOURCE.SEEK_CONFIG</code>. 「seekConfig」- 访问配置
      */
-    public final TableField<SResourceRecord, String> SEEK_CONFIG = createField(DSL.name("SEEK_CONFIG"), SQLDataType.CLOB, this, "「seekConfig」- 访问配置");
+    public final TableField<SResourceRecord, JsonObject> SEEK_CONFIG = createField(DSL.name("SEEK_CONFIG"), SQLDataType.CLOB, this, "「seekConfig」- 访问配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_RESOURCE.SEEK_SYNTAX</code>. 「seekSyntax」- 访问语法
      */
-    public final TableField<SResourceRecord, String> SEEK_SYNTAX = createField(DSL.name("SEEK_SYNTAX"), SQLDataType.CLOB, this, "「seekSyntax」- 访问语法");
+    public final TableField<SResourceRecord, JsonObject> SEEK_SYNTAX = createField(DSL.name("SEEK_SYNTAX"), SQLDataType.CLOB, this, "「seekSyntax」- 访问语法", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_RESOURCE.VIRTUAL</code>. 「virtual」- 是否虚拟
@@ -151,7 +153,7 @@ public class SResource extends TableImpl<SResourceRecord> {
     /**
      * The column <code>ZDB.S_RESOURCE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<SResourceRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<SResourceRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_RESOURCE.VERSION</code>. 「version」- 版本号

@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XApp;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXApp;
 
@@ -469,7 +470,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Setter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XAppRecord setMetadata(String value) {
+    public XAppRecord setMetadata(JsonObject value) {
         set(26, value);
         return this;
     }
@@ -478,8 +479,8 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
      * Getter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(26);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(26);
     }
 
     /**
@@ -637,7 +638,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     /**
      * Create a detached, initialised XAppRecord
      */
-    public XAppRecord(String id, String code, String name, String title, String copyRight, String email, String icp, String logo, String favicon, String entry, String domain, Integer port, String context, String endpoint, String urlAdmin, String urlLogin, String urlHealth, String appKey, String appSecret, String status, String namespace, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XAppRecord(String id, String code, String name, String title, String copyRight, String email, String icp, String logo, String favicon, String entry, String domain, Integer port, String context, String endpoint, String urlAdmin, String urlLogin, String urlHealth, String appKey, String appSecret, String status, String namespace, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XApp.X_APP);
 
         setId(id);

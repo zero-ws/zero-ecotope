@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.records.XActivityRuleRecord;
 
@@ -73,7 +74,7 @@ public class XActivityRuleDao extends AbstractVertxDAO<XActivityRuleRecord, io.z
      * Find records that have <code>HOOK_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByHookConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByHookConfig(Collection<JsonObject> values) {
                 return findManyByCondition(XActivityRule.X_ACTIVITY_RULE.HOOK_CONFIG.in(values));
         }
 
@@ -81,7 +82,7 @@ public class XActivityRuleDao extends AbstractVertxDAO<XActivityRuleRecord, io.z
      * Find records that have <code>HOOK_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByHookConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByHookConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XActivityRule.X_ACTIVITY_RULE.HOOK_CONFIG.in(values),limit);
         }
 
@@ -104,7 +105,7 @@ public class XActivityRuleDao extends AbstractVertxDAO<XActivityRuleRecord, io.z
      * Find records that have <code>RULE_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByRuleConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByRuleConfig(Collection<JsonObject> values) {
                 return findManyByCondition(XActivityRule.X_ACTIVITY_RULE.RULE_CONFIG.in(values));
         }
 
@@ -112,7 +113,7 @@ public class XActivityRuleDao extends AbstractVertxDAO<XActivityRuleRecord, io.z
      * Find records that have <code>RULE_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByRuleConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByRuleConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XActivityRule.X_ACTIVITY_RULE.RULE_CONFIG.in(values),limit);
         }
 
@@ -227,7 +228,7 @@ public class XActivityRuleDao extends AbstractVertxDAO<XActivityRuleRecord, io.z
         /**
      * Find records that have <code>RULE_TPL IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByRuleTpl(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByRuleTpl(Collection<JsonObject> values) {
                 return findManyByCondition(XActivityRule.X_ACTIVITY_RULE.RULE_TPL.in(values));
         }
 
@@ -235,7 +236,7 @@ public class XActivityRuleDao extends AbstractVertxDAO<XActivityRuleRecord, io.z
      * Find records that have <code>RULE_TPL IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByRuleTpl(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByRuleTpl(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XActivityRule.X_ACTIVITY_RULE.RULE_TPL.in(values),limit);
         }
 
@@ -347,7 +348,7 @@ public class XActivityRuleDao extends AbstractVertxDAO<XActivityRuleRecord, io.z
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XActivityRule.X_ACTIVITY_RULE.METADATA.in(values));
         }
 
@@ -355,7 +356,7 @@ public class XActivityRuleDao extends AbstractVertxDAO<XActivityRuleRecord, io.z
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityRule>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XActivityRule.X_ACTIVITY_RULE.METADATA.in(values),limit);
         }
 

@@ -46,3 +46,4 @@ tree.txt
 archive
 *.log
 .flattened-pom.xml
+dump.rdb

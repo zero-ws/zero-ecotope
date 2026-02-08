@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISView;
 
 import java.time.LocalDateTime;
@@ -35,7 +36,7 @@ public class SView implements VertxPojo, ISView {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -86,7 +87,7 @@ public class SView implements VertxPojo, ISView {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -398,7 +399,7 @@ public class SView implements VertxPojo, ISView {
      * Getter for <code>ZDB.S_VIEW.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -406,7 +407,7 @@ public class SView implements VertxPojo, ISView {
      * Setter for <code>ZDB.S_VIEW.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SView setMetadata(String metadata) {
+    public SView setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

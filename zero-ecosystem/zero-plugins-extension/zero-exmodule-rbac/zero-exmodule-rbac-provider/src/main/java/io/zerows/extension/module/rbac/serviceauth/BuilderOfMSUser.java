@@ -7,7 +7,6 @@ import io.r2mo.typed.domain.extension.AbstractBuilder;
 import io.r2mo.typed.enums.TypeID;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
-import io.zerows.support.Ut;
 
 import java.util.Optional;
 
@@ -79,7 +78,7 @@ public class BuilderOfMSUser extends AbstractBuilder<MSUser> {
             );
 
             // metadata
-            entity.extension(KName.METADATA, Ut.toJObject(user.getMetadata()));
+            entity.extension(KName.METADATA, user.getMetadata());
 
             // Active
             R2MO.vActive(entity,

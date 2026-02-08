@@ -4,6 +4,8 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Keys;
 import io.zerows.extension.module.rbac.domain.Zdb;
 import io.zerows.extension.module.rbac.domain.tables.records.SActionRecord;
@@ -127,7 +129,7 @@ public class SAction extends TableImpl<SActionRecord> {
     /**
      * The column <code>ZDB.S_ACTION.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<SActionRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<SActionRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_ACTION.VERSION</code>. 「version」- 版本号

@@ -148,7 +148,7 @@ class ExtensionGenerate {
             this.writeZDB(configuration);
             log.info("[ PLUG ] 您的数据库相关代码生成成功！");
         } catch (final Throwable ex) {
-            ex.printStackTrace();
+            // ex.printStackTrace();
             log.error(ex.getMessage(), ex);
         }
     }
@@ -194,7 +194,8 @@ class ExtensionGenerate {
             }
 
         } catch (final Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
 
         return null;

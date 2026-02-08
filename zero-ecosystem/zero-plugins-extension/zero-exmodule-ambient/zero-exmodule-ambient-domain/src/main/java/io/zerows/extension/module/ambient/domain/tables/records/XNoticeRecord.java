@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XNotice;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXNotice;
 
@@ -231,7 +232,7 @@ public class XNoticeRecord extends UpdatableRecordImpl<XNoticeRecord> implements
      * Setter for <code>ZDB.X_NOTICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XNoticeRecord setMetadata(String value) {
+    public XNoticeRecord setMetadata(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -240,8 +241,8 @@ public class XNoticeRecord extends UpdatableRecordImpl<XNoticeRecord> implements
      * Getter for <code>ZDB.X_NOTICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(12);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -385,7 +386,7 @@ public class XNoticeRecord extends UpdatableRecordImpl<XNoticeRecord> implements
     /**
      * Create a detached, initialised XNoticeRecord
      */
-    public XNoticeRecord(String id, String code, String content, LocalDateTime expiredAt, String name, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XNoticeRecord(String id, String code, String content, LocalDateTime expiredAt, String name, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XNotice.X_NOTICE);
 
         setId(id);

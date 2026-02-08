@@ -4,6 +4,8 @@
 package io.zerows.extension.module.ambient.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.Keys;
 import io.zerows.extension.module.ambient.domain.Zdb;
 import io.zerows.extension.module.ambient.domain.tables.records.XTagRecord;
@@ -130,7 +132,7 @@ public class XTag extends TableImpl<XTagRecord> {
     /**
      * The column <code>ZDB.X_TAG.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<XTagRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<XTagRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_TAG.VERSION</code>. 「version」- 版本号

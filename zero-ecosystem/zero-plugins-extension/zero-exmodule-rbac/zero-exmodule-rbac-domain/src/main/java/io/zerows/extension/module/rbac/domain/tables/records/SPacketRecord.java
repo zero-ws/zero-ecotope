@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SPacket;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISPacket;
 
@@ -386,7 +387,7 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Setter for <code>ZDB.S_PACKET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SPacketRecord setMetadata(String value) {
+    public SPacketRecord setMetadata(JsonObject value) {
         set(21, value);
         return this;
     }
@@ -395,8 +396,8 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(21);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(21);
     }
 
     /**
@@ -549,7 +550,7 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
     /**
      * Create a detached, initialised SPacketRecord
      */
-    public SPacketRecord(String id, String code, String hConfig, String hMapping, String hType, String qConfig, String qMapping, String qType, String resource, String runComponent, String runConfig, String seekConfig, String seekSyntax, String vConfig, String vMapping, String vType, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SPacketRecord(String id, String code, String hConfig, String hMapping, String hType, String qConfig, String qMapping, String qType, String resource, String runComponent, String runConfig, String seekConfig, String seekSyntax, String vConfig, String vMapping, String vType, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SPacket.S_PACKET);
 
         setId(id);

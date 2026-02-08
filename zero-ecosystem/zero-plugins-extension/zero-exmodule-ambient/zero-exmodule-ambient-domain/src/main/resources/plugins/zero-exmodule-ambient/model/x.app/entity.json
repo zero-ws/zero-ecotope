@@ -1,0 +1,12 @@
+{
+  "name": "app",
+  "daoCls": "X_APP",
+  "field": {
+    "unique": [
+      [
+        "name"
+      ]
+    ]
+  },
+  "tag": "云端管理/应用"
+}

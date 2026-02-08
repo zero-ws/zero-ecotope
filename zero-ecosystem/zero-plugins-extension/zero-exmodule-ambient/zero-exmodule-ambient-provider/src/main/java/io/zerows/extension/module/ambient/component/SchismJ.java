@@ -80,8 +80,8 @@ class SchismJ extends SchismBase {
              *  - key
              *  - serial
              */
-            activity.setRecordOld(recordO.encode());
-            activity.setRecordNew(recordN.encode());
+            activity.setRecordOld(recordO);
+            activity.setRecordNew(recordN);
 
             final List<XActivityChange> changes = At.diffChange(recordO, recordN, this.atom);
 

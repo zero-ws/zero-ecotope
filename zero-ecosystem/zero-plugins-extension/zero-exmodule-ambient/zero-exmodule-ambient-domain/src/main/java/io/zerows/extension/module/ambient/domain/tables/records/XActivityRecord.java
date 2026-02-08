@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXActivity;
 
@@ -61,7 +62,7 @@ public class XActivityRecord extends UpdatableRecordImpl<XActivityRecord> implem
      * Setter for <code>ZDB.X_ACTIVITY.RECORD_NEW</code>. 「recordNew」- 变更后数据
      */
     @Override
-    public XActivityRecord setRecordNew(String value) {
+    public XActivityRecord setRecordNew(JsonObject value) {
         set(2, value);
         return this;
     }
@@ -70,15 +71,15 @@ public class XActivityRecord extends UpdatableRecordImpl<XActivityRecord> implem
      * Getter for <code>ZDB.X_ACTIVITY.RECORD_NEW</code>. 「recordNew」- 变更后数据
      */
     @Override
-    public String getRecordNew() {
-        return (String) get(2);
+    public JsonObject getRecordNew() {
+        return (JsonObject) get(2);
     }
 
     /**
      * Setter for <code>ZDB.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更前数据
      */
     @Override
-    public XActivityRecord setRecordOld(String value) {
+    public XActivityRecord setRecordOld(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -87,8 +88,8 @@ public class XActivityRecord extends UpdatableRecordImpl<XActivityRecord> implem
      * Getter for <code>ZDB.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更前数据
      */
     @Override
-    public String getRecordOld() {
-        return (String) get(3);
+    public JsonObject getRecordOld() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -301,7 +302,7 @@ public class XActivityRecord extends UpdatableRecordImpl<XActivityRecord> implem
      * Setter for <code>ZDB.X_ACTIVITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XActivityRecord setMetadata(String value) {
+    public XActivityRecord setMetadata(JsonObject value) {
         set(16, value);
         return this;
     }
@@ -310,8 +311,8 @@ public class XActivityRecord extends UpdatableRecordImpl<XActivityRecord> implem
      * Getter for <code>ZDB.X_ACTIVITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(16);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(16);
     }
 
     /**
@@ -459,7 +460,7 @@ public class XActivityRecord extends UpdatableRecordImpl<XActivityRecord> implem
     /**
      * Create a detached, initialised XActivityRecord
      */
-    public XActivityRecord(String id, String description, String recordNew, String recordOld, String serial, String taskName, String taskSerial, String type, String modelId, String modelKey, String modelCategory, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XActivityRecord(String id, String description, JsonObject recordNew, JsonObject recordOld, String serial, String taskName, String taskSerial, String type, String modelId, String modelKey, String modelCategory, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XActivity.X_ACTIVITY);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XSubscription;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXSubscription;
 
@@ -248,7 +249,7 @@ public class XSubscriptionRecord extends UpdatableRecordImpl<XSubscriptionRecord
      * Setter for <code>ZDB.X_SUBSCRIPTION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XSubscriptionRecord setMetadata(String value) {
+    public XSubscriptionRecord setMetadata(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -257,8 +258,8 @@ public class XSubscriptionRecord extends UpdatableRecordImpl<XSubscriptionRecord
      * Getter for <code>ZDB.X_SUBSCRIPTION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(13);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -403,7 +404,7 @@ public class XSubscriptionRecord extends UpdatableRecordImpl<XSubscriptionRecord
     /**
      * Create a detached, initialised XSubscriptionRecord
      */
-    public XSubscriptionRecord(String id, String planId, LocalDateTime startAt, LocalDateTime endAt, String renewType, Boolean autoRenew, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XSubscriptionRecord(String id, String planId, LocalDateTime startAt, LocalDateTime endAt, String renewType, Boolean autoRenew, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XSubscription.X_SUBSCRIPTION);
 
         setId(id);

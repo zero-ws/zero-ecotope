@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXSource;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,7 @@ public class XSource implements VertxPojo, IXSource {
     private String instance;
     private String ipV4;
     private String ipV6;
-    private String jdbcConfig;
+    private JsonObject jdbcConfig;
     private String jdbcUrl;
     private String password;
     private Integer port;
@@ -36,7 +37,7 @@ public class XSource implements VertxPojo, IXSource {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -78,7 +79,7 @@ public class XSource implements VertxPojo, IXSource {
         String instance,
         String ipV4,
         String ipV6,
-        String jdbcConfig,
+        JsonObject jdbcConfig,
         String jdbcUrl,
         String password,
         Integer port,
@@ -89,7 +90,7 @@ public class XSource implements VertxPojo, IXSource {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -234,7 +235,7 @@ public class XSource implements VertxPojo, IXSource {
      * Getter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中
      */
     @Override
-    public String getJdbcConfig() {
+    public JsonObject getJdbcConfig() {
         return this.jdbcConfig;
     }
 
@@ -242,7 +243,7 @@ public class XSource implements VertxPojo, IXSource {
      * Setter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中
      */
     @Override
-    public XSource setJdbcConfig(String jdbcConfig) {
+    public XSource setJdbcConfig(JsonObject jdbcConfig) {
         this.jdbcConfig = jdbcConfig;
         return this;
     }
@@ -421,7 +422,7 @@ public class XSource implements VertxPojo, IXSource {
      * Getter for <code>ZDB.X_SOURCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -429,7 +430,7 @@ public class XSource implements VertxPojo, IXSource {
      * Setter for <code>ZDB.X_SOURCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XSource setMetadata(String metadata) {
+    public XSource setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }
