@@ -974,7 +974,7 @@ public class ADB {
 
     // map ✅ ------> executed ✅ ------> map ❌
     public <T> ConcurrentMap<String, List<T>> group(final String field,final JsonObject criteria) {
-        return new ConcurrentHashMap<>(this.<T>dbe().findGroupBy(criteria, field));
+        return new ConcurrentHashMap<>(this.<T>dbe().findGroupBy(field,criteria));
     }
 
     // map ✅ ------> executed ✅ ------> map ✅

@@ -50,7 +50,7 @@ public class ExModulatCommon implements ExModulat {
      */
     @Override
     public Future<JsonObject> extension(final JsonObject appJson, final boolean open) {
-        final String key = appJson.getString(KName.KEY);
+        final String key = appJson.getString(KName.ID);
         return this.extension(key, open).compose(moduleJ -> {
             final JsonObject original = moduleJ.copy();
             original.mergeIn(appJson, true);
