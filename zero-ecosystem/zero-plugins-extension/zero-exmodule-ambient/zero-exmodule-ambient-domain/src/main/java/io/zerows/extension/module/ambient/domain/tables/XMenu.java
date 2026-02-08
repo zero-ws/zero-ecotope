@@ -4,6 +4,8 @@
 package io.zerows.extension.module.ambient.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.Indexes;
 import io.zerows.extension.module.ambient.domain.Keys;
 import io.zerows.extension.module.ambient.domain.Zdb;
@@ -127,7 +129,7 @@ public class XMenu extends TableImpl<XMenuRecord> {
     /**
      * The column <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<XMenuRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<XMenuRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本号

@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXCategory;
 
 import java.time.LocalDateTime;
@@ -28,17 +29,17 @@ public class XCategory implements VertxPojo, IXCategory {
     private String name;
     private String parentId;
     private String runComponent;
-    private String runConfig;
+    private JsonObject runConfig;
     private Integer sort;
     private String treeComponent;
-    private String treeConfig;
+    private JsonObject treeConfig;
     private String type;
     private String sigma;
     private String tenantId;
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -85,17 +86,17 @@ public class XCategory implements VertxPojo, IXCategory {
         String name,
         String parentId,
         String runComponent,
-        String runConfig,
+        JsonObject runConfig,
         Integer sort,
         String treeComponent,
-        String treeConfig,
+        JsonObject treeConfig,
         String type,
         String sigma,
         String tenantId,
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -293,7 +294,7 @@ public class XCategory implements VertxPojo, IXCategory {
      * Getter for <code>ZDB.X_CATEGORY.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
     @Override
-    public String getRunConfig() {
+    public JsonObject getRunConfig() {
         return this.runConfig;
     }
 
@@ -301,7 +302,7 @@ public class XCategory implements VertxPojo, IXCategory {
      * Setter for <code>ZDB.X_CATEGORY.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
     @Override
-    public XCategory setRunConfig(String runConfig) {
+    public XCategory setRunConfig(JsonObject runConfig) {
         this.runConfig = runConfig;
         return this;
     }
@@ -346,7 +347,7 @@ public class XCategory implements VertxPojo, IXCategory {
      * Getter for <code>ZDB.X_CATEGORY.TREE_CONFIG</code>. 「treeConfig」- 目录配置
      */
     @Override
-    public String getTreeConfig() {
+    public JsonObject getTreeConfig() {
         return this.treeConfig;
     }
 
@@ -354,7 +355,7 @@ public class XCategory implements VertxPojo, IXCategory {
      * Setter for <code>ZDB.X_CATEGORY.TREE_CONFIG</code>. 「treeConfig」- 目录配置
      */
     @Override
-    public XCategory setTreeConfig(String treeConfig) {
+    public XCategory setTreeConfig(JsonObject treeConfig) {
         this.treeConfig = treeConfig;
         return this;
     }
@@ -465,7 +466,7 @@ public class XCategory implements VertxPojo, IXCategory {
      * Getter for <code>ZDB.X_CATEGORY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -473,7 +474,7 @@ public class XCategory implements VertxPojo, IXCategory {
      * Setter for <code>ZDB.X_CATEGORY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XCategory setMetadata(String metadata) {
+    public XCategory setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

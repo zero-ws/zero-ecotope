@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XLinkage;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXLinkage;
 
@@ -350,7 +351,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Setter for <code>ZDB.X_LINKAGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XLinkageRecord setMetadata(String value) {
+    public XLinkageRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -359,8 +360,8 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
      * Getter for <code>ZDB.X_LINKAGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -511,7 +512,7 @@ public class XLinkageRecord extends UpdatableRecordImpl<XLinkageRecord> implemen
     /**
      * Create a detached, initialised XLinkageRecord
      */
-    public XLinkageRecord(String id, String alias, String linkData, String linkKey, String linkType, String name, String region, String sourceData, String sourceKey, String sourceType, String targetData, String targetKey, String targetType, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XLinkageRecord(String id, String alias, String linkData, String linkKey, String linkType, String name, String region, String sourceData, String sourceKey, String sourceType, String targetData, String targetKey, String targetType, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XLinkage.X_LINKAGE);
 
         setId(id);

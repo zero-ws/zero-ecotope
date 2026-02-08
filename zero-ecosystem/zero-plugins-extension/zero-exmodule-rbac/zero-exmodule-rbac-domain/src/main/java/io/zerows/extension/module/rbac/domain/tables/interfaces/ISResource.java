@@ -123,22 +123,22 @@ public interface ISResource extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_RESOURCE.SEEK_CONFIG</code>. 「seekConfig」- 访问配置
      */
-    public ISResource setSeekConfig(String value);
+    public ISResource setSeekConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_RESOURCE.SEEK_CONFIG</code>. 「seekConfig」- 访问配置
      */
-    public String getSeekConfig();
+    public JsonObject getSeekConfig();
 
     /**
      * Setter for <code>ZDB.S_RESOURCE.SEEK_SYNTAX</code>. 「seekSyntax」- 访问语法
      */
-    public ISResource setSeekSyntax(String value);
+    public ISResource setSeekSyntax(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_RESOURCE.SEEK_SYNTAX</code>. 「seekSyntax」- 访问语法
      */
-    public String getSeekSyntax();
+    public JsonObject getSeekSyntax();
 
     /**
      * Setter for <code>ZDB.S_RESOURCE.VIRTUAL</code>. 「virtual」- 是否虚拟
@@ -298,8 +298,8 @@ public interface ISResource extends VertxPojo, Serializable {
                 setOrThrow(this::setModeTree,json::getString,"MODE_TREE","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setSeekComponent,json::getString,"SEEK_COMPONENT","java.lang.String");
-                setOrThrow(this::setSeekConfig,json::getString,"SEEK_CONFIG","java.lang.String");
-                setOrThrow(this::setSeekSyntax,json::getString,"SEEK_SYNTAX","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SEEK_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SEEK_SYNTAX!
                 setOrThrow(this::setVirtual,json::getBoolean,"VIRTUAL","java.lang.Boolean");
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -330,8 +330,8 @@ public interface ISResource extends VertxPojo, Serializable {
                 json.put("MODE_TREE",getModeTree());
                 json.put("NAME",getName());
                 json.put("SEEK_COMPONENT",getSeekComponent());
-                json.put("SEEK_CONFIG",getSeekConfig());
-                json.put("SEEK_SYNTAX",getSeekSyntax());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SEEK_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SEEK_SYNTAX!
                 json.put("VIRTUAL",getVirtual());
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());

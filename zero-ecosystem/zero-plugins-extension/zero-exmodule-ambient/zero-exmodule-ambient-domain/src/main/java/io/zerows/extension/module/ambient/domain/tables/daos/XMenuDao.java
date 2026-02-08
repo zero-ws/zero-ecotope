@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XMenu;
 import io.zerows.extension.module.ambient.domain.tables.records.XMenuRecord;
 
@@ -235,7 +236,7 @@ public class XMenuDao extends AbstractVertxDAO<XMenuRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XMenu>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XMenu>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XMenu.X_MENU.METADATA.in(values));
         }
 
@@ -243,7 +244,7 @@ public class XMenuDao extends AbstractVertxDAO<XMenuRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XMenu>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XMenu>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XMenu.X_MENU.METADATA.in(values),limit);
         }
 

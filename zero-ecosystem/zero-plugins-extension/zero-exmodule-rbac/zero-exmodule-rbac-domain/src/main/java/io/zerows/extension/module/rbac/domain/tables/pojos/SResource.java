@@ -30,8 +30,8 @@ public class SResource implements VertxPojo, ISResource {
     private String modeTree;
     private String name;
     private String seekComponent;
-    private String seekConfig;
-    private String seekSyntax;
+    private JsonObject seekConfig;
+    private JsonObject seekSyntax;
     private Boolean virtual;
     private String type;
     private String sigma;
@@ -87,8 +87,8 @@ public class SResource implements VertxPojo, ISResource {
         String modeTree,
         String name,
         String seekComponent,
-        String seekConfig,
-        String seekSyntax,
+        JsonObject seekConfig,
+        JsonObject seekSyntax,
         Boolean virtual,
         String type,
         String sigma,
@@ -311,7 +311,7 @@ public class SResource implements VertxPojo, ISResource {
      * Getter for <code>ZDB.S_RESOURCE.SEEK_CONFIG</code>. 「seekConfig」- 访问配置
      */
     @Override
-    public String getSeekConfig() {
+    public JsonObject getSeekConfig() {
         return this.seekConfig;
     }
 
@@ -319,7 +319,7 @@ public class SResource implements VertxPojo, ISResource {
      * Setter for <code>ZDB.S_RESOURCE.SEEK_CONFIG</code>. 「seekConfig」- 访问配置
      */
     @Override
-    public SResource setSeekConfig(String seekConfig) {
+    public SResource setSeekConfig(JsonObject seekConfig) {
         this.seekConfig = seekConfig;
         return this;
     }
@@ -328,7 +328,7 @@ public class SResource implements VertxPojo, ISResource {
      * Getter for <code>ZDB.S_RESOURCE.SEEK_SYNTAX</code>. 「seekSyntax」- 访问语法
      */
     @Override
-    public String getSeekSyntax() {
+    public JsonObject getSeekSyntax() {
         return this.seekSyntax;
     }
 
@@ -336,7 +336,7 @@ public class SResource implements VertxPojo, ISResource {
      * Setter for <code>ZDB.S_RESOURCE.SEEK_SYNTAX</code>. 「seekSyntax」- 访问语法
      */
     @Override
-    public SResource setSeekSyntax(String seekSyntax) {
+    public SResource setSeekSyntax(JsonObject seekSyntax) {
         this.seekSyntax = seekSyntax;
         return this;
     }

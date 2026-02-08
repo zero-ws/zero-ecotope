@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -55,13 +56,13 @@ public interface IXActivityRule extends VertxPojo, Serializable {
      * Setter for <code>ZDB.X_ACTIVITY_RULE.HOOK_CONFIG</code>. 「hookConfig」-
      * 钩子配置
      */
-    public IXActivityRule setHookConfig(String value);
+    public IXActivityRule setHookConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_ACTIVITY_RULE.HOOK_CONFIG</code>. 「hookConfig」-
      * 钩子配置
      */
-    public String getHookConfig();
+    public JsonObject getHookConfig();
 
     /**
      * Setter for <code>ZDB.X_ACTIVITY_RULE.LOGGING</code>. 「logging」- 是否记录日志
@@ -77,13 +78,13 @@ public interface IXActivityRule extends VertxPojo, Serializable {
      * Setter for <code>ZDB.X_ACTIVITY_RULE.RULE_CONFIG</code>. 「ruleConfig」-
      * 规则配置
      */
-    public IXActivityRule setRuleConfig(String value);
+    public IXActivityRule setRuleConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_ACTIVITY_RULE.RULE_CONFIG</code>. 「ruleConfig」-
      * 规则配置
      */
-    public String getRuleConfig();
+    public JsonObject getRuleConfig();
 
     /**
      * Setter for <code>ZDB.X_ACTIVITY_RULE.RULE_EXPRESSION</code>.
@@ -166,12 +167,12 @@ public interface IXActivityRule extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_ACTIVITY_RULE.RULE_TPL</code>. 「ruleTpl」- 参数模版
      */
-    public IXActivityRule setRuleTpl(String value);
+    public IXActivityRule setRuleTpl(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_ACTIVITY_RULE.RULE_TPL</code>. 「ruleTpl」- 参数模版
      */
-    public String getRuleTpl();
+    public JsonObject getRuleTpl();
 
     /**
      * Setter for <code>ZDB.X_ACTIVITY_RULE.TASK_KEY</code>. 「taskKey」- 任务节点名
@@ -246,12 +247,12 @@ public interface IXActivityRule extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_ACTIVITY_RULE.METADATA</code>. 「metadata」- 元配置
      */
-    public IXActivityRule setMetadata(String value);
+    public IXActivityRule setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_ACTIVITY_RULE.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.X_ACTIVITY_RULE.VERSION</code>. 「version」- 版本号
@@ -324,9 +325,9 @@ public interface IXActivityRule extends VertxPojo, Serializable {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setDefinitionKey,json::getString,"DEFINITION_KEY","java.lang.String");
                 setOrThrow(this::setHookComponent,json::getString,"HOOK_COMPONENT","java.lang.String");
-                setOrThrow(this::setHookConfig,json::getString,"HOOK_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column HOOK_CONFIG!
                 setOrThrow(this::setLogging,json::getBoolean,"LOGGING","java.lang.Boolean");
-                setOrThrow(this::setRuleConfig,json::getString,"RULE_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RULE_CONFIG!
                 setOrThrow(this::setRuleExpression,json::getString,"RULE_EXPRESSION","java.lang.String");
                 setOrThrow(this::setRuleField,json::getString,"RULE_FIELD","java.lang.String");
                 setOrThrow(this::setRuleIdentifier,json::getString,"RULE_IDENTIFIER","java.lang.String");
@@ -334,7 +335,7 @@ public interface IXActivityRule extends VertxPojo, Serializable {
                 setOrThrow(this::setRuleName,json::getString,"RULE_NAME","java.lang.String");
                 setOrThrow(this::setRuleNs,json::getString,"RULE_NS","java.lang.String");
                 setOrThrow(this::setRuleOrder,json::getLong,"RULE_ORDER","java.lang.Long");
-                setOrThrow(this::setRuleTpl,json::getString,"RULE_TPL","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RULE_TPL!
                 setOrThrow(this::setTaskKey,json::getString,"TASK_KEY","java.lang.String");
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -342,7 +343,7 @@ public interface IXActivityRule extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -358,9 +359,9 @@ public interface IXActivityRule extends VertxPojo, Serializable {
                 json.put("ID",getId());
                 json.put("DEFINITION_KEY",getDefinitionKey());
                 json.put("HOOK_COMPONENT",getHookComponent());
-                json.put("HOOK_CONFIG",getHookConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column HOOK_CONFIG!
                 json.put("LOGGING",getLogging());
-                json.put("RULE_CONFIG",getRuleConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RULE_CONFIG!
                 json.put("RULE_EXPRESSION",getRuleExpression());
                 json.put("RULE_FIELD",getRuleField());
                 json.put("RULE_IDENTIFIER",getRuleIdentifier());
@@ -368,7 +369,7 @@ public interface IXActivityRule extends VertxPojo, Serializable {
                 json.put("RULE_NAME",getRuleName());
                 json.put("RULE_NS",getRuleNs());
                 json.put("RULE_ORDER",getRuleOrder());
-                json.put("RULE_TPL",getRuleTpl());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RULE_TPL!
                 json.put("TASK_KEY",getTaskKey());
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
@@ -376,7 +377,7 @@ public interface IXActivityRule extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

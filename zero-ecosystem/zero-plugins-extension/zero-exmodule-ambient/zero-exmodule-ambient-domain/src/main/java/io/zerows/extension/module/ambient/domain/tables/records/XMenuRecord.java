@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XMenu;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXMenu;
 
@@ -265,7 +266,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
      * Setter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XMenuRecord setMetadata(String value) {
+    public XMenuRecord setMetadata(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -274,8 +275,8 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
      * Getter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(14);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(14);
     }
 
     /**
@@ -421,7 +422,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     /**
      * Create a detached, initialised XMenuRecord
      */
-    public XMenuRecord(String id, String icon, Long level, String name, Long order, String parentId, String text, String uri, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XMenuRecord(String id, String icon, Long level, String name, Long order, String parentId, String text, String uri, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XMenu.X_MENU);
 
         setId(id);

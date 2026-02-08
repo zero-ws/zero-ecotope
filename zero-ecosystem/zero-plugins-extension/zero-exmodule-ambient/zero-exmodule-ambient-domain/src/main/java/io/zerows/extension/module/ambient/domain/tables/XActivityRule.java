@@ -4,6 +4,8 @@
 package io.zerows.extension.module.ambient.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.Indexes;
 import io.zerows.extension.module.ambient.domain.Keys;
 import io.zerows.extension.module.ambient.domain.Zdb;
@@ -75,7 +77,7 @@ public class XActivityRule extends TableImpl<XActivityRuleRecord> {
      * The column <code>ZDB.X_ACTIVITY_RULE.HOOK_CONFIG</code>. 「hookConfig」-
      * 钩子配置
      */
-    public final TableField<XActivityRuleRecord, String> HOOK_CONFIG = createField(DSL.name("HOOK_CONFIG"), SQLDataType.CLOB, this, "「hookConfig」- 钩子配置");
+    public final TableField<XActivityRuleRecord, JsonObject> HOOK_CONFIG = createField(DSL.name("HOOK_CONFIG"), SQLDataType.CLOB, this, "「hookConfig」- 钩子配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_ACTIVITY_RULE.LOGGING</code>. 「logging」- 是否记录日志
@@ -86,7 +88,7 @@ public class XActivityRule extends TableImpl<XActivityRuleRecord> {
      * The column <code>ZDB.X_ACTIVITY_RULE.RULE_CONFIG</code>. 「ruleConfig」-
      * 规则配置
      */
-    public final TableField<XActivityRuleRecord, String> RULE_CONFIG = createField(DSL.name("RULE_CONFIG"), SQLDataType.CLOB, this, "「ruleConfig」- 规则配置");
+    public final TableField<XActivityRuleRecord, JsonObject> RULE_CONFIG = createField(DSL.name("RULE_CONFIG"), SQLDataType.CLOB, this, "「ruleConfig」- 规则配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_ACTIVITY_RULE.RULE_EXPRESSION</code>.
@@ -130,7 +132,7 @@ public class XActivityRule extends TableImpl<XActivityRuleRecord> {
     /**
      * The column <code>ZDB.X_ACTIVITY_RULE.RULE_TPL</code>. 「ruleTpl」- 参数模版
      */
-    public final TableField<XActivityRuleRecord, String> RULE_TPL = createField(DSL.name("RULE_TPL"), SQLDataType.CLOB(65535), this, "「ruleTpl」- 参数模版");
+    public final TableField<XActivityRuleRecord, JsonObject> RULE_TPL = createField(DSL.name("RULE_TPL"), SQLDataType.CLOB(65535), this, "「ruleTpl」- 参数模版", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_ACTIVITY_RULE.TASK_KEY</code>. 「taskKey」- 任务节点名
@@ -170,7 +172,7 @@ public class XActivityRule extends TableImpl<XActivityRuleRecord> {
     /**
      * The column <code>ZDB.X_ACTIVITY_RULE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<XActivityRuleRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<XActivityRuleRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_ACTIVITY_RULE.VERSION</code>. 「version」- 版本号

@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
 import io.zerows.extension.module.ambient.domain.tables.records.XCategoryRecord;
 
@@ -161,7 +162,7 @@ public class XCategoryDao extends AbstractVertxDAO<XCategoryRecord, io.zerows.ex
         /**
      * Find records that have <code>RUN_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByRunConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByRunConfig(Collection<JsonObject> values) {
                 return findManyByCondition(XCategory.X_CATEGORY.RUN_CONFIG.in(values));
         }
 
@@ -169,7 +170,7 @@ public class XCategoryDao extends AbstractVertxDAO<XCategoryRecord, io.zerows.ex
      * Find records that have <code>RUN_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByRunConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByRunConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XCategory.X_CATEGORY.RUN_CONFIG.in(values),limit);
         }
 
@@ -208,7 +209,7 @@ public class XCategoryDao extends AbstractVertxDAO<XCategoryRecord, io.zerows.ex
      * Find records that have <code>TREE_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByTreeConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByTreeConfig(Collection<JsonObject> values) {
                 return findManyByCondition(XCategory.X_CATEGORY.TREE_CONFIG.in(values));
         }
 
@@ -216,7 +217,7 @@ public class XCategoryDao extends AbstractVertxDAO<XCategoryRecord, io.zerows.ex
      * Find records that have <code>TREE_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByTreeConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByTreeConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XCategory.X_CATEGORY.TREE_CONFIG.in(values),limit);
         }
 
@@ -313,7 +314,7 @@ public class XCategoryDao extends AbstractVertxDAO<XCategoryRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XCategory.X_CATEGORY.METADATA.in(values));
         }
 
@@ -321,7 +322,7 @@ public class XCategoryDao extends AbstractVertxDAO<XCategoryRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XCategory>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XCategory.X_CATEGORY.METADATA.in(values),limit);
         }
 

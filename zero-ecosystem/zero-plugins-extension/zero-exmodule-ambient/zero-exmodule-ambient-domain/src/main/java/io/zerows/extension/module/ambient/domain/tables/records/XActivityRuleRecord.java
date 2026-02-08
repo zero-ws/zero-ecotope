@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXActivityRule;
 
@@ -83,7 +84,7 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
      * 钩子配置
      */
     @Override
-    public XActivityRuleRecord setHookConfig(String value) {
+    public XActivityRuleRecord setHookConfig(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -93,8 +94,8 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
      * 钩子配置
      */
     @Override
-    public String getHookConfig() {
-        return (String) get(3);
+    public JsonObject getHookConfig() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -119,7 +120,7 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
      * 规则配置
      */
     @Override
-    public XActivityRuleRecord setRuleConfig(String value) {
+    public XActivityRuleRecord setRuleConfig(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -129,8 +130,8 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
      * 规则配置
      */
     @Override
-    public String getRuleConfig() {
-        return (String) get(5);
+    public JsonObject getRuleConfig() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -264,7 +265,7 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
      * Setter for <code>ZDB.X_ACTIVITY_RULE.RULE_TPL</code>. 「ruleTpl」- 参数模版
      */
     @Override
-    public XActivityRuleRecord setRuleTpl(String value) {
+    public XActivityRuleRecord setRuleTpl(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -273,8 +274,8 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
      * Getter for <code>ZDB.X_ACTIVITY_RULE.RULE_TPL</code>. 「ruleTpl」- 参数模版
      */
     @Override
-    public String getRuleTpl() {
-        return (String) get(13);
+    public JsonObject getRuleTpl() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -400,7 +401,7 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
      * Setter for <code>ZDB.X_ACTIVITY_RULE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XActivityRuleRecord setMetadata(String value) {
+    public XActivityRuleRecord setMetadata(JsonObject value) {
         set(21, value);
         return this;
     }
@@ -409,8 +410,8 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
      * Getter for <code>ZDB.X_ACTIVITY_RULE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(21);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(21);
     }
 
     /**
@@ -563,7 +564,7 @@ public class XActivityRuleRecord extends UpdatableRecordImpl<XActivityRuleRecord
     /**
      * Create a detached, initialised XActivityRuleRecord
      */
-    public XActivityRuleRecord(String id, String definitionKey, String hookComponent, String hookConfig, Boolean logging, String ruleConfig, String ruleExpression, String ruleField, String ruleIdentifier, String ruleMessage, String ruleName, String ruleNs, Long ruleOrder, String ruleTpl, String taskKey, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XActivityRuleRecord(String id, String definitionKey, String hookComponent, JsonObject hookConfig, Boolean logging, JsonObject ruleConfig, String ruleExpression, String ruleField, String ruleIdentifier, String ruleMessage, String ruleName, String ruleNs, Long ruleOrder, JsonObject ruleTpl, String taskKey, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XActivityRule.X_ACTIVITY_RULE);
 
         setId(id);

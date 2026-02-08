@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXMenu;
 
 import java.time.LocalDateTime;
@@ -33,7 +34,7 @@ public class XMenu implements VertxPojo, IXMenu {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -80,7 +81,7 @@ public class XMenu implements VertxPojo, IXMenu {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -356,7 +357,7 @@ public class XMenu implements VertxPojo, IXMenu {
      * Getter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -364,7 +365,7 @@ public class XMenu implements VertxPojo, IXMenu {
      * Setter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XMenu setMetadata(String metadata) {
+    public XMenu setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

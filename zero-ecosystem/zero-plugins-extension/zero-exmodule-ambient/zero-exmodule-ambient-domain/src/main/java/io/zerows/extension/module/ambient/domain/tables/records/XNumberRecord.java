@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XNumber;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXNumber;
 
@@ -350,7 +351,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Setter for <code>ZDB.X_NUMBER.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XNumberRecord setMetadata(String value) {
+    public XNumberRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -359,8 +360,8 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
      * Getter for <code>ZDB.X_NUMBER.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -511,7 +512,7 @@ public class XNumberRecord extends UpdatableRecordImpl<XNumberRecord> implements
     /**
      * Create a detached, initialised XNumberRecord
      */
-    public XNumberRecord(String id, String code, String comment, Long current, Boolean decrement, String format, String identifier, Integer length, String prefix, Boolean renewal, String runComponent, Integer step, String suffix, String time, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XNumberRecord(String id, String code, String comment, Long current, Boolean decrement, String format, String identifier, Integer length, String prefix, Boolean renewal, String runComponent, Integer step, String suffix, String time, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XNumber.X_NUMBER);
 
         setId(id);

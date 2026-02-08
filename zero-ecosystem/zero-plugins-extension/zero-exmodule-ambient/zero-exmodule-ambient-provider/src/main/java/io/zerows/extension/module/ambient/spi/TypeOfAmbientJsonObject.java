@@ -1,0 +1,29 @@
+package io.zerows.extension.module.ambient.spi;
+
+import io.r2mo.vertx.jooq.generate.configuration.TypeOfJsonObject;
+import io.zerows.extension.module.ambient.domain.tables.XActivity;
+import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
+import io.zerows.extension.module.ambient.domain.tables.XCategory;
+import io.zerows.extension.module.ambient.domain.tables.XSource;
+
+import java.util.Map;
+
+public class TypeOfAmbientJsonObject extends TypeOfJsonObject {
+    @Override
+    protected Map<String, String> regexMeta() {
+        return Map.of(
+            // XCategory
+            XCategory.X_CATEGORY.RUN_CONFIG.getName(), XCategory.X_CATEGORY.getName(),
+            XCategory.X_CATEGORY.TREE_CONFIG.getName(), XCategory.X_CATEGORY.getName(),
+            // XSource
+            XSource.X_SOURCE.JDBC_CONFIG.getName(), XSource.X_SOURCE.getName(),
+            // XActivityRule
+            XActivityRule.X_ACTIVITY_RULE.HOOK_CONFIG.getName(), XActivityRule.X_ACTIVITY_RULE.getName(),
+            XActivityRule.X_ACTIVITY_RULE.RULE_CONFIG.getName(), XActivityRule.X_ACTIVITY_RULE.getName(),
+            XActivityRule.X_ACTIVITY_RULE.RULE_TPL.getName(), XActivityRule.X_ACTIVITY_RULE.getName(),
+            // XActivity
+            XActivity.X_ACTIVITY.RECORD_NEW.getName(), XActivity.X_ACTIVITY.getName(),
+            XActivity.X_ACTIVITY.RECORD_OLD.getName(), XActivity.X_ACTIVITY.getName()
+        );
+    }
+}

@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XSource;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXSource;
 
@@ -131,7 +132,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
      * Setter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中
      */
     @Override
-    public XSourceRecord setJdbcConfig(String value) {
+    public XSourceRecord setJdbcConfig(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -140,8 +141,8 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
      * Getter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中
      */
     @Override
-    public String getJdbcConfig() {
-        return (String) get(6);
+    public JsonObject getJdbcConfig() {
+        return (JsonObject) get(6);
     }
 
     /**
@@ -318,7 +319,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
      * Setter for <code>ZDB.X_SOURCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XSourceRecord setMetadata(String value) {
+    public XSourceRecord setMetadata(JsonObject value) {
         set(17, value);
         return this;
     }
@@ -327,8 +328,8 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
      * Getter for <code>ZDB.X_SOURCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(17);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(17);
     }
 
     /**
@@ -477,7 +478,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
     /**
      * Create a detached, initialised XSourceRecord
      */
-    public XSourceRecord(String id, String driverClassName, String hostname, String instance, String ipV4, String ipV6, String jdbcConfig, String jdbcUrl, String password, Integer port, String username, String category, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XSourceRecord(String id, String driverClassName, String hostname, String instance, String ipV4, String ipV6, JsonObject jdbcConfig, String jdbcUrl, String password, Integer port, String username, String category, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XSource.X_SOURCE);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.records.XActivityChangeRecord;
 
@@ -237,7 +238,7 @@ public class XActivityChangeDao extends AbstractVertxDAO<XActivityChangeRecord, 
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityChange>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityChange>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XActivityChange.X_ACTIVITY_CHANGE.METADATA.in(values));
         }
 
@@ -245,7 +246,7 @@ public class XActivityChangeDao extends AbstractVertxDAO<XActivityChangeRecord, 
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityChange>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivityChange>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XActivityChange.X_ACTIVITY_CHANGE.METADATA.in(values),limit);
         }
 

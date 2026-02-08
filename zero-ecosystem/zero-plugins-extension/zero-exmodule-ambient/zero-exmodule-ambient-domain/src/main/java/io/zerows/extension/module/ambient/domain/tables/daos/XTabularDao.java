@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XTabular;
 import io.zerows.extension.module.ambient.domain.tables.records.XTabularRecord;
 
@@ -221,7 +222,7 @@ public class XTabularDao extends AbstractVertxDAO<XTabularRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTabular>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTabular>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XTabular.X_TABULAR.METADATA.in(values));
         }
 
@@ -229,7 +230,7 @@ public class XTabularDao extends AbstractVertxDAO<XTabularRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTabular>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XTabular>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XTabular.X_TABULAR.METADATA.in(values),limit);
         }
 

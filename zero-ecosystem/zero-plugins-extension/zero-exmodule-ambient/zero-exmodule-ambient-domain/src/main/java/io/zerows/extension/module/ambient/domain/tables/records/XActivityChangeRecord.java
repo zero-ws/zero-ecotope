@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXActivityChange;
 
@@ -273,7 +274,7 @@ public class XActivityChangeRecord extends UpdatableRecordImpl<XActivityChangeRe
      * Setter for <code>ZDB.X_ACTIVITY_CHANGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XActivityChangeRecord setMetadata(String value) {
+    public XActivityChangeRecord setMetadata(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -282,8 +283,8 @@ public class XActivityChangeRecord extends UpdatableRecordImpl<XActivityChangeRe
      * Getter for <code>ZDB.X_ACTIVITY_CHANGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(14);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(14);
     }
 
     /**
@@ -437,7 +438,7 @@ public class XActivityChangeRecord extends UpdatableRecordImpl<XActivityChangeRe
     /**
      * Create a detached, initialised XActivityChangeRecord
      */
-    public XActivityChangeRecord(String id, String activityId, String fieldAlias, String fieldName, String fieldType, String valueNew, String valueOld, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XActivityChangeRecord(String id, String activityId, String fieldAlias, String fieldName, String fieldType, String valueNew, String valueOld, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XActivityChange.X_ACTIVITY_CHANGE);
 
         setId(id);

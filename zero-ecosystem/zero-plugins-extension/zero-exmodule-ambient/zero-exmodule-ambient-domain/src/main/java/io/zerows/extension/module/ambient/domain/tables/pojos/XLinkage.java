@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXLinkage;
 
 import java.time.LocalDateTime;
@@ -38,7 +39,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -95,7 +96,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -461,7 +462,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Getter for <code>ZDB.X_LINKAGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -469,7 +470,7 @@ public class XLinkage implements VertxPojo, IXLinkage {
      * Setter for <code>ZDB.X_LINKAGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XLinkage setMetadata(String metadata) {
+    public XLinkage setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

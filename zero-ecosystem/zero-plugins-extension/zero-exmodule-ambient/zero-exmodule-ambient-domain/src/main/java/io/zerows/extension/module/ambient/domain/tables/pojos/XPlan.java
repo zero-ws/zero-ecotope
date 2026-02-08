@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXPlan;
 
 import java.math.BigDecimal;
@@ -34,7 +35,7 @@ public class XPlan implements VertxPojo, IXPlan {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -81,7 +82,7 @@ public class XPlan implements VertxPojo, IXPlan {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -357,7 +358,7 @@ public class XPlan implements VertxPojo, IXPlan {
      * Getter for <code>ZDB.X_PLAN.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -365,7 +366,7 @@ public class XPlan implements VertxPojo, IXPlan {
      * Setter for <code>ZDB.X_PLAN.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XPlan setMetadata(String metadata) {
+    public XPlan setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

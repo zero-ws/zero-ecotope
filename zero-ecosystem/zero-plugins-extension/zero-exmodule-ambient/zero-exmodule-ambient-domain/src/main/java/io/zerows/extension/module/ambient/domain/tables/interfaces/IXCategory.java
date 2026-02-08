@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -112,12 +113,12 @@ public interface IXCategory extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_CATEGORY.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
-    public IXCategory setRunConfig(String value);
+    public IXCategory setRunConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_CATEGORY.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
-    public String getRunConfig();
+    public JsonObject getRunConfig();
 
     /**
      * Setter for <code>ZDB.X_CATEGORY.SORT</code>. 「sort」- 排序
@@ -144,12 +145,12 @@ public interface IXCategory extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_CATEGORY.TREE_CONFIG</code>. 「treeConfig」- 目录配置
      */
-    public IXCategory setTreeConfig(String value);
+    public IXCategory setTreeConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_CATEGORY.TREE_CONFIG</code>. 「treeConfig」- 目录配置
      */
-    public String getTreeConfig();
+    public JsonObject getTreeConfig();
 
     /**
      * Setter for <code>ZDB.X_CATEGORY.TYPE</code>. 「type」- 类型
@@ -214,12 +215,12 @@ public interface IXCategory extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_CATEGORY.METADATA</code>. 「metadata」- 元配置
      */
-    public IXCategory setMetadata(String value);
+    public IXCategory setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_CATEGORY.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.X_CATEGORY.VERSION</code>. 「version」- 版本号
@@ -298,17 +299,17 @@ public interface IXCategory extends VertxPojo, Serializable {
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setParentId,json::getString,"PARENT_ID","java.lang.String");
                 setOrThrow(this::setRunComponent,json::getString,"RUN_COMPONENT","java.lang.String");
-                setOrThrow(this::setRunConfig,json::getString,"RUN_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RUN_CONFIG!
                 setOrThrow(this::setSort,json::getInteger,"SORT","java.lang.Integer");
                 setOrThrow(this::setTreeComponent,json::getString,"TREE_COMPONENT","java.lang.String");
-                setOrThrow(this::setTreeConfig,json::getString,"TREE_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TREE_CONFIG!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -330,17 +331,17 @@ public interface IXCategory extends VertxPojo, Serializable {
                 json.put("NAME",getName());
                 json.put("PARENT_ID",getParentId());
                 json.put("RUN_COMPONENT",getRunComponent());
-                json.put("RUN_CONFIG",getRunConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RUN_CONFIG!
                 json.put("SORT",getSort());
                 json.put("TREE_COMPONENT",getTreeComponent());
-                json.put("TREE_CONFIG",getTreeConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TREE_CONFIG!
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

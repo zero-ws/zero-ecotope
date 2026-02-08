@@ -4,6 +4,8 @@
 package io.zerows.extension.module.ambient.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.Keys;
 import io.zerows.extension.module.ambient.domain.Zdb;
 import io.zerows.extension.module.ambient.domain.tables.records.XSourceRecord;
@@ -86,7 +88,7 @@ public class XSource extends TableImpl<XSourceRecord> {
     /**
      * The column <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中
      */
-    public final TableField<XSourceRecord, String> JDBC_CONFIG = createField(DSL.name("JDBC_CONFIG"), SQLDataType.CLOB(65535), this, "「jdbcConfig」- 连接字符串中");
+    public final TableField<XSourceRecord, JsonObject> JDBC_CONFIG = createField(DSL.name("JDBC_CONFIG"), SQLDataType.CLOB(65535), this, "「jdbcConfig」- 连接字符串中", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
@@ -141,7 +143,7 @@ public class XSource extends TableImpl<XSourceRecord> {
     /**
      * The column <code>ZDB.X_SOURCE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<XSourceRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<XSourceRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_SOURCE.VERSION</code>. 「version」- 版本号

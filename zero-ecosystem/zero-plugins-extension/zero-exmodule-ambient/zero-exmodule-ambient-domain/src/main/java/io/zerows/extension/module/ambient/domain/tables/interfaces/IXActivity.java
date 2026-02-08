@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -40,22 +41,22 @@ public interface IXActivity extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_ACTIVITY.RECORD_NEW</code>. 「recordNew」- 变更后数据
      */
-    public IXActivity setRecordNew(String value);
+    public IXActivity setRecordNew(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_ACTIVITY.RECORD_NEW</code>. 「recordNew」- 变更后数据
      */
-    public String getRecordNew();
+    public JsonObject getRecordNew();
 
     /**
      * Setter for <code>ZDB.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更前数据
      */
-    public IXActivity setRecordOld(String value);
+    public IXActivity setRecordOld(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更前数据
      */
-    public String getRecordOld();
+    public JsonObject getRecordOld();
 
     /**
      * Setter for <code>ZDB.X_ACTIVITY.SERIAL</code>. 「serial」- 记录单号
@@ -182,12 +183,12 @@ public interface IXActivity extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_ACTIVITY.METADATA</code>. 「metadata」- 元配置
      */
-    public IXActivity setMetadata(String value);
+    public IXActivity setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_ACTIVITY.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.X_ACTIVITY.VERSION</code>. 「version」- 版本号
@@ -259,8 +260,8 @@ public interface IXActivity extends VertxPojo, Serializable {
         public default IXActivity fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setDescription,json::getString,"DESCRIPTION","java.lang.String");
-                setOrThrow(this::setRecordNew,json::getString,"RECORD_NEW","java.lang.String");
-                setOrThrow(this::setRecordOld,json::getString,"RECORD_OLD","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_NEW!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_OLD!
                 setOrThrow(this::setSerial,json::getString,"SERIAL","java.lang.String");
                 setOrThrow(this::setTaskName,json::getString,"TASK_NAME","java.lang.String");
                 setOrThrow(this::setTaskSerial,json::getString,"TASK_SERIAL","java.lang.String");
@@ -273,7 +274,7 @@ public interface IXActivity extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -288,8 +289,8 @@ public interface IXActivity extends VertxPojo, Serializable {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
                 json.put("DESCRIPTION",getDescription());
-                json.put("RECORD_NEW",getRecordNew());
-                json.put("RECORD_OLD",getRecordOld());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_NEW!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_OLD!
                 json.put("SERIAL",getSerial());
                 json.put("TASK_NAME",getTaskName());
                 json.put("TASK_SERIAL",getTaskSerial());
@@ -302,7 +303,7 @@ public interface IXActivity extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

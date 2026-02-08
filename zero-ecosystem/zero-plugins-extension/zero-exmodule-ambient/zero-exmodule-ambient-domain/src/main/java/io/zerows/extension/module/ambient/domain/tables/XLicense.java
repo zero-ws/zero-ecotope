@@ -4,6 +4,8 @@
 package io.zerows.extension.module.ambient.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.Indexes;
 import io.zerows.extension.module.ambient.domain.Keys;
 import io.zerows.extension.module.ambient.domain.Zdb;
@@ -128,7 +130,7 @@ public class XLicense extends TableImpl<XLicenseRecord> {
     /**
      * The column <code>ZDB.X_LICENSE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<XLicenseRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<XLicenseRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_LICENSE.VERSION</code>. 「version」- 版本号

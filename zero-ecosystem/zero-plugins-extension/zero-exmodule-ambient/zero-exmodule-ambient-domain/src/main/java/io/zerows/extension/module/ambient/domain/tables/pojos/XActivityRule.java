@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXActivityRule;
 
 import java.time.LocalDateTime;
@@ -22,9 +23,9 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
     private String id;
     private String definitionKey;
     private String hookComponent;
-    private String hookConfig;
+    private JsonObject hookConfig;
     private Boolean logging;
-    private String ruleConfig;
+    private JsonObject ruleConfig;
     private String ruleExpression;
     private String ruleField;
     private String ruleIdentifier;
@@ -32,7 +33,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
     private String ruleName;
     private String ruleNs;
     private Long ruleOrder;
-    private String ruleTpl;
+    private JsonObject ruleTpl;
     private String taskKey;
     private String type;
     private String sigma;
@@ -40,7 +41,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -83,9 +84,9 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
         String id,
         String definitionKey,
         String hookComponent,
-        String hookConfig,
+        JsonObject hookConfig,
         Boolean logging,
-        String ruleConfig,
+        JsonObject ruleConfig,
         String ruleExpression,
         String ruleField,
         String ruleIdentifier,
@@ -93,7 +94,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
         String ruleName,
         String ruleNs,
         Long ruleOrder,
-        String ruleTpl,
+        JsonObject ruleTpl,
         String taskKey,
         String type,
         String sigma,
@@ -101,7 +102,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -202,7 +203,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
      * 钩子配置
      */
     @Override
-    public String getHookConfig() {
+    public JsonObject getHookConfig() {
         return this.hookConfig;
     }
 
@@ -211,7 +212,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
      * 钩子配置
      */
     @Override
-    public XActivityRule setHookConfig(String hookConfig) {
+    public XActivityRule setHookConfig(JsonObject hookConfig) {
         this.hookConfig = hookConfig;
         return this;
     }
@@ -238,7 +239,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
      * 规则配置
      */
     @Override
-    public String getRuleConfig() {
+    public JsonObject getRuleConfig() {
         return this.ruleConfig;
     }
 
@@ -247,7 +248,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
      * 规则配置
      */
     @Override
-    public XActivityRule setRuleConfig(String ruleConfig) {
+    public XActivityRule setRuleConfig(JsonObject ruleConfig) {
         this.ruleConfig = ruleConfig;
         return this;
     }
@@ -383,7 +384,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
      * Getter for <code>ZDB.X_ACTIVITY_RULE.RULE_TPL</code>. 「ruleTpl」- 参数模版
      */
     @Override
-    public String getRuleTpl() {
+    public JsonObject getRuleTpl() {
         return this.ruleTpl;
     }
 
@@ -391,7 +392,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
      * Setter for <code>ZDB.X_ACTIVITY_RULE.RULE_TPL</code>. 「ruleTpl」- 参数模版
      */
     @Override
-    public XActivityRule setRuleTpl(String ruleTpl) {
+    public XActivityRule setRuleTpl(JsonObject ruleTpl) {
         this.ruleTpl = ruleTpl;
         return this;
     }
@@ -519,7 +520,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
      * Getter for <code>ZDB.X_ACTIVITY_RULE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -527,7 +528,7 @@ public class XActivityRule implements VertxPojo, IXActivityRule {
      * Setter for <code>ZDB.X_ACTIVITY_RULE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XActivityRule setMetadata(String metadata) {
+    public XActivityRule setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

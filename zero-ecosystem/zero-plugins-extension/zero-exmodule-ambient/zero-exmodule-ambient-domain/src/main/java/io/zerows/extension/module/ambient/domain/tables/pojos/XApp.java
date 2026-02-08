@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXApp;
 
 import java.time.LocalDateTime;
@@ -45,7 +46,7 @@ public class XApp implements VertxPojo, IXApp {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -116,7 +117,7 @@ public class XApp implements VertxPojo, IXApp {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -608,7 +609,7 @@ public class XApp implements VertxPojo, IXApp {
      * Getter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -616,7 +617,7 @@ public class XApp implements VertxPojo, IXApp {
      * Setter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XApp setMetadata(String metadata) {
+    public XApp setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

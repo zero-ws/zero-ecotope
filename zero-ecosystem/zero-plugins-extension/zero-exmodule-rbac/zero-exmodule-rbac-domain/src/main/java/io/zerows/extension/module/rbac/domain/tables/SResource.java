@@ -108,12 +108,12 @@ public class SResource extends TableImpl<SResourceRecord> {
     /**
      * The column <code>ZDB.S_RESOURCE.SEEK_CONFIG</code>. 「seekConfig」- 访问配置
      */
-    public final TableField<SResourceRecord, String> SEEK_CONFIG = createField(DSL.name("SEEK_CONFIG"), SQLDataType.CLOB, this, "「seekConfig」- 访问配置");
+    public final TableField<SResourceRecord, JsonObject> SEEK_CONFIG = createField(DSL.name("SEEK_CONFIG"), SQLDataType.CLOB, this, "「seekConfig」- 访问配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_RESOURCE.SEEK_SYNTAX</code>. 「seekSyntax」- 访问语法
      */
-    public final TableField<SResourceRecord, String> SEEK_SYNTAX = createField(DSL.name("SEEK_SYNTAX"), SQLDataType.CLOB, this, "「seekSyntax」- 访问语法");
+    public final TableField<SResourceRecord, JsonObject> SEEK_SYNTAX = createField(DSL.name("SEEK_SYNTAX"), SQLDataType.CLOB, this, "「seekSyntax」- 访问语法", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_RESOURCE.VIRTUAL</code>. 「virtual」- 是否虚拟

@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XTenant;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXTenant;
 
@@ -401,7 +402,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      * Setter for <code>ZDB.X_TENANT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XTenantRecord setMetadata(String value) {
+    public XTenantRecord setMetadata(JsonObject value) {
         set(22, value);
         return this;
     }
@@ -410,8 +411,8 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
      * Getter for <code>ZDB.X_TENANT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(22);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(22);
     }
 
     /**
@@ -565,7 +566,7 @@ public class XTenantRecord extends UpdatableRecordImpl<XTenantRecord> implements
     /**
      * Create a detached, initialised XTenantRecord
      */
-    public XTenantRecord(String id, String name, String code, String alias, String description, String email, String phone, String contact, String address, String idType, String idNumber, String idBack, String idFront, String bankCard, String bankId, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XTenantRecord(String id, String name, String code, String alias, String description, String email, String phone, String contact, String address, String idType, String idNumber, String idBack, String idFront, String bankCard, String bankId, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XTenant.X_TENANT);
 
         setId(id);

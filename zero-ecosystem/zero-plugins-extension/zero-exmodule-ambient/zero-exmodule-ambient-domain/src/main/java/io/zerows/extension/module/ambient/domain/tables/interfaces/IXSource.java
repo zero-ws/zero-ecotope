@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -82,12 +83,12 @@ public interface IXSource extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中
      */
-    public IXSource setJdbcConfig(String value);
+    public IXSource setJdbcConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中
      */
-    public String getJdbcConfig();
+    public JsonObject getJdbcConfig();
 
     /**
      * Setter for <code>ZDB.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
@@ -192,12 +193,12 @@ public interface IXSource extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.X_SOURCE.METADATA</code>. 「metadata」- 元配置
      */
-    public IXSource setMetadata(String value);
+    public IXSource setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.X_SOURCE.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.X_SOURCE.VERSION</code>. 「version」- 版本号
@@ -273,7 +274,7 @@ public interface IXSource extends VertxPojo, Serializable {
                 setOrThrow(this::setInstance,json::getString,"INSTANCE","java.lang.String");
                 setOrThrow(this::setIpV4,json::getString,"IP_V4","java.lang.String");
                 setOrThrow(this::setIpV6,json::getString,"IP_V6","java.lang.String");
-                setOrThrow(this::setJdbcConfig,json::getString,"JDBC_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column JDBC_CONFIG!
                 setOrThrow(this::setJdbcUrl,json::getString,"JDBC_URL","java.lang.String");
                 setOrThrow(this::setPassword,json::getString,"PASSWORD","java.lang.String");
                 setOrThrow(this::setPort,json::getInteger,"PORT","java.lang.Integer");
@@ -284,7 +285,7 @@ public interface IXSource extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -303,7 +304,7 @@ public interface IXSource extends VertxPojo, Serializable {
                 json.put("INSTANCE",getInstance());
                 json.put("IP_V4",getIpV4());
                 json.put("IP_V6",getIpV6());
-                json.put("JDBC_CONFIG",getJdbcConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column JDBC_CONFIG!
                 json.put("JDBC_URL",getJdbcUrl());
                 json.put("PASSWORD",getPassword());
                 json.put("PORT",getPort());
@@ -314,7 +315,7 @@ public interface IXSource extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

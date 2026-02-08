@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.interfaces.IXActivity;
 
 import java.time.LocalDateTime;
@@ -21,8 +22,8 @@ public class XActivity implements VertxPojo, IXActivity {
 
     private String id;
     private String description;
-    private String recordNew;
-    private String recordOld;
+    private JsonObject recordNew;
+    private JsonObject recordOld;
     private String serial;
     private String taskName;
     private String taskSerial;
@@ -35,7 +36,7 @@ public class XActivity implements VertxPojo, IXActivity {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -72,8 +73,8 @@ public class XActivity implements VertxPojo, IXActivity {
     public XActivity(
         String id,
         String description,
-        String recordNew,
-        String recordOld,
+        JsonObject recordNew,
+        JsonObject recordOld,
         String serial,
         String taskName,
         String taskSerial,
@@ -86,7 +87,7 @@ public class XActivity implements VertxPojo, IXActivity {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -160,7 +161,7 @@ public class XActivity implements VertxPojo, IXActivity {
      * Getter for <code>ZDB.X_ACTIVITY.RECORD_NEW</code>. 「recordNew」- 变更后数据
      */
     @Override
-    public String getRecordNew() {
+    public JsonObject getRecordNew() {
         return this.recordNew;
     }
 
@@ -168,7 +169,7 @@ public class XActivity implements VertxPojo, IXActivity {
      * Setter for <code>ZDB.X_ACTIVITY.RECORD_NEW</code>. 「recordNew」- 变更后数据
      */
     @Override
-    public XActivity setRecordNew(String recordNew) {
+    public XActivity setRecordNew(JsonObject recordNew) {
         this.recordNew = recordNew;
         return this;
     }
@@ -177,7 +178,7 @@ public class XActivity implements VertxPojo, IXActivity {
      * Getter for <code>ZDB.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更前数据
      */
     @Override
-    public String getRecordOld() {
+    public JsonObject getRecordOld() {
         return this.recordOld;
     }
 
@@ -185,7 +186,7 @@ public class XActivity implements VertxPojo, IXActivity {
      * Setter for <code>ZDB.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更前数据
      */
     @Override
-    public XActivity setRecordOld(String recordOld) {
+    public XActivity setRecordOld(JsonObject recordOld) {
         this.recordOld = recordOld;
         return this;
     }
@@ -400,7 +401,7 @@ public class XActivity implements VertxPojo, IXActivity {
      * Getter for <code>ZDB.X_ACTIVITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -408,7 +409,7 @@ public class XActivity implements VertxPojo, IXActivity {
      * Setter for <code>ZDB.X_ACTIVITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public XActivity setMetadata(String metadata) {
+    public XActivity setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

@@ -5,6 +5,7 @@ package io.zerows.extension.module.ambient.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.records.XActivityRecord;
 
@@ -56,7 +57,7 @@ public class XActivityDao extends AbstractVertxDAO<XActivityRecord, io.zerows.ex
         /**
      * Find records that have <code>RECORD_NEW IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByRecordNew(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByRecordNew(Collection<JsonObject> values) {
                 return findManyByCondition(XActivity.X_ACTIVITY.RECORD_NEW.in(values));
         }
 
@@ -64,14 +65,14 @@ public class XActivityDao extends AbstractVertxDAO<XActivityRecord, io.zerows.ex
      * Find records that have <code>RECORD_NEW IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByRecordNew(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByRecordNew(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XActivity.X_ACTIVITY.RECORD_NEW.in(values),limit);
         }
 
         /**
      * Find records that have <code>RECORD_OLD IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByRecordOld(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByRecordOld(Collection<JsonObject> values) {
                 return findManyByCondition(XActivity.X_ACTIVITY.RECORD_OLD.in(values));
         }
 
@@ -79,7 +80,7 @@ public class XActivityDao extends AbstractVertxDAO<XActivityRecord, io.zerows.ex
      * Find records that have <code>RECORD_OLD IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByRecordOld(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByRecordOld(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XActivity.X_ACTIVITY.RECORD_OLD.in(values),limit);
         }
 
@@ -268,7 +269,7 @@ public class XActivityDao extends AbstractVertxDAO<XActivityRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(XActivity.X_ACTIVITY.METADATA.in(values));
         }
 
@@ -276,7 +277,7 @@ public class XActivityDao extends AbstractVertxDAO<XActivityRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.ambient.domain.tables.pojos.XActivity>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(XActivity.X_ACTIVITY.METADATA.in(values),limit);
         }
 

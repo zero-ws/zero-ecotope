@@ -4,6 +4,8 @@
 package io.zerows.extension.module.ambient.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.Indexes;
 import io.zerows.extension.module.ambient.domain.Keys;
 import io.zerows.extension.module.ambient.domain.Zdb;
@@ -103,7 +105,7 @@ public class XCategory extends TableImpl<XCategoryRecord> {
     /**
      * The column <code>ZDB.X_CATEGORY.RUN_CONFIG</code>. 「runConfig」- 执行配置
      */
-    public final TableField<XCategoryRecord, String> RUN_CONFIG = createField(DSL.name("RUN_CONFIG"), SQLDataType.CLOB, this, "「runConfig」- 执行配置");
+    public final TableField<XCategoryRecord, JsonObject> RUN_CONFIG = createField(DSL.name("RUN_CONFIG"), SQLDataType.CLOB, this, "「runConfig」- 执行配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_CATEGORY.SORT</code>. 「sort」- 排序
@@ -119,7 +121,7 @@ public class XCategory extends TableImpl<XCategoryRecord> {
     /**
      * The column <code>ZDB.X_CATEGORY.TREE_CONFIG</code>. 「treeConfig」- 目录配置
      */
-    public final TableField<XCategoryRecord, String> TREE_CONFIG = createField(DSL.name("TREE_CONFIG"), SQLDataType.CLOB, this, "「treeConfig」- 目录配置");
+    public final TableField<XCategoryRecord, JsonObject> TREE_CONFIG = createField(DSL.name("TREE_CONFIG"), SQLDataType.CLOB, this, "「treeConfig」- 目录配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_CATEGORY.TYPE</code>. 「type」- 类型
@@ -154,7 +156,7 @@ public class XCategory extends TableImpl<XCategoryRecord> {
     /**
      * The column <code>ZDB.X_CATEGORY.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<XCategoryRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<XCategoryRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.X_CATEGORY.VERSION</code>. 「version」- 版本号
