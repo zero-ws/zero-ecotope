@@ -70,19 +70,6 @@ public final class EmDS {
         AZURE_SA,   // Azure Synapse Analytics 12.2.0
     }
 
-    public enum DB {
-        // Default Value ( Major Database configured by 'provider' )
-        PRIMARY,
-        // History Value ( configured by 'orbit' )
-        HISTORY,
-        // Workflow Value ( configured by 'workflow' )
-        WORKFLOW,
-        // Dynamic Value ( Build by 'DataPool' here )
-        DYNAMIC,
-        // Extension Value ( configured by '<key>' that provided )
-        EXTENSION,
-    }
-
     public enum Connect {
         PARENT_ACTIVE,      // 父表是主表
         PARENT_STANDBY,     // 附表是从表
