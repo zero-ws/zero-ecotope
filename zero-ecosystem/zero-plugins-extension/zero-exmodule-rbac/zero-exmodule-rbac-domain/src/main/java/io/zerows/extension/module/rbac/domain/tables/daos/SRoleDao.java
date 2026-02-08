@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SRole;
 import io.zerows.extension.module.rbac.domain.tables.records.SRoleRecord;
 
@@ -220,7 +221,7 @@ public class SRoleDao extends AbstractVertxDAO<SRoleRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SRole>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SRole>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(SRole.S_ROLE.METADATA.in(values));
         }
 
@@ -228,7 +229,7 @@ public class SRoleDao extends AbstractVertxDAO<SRoleRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SRole>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SRole>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SRole.S_ROLE.METADATA.in(values),limit);
         }
 

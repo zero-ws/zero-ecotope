@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SRole;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISRole;
 
@@ -248,7 +249,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Ver
      * Setter for <code>ZDB.S_ROLE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SRoleRecord setMetadata(String value) {
+    public SRoleRecord setMetadata(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -257,8 +258,8 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Ver
      * Getter for <code>ZDB.S_ROLE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(13);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -403,7 +404,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Ver
     /**
      * Create a detached, initialised SRoleRecord
      */
-    public SRoleRecord(String id, String code, String comment, String name, Boolean power, String category, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SRoleRecord(String id, String code, String comment, String name, Boolean power, String category, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SRole.S_ROLE);
 
         setId(id);

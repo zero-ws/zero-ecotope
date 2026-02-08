@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SPath;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISPath;
 
@@ -420,7 +421,7 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Setter for <code>ZDB.S_PATH.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SPathRecord setMetadata(String value) {
+    public SPathRecord setMetadata(JsonObject value) {
         set(23, value);
         return this;
     }
@@ -429,8 +430,8 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Getter for <code>ZDB.S_PATH.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(23);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(23);
     }
 
     /**
@@ -585,7 +586,7 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
     /**
      * Create a detached, initialised SPathRecord
      */
-    public SPathRecord(String id, String code, String dmComponent, String dmCondition, String dmConfig, String dmType, String mapping, String name, String parentId, String phase, String runComponent, String runType, String uiComponent, String uiCondition, String uiConfig, Integer uiSort, String uiSurface, String uiType, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SPathRecord(String id, String code, String dmComponent, String dmCondition, String dmConfig, String dmType, String mapping, String name, String parentId, String phase, String runComponent, String runType, String uiComponent, String uiCondition, String uiConfig, Integer uiSort, String uiSurface, String uiType, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SPath.S_PATH);
 
         setId(id);

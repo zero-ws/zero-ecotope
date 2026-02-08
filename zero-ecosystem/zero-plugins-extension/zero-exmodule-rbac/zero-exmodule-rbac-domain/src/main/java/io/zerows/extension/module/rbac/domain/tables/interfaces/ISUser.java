@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -320,12 +321,12 @@ public interface ISUser extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_USER.METADATA</code>. 「metadata」- 扩展配置
      */
-    public ISUser setMetadata(String value);
+    public ISUser setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_USER.METADATA</code>. 「metadata」- 扩展配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
@@ -415,7 +416,7 @@ public interface ISUser extends VertxPojo, Serializable {
                 setOrThrow(this::setDirectoryId,json::getString,"DIRECTORY_ID","java.lang.String");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
                 setOrThrow(this::setUpdatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"UPDATED_AT","java.time.LocalDateTime");
@@ -457,7 +458,7 @@ public interface ISUser extends VertxPojo, Serializable {
                 json.put("DIRECTORY_ID",getDirectoryId());
                 json.put("LANGUAGE",getLanguage());
                 json.put("ACTIVE",getActive());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());
                 json.put("UPDATED_AT",getUpdatedAt()==null?null:getUpdatedAt().toString());

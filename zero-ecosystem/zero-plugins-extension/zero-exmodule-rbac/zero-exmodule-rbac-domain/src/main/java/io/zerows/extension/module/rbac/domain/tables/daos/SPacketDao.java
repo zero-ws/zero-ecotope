@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SPacket;
 import io.zerows.extension.module.rbac.domain.tables.records.SPacketRecord;
 
@@ -343,7 +344,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.METADATA.in(values));
         }
 
@@ -351,7 +352,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.METADATA.in(values),limit);
         }
 

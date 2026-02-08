@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SView;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISView;
 
@@ -299,7 +300,7 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
      * Setter for <code>ZDB.S_VIEW.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SViewRecord setMetadata(String value) {
+    public SViewRecord setMetadata(JsonObject value) {
         set(16, value);
         return this;
     }
@@ -308,8 +309,8 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
      * Getter for <code>ZDB.S_VIEW.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(16);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(16);
     }
 
     /**
@@ -457,7 +458,7 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
     /**
      * Create a detached, initialised SViewRecord
      */
-    public SViewRecord(String id, String criteria, String name, String owner, String ownerType, String position, String projection, String resourceId, String rows, String title, Boolean visitant, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SViewRecord(String id, String criteria, String name, String owner, String ownerType, String position, String projection, String resourceId, String rows, String title, Boolean visitant, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SView.S_VIEW);
 
         setId(id);

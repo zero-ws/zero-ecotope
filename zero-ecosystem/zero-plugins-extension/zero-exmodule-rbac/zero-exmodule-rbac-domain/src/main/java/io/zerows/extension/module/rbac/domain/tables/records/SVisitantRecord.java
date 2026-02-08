@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SVisitant;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISVisitant;
 
@@ -371,7 +372,7 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Setter for <code>ZDB.S_VISITANT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SVisitantRecord setMetadata(String value) {
+    public SVisitantRecord setMetadata(JsonObject value) {
         set(20, value);
         return this;
     }
@@ -380,8 +381,8 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Getter for <code>ZDB.S_VISITANT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(20);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(20);
     }
 
     /**
@@ -533,7 +534,7 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
     /**
      * Create a detached, initialised SVisitantRecord
      */
-    public SVisitantRecord(String id, String aclVariety, String aclVerge, String aclView, String aclVisible, String aclVow, String dmColumn, String dmQr, String dmRow, String identifier, String mode, String phase, String seekKey, String viewId, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SVisitantRecord(String id, String aclVariety, String aclVerge, String aclView, String aclVisible, String aclVow, String dmColumn, String dmQr, String dmRow, String identifier, String mode, String phase, String seekKey, String viewId, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SVisitant.S_VISITANT);
 
         setId(id);

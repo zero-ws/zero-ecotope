@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SPermSet;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISPermSet;
 
@@ -197,7 +198,7 @@ public class SPermSetRecord extends UpdatableRecordImpl<SPermSetRecord> implemen
      * Setter for <code>ZDB.S_PERM_SET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SPermSetRecord setMetadata(String value) {
+    public SPermSetRecord setMetadata(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -206,8 +207,8 @@ public class SPermSetRecord extends UpdatableRecordImpl<SPermSetRecord> implemen
      * Getter for <code>ZDB.S_PERM_SET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(10);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(10);
     }
 
     /**
@@ -349,7 +350,7 @@ public class SPermSetRecord extends UpdatableRecordImpl<SPermSetRecord> implemen
     /**
      * Create a detached, initialised SPermSetRecord
      */
-    public SPermSetRecord(String id, String code, String comment, String name, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SPermSetRecord(String id, String code, String comment, String name, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SPermSet.S_PERM_SET);
 
         setId(id);

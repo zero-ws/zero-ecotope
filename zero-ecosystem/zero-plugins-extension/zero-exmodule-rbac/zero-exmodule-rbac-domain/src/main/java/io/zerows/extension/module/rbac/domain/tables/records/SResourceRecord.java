@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SResource;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISResource;
 
@@ -352,7 +353,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      * Setter for <code>ZDB.S_RESOURCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SResourceRecord setMetadata(String value) {
+    public SResourceRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -361,8 +362,8 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      * Getter for <code>ZDB.S_RESOURCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -513,7 +514,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     /**
      * Create a detached, initialised SResourceRecord
      */
-    public SResourceRecord(String id, String code, String comment, String identifier, Integer level, String modeGroup, String modeRole, String modeTree, String name, String seekComponent, String seekConfig, String seekSyntax, Boolean virtual, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SResourceRecord(String id, String code, String comment, String identifier, Integer level, String modeGroup, String modeRole, String modeTree, String name, String seekComponent, String seekConfig, String seekSyntax, Boolean virtual, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SResource.S_RESOURCE);
 
         setId(id);

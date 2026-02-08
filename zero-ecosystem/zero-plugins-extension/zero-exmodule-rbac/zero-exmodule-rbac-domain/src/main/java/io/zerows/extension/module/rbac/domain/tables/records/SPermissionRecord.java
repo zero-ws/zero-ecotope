@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SPermission;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISPermission;
 
@@ -197,7 +198,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      * Setter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public SPermissionRecord setMetadata(String value) {
+    public SPermissionRecord setMetadata(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -206,8 +207,8 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      * Getter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(10);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(10);
     }
 
     /**
@@ -349,7 +350,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     /**
      * Create a detached, initialised SPermissionRecord
      */
-    public SPermissionRecord(String id, String code, String comment, String identifier, String name, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SPermissionRecord(String id, String code, String comment, String identifier, String name, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SPermission.S_PERMISSION);
 
         setId(id);

@@ -4,6 +4,8 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Keys;
 import io.zerows.extension.module.rbac.domain.Zdb;
 import io.zerows.extension.module.rbac.domain.tables.records.SRoleRecord;
@@ -120,7 +122,7 @@ public class SRole extends TableImpl<SRoleRecord> {
     /**
      * The column <code>ZDB.S_ROLE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<SRoleRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<SRoleRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_ROLE.VERSION</code>. 「version」- 版本号
