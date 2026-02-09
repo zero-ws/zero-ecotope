@@ -8,6 +8,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.modulat.component.Ark;
 import io.zerows.plugins.monitor.client.QuotaMetricBase;
 import io.zerows.plugins.monitor.metadata.MetricRow;
+import io.zerows.plugins.monitor.metadata.MetricType;
 import io.zerows.support.Ut;
 
 import java.util.ArrayList;
@@ -36,6 +37,11 @@ public class QuotaMetricBagAdmin extends QuotaMetricBase {
         item.id(Ut.valueString(config, KName.KEY));
         item.group("G.Config");
         item.name(Ut.valueString(config, KName.CODE));
+        /*
+         * Cannot invoke "io.zerows.plugins.monitor.metadata.MetricType.name()"
+         * because the return value of "io.zerows.plugins.monitor.metadata.MetricRow.category()" is null
+         */
+        item.category(MetricType.CONFIG);
         return item;
     }
 
