@@ -1,6 +1,6 @@
 {
   "store": {
-    "runComponent": "io.zerows.extension.runtime.integration.uca.command.FsReadOnly",
+    "runComponent": "io.zerows.extension.module.integration.component.FsReadOnly",
     "initialize": {
       "visitMode": [
         "r",

@@ -94,7 +94,9 @@ public class MDAmbientActor extends MDModuleActor {
         final HApp app = v.app();
         final String appId = app.id(); // Ut.valueString(appJ, KName.KEY);
         return docStub.initialize(appId, config.getFileIntegration()).compose(initialized -> {
-            log.info("{} / AppId = {}, 目录数量 = {}", AtConstant.K_PREFIX, appId, initialized.size());
+            if (!initialized.isEmpty()) {
+                log.info("{} / Name = {} 存储目录数 = {}", AtConstant.K_PREFIX, app.name(), initialized.size());
+            }
             return Ux.futureT();
         });
     }

@@ -74,7 +74,7 @@ class ArkConfigure extends ArkBase {
          */
         final JsonObject condition = this.buildQr(appId, by);
         condition.put(KName.PARENT_ID + ",n", null);
-        log.info("{} 模块查询条件：{}", BkConstant.K_PREFIX_MOD, condition.encode());
+        log.info("{} 模块查询条件：{}", BkConstant.K_PREFIX, condition.encode());
         return DB.on(BBagDao.class).<BBag>fetchAsync(condition).compose(bags -> {
             final ConcurrentMap<String, Future<JsonObject>> futures = new ConcurrentHashMap<>();
             // open = true 的时候要开放
