@@ -49,7 +49,8 @@ public class ExInPure extends ExInBase {
                 /* Field / Value */
                 final String field = table.field(cellIndex);
                 if (Objects.nonNull(field)) {
-                    final Class<?> type = metaAtom.type(field);
+                    // Fix: SPI 实现类未找到（按优先级）: io.zerows.spi.modeler.MetaOn | io.r2mo.spi.ProviderOfFactory
+                    final Class<?> type = Objects.isNull(metaAtom) ? null : metaAtom.type(field);
                     final Object value = this.formulaValue(dataCell, type);
 
                     /* Stored into record */
