@@ -23,7 +23,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <java.version>21</java.version>
     </properties>
-    <name>(POM) 📚️ - Zero Framework ${revision}</name>
+    <name>(POM) 📚️ - Zero Ecotope ${revision}</name>
     <description>Zero Ecotope Framework is a tool for Service Mesh Micro Service.</description>
     <url>http://www.zerows.io</url>
     <packaging>pom</packaging>

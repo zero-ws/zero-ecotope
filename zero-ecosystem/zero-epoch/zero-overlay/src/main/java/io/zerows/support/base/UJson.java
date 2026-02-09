@@ -209,6 +209,9 @@ class UJson {
 
     @SuppressWarnings("unchecked")
     static JsonObject toJObject(final Object value) {
+        if (value instanceof final JsonObject directJ) {
+            return directJ;
+        }
         /* 解决 Map 级的直接转换 */
         final JsonObject result = new JsonObject();
         Fn.jvmAt(() -> {
@@ -234,6 +237,9 @@ class UJson {
     }
 
     static JsonArray toJArray(final Object value) {
+        if (value instanceof final JsonArray directA) {
+            return directA;
+        }
         final JsonArray result = new JsonArray();
         Fn.jvmAt(() -> {
             if (Collection.class.isAssignableFrom(value.getClass())) {

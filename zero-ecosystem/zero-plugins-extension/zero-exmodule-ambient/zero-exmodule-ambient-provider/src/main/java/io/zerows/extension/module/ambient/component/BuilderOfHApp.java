@@ -106,7 +106,7 @@ public class BuilderOfHApp extends AbstractBuilder<HArk> {
 
             // appSecret
             option.put(KName.APP_SECRET, app.getAppSecret());
-            option.put(KName.METADATA, Ut.toJObject(app.getMetadata()));
+            option.put(KName.METADATA, app.getMetadata());
 
             /*
              * Auditor 审计专用信息
