@@ -29,6 +29,10 @@ class ExExprRecord implements ExExpr {
             paramMap.put(KName.FIELD, field);
             final Object result = component.to(value, paramMap);
             record.put(field, result);
+            // Fix: Legacy 临时解决方案
+            if (KName.KEY.equals(field)) {
+                record.put(KName.ID, result);
+            }
         });
         return record.toJson();
     }
