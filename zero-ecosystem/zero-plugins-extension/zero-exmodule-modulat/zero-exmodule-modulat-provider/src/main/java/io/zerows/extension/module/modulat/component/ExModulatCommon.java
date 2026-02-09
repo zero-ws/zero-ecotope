@@ -1,5 +1,6 @@
 package io.zerows.extension.module.modulat.component;
 
+import cn.hutool.core.util.StrUtil;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -52,6 +53,21 @@ public class ExModulatCommon implements ExModulat {
     @Override
     public Future<JsonObject> extension(final JsonObject appJson, final boolean open) {
         final String key = Ut.vId(appJson);
+        if (StrUtil.isEmpty(key)) {
+            /*
+            启动流程中的执行异常 /
+             java.lang.NullPointerException
+                at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+                at io.zerows.extension.module.modulat.component.ExModulatCommon.extension(ExModulatCommon.java:70)
+                at io.zerows.extension.module.modulat.component.ExModulatCommon.extension(ExModulatCommon.java:55)
+                at io.zerows.extension.skeleton.spi.ExModulat.extension(ExModulat.java:41)
+                at io.zerows.extension.module.modulat.boot.MDModulatActor.startAsync(MDModulatActor.java:38)
+                at io.zerows.extension.skeleton.metadata.MDModuleActor.lambda$startAsync$1(MDModuleActor.java:192)
+                at java.base/java.util.concurrent.ConcurrentHashMap.forEach(ConcurrentHashMap.java:1603)
+                at io.zerows.extension.skeleton.metadata.MDModuleActor.startAsync(MDModuleActor.java:192)
+             */
+            return Ux.futureJ();
+        }
         return this.extension(key, open).compose(moduleJ -> {
             final JsonObject original = moduleJ.copy();
             original.mergeIn(appJson, true);

@@ -89,7 +89,6 @@ public class MDModuleRegistry {
         // 模块配置先加载
         final OCacheConfiguration store = OCacheConfiguration.of();
         final JsonObject configurationJ = store.configurationJ(this.mid);
-        log.info("{} 配置数据加载：{}", KeConstant.K_PREFIX_BOOT, configurationJ.encode());
 
 
         // APP-0011: 运行环境检查
@@ -97,6 +96,7 @@ public class MDModuleRegistry {
         if (Objects.nonNull(ambient) && ambient.isReady()) {
             return Future.succeededFuture(ambient);
         }
+        log.info("{} 配置数据加载：{}", KeConstant.K_PREFIX_BOOT, configurationJ.encode());
 
 
         // APP-0012: 运行环境注册（首次启动检查为空）
