@@ -101,8 +101,17 @@ public class KApp implements HApp, HLog {
      * @param tenant 租户标识
      */
     public KApp(final String name, final String tenant) {
-        final String nameApp = ENV.of().get(EnvironmentVariable.Z_APP, name);
-        final String nameTenant = ENV.of().get(EnvironmentVariable.Z_TENANT, tenant);
+        /*
+         * 此处反掉了，应该是输入为 null 时才使用环境变量，而不是直接覆盖
+         * - 优先考虑 name
+         * - 然后考虑环境变量 Z_APP
+         * Fix: 之前的逻辑是无论 name 是否为空都会覆盖，这样就无法通过构造函数传入 name 了，现在改为只有当 name 为空时才使用环境变量，
+         * 这样就可以通过构造函数传入 name，同时又保留了环境变量的优先级逻辑
+         */
+        final String nameApp = StrUtil.isEmpty(name) ?
+            ENV.of().get(EnvironmentVariable.Z_APP, name) : name;
+        final String nameTenant = StrUtil.isEmpty(tenant) ?
+            ENV.of().get(EnvironmentVariable.Z_TENANT, tenant) : tenant;
         this.initialize(nameApp, nameTenant);
     }
 

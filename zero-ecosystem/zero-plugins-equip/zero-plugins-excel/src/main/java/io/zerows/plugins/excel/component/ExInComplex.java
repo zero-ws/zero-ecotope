@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.metadata.KRef;
+import io.zerows.plugins.excel.ExcelConstant;
 import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.plugins.excel.util.ExFn;
@@ -187,7 +188,7 @@ public class ExInComplex extends ExInBase {
                     record.put(field, value);
                 }
             } else {
-                this.logger().warn("Field (index = {0}) could not be found", cellIndex);
+                this.log().warn("{} 属性 (index = {}) 找不到 ( Data )", ExcelConstant.K_PREFIX, cellIndex);
             }
         };
     }
@@ -205,7 +206,7 @@ public class ExInComplex extends ExInBase {
                     this.consumeCellFn(rowMap, field).accept(dataCell, metaAtom);
                 }
             } else {
-                this.logger().warn("Field (index = {0}) could not be found", cellIndex);
+                this.log().warn("{} 属性 (index = {}) 找不到", ExcelConstant.K_PREFIX, cellIndex);
             }
         };
     }

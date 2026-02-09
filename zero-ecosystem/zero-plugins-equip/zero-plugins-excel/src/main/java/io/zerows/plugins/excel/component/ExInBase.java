@@ -65,8 +65,7 @@ public abstract class ExInBase implements ExIn {
 
             result = fun.apply(dataCell);
         } catch (final Throwable ex) {
-            this.logger().fatal(ex);
-            ex.printStackTrace();
+            this.log().error(ex.getMessage(), ex);
             result = null;
         }
         return result;

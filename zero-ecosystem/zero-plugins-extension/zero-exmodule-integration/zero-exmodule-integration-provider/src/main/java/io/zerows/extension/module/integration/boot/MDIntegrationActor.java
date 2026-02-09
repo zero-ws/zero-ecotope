@@ -36,6 +36,9 @@ public class MDIntegrationActor extends MDModuleActor {
         final String storePath = ENV.of().get(EnvironmentVariable.SIS_STORE, config.getStoreRoot());
         config.setStoreRoot(storePath);
 
+        log.info("{} 集成存储：\"{}\"", KeConstant.K_PREFIX_STORE, config.getStoreRoot());
+        this.manager().config(config);
+
         return Future.succeededFuture(Boolean.TRUE);
     }
 

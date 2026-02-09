@@ -1,6 +1,6 @@
 package io.zerows.support.base;
 
-import io.zerows.component.log.LogUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.helpers.MessageFormatter;
 
 import java.text.MessageFormat;
@@ -11,8 +11,8 @@ import java.util.ResourceBundle;
 /**
  * @author lang : 2023/4/27
  */
+@Slf4j
 class UFormat {
-    private static final LogUtil LOG = LogUtil.from(UFormat.class);
 
     private static String formatJava(final String pattern, final Object... args) {
         return MessageFormat.format(pattern, args);
@@ -37,7 +37,7 @@ class UFormat {
             final String pattern = bundle.getString(key);
             return fromMessage(pattern, args);
         } catch (final MissingResourceException ex) {
-            LOG.error(ex.getMessage());
+            log.error(ex.getMessage(), ex);
             throw ex;
         }
     }

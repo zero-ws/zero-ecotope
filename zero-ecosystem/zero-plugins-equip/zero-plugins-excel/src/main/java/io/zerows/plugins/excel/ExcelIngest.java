@@ -31,11 +31,13 @@ class ExcelIngest {
      * 2. Iterator for Sheet ( By Analyzer )
      */
     Set<ExTable> ingest(final InputStream in, final boolean isXlsx) {
-        return this.ingest(in, isXlsx, HMetaAtom.of());
+        // Fix: SPI 实现类未找到（按优先级）: io.zerows.spi.modeler.MetaOn | io.r2mo.spi.ProviderOfFactory
+        return this.ingest(in, isXlsx, null);
     }
 
     Set<ExTable> ingest(final String filename) {
-        return this.ingest(filename, HMetaAtom.of());
+        // Fix: SPI 实现类未找到（按优先级）: io.zerows.spi.modeler.MetaOn | io.r2mo.spi.ProviderOfFactory
+        return this.ingest(filename, null);
     }
 
     /**

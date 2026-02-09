@@ -57,7 +57,7 @@ class StoreAppAmbiguity extends AbstractAmbiguity implements StoreApp {
     @Override
     public StoreApp add(final HApp app) {
         if (Objects.nonNull(app) && Objects.nonNull(app.name())) {
-            log.info("[ ZERO ] 应用 {} 已成功添加！", app.name());
+            log.info("[ ZERO ] ( HApp ) 应用 {} / name = {} 已成功添加！", app.id(), app.name());
             APPS.put(app.name(), app, app.id(), app.ns());
         }
         return this;

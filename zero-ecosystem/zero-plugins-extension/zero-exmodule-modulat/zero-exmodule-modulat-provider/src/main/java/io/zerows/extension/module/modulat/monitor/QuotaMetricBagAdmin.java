@@ -8,11 +8,11 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.modulat.component.Ark;
 import io.zerows.plugins.monitor.client.QuotaMetricBase;
 import io.zerows.plugins.monitor.metadata.MetricRow;
+import io.zerows.plugins.monitor.metadata.MetricType;
 import io.zerows.support.Ut;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author lang : 2025-12-29
@@ -25,7 +25,8 @@ public class QuotaMetricBagAdmin extends QuotaMetricBase {
         final List<MetricRow> metric = new ArrayList<>();
         bagAdmin.keys().stream()
             .map(bagAdmin::value)
-            .filter(Objects::nonNull)
+            // Fix: java.lang.NullPointerException 配置为空的异常
+            .filter(Ut::isNotNil)
             .map(this::build)
             .forEach(metric::add);
         return Future.succeededFuture(metric);
@@ -33,9 +34,15 @@ public class QuotaMetricBagAdmin extends QuotaMetricBase {
 
     private MetricRow build(final JsonObject config) {
         final MetricRow item = new MetricRow();
-        item.id(Ut.valueString(config, KName.KEY));
+        final String vId = Ut.vId(config);
+        item.id(vId);
         item.group("G.Config");
         item.name(Ut.valueString(config, KName.CODE));
+        /*
+         * Cannot invoke "io.zerows.plugins.monitor.metadata.MetricType.name()"
+         * because the return value of "io.zerows.plugins.monitor.metadata.MetricRow.category()" is null
+         */
+        item.category(MetricType.CONFIG);
         return item;
     }
 

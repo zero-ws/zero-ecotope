@@ -5,7 +5,7 @@ package io.zerows.extension.module.modulat.common;
  */
 public interface BkConstant {
 
-    String K_PREFIX_MOD = "[ XMOD ] ( Mod )";
+    String K_PREFIX = "[ XMOD ] ( Mod )";
 
     interface License {
 

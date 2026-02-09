@@ -1,6 +1,7 @@
 package io.zerows.plugins.excel.component;
 
 import io.zerows.platform.metadata.KRef;
+import io.zerows.plugins.excel.ExcelConstant;
 import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.plugins.excel.util.ExFn;
@@ -49,13 +50,14 @@ public class ExInPure extends ExInBase {
                 /* Field / Value */
                 final String field = table.field(cellIndex);
                 if (Objects.nonNull(field)) {
-                    final Class<?> type = metaAtom.type(field);
+                    // Fix: SPI 实现类未找到（按优先级）: io.zerows.spi.modeler.MetaOn | io.r2mo.spi.ProviderOfFactory
+                    final Class<?> type = Objects.isNull(metaAtom) ? null : metaAtom.type(field);
                     final Object value = this.formulaValue(dataCell, type);
 
                     /* Stored into record */
                     record.put(field, value);
                 } else {
-                    this.logger().warn("Field (index = {0}) could not be found", cellIndex);
+                    this.log().warn("{} Field (index = {}) could not be found", ExcelConstant.K_PREFIX, cellIndex);
                 }
             });
             /* Not Empty to add, check whether record is valid */

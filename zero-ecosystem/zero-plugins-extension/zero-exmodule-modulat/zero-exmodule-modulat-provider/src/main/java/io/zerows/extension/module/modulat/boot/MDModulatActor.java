@@ -34,7 +34,8 @@ public class MDModulatActor extends MDModuleActor {
             return Future.succeededFuture(Boolean.TRUE);
         }
         final ExModulat modulat = HPI.findOneOf(ExModulat.class);
-        return modulat.extension(app.option()).compose(nil -> Ux.futureT());
+        // BUG: 解决无法提取 app 数据导致模块无法加载的问题
+        return modulat.extension(app.data()).compose(nil -> Ux.futureT());
     }
 
 

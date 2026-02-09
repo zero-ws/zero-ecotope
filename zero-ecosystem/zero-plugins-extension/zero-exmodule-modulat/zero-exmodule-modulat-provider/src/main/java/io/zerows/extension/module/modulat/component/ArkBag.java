@@ -7,12 +7,14 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.ClusterSerializable;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.modulat.common.Bk;
+import io.zerows.extension.module.modulat.common.BkConstant;
 import io.zerows.extension.module.modulat.domain.tables.daos.BBagDao;
 import io.zerows.extension.module.modulat.domain.tables.pojos.BBag;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.program.Ux;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 class ArkBag extends ArkBase {
     /*
      * B_BAG 专用数据存储结构，以及 B_BAG 核心缓存结构，用于加载 X_BAG 中的基础数据
@@ -29,7 +31,7 @@ class ArkBag extends ArkBase {
         return ASYNC_BAG_DATA.pick(() -> {
             final JsonObject condition = this.buildQr(appId, by);
             condition.put(KName.ENTRY, Boolean.TRUE);
-            Bk.LOG.Spi.info(this.getClass(), "Modulat condition = {0}", condition.encode());
+            log.debug("{} 模块配置条件 = `{}`", BkConstant.K_PREFIX, condition.encode());
             return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
                 .compose(Ux::futureA);
         }, appId).compose(Ux::future);

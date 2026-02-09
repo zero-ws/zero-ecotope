@@ -7,6 +7,7 @@ import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.support.Ut;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -22,13 +23,18 @@ class ExExprRecord implements ExExpr {
 
 
         // CURRENT 可以直接从 ExRecord -> ExTable 中提取，此处可忽略，主要是先构造 paramMap（第三参）
-        record.keySet().forEach(field -> {
+        // FIX: 经典BUG / java.util.ConcurrentModificationException
+        new HashSet<>(record.keySet()).forEach(field -> {
             final Object value = record.get(field);
             final ExValue component = this.pickComponent(value);
             // 必须传递 field
             paramMap.put(KName.FIELD, field);
             final Object result = component.to(value, paramMap);
             record.put(field, result);
+            // Fix: Legacy 临时解决方案
+            if (KName.KEY.equals(field)) {
+                record.put(KName.ID, result);
+            }
         });
         return record.toJson();
     }

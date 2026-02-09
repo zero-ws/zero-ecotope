@@ -54,13 +54,26 @@ public class DI {
         return (T) CC_SINGLETON.pick(() -> di.getInstance(clazz), extensionKey);
     }
 
+    /**
+     * 单例条件模型 / 缓存键计算
+     * <pre>
+     *     如果带有 {@link Named} 注解，则使用注解值作为 Key 来区分不同的单例实例。
+     *     如果没有 {@link Named} 注解，则使用类的全限定名（即 `clazz.getName()`）作为 Key 来区分不同的单例实例。
+     * </pre>
+     *
+     * @param clazz 对应的实例类
+     * @return 返回唯一的 Key 值
+     */
     public String named(final Class<?> clazz) {
         String name;
         if (clazz.isAnnotationPresent(Named.class)) {
             final Named annotation = clazz.getDeclaredAnnotation(Named.class);
             name = annotation.value();
         } else {
-            name = null;
+            /*
+             * java.lang.NullPointerException: [ R2MO ] key 参数不可为空！
+             */
+            name = clazz.getName();
         }
         return name;
     }

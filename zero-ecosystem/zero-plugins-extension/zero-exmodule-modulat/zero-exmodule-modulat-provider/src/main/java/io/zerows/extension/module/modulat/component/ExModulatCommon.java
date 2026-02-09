@@ -1,11 +1,13 @@
 package io.zerows.extension.module.modulat.component;
 
+import cn.hutool.core.util.StrUtil;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.program.Ux;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -50,7 +52,22 @@ public class ExModulatCommon implements ExModulat {
      */
     @Override
     public Future<JsonObject> extension(final JsonObject appJson, final boolean open) {
-        final String key = appJson.getString(KName.ID);
+        final String key = Ut.vId(appJson);
+        if (StrUtil.isEmpty(key)) {
+            /*
+            启动流程中的执行异常 /
+             java.lang.NullPointerException
+                at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+                at io.zerows.extension.module.modulat.component.ExModulatCommon.extension(ExModulatCommon.java:70)
+                at io.zerows.extension.module.modulat.component.ExModulatCommon.extension(ExModulatCommon.java:55)
+                at io.zerows.extension.skeleton.spi.ExModulat.extension(ExModulat.java:41)
+                at io.zerows.extension.module.modulat.boot.MDModulatActor.startAsync(MDModulatActor.java:38)
+                at io.zerows.extension.skeleton.metadata.MDModuleActor.lambda$startAsync$1(MDModuleActor.java:192)
+                at java.base/java.util.concurrent.ConcurrentHashMap.forEach(ConcurrentHashMap.java:1603)
+                at io.zerows.extension.skeleton.metadata.MDModuleActor.startAsync(MDModuleActor.java:192)
+             */
+            return Ux.futureJ();
+        }
         return this.extension(key, open).compose(moduleJ -> {
             final JsonObject original = moduleJ.copy();
             original.mergeIn(appJson, true);
@@ -67,9 +84,7 @@ public class ExModulatCommon implements ExModulat {
     @Override
     public Future<JsonObject> extension(final String appId, final boolean open) {
         Objects.requireNonNull(appId);
-        final JsonObject appJ = new JsonObject();
-        // 解决无法连接导致AppId为空的问题
-        appJ.put(KName.KEY, appId);
+        final JsonObject appJ = Ut.vId(appId);
         return Ark.ofConfigure().modularize(appId, open).compose(moduleJ -> {
             appJ.mergeIn((JsonObject) moduleJ, true);
             if (open) {

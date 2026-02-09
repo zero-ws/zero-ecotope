@@ -1,20 +1,11 @@
 package io.zerows.plugins.excel.component;
 
 import org.apache.poi.ss.usermodel.Sheet;
+import org.jspecify.annotations.NonNull;
 
-import java.util.Objects;
-
-public class ExBoundRow implements ExBound {
-    private final transient int start;
-    private final transient int end;
-
+public record ExBoundRow(int start, int end) implements ExBound {
     public ExBoundRow(final Sheet sheet) {
         this(sheet.getFirstRowNum(), sheet.getLastRowNum());
-    }
-
-    public ExBoundRow(final int start, final int end) {
-        this.start = start;
-        this.end = end;
     }
 
     @Override
@@ -22,34 +13,18 @@ public class ExBoundRow implements ExBound {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ExBoundRow)) {
+        if (!(o instanceof final ExBoundRow rowBound)) {
             return false;
         }
-        final ExBoundRow rowBound = (ExBoundRow) o;
         return this.start == rowBound.start &&
             this.end == rowBound.end;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(this.start, this.end);
-    }
-
-    @Override
-    public String toString() {
+    public @NonNull String toString() {
         return "RowBound{" +
             "begin=" + this.start +
             ", end=" + this.end +
             '}';
-    }
-
-    @Override
-    public int getStart() {
-        return this.start;
-    }
-
-    @Override
-    public int getEnd() {
-        return this.end;
     }
 }
