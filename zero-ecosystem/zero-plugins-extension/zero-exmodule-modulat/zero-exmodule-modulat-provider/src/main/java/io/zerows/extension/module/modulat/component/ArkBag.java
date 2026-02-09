@@ -31,7 +31,7 @@ class ArkBag extends ArkBase {
         return ASYNC_BAG_DATA.pick(() -> {
             final JsonObject condition = this.buildQr(appId, by);
             condition.put(KName.ENTRY, Boolean.TRUE);
-            log.info("{} Modulat Condition = `{}`", BkConstant.K_PREFIX, condition.encode());
+            log.debug("{} 模块配置条件 = `{}`", BkConstant.K_PREFIX, condition.encode());
             return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
                 .compose(Ux::futureA);
         }, appId).compose(Ux::future);

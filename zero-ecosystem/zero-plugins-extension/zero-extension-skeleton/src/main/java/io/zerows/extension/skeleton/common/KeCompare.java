@@ -59,6 +59,7 @@ class KeCompare {
         return Apt.create(originalArray, latest).comparedA(inserted).comparedU(updated);
     }
 
+    @SuppressWarnings("all")
     static BiFunction<Function<JsonArray, Future<JsonArray>>, Function<JsonArray, Future<JsonArray>>, Future<JsonArray>> atomyFn(
         final Class<?> clazz,
         final Apt compared) {
