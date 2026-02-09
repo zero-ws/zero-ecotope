@@ -51,7 +51,6 @@ import java.util.function.Function;
  * @author lang : 2023-05-21 👨‍💻
  */
 public interface HApp extends HBoundary<String>, Function<HApp, HApp> {
-
     // 🚀 区域范围属性：----------------------------------------------------------
     /*
      * 🌐 区域范围属性模块 🧭

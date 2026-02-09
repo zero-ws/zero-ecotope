@@ -1,5 +1,9 @@
 package io.zerows.support.base;
 
+import cn.hutool.core.util.StrUtil;
+import io.vertx.core.json.JsonObject;
+import io.zerows.platform.constant.VName;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -94,5 +98,26 @@ public class UtBase extends _Value {
 
     public static String compileAnsible(final String content) {
         return UCompiler.compileAnsible(content);
+    }
+
+    
+    public static String vId(final JsonObject data) {
+        if (Objects.isNull(data)) {
+            return null;
+        }
+        final String id = valueString(data, VName.ID);
+        if (StrUtil.isNotEmpty(id)) {
+            return id;
+        }
+        return valueString(data, VName.KEY);
+    }
+
+    public static JsonObject vId(final String id) {
+        if (StrUtil.isEmpty(id)) {
+            return new JsonObject();
+        }
+        return new JsonObject()
+            .put(VName.ID, id)
+            .put(VName.KEY, id);
     }
 }
