@@ -13,7 +13,6 @@ import io.zerows.support.Ut;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author lang : 2025-12-29
@@ -26,7 +25,8 @@ public class QuotaMetricBagAdmin extends QuotaMetricBase {
         final List<MetricRow> metric = new ArrayList<>();
         bagAdmin.keys().stream()
             .map(bagAdmin::value)
-            .filter(Objects::nonNull)
+            // Fix: java.lang.NullPointerException 配置为空的异常
+            .filter(Ut::isNotNil)
             .map(this::build)
             .forEach(metric::add);
         return Future.succeededFuture(metric);
@@ -34,7 +34,8 @@ public class QuotaMetricBagAdmin extends QuotaMetricBase {
 
     private MetricRow build(final JsonObject config) {
         final MetricRow item = new MetricRow();
-        item.id(Ut.valueString(config, KName.KEY));
+        final String vId = Ut.vId(config);
+        item.id(vId);
         item.group("G.Config");
         item.name(Ut.valueString(config, KName.CODE));
         /*
