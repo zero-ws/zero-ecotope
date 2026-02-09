@@ -46,8 +46,8 @@ public class SISDirectoryActor extends MDModuleActor {
         final AtConfig config = this.manager().config();
 
         /* 网盘配置 */
-        log.info("{} 存储目录 {} / 存储路径：\"{}\" @ type = {}", KeConstant.K_PREFIX_STORE,
-            config.getFileIntegration(), config.getStorePath(), config.getFileStorage());
+        log.info("{} 本地路径：\"{}\" @ type = {}, 目录类型：{}", KeConstant.K_PREFIX_STORE,
+            config.getStorePath(), config.getFileStorage(), config.getFileIntegration());
 
         return this.startDocAsync(ambient, config);
     }
