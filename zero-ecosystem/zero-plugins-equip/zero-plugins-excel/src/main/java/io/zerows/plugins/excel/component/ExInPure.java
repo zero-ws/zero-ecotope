@@ -1,6 +1,7 @@
 package io.zerows.plugins.excel.component;
 
 import io.zerows.platform.metadata.KRef;
+import io.zerows.plugins.excel.ExcelConstant;
 import io.zerows.plugins.excel.metadata.ExRecord;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.plugins.excel.util.ExFn;
@@ -56,7 +57,7 @@ public class ExInPure extends ExInBase {
                     /* Stored into record */
                     record.put(field, value);
                 } else {
-                    this.logger().warn("Field (index = {0}) could not be found", cellIndex);
+                    this.log().warn("{} Field (index = {}) could not be found", ExcelConstant.K_PREFIX, cellIndex);
                 }
             });
             /* Not Empty to add, check whether record is valid */

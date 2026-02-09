@@ -44,7 +44,7 @@ public class ExBoundCol implements ExBound {
     }
 
     @Override
-    public int getStart() {
+    public int start() {
         return this.start;
     }
 
@@ -53,7 +53,7 @@ public class ExBoundCol implements ExBound {
     }
 
     @Override
-    public int getEnd() {
+    public int end() {
         return this.end;
     }
 

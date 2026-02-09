@@ -1,12 +1,12 @@
 package io.zerows.plugins.excel.component;
 
-import io.zerows.component.log.LogO;
 import io.zerows.plugins.excel.metadata.ExTable;
 import io.zerows.specification.modeling.metadata.HMetaAtom;
-import io.zerows.support.Ut;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -21,7 +21,7 @@ public interface ExIn {
 
     ExTable applyData(ExTable table, ExBound dataRange, Cell cell, HMetaAtom metaAtom);
 
-    default LogO logger() {
-        return Ut.Log.plugin(this.getClass());
+    default Logger log() {
+        return LoggerFactory.getLogger(this.getClass());
     }
 }

@@ -28,8 +28,8 @@ public class ExFn {
                                final ExBound bound,
                                final BiConsumer<Row, Integer> consumer) {
         /* Start / End */
-        final int start = bound.getStart();
-        final int end = bound.getEnd();
+        final int start = bound.start();
+        final int end = bound.end();
         for (int idx = start; idx <= end; idx++) {
             final Row row = sheet.getRow(idx);
             if (null != row) {
@@ -44,8 +44,8 @@ public class ExFn {
                                final Set<Integer> indexSet,
                                final Consumer<List<Row>> consumer) {
         /* Start / End */
-        final int start = bound.getStart();
-        final int end = bound.getEnd();
+        final int start = bound.start();
+        final int end = bound.end();
         /* Matrix -> List */
         final List<List<Row>> matrix = new ArrayList<>();
         final List<Row> parameters = new ArrayList<>();
@@ -103,8 +103,8 @@ public class ExFn {
                              final ExBound bound,
                              final BiConsumer<Cell, Integer> consumer,
                              final Predicate<Cell> predicate) {
-        final int start = bound.getStart();
-        final int end = bound.getEnd();
+        final int start = bound.start();
+        final int end = bound.end();
         for (int idx = start; idx < end; idx++) {
             final Cell cell = row.getCell(idx);
             if (null != cell) {
@@ -136,8 +136,8 @@ public class ExFn {
     public static void itRowZip(final Row row, final Row row1,
                                 final ExBound bound,
                                 final BiConsumer<Cell, Cell> consumer) {
-        final int start = bound.getStart();
-        final int end = bound.getEnd();
+        final int start = bound.start();
+        final int end = bound.end();
         for (int idx = start; idx < end; idx++) {
             final Cell cell = row.getCell(idx);
             final Cell cell1 = row1.getCell(idx);

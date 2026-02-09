@@ -4,10 +4,10 @@ public interface ExBound {
     /*
      * Start num;
      */
-    int getStart();
+    int start();
 
     /*
      * End num;
      */
-    int getEnd();
+    int end();
 }
