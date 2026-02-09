@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.program.Ux;
+import io.zerows.support.Ut;
 
 import java.util.Objects;
 
@@ -50,7 +51,7 @@ public class ExModulatCommon implements ExModulat {
      */
     @Override
     public Future<JsonObject> extension(final JsonObject appJson, final boolean open) {
-        final String key = appJson.getString(KName.KEY);
+        final String key = Ut.vId(appJson);
         return this.extension(key, open).compose(moduleJ -> {
             final JsonObject original = moduleJ.copy();
             original.mergeIn(appJson, true);
@@ -67,9 +68,7 @@ public class ExModulatCommon implements ExModulat {
     @Override
     public Future<JsonObject> extension(final String appId, final boolean open) {
         Objects.requireNonNull(appId);
-        final JsonObject appJ = new JsonObject();
-        // 解决无法连接导致AppId为空的问题
-        appJ.put(KName.KEY, appId);
+        final JsonObject appJ = Ut.vId(appId);
         return Ark.ofConfigure().modularize(appId, open).compose(moduleJ -> {
             appJ.mergeIn((JsonObject) moduleJ, true);
             if (open) {
