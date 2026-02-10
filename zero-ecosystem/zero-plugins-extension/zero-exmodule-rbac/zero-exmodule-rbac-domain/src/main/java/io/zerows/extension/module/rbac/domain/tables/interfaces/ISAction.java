@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
@@ -84,13 +85,13 @@ public interface ISAction extends VertxPojo, Serializable {
      * Setter for <code>ZDB.S_ACTION.RENEWAL_CREDIT</code>. 「renewalCredit」-
      * 被刷新的凭证
      */
-    public ISAction setRenewalCredit(String value);
+    public ISAction setRenewalCredit(JsonArray value);
 
     /**
      * Getter for <code>ZDB.S_ACTION.RENEWAL_CREDIT</code>. 「renewalCredit」-
      * 被刷新的凭证
      */
-    public String getRenewalCredit();
+    public JsonArray getRenewalCredit();
 
     /**
      * Setter for <code>ZDB.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
@@ -246,7 +247,7 @@ public interface ISAction extends VertxPojo, Serializable {
                 setOrThrow(this::setMethod,json::getString,"METHOD","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setPermissionId,json::getString,"PERMISSION_ID","java.lang.String");
-                setOrThrow(this::setRenewalCredit,json::getString,"RENEWAL_CREDIT","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column RENEWAL_CREDIT!
                 setOrThrow(this::setResourceId,json::getString,"RESOURCE_ID","java.lang.String");
                 setOrThrow(this::setUri,json::getString,"URI","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -273,7 +274,7 @@ public interface ISAction extends VertxPojo, Serializable {
                 json.put("METHOD",getMethod());
                 json.put("NAME",getName());
                 json.put("PERMISSION_ID",getPermissionId());
-                json.put("RENEWAL_CREDIT",getRenewalCredit());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column RENEWAL_CREDIT!
                 json.put("RESOURCE_ID",getResourceId());
                 json.put("URI",getUri());
                 json.put("SIGMA",getSigma());

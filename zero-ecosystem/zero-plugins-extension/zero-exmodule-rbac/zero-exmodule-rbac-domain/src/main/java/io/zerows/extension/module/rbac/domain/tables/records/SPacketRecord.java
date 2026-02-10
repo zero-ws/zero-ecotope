@@ -62,7 +62,7 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Setter for <code>ZDB.S_PACKET.H_CONFIG</code>. 「hConfig」- 字段附加配置
      */
     @Override
-    public SPacketRecord setHConfig(String value) {
+    public SPacketRecord setHConfig(JsonObject value) {
         set(2, value);
         return this;
     }
@@ -71,15 +71,15 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.H_CONFIG</code>. 「hConfig」- 字段附加配置
      */
     @Override
-    public String getHConfig() {
-        return (String) get(2);
+    public JsonObject getHConfig() {
+        return (JsonObject) get(2);
     }
 
     /**
      * Setter for <code>ZDB.S_PACKET.H_MAPPING</code>. 「hMapping」- 字段映射关系
      */
     @Override
-    public SPacketRecord setHMapping(String value) {
+    public SPacketRecord setHMapping(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -88,8 +88,8 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.H_MAPPING</code>. 「hMapping」- 字段映射关系
      */
     @Override
-    public String getHMapping() {
-        return (String) get(3);
+    public JsonObject getHMapping() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -113,7 +113,7 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Setter for <code>ZDB.S_PACKET.Q_CONFIG</code>. 「qConfig」- 条件配置
      */
     @Override
-    public SPacketRecord setQConfig(String value) {
+    public SPacketRecord setQConfig(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -122,15 +122,15 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.Q_CONFIG</code>. 「qConfig」- 条件配置
      */
     @Override
-    public String getQConfig() {
-        return (String) get(5);
+    public JsonObject getQConfig() {
+        return (JsonObject) get(5);
     }
 
     /**
      * Setter for <code>ZDB.S_PACKET.Q_MAPPING</code>. 「qMapping」- 查询条件映射关系
      */
     @Override
-    public SPacketRecord setQMapping(String value) {
+    public SPacketRecord setQMapping(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -139,8 +139,8 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.Q_MAPPING</code>. 「qMapping」- 查询条件映射关系
      */
     @Override
-    public String getQMapping() {
-        return (String) get(6);
+    public JsonObject getQMapping() {
+        return (JsonObject) get(6);
     }
 
     /**
@@ -200,7 +200,7 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Setter for <code>ZDB.S_PACKET.RUN_CONFIG</code>. 「runConfig」- 运行专用配置
      */
     @Override
-    public SPacketRecord setRunConfig(String value) {
+    public SPacketRecord setRunConfig(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -209,15 +209,15 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.RUN_CONFIG</code>. 「runConfig」- 运行专用配置
      */
     @Override
-    public String getRunConfig() {
-        return (String) get(10);
+    public JsonObject getRunConfig() {
+        return (JsonObject) get(10);
     }
 
     /**
      * Setter for <code>ZDB.S_PACKET.SEEK_CONFIG</code>. 「seekConfig」- 访问者配置
      */
     @Override
-    public SPacketRecord setSeekConfig(String value) {
+    public SPacketRecord setSeekConfig(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -226,15 +226,15 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.SEEK_CONFIG</code>. 「seekConfig」- 访问者配置
      */
     @Override
-    public String getSeekConfig() {
-        return (String) get(11);
+    public JsonObject getSeekConfig() {
+        return (JsonObject) get(11);
     }
 
     /**
      * Setter for <code>ZDB.S_PACKET.SEEK_SYNTAX</code>. 「seekSyntax」- 访问者语法
      */
     @Override
-    public SPacketRecord setSeekSyntax(String value) {
+    public SPacketRecord setSeekSyntax(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -243,15 +243,15 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.SEEK_SYNTAX</code>. 「seekSyntax」- 访问者语法
      */
     @Override
-    public String getSeekSyntax() {
-        return (String) get(12);
+    public JsonObject getSeekSyntax() {
+        return (JsonObject) get(12);
     }
 
     /**
      * Setter for <code>ZDB.S_PACKET.V_CONFIG</code>. 「vConfig」- 列配置
      */
     @Override
-    public SPacketRecord setVConfig(String value) {
+    public SPacketRecord setVConfig(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -260,15 +260,15 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.V_CONFIG</code>. 「vConfig」- 列配置
      */
     @Override
-    public String getVConfig() {
-        return (String) get(13);
+    public JsonObject getVConfig() {
+        return (JsonObject) get(13);
     }
 
     /**
      * Setter for <code>ZDB.S_PACKET.V_MAPPING</code>. 「vMapping」- 列字段映射关系
      */
     @Override
-    public SPacketRecord setVMapping(String value) {
+    public SPacketRecord setVMapping(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -277,8 +277,8 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
      * Getter for <code>ZDB.S_PACKET.V_MAPPING</code>. 「vMapping」- 列字段映射关系
      */
     @Override
-    public String getVMapping() {
-        return (String) get(14);
+    public JsonObject getVMapping() {
+        return (JsonObject) get(14);
     }
 
     /**
@@ -550,7 +550,7 @@ public class SPacketRecord extends UpdatableRecordImpl<SPacketRecord> implements
     /**
      * Create a detached, initialised SPacketRecord
      */
-    public SPacketRecord(String id, String code, String hConfig, String hMapping, String hType, String qConfig, String qMapping, String qType, String resource, String runComponent, String runConfig, String seekConfig, String seekSyntax, String vConfig, String vMapping, String vType, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SPacketRecord(String id, String code, JsonObject hConfig, JsonObject hMapping, String hType, JsonObject qConfig, JsonObject qMapping, String qType, String resource, String runComponent, JsonObject runConfig, JsonObject seekConfig, JsonObject seekSyntax, JsonObject vConfig, JsonObject vMapping, String vType, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SPacket.S_PACKET);
 
         setId(id);

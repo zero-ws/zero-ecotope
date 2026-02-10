@@ -4,7 +4,9 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
 import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Indexes;
 import io.zerows.extension.module.rbac.domain.Keys;
@@ -64,43 +66,43 @@ public class SVisitant extends TableImpl<SVisitantRecord> {
     /**
      * The column <code>ZDB.S_VISITANT.ACL_VARIETY</code>. 「aclVariety」- 多样性的属性集
      */
-    public final TableField<SVisitantRecord, String> ACL_VARIETY = createField(DSL.name("ACL_VARIETY"), SQLDataType.CLOB(65535), this, "「aclVariety」- 多样性的属性集");
+    public final TableField<SVisitantRecord, JsonArray> ACL_VARIETY = createField(DSL.name("ACL_VARIETY"), SQLDataType.CLOB(65535), this, "「aclVariety」- 多样性的属性集", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.S_VISITANT.ACL_VERGE</code>. 「aclVerge」- 依赖属性集
      */
-    public final TableField<SVisitantRecord, String> ACL_VERGE = createField(DSL.name("ACL_VERGE"), SQLDataType.CLOB(65535), this, "「aclVerge」- 依赖属性集");
+    public final TableField<SVisitantRecord, JsonArray> ACL_VERGE = createField(DSL.name("ACL_VERGE"), SQLDataType.CLOB(65535), this, "「aclVerge」- 依赖属性集", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.S_VISITANT.ACL_VIEW</code>. 「aclView」- 只读的属性集
      */
-    public final TableField<SVisitantRecord, String> ACL_VIEW = createField(DSL.name("ACL_VIEW"), SQLDataType.CLOB(65535), this, "「aclView」- 只读的属性集");
+    public final TableField<SVisitantRecord, JsonArray> ACL_VIEW = createField(DSL.name("ACL_VIEW"), SQLDataType.CLOB(65535), this, "「aclView」- 只读的属性集", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.S_VISITANT.ACL_VISIBLE</code>. 「aclVisible」- 可见的属性集
      */
-    public final TableField<SVisitantRecord, String> ACL_VISIBLE = createField(DSL.name("ACL_VISIBLE"), SQLDataType.CLOB(65535), this, "「aclVisible」- 可见的属性集");
+    public final TableField<SVisitantRecord, JsonArray> ACL_VISIBLE = createField(DSL.name("ACL_VISIBLE"), SQLDataType.CLOB(65535), this, "「aclVisible」- 可见的属性集", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.S_VISITANT.ACL_VOW</code>. 「aclVow」- 引用类属性集
      */
-    public final TableField<SVisitantRecord, String> ACL_VOW = createField(DSL.name("ACL_VOW"), SQLDataType.CLOB(65535), this, "「aclVow」- 引用类属性集");
+    public final TableField<SVisitantRecord, JsonArray> ACL_VOW = createField(DSL.name("ACL_VOW"), SQLDataType.CLOB(65535), this, "「aclVow」- 引用类属性集", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.S_VISITANT.DM_COLUMN</code>. 「dmColumn」对应视图中的
      * Projection
      */
-    public final TableField<SVisitantRecord, String> DM_COLUMN = createField(DSL.name("DM_COLUMN"), SQLDataType.CLOB(65535), this, "「dmColumn」对应视图中的 Projection");
+    public final TableField<SVisitantRecord, JsonArray> DM_COLUMN = createField(DSL.name("DM_COLUMN"), SQLDataType.CLOB(65535), this, "「dmColumn」对应视图中的 Projection", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.S_VISITANT.DM_QR</code>. 「dmQr」对应视图中的 Criteria
      */
-    public final TableField<SVisitantRecord, String> DM_QR = createField(DSL.name("DM_QR"), SQLDataType.CLOB(65535), this, "「dmQr」对应视图中的 Criteria");
+    public final TableField<SVisitantRecord, JsonObject> DM_QR = createField(DSL.name("DM_QR"), SQLDataType.CLOB(65535), this, "「dmQr」对应视图中的 Criteria", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_VISITANT.DM_ROW</code>. 「dmRow」对应视图中 Rows
      */
-    public final TableField<SVisitantRecord, String> DM_ROW = createField(DSL.name("DM_ROW"), SQLDataType.CLOB(65535), this, "「dmRow」对应视图中 Rows");
+    public final TableField<SVisitantRecord, JsonObject> DM_ROW = createField(DSL.name("DM_ROW"), SQLDataType.CLOB(65535), this, "「dmRow」对应视图中 Rows", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_VISITANT.IDENTIFIER</code>. 「identifier」-

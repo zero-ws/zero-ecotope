@@ -69,12 +69,12 @@ public class SPacket extends TableImpl<SPacketRecord> {
     /**
      * The column <code>ZDB.S_PACKET.H_CONFIG</code>. 「hConfig」- 字段附加配置
      */
-    public final TableField<SPacketRecord, String> H_CONFIG = createField(DSL.name("H_CONFIG"), SQLDataType.CLOB, this, "「hConfig」- 字段附加配置");
+    public final TableField<SPacketRecord, JsonObject> H_CONFIG = createField(DSL.name("H_CONFIG"), SQLDataType.CLOB, this, "「hConfig」- 字段附加配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.H_MAPPING</code>. 「hMapping」- 字段映射关系
      */
-    public final TableField<SPacketRecord, String> H_MAPPING = createField(DSL.name("H_MAPPING"), SQLDataType.CLOB, this, "「hMapping」- 字段映射关系");
+    public final TableField<SPacketRecord, JsonObject> H_MAPPING = createField(DSL.name("H_MAPPING"), SQLDataType.CLOB, this, "「hMapping」- 字段映射关系", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.H_TYPE</code>. 「hType」- 行过滤类型
@@ -84,12 +84,12 @@ public class SPacket extends TableImpl<SPacketRecord> {
     /**
      * The column <code>ZDB.S_PACKET.Q_CONFIG</code>. 「qConfig」- 条件配置
      */
-    public final TableField<SPacketRecord, String> Q_CONFIG = createField(DSL.name("Q_CONFIG"), SQLDataType.CLOB, this, "「qConfig」- 条件配置");
+    public final TableField<SPacketRecord, JsonObject> Q_CONFIG = createField(DSL.name("Q_CONFIG"), SQLDataType.CLOB, this, "「qConfig」- 条件配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.Q_MAPPING</code>. 「qMapping」- 查询条件映射关系
      */
-    public final TableField<SPacketRecord, String> Q_MAPPING = createField(DSL.name("Q_MAPPING"), SQLDataType.CLOB, this, "「qMapping」- 查询条件映射关系");
+    public final TableField<SPacketRecord, JsonObject> Q_MAPPING = createField(DSL.name("Q_MAPPING"), SQLDataType.CLOB, this, "「qMapping」- 查询条件映射关系", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.Q_TYPE</code>. 「qType」- 条件模板
@@ -110,27 +110,27 @@ public class SPacket extends TableImpl<SPacketRecord> {
     /**
      * The column <code>ZDB.S_PACKET.RUN_CONFIG</code>. 「runConfig」- 运行专用配置
      */
-    public final TableField<SPacketRecord, String> RUN_CONFIG = createField(DSL.name("RUN_CONFIG"), SQLDataType.CLOB, this, "「runConfig」- 运行专用配置");
+    public final TableField<SPacketRecord, JsonObject> RUN_CONFIG = createField(DSL.name("RUN_CONFIG"), SQLDataType.CLOB, this, "「runConfig」- 运行专用配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.SEEK_CONFIG</code>. 「seekConfig」- 访问者配置
      */
-    public final TableField<SPacketRecord, String> SEEK_CONFIG = createField(DSL.name("SEEK_CONFIG"), SQLDataType.CLOB, this, "「seekConfig」- 访问者配置");
+    public final TableField<SPacketRecord, JsonObject> SEEK_CONFIG = createField(DSL.name("SEEK_CONFIG"), SQLDataType.CLOB, this, "「seekConfig」- 访问者配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.SEEK_SYNTAX</code>. 「seekSyntax」- 访问者语法
      */
-    public final TableField<SPacketRecord, String> SEEK_SYNTAX = createField(DSL.name("SEEK_SYNTAX"), SQLDataType.CLOB, this, "「seekSyntax」- 访问者语法");
+    public final TableField<SPacketRecord, JsonObject> SEEK_SYNTAX = createField(DSL.name("SEEK_SYNTAX"), SQLDataType.CLOB, this, "「seekSyntax」- 访问者语法", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.V_CONFIG</code>. 「vConfig」- 列配置
      */
-    public final TableField<SPacketRecord, String> V_CONFIG = createField(DSL.name("V_CONFIG"), SQLDataType.CLOB, this, "「vConfig」- 列配置");
+    public final TableField<SPacketRecord, JsonObject> V_CONFIG = createField(DSL.name("V_CONFIG"), SQLDataType.CLOB, this, "「vConfig」- 列配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.V_MAPPING</code>. 「vMapping」- 列字段映射关系
      */
-    public final TableField<SPacketRecord, String> V_MAPPING = createField(DSL.name("V_MAPPING"), SQLDataType.CLOB, this, "「vMapping」- 列字段映射关系");
+    public final TableField<SPacketRecord, JsonObject> V_MAPPING = createField(DSL.name("V_MAPPING"), SQLDataType.CLOB, this, "「vMapping」- 列字段映射关系", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PACKET.V_TYPE</code>. 「vType」- 列过滤类型

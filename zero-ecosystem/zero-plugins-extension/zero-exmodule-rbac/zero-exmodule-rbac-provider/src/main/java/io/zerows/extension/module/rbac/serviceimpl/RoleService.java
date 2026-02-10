@@ -72,9 +72,9 @@ public class RoleService implements RoleStub {
         view.setOwner(role.getId());
         view.setOwnerType(ScAuthKey.OWNER_TYPE_ROLE);
         view.setResourceId(ScAuthKey.DEFAULT_RESOURCE_ID);
-        view.setProjection("{}");
-        view.setCriteria("{}");
-        view.setRows(initPermissions.toString());
+        view.setProjection(new JsonArray());
+        view.setCriteria(new JsonObject());
+        view.setRows(initPermissions);
         view.setPosition(ScAuthKey.DEFAULT);
         view.setVisitant(false);
         view.setSigma(role.getSigma());

@@ -4,7 +4,9 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
 import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Keys;
 import io.zerows.extension.module.rbac.domain.Zdb;
@@ -89,7 +91,7 @@ public class SAction extends TableImpl<SActionRecord> {
      * The column <code>ZDB.S_ACTION.RENEWAL_CREDIT</code>. 「renewalCredit」-
      * 被刷新的凭证
      */
-    public final TableField<SActionRecord, String> RENEWAL_CREDIT = createField(DSL.name("RENEWAL_CREDIT"), SQLDataType.CLOB(65535), this, "「renewalCredit」- 被刷新的凭证");
+    public final TableField<SActionRecord, JsonArray> RENEWAL_CREDIT = createField(DSL.name("RENEWAL_CREDIT"), SQLDataType.CLOB(65535), this, "「renewalCredit」- 被刷新的凭证", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID

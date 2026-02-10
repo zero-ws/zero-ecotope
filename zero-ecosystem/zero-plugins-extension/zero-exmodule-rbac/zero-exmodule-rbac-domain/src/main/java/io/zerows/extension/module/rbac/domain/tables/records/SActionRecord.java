@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SAction;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISAction;
@@ -133,7 +134,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
      * 被刷新的凭证
      */
     @Override
-    public SActionRecord setRenewalCredit(String value) {
+    public SActionRecord setRenewalCredit(JsonArray value) {
         set(6, value);
         return this;
     }
@@ -143,8 +144,8 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
      * 被刷新的凭证
      */
     @Override
-    public String getRenewalCredit() {
-        return (String) get(6);
+    public JsonArray getRenewalCredit() {
+        return (JsonArray) get(6);
     }
 
     /**
@@ -426,7 +427,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     /**
      * Create a detached, initialised SActionRecord
      */
-    public SActionRecord(String id, String code, Integer level, String method, String name, String permissionId, String renewalCredit, String resourceId, String uri, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SActionRecord(String id, String code, Integer level, String method, String name, String permissionId, JsonArray renewalCredit, String resourceId, String uri, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SAction.S_ACTION);
 
         setId(id);

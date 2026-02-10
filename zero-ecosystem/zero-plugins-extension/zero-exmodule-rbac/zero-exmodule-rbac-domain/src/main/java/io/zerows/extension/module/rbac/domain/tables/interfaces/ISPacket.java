@@ -41,22 +41,22 @@ public interface ISPacket extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_PACKET.H_CONFIG</code>. 「hConfig」- 字段附加配置
      */
-    public ISPacket setHConfig(String value);
+    public ISPacket setHConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.H_CONFIG</code>. 「hConfig」- 字段附加配置
      */
-    public String getHConfig();
+    public JsonObject getHConfig();
 
     /**
      * Setter for <code>ZDB.S_PACKET.H_MAPPING</code>. 「hMapping」- 字段映射关系
      */
-    public ISPacket setHMapping(String value);
+    public ISPacket setHMapping(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.H_MAPPING</code>. 「hMapping」- 字段映射关系
      */
-    public String getHMapping();
+    public JsonObject getHMapping();
 
     /**
      * Setter for <code>ZDB.S_PACKET.H_TYPE</code>. 「hType」- 行过滤类型
@@ -71,22 +71,22 @@ public interface ISPacket extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_PACKET.Q_CONFIG</code>. 「qConfig」- 条件配置
      */
-    public ISPacket setQConfig(String value);
+    public ISPacket setQConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.Q_CONFIG</code>. 「qConfig」- 条件配置
      */
-    public String getQConfig();
+    public JsonObject getQConfig();
 
     /**
      * Setter for <code>ZDB.S_PACKET.Q_MAPPING</code>. 「qMapping」- 查询条件映射关系
      */
-    public ISPacket setQMapping(String value);
+    public ISPacket setQMapping(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.Q_MAPPING</code>. 「qMapping」- 查询条件映射关系
      */
-    public String getQMapping();
+    public JsonObject getQMapping();
 
     /**
      * Setter for <code>ZDB.S_PACKET.Q_TYPE</code>. 「qType」- 条件模板
@@ -123,52 +123,52 @@ public interface ISPacket extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_PACKET.RUN_CONFIG</code>. 「runConfig」- 运行专用配置
      */
-    public ISPacket setRunConfig(String value);
+    public ISPacket setRunConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.RUN_CONFIG</code>. 「runConfig」- 运行专用配置
      */
-    public String getRunConfig();
+    public JsonObject getRunConfig();
 
     /**
      * Setter for <code>ZDB.S_PACKET.SEEK_CONFIG</code>. 「seekConfig」- 访问者配置
      */
-    public ISPacket setSeekConfig(String value);
+    public ISPacket setSeekConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.SEEK_CONFIG</code>. 「seekConfig」- 访问者配置
      */
-    public String getSeekConfig();
+    public JsonObject getSeekConfig();
 
     /**
      * Setter for <code>ZDB.S_PACKET.SEEK_SYNTAX</code>. 「seekSyntax」- 访问者语法
      */
-    public ISPacket setSeekSyntax(String value);
+    public ISPacket setSeekSyntax(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.SEEK_SYNTAX</code>. 「seekSyntax」- 访问者语法
      */
-    public String getSeekSyntax();
+    public JsonObject getSeekSyntax();
 
     /**
      * Setter for <code>ZDB.S_PACKET.V_CONFIG</code>. 「vConfig」- 列配置
      */
-    public ISPacket setVConfig(String value);
+    public ISPacket setVConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.V_CONFIG</code>. 「vConfig」- 列配置
      */
-    public String getVConfig();
+    public JsonObject getVConfig();
 
     /**
      * Setter for <code>ZDB.S_PACKET.V_MAPPING</code>. 「vMapping」- 列字段映射关系
      */
-    public ISPacket setVMapping(String value);
+    public ISPacket setVMapping(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PACKET.V_MAPPING</code>. 「vMapping」- 列字段映射关系
      */
-    public String getVMapping();
+    public JsonObject getVMapping();
 
     /**
      * Setter for <code>ZDB.S_PACKET.V_TYPE</code>. 「vType」- 列过滤类型
@@ -310,19 +310,19 @@ public interface ISPacket extends VertxPojo, Serializable {
         public default ISPacket fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
-                setOrThrow(this::setHConfig,json::getString,"H_CONFIG","java.lang.String");
-                setOrThrow(this::setHMapping,json::getString,"H_MAPPING","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column H_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column H_MAPPING!
                 setOrThrow(this::setHType,json::getString,"H_TYPE","java.lang.String");
-                setOrThrow(this::setQConfig,json::getString,"Q_CONFIG","java.lang.String");
-                setOrThrow(this::setQMapping,json::getString,"Q_MAPPING","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column Q_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column Q_MAPPING!
                 setOrThrow(this::setQType,json::getString,"Q_TYPE","java.lang.String");
                 setOrThrow(this::setResource,json::getString,"RESOURCE","java.lang.String");
                 setOrThrow(this::setRunComponent,json::getString,"RUN_COMPONENT","java.lang.String");
-                setOrThrow(this::setRunConfig,json::getString,"RUN_CONFIG","java.lang.String");
-                setOrThrow(this::setSeekConfig,json::getString,"SEEK_CONFIG","java.lang.String");
-                setOrThrow(this::setSeekSyntax,json::getString,"SEEK_SYNTAX","java.lang.String");
-                setOrThrow(this::setVConfig,json::getString,"V_CONFIG","java.lang.String");
-                setOrThrow(this::setVMapping,json::getString,"V_MAPPING","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RUN_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SEEK_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SEEK_SYNTAX!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column V_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column V_MAPPING!
                 setOrThrow(this::setVType,json::getString,"V_TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
@@ -344,19 +344,19 @@ public interface ISPacket extends VertxPojo, Serializable {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
                 json.put("CODE",getCode());
-                json.put("H_CONFIG",getHConfig());
-                json.put("H_MAPPING",getHMapping());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column H_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column H_MAPPING!
                 json.put("H_TYPE",getHType());
-                json.put("Q_CONFIG",getQConfig());
-                json.put("Q_MAPPING",getQMapping());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column Q_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column Q_MAPPING!
                 json.put("Q_TYPE",getQType());
                 json.put("RESOURCE",getResource());
                 json.put("RUN_COMPONENT",getRunComponent());
-                json.put("RUN_CONFIG",getRunConfig());
-                json.put("SEEK_CONFIG",getSeekConfig());
-                json.put("SEEK_SYNTAX",getSeekSyntax());
-                json.put("V_CONFIG",getVConfig());
-                json.put("V_MAPPING",getVMapping());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RUN_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SEEK_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SEEK_SYNTAX!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column V_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column V_MAPPING!
                 json.put("V_TYPE",getVType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());

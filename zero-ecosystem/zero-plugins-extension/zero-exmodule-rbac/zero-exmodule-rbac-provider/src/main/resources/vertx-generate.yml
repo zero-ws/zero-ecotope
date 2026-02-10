@@ -4,4 +4,4 @@ database:
   username: ${R2MO_DB_MYSQL5_USER}
   password: ${R2MO_DB_MYSQL5_PASSWORD}
 source:
-  includes: (^(O_|R_|S_).*)
+  includes: (^(R_|S_).*)

@@ -92,8 +92,8 @@ public class DataBound implements Serializable {
     /*
      * Projection modification: projection field here.
      */
-    public DataBound addProjection(final String projection) {
-        final JsonArray array = Ut.toJArray(projection);
+    public DataBound addProjection(final JsonArray projection) {
+        final JsonArray array = Ut.valueJArray(projection);
         array.stream().filter(Objects::nonNull)
             .map(item -> (String) item)
             .forEach(this.projection::add);
@@ -103,8 +103,8 @@ public class DataBound implements Serializable {
     /*
      * Row modification: rows object.
      */
-    public DataBound addRows(final String rows) {
-        final JsonObject rowJson = Ut.toJObject(rows);
+    public DataBound addRows(final JsonObject rows) {
+        final JsonObject rowJson = Ut.valueJObject(rows);
         Ut.<JsonArray>itJObject(rowJson, (array, key) -> {
             final Set<String> set = new HashSet<>(array.getList());
             final Set<String> origianl = this.rows.get(key);
@@ -122,8 +122,8 @@ public class DataBound implements Serializable {
     /*
      * Specification data flow for credit refresh about impact
      */
-    public DataBound addCredit(final String credit) {
-        final JsonArray array = Ut.toJArray(credit);
+    public DataBound addCredit(final JsonArray credit) {
+        final JsonArray array = Ut.valueJArray(credit);
         array.stream().filter(Objects::nonNull)
             .map(item -> (String) item)
             .map(literal -> literal.split(" "))
@@ -138,8 +138,8 @@ public class DataBound implements Serializable {
     /*
      * Criteria modification: complex logical to merge criteria
      */
-    public DataBound addCriteria(final String criteria) {
-        final JsonObject criteriaJson = Ut.toJObject(criteria);
+    public DataBound addCriteria(final JsonObject criteria) {
+        final JsonObject criteriaJson = Ut.valueJObject(criteria);
         if (!criteriaJson.isEmpty()) {
             /*
              * Contains findRunning here.

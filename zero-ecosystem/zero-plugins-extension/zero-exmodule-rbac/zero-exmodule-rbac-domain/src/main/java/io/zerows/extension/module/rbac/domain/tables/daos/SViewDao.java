@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SView;
 import io.zerows.extension.module.rbac.domain.tables.records.SViewRecord;
@@ -41,7 +42,7 @@ public class SViewDao extends AbstractVertxDAO<SViewRecord, io.zerows.extension.
         /**
      * Find records that have <code>CRITERIA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByCriteria(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByCriteria(Collection<JsonObject> values) {
                 return findManyByCondition(SView.S_VIEW.CRITERIA.in(values));
         }
 
@@ -49,7 +50,7 @@ public class SViewDao extends AbstractVertxDAO<SViewRecord, io.zerows.extension.
      * Find records that have <code>CRITERIA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByCriteria(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByCriteria(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SView.S_VIEW.CRITERIA.in(values),limit);
         }
 
@@ -116,7 +117,7 @@ public class SViewDao extends AbstractVertxDAO<SViewRecord, io.zerows.extension.
         /**
      * Find records that have <code>PROJECTION IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByProjection(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByProjection(Collection<JsonArray> values) {
                 return findManyByCondition(SView.S_VIEW.PROJECTION.in(values));
         }
 
@@ -124,7 +125,7 @@ public class SViewDao extends AbstractVertxDAO<SViewRecord, io.zerows.extension.
      * Find records that have <code>PROJECTION IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByProjection(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByProjection(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(SView.S_VIEW.PROJECTION.in(values),limit);
         }
 
@@ -147,7 +148,7 @@ public class SViewDao extends AbstractVertxDAO<SViewRecord, io.zerows.extension.
         /**
      * Find records that have <code>ROWS IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByRows(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByRows(Collection<JsonObject> values) {
                 return findManyByCondition(SView.S_VIEW.ROWS.in(values));
         }
 
@@ -155,7 +156,7 @@ public class SViewDao extends AbstractVertxDAO<SViewRecord, io.zerows.extension.
      * Find records that have <code>ROWS IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByRows(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SView>> findManyByRows(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SView.S_VIEW.ROWS.in(values),limit);
         }
 

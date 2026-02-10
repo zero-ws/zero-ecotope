@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
@@ -31,12 +32,12 @@ public interface ISView extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
-    public ISView setCriteria(String value);
+    public ISView setCriteria(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
-    public String getCriteria();
+    public JsonObject getCriteria();
 
     /**
      * Setter for <code>ZDB.S_VIEW.NAME</code>. 「name」- 名称
@@ -81,12 +82,12 @@ public interface ISView extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
-    public ISView setProjection(String value);
+    public ISView setProjection(JsonArray value);
 
     /**
      * Getter for <code>ZDB.S_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
-    public String getProjection();
+    public JsonArray getProjection();
 
     /**
      * Setter for <code>ZDB.S_VIEW.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
@@ -101,12 +102,12 @@ public interface ISView extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_VIEW.ROWS</code>. 「rows」- 该资源针对保存
      */
-    public ISView setRows(String value);
+    public ISView setRows(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_VIEW.ROWS</code>. 「rows」- 该资源针对保存
      */
-    public String getRows();
+    public JsonObject getRows();
 
     /**
      * Setter for <code>ZDB.S_VIEW.TITLE</code>. 「title」- 标题
@@ -257,14 +258,14 @@ public interface ISView extends VertxPojo, Serializable {
         @Override
         public default ISView fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
-                setOrThrow(this::setCriteria,json::getString,"CRITERIA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CRITERIA!
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setOwner,json::getString,"OWNER","java.lang.String");
                 setOrThrow(this::setOwnerType,json::getString,"OWNER_TYPE","java.lang.String");
                 setOrThrow(this::setPosition,json::getString,"POSITION","java.lang.String");
-                setOrThrow(this::setProjection,json::getString,"PROJECTION","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column PROJECTION!
                 setOrThrow(this::setResourceId,json::getString,"RESOURCE_ID","java.lang.String");
-                setOrThrow(this::setRows,json::getString,"ROWS","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column ROWS!
                 setOrThrow(this::setTitle,json::getString,"TITLE","java.lang.String");
                 setOrThrow(this::setVisitant,json::getBoolean,"VISITANT","java.lang.Boolean");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -286,14 +287,14 @@ public interface ISView extends VertxPojo, Serializable {
         public default io.vertx.core.json.JsonObject toJson() {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
-                json.put("CRITERIA",getCriteria());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CRITERIA!
                 json.put("NAME",getName());
                 json.put("OWNER",getOwner());
                 json.put("OWNER_TYPE",getOwnerType());
                 json.put("POSITION",getPosition());
-                json.put("PROJECTION",getProjection());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column PROJECTION!
                 json.put("RESOURCE_ID",getResourceId());
-                json.put("ROWS",getRows());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column ROWS!
                 json.put("TITLE",getTitle());
                 json.put("VISITANT",getVisitant());
                 json.put("SIGMA",getSigma());

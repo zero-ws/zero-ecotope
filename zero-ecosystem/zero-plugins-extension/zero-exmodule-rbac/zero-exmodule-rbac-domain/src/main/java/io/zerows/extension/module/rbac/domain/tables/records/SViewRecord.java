@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SView;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISView;
@@ -45,7 +46,7 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
      * Setter for <code>ZDB.S_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
     @Override
-    public SViewRecord setCriteria(String value) {
+    public SViewRecord setCriteria(JsonObject value) {
         set(1, value);
         return this;
     }
@@ -54,8 +55,8 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
      * Getter for <code>ZDB.S_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
     @Override
-    public String getCriteria() {
-        return (String) get(1);
+    public JsonObject getCriteria() {
+        return (JsonObject) get(1);
     }
 
     /**
@@ -130,7 +131,7 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
      * Setter for <code>ZDB.S_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
     @Override
-    public SViewRecord setProjection(String value) {
+    public SViewRecord setProjection(JsonArray value) {
         set(6, value);
         return this;
     }
@@ -139,8 +140,8 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
      * Getter for <code>ZDB.S_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
     @Override
-    public String getProjection() {
-        return (String) get(6);
+    public JsonArray getProjection() {
+        return (JsonArray) get(6);
     }
 
     /**
@@ -164,7 +165,7 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
      * Setter for <code>ZDB.S_VIEW.ROWS</code>. 「rows」- 该资源针对保存
      */
     @Override
-    public SViewRecord setRows(String value) {
+    public SViewRecord setRows(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -173,8 +174,8 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
      * Getter for <code>ZDB.S_VIEW.ROWS</code>. 「rows」- 该资源针对保存
      */
     @Override
-    public String getRows() {
-        return (String) get(8);
+    public JsonObject getRows() {
+        return (JsonObject) get(8);
     }
 
     /**
@@ -458,7 +459,7 @@ public class SViewRecord extends UpdatableRecordImpl<SViewRecord> implements Ver
     /**
      * Create a detached, initialised SViewRecord
      */
-    public SViewRecord(String id, String criteria, String name, String owner, String ownerType, String position, String projection, String resourceId, String rows, String title, Boolean visitant, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SViewRecord(String id, JsonObject criteria, String name, String owner, String ownerType, String position, JsonArray projection, String resourceId, JsonObject rows, String title, Boolean visitant, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SView.S_VIEW);
 
         setId(id);

@@ -1,6 +1,7 @@
 package io.zerows.extension.module.rbac.boot;
 
 import io.r2mo.vertx.jooq.generate.configuration.TypeOfJsonArray;
+import io.zerows.extension.module.rbac.domain.tables.SAction;
 import io.zerows.extension.module.rbac.domain.tables.SView;
 import io.zerows.extension.module.rbac.domain.tables.SVisitant;
 
@@ -11,6 +12,10 @@ public class TypeOfRBACJsonArray extends TypeOfJsonArray {
     @Override
     protected List<Map<String, String>> regexMeta() {
         return List.of(
+            // SAction
+            Map.of(
+                SAction.S_ACTION.RENEWAL_CREDIT.getName(), SAction.S_ACTION.getName()
+            ),
             // SView
             Map.of(
                 SView.S_VIEW.PROJECTION.getName(), SView.S_VIEW.getName()

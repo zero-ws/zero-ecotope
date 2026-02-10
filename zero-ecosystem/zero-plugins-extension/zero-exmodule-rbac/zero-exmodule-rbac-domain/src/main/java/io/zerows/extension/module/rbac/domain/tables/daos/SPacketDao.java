@@ -56,7 +56,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
         /**
      * Find records that have <code>H_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByHConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByHConfig(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.H_CONFIG.in(values));
         }
 
@@ -64,14 +64,14 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>H_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByHConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByHConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.H_CONFIG.in(values),limit);
         }
 
         /**
      * Find records that have <code>H_MAPPING IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByHMapping(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByHMapping(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.H_MAPPING.in(values));
         }
 
@@ -79,7 +79,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>H_MAPPING IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByHMapping(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByHMapping(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.H_MAPPING.in(values),limit);
         }
 
@@ -101,7 +101,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
         /**
      * Find records that have <code>Q_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByQConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByQConfig(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.Q_CONFIG.in(values));
         }
 
@@ -109,14 +109,14 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>Q_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByQConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByQConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.Q_CONFIG.in(values),limit);
         }
 
         /**
      * Find records that have <code>Q_MAPPING IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByQMapping(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByQMapping(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.Q_MAPPING.in(values));
         }
 
@@ -124,7 +124,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>Q_MAPPING IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByQMapping(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByQMapping(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.Q_MAPPING.in(values),limit);
         }
 
@@ -177,7 +177,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
         /**
      * Find records that have <code>RUN_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByRunConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByRunConfig(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.RUN_CONFIG.in(values));
         }
 
@@ -185,7 +185,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>RUN_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByRunConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByRunConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.RUN_CONFIG.in(values),limit);
         }
 
@@ -193,7 +193,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>SEEK_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyBySeekConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyBySeekConfig(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.SEEK_CONFIG.in(values));
         }
 
@@ -201,7 +201,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>SEEK_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyBySeekConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyBySeekConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.SEEK_CONFIG.in(values),limit);
         }
 
@@ -209,7 +209,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>SEEK_SYNTAX IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyBySeekSyntax(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyBySeekSyntax(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.SEEK_SYNTAX.in(values));
         }
 
@@ -217,14 +217,14 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>SEEK_SYNTAX IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyBySeekSyntax(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyBySeekSyntax(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.SEEK_SYNTAX.in(values),limit);
         }
 
         /**
      * Find records that have <code>V_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByVConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByVConfig(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.V_CONFIG.in(values));
         }
 
@@ -232,14 +232,14 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>V_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByVConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByVConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.V_CONFIG.in(values),limit);
         }
 
         /**
      * Find records that have <code>V_MAPPING IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByVMapping(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByVMapping(Collection<JsonObject> values) {
                 return findManyByCondition(SPacket.S_PACKET.V_MAPPING.in(values));
         }
 
@@ -247,7 +247,7 @@ public class SPacketDao extends AbstractVertxDAO<SPacketRecord, io.zerows.extens
      * Find records that have <code>V_MAPPING IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByVMapping(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPacket>> findManyByVMapping(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPacket.S_PACKET.V_MAPPING.in(values),limit);
         }
 

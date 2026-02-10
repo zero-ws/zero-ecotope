@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SVisitant;
 import io.zerows.extension.module.rbac.domain.tables.records.SVisitantRecord;
@@ -42,7 +43,7 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>ACL_VARIETY IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVariety(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVariety(Collection<JsonArray> values) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VARIETY.in(values));
         }
 
@@ -50,14 +51,14 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>ACL_VARIETY IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVariety(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVariety(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VARIETY.in(values),limit);
         }
 
         /**
      * Find records that have <code>ACL_VERGE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVerge(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVerge(Collection<JsonArray> values) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VERGE.in(values));
         }
 
@@ -65,14 +66,14 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>ACL_VERGE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVerge(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVerge(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VERGE.in(values),limit);
         }
 
         /**
      * Find records that have <code>ACL_VIEW IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclView(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclView(Collection<JsonArray> values) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VIEW.in(values));
         }
 
@@ -80,7 +81,7 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>ACL_VIEW IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclView(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclView(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VIEW.in(values),limit);
         }
 
@@ -88,7 +89,7 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>ACL_VISIBLE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVisible(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVisible(Collection<JsonArray> values) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VISIBLE.in(values));
         }
 
@@ -96,14 +97,14 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>ACL_VISIBLE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVisible(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVisible(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VISIBLE.in(values),limit);
         }
 
         /**
      * Find records that have <code>ACL_VOW IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVow(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVow(Collection<JsonArray> values) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VOW.in(values));
         }
 
@@ -111,14 +112,14 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>ACL_VOW IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVow(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByAclVow(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(SVisitant.S_VISITANT.ACL_VOW.in(values),limit);
         }
 
         /**
      * Find records that have <code>DM_COLUMN IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmColumn(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmColumn(Collection<JsonArray> values) {
                 return findManyByCondition(SVisitant.S_VISITANT.DM_COLUMN.in(values));
         }
 
@@ -126,14 +127,14 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>DM_COLUMN IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmColumn(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmColumn(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(SVisitant.S_VISITANT.DM_COLUMN.in(values),limit);
         }
 
         /**
      * Find records that have <code>DM_QR IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmQr(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmQr(Collection<JsonObject> values) {
                 return findManyByCondition(SVisitant.S_VISITANT.DM_QR.in(values));
         }
 
@@ -141,14 +142,14 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>DM_QR IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmQr(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmQr(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SVisitant.S_VISITANT.DM_QR.in(values),limit);
         }
 
         /**
      * Find records that have <code>DM_ROW IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmRow(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmRow(Collection<JsonObject> values) {
                 return findManyByCondition(SVisitant.S_VISITANT.DM_ROW.in(values));
         }
 
@@ -156,7 +157,7 @@ public class SVisitantDao extends AbstractVertxDAO<SVisitantRecord, io.zerows.ex
      * Find records that have <code>DM_ROW IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmRow(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SVisitant>> findManyByDmRow(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SVisitant.S_VISITANT.DM_ROW.in(values),limit);
         }
 
