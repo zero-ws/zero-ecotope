@@ -1,5 +1,6 @@
 package io.zerows.extension.module.modulat.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -29,17 +30,20 @@ public interface BagArgAgent {
     @GET
     @Path("/bag/config/:key")
     @Address(Addr.Argument.BAG_ARGUMENT)
+    @OpenApi
     JsonObject fetchBag(@PathParam(KName.KEY) String bagId);
 
     @GET
     @Path("/bag/data/:key")
     @Address(Addr.Argument.BAG_ARGUMENT_VALUE)
+    @OpenApi
     JsonObject fetchBagData(@PathParam(KName.KEY) String bagId);
 
     @PUT
     @Path("/bag/config/:key")
     @Address(Addr.Argument.BAG_CONFIGURE)
     @Off(address = Addr.Notify.BLOCK_CONFIGURE_UP)
+    @OpenApi
     JsonObject saveBag(@PathParam(KName.KEY) String bagId,
                        @BodyParam JsonObject data);
 }

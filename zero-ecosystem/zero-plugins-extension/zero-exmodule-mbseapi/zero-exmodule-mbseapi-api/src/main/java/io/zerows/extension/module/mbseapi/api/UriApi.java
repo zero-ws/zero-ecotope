@@ -1,8 +1,6 @@
 package io.zerows.extension.module.mbseapi.api;
 
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.annotations.Address;
-import io.zerows.epoch.annotations.EndPoint;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.extension.BodyParam;
@@ -17,12 +15,11 @@ import jakarta.ws.rs.extension.BodyParam;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-@EndPoint
 @Path("/api")
+@Deprecated
 public interface UriApi {
 
     @Path("routing/create")
     @POST
-    @Address(JtAddr.Aeon.NEW_ROUTE)
     Boolean createUri(@BodyParam JsonObject body);
 }
