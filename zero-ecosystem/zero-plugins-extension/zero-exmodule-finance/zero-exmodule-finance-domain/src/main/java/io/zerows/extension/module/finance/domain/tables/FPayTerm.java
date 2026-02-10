@@ -4,6 +4,8 @@
 package io.zerows.extension.module.finance.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.Keys;
 import io.zerows.extension.module.finance.domain.Zdb;
 import io.zerows.extension.module.finance.domain.tables.records.FPayTermRecord;
@@ -135,7 +137,7 @@ public class FPayTerm extends TableImpl<FPayTermRecord> {
     /**
      * The column <code>ZDB.F_PAY_TERM.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<FPayTermRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<FPayTermRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.F_PAY_TERM.VERSION</code>. 「version」- 版本号

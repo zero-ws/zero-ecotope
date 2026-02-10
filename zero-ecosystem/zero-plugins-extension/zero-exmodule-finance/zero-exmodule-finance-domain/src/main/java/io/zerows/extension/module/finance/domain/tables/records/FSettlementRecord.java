@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FSettlement;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFSettlement;
 
@@ -357,7 +358,7 @@ public class FSettlementRecord extends UpdatableRecordImpl<FSettlementRecord> im
      * Setter for <code>ZDB.F_SETTLEMENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FSettlementRecord setMetadata(String value) {
+    public FSettlementRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -366,8 +367,8 @@ public class FSettlementRecord extends UpdatableRecordImpl<FSettlementRecord> im
      * Getter for <code>ZDB.F_SETTLEMENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -518,7 +519,7 @@ public class FSettlementRecord extends UpdatableRecordImpl<FSettlementRecord> im
     /**
      * Create a detached, initialised FSettlementRecord
      */
-    public FSettlementRecord(String id, BigDecimal amount, String code, String comment, String customerId, LocalDateTime endAt, Boolean finished, LocalDateTime finishedAt, String groupBy, String relatedId, String serial, String signMobile, String signName, LocalDateTime startAt, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FSettlementRecord(String id, BigDecimal amount, String code, String comment, String customerId, LocalDateTime endAt, Boolean finished, LocalDateTime finishedAt, String groupBy, String relatedId, String serial, String signMobile, String signName, LocalDateTime startAt, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FSettlement.F_SETTLEMENT);
 
         setId(id);

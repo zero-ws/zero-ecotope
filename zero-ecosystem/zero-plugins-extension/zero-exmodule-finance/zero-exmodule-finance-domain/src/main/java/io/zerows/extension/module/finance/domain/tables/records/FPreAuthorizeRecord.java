@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FPreAuthorize;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFPreAuthorize;
 
@@ -325,7 +326,7 @@ public class FPreAuthorizeRecord extends UpdatableRecordImpl<FPreAuthorizeRecord
      * Setter for <code>ZDB.F_PRE_AUTHORIZE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FPreAuthorizeRecord setMetadata(String value) {
+    public FPreAuthorizeRecord setMetadata(JsonObject value) {
         set(17, value);
         return this;
     }
@@ -334,8 +335,8 @@ public class FPreAuthorizeRecord extends UpdatableRecordImpl<FPreAuthorizeRecord
      * Getter for <code>ZDB.F_PRE_AUTHORIZE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(17);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(17);
     }
 
     /**
@@ -484,7 +485,7 @@ public class FPreAuthorizeRecord extends UpdatableRecordImpl<FPreAuthorizeRecord
     /**
      * Create a detached, initialised FPreAuthorizeRecord
      */
-    public FPreAuthorizeRecord(String id, BigDecimal amount, String bankCard, String bankName, String billId, String bookId, String code, String comment, LocalDateTime expiredAt, String orderId, String serial, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FPreAuthorizeRecord(String id, BigDecimal amount, String bankCard, String bankName, String billId, String bookId, String code, String comment, LocalDateTime expiredAt, String orderId, String serial, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FPreAuthorize.F_PRE_AUTHORIZE);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFSettlement;
 
 import java.math.BigDecimal;
@@ -39,7 +40,7 @@ public class FSettlement implements VertxPojo, IFSettlement {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -96,7 +97,7 @@ public class FSettlement implements VertxPojo, IFSettlement {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -468,7 +469,7 @@ public class FSettlement implements VertxPojo, IFSettlement {
      * Getter for <code>ZDB.F_SETTLEMENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -476,7 +477,7 @@ public class FSettlement implements VertxPojo, IFSettlement {
      * Setter for <code>ZDB.F_SETTLEMENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FSettlement setMetadata(String metadata) {
+    public FSettlement setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FDebt;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFDebt;
 
@@ -385,7 +386,7 @@ public class FDebtRecord extends UpdatableRecordImpl<FDebtRecord> implements Ver
      * Setter for <code>ZDB.F_DEBT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FDebtRecord setMetadata(String value) {
+    public FDebtRecord setMetadata(JsonObject value) {
         set(21, value);
         return this;
     }
@@ -394,8 +395,8 @@ public class FDebtRecord extends UpdatableRecordImpl<FDebtRecord> implements Ver
      * Getter for <code>ZDB.F_DEBT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(21);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(21);
     }
 
     /**
@@ -548,7 +549,7 @@ public class FDebtRecord extends UpdatableRecordImpl<FDebtRecord> implements Ver
     /**
      * Create a detached, initialised FDebtRecord
      */
-    public FDebtRecord(String id, BigDecimal amount, BigDecimal amountBalance, String code, String comment, String customerId, LocalDateTime endAt, Boolean finished, LocalDateTime finishedAt, String groupBy, String name, String serial, String signMobile, String signName, LocalDateTime startAt, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FDebtRecord(String id, BigDecimal amount, BigDecimal amountBalance, String code, String comment, String customerId, LocalDateTime endAt, Boolean finished, LocalDateTime finishedAt, String groupBy, String name, String serial, String signMobile, String signName, LocalDateTime startAt, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FDebt.F_DEBT);
 
         setId(id);

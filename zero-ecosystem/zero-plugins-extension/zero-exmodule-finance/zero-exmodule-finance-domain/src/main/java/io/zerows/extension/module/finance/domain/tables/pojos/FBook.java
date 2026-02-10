@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFBook;
 
 import java.math.BigDecimal;
@@ -42,7 +43,7 @@ public class FBook implements VertxPojo, IFBook {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -105,7 +106,7 @@ public class FBook implements VertxPojo, IFBook {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -525,7 +526,7 @@ public class FBook implements VertxPojo, IFBook {
      * Getter for <code>ZDB.F_BOOK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -533,7 +534,7 @@ public class FBook implements VertxPojo, IFBook {
      * Setter for <code>ZDB.F_BOOK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FBook setMetadata(String metadata) {
+    public FBook setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

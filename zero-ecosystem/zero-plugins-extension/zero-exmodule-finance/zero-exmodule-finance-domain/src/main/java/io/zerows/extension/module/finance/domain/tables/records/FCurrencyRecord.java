@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FCurrency;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFCurrency;
 
@@ -216,7 +217,7 @@ public class FCurrencyRecord extends UpdatableRecordImpl<FCurrencyRecord> implem
      * Setter for <code>ZDB.F_CURRENCY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FCurrencyRecord setMetadata(String value) {
+    public FCurrencyRecord setMetadata(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -225,8 +226,8 @@ public class FCurrencyRecord extends UpdatableRecordImpl<FCurrencyRecord> implem
      * Getter for <code>ZDB.F_CURRENCY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(11);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -369,7 +370,7 @@ public class FCurrencyRecord extends UpdatableRecordImpl<FCurrencyRecord> implem
     /**
      * Create a detached, initialised FCurrencyRecord
      */
-    public FCurrencyRecord(String id, String code, String comment, Integer digitAmount, Integer digitPrice, String name, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FCurrencyRecord(String id, String code, String comment, Integer digitAmount, Integer digitPrice, String name, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FCurrency.F_CURRENCY);
 
         setId(id);

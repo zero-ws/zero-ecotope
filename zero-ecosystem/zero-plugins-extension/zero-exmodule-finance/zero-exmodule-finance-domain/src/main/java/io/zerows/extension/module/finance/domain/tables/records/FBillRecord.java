@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FBill;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFBill;
 
@@ -385,7 +386,7 @@ public class FBillRecord extends UpdatableRecordImpl<FBillRecord> implements Ver
      * Setter for <code>ZDB.F_BILL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FBillRecord setMetadata(String value) {
+    public FBillRecord setMetadata(JsonObject value) {
         set(21, value);
         return this;
     }
@@ -394,8 +395,8 @@ public class FBillRecord extends UpdatableRecordImpl<FBillRecord> implements Ver
      * Getter for <code>ZDB.F_BILL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(21);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(21);
     }
 
     /**
@@ -548,7 +549,7 @@ public class FBillRecord extends UpdatableRecordImpl<FBillRecord> implements Ver
     /**
      * Create a detached, initialised FBillRecord
      */
-    public FBillRecord(String id, BigDecimal amount, String bookId, String code, String comment, LocalDateTime endAt, String groupBy, Boolean income, String name, String orderId, String serial, LocalDateTime startAt, String type, String category, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FBillRecord(String id, BigDecimal amount, String bookId, String code, String comment, LocalDateTime endAt, String groupBy, Boolean income, String name, String orderId, String serial, LocalDateTime startAt, String type, String category, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FBill.F_BILL);
 
         setId(id);

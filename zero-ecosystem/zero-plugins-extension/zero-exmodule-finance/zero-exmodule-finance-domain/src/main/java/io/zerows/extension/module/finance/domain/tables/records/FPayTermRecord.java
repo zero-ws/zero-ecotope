@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FPayTerm;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFPayTerm;
 
@@ -299,7 +300,7 @@ public class FPayTermRecord extends UpdatableRecordImpl<FPayTermRecord> implemen
      * Setter for <code>ZDB.F_PAY_TERM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FPayTermRecord setMetadata(String value) {
+    public FPayTermRecord setMetadata(JsonObject value) {
         set(16, value);
         return this;
     }
@@ -308,8 +309,8 @@ public class FPayTermRecord extends UpdatableRecordImpl<FPayTermRecord> implemen
      * Getter for <code>ZDB.F_PAY_TERM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(16);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(16);
     }
 
     /**
@@ -457,7 +458,7 @@ public class FPayTermRecord extends UpdatableRecordImpl<FPayTermRecord> implemen
     /**
      * Create a detached, initialised FPayTermRecord
      */
-    public FPayTermRecord(String id, String code, String comment, String helpCode, Boolean leaf, Boolean locked, String name, String parentId, String subjectId, String type, String category, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FPayTermRecord(String id, String code, String comment, String helpCode, Boolean leaf, Boolean locked, String name, String parentId, String subjectId, String type, String category, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FPayTerm.F_PAY_TERM);
 
         setId(id);

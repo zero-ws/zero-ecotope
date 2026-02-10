@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FTransItem;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFTransItem;
 
@@ -338,7 +339,7 @@ public class FTransItemRecord extends UpdatableRecordImpl<FTransItemRecord> impl
      * Setter for <code>ZDB.F_TRANS_ITEM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FTransItemRecord setMetadata(String value) {
+    public FTransItemRecord setMetadata(JsonObject value) {
         set(18, value);
         return this;
     }
@@ -347,8 +348,8 @@ public class FTransItemRecord extends UpdatableRecordImpl<FTransItemRecord> impl
      * Getter for <code>ZDB.F_TRANS_ITEM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(18);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(18);
     }
 
     /**
@@ -498,7 +499,7 @@ public class FTransItemRecord extends UpdatableRecordImpl<FTransItemRecord> impl
     /**
      * Create a detached, initialised FTransItemRecord
      */
-    public FTransItemRecord(String id, BigDecimal amount, String code, LocalDateTime endAt, String groupBy, String name, String payId, String payMethod, String payMobile, String payName, String serial, LocalDateTime startAt, String transactionId, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FTransItemRecord(String id, BigDecimal amount, String code, LocalDateTime endAt, String groupBy, String name, String payId, String payMethod, String payMobile, String payName, String serial, LocalDateTime startAt, String transactionId, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FTransItem.F_TRANS_ITEM);
 
         setId(id);
