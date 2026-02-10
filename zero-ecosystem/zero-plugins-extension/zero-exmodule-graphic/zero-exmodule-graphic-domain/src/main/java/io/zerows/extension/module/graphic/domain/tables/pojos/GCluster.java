@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.interfaces.IGCluster;
 
 import java.time.LocalDateTime;
@@ -22,9 +23,9 @@ public class GCluster implements VertxPojo, IGCluster {
     private String id;
     private String graphicId;
     private String name;
-    private String recordData;
+    private JsonObject recordData;
     private String recordKey;
-    private String ui;
+    private JsonObject ui;
     private Integer x;
     private Integer y;
     private String sigma;
@@ -32,7 +33,7 @@ public class GCluster implements VertxPojo, IGCluster {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -67,9 +68,9 @@ public class GCluster implements VertxPojo, IGCluster {
         String id,
         String graphicId,
         String name,
-        String recordData,
+        JsonObject recordData,
         String recordKey,
-        String ui,
+        JsonObject ui,
         Integer x,
         Integer y,
         String sigma,
@@ -77,7 +78,7 @@ public class GCluster implements VertxPojo, IGCluster {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -168,7 +169,7 @@ public class GCluster implements VertxPojo, IGCluster {
      * 组中存储的数据信息
      */
     @Override
-    public String getRecordData() {
+    public JsonObject getRecordData() {
         return this.recordData;
     }
 
@@ -177,7 +178,7 @@ public class GCluster implements VertxPojo, IGCluster {
      * 组中存储的数据信息
      */
     @Override
-    public GCluster setRecordData(String recordData) {
+    public GCluster setRecordData(JsonObject recordData) {
         this.recordData = recordData;
         return this;
     }
@@ -203,7 +204,7 @@ public class GCluster implements VertxPojo, IGCluster {
      * Getter for <code>ZDB.G_CLUSTER.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public String getUi() {
+    public JsonObject getUi() {
         return this.ui;
     }
 
@@ -211,7 +212,7 @@ public class GCluster implements VertxPojo, IGCluster {
      * Setter for <code>ZDB.G_CLUSTER.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public GCluster setUi(String ui) {
+    public GCluster setUi(JsonObject ui) {
         this.ui = ui;
         return this;
     }
@@ -339,7 +340,7 @@ public class GCluster implements VertxPojo, IGCluster {
      * Getter for <code>ZDB.G_CLUSTER.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -347,7 +348,7 @@ public class GCluster implements VertxPojo, IGCluster {
      * Setter for <code>ZDB.G_CLUSTER.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public GCluster setMetadata(String metadata) {
+    public GCluster setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

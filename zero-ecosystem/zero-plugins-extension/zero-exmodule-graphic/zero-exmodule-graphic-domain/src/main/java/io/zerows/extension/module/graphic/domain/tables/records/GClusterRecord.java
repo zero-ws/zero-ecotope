@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.GCluster;
 import io.zerows.extension.module.graphic.domain.tables.interfaces.IGCluster;
 
@@ -81,7 +82,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * 组中存储的数据信息
      */
     @Override
-    public GClusterRecord setRecordData(String value) {
+    public GClusterRecord setRecordData(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -91,8 +92,8 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * 组中存储的数据信息
      */
     @Override
-    public String getRecordData() {
-        return (String) get(3);
+    public JsonObject getRecordData() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -116,7 +117,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public GClusterRecord setUi(String value) {
+    public GClusterRecord setUi(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -125,8 +126,8 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Getter for <code>ZDB.G_CLUSTER.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public String getUi() {
-        return (String) get(5);
+    public JsonObject getUi() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -252,7 +253,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Setter for <code>ZDB.G_CLUSTER.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public GClusterRecord setMetadata(String value) {
+    public GClusterRecord setMetadata(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -261,8 +262,8 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
      * Getter for <code>ZDB.G_CLUSTER.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(13);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -407,7 +408,7 @@ public class GClusterRecord extends UpdatableRecordImpl<GClusterRecord> implemen
     /**
      * Create a detached, initialised GClusterRecord
      */
-    public GClusterRecord(String id, String graphicId, String name, String recordData, String recordKey, String ui, Integer x, Integer y, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public GClusterRecord(String id, String graphicId, String name, JsonObject recordData, String recordKey, JsonObject ui, Integer x, Integer y, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(GCluster.G_CLUSTER);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.GCluster;
 import io.zerows.extension.module.graphic.domain.tables.records.GClusterRecord;
 
@@ -71,7 +72,7 @@ public class GClusterDao extends AbstractVertxDAO<GClusterRecord, io.zerows.exte
      * Find records that have <code>RECORD_DATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByRecordData(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByRecordData(Collection<JsonObject> values) {
                 return findManyByCondition(GCluster.G_CLUSTER.RECORD_DATA.in(values));
         }
 
@@ -79,7 +80,7 @@ public class GClusterDao extends AbstractVertxDAO<GClusterRecord, io.zerows.exte
      * Find records that have <code>RECORD_DATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByRecordData(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByRecordData(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GCluster.G_CLUSTER.RECORD_DATA.in(values),limit);
         }
 
@@ -101,7 +102,7 @@ public class GClusterDao extends AbstractVertxDAO<GClusterRecord, io.zerows.exte
         /**
      * Find records that have <code>UI IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByUi(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByUi(Collection<JsonObject> values) {
                 return findManyByCondition(GCluster.G_CLUSTER.UI.in(values));
         }
 
@@ -109,7 +110,7 @@ public class GClusterDao extends AbstractVertxDAO<GClusterRecord, io.zerows.exte
      * Find records that have <code>UI IN (values)</code> asynchronously limited
      * by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByUi(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByUi(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GCluster.G_CLUSTER.UI.in(values),limit);
         }
 
@@ -221,7 +222,7 @@ public class GClusterDao extends AbstractVertxDAO<GClusterRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(GCluster.G_CLUSTER.METADATA.in(values));
         }
 
@@ -229,7 +230,7 @@ public class GClusterDao extends AbstractVertxDAO<GClusterRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GCluster>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GCluster.G_CLUSTER.METADATA.in(values),limit);
         }
 

@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.GEdge;
 import io.zerows.extension.module.graphic.domain.tables.records.GEdgeRecord;
 
@@ -71,7 +72,7 @@ public class GEdgeDao extends AbstractVertxDAO<GEdgeRecord, io.zerows.extension.
      * Find records that have <code>RECORD_DATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByRecordData(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByRecordData(Collection<JsonObject> values) {
                 return findManyByCondition(GEdge.G_EDGE.RECORD_DATA.in(values));
         }
 
@@ -79,7 +80,7 @@ public class GEdgeDao extends AbstractVertxDAO<GEdgeRecord, io.zerows.extension.
      * Find records that have <code>RECORD_DATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByRecordData(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByRecordData(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GEdge.G_EDGE.RECORD_DATA.in(values),limit);
         }
 
@@ -131,7 +132,7 @@ public class GEdgeDao extends AbstractVertxDAO<GEdgeRecord, io.zerows.extension.
         /**
      * Find records that have <code>UI IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByUi(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByUi(Collection<JsonObject> values) {
                 return findManyByCondition(GEdge.G_EDGE.UI.in(values));
         }
 
@@ -139,7 +140,7 @@ public class GEdgeDao extends AbstractVertxDAO<GEdgeRecord, io.zerows.extension.
      * Find records that have <code>UI IN (values)</code> asynchronously limited
      * by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByUi(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByUi(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GEdge.G_EDGE.UI.in(values),limit);
         }
 
@@ -236,7 +237,7 @@ public class GEdgeDao extends AbstractVertxDAO<GEdgeRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(GEdge.G_EDGE.METADATA.in(values));
         }
 
@@ -244,7 +245,7 @@ public class GEdgeDao extends AbstractVertxDAO<GEdgeRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GEdge>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GEdge.G_EDGE.METADATA.in(values),limit);
         }
 

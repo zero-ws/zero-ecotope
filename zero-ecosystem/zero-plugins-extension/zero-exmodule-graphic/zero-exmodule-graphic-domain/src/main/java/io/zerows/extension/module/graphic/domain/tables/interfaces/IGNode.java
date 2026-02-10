@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -75,12 +76,12 @@ public interface IGNode extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.G_NODE.RECORD_DATA</code>. 「recordData」 - 该节点存储的数据信息
      */
-    public IGNode setRecordData(String value);
+    public IGNode setRecordData(JsonObject value);
 
     /**
      * Getter for <code>ZDB.G_NODE.RECORD_DATA</code>. 「recordData」 - 该节点存储的数据信息
      */
-    public String getRecordData();
+    public JsonObject getRecordData();
 
     /**
      * Setter for <code>ZDB.G_NODE.RECORD_KEY</code>. 「recordKey」 - 记录主键
@@ -95,12 +96,12 @@ public interface IGNode extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.G_NODE.UI</code>. 「ui」 - ui配置专用
      */
-    public IGNode setUi(String value);
+    public IGNode setUi(JsonObject value);
 
     /**
      * Getter for <code>ZDB.G_NODE.UI</code>. 「ui」 - ui配置专用
      */
-    public String getUi();
+    public JsonObject getUi();
 
     /**
      * Setter for <code>ZDB.G_NODE.X</code>. 「x」 - 当前节点在图上的x坐标
@@ -175,12 +176,12 @@ public interface IGNode extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.G_NODE.METADATA</code>. 「metadata」- 元配置
      */
-    public IGNode setMetadata(String value);
+    public IGNode setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.G_NODE.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.G_NODE.VERSION</code>. 「version」- 版本号
@@ -255,9 +256,9 @@ public interface IGNode extends VertxPojo, Serializable {
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setRecordClass,json::getString,"RECORD_CLASS","java.lang.String");
                 setOrThrow(this::setRecordComponent,json::getString,"RECORD_COMPONENT","java.lang.String");
-                setOrThrow(this::setRecordData,json::getString,"RECORD_DATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_DATA!
                 setOrThrow(this::setRecordKey,json::getString,"RECORD_KEY","java.lang.String");
-                setOrThrow(this::setUi,json::getString,"UI","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI!
                 setOrThrow(this::setX,key -> {String s = json.getString(key); return s==null?null:new java.math.BigDecimal(s);},"X","java.math.BigDecimal");
                 setOrThrow(this::setY,key -> {String s = json.getString(key); return s==null?null:new java.math.BigDecimal(s);},"Y","java.math.BigDecimal");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -265,7 +266,7 @@ public interface IGNode extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -283,9 +284,9 @@ public interface IGNode extends VertxPojo, Serializable {
                 json.put("NAME",getName());
                 json.put("RECORD_CLASS",getRecordClass());
                 json.put("RECORD_COMPONENT",getRecordComponent());
-                json.put("RECORD_DATA",getRecordData());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_DATA!
                 json.put("RECORD_KEY",getRecordKey());
-                json.put("UI",getUi());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI!
                 json.put("X",getX()==null?null:getX().toString());
                 json.put("Y",getY()==null?null:getY().toString());
                 json.put("SIGMA",getSigma());
@@ -293,7 +294,7 @@ public interface IGNode extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

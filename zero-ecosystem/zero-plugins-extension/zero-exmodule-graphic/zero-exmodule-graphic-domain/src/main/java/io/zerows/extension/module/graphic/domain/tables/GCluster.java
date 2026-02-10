@@ -4,6 +4,8 @@
 package io.zerows.extension.module.graphic.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.Keys;
 import io.zerows.extension.module.graphic.domain.Zdb;
 import io.zerows.extension.module.graphic.domain.tables.records.GClusterRecord;
@@ -72,7 +74,7 @@ public class GCluster extends TableImpl<GClusterRecord> {
      * The column <code>ZDB.G_CLUSTER.RECORD_DATA</code>. 「recordData」 -
      * 组中存储的数据信息
      */
-    public final TableField<GClusterRecord, String> RECORD_DATA = createField(DSL.name("RECORD_DATA"), SQLDataType.CLOB(65535), this, "「recordData」 - 组中存储的数据信息");
+    public final TableField<GClusterRecord, JsonObject> RECORD_DATA = createField(DSL.name("RECORD_DATA"), SQLDataType.CLOB(65535), this, "「recordData」 - 组中存储的数据信息", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_CLUSTER.RECORD_KEY</code>. 「recordKey」 - 记录主键
@@ -82,7 +84,7 @@ public class GCluster extends TableImpl<GClusterRecord> {
     /**
      * The column <code>ZDB.G_CLUSTER.UI</code>. 「ui」 - ui配置专用
      */
-    public final TableField<GClusterRecord, String> UI = createField(DSL.name("UI"), SQLDataType.CLOB(65535), this, "「ui」 - ui配置专用");
+    public final TableField<GClusterRecord, JsonObject> UI = createField(DSL.name("UI"), SQLDataType.CLOB(65535), this, "「ui」 - ui配置专用", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_CLUSTER.X</code>. 「x」 - 当前组在图上的x坐标
@@ -122,7 +124,7 @@ public class GCluster extends TableImpl<GClusterRecord> {
     /**
      * The column <code>ZDB.G_CLUSTER.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<GClusterRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<GClusterRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_CLUSTER.VERSION</code>. 「version」- 版本号

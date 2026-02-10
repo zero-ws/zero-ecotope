@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.interfaces.IGEdge;
 
 import java.time.LocalDateTime;
@@ -22,18 +23,18 @@ public class GEdge implements VertxPojo, IGEdge {
     private String id;
     private String graphicId;
     private String name;
-    private String recordData;
+    private JsonObject recordData;
     private String recordKey;
     private String sourceKey;
     private String targetKey;
-    private String ui;
+    private JsonObject ui;
     private String type;
     private String sigma;
     private String tenantId;
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -69,18 +70,18 @@ public class GEdge implements VertxPojo, IGEdge {
         String id,
         String graphicId,
         String name,
-        String recordData,
+        JsonObject recordData,
         String recordKey,
         String sourceKey,
         String targetKey,
-        String ui,
+        JsonObject ui,
         String type,
         String sigma,
         String tenantId,
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -169,7 +170,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Getter for <code>ZDB.G_EDGE.RECORD_DATA</code>. 「recordData」 - 组中存储的数据信息
      */
     @Override
-    public String getRecordData() {
+    public JsonObject getRecordData() {
         return this.recordData;
     }
 
@@ -177,7 +178,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.RECORD_DATA</code>. 「recordData」 - 组中存储的数据信息
      */
     @Override
-    public GEdge setRecordData(String recordData) {
+    public GEdge setRecordData(JsonObject recordData) {
         this.recordData = recordData;
         return this;
     }
@@ -237,7 +238,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Getter for <code>ZDB.G_EDGE.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public String getUi() {
+    public JsonObject getUi() {
         return this.ui;
     }
 
@@ -245,7 +246,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public GEdge setUi(String ui) {
+    public GEdge setUi(JsonObject ui) {
         this.ui = ui;
         return this;
     }
@@ -356,7 +357,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Getter for <code>ZDB.G_EDGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -364,7 +365,7 @@ public class GEdge implements VertxPojo, IGEdge {
      * Setter for <code>ZDB.G_EDGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public GEdge setMetadata(String metadata) {
+    public GEdge setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -108,12 +109,12 @@ public interface IGGraphic extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.G_GRAPHIC.UI</code>. 「ui」 - ui配置专用
      */
-    public IGGraphic setUi(String value);
+    public IGGraphic setUi(JsonObject value);
 
     /**
      * Getter for <code>ZDB.G_GRAPHIC.UI</code>. 「ui」 - ui配置专用
      */
-    public String getUi();
+    public JsonObject getUi();
 
     /**
      * Setter for <code>ZDB.G_GRAPHIC.TYPE</code>. 「type」- 类型
@@ -210,12 +211,12 @@ public interface IGGraphic extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 元配置
      */
-    public IGGraphic setMetadata(String value);
+    public IGGraphic setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.G_GRAPHIC.VERSION</code>. 「version」- 版本号
@@ -293,7 +294,7 @@ public interface IGGraphic extends VertxPojo, Serializable {
                 setOrThrow(this::setMode,json::getString,"MODE","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setOwnerId,json::getString,"OWNER_ID","java.lang.String");
-                setOrThrow(this::setUi,json::getString,"UI","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setModelId,json::getString,"MODEL_ID","java.lang.String");
                 setOrThrow(this::setModelKey,json::getString,"MODEL_KEY","java.lang.String");
@@ -303,7 +304,7 @@ public interface IGGraphic extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -324,7 +325,7 @@ public interface IGGraphic extends VertxPojo, Serializable {
                 json.put("MODE",getMode());
                 json.put("NAME",getName());
                 json.put("OWNER_ID",getOwnerId());
-                json.put("UI",getUi());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI!
                 json.put("TYPE",getType());
                 json.put("MODEL_ID",getModelId());
                 json.put("MODEL_KEY",getModelKey());
@@ -334,7 +335,7 @@ public interface IGGraphic extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

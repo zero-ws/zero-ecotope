@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.interfaces.IGNode;
 
 import java.math.BigDecimal;
@@ -25,9 +26,9 @@ public class GNode implements VertxPojo, IGNode {
     private String name;
     private String recordClass;
     private String recordComponent;
-    private String recordData;
+    private JsonObject recordData;
     private String recordKey;
-    private String ui;
+    private JsonObject ui;
     private BigDecimal x;
     private BigDecimal y;
     private String sigma;
@@ -35,7 +36,7 @@ public class GNode implements VertxPojo, IGNode {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -74,9 +75,9 @@ public class GNode implements VertxPojo, IGNode {
         String name,
         String recordClass,
         String recordComponent,
-        String recordData,
+        JsonObject recordData,
         String recordKey,
-        String ui,
+        JsonObject ui,
         BigDecimal x,
         BigDecimal y,
         String sigma,
@@ -84,7 +85,7 @@ public class GNode implements VertxPojo, IGNode {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -212,7 +213,7 @@ public class GNode implements VertxPojo, IGNode {
      * Getter for <code>ZDB.G_NODE.RECORD_DATA</code>. 「recordData」 - 该节点存储的数据信息
      */
     @Override
-    public String getRecordData() {
+    public JsonObject getRecordData() {
         return this.recordData;
     }
 
@@ -220,7 +221,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.RECORD_DATA</code>. 「recordData」 - 该节点存储的数据信息
      */
     @Override
-    public GNode setRecordData(String recordData) {
+    public GNode setRecordData(JsonObject recordData) {
         this.recordData = recordData;
         return this;
     }
@@ -246,7 +247,7 @@ public class GNode implements VertxPojo, IGNode {
      * Getter for <code>ZDB.G_NODE.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public String getUi() {
+    public JsonObject getUi() {
         return this.ui;
     }
 
@@ -254,7 +255,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public GNode setUi(String ui) {
+    public GNode setUi(JsonObject ui) {
         this.ui = ui;
         return this;
     }
@@ -382,7 +383,7 @@ public class GNode implements VertxPojo, IGNode {
      * Getter for <code>ZDB.G_NODE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -390,7 +391,7 @@ public class GNode implements VertxPojo, IGNode {
      * Setter for <code>ZDB.G_NODE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public GNode setMetadata(String metadata) {
+    public GNode setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

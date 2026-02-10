@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.GNode;
 import io.zerows.extension.module.graphic.domain.tables.records.GNodeRecord;
 
@@ -104,7 +105,7 @@ public class GNodeDao extends AbstractVertxDAO<GNodeRecord, io.zerows.extension.
      * Find records that have <code>RECORD_DATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByRecordData(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByRecordData(Collection<JsonObject> values) {
                 return findManyByCondition(GNode.G_NODE.RECORD_DATA.in(values));
         }
 
@@ -112,7 +113,7 @@ public class GNodeDao extends AbstractVertxDAO<GNodeRecord, io.zerows.extension.
      * Find records that have <code>RECORD_DATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByRecordData(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByRecordData(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GNode.G_NODE.RECORD_DATA.in(values),limit);
         }
 
@@ -134,7 +135,7 @@ public class GNodeDao extends AbstractVertxDAO<GNodeRecord, io.zerows.extension.
         /**
      * Find records that have <code>UI IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByUi(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByUi(Collection<JsonObject> values) {
                 return findManyByCondition(GNode.G_NODE.UI.in(values));
         }
 
@@ -142,7 +143,7 @@ public class GNodeDao extends AbstractVertxDAO<GNodeRecord, io.zerows.extension.
      * Find records that have <code>UI IN (values)</code> asynchronously limited
      * by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByUi(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByUi(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GNode.G_NODE.UI.in(values),limit);
         }
 
@@ -254,7 +255,7 @@ public class GNodeDao extends AbstractVertxDAO<GNodeRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(GNode.G_NODE.METADATA.in(values));
         }
 
@@ -262,7 +263,7 @@ public class GNodeDao extends AbstractVertxDAO<GNodeRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GNode>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GNode.G_NODE.METADATA.in(values),limit);
         }
 

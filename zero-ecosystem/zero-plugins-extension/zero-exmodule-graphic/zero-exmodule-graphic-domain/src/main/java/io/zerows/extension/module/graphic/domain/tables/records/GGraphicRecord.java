@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.GGraphic;
 import io.zerows.extension.module.graphic.domain.tables.interfaces.IGGraphic;
 
@@ -171,7 +172,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public GGraphicRecord setUi(String value) {
+    public GGraphicRecord setUi(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -180,8 +181,8 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Getter for <code>ZDB.G_GRAPHIC.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public String getUi() {
-        return (String) get(8);
+    public JsonObject getUi() {
+        return (JsonObject) get(8);
     }
 
     /**
@@ -343,7 +344,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Setter for <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public GGraphicRecord setMetadata(String value) {
+    public GGraphicRecord setMetadata(JsonObject value) {
         set(18, value);
         return this;
     }
@@ -352,8 +353,8 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
      * Getter for <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(18);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(18);
     }
 
     /**
@@ -503,7 +504,7 @@ public class GGraphicRecord extends UpdatableRecordImpl<GGraphicRecord> implemen
     /**
      * Create a detached, initialised GGraphicRecord
      */
-    public GGraphicRecord(String id, String code, String comments, String graphicId, Boolean master, String mode, String name, String ownerId, String ui, String type, String modelId, String modelKey, String modelCategory, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public GGraphicRecord(String id, String code, String comments, String graphicId, Boolean master, String mode, String name, String ownerId, JsonObject ui, String type, String modelId, String modelKey, String modelCategory, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(GGraphic.G_GRAPHIC);
 
         setId(id);
