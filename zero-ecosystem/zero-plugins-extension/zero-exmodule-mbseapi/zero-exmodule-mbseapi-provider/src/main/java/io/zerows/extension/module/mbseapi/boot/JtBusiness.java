@@ -35,14 +35,13 @@ class JtBusiness {
             /*
              * Dict Config for service
              */
-            final String dictStr = service.getDictConfig();
-            final KDictConfig dict = new KDictConfig(dictStr);
+            // final String dictStr = service.getDictConfig();
+            final KDictConfig dict = new KDictConfig(service.getDictConfig());
             /*
              * When valid, inject component here
              */
             if (!dict.configSource().isEmpty()) {
-                final Class<?> component =
-                    Ut.clazz(service.getDictComponent(), null);
+                final Class<?> component = Ut.clazz(service.getDictComponent(), null);
                 dict.bind(component);
                 /*
                  * dictEpsilon configuration

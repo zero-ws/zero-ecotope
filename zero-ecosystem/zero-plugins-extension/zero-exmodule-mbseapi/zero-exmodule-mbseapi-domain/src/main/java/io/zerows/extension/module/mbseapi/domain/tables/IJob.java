@@ -4,6 +4,8 @@
 package io.zerows.extension.module.mbseapi.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.Indexes;
 import io.zerows.extension.module.mbseapi.domain.Keys;
 import io.zerows.extension.module.mbseapi.domain.Zdb;
@@ -88,7 +90,7 @@ public class IJob extends TableImpl<IJobRecord> {
     /**
      * The column <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置
      */
-    public final TableField<IJobRecord, String> ADDITIONAL = createField(DSL.name("ADDITIONAL"), SQLDataType.CLOB(65535), this, "「additional」- 额外配置");
+    public final TableField<IJobRecord, JsonObject> ADDITIONAL = createField(DSL.name("ADDITIONAL"), SQLDataType.CLOB(65535), this, "「additional」- 额外配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_JOB.PROXY</code>. 「proxy」- 代理类
@@ -114,7 +116,7 @@ public class IJob extends TableImpl<IJobRecord> {
     /**
      * The column <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」- 调度配置
      */
-    public final TableField<IJobRecord, String> DURATION_CONFIG = createField(DSL.name("DURATION_CONFIG"), SQLDataType.CLOB, this, "「durationConfig」- 调度配置");
+    public final TableField<IJobRecord, JsonObject> DURATION_CONFIG = createField(DSL.name("DURATION_CONFIG"), SQLDataType.CLOB, this, "「durationConfig」- 调度配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_JOB.RUN_AT</code>. 「runAt」- 运行时间点
@@ -186,7 +188,7 @@ public class IJob extends TableImpl<IJobRecord> {
     /**
      * The column <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<IJobRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<IJobRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_JOB.VERSION</code>. 「version」- 版本号

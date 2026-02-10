@@ -4,6 +4,10 @@
 package io.zerows.extension.module.mbseapi.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.Keys;
 import io.zerows.extension.module.mbseapi.domain.Zdb;
 import io.zerows.extension.module.mbseapi.domain.tables.records.IApiRecord;
@@ -65,12 +69,12 @@ public class IApi extends TableImpl<IApiRecord> {
     /**
      * The column <code>ZDB.I_API.CONSUMES</code>. 「consumes」- 当前接口使用的客户端
      */
-    public final TableField<IApiRecord, String> CONSUMES = createField(DSL.name("CONSUMES"), SQLDataType.CLOB(65535), this, "「consumes」- 当前接口使用的客户端");
+    public final TableField<IApiRecord, JsonArray> CONSUMES = createField(DSL.name("CONSUMES"), SQLDataType.CLOB(65535), this, "「consumes」- 当前接口使用的客户端", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.I_API.IN_MAPPING</code>. 「inMapping」- 参数映射规则
      */
-    public final TableField<IApiRecord, String> IN_MAPPING = createField(DSL.name("IN_MAPPING"), SQLDataType.CLOB(65535), this, "「inMapping」- 参数映射规则");
+    public final TableField<IApiRecord, JsonObject> IN_MAPPING = createField(DSL.name("IN_MAPPING"), SQLDataType.CLOB(65535), this, "「inMapping」- 参数映射规则", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_API.IN_PLUG</code>. 「inPlug」- 参数请求流程中的插件
@@ -80,7 +84,7 @@ public class IApi extends TableImpl<IApiRecord> {
     /**
      * The column <code>ZDB.I_API.IN_RULE</code>. 「inRule」- 参数验证、转换基
      */
-    public final TableField<IApiRecord, String> IN_RULE = createField(DSL.name("IN_RULE"), SQLDataType.CLOB(65535), this, "「inRule」- 参数验证、转换基");
+    public final TableField<IApiRecord, JsonObject> IN_RULE = createField(DSL.name("IN_RULE"), SQLDataType.CLOB(65535), this, "「inRule」- 参数验证、转换基", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_API.IN_SCRIPT</code>. 「inScript」- 【保留】参数请求
@@ -106,7 +110,7 @@ public class IApi extends TableImpl<IApiRecord> {
      * The column <code>ZDB.I_API.PARAM_CONTAINED</code>. 「paramContained」-
      * 必须参数表
      */
-    public final TableField<IApiRecord, String> PARAM_CONTAINED = createField(DSL.name("PARAM_CONTAINED"), SQLDataType.CLOB(65535), this, "「paramContained」- 必须参数表");
+    public final TableField<IApiRecord, JsonArray> PARAM_CONTAINED = createField(DSL.name("PARAM_CONTAINED"), SQLDataType.CLOB(65535), this, "「paramContained」- 必须参数表", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.I_API.PARAM_MODE</code>. 「paramMode」- 参数来源
@@ -116,12 +120,12 @@ public class IApi extends TableImpl<IApiRecord> {
     /**
      * The column <code>ZDB.I_API.PARAM_REQUIRED</code>. 「paramRequired」- 必须参数表
      */
-    public final TableField<IApiRecord, String> PARAM_REQUIRED = createField(DSL.name("PARAM_REQUIRED"), SQLDataType.CLOB(65535), this, "「paramRequired」- 必须参数表");
+    public final TableField<IApiRecord, JsonArray> PARAM_REQUIRED = createField(DSL.name("PARAM_REQUIRED"), SQLDataType.CLOB(65535), this, "「paramRequired」- 必须参数表", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.I_API.PRODUCES</code>. 「produces」- 当前接口使用的服务端
      */
-    public final TableField<IApiRecord, String> PRODUCES = createField(DSL.name("PRODUCES"), SQLDataType.CLOB(65535), this, "「produces」- 当前接口使用的服务端");
+    public final TableField<IApiRecord, JsonArray> PRODUCES = createField(DSL.name("PRODUCES"), SQLDataType.CLOB(65535), this, "「produces」- 当前接口使用的服务端", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.I_API.SECURE</code>. 「secure」- 是否走安全通道
@@ -197,7 +201,7 @@ public class IApi extends TableImpl<IApiRecord> {
     /**
      * The column <code>ZDB.I_API.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<IApiRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<IApiRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_API.VERSION</code>. 「version」- 版本号

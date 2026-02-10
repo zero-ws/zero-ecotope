@@ -4,6 +4,10 @@
 package io.zerows.extension.module.mbseapi.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.Indexes;
 import io.zerows.extension.module.mbseapi.domain.Keys;
 import io.zerows.extension.module.mbseapi.domain.Zdb;
@@ -88,7 +92,7 @@ public class IService extends TableImpl<IServiceRecord> {
     /**
      * The column <code>ZDB.I_SERVICE.RULE_UNIQUE</code>. 「ruleUnique」- 唯一规则
      */
-    public final TableField<IServiceRecord, String> RULE_UNIQUE = createField(DSL.name("RULE_UNIQUE"), SQLDataType.CLOB(16777215), this, "「ruleUnique」- 唯一规则");
+    public final TableField<IServiceRecord, JsonObject> RULE_UNIQUE = createField(DSL.name("RULE_UNIQUE"), SQLDataType.CLOB(16777215), this, "「ruleUnique」- 唯一规则", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.CHANNEL_TYPE</code>. 「channelType」- 通道类型
@@ -105,7 +109,7 @@ public class IService extends TableImpl<IServiceRecord> {
      * The column <code>ZDB.I_SERVICE.CHANNEL_CONFIG</code>. 「channelConfig」-
      * 通道配置
      */
-    public final TableField<IServiceRecord, String> CHANNEL_CONFIG = createField(DSL.name("CHANNEL_CONFIG"), SQLDataType.CLOB(16777215), this, "「channelConfig」- 通道配置");
+    public final TableField<IServiceRecord, JsonObject> CHANNEL_CONFIG = createField(DSL.name("CHANNEL_CONFIG"), SQLDataType.CLOB(16777215), this, "「channelConfig」- 通道配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.DICT_COMPONENT</code>. 「dictComponent」-
@@ -116,12 +120,12 @@ public class IService extends TableImpl<IServiceRecord> {
     /**
      * The column <code>ZDB.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典配置
      */
-    public final TableField<IServiceRecord, String> DICT_CONFIG = createField(DSL.name("DICT_CONFIG"), SQLDataType.CLOB(16777215), this, "「dictConfig」- 字典配置");
+    public final TableField<IServiceRecord, JsonArray> DICT_CONFIG = createField(DSL.name("DICT_CONFIG"), SQLDataType.CLOB(16777215), this, "「dictConfig」- 字典配置", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典消费配置
      */
-    public final TableField<IServiceRecord, String> DICT_EPSILON = createField(DSL.name("DICT_EPSILON"), SQLDataType.CLOB(16777215), this, "「dictEpsilon」- 字典消费配置");
+    public final TableField<IServiceRecord, JsonObject> DICT_EPSILON = createField(DSL.name("DICT_EPSILON"), SQLDataType.CLOB(16777215), this, "「dictEpsilon」- 字典消费配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.MAPPING_MODE</code>. 「mappingMode」- 映射模式
@@ -138,7 +142,7 @@ public class IService extends TableImpl<IServiceRecord> {
      * The column <code>ZDB.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」-
      * 映射配置
      */
-    public final TableField<IServiceRecord, String> MAPPING_CONFIG = createField(DSL.name("MAPPING_CONFIG"), SQLDataType.CLOB(16777215), this, "「mappingConfig」- 映射配置");
+    public final TableField<IServiceRecord, JsonObject> MAPPING_CONFIG = createField(DSL.name("MAPPING_CONFIG"), SQLDataType.CLOB(16777215), this, "「mappingConfig」- 映射配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.SERVICE_COMPONENT</code>.
@@ -150,7 +154,7 @@ public class IService extends TableImpl<IServiceRecord> {
      * The column <code>ZDB.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」-
      * 业务配置
      */
-    public final TableField<IServiceRecord, String> SERVICE_CONFIG = createField(DSL.name("SERVICE_CONFIG"), SQLDataType.CLOB(16777215), this, "「serviceConfig」- 业务配置");
+    public final TableField<IServiceRecord, JsonObject> SERVICE_CONFIG = createField(DSL.name("SERVICE_CONFIG"), SQLDataType.CLOB(16777215), this, "「serviceConfig」- 业务配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」-
@@ -162,13 +166,13 @@ public class IService extends TableImpl<IServiceRecord> {
      * The column <code>ZDB.I_SERVICE.CONFIG_DATABASE</code>. 「configDatabase」-
      * 数据库配置
      */
-    public final TableField<IServiceRecord, String> CONFIG_DATABASE = createField(DSL.name("CONFIG_DATABASE"), SQLDataType.CLOB(16777215), this, "「configDatabase」- 数据库配置");
+    public final TableField<IServiceRecord, JsonObject> CONFIG_DATABASE = createField(DSL.name("CONFIG_DATABASE"), SQLDataType.CLOB(16777215), this, "「configDatabase」- 数据库配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.CONFIG_INTEGRATION</code>.
      * 「configIntegration」- 集成配置
      */
-    public final TableField<IServiceRecord, String> CONFIG_INTEGRATION = createField(DSL.name("CONFIG_INTEGRATION"), SQLDataType.CLOB(16777215), this, "「configIntegration」- 集成配置");
+    public final TableField<IServiceRecord, JsonObject> CONFIG_INTEGRATION = createField(DSL.name("CONFIG_INTEGRATION"), SQLDataType.CLOB(16777215), this, "「configIntegration」- 集成配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.IN_SCRIPT</code>. 「inScript」- 前置脚本
@@ -223,7 +227,7 @@ public class IService extends TableImpl<IServiceRecord> {
     /**
      * The column <code>ZDB.I_SERVICE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<IServiceRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<IServiceRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_SERVICE.VERSION</code>. 「version」- 版本号

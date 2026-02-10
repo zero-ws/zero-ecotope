@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbseapi.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.interfaces.IIService;
 
 import java.time.LocalDateTime;
@@ -25,21 +27,21 @@ public class IService implements VertxPojo, IIService {
     private String comment;
     private String identifier;
     private String identifierComponent;
-    private String ruleUnique;
+    private JsonObject ruleUnique;
     private String channelType;
     private String channelComponent;
-    private String channelConfig;
+    private JsonObject channelConfig;
     private String dictComponent;
-    private String dictConfig;
-    private String dictEpsilon;
+    private JsonArray dictConfig;
+    private JsonObject dictEpsilon;
     private String mappingMode;
     private String mappingComponent;
-    private String mappingConfig;
+    private JsonObject mappingConfig;
     private String serviceComponent;
-    private String serviceConfig;
+    private JsonObject serviceConfig;
     private String serviceRecord;
-    private String configDatabase;
-    private String configIntegration;
+    private JsonObject configDatabase;
+    private JsonObject configIntegration;
     private String inScript;
     private String outScript;
     private Boolean isGraphic;
@@ -50,7 +52,7 @@ public class IService implements VertxPojo, IIService {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -106,21 +108,21 @@ public class IService implements VertxPojo, IIService {
         String comment,
         String identifier,
         String identifierComponent,
-        String ruleUnique,
+        JsonObject ruleUnique,
         String channelType,
         String channelComponent,
-        String channelConfig,
+        JsonObject channelConfig,
         String dictComponent,
-        String dictConfig,
-        String dictEpsilon,
+        JsonArray dictConfig,
+        JsonObject dictEpsilon,
         String mappingMode,
         String mappingComponent,
-        String mappingConfig,
+        JsonObject mappingConfig,
         String serviceComponent,
-        String serviceConfig,
+        JsonObject serviceConfig,
         String serviceRecord,
-        String configDatabase,
-        String configIntegration,
+        JsonObject configDatabase,
+        JsonObject configIntegration,
         String inScript,
         String outScript,
         Boolean isGraphic,
@@ -131,7 +133,7 @@ public class IService implements VertxPojo, IIService {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -290,7 +292,7 @@ public class IService implements VertxPojo, IIService {
      * Getter for <code>ZDB.I_SERVICE.RULE_UNIQUE</code>. 「ruleUnique」- 唯一规则
      */
     @Override
-    public String getRuleUnique() {
+    public JsonObject getRuleUnique() {
         return this.ruleUnique;
     }
 
@@ -298,7 +300,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.RULE_UNIQUE</code>. 「ruleUnique」- 唯一规则
      */
     @Override
-    public IService setRuleUnique(String ruleUnique) {
+    public IService setRuleUnique(JsonObject ruleUnique) {
         this.ruleUnique = ruleUnique;
         return this;
     }
@@ -344,7 +346,7 @@ public class IService implements VertxPojo, IIService {
      * 通道配置
      */
     @Override
-    public String getChannelConfig() {
+    public JsonObject getChannelConfig() {
         return this.channelConfig;
     }
 
@@ -353,7 +355,7 @@ public class IService implements VertxPojo, IIService {
      * 通道配置
      */
     @Override
-    public IService setChannelConfig(String channelConfig) {
+    public IService setChannelConfig(JsonObject channelConfig) {
         this.channelConfig = channelConfig;
         return this;
     }
@@ -381,7 +383,7 @@ public class IService implements VertxPojo, IIService {
      * Getter for <code>ZDB.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典配置
      */
     @Override
-    public String getDictConfig() {
+    public JsonArray getDictConfig() {
         return this.dictConfig;
     }
 
@@ -389,7 +391,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典配置
      */
     @Override
-    public IService setDictConfig(String dictConfig) {
+    public IService setDictConfig(JsonArray dictConfig) {
         this.dictConfig = dictConfig;
         return this;
     }
@@ -398,7 +400,7 @@ public class IService implements VertxPojo, IIService {
      * Getter for <code>ZDB.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典消费配置
      */
     @Override
-    public String getDictEpsilon() {
+    public JsonObject getDictEpsilon() {
         return this.dictEpsilon;
     }
 
@@ -406,7 +408,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典消费配置
      */
     @Override
-    public IService setDictEpsilon(String dictEpsilon) {
+    public IService setDictEpsilon(JsonObject dictEpsilon) {
         this.dictEpsilon = dictEpsilon;
         return this;
     }
@@ -452,7 +454,7 @@ public class IService implements VertxPojo, IIService {
      * 映射配置
      */
     @Override
-    public String getMappingConfig() {
+    public JsonObject getMappingConfig() {
         return this.mappingConfig;
     }
 
@@ -461,7 +463,7 @@ public class IService implements VertxPojo, IIService {
      * 映射配置
      */
     @Override
-    public IService setMappingConfig(String mappingConfig) {
+    public IService setMappingConfig(JsonObject mappingConfig) {
         this.mappingConfig = mappingConfig;
         return this;
     }
@@ -490,7 +492,7 @@ public class IService implements VertxPojo, IIService {
      * 业务配置
      */
     @Override
-    public String getServiceConfig() {
+    public JsonObject getServiceConfig() {
         return this.serviceConfig;
     }
 
@@ -499,7 +501,7 @@ public class IService implements VertxPojo, IIService {
      * 业务配置
      */
     @Override
-    public IService setServiceConfig(String serviceConfig) {
+    public IService setServiceConfig(JsonObject serviceConfig) {
         this.serviceConfig = serviceConfig;
         return this;
     }
@@ -528,7 +530,7 @@ public class IService implements VertxPojo, IIService {
      * 数据库配置
      */
     @Override
-    public String getConfigDatabase() {
+    public JsonObject getConfigDatabase() {
         return this.configDatabase;
     }
 
@@ -537,7 +539,7 @@ public class IService implements VertxPojo, IIService {
      * 数据库配置
      */
     @Override
-    public IService setConfigDatabase(String configDatabase) {
+    public IService setConfigDatabase(JsonObject configDatabase) {
         this.configDatabase = configDatabase;
         return this;
     }
@@ -547,7 +549,7 @@ public class IService implements VertxPojo, IIService {
      * 「configIntegration」- 集成配置
      */
     @Override
-    public String getConfigIntegration() {
+    public JsonObject getConfigIntegration() {
         return this.configIntegration;
     }
 
@@ -556,7 +558,7 @@ public class IService implements VertxPojo, IIService {
      * 「configIntegration」- 集成配置
      */
     @Override
-    public IService setConfigIntegration(String configIntegration) {
+    public IService setConfigIntegration(JsonObject configIntegration) {
         this.configIntegration = configIntegration;
         return this;
     }
@@ -735,7 +737,7 @@ public class IService implements VertxPojo, IIService {
      * Getter for <code>ZDB.I_SERVICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -743,7 +745,7 @@ public class IService implements VertxPojo, IIService {
      * Setter for <code>ZDB.I_SERVICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IService setMetadata(String metadata) {
+    public IService setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

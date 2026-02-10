@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbseapi.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -40,22 +42,22 @@ public interface IIApi extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_API.CONSUMES</code>. 「consumes」- 当前接口使用的客户端
      */
-    public IIApi setConsumes(String value);
+    public IIApi setConsumes(JsonArray value);
 
     /**
      * Getter for <code>ZDB.I_API.CONSUMES</code>. 「consumes」- 当前接口使用的客户端
      */
-    public String getConsumes();
+    public JsonArray getConsumes();
 
     /**
      * Setter for <code>ZDB.I_API.IN_MAPPING</code>. 「inMapping」- 参数映射规则
      */
-    public IIApi setInMapping(String value);
+    public IIApi setInMapping(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_API.IN_MAPPING</code>. 「inMapping」- 参数映射规则
      */
-    public String getInMapping();
+    public JsonObject getInMapping();
 
     /**
      * Setter for <code>ZDB.I_API.IN_PLUG</code>. 「inPlug」- 参数请求流程中的插件
@@ -70,12 +72,12 @@ public interface IIApi extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_API.IN_RULE</code>. 「inRule」- 参数验证、转换基
      */
-    public IIApi setInRule(String value);
+    public IIApi setInRule(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_API.IN_RULE</code>. 「inRule」- 参数验证、转换基
      */
-    public String getInRule();
+    public JsonObject getInRule();
 
     /**
      * Setter for <code>ZDB.I_API.IN_SCRIPT</code>. 「inScript」- 【保留】参数请求
@@ -121,13 +123,13 @@ public interface IIApi extends VertxPojo, Serializable {
      * Setter for <code>ZDB.I_API.PARAM_CONTAINED</code>. 「paramContained」-
      * 必须参数表
      */
-    public IIApi setParamContained(String value);
+    public IIApi setParamContained(JsonArray value);
 
     /**
      * Getter for <code>ZDB.I_API.PARAM_CONTAINED</code>. 「paramContained」-
      * 必须参数表
      */
-    public String getParamContained();
+    public JsonArray getParamContained();
 
     /**
      * Setter for <code>ZDB.I_API.PARAM_MODE</code>. 「paramMode」- 参数来源
@@ -142,22 +144,22 @@ public interface IIApi extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_API.PARAM_REQUIRED</code>. 「paramRequired」- 必须参数表
      */
-    public IIApi setParamRequired(String value);
+    public IIApi setParamRequired(JsonArray value);
 
     /**
      * Getter for <code>ZDB.I_API.PARAM_REQUIRED</code>. 「paramRequired」- 必须参数表
      */
-    public String getParamRequired();
+    public JsonArray getParamRequired();
 
     /**
      * Setter for <code>ZDB.I_API.PRODUCES</code>. 「produces」- 当前接口使用的服务端
      */
-    public IIApi setProduces(String value);
+    public IIApi setProduces(JsonArray value);
 
     /**
      * Getter for <code>ZDB.I_API.PRODUCES</code>. 「produces」- 当前接口使用的服务端
      */
-    public String getProduces();
+    public JsonArray getProduces();
 
     /**
      * Setter for <code>ZDB.I_API.SECURE</code>. 「secure」- 是否走安全通道
@@ -304,12 +306,12 @@ public interface IIApi extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_API.METADATA</code>. 「metadata」- 元配置
      */
-    public IIApi setMetadata(String value);
+    public IIApi setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_API.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.I_API.VERSION</code>. 「version」- 版本号
@@ -381,18 +383,18 @@ public interface IIApi extends VertxPojo, Serializable {
         public default IIApi fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setComment,json::getString,"COMMENT","java.lang.String");
-                setOrThrow(this::setConsumes,json::getString,"CONSUMES","java.lang.String");
-                setOrThrow(this::setInMapping,json::getString,"IN_MAPPING","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column CONSUMES!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column IN_MAPPING!
                 setOrThrow(this::setInPlug,json::getString,"IN_PLUG","java.lang.String");
-                setOrThrow(this::setInRule,json::getString,"IN_RULE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column IN_RULE!
                 setOrThrow(this::setInScript,json::getString,"IN_SCRIPT","java.lang.String");
                 setOrThrow(this::setMethod,json::getString,"METHOD","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setOutWriter,json::getString,"OUT_WRITER","java.lang.String");
-                setOrThrow(this::setParamContained,json::getString,"PARAM_CONTAINED","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column PARAM_CONTAINED!
                 setOrThrow(this::setParamMode,json::getString,"PARAM_MODE","java.lang.String");
-                setOrThrow(this::setParamRequired,json::getString,"PARAM_REQUIRED","java.lang.String");
-                setOrThrow(this::setProduces,json::getString,"PRODUCES","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column PARAM_REQUIRED!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column PRODUCES!
                 setOrThrow(this::setSecure,json::getBoolean,"SECURE","java.lang.Boolean");
                 setOrThrow(this::setServiceId,json::getString,"SERVICE_ID","java.lang.String");
                 setOrThrow(this::setUri,json::getString,"URI","java.lang.String");
@@ -407,7 +409,7 @@ public interface IIApi extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -422,18 +424,18 @@ public interface IIApi extends VertxPojo, Serializable {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
                 json.put("COMMENT",getComment());
-                json.put("CONSUMES",getConsumes());
-                json.put("IN_MAPPING",getInMapping());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column CONSUMES!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column IN_MAPPING!
                 json.put("IN_PLUG",getInPlug());
-                json.put("IN_RULE",getInRule());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column IN_RULE!
                 json.put("IN_SCRIPT",getInScript());
                 json.put("METHOD",getMethod());
                 json.put("NAME",getName());
                 json.put("OUT_WRITER",getOutWriter());
-                json.put("PARAM_CONTAINED",getParamContained());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column PARAM_CONTAINED!
                 json.put("PARAM_MODE",getParamMode());
-                json.put("PARAM_REQUIRED",getParamRequired());
-                json.put("PRODUCES",getProduces());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column PARAM_REQUIRED!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column PRODUCES!
                 json.put("SECURE",getSecure());
                 json.put("SERVICE_ID",getServiceId());
                 json.put("URI",getUri());
@@ -448,7 +450,7 @@ public interface IIApi extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbseapi.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.IApi;
 import io.zerows.extension.module.mbseapi.domain.tables.interfaces.IIApi;
 
@@ -61,7 +63,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Setter for <code>ZDB.I_API.CONSUMES</code>. 「consumes」- 当前接口使用的客户端
      */
     @Override
-    public IApiRecord setConsumes(String value) {
+    public IApiRecord setConsumes(JsonArray value) {
         set(2, value);
         return this;
     }
@@ -70,15 +72,15 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Getter for <code>ZDB.I_API.CONSUMES</code>. 「consumes」- 当前接口使用的客户端
      */
     @Override
-    public String getConsumes() {
-        return (String) get(2);
+    public JsonArray getConsumes() {
+        return (JsonArray) get(2);
     }
 
     /**
      * Setter for <code>ZDB.I_API.IN_MAPPING</code>. 「inMapping」- 参数映射规则
      */
     @Override
-    public IApiRecord setInMapping(String value) {
+    public IApiRecord setInMapping(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -87,8 +89,8 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Getter for <code>ZDB.I_API.IN_MAPPING</code>. 「inMapping」- 参数映射规则
      */
     @Override
-    public String getInMapping() {
-        return (String) get(3);
+    public JsonObject getInMapping() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -112,7 +114,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Setter for <code>ZDB.I_API.IN_RULE</code>. 「inRule」- 参数验证、转换基
      */
     @Override
-    public IApiRecord setInRule(String value) {
+    public IApiRecord setInRule(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -121,8 +123,8 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Getter for <code>ZDB.I_API.IN_RULE</code>. 「inRule」- 参数验证、转换基
      */
     @Override
-    public String getInRule() {
-        return (String) get(5);
+    public JsonObject getInRule() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -198,7 +200,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * 必须参数表
      */
     @Override
-    public IApiRecord setParamContained(String value) {
+    public IApiRecord setParamContained(JsonArray value) {
         set(10, value);
         return this;
     }
@@ -208,8 +210,8 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * 必须参数表
      */
     @Override
-    public String getParamContained() {
-        return (String) get(10);
+    public JsonArray getParamContained() {
+        return (JsonArray) get(10);
     }
 
     /**
@@ -233,7 +235,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Setter for <code>ZDB.I_API.PARAM_REQUIRED</code>. 「paramRequired」- 必须参数表
      */
     @Override
-    public IApiRecord setParamRequired(String value) {
+    public IApiRecord setParamRequired(JsonArray value) {
         set(12, value);
         return this;
     }
@@ -242,15 +244,15 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Getter for <code>ZDB.I_API.PARAM_REQUIRED</code>. 「paramRequired」- 必须参数表
      */
     @Override
-    public String getParamRequired() {
-        return (String) get(12);
+    public JsonArray getParamRequired() {
+        return (JsonArray) get(12);
     }
 
     /**
      * Setter for <code>ZDB.I_API.PRODUCES</code>. 「produces」- 当前接口使用的服务端
      */
     @Override
-    public IApiRecord setProduces(String value) {
+    public IApiRecord setProduces(JsonArray value) {
         set(13, value);
         return this;
     }
@@ -259,8 +261,8 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Getter for <code>ZDB.I_API.PRODUCES</code>. 「produces」- 当前接口使用的服务端
      */
     @Override
-    public String getProduces() {
-        return (String) get(13);
+    public JsonArray getProduces() {
+        return (JsonArray) get(13);
     }
 
     /**
@@ -507,7 +509,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Setter for <code>ZDB.I_API.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IApiRecord setMetadata(String value) {
+    public IApiRecord setMetadata(JsonObject value) {
         set(28, value);
         return this;
     }
@@ -516,8 +518,8 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
      * Getter for <code>ZDB.I_API.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(28);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(28);
     }
 
     /**
@@ -677,7 +679,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements Vertx
     /**
      * Create a detached, initialised IApiRecord
      */
-    public IApiRecord(String id, String comment, String consumes, String inMapping, String inPlug, String inRule, String inScript, String method, String name, String outWriter, String paramContained, String paramMode, String paramRequired, String produces, Boolean secure, String serviceId, String uri, String workerAddress, String workerClass, String workerConsumer, String workerJs, String workerType, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IApiRecord(String id, String comment, JsonArray consumes, JsonObject inMapping, String inPlug, JsonObject inRule, String inScript, String method, String name, String outWriter, JsonArray paramContained, String paramMode, JsonArray paramRequired, JsonArray produces, Boolean secure, String serviceId, String uri, String workerAddress, String workerClass, String workerConsumer, String workerJs, String workerType, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IApi.I_API);
 
         setId(id);
