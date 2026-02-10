@@ -190,19 +190,11 @@ class AuthenticationHandlerGateway extends AuthenticationHandlerImpl<Authenticat
                                       final AsyncSession asyncSession) {
         final SecurityAudit audit = ((RoutingContextInternal) context).securityAudit();
 
-        final SecuritySession session = SecuritySession.of();
         audit.credentials(asyncSession);
         // 根据结果进行分流处理
-        final Future<User> future;
-        if (asyncSession.isVerified()) {
-            // 带 Token
-            session.authorizedUser(context, asyncSession.getUser());
-            future = this.authProvider.authenticate(asyncSession);
-        } else {
-            // 匿名
-            future = this.authProvider.authenticate(asyncSession)
-                .map(authorized -> session.authorizedUser(context, authorized));
-        }
-        return future.andThen(result -> audit.audit(Marker.AUTHENTICATION, result.succeeded()));
+        return this.authProvider.authenticate(asyncSession).map(verified -> {
+            final SecuritySession session = SecuritySession.of();
+            return session.authorizedUser(context, verified);
+        }).andThen(result -> audit.audit(Marker.AUTHENTICATION, result.succeeded()));
     }
 }

@@ -8,7 +8,6 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
-import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.component.authorization.Align;
 import io.zerows.extension.module.rbac.component.authorization.ScDetent;
 import io.zerows.platform.metadata.KRef;
@@ -49,9 +48,8 @@ public class ScUser {
      * 4) INTERSECT
      */
     private static Future<JsonObject> initRoles(final JsonObject profile, final JsonArray roles) {
-        log.info("{} 初始化用户角色信息，Roles = {}", ScConstant.K_PREFIX, roles.encode());
         final List<Future<ProfileRole>> futures = new ArrayList<>();
-        roles.stream().filter(Objects::nonNull)
+        Ut.valueJArray(roles).stream().filter(Objects::nonNull)
             .map(item -> (JsonObject) item)
             .map(ProfileRole::new)
             .map(ProfileRole::initAsync)
@@ -61,9 +59,8 @@ public class ScUser {
     }
 
     private static Future<JsonObject> initGroups(final JsonObject profile, final JsonArray groups) {
-        log.info("{} 初始化用户分组信息，Groups = {}", ScConstant.K_PREFIX, groups.encode());
         final List<Future<ProfileGroup>> futures = new ArrayList<>();
-        groups.stream().filter(Objects::nonNull)
+        Ut.valueJArray(groups).stream().filter(Objects::nonNull)
             .map(item -> (JsonObject) item)
             .map(ProfileGroup::new)
             .map(ProfileGroup::initAsync)
@@ -91,19 +88,10 @@ public class ScUser {
             .compose(Align::children)
             .compose(childHod::future)
             /* 仅父组 */
-            .compose(parents -> ScDetent.parent(profile, profiles).procAsync(parents))
-            // 父组和当前组 Parent and Current
-            .compose(nil -> ScDetent.inherit(profile, profiles).procAsync(childHod.get()))
-            .map(nil -> profiles)
-
-
-            /* 子组模式 */
-            .compose(Align::children)
-            .compose(childHod::future)
-            // 子组
             .compose(children -> ScDetent.children(profile, profiles).procAsync(children))
-            // 子组和当前组
+            // 父组和当前组 Parent and Current
             .compose(nil -> ScDetent.extend(profile, profiles).procAsync(childHod.get()))
+            .map(nil -> profiles)
         ).map(nil -> profile);
     }
 
@@ -153,19 +141,18 @@ public class ScUser {
         return Ux.future(CC_USER.pick(() -> new ScUser(habitus), habitus)).compose(user -> {
             final JsonObject stored = userData.copy();
             stored.remove(KName.HABITUS);
-            final String userId = stored.getString(KName.USER);
-            return user.user(userId).set(stored);        // Start Async
-        }).compose(user -> user.profile()
+            // 新版直接走 id
+            final String userId = stored.getString(KName.ID);
+            return user.user(userId).setStored(stored);        // Start Async
+        }).compose(user -> user.getProfile()
             // Role Profile initialized
-            .compose(profile -> initRoles(profile, userData.getJsonArray(KName.ROLE)))
+            .compose(profile -> initRoles(profile, userData.getJsonArray(KName.ROLES)))
             // Group Profile initialized
-            .compose(profile -> initGroups(profile, userData.getJsonArray(KName.GROUP)))
+            .compose(profile -> initGroups(profile, userData.getJsonArray(KName.GROUPS)))
             // Stored
-            .compose(user::profile)
-            // Report
-            .compose(user::report)
+            .compose(user::setProfile)
             // Final result
-            .compose(nil -> Ux.future(user))
+            .compose(waitFor -> Ux.future(user))
         );
     }
 
@@ -185,6 +172,8 @@ public class ScUser {
         return user.logout();
     }
 
+    // ------------------------- Session Method -----------------------
+
     private ScUser user(final String userId) {
         this.userId = userId;
         return this;
@@ -194,23 +183,23 @@ public class ScUser {
         return this.userId;
     }
 
-    // ------------------------- Session Method -----------------------
     public Future<JsonObject> view() {
-        return this.<JsonObject>get(KName.VIEW).compose(item -> {
+        return this.<JsonObject>getStored(KName.VIEW).map(item -> {
             if (Objects.isNull(item)) {
-                return Ux.futureJ();
+                return new JsonObject();
             }
-            return Ux.future(item);
+            return item;
         });
     }
 
     public Future<JsonObject> view(final String viewKey) {
-        return this.view().compose(view -> Ux.future(view.getJsonObject(viewKey)))
-            .compose(view -> {
+        return this.view()
+            .map(view -> Ut.valueJObject(view, viewKey))
+            .map(view -> {
                 if (Ut.isNotNil(view)) {
                     log.debug("[ XMOD ] ScUser 缓存命中 View，Key = {}, Data = {}", viewKey, view.encode());
                 }
-                return Ux.future(view);
+                return view;
             });
     }
 
@@ -220,8 +209,34 @@ public class ScUser {
             // Deep Merge is not needed
             stored.mergeIn(viewData);
             view.put(viewKey, stored);
-            return this.set(KName.VIEW, view);
+            return this.setStored(KName.VIEW, view).map(v -> view);
         });
+    }
+
+    public Future<JsonObject> permissions() {
+        return this.getProfile(ScAuthKey.PROFILE_PERM);
+    }
+
+    public Future<JsonObject> roles() {
+        return this.getProfile(ScAuthKey.PROFILE_ROLE);
+    }
+
+    public Future<JsonArray> roles(final String profileName) {
+        return this.getProfile(ScAuthKey.PROFILE_ROLE).map(json -> {
+            log.info("[ XMOD ] ( RBAC ) 获取用户角色信息，Profile Name = {}", profileName);
+            return Ut.valueJArray(json, profileName);
+        });
+    }
+
+    // ------------------------- Private Method ------------------------
+    private Future<Boolean> logout() {
+        CC_USER.remove(this.habitus);
+        return this.rapid.remove(this.habitus)
+            .compose(nil -> Ux.future(Boolean.TRUE));
+    }
+
+    private Future<JsonObject> setProfile(final JsonObject profileData) {
+        return this.setStored(KName.PROFILE, profileData).map(v -> profileData);
     }
 
     /*
@@ -232,93 +247,53 @@ public class ScUser {
      *      }
      * }
      */
-    public Future<JsonObject> profile() {
-        return this.<JsonObject>get(KName.PROFILE)
+    public Future<JsonObject> getProfile() {
+        return this.<JsonObject>getStored(KName.PROFILE)
             .map(item -> Objects.isNull(item) ? new JsonObject() : item);
     }
 
-    public Future<JsonObject> permissions() {
-        return this.profile(ScAuthKey.PROFILE_PERM);
-    }
-
-    public Future<JsonObject> roles() {
-        return this.profile(ScAuthKey.PROFILE_ROLE);
-    }
-
-    public Future<JsonArray> roles(final String profileName) {
-        return this.profile(ScAuthKey.PROFILE_ROLE).compose(json -> {
-            log.info("[ XMOD ] ( RBAC ) 获取用户角色信息，Profile Name = {}", profileName);
-            return Ux.future(json.getJsonArray(profileName, new JsonArray()));
-        });
-    }
-
-    public Future<JsonObject> profile(final JsonObject profileData) {
-        return this.set(KName.PROFILE, profileData);
-    }
-
-    // ------------------------- Private Method ------------------------
-
-    private Future<JsonObject> profile(final String key) {
-        return this.profile().compose(profile -> {
+    private Future<JsonObject> getProfile(final String key) {
+        return this.getProfile().map(profile -> {
             final JsonObject map = new JsonObject();
             Ut.<JsonObject>itJObject(profile, (item, profileName) -> {
                 final JsonArray data = item.getJsonArray(key, new JsonArray());
                 map.put(profileName, data);
             });
-            return Ux.future(map);
+            return map;
         });
     }
 
-    private Future<Boolean> logout() {
-        /*
-         * Remove reference pool first
-         */
-        // USERS.remove(this.habitus);
-        CC_USER.remove(this.habitus);
-        return this.rapid.remove(this.habitus)
-            .compose(nil -> Ux.future(Boolean.TRUE));
-    }
 
-    private Future<JsonObject> report(final JsonObject result) {
-        log.info("[ XMOD ] ( RBAC ) 用户权限信息报表：{}", result.encodePrettily());
-        return Ux.future(result);
-    }
-
-    private Future<ScUser> set(final JsonObject data) {
+    private Future<ScUser> setStored(final JsonObject data) {
         return this.getStored().compose(stored -> {
             stored.mergeIn(data, true);
-            return this.rapid.put(this.habitus, stored)
-                .compose(nil -> Ux.future(this));
+            return this.rapid.put(this.habitus, stored).map(v -> this);
         });
     }
 
-    private <T> Future<T> set(final String dataKey, final T value) {
+    private <T> Future<ScUser> setStored(final String dataKey, final T value) {
         return this.getStored().compose(stored -> {
-            // dataKey = findRunning, the Tool must be valid for JsonObject
             stored.put(dataKey, value);
-            return this.rapid.put(this.habitus, stored)
-                .compose(nil -> Ux.future(value));
+            return this.rapid.put(this.habitus, stored).map(v -> this);
         });
     }
 
     private Future<JsonObject> getStored() {
-        return this.rapid.find(this.habitus).compose(stored -> {
-            // 1st time fetch data often return null here
+        return this.rapid.find(this.habitus).map(stored -> {
             if (Ut.isNil(stored)) {
-                stored = new JsonObject();
+                return new JsonObject();
             }
-            return Ux.future(stored);
+            return stored;
         });
     }
 
     @SuppressWarnings("unchecked")
-    private <T> Future<T> get(final String dataKey) {
-        return this.getStored().compose(stored -> {
+    private <T> Future<T> getStored(final String dataKey) {
+        return this.getStored().map(stored -> {
             if (Ut.isNil(stored)) {
-                return Ux.future();
-            } else {
-                return Ux.future((T) stored.getValue(dataKey));
+                return null;
             }
+            return (T) stored.getValue(dataKey);
         });
     }
 }

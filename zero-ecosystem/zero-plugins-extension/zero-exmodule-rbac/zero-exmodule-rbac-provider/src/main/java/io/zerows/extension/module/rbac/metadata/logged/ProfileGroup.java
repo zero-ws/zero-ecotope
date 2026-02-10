@@ -4,6 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
+import io.zerows.support.Fx;
+import lombok.Data;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,12 +18,15 @@ import java.util.stream.Collectors;
 /*
  * Single middle fetchProfile for group
  */
+@Data
 public class ProfileGroup implements Serializable {
 
     private transient final String groupId;
+    @Getter
     private transient final Integer priority;
     private transient final JsonArray role;
     private transient final List<ProfileRole> roles = new ArrayList<>();
+    @Accessors(chain = true)
     private transient String reference;
 
     public ProfileGroup(final JsonObject data) {
@@ -46,16 +53,8 @@ public class ProfileGroup implements Serializable {
         return this;
     }
 
-    public Integer getPriority() {
-        return this.priority;
-    }
-
     public String getKey() {
         return this.groupId;
-    }
-
-    public List<ProfileRole> getRoles() {
-        return this.roles;
     }
 
     private void setRoles(final List<ProfileRole> profiles) {
@@ -64,37 +63,19 @@ public class ProfileGroup implements Serializable {
     }
 
     /*
-     * Parent Reference for current fetchProfile group
-     * */
-    public String getReference() {
-        return this.reference;
-    }
-
-    public ProfileGroup setReference(final String reference) {
-        this.reference = reference;
-        return this;
-    }
-
-    /*
      * Extract the latest relations: initAsync role for each group fetchProfile
      */
-    @SuppressWarnings("all")
     private Future<List<ProfileRole>> fetchProfilesAsync() {
-        final List futures = new ArrayList();
+        final List<Future<ProfileRole>> futures = new ArrayList<>();
         this.role.stream().filter(Objects::nonNull)
             .map(item -> (JsonObject) item)
             .map(ProfileRole::new)
             .map(ProfileRole::initAsync)
             .forEach(futures::add);
-        return null;
-        //        return Future.join(futures)
-        //            /* Composite Result */
-        //            .compose(FnZero::<ProfileRole>combineT)
-        //            .compose(profiles -> {
-        //                /* Bind each fetchProfile to group Id */
-        //                profiles.forEach(profile -> profile.setGroup(this));
-        //                return Future.succeededFuture(profiles);
-        //            });
+        return Fx.combineT(futures).compose(profiles -> {
+            profiles.forEach(profile -> profile.setGroup(this));
+            return Future.succeededFuture(profiles);
+        });
     }
 
     private List<ProfileRole> fetchProfiles() {
@@ -111,10 +92,9 @@ public class ProfileGroup implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ProfileGroup)) {
+        if (!(o instanceof final ProfileGroup that)) {
             return false;
         }
-        final ProfileGroup that = (ProfileGroup) o;
         return this.groupId.equals(that.groupId);
     }
 

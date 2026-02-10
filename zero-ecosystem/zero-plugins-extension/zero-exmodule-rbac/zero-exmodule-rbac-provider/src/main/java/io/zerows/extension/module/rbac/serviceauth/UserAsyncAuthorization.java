@@ -46,9 +46,14 @@ public class UserAsyncAuthorization implements AsyncAuthorization {
      * }
      */
     @Override
-    public Future<JsonObject> seekProfile(final User user) {
+    public Future<JsonObject> seekAuthorized(final User user) {
         final ScUser scUser = ScUser.login(user);
         return scUser.permissions();
+    }
+
+    @Override
+    public Future<User> seekProfile(final User logged) {
+        return ScUser.initProfile(logged).map(v -> logged);
     }
 
     @Override

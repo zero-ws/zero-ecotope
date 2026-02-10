@@ -1,11 +1,14 @@
 package io.zerows.epoch.web;
 
+import io.r2mo.jaas.element.MSGroup;
+import io.r2mo.jaas.element.MSRole;
 import io.r2mo.jaas.element.MSUser;
 import io.r2mo.jaas.session.UserAt;
 import io.r2mo.jaas.session.UserContext;
 import io.r2mo.jaas.session.UserSession;
 import io.r2mo.jaas.token.TokenType;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.Credentials;
@@ -13,6 +16,7 @@ import io.vertx.ext.web.Session;
 import io.zerows.epoch.constant.KName;
 import io.zerows.support.Ut;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -184,6 +188,33 @@ public class Account {
         // 鉴于旧版标识基本信息，此处还需要执行 habitus 对应的数据计算，此处 habitus 是后续执行过程中的核心
         principal.put(KName.HABITUS, id);
         principal.put(KName.SESSION, id);
+
+
+        // Role 信息，后续会在授权过程中使用
+        final List<MSRole> roles = user.roles();
+        if (!roles.isEmpty()) {
+            final JsonArray roleArr = new JsonArray();
+            roles.forEach(role -> {
+                final JsonObject roleJ = new JsonObject();
+                roleJ.put("roleId", role.getId());
+                roleJ.put("priority", role.getPriority());
+                roleArr.add(roleJ);
+            });
+            principal.put(KName.ROLES, roleArr);
+        }
+
+        // Group 信息，后续会在授权过程中使用
+        final List<MSGroup> groups = user.groups();
+        if (!groups.isEmpty()) {
+            final JsonArray groupArr = new JsonArray();
+            groups.forEach(group -> {
+                final JsonObject groupJ = new JsonObject();
+                groupJ.put("groupId", group.getId());
+                groupJ.put("priority", group.getPriority());
+                groupArr.add(groupJ);
+            });
+            principal.put(KName.GROUPS, groupArr);
+        }
         return principal;
     }
 

@@ -39,7 +39,6 @@ public class ScRole {
 
     public static ScRole login(final String roleId) {
         return CC_ROLE.pick(() -> new ScRole(roleId), roleId);
-        // return FnZero.po?l(ROLES, roleId, () -> new ScRole(roleId));
     }
 
     public String key() {
@@ -53,7 +52,6 @@ public class ScRole {
     // ------------------------- Initialized Method ------------------------
     public Future<JsonArray> clear() {
         CC_ROLE.remove(this.roleId);
-        // ROLES.remove(this.roleId);
         return this.cache.remove(this.roleId);
     }
 

@@ -5,7 +5,6 @@ import io.r2mo.jaas.session.UserAt;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.enums.TypeLogin;
 import io.vertx.core.Future;
-import io.vertx.ext.auth.User;
 import io.zerows.program.Ux;
 
 /**
@@ -34,14 +33,4 @@ public interface AsyncUserAt {
      * @return 用户信息
      */
     Future<UserAt> loadLogged(String identifier);
-
-    /**
-     * 登录之后，使用 Vert.x User 对象加载用户信息专用接口（访问缓存）
-     *
-     * @param logged 登录账号
-     * @return 用户信息
-     */
-    default Future<User> loadAuthorization(final User logged) {
-        return Future.succeededFuture(logged);
-    }
 }

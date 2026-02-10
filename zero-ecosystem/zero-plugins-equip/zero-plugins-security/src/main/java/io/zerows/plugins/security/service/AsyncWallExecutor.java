@@ -35,10 +35,7 @@ public abstract class AsyncWallExecutor implements WallExecutor {
         }
 
         // 加载用户信息，直接做转换 UserAt -> User
-        return userService.loadLogged(request)
-            .map(Account::userVx)
-            // 加载 Profile 信息，默认为 null，由授权组件来处理
-            .compose(userService::loadAuthorization);
+        return userService.loadLogged(request).map(Account::userVx);
     }
 
     /**
@@ -53,7 +50,7 @@ public abstract class AsyncWallExecutor implements WallExecutor {
     public Future<JsonObject> authorize(final User user) {
         final AsyncAuthorization resource = AsyncAuthorization.of();
         Objects.requireNonNull(resource, "[ XMOD ] 授权组件为空 / authorize");
-        return resource.seekProfile(user);
+        return resource.seekAuthorized(user);
     }
 
     /**

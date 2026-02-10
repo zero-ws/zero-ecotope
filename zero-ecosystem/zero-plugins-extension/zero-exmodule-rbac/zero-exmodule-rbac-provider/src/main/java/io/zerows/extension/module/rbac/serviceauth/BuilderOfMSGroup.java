@@ -38,9 +38,9 @@ public class BuilderOfMSGroup extends AbstractBuilder<MSGroup> {
 
             // Scope
             R2MO.vScope(entity,
-                groupEntity::getId,
                 groupEntity::getAppId,
-                groupEntity::getTenantId
+                groupEntity::getTenantId,
+                groupEntity::getId
             );
 
             // Audit
@@ -50,6 +50,7 @@ public class BuilderOfMSGroup extends AbstractBuilder<MSGroup> {
                 groupEntity::getUpdatedBy,
                 groupEntity::getUpdatedAt
             );
+            return entity;
         }
         return null;
     }

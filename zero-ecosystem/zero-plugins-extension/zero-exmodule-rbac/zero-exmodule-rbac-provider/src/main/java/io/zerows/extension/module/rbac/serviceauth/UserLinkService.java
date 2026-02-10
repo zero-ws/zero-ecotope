@@ -80,7 +80,7 @@ public class UserLinkService implements UserLinkStub {
         return DB.on(RUserRoleDao.class).<RUserRole>fetchAsync(KName.USER_ID, userId).compose(relations -> {
             final Set<String> roleIds = Ut.elementSet(relations, RUserRole::getRoleId);
             // 组合角色信息和关系信息
-            return DB.on(SRoleDao.class).<SRole>fetchInAsync(KName.ID, roleIds).map(roles -> {
+            return DB.on(SRoleDao.class).<SRole, String>fetchInAsync(KName.ID, roleIds).map(roles -> {
                 final List<MSRole> roleList = new ArrayList<>();
                 final BuilderOf<MSRole> builder = BuilderOf.of(BuilderOfMSRole::new);
                 roles.stream().filter(SRole::getActive).forEach(role -> {

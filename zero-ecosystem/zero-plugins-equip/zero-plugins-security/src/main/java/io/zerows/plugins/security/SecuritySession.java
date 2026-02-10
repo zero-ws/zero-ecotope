@@ -59,6 +59,19 @@ public class SecuritySession {
         return expiredAt.toSeconds();
     }
 
+    /**
+     * 此方法有三个位置会被调用
+     * <pre>
+     *     1. 401 过程中两处
+     *        - 带 Token 的认证处理
+     *        - 匿名模式的认证处理
+     *     2. 403 过程中执行（authorization -> true），启用授权功能后
+     * </pre>
+     *
+     * @param context   RoutingContext 对象，包含了当前请求的上下文信息
+     * @param recovered 从缓存中恢复的 User 对象，可能为 null
+     * @return 合法的 User 对象
+     */
     User authorizedUser(final RoutingContext context, final User recovered) {
         if (Objects.isNull(recovered)) {
             return null;
