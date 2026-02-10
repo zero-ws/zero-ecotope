@@ -1,4 +1,4 @@
-package io.zerows.extension.module.ambient.spi;
+package io.zerows.extension.module.ambient.boot;
 
 import io.r2mo.vertx.jooq.generate.configuration.TypeOfJsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;

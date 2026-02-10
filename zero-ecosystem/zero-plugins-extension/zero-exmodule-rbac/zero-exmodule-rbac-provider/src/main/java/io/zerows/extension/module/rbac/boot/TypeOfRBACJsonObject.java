@@ -1,4 +1,4 @@
-package io.zerows.extension.module.rbac.spi;
+package io.zerows.extension.module.rbac.boot;
 
 import io.r2mo.vertx.jooq.generate.configuration.TypeOfJsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SResource;
