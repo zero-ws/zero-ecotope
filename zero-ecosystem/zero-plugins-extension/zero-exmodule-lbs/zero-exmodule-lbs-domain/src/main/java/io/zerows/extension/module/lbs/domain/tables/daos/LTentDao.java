@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LTent;
 import io.zerows.extension.module.lbs.domain.tables.records.LTentRecord;
 
@@ -223,7 +224,7 @@ public class LTentDao extends AbstractVertxDAO<LTentRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LTent>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LTent>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(LTent.L_TENT.METADATA.in(values));
         }
 
@@ -231,7 +232,7 @@ public class LTentDao extends AbstractVertxDAO<LTentRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LTent>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LTent>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(LTent.L_TENT.METADATA.in(values),limit);
         }
 

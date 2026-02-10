@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILCountry;
 
 import java.time.LocalDateTime;
@@ -31,7 +32,7 @@ public class LCountry implements VertxPojo, ILCountry {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -74,7 +75,7 @@ public class LCountry implements VertxPojo, ILCountry {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -314,7 +315,7 @@ public class LCountry implements VertxPojo, ILCountry {
      * Getter for <code>ZDB.L_COUNTRY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -322,7 +323,7 @@ public class LCountry implements VertxPojo, ILCountry {
      * Setter for <code>ZDB.L_COUNTRY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LCountry setMetadata(String metadata) {
+    public LCountry setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

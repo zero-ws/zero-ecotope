@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILRegion;
 
 import java.time.LocalDateTime;
@@ -29,7 +30,7 @@ public class LRegion implements VertxPojo, ILRegion {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -68,7 +69,7 @@ public class LRegion implements VertxPojo, ILRegion {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -272,7 +273,7 @@ public class LRegion implements VertxPojo, ILRegion {
      * Getter for <code>ZDB.L_REGION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -280,7 +281,7 @@ public class LRegion implements VertxPojo, ILRegion {
      * Setter for <code>ZDB.L_REGION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LRegion setMetadata(String metadata) {
+    public LRegion setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

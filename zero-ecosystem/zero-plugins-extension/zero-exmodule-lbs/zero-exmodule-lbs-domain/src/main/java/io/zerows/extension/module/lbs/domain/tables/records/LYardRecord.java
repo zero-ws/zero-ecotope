@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LYard;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILYard;
 
@@ -197,7 +198,7 @@ public class LYardRecord extends UpdatableRecordImpl<LYardRecord> implements Ver
      * Setter for <code>ZDB.L_YARD.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LYardRecord setMetadata(String value) {
+    public LYardRecord setMetadata(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -206,8 +207,8 @@ public class LYardRecord extends UpdatableRecordImpl<LYardRecord> implements Ver
      * Getter for <code>ZDB.L_YARD.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(10);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(10);
     }
 
     /**
@@ -349,7 +350,7 @@ public class LYardRecord extends UpdatableRecordImpl<LYardRecord> implements Ver
     /**
      * Create a detached, initialised LYardRecord
      */
-    public LYardRecord(String id, String code, String locationId, String name, Integer order, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public LYardRecord(String id, String code, String locationId, String name, Integer order, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(LYard.L_YARD);
 
         setId(id);

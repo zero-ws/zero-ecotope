@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LLocation;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILLocation;
 
@@ -350,7 +351,7 @@ public class LLocationRecord extends UpdatableRecordImpl<LLocationRecord> implem
      * Setter for <code>ZDB.L_LOCATION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LLocationRecord setMetadata(String value) {
+    public LLocationRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -359,8 +360,8 @@ public class LLocationRecord extends UpdatableRecordImpl<LLocationRecord> implem
      * Getter for <code>ZDB.L_LOCATION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -511,7 +512,7 @@ public class LLocationRecord extends UpdatableRecordImpl<LLocationRecord> implem
     /**
      * Create a detached, initialised LLocationRecord
      */
-    public LLocationRecord(String id, String address, String city, String code, String country, String fullName, String name, String postal, String region, String regionId, String state, String street1, String street2, String street3, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public LLocationRecord(String id, String address, String city, String code, String country, String fullName, String name, String postal, String region, String regionId, String state, String street1, String street2, String street3, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(LLocation.L_LOCATION);
 
         setId(id);

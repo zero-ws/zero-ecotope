@@ -4,6 +4,8 @@
 package io.zerows.extension.module.lbs.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.Keys;
 import io.zerows.extension.module.lbs.domain.Zdb;
 import io.zerows.extension.module.lbs.domain.tables.records.LRegionRecord;
@@ -105,7 +107,7 @@ public class LRegion extends TableImpl<LRegionRecord> {
     /**
      * The column <code>ZDB.L_REGION.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<LRegionRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<LRegionRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.L_REGION.VERSION</code>. 「version」- 版本号

@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LCity;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILCity;
 
@@ -197,7 +198,7 @@ public class LCityRecord extends UpdatableRecordImpl<LCityRecord> implements Ver
      * Setter for <code>ZDB.L_CITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LCityRecord setMetadata(String value) {
+    public LCityRecord setMetadata(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -206,8 +207,8 @@ public class LCityRecord extends UpdatableRecordImpl<LCityRecord> implements Ver
      * Getter for <code>ZDB.L_CITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(10);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(10);
     }
 
     /**
@@ -349,7 +350,7 @@ public class LCityRecord extends UpdatableRecordImpl<LCityRecord> implements Ver
     /**
      * Create a detached, initialised LCityRecord
      */
-    public LCityRecord(String id, String code, String name, Integer order, String stateId, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public LCityRecord(String id, String code, String name, Integer order, String stateId, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(LCity.L_CITY);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LLocation;
 import io.zerows.extension.module.lbs.domain.tables.records.LLocationRecord;
 
@@ -310,7 +311,7 @@ public class LLocationDao extends AbstractVertxDAO<LLocationRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LLocation>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LLocation>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(LLocation.L_LOCATION.METADATA.in(values));
         }
 
@@ -318,7 +319,7 @@ public class LLocationDao extends AbstractVertxDAO<LLocationRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LLocation>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LLocation>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(LLocation.L_LOCATION.METADATA.in(values),limit);
         }
 
