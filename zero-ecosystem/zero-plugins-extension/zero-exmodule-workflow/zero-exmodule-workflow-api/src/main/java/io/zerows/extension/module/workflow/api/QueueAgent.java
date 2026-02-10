@@ -1,5 +1,6 @@
 package io.zerows.extension.module.workflow.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -24,16 +25,19 @@ public interface QueueAgent {
     @POST
     @Path("/up/flow-queue")
     @Address(HighWay.Queue.TASK_QUEUE)
+    @OpenApi
     JsonObject fetchQueue(@BodyParam JsonObject body);
 
     @POST
     @Path("/up/flow-history")
     @Address(HighWay.Queue.TICKET_HISTORY)
+    @OpenApi
     JsonObject fetchHistory(@BodyParam JsonObject body);
 
     @POST
     @Path("/up/flow-ticket")
     @Address(HighWay.Queue.TICKET_LINKAGE)
+    @OpenApi
     JsonObject searchLinkage(@BodyParam JsonObject body);
 
     /*
@@ -42,6 +46,7 @@ public interface QueueAgent {
     @GET
     @Path("/up/flow-definition/:code")
     @Address(HighWay.Flow.BY_CODE)
+    @OpenApi
     JsonObject fetchFlow(@PathParam(KName.CODE) String code);
 
     /*
@@ -52,16 +57,19 @@ public interface QueueAgent {
     @POST
     @Path("/up/flow-form/:pre")
     @Address(HighWay.Queue.TASK_FORM)
+    @OpenApi
     JsonObject fetchForm(@BodyParam JsonObject body,
                          @PathParam("pre") Boolean isPre);
 
     @GET
     @Path("/up/flow/:key")
     @Address(HighWay.Flow.BY_TODO)
+    @OpenApi
     JsonObject fetchTodo(@PathParam(KName.KEY) String key);
 
     @GET
     @Path("/up/flow-finished/:key")
     @Address(HighWay.Flow.BY_HISTORY)
+    @OpenApi
     JsonObject fetchHistory(@PathParam(KName.KEY) String key);
 }

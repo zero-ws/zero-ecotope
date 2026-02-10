@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -20,6 +21,7 @@ public interface EndTransAgent {
     @Path("/trans-proc/standard")
     @PUT
     @Address(Addr.Trans.END_TRANS)
+    @OpenApi
     JsonObject finishAsync(@BodyParam JsonObject body);
 
     /**
@@ -100,6 +102,7 @@ public interface EndTransAgent {
     @Path("/trans-proc/debt")
     @PUT
     @Address(Addr.Trans.END_DEBT)
+    @OpenApi
     JsonObject debtAsync(@BodyParam JsonObject body);
 
     /**
@@ -122,5 +125,6 @@ public interface EndTransAgent {
     @Path("/trans/:key")
     @GET
     @Address(Addr.Trans.FETCH_BY_KEY)
+    @OpenApi
     JsonObject fetchAsync(@PathParam(KName.KEY) String key);
 }

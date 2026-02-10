@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ui.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -32,6 +33,7 @@ public interface UiApi {
     @Path("/ui/page")
     @POST
     @Address(Addr.Page.FETCH_AMP)
+    @OpenApi
     JsonObject fetchPage(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
                          @BodyParam JsonObject body);
 
@@ -45,6 +47,7 @@ public interface UiApi {
     @Path("/ui/control")
     @POST
     @Address(Addr.Control.FETCH_BY_ID)
+    @OpenApi
     JsonObject fetchControl(@BodyParam JsonObject body);
 
     /*
@@ -56,6 +59,7 @@ public interface UiApi {
     @Path("/ui/ops")
     @POST
     @Address(Addr.Control.FETCH_OP)
+    @OpenApi
     JsonObject fetchOp(@BodyParam JsonObject body);
 
     /*
@@ -81,6 +85,7 @@ public interface UiApi {
     @Path("/ui/visitor/:identifier/:page")
     @POST
     @Address(Addr.Control.FETCH_BY_VISITOR)
+    @OpenApi
     JsonObject fetchVisitor(@PathParam(KName.Ui.PAGE) String page,
                             @PathParam(KName.IDENTIFIER) String identifier,
                             @BodyParam JsonObject params);
@@ -92,6 +97,7 @@ public interface UiApi {
     @Path("/ui/form/:code")
     @GET
     @Address(Addr.Control.FETCH_FORM_BY_CODE)
+    @OpenApi
     JsonObject fetchForm(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
                          @PathParam(KName.CODE) String name);
 
@@ -102,6 +108,7 @@ public interface UiApi {
     @Path("/ui/forms/:identifier")
     @GET
     @Address(Addr.Control.FETCH_FORM_BY_IDENTIFIER)
+    @OpenApi
     JsonArray fetchForms(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
                          @PathParam(KName.IDENTIFIER) String identifier);
 
@@ -112,6 +119,7 @@ public interface UiApi {
     @Path("/ui/lists/:identifier")
     @GET
     @Address(Addr.Control.FETCH_LIST_BY_IDENTIFIER)
+    @OpenApi
     JsonArray fetchLists(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
                          @PathParam(KName.IDENTIFIER) String identifier);
 
@@ -131,6 +139,7 @@ public interface UiApi {
     @Path("/ui/views/:id/:position")
     @GET
     @Address(Addr.Control.FETCH_LIST_QR_BY_CODE)
+    @OpenApi
     JsonArray fetchListQr(@PathParam(KName.ID) String id,
                           @PathParam(KName.POSITION) String position,
                           @QueryParam(KName.TYPE) String type,

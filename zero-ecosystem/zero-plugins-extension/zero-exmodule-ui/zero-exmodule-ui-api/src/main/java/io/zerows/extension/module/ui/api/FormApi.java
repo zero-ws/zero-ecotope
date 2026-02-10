@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ui.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -19,6 +20,7 @@ public interface FormApi {
     @Path("/ui-form/cascade/:key")
     @PUT
     @Address(Addr.Control.PUT_FORM_CASCADE)
+    @OpenApi
     JsonObject putFormCascade(@PathParam(KName.KEY) String key,
                               @BodyParam JsonObject body);
 
@@ -28,6 +30,7 @@ public interface FormApi {
     @Path("/ui-form/:key")
     @DELETE
     @Address(Addr.Control.DELETE_FORM)
+    @OpenApi
     Boolean deleteForm(@PathParam(KName.KEY) String key);
 
 }
