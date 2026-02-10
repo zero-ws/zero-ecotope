@@ -1,6 +1,7 @@
 package io.zerows.extension.module.ui.api;
 
 import io.r2mo.openapi.annotations.OpenApi;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -143,5 +144,7 @@ public interface UiApi {
     JsonArray fetchListQr(@PathParam(KName.ID) String id,
                           @PathParam(KName.POSITION) String position,
                           @QueryParam(KName.TYPE) String type,
+                          // ✅ 显式隐藏：告诉 Swagger 不要把这个当成 API 参数
+                          @Parameter(hidden = true)
                           @PointParam(KName.VIEW) KView view);
 }

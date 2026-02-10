@@ -8,9 +8,13 @@ import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
+import io.zerows.extension.module.rbac.common.ScConstant;
+import io.zerows.extension.module.rbac.component.authorization.Align;
+import io.zerows.extension.module.rbac.component.authorization.ScDetent;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
+import io.zerows.support.Fx;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,27 +48,21 @@ public class ScUser {
      * 3) LAZY
      * 4) INTERSECT
      */
-    @SuppressWarnings("all")
     private static Future<JsonObject> initRoles(final JsonObject profile, final JsonArray roles) {
-        log.info("[ XMOD ] ( RBAC ) 初始化用户角色信息，Roles = {0}", roles.encode());
-        final List futures = new ArrayList<>();
+        log.info("{} 初始化用户角色信息，Roles = {}", ScConstant.K_PREFIX, roles.encode());
+        final List<Future<ProfileRole>> futures = new ArrayList<>();
         roles.stream().filter(Objects::nonNull)
             .map(item -> (JsonObject) item)
             .map(ProfileRole::new)
             .map(ProfileRole::initAsync)
             .forEach(futures::add);
-        return null;
-        //        return Future.join(futures)
-        //            /* Composite Result */
-        //            .compose(FnZero::<ProfileRole>combineT)
-        //            /* User Process */
-        //            .compose(ScDetent.user(profile)::procAsync);
+        return Fx.combineT(futures)
+            .compose(ScDetent.user(profile)::procAsync);
     }
 
-    @SuppressWarnings("all")
     private static Future<JsonObject> initGroups(final JsonObject profile, final JsonArray groups) {
-        log.info("[ XMOD ] ( RBAC ) 初始化用户分组信息，Groups = {0}", groups.encode());
-        final List futures = new ArrayList();
+        log.info("{} 初始化用户分组信息，Groups = {}", ScConstant.K_PREFIX, groups.encode());
+        final List<Future<ProfileGroup>> futures = new ArrayList<>();
         groups.stream().filter(Objects::nonNull)
             .map(item -> (JsonObject) item)
             .map(ProfileGroup::new)
@@ -72,32 +70,41 @@ public class ScUser {
             .forEach(futures::add);
         final KRef parentHod = new KRef();
         final KRef childHod = new KRef();
-        return null;
-        //
-        //        return Future.join(futures).compose(FnZero::<ProfileGroup>combineT).compose(profiles -> Ux.future(profiles)
-        //            /* Group Direct Mode */
-        //            .compose(Align::flat)
-        //            .compose(ScDetent.group(profile)::procAsync)
-        //            .compose(nil -> Ux.future(profiles))
-        //
-        //            /* Group Parent Mode */
-        //            .compose(Align::parent)
-        //            .compose(parentHod::future)
-        //            /** Parent Only */
-        //            .compose(parents -> ScDetent.parent(profile, profiles).procAsync(parents))
-        //            /** Parent and Current */
-        //            .compose(nil -> ScDetent.inherit(profile, profiles).procAsync(parentHod.findRunning()))
-        //            .compose(nil -> Ux.future(profiles))
-        //
-        //            /* Group Child Mode */
-        //            .compose(Align::children)
-        //            .compose(childHod::future)
-        //            /** Child Only */
-        //            .compose(children -> ScDetent.children(profile, profiles).procAsync(children))
-        //            /** Child and Current */
-        //            .compose(nil -> ScDetent.extend(profile, profiles).procAsync(childHod.findRunning()))
-        //            .compose(nil -> Ux.future(profiles))
-        //        ).compose(nil -> Ux.future(profile));
+        return Fx.combineT(futures).compose(profiles -> Ux.future(profiles)
+            /* 直接组 Profile */
+            .compose(Align::flat)
+            .compose(ScDetent.group(profile)::procAsync)
+            .map(nil -> profiles)
+
+
+            /* 父类组 Profile */
+            .compose(Align::parent)
+            .compose(parentHod::future)
+            // 仅父组 Parent Only
+            .compose(parents -> ScDetent.parent(profile, profiles).procAsync(parents))
+            // 父组和当前组 Parent and Current
+            .compose(nil -> ScDetent.inherit(profile, profiles).procAsync(parentHod.get()))
+            .map(nil -> profiles)
+
+
+            /* 子组模式 */
+            .compose(Align::children)
+            .compose(childHod::future)
+            /* 仅父组 */
+            .compose(parents -> ScDetent.parent(profile, profiles).procAsync(parents))
+            // 父组和当前组 Parent and Current
+            .compose(nil -> ScDetent.inherit(profile, profiles).procAsync(childHod.get()))
+            .map(nil -> profiles)
+
+
+            /* 子组模式 */
+            .compose(Align::children)
+            .compose(childHod::future)
+            // 子组
+            .compose(children -> ScDetent.children(profile, profiles).procAsync(children))
+            // 子组和当前组
+            .compose(nil -> ScDetent.extend(profile, profiles).procAsync(childHod.get()))
+        ).map(nil -> profile);
     }
 
     // ------------------------- Initialized Method ------------------------
@@ -140,18 +147,19 @@ public class ScUser {
      *      }
      * }
      */
-    public static Future<ScUser> login(final JsonObject data) {
-        final String habitus = data.getString(KName.HABITUS);
+    public static Future<ScUser> initProfile(final User logged) {
+        final JsonObject userData = logged.principal();
+        final String habitus = userData.getString(KName.HABITUS);
         return Ux.future(CC_USER.pick(() -> new ScUser(habitus), habitus)).compose(user -> {
-            final JsonObject stored = data.copy();
+            final JsonObject stored = userData.copy();
             stored.remove(KName.HABITUS);
             final String userId = stored.getString(KName.USER);
             return user.user(userId).set(stored);        // Start Async
         }).compose(user -> user.profile()
             // Role Profile initialized
-            .compose(profile -> initRoles(profile, data.getJsonArray(KName.ROLE)))
+            .compose(profile -> initRoles(profile, userData.getJsonArray(KName.ROLE)))
             // Group Profile initialized
-            .compose(profile -> initGroups(profile, data.getJsonArray(KName.GROUP)))
+            .compose(profile -> initGroups(profile, userData.getJsonArray(KName.GROUP)))
             // Stored
             .compose(user::profile)
             // Report

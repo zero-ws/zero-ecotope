@@ -199,11 +199,11 @@ class _Um extends _Key {
     }
 
     public static Future<JsonObject> umUser(final JsonObject input, final JsonObject config) {
-        return KeUser.umUser(input, config);
+        return KeCache.umUser(input, config);
     }
 
     public static Future<JsonObject> umUser(final JsonObject input) {
         final JsonObject config = Ut.valueJObject(input, KName.__.USER);
-        return KeUser.umUser(input, config);
+        return KeCache.umUser(input, config);
     }
 }
