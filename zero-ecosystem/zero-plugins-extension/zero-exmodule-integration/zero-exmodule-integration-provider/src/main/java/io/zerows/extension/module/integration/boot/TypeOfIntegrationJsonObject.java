@@ -1,7 +1,6 @@
 package io.zerows.extension.module.integration.boot;
 
 import io.r2mo.vertx.jooq.generate.configuration.TypeOfJsonObject;
-import io.zerows.extension.module.integration.domain.tables.IDirectory;
 import io.zerows.extension.module.integration.domain.tables.IIntegration;
 import io.zerows.extension.module.integration.domain.tables.IPortfolio;
 
@@ -13,11 +12,6 @@ public class TypeOfIntegrationJsonObject extends TypeOfJsonObject {
     @Override
     protected List<Map<String, String>> regexMeta() {
         return List.of(
-            // IDirectory
-            Map.of(
-                IDirectory.I_DIRECTORY.VISIT_GROUP.getName(), IDirectory.I_DIRECTORY.getName(),
-                IDirectory.I_DIRECTORY.VISIT_ROLE.getName(), IDirectory.I_DIRECTORY.getName()
-            ),
             // IIntegration
             Map.of(
                 IIntegration.I_INTEGRATION.OPTIONS.getName(), IIntegration.I_INTEGRATION.getName()

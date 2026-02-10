@@ -284,7 +284,7 @@ class IsDir {
                 final JsonArray visitMode = Ut.toJArray(parent.getVisitMode());
                 if (!visitMode.contains(KName.Attachment.W)) {
                     visitMode.add(KName.Attachment.W);
-                    created.setVisitMode(visitMode.encode());
+                    created.setVisitMode(visitMode);
                 }
                 if (visitMode.contains(KName.Attachment.W)) {
                     final String componentCls = parent.getRunComponent();

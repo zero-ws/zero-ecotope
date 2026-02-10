@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
@@ -139,34 +140,34 @@ public interface IIDirectory extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
-    public IIDirectory setVisitGroup(JsonObject value);
+    public IIDirectory setVisitGroup(JsonArray value);
 
     /**
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
-    public JsonObject getVisitGroup();
+    public JsonArray getVisitGroup();
 
     /**
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_MODE</code>. 「visitMode」 - 目录模式：只读
      * / 可写，以后扩展为其他
      */
-    public IIDirectory setVisitMode(String value);
+    public IIDirectory setVisitMode(JsonArray value);
 
     /**
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_MODE</code>. 「visitMode」 - 目录模式：只读
      * / 可写，以后扩展为其他
      */
-    public String getVisitMode();
+    public JsonArray getVisitMode();
 
     /**
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
-    public IIDirectory setVisitRole(JsonObject value);
+    public IIDirectory setVisitRole(JsonArray value);
 
     /**
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
-    public JsonObject getVisitRole();
+    public JsonArray getVisitRole();
 
     /**
      * Setter for <code>ZDB.I_DIRECTORY.TYPE</code>. 「type」- 类型
@@ -327,9 +328,9 @@ public interface IIDirectory extends VertxPojo, Serializable {
                 setOrThrow(this::setStorePath,json::getString,"STORE_PATH","java.lang.String");
                 setOrThrow(this::setVisit,json::getBoolean,"VISIT","java.lang.Boolean");
                 setOrThrow(this::setVisitComponent,json::getString,"VISIT_COMPONENT","java.lang.String");
-                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VISIT_GROUP!
-                setOrThrow(this::setVisitMode,json::getString,"VISIT_MODE","java.lang.String");
-                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VISIT_ROLE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column VISIT_GROUP!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column VISIT_MODE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column VISIT_ROLE!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setCategory,json::getString,"CATEGORY","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -361,9 +362,9 @@ public interface IIDirectory extends VertxPojo, Serializable {
                 json.put("STORE_PATH",getStorePath());
                 json.put("VISIT",getVisit());
                 json.put("VISIT_COMPONENT",getVisitComponent());
-                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VISIT_GROUP!
-                json.put("VISIT_MODE",getVisitMode());
-                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VISIT_ROLE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column VISIT_GROUP!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column VISIT_MODE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column VISIT_ROLE!
                 json.put("TYPE",getType());
                 json.put("CATEGORY",getCategory());
                 json.put("SIGMA",getSigma());

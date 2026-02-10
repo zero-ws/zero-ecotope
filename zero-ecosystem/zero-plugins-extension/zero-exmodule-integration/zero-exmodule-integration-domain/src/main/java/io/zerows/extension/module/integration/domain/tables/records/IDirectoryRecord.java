@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.IDirectory;
 import io.zerows.extension.module.integration.domain.tables.interfaces.IIDirectory;
@@ -223,7 +224,7 @@ public class IDirectoryRecord extends UpdatableRecordImpl<IDirectoryRecord> impl
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
     @Override
-    public IDirectoryRecord setVisitGroup(JsonObject value) {
+    public IDirectoryRecord setVisitGroup(JsonArray value) {
         set(11, value);
         return this;
     }
@@ -232,8 +233,8 @@ public class IDirectoryRecord extends UpdatableRecordImpl<IDirectoryRecord> impl
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
     @Override
-    public JsonObject getVisitGroup() {
-        return (JsonObject) get(11);
+    public JsonArray getVisitGroup() {
+        return (JsonArray) get(11);
     }
 
     /**
@@ -241,7 +242,7 @@ public class IDirectoryRecord extends UpdatableRecordImpl<IDirectoryRecord> impl
      * / 可写，以后扩展为其他
      */
     @Override
-    public IDirectoryRecord setVisitMode(String value) {
+    public IDirectoryRecord setVisitMode(JsonArray value) {
         set(12, value);
         return this;
     }
@@ -251,15 +252,15 @@ public class IDirectoryRecord extends UpdatableRecordImpl<IDirectoryRecord> impl
      * / 可写，以后扩展为其他
      */
     @Override
-    public String getVisitMode() {
-        return (String) get(12);
+    public JsonArray getVisitMode() {
+        return (JsonArray) get(12);
     }
 
     /**
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
     @Override
-    public IDirectoryRecord setVisitRole(JsonObject value) {
+    public IDirectoryRecord setVisitRole(JsonArray value) {
         set(13, value);
         return this;
     }
@@ -268,8 +269,8 @@ public class IDirectoryRecord extends UpdatableRecordImpl<IDirectoryRecord> impl
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
     @Override
-    public JsonObject getVisitRole() {
-        return (JsonObject) get(13);
+    public JsonArray getVisitRole() {
+        return (JsonArray) get(13);
     }
 
     /**
@@ -558,7 +559,7 @@ public class IDirectoryRecord extends UpdatableRecordImpl<IDirectoryRecord> impl
     /**
      * Create a detached, initialised IDirectoryRecord
      */
-    public IDirectoryRecord(String id, String code, String integrationId, String linkedPath, String name, String owner, String parentId, String runComponent, String storePath, Boolean visit, String visitComponent, JsonObject visitGroup, String visitMode, JsonObject visitRole, String type, String category, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IDirectoryRecord(String id, String code, String integrationId, String linkedPath, String name, String owner, String parentId, String runComponent, String storePath, Boolean visit, String visitComponent, JsonArray visitGroup, JsonArray visitMode, JsonArray visitRole, String type, String category, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IDirectory.I_DIRECTORY);
 
         setId(id);

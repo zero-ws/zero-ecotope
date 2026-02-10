@@ -120,9 +120,9 @@ class IsStore {
                      * -- visitRole             可访问角色
                      * -- visitGroup            可访问组
                      */
-                    json.put(KName.VISIT_MODE, Ut.toJArray(store.getVisitMode()));
-                    json.put(KName.VISIT_ROLE, Ut.toJArray(store.getVisitRole()));
-                    json.put(KName.VISIT_GROUP, Ut.toJArray(store.getVisitGroup()));
+                    json.put(KName.VISIT_MODE, store.getVisitMode());
+                    json.put(KName.VISIT_ROLE, store.getVisitRole());
+                    json.put(KName.VISIT_GROUP, store.getVisitGroup());
                 }
                 queueRun.add(json);
             } else {

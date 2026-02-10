@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.interfaces.IIDirectory;
 
@@ -31,9 +32,9 @@ public class IDirectory implements VertxPojo, IIDirectory {
     private String storePath;
     private Boolean visit;
     private String visitComponent;
-    private JsonObject visitGroup;
-    private String visitMode;
-    private JsonObject visitRole;
+    private JsonArray visitGroup;
+    private JsonArray visitMode;
+    private JsonArray visitRole;
     private String type;
     private String category;
     private String sigma;
@@ -92,9 +93,9 @@ public class IDirectory implements VertxPojo, IIDirectory {
         String storePath,
         Boolean visit,
         String visitComponent,
-        JsonObject visitGroup,
-        String visitMode,
-        JsonObject visitRole,
+        JsonArray visitGroup,
+        JsonArray visitMode,
+        JsonArray visitRole,
         String type,
         String category,
         String sigma,
@@ -342,7 +343,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
     @Override
-    public JsonObject getVisitGroup() {
+    public JsonArray getVisitGroup() {
         return this.visitGroup;
     }
 
@@ -350,7 +351,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
     @Override
-    public IDirectory setVisitGroup(JsonObject visitGroup) {
+    public IDirectory setVisitGroup(JsonArray visitGroup) {
         this.visitGroup = visitGroup;
         return this;
     }
@@ -360,7 +361,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * / 可写，以后扩展为其他
      */
     @Override
-    public String getVisitMode() {
+    public JsonArray getVisitMode() {
         return this.visitMode;
     }
 
@@ -369,7 +370,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * / 可写，以后扩展为其他
      */
     @Override
-    public IDirectory setVisitMode(String visitMode) {
+    public IDirectory setVisitMode(JsonArray visitMode) {
         this.visitMode = visitMode;
         return this;
     }
@@ -378,7 +379,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
     @Override
-    public JsonObject getVisitRole() {
+    public JsonArray getVisitRole() {
         return this.visitRole;
     }
 
@@ -386,7 +387,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
     @Override
-    public IDirectory setVisitRole(JsonObject visitRole) {
+    public IDirectory setVisitRole(JsonArray visitRole) {
         this.visitRole = visitRole;
         return this;
     }
