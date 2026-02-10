@@ -64,15 +64,6 @@ public class KDictConfig implements Serializable {
     private final ConcurrentMap<String, KDictUse> consumer = new ConcurrentHashMap<>();
     private Class<?> component;
 
-    public KDictConfig(final String literal) {
-        if (UtBase.isJArray(literal)) {
-            final JsonArray parameters = new JsonArray(literal);
-            UtBase.itJArray(parameters)
-                .map(Source::new)
-                .forEach(this.source::add);
-        }
-    }
-
     public KDictConfig(final JsonArray input) {
         if (Objects.nonNull(input)) {
             UtBase.itJArray(input)

@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MAttribute;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMAttribute;
 
@@ -304,7 +305,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 数据集配置
      */
     @Override
-    public MAttributeRecord setSourceConfig(String value) {
+    public MAttributeRecord setSourceConfig(JsonObject value) {
         set(16, value);
         return this;
     }
@@ -314,8 +315,8 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 数据集配置
      */
     @Override
-    public String getSourceConfig() {
-        return (String) get(16);
+    public JsonObject getSourceConfig() {
+        return (JsonObject) get(16);
     }
 
     /**
@@ -323,7 +324,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 「sourceExternal」- 外部配置信息
      */
     @Override
-    public MAttributeRecord setSourceExternal(String value) {
+    public MAttributeRecord setSourceExternal(JsonObject value) {
         set(17, value);
         return this;
     }
@@ -333,8 +334,8 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 「sourceExternal」- 外部配置信息
      */
     @Override
-    public String getSourceExternal() {
-        return (String) get(17);
+    public JsonObject getSourceExternal() {
+        return (JsonObject) get(17);
     }
 
     /**
@@ -359,7 +360,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 「sourceReference」- 引用配置信息
      */
     @Override
-    public MAttributeRecord setSourceReference(String value) {
+    public MAttributeRecord setSourceReference(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -369,8 +370,8 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * 「sourceReference」- 引用配置信息
      */
     @Override
-    public String getSourceReference() {
-        return (String) get(19);
+    public JsonObject getSourceReference() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -496,7 +497,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Setter for <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MAttributeRecord setMetadata(String value) {
+    public MAttributeRecord setMetadata(JsonObject value) {
         set(27, value);
         return this;
     }
@@ -505,8 +506,8 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
      * Getter for <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(27);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(27);
     }
 
     /**
@@ -665,7 +666,7 @@ public class MAttributeRecord extends UpdatableRecordImpl<MAttributeRecord> impl
     /**
      * Create a detached, initialised MAttributeRecord
      */
-    public MAttributeRecord(String id, String alias, String comments, String expression, String inComponent, Boolean isArray, Boolean isConfirm, Boolean isLock, Boolean isRefer, Boolean isSyncIn, Boolean isSyncOut, Boolean isTrack, String name, String normalize, String outComponent, String source, String sourceConfig, String sourceExternal, String sourceField, String sourceReference, String type, String modelId, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MAttributeRecord(String id, String alias, String comments, String expression, String inComponent, Boolean isArray, Boolean isConfirm, Boolean isLock, Boolean isRefer, Boolean isSyncIn, Boolean isSyncOut, Boolean isTrack, String name, String normalize, String outComponent, String source, JsonObject sourceConfig, JsonObject sourceExternal, String sourceField, JsonObject sourceReference, String type, String modelId, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MAttribute.M_ATTRIBUTE);
 
         setId(id);

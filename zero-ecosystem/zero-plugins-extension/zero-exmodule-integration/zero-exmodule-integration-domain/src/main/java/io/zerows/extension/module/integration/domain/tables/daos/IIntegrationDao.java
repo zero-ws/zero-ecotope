@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.IIntegration;
 import io.zerows.extension.module.integration.domain.tables.records.IIntegrationRecord;
 
@@ -115,7 +116,7 @@ public class IIntegrationDao extends AbstractVertxDAO<IIntegrationRecord, io.zer
         /**
      * Find records that have <code>OPTIONS IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IIntegration>> findManyByOptions(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IIntegration>> findManyByOptions(Collection<JsonObject> values) {
                 return findManyByCondition(IIntegration.I_INTEGRATION.OPTIONS.in(values));
         }
 
@@ -123,7 +124,7 @@ public class IIntegrationDao extends AbstractVertxDAO<IIntegrationRecord, io.zer
      * Find records that have <code>OPTIONS IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IIntegration>> findManyByOptions(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IIntegration>> findManyByOptions(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IIntegration.I_INTEGRATION.OPTIONS.in(values),limit);
         }
 
@@ -403,7 +404,7 @@ public class IIntegrationDao extends AbstractVertxDAO<IIntegrationRecord, io.zer
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IIntegration>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IIntegration>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(IIntegration.I_INTEGRATION.METADATA.in(values));
         }
 
@@ -411,7 +412,7 @@ public class IIntegrationDao extends AbstractVertxDAO<IIntegrationRecord, io.zer
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IIntegration>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IIntegration>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IIntegration.I_INTEGRATION.METADATA.in(values),limit);
         }
 

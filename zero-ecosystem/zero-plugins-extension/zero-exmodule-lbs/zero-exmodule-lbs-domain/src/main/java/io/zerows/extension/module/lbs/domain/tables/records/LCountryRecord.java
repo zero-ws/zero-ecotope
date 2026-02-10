@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LCountry;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILCountry;
 
@@ -231,7 +232,7 @@ public class LCountryRecord extends UpdatableRecordImpl<LCountryRecord> implemen
      * Setter for <code>ZDB.L_COUNTRY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LCountryRecord setMetadata(String value) {
+    public LCountryRecord setMetadata(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -240,8 +241,8 @@ public class LCountryRecord extends UpdatableRecordImpl<LCountryRecord> implemen
      * Getter for <code>ZDB.L_COUNTRY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(12);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -385,7 +386,7 @@ public class LCountryRecord extends UpdatableRecordImpl<LCountryRecord> implemen
     /**
      * Create a detached, initialised LCountryRecord
      */
-    public LCountryRecord(String id, String code, String currency, String flag, String name, Integer order, String phonePrefix, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public LCountryRecord(String id, String code, String currency, String flag, String name, Integer order, String phonePrefix, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(LCountry.L_COUNTRY);
 
         setId(id);

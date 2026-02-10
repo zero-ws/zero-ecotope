@@ -4,6 +4,10 @@
 package io.zerows.extension.module.mbsecore.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.Indexes;
 import io.zerows.extension.module.mbsecore.domain.Keys;
 import io.zerows.extension.module.mbsecore.domain.Zdb;
@@ -65,9 +69,9 @@ public class MIndex extends TableImpl<MIndexRecord> {
     public final TableField<MIndexRecord, Boolean> CLUSTERED = createField(DSL.name("CLUSTERED"), SQLDataType.BIT, this, "「clustered」- 是否聚集索引");
 
     /**
-     * The column <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArra
+     * The column <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArray
      */
-    public final TableField<MIndexRecord, String> COLUMNS = createField(DSL.name("COLUMNS"), SQLDataType.CLOB(65535), this, "「columns」- JsonArra");
+    public final TableField<MIndexRecord, JsonArray> COLUMNS = createField(DSL.name("COLUMNS"), SQLDataType.CLOB(65535), this, "「columns」- JsonArray", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.M_INDEX.COMMENTS</code>. 「comments」- 当前索引的描述信息
@@ -117,7 +121,7 @@ public class MIndex extends TableImpl<MIndexRecord> {
     /**
      * The column <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MIndexRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MIndexRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_INDEX.VERSION</code>. 「version」- 版本号

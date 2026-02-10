@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LState;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILState;
 
@@ -214,7 +215,7 @@ public class LStateRecord extends UpdatableRecordImpl<LStateRecord> implements V
      * Setter for <code>ZDB.L_STATE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LStateRecord setMetadata(String value) {
+    public LStateRecord setMetadata(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -223,8 +224,8 @@ public class LStateRecord extends UpdatableRecordImpl<LStateRecord> implements V
      * Getter for <code>ZDB.L_STATE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(11);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -367,7 +368,7 @@ public class LStateRecord extends UpdatableRecordImpl<LStateRecord> implements V
     /**
      * Create a detached, initialised LStateRecord
      */
-    public LStateRecord(String id, String alias, String code, String countryId, String name, Integer order, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public LStateRecord(String id, String alias, String code, String countryId, String name, Integer order, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(LState.L_STATE);
 
         setId(id);

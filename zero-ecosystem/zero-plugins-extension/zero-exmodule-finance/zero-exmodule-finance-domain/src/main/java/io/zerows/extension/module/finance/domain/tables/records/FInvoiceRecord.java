@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FInvoice;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFInvoice;
 
@@ -510,7 +511,7 @@ public class FInvoiceRecord extends UpdatableRecordImpl<FInvoiceRecord> implemen
      * Setter for <code>ZDB.F_INVOICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FInvoiceRecord setMetadata(String value) {
+    public FInvoiceRecord setMetadata(JsonObject value) {
         set(28, value);
         return this;
     }
@@ -519,8 +520,8 @@ public class FInvoiceRecord extends UpdatableRecordImpl<FInvoiceRecord> implemen
      * Getter for <code>ZDB.F_INVOICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(28);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(28);
     }
 
     /**
@@ -680,7 +681,7 @@ public class FInvoiceRecord extends UpdatableRecordImpl<FInvoiceRecord> implemen
     /**
      * Create a detached, initialised FInvoiceRecord
      */
-    public FInvoiceRecord(String id, BigDecimal amount, String code, String comment, String descBank, String descCompany, String descLocation, String descUser, String invoiceNumber, String invoiceSerial, String invoiceTitle, String name, String nameBilling, String nameReceipt, String nameRecheck, String nameSelling, String orderId, Boolean personal, String tin, String tinName, String type, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FInvoiceRecord(String id, BigDecimal amount, String code, String comment, String descBank, String descCompany, String descLocation, String descUser, String invoiceNumber, String invoiceSerial, String invoiceTitle, String name, String nameBilling, String nameReceipt, String nameRecheck, String nameSelling, String orderId, Boolean personal, String tin, String tinName, String type, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FInvoice.F_INVOICE);
 
         setId(id);

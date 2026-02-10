@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.ITplTicket;
 
 import java.time.LocalDateTime;
@@ -24,10 +25,10 @@ public class TplTicket implements VertxPojo, ITplTicket {
     private String description;
     private String name;
     private String recordComponent;
-    private String recordJson;
+    private JsonObject recordJson;
     private Boolean system;
     private String uiComponent;
-    private String uiConfig;
+    private JsonObject uiConfig;
     private String type;
     private String status;
     private String modelId;
@@ -38,7 +39,7 @@ public class TplTicket implements VertxPojo, ITplTicket {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -81,10 +82,10 @@ public class TplTicket implements VertxPojo, ITplTicket {
         String description,
         String name,
         String recordComponent,
-        String recordJson,
+        JsonObject recordJson,
         Boolean system,
         String uiComponent,
-        String uiConfig,
+        JsonObject uiConfig,
         String type,
         String status,
         String modelId,
@@ -95,7 +96,7 @@ public class TplTicket implements VertxPojo, ITplTicket {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -226,7 +227,7 @@ public class TplTicket implements VertxPojo, ITplTicket {
      * 上一次的记录内容
      */
     @Override
-    public String getRecordJson() {
+    public JsonObject getRecordJson() {
         return this.recordJson;
     }
 
@@ -235,7 +236,7 @@ public class TplTicket implements VertxPojo, ITplTicket {
      * 上一次的记录内容
      */
     @Override
-    public TplTicket setRecordJson(String recordJson) {
+    public TplTicket setRecordJson(JsonObject recordJson) {
         this.recordJson = recordJson;
         return this;
     }
@@ -280,7 +281,7 @@ public class TplTicket implements VertxPojo, ITplTicket {
      * Getter for <code>ZDB.TPL_TICKET.UI_CONFIG</code>. 「uiConfig」- UI的配置
      */
     @Override
-    public String getUiConfig() {
+    public JsonObject getUiConfig() {
         return this.uiConfig;
     }
 
@@ -288,7 +289,7 @@ public class TplTicket implements VertxPojo, ITplTicket {
      * Setter for <code>ZDB.TPL_TICKET.UI_CONFIG</code>. 「uiConfig」- UI的配置
      */
     @Override
-    public TplTicket setUiConfig(String uiConfig) {
+    public TplTicket setUiConfig(JsonObject uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -469,7 +470,7 @@ public class TplTicket implements VertxPojo, ITplTicket {
      * Getter for <code>ZDB.TPL_TICKET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -477,7 +478,7 @@ public class TplTicket implements VertxPojo, ITplTicket {
      * Setter for <code>ZDB.TPL_TICKET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public TplTicket setMetadata(String metadata) {
+    public TplTicket setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

@@ -4,7 +4,9 @@
 package io.zerows.extension.module.rbac.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
 import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.Keys;
 import io.zerows.extension.module.rbac.domain.Zdb;
@@ -62,7 +64,7 @@ public class SView extends TableImpl<SViewRecord> {
     /**
      * The column <code>ZDB.S_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
-    public final TableField<SViewRecord, String> CRITERIA = createField(DSL.name("CRITERIA"), SQLDataType.CLOB(65535), this, "「criteria」- 该资源的行查询");
+    public final TableField<SViewRecord, JsonObject> CRITERIA = createField(DSL.name("CRITERIA"), SQLDataType.CLOB(65535), this, "「criteria」- 该资源的行查询", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_VIEW.NAME</code>. 「name」- 名称
@@ -87,7 +89,7 @@ public class SView extends TableImpl<SViewRecord> {
     /**
      * The column <code>ZDB.S_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
-    public final TableField<SViewRecord, String> PROJECTION = createField(DSL.name("PROJECTION"), SQLDataType.CLOB(65535), this, "「projection」- 该资源的列定义");
+    public final TableField<SViewRecord, JsonArray> PROJECTION = createField(DSL.name("PROJECTION"), SQLDataType.CLOB(65535), this, "「projection」- 该资源的列定义", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.S_VIEW.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
@@ -97,7 +99,7 @@ public class SView extends TableImpl<SViewRecord> {
     /**
      * The column <code>ZDB.S_VIEW.ROWS</code>. 「rows」- 该资源针对保存
      */
-    public final TableField<SViewRecord, String> ROWS = createField(DSL.name("ROWS"), SQLDataType.CLOB(65535), this, "「rows」- 该资源针对保存");
+    public final TableField<SViewRecord, JsonObject> ROWS = createField(DSL.name("ROWS"), SQLDataType.CLOB(65535), this, "「rows」- 该资源针对保存", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_VIEW.TITLE</code>. 「title」- 标题

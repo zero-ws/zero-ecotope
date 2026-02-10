@@ -4,6 +4,8 @@
 package io.zerows.extension.module.report.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.Keys;
 import io.zerows.extension.module.report.domain.Zdb;
 import io.zerows.extension.module.report.domain.tables.records.KpFeatureRecord;
@@ -66,7 +68,7 @@ public class KpFeature extends TableImpl<KpFeatureRecord> {
     /**
      * The column <code>ZDB.KP_FEATURE.IN_CONFIG</code>. 「inConfig」- 特殊输出配置
      */
-    public final TableField<KpFeatureRecord, String> IN_CONFIG = createField(DSL.name("IN_CONFIG"), SQLDataType.CLOB, this, "「inConfig」- 特殊输出配置");
+    public final TableField<KpFeatureRecord, JsonObject> IN_CONFIG = createField(DSL.name("IN_CONFIG"), SQLDataType.CLOB, this, "「inConfig」- 特殊输出配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_FEATURE.NAME</code>. 「name」- 名称
@@ -82,7 +84,7 @@ public class KpFeature extends TableImpl<KpFeatureRecord> {
     /**
      * The column <code>ZDB.KP_FEATURE.OUT_CONFIG</code>. 「outConfig」- 特殊输出配置
      */
-    public final TableField<KpFeatureRecord, String> OUT_CONFIG = createField(DSL.name("OUT_CONFIG"), SQLDataType.CLOB, this, "「outConfig」- 特殊输出配置");
+    public final TableField<KpFeatureRecord, JsonObject> OUT_CONFIG = createField(DSL.name("OUT_CONFIG"), SQLDataType.CLOB, this, "「outConfig」- 特殊输出配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_FEATURE.REPORT_ID</code>. 「reportId」- 关联报表ID
@@ -92,7 +94,7 @@ public class KpFeature extends TableImpl<KpFeatureRecord> {
     /**
      * The column <code>ZDB.KP_FEATURE.VALUE_CONFIG</code>. 「valueConfig」- 特征配置
      */
-    public final TableField<KpFeatureRecord, String> VALUE_CONFIG = createField(DSL.name("VALUE_CONFIG"), SQLDataType.CLOB, this, "「valueConfig」- 特征配置");
+    public final TableField<KpFeatureRecord, JsonObject> VALUE_CONFIG = createField(DSL.name("VALUE_CONFIG"), SQLDataType.CLOB, this, "「valueConfig」- 特征配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_FEATURE.VALUE_DISPLAY</code>. 「valueDisplay」-
@@ -143,7 +145,7 @@ public class KpFeature extends TableImpl<KpFeatureRecord> {
     /**
      * The column <code>ZDB.KP_FEATURE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<KpFeatureRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<KpFeatureRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_FEATURE.VERSION</code>. 「version」- 版本号

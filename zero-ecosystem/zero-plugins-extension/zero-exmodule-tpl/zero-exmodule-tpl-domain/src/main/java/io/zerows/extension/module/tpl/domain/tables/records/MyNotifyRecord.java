@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyNotify;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyNotify;
 
@@ -44,7 +45,7 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
      * Setter for <code>ZDB.MY_NOTIFY.CONFIG_EMAIL</code>. 「configEmail」- 邮件配置
      */
     @Override
-    public MyNotifyRecord setConfigEmail(String value) {
+    public MyNotifyRecord setConfigEmail(JsonObject value) {
         set(1, value);
         return this;
     }
@@ -53,8 +54,8 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
      * Getter for <code>ZDB.MY_NOTIFY.CONFIG_EMAIL</code>. 「configEmail」- 邮件配置
      */
     @Override
-    public String getConfigEmail() {
-        return (String) get(1);
+    public JsonObject getConfigEmail() {
+        return (JsonObject) get(1);
     }
 
     /**
@@ -62,7 +63,7 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
      * 站内信配置
      */
     @Override
-    public MyNotifyRecord setConfigInternal(String value) {
+    public MyNotifyRecord setConfigInternal(JsonObject value) {
         set(2, value);
         return this;
     }
@@ -72,15 +73,15 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
      * 站内信配置
      */
     @Override
-    public String getConfigInternal() {
-        return (String) get(2);
+    public JsonObject getConfigInternal() {
+        return (JsonObject) get(2);
     }
 
     /**
      * Setter for <code>ZDB.MY_NOTIFY.CONFIG_SMS</code>. 「configSms」- 短信配置
      */
     @Override
-    public MyNotifyRecord setConfigSms(String value) {
+    public MyNotifyRecord setConfigSms(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -89,8 +90,8 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
      * Getter for <code>ZDB.MY_NOTIFY.CONFIG_SMS</code>. 「configSms」- 短信配置
      */
     @Override
-    public String getConfigSms() {
-        return (String) get(3);
+    public JsonObject getConfigSms() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -216,7 +217,7 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
      * Setter for <code>ZDB.MY_NOTIFY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MyNotifyRecord setMetadata(String value) {
+    public MyNotifyRecord setMetadata(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -225,8 +226,8 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
      * Getter for <code>ZDB.MY_NOTIFY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(11);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -369,7 +370,7 @@ public class MyNotifyRecord extends UpdatableRecordImpl<MyNotifyRecord> implemen
     /**
      * Create a detached, initialised MyNotifyRecord
      */
-    public MyNotifyRecord(String id, String configEmail, String configInternal, String configSms, String ownerId, String ownerType, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MyNotifyRecord(String id, JsonObject configEmail, JsonObject configInternal, JsonObject configSms, String ownerId, String ownerType, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MyNotify.MY_NOTIFY);
 
         setId(id);

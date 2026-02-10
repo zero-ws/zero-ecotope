@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.IMessage;
 import io.zerows.extension.module.integration.domain.tables.interfaces.IIMessage;
 
@@ -299,7 +300,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Setter for <code>ZDB.I_MESSAGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IMessageRecord setMetadata(String value) {
+    public IMessageRecord setMetadata(JsonObject value) {
         set(16, value);
         return this;
     }
@@ -308,8 +309,8 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
      * Getter for <code>ZDB.I_MESSAGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(16);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(16);
     }
 
     /**
@@ -457,7 +458,7 @@ public class IMessageRecord extends UpdatableRecordImpl<IMessageRecord> implemen
     /**
      * Create a detached, initialised IMessageRecord
      */
-    public IMessageRecord(String id, String code, String content, String name, String sendAt, String sendBy, String sendFrom, String sendTo, String subject, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IMessageRecord(String id, String code, String content, String name, String sendAt, String sendBy, String sendFrom, String sendTo, String subject, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IMessage.I_MESSAGE);
 
         setId(id);

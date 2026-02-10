@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFSubject;
 
 import java.time.LocalDateTime;
@@ -34,7 +35,7 @@ public class FSubject implements VertxPojo, IFSubject {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -83,7 +84,7 @@ public class FSubject implements VertxPojo, IFSubject {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -379,7 +380,7 @@ public class FSubject implements VertxPojo, IFSubject {
      * Getter for <code>ZDB.F_SUBJECT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -387,7 +388,7 @@ public class FSubject implements VertxPojo, IFSubject {
      * Setter for <code>ZDB.F_SUBJECT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FSubject setMetadata(String metadata) {
+    public FSubject setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

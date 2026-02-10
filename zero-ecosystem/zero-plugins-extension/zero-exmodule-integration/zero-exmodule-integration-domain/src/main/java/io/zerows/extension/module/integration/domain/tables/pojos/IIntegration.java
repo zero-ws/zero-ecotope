@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.interfaces.IIIntegration;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
     private String ipV4;
     private String ipV6;
     private String name;
-    private String options;
+    private JsonObject options;
     private String osAuthorize;
     private String osKey;
     private String osSecret;
@@ -44,7 +45,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -94,7 +95,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
         String ipV4,
         String ipV6,
         String name,
-        String options,
+        JsonObject options,
         String osAuthorize,
         String osKey,
         String osSecret,
@@ -113,7 +114,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -264,7 +265,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Getter for <code>ZDB.I_INTEGRATION.OPTIONS</code>. 「options」 - 集成相关配置
      */
     @Override
-    public String getOptions() {
+    public JsonObject getOptions() {
         return this.options;
     }
 
@@ -272,7 +273,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.OPTIONS</code>. 「options」 - 集成相关配置
      */
     @Override
-    public IIntegration setOptions(String options) {
+    public IIntegration setOptions(JsonObject options) {
         this.options = options;
         return this;
     }
@@ -597,7 +598,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Getter for <code>ZDB.I_INTEGRATION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -605,7 +606,7 @@ public class IIntegration implements VertxPojo, IIIntegration {
      * Setter for <code>ZDB.I_INTEGRATION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IIntegration setMetadata(String metadata) {
+    public IIntegration setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

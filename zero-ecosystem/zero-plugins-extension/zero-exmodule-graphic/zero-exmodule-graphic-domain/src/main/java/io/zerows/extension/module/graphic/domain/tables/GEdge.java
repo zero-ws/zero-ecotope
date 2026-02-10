@@ -4,6 +4,8 @@
 package io.zerows.extension.module.graphic.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.Keys;
 import io.zerows.extension.module.graphic.domain.Zdb;
 import io.zerows.extension.module.graphic.domain.tables.records.GEdgeRecord;
@@ -70,7 +72,7 @@ public class GEdge extends TableImpl<GEdgeRecord> {
     /**
      * The column <code>ZDB.G_EDGE.RECORD_DATA</code>. 「recordData」 - 组中存储的数据信息
      */
-    public final TableField<GEdgeRecord, String> RECORD_DATA = createField(DSL.name("RECORD_DATA"), SQLDataType.CLOB(65535), this, "「recordData」 - 组中存储的数据信息");
+    public final TableField<GEdgeRecord, JsonObject> RECORD_DATA = createField(DSL.name("RECORD_DATA"), SQLDataType.CLOB(65535), this, "「recordData」 - 组中存储的数据信息", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_EDGE.RECORD_KEY</code>. 「recordKey」 - 记录主键
@@ -90,7 +92,7 @@ public class GEdge extends TableImpl<GEdgeRecord> {
     /**
      * The column <code>ZDB.G_EDGE.UI</code>. 「ui」 - ui配置专用
      */
-    public final TableField<GEdgeRecord, String> UI = createField(DSL.name("UI"), SQLDataType.CLOB(65535), this, "「ui」 - ui配置专用");
+    public final TableField<GEdgeRecord, JsonObject> UI = createField(DSL.name("UI"), SQLDataType.CLOB(65535), this, "「ui」 - ui配置专用", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_EDGE.TYPE</code>. 「type」- 类型
@@ -125,7 +127,7 @@ public class GEdge extends TableImpl<GEdgeRecord> {
     /**
      * The column <code>ZDB.G_EDGE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<GEdgeRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<GEdgeRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_EDGE.VERSION</code>. 「version」- 版本号

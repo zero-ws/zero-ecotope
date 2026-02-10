@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpDataSet;
 
 import java.time.LocalDateTime;
@@ -22,12 +23,12 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
     private String id;
     private String code;
     private String dataComponent;
-    private String dataConfig;
-    private String dataField;
-    private String dataQuery;
-    private String dataSource;
+    private JsonObject dataConfig;
+    private JsonObject dataField;
+    private JsonObject dataQuery;
+    private JsonObject dataSource;
     private String name;
-    private String sourceConfig;
+    private JsonObject sourceConfig;
     private String sourceId;
     private String type;
     private String status;
@@ -36,7 +37,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -75,12 +76,12 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
         String id,
         String code,
         String dataComponent,
-        String dataConfig,
-        String dataField,
-        String dataQuery,
-        String dataSource,
+        JsonObject dataConfig,
+        JsonObject dataField,
+        JsonObject dataQuery,
+        JsonObject dataSource,
         String name,
-        String sourceConfig,
+        JsonObject sourceConfig,
         String sourceId,
         String type,
         String status,
@@ -89,7 +90,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -184,7 +185,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * 数据查询过程中的配置
      */
     @Override
-    public String getDataConfig() {
+    public JsonObject getDataConfig() {
         return this.dataConfig;
     }
 
@@ -193,7 +194,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * 数据查询过程中的配置
      */
     @Override
-    public KpDataSet setDataConfig(String dataConfig) {
+    public KpDataSet setDataConfig(JsonObject dataConfig) {
         this.dataConfig = dataConfig;
         return this;
     }
@@ -202,7 +203,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * Getter for <code>ZDB.KP_DATA_SET.DATA_FIELD</code>. 「dataField」- 数据字段
      */
     @Override
-    public String getDataField() {
+    public JsonObject getDataField() {
         return this.dataField;
     }
 
@@ -210,7 +211,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * Setter for <code>ZDB.KP_DATA_SET.DATA_FIELD</code>. 「dataField」- 数据字段
      */
     @Override
-    public KpDataSet setDataField(String dataField) {
+    public KpDataSet setDataField(JsonObject dataField) {
         this.dataField = dataField;
         return this;
     }
@@ -219,7 +220,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * Getter for <code>ZDB.KP_DATA_SET.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
     @Override
-    public String getDataQuery() {
+    public JsonObject getDataQuery() {
         return this.dataQuery;
     }
 
@@ -227,7 +228,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * Setter for <code>ZDB.KP_DATA_SET.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
     @Override
-    public KpDataSet setDataQuery(String dataQuery) {
+    public KpDataSet setDataQuery(JsonObject dataQuery) {
         this.dataQuery = dataQuery;
         return this;
     }
@@ -237,7 +238,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * 基于什么内容做报表
      */
     @Override
-    public String getDataSource() {
+    public JsonObject getDataSource() {
         return this.dataSource;
     }
 
@@ -246,7 +247,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * 基于什么内容做报表
      */
     @Override
-    public KpDataSet setDataSource(String dataSource) {
+    public KpDataSet setDataSource(JsonObject dataSource) {
         this.dataSource = dataSource;
         return this;
     }
@@ -273,7 +274,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * 数据源相关配置
      */
     @Override
-    public String getSourceConfig() {
+    public JsonObject getSourceConfig() {
         return this.sourceConfig;
     }
 
@@ -282,7 +283,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * 数据源相关配置
      */
     @Override
-    public KpDataSet setSourceConfig(String sourceConfig) {
+    public KpDataSet setSourceConfig(JsonObject sourceConfig) {
         this.sourceConfig = sourceConfig;
         return this;
     }
@@ -427,7 +428,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * Getter for <code>ZDB.KP_DATA_SET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -435,7 +436,7 @@ public class KpDataSet implements VertxPojo, IKpDataSet {
      * Setter for <code>ZDB.KP_DATA_SET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpDataSet setMetadata(String metadata) {
+    public KpDataSet setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

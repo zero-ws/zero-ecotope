@@ -4,6 +4,8 @@
 package io.zerows.extension.module.report.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.Keys;
 import io.zerows.extension.module.report.domain.Zdb;
 import io.zerows.extension.module.report.domain.tables.records.KpDimensionRecord;
@@ -61,7 +63,7 @@ public class KpDimension extends TableImpl<KpDimensionRecord> {
      * The column <code>ZDB.KP_DIMENSION.CHART_CONFIG</code>. 「chartConfig」-
      * 若当前报表是图表
      */
-    public final TableField<KpDimensionRecord, String> CHART_CONFIG = createField(DSL.name("CHART_CONFIG"), SQLDataType.CLOB, this, "「chartConfig」- 若当前报表是图表");
+    public final TableField<KpDimensionRecord, JsonObject> CHART_CONFIG = createField(DSL.name("CHART_CONFIG"), SQLDataType.CLOB, this, "「chartConfig」- 若当前报表是图表", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DIMENSION.CHART_TYPE</code>. 「chartType」- 图表类型
@@ -77,23 +79,23 @@ public class KpDimension extends TableImpl<KpDimensionRecord> {
      * The column <code>ZDB.KP_DIMENSION.DATA_FIELD</code>. 「dataField」-
      * 当前报表对应字段
      */
-    public final TableField<KpDimensionRecord, String> DATA_FIELD = createField(DSL.name("DATA_FIELD"), SQLDataType.CLOB, this, "「dataField」- 当前报表对应字段");
+    public final TableField<KpDimensionRecord, JsonObject> DATA_FIELD = createField(DSL.name("DATA_FIELD"), SQLDataType.CLOB, this, "「dataField」- 当前报表对应字段", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DIMENSION.DATA_GROUP</code>. 「dataGroup」- 分组维度处理
      */
-    public final TableField<KpDimensionRecord, String> DATA_GROUP = createField(DSL.name("DATA_GROUP"), SQLDataType.CLOB, this, "「dataGroup」- 分组维度处理");
+    public final TableField<KpDimensionRecord, JsonObject> DATA_GROUP = createField(DSL.name("DATA_GROUP"), SQLDataType.CLOB, this, "「dataGroup」- 分组维度处理", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DIMENSION.DATA_OUTPUT</code>. 「dataOutput」-
      * 输出专用配置
      */
-    public final TableField<KpDimensionRecord, String> DATA_OUTPUT = createField(DSL.name("DATA_OUTPUT"), SQLDataType.CLOB, this, "「dataOutput」- 输出专用配置");
+    public final TableField<KpDimensionRecord, JsonObject> DATA_OUTPUT = createField(DSL.name("DATA_OUTPUT"), SQLDataType.CLOB, this, "「dataOutput」- 输出专用配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DIMENSION.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
-    public final TableField<KpDimensionRecord, String> DATA_QUERY = createField(DSL.name("DATA_QUERY"), SQLDataType.CLOB, this, "「dataQuery」- 数据查询配置");
+    public final TableField<KpDimensionRecord, JsonObject> DATA_QUERY = createField(DSL.name("DATA_QUERY"), SQLDataType.CLOB, this, "「dataQuery」- 数据查询配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DIMENSION.DATA_SET_ID</code>. 「dataSetId」- 数据源ID
@@ -153,7 +155,7 @@ public class KpDimension extends TableImpl<KpDimensionRecord> {
     /**
      * The column <code>ZDB.KP_DIMENSION.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<KpDimensionRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<KpDimensionRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DIMENSION.VERSION</code>. 「version」- 版本号

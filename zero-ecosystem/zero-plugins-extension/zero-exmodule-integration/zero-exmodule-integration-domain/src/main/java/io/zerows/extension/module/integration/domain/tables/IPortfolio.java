@@ -4,6 +4,8 @@
 package io.zerows.extension.module.integration.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.Keys;
 import io.zerows.extension.module.integration.domain.Zdb;
 import io.zerows.extension.module.integration.domain.tables.records.IPortfolioRecord;
@@ -65,13 +67,13 @@ public class IPortfolio extends TableImpl<IPortfolioRecord> {
     /**
      * The column <code>ZDB.I_PORTFOLIO.DATA_CONFIG</code>. 「dataConfig」- 数据基础配置
      */
-    public final TableField<IPortfolioRecord, String> DATA_CONFIG = createField(DSL.name("DATA_CONFIG"), SQLDataType.CLOB, this, "「dataConfig」- 数据基础配置");
+    public final TableField<IPortfolioRecord, JsonObject> DATA_CONFIG = createField(DSL.name("DATA_CONFIG"), SQLDataType.CLOB, this, "「dataConfig」- 数据基础配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_PORTFOLIO.DATA_INTEGRATION</code>.
      * 「dataIntegration」- 绑定好过后
      */
-    public final TableField<IPortfolioRecord, String> DATA_INTEGRATION = createField(DSL.name("DATA_INTEGRATION"), SQLDataType.CLOB, this, "「dataIntegration」- 绑定好过后");
+    public final TableField<IPortfolioRecord, JsonObject> DATA_INTEGRATION = createField(DSL.name("DATA_INTEGRATION"), SQLDataType.CLOB, this, "「dataIntegration」- 绑定好过后", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_PORTFOLIO.DATA_KEY</code>. 「dataKey」- LDAP路径做完
@@ -81,7 +83,7 @@ public class IPortfolio extends TableImpl<IPortfolioRecord> {
     /**
      * The column <code>ZDB.I_PORTFOLIO.DATA_SECURE</code>. 「dataSecure」- 安全专用配置
      */
-    public final TableField<IPortfolioRecord, String> DATA_SECURE = createField(DSL.name("DATA_SECURE"), SQLDataType.CLOB, this, "「dataSecure」- 安全专用配置");
+    public final TableField<IPortfolioRecord, JsonObject> DATA_SECURE = createField(DSL.name("DATA_SECURE"), SQLDataType.CLOB, this, "「dataSecure」- 安全专用配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_PORTFOLIO.INTEGRATION_ID</code>. 「integrationId」-
@@ -113,7 +115,7 @@ public class IPortfolio extends TableImpl<IPortfolioRecord> {
     /**
      * The column <code>ZDB.I_PORTFOLIO.RUN_CONFIG</code>. 「runConfig」- 执行组件额外配置
      */
-    public final TableField<IPortfolioRecord, String> RUN_CONFIG = createField(DSL.name("RUN_CONFIG"), SQLDataType.CLOB, this, "「runConfig」- 执行组件额外配置");
+    public final TableField<IPortfolioRecord, JsonObject> RUN_CONFIG = createField(DSL.name("RUN_CONFIG"), SQLDataType.CLOB, this, "「runConfig」- 执行组件额外配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_PORTFOLIO.TYPE</code>. 「type」- 类型
@@ -153,7 +155,7 @@ public class IPortfolio extends TableImpl<IPortfolioRecord> {
     /**
      * The column <code>ZDB.I_PORTFOLIO.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<IPortfolioRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<IPortfolioRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_PORTFOLIO.VERSION</code>. 「version」- 版本号

@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFInvoice;
 
 import java.math.BigDecimal;
@@ -48,7 +49,7 @@ public class FInvoice implements VertxPojo, IFInvoice {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -123,7 +124,7 @@ public class FInvoice implements VertxPojo, IFInvoice {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -657,7 +658,7 @@ public class FInvoice implements VertxPojo, IFInvoice {
      * Getter for <code>ZDB.F_INVOICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -665,7 +666,7 @@ public class FInvoice implements VertxPojo, IFInvoice {
      * Setter for <code>ZDB.F_INVOICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FInvoice setMetadata(String metadata) {
+    public FInvoice setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

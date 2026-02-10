@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MIndex;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMIndex;
 
@@ -58,20 +60,20 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     }
 
     /**
-     * Setter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArra
+     * Setter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArray
      */
     @Override
-    public MIndexRecord setColumns(String value) {
+    public MIndexRecord setColumns(JsonArray value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArra
+     * Getter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArray
      */
     @Override
-    public String getColumns() {
-        return (String) get(2);
+    public JsonArray getColumns() {
+        return (JsonArray) get(2);
     }
 
     /**
@@ -231,7 +233,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Setter for <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MIndexRecord setMetadata(String value) {
+    public MIndexRecord setMetadata(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -240,8 +242,8 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
      * Getter for <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(12);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -385,7 +387,7 @@ public class MIndexRecord extends UpdatableRecordImpl<MIndexRecord> implements V
     /**
      * Create a detached, initialised MIndexRecord
      */
-    public MIndexRecord(String id, Boolean clustered, String columns, String comments, String entityId, String name, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MIndexRecord(String id, Boolean clustered, JsonArray columns, String comments, String entityId, String name, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MIndex.M_INDEX);
 
         setId(id);

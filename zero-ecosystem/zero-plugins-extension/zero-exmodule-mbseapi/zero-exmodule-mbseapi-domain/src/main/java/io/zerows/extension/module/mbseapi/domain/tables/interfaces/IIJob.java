@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbseapi.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -81,12 +82,12 @@ public interface IIJob extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置
      */
-    public IIJob setAdditional(String value);
+    public IIJob setAdditional(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置
      */
-    public String getAdditional();
+    public JsonObject getAdditional();
 
     /**
      * Setter for <code>ZDB.I_JOB.PROXY</code>. 「proxy」- 代理类
@@ -133,12 +134,12 @@ public interface IIJob extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」- 调度配置
      */
-    public IIJob setDurationConfig(String value);
+    public IIJob setDurationConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」- 调度配置
      */
-    public String getDurationConfig();
+    public JsonObject getDurationConfig();
 
     /**
      * Setter for <code>ZDB.I_JOB.RUN_AT</code>. 「runAt」- 运行时间点
@@ -277,12 +278,12 @@ public interface IIJob extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 元配置
      */
-    public IIJob setMetadata(String value);
+    public IIJob setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.I_JOB.VERSION</code>. 「version」- 版本号
@@ -358,12 +359,12 @@ public interface IIJob extends VertxPojo, Serializable {
                 setOrThrow(this::setGroup,json::getString,"GROUP","java.lang.String");
                 setOrThrow(this::setNamespace,json::getString,"NAMESPACE","java.lang.String");
                 setOrThrow(this::setComment,json::getString,"COMMENT","java.lang.String");
-                setOrThrow(this::setAdditional,json::getString,"ADDITIONAL","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column ADDITIONAL!
                 setOrThrow(this::setProxy,json::getString,"PROXY","java.lang.String");
                 setOrThrow(this::setServiceId,json::getString,"SERVICE_ID","java.lang.String");
                 setOrThrow(this::setDuration,json::getLong,"DURATION","java.lang.Long");
                 setOrThrow(this::setDurationComponent,json::getString,"DURATION_COMPONENT","java.lang.String");
-                setOrThrow(this::setDurationConfig,json::getString,"DURATION_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DURATION_CONFIG!
                 setOrThrow(this::setRunAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalTime.parse(s);},"RUN_AT","java.time.LocalTime");
                 setOrThrow(this::setRunFormula,json::getString,"RUN_FORMULA","java.lang.String");
                 setOrThrow(this::setThreshold,json::getInteger,"THRESHOLD","java.lang.Integer");
@@ -377,7 +378,7 @@ public interface IIJob extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -396,12 +397,12 @@ public interface IIJob extends VertxPojo, Serializable {
                 json.put("GROUP",getGroup());
                 json.put("NAMESPACE",getNamespace());
                 json.put("COMMENT",getComment());
-                json.put("ADDITIONAL",getAdditional());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column ADDITIONAL!
                 json.put("PROXY",getProxy());
                 json.put("SERVICE_ID",getServiceId());
                 json.put("DURATION",getDuration());
                 json.put("DURATION_COMPONENT",getDurationComponent());
-                json.put("DURATION_CONFIG",getDurationConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DURATION_CONFIG!
                 json.put("RUN_AT",getRunAt()==null?null:getRunAt().toString());
                 json.put("RUN_FORMULA",getRunFormula());
                 json.put("THRESHOLD",getThreshold());
@@ -415,7 +416,7 @@ public interface IIJob extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

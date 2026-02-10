@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FBank;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFBank;
 
@@ -316,7 +317,7 @@ public class FBankRecord extends UpdatableRecordImpl<FBankRecord> implements Ver
      * Setter for <code>ZDB.F_BANK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FBankRecord setMetadata(String value) {
+    public FBankRecord setMetadata(JsonObject value) {
         set(17, value);
         return this;
     }
@@ -325,8 +326,8 @@ public class FBankRecord extends UpdatableRecordImpl<FBankRecord> implements Ver
      * Getter for <code>ZDB.F_BANK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(17);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(17);
     }
 
     /**
@@ -475,7 +476,7 @@ public class FBankRecord extends UpdatableRecordImpl<FBankRecord> implements Ver
     /**
      * Create a detached, initialised FBankRecord
      */
-    public FBankRecord(String id, String alias, String bankId, Boolean branch, String branchCode, String branchName, String code, String comment, String locationId, String logo, String name, String website, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FBankRecord(String id, String alias, String bankId, Boolean branch, String branchCode, String branchName, String code, String comment, String locationId, String logo, String name, String website, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FBank.F_BANK);
 
         setId(id);

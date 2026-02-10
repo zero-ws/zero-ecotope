@@ -4,6 +4,8 @@
 package io.zerows.extension.module.modulat.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.Keys;
 import io.zerows.extension.module.modulat.domain.Zdb;
 import io.zerows.extension.module.modulat.domain.tables.records.BComponentRecord;
@@ -122,7 +124,7 @@ public class BComponent extends TableImpl<BComponentRecord> {
     /**
      * The column <code>ZDB.B_COMPONENT.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<BComponentRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<BComponentRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_COMPONENT.VERSION</code>. 「version」- 版本号

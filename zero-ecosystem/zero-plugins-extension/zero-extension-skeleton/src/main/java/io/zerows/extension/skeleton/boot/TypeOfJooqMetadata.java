@@ -1,4 +1,4 @@
-package io.zerows.extension.skeleton.database;
+package io.zerows.extension.skeleton.boot;
 
 import io.r2mo.vertx.jooq.generate.configuration.TypeOfJsonObject;
 import io.zerows.epoch.constant.KName;

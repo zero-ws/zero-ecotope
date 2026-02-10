@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -53,45 +54,45 @@ public interface IKpDataSet extends VertxPojo, Serializable {
      * Setter for <code>ZDB.KP_DATA_SET.DATA_CONFIG</code>. 「dataConfig」-
      * 数据查询过程中的配置
      */
-    public IKpDataSet setDataConfig(String value);
+    public IKpDataSet setDataConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DATA_SET.DATA_CONFIG</code>. 「dataConfig」-
      * 数据查询过程中的配置
      */
-    public String getDataConfig();
+    public JsonObject getDataConfig();
 
     /**
      * Setter for <code>ZDB.KP_DATA_SET.DATA_FIELD</code>. 「dataField」- 数据字段
      */
-    public IKpDataSet setDataField(String value);
+    public IKpDataSet setDataField(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DATA_SET.DATA_FIELD</code>. 「dataField」- 数据字段
      */
-    public String getDataField();
+    public JsonObject getDataField();
 
     /**
      * Setter for <code>ZDB.KP_DATA_SET.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
-    public IKpDataSet setDataQuery(String value);
+    public IKpDataSet setDataQuery(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DATA_SET.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
-    public String getDataQuery();
+    public JsonObject getDataQuery();
 
     /**
      * Setter for <code>ZDB.KP_DATA_SET.DATA_SOURCE</code>. 「dataSource」-
      * 基于什么内容做报表
      */
-    public IKpDataSet setDataSource(String value);
+    public IKpDataSet setDataSource(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DATA_SET.DATA_SOURCE</code>. 「dataSource」-
      * 基于什么内容做报表
      */
-    public String getDataSource();
+    public JsonObject getDataSource();
 
     /**
      * Setter for <code>ZDB.KP_DATA_SET.NAME</code>. 「name」- 名称
@@ -107,13 +108,13 @@ public interface IKpDataSet extends VertxPojo, Serializable {
      * Setter for <code>ZDB.KP_DATA_SET.SOURCE_CONFIG</code>. 「sourceConfig」-
      * 数据源相关配置
      */
-    public IKpDataSet setSourceConfig(String value);
+    public IKpDataSet setSourceConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DATA_SET.SOURCE_CONFIG</code>. 「sourceConfig」-
      * 数据源相关配置
      */
-    public String getSourceConfig();
+    public JsonObject getSourceConfig();
 
     /**
      * Setter for <code>ZDB.KP_DATA_SET.SOURCE_ID</code>. 「sourceId」- 额外数据源
@@ -198,12 +199,12 @@ public interface IKpDataSet extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.KP_DATA_SET.METADATA</code>. 「metadata」- 元配置
      */
-    public IKpDataSet setMetadata(String value);
+    public IKpDataSet setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DATA_SET.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.KP_DATA_SET.VERSION</code>. 「version」- 版本号
@@ -276,12 +277,12 @@ public interface IKpDataSet extends VertxPojo, Serializable {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
                 setOrThrow(this::setDataComponent,json::getString,"DATA_COMPONENT","java.lang.String");
-                setOrThrow(this::setDataConfig,json::getString,"DATA_CONFIG","java.lang.String");
-                setOrThrow(this::setDataField,json::getString,"DATA_FIELD","java.lang.String");
-                setOrThrow(this::setDataQuery,json::getString,"DATA_QUERY","java.lang.String");
-                setOrThrow(this::setDataSource,json::getString,"DATA_SOURCE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_FIELD!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_QUERY!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_SOURCE!
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
-                setOrThrow(this::setSourceConfig,json::getString,"SOURCE_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SOURCE_CONFIG!
                 setOrThrow(this::setSourceId,json::getString,"SOURCE_ID","java.lang.String");
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setStatus,json::getString,"STATUS","java.lang.String");
@@ -290,7 +291,7 @@ public interface IKpDataSet extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -306,12 +307,12 @@ public interface IKpDataSet extends VertxPojo, Serializable {
                 json.put("ID",getId());
                 json.put("CODE",getCode());
                 json.put("DATA_COMPONENT",getDataComponent());
-                json.put("DATA_CONFIG",getDataConfig());
-                json.put("DATA_FIELD",getDataField());
-                json.put("DATA_QUERY",getDataQuery());
-                json.put("DATA_SOURCE",getDataSource());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_FIELD!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_QUERY!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_SOURCE!
                 json.put("NAME",getName());
-                json.put("SOURCE_CONFIG",getSourceConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SOURCE_CONFIG!
                 json.put("SOURCE_ID",getSourceId());
                 json.put("TYPE",getType());
                 json.put("STATUS",getStatus());
@@ -320,7 +321,7 @@ public interface IKpDataSet extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

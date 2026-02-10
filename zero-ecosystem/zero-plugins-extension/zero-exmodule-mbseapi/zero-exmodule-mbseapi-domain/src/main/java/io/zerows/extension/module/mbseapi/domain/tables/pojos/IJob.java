@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbseapi.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.interfaces.IIJob;
 
 import java.time.LocalDateTime;
@@ -26,12 +27,12 @@ public class IJob implements VertxPojo, IIJob {
     private String group;
     private String namespace;
     private String comment;
-    private String additional;
+    private JsonObject additional;
     private String proxy;
     private String serviceId;
     private Long duration;
     private String durationComponent;
-    private String durationConfig;
+    private JsonObject durationConfig;
     private LocalTime runAt;
     private String runFormula;
     private Integer threshold;
@@ -45,7 +46,7 @@ public class IJob implements VertxPojo, IIJob {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -95,12 +96,12 @@ public class IJob implements VertxPojo, IIJob {
         String group,
         String namespace,
         String comment,
-        String additional,
+        JsonObject additional,
         String proxy,
         String serviceId,
         Long duration,
         String durationComponent,
-        String durationConfig,
+        JsonObject durationConfig,
         LocalTime runAt,
         String runFormula,
         Integer threshold,
@@ -114,7 +115,7 @@ public class IJob implements VertxPojo, IIJob {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -265,7 +266,7 @@ public class IJob implements VertxPojo, IIJob {
      * Getter for <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置
      */
     @Override
-    public String getAdditional() {
+    public JsonObject getAdditional() {
         return this.additional;
     }
 
@@ -273,7 +274,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置
      */
     @Override
-    public IJob setAdditional(String additional) {
+    public IJob setAdditional(JsonObject additional) {
         this.additional = additional;
         return this;
     }
@@ -352,7 +353,7 @@ public class IJob implements VertxPojo, IIJob {
      * Getter for <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」- 调度配置
      */
     @Override
-    public String getDurationConfig() {
+    public JsonObject getDurationConfig() {
         return this.durationConfig;
     }
 
@@ -360,7 +361,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」- 调度配置
      */
     @Override
-    public IJob setDurationConfig(String durationConfig) {
+    public IJob setDurationConfig(JsonObject durationConfig) {
         this.durationConfig = durationConfig;
         return this;
     }
@@ -594,7 +595,7 @@ public class IJob implements VertxPojo, IIJob {
      * Getter for <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -602,7 +603,7 @@ public class IJob implements VertxPojo, IIJob {
      * Setter for <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IJob setMetadata(String metadata) {
+    public IJob setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

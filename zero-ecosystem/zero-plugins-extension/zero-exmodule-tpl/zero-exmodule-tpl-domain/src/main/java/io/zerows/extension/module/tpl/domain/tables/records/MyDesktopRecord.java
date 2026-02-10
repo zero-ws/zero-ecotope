@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyDesktop;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyDesktop;
 
@@ -61,7 +62,7 @@ public class MyDesktopRecord extends UpdatableRecordImpl<MyDesktopRecord> implem
      * Setter for <code>ZDB.MY_DESKTOP.UI_CONFIG</code>. 「uiConfig」- 看板配置
      */
     @Override
-    public MyDesktopRecord setUiConfig(String value) {
+    public MyDesktopRecord setUiConfig(JsonObject value) {
         set(2, value);
         return this;
     }
@@ -70,15 +71,15 @@ public class MyDesktopRecord extends UpdatableRecordImpl<MyDesktopRecord> implem
      * Getter for <code>ZDB.MY_DESKTOP.UI_CONFIG</code>. 「uiConfig」- 看板配置
      */
     @Override
-    public String getUiConfig() {
-        return (String) get(2);
+    public JsonObject getUiConfig() {
+        return (JsonObject) get(2);
     }
 
     /**
      * Setter for <code>ZDB.MY_DESKTOP.UI_GRID</code>. 「uiGrid」- 布局配置
      */
     @Override
-    public MyDesktopRecord setUiGrid(String value) {
+    public MyDesktopRecord setUiGrid(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -87,8 +88,8 @@ public class MyDesktopRecord extends UpdatableRecordImpl<MyDesktopRecord> implem
      * Getter for <code>ZDB.MY_DESKTOP.UI_GRID</code>. 「uiGrid」- 布局配置
      */
     @Override
-    public String getUiGrid() {
-        return (String) get(3);
+    public JsonObject getUiGrid() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -214,7 +215,7 @@ public class MyDesktopRecord extends UpdatableRecordImpl<MyDesktopRecord> implem
      * Setter for <code>ZDB.MY_DESKTOP.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public MyDesktopRecord setMetadata(String value) {
+    public MyDesktopRecord setMetadata(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -223,8 +224,8 @@ public class MyDesktopRecord extends UpdatableRecordImpl<MyDesktopRecord> implem
      * Getter for <code>ZDB.MY_DESKTOP.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(11);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -349,7 +350,7 @@ public class MyDesktopRecord extends UpdatableRecordImpl<MyDesktopRecord> implem
     /**
      * Create a detached, initialised MyDesktopRecord
      */
-    public MyDesktopRecord(String id, String bagId, String uiConfig, String uiGrid, String owner, String ownerType, String sigma, String appId, String tenantId, Boolean active, String language, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MyDesktopRecord(String id, String bagId, JsonObject uiConfig, JsonObject uiGrid, String owner, String ownerType, String sigma, String appId, String tenantId, Boolean active, String language, JsonObject metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MyDesktop.MY_DESKTOP);
 
         setId(id);

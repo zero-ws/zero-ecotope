@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILTent;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class LTent implements VertxPojo, ILTent {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -77,7 +78,7 @@ public class LTent implements VertxPojo, ILTent {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -335,7 +336,7 @@ public class LTent implements VertxPojo, ILTent {
      * Getter for <code>ZDB.L_TENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -343,7 +344,7 @@ public class LTent implements VertxPojo, ILTent {
      * Setter for <code>ZDB.L_TENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LTent setMetadata(String metadata) {
+    public LTent setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

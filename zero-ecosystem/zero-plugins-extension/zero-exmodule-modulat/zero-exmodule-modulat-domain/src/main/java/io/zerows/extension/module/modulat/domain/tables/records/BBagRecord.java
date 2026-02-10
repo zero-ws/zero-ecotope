@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BBag;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBBag;
 
@@ -146,7 +147,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      * Setter for <code>ZDB.B_BAG.UI_CONFIG</code>. 「uiConfig」- 模块核心配置
      */
     @Override
-    public BBagRecord setUiConfig(String value) {
+    public BBagRecord setUiConfig(JsonObject value) {
         set(7, value);
         return this;
     }
@@ -155,8 +156,8 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      * Getter for <code>ZDB.B_BAG.UI_CONFIG</code>. 「uiConfig」- 模块核心配置
      */
     @Override
-    public String getUiConfig() {
-        return (String) get(7);
+    public JsonObject getUiConfig() {
+        return (JsonObject) get(7);
     }
 
     /**
@@ -197,7 +198,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      * Setter for <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
     @Override
-    public BBagRecord setUiStyle(String value) {
+    public BBagRecord setUiStyle(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -206,8 +207,8 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      * Getter for <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
     @Override
-    public String getUiStyle() {
-        return (String) get(10);
+    public JsonObject getUiStyle() {
+        return (JsonObject) get(10);
     }
 
     /**
@@ -316,7 +317,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BBagRecord setMetadata(String value) {
+    public BBagRecord setMetadata(JsonObject value) {
         set(17, value);
         return this;
     }
@@ -325,8 +326,8 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(17);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(17);
     }
 
     /**
@@ -475,7 +476,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     /**
      * Create a detached, initialised BBagRecord
      */
-    public BBagRecord(String id, Boolean entry, String entryId, String name, String nameAbbr, String nameFull, String parentId, String uiConfig, String uiIcon, Long uiSort, String uiStyle, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public BBagRecord(String id, Boolean entry, String entryId, String name, String nameAbbr, String nameFull, String parentId, JsonObject uiConfig, String uiIcon, Long uiSort, JsonObject uiStyle, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(BBag.B_BAG);
 
         setId(id);

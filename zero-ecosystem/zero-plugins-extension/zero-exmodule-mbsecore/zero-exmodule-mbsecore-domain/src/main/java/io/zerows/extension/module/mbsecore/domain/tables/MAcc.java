@@ -4,6 +4,10 @@
 package io.zerows.extension.module.mbsecore.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.Keys;
 import io.zerows.extension.module.mbsecore.domain.Zdb;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MAccRecord;
@@ -60,12 +64,12 @@ public class MAcc extends TableImpl<MAccRecord> {
     /**
      * The column <code>ZDB.M_ACC.RECORD_JSON</code>. 「recordJson」- 上一次的记录内容
      */
-    public final TableField<MAccRecord, String> RECORD_JSON = createField(DSL.name("RECORD_JSON"), SQLDataType.CLOB, this, "「recordJson」- 上一次的记录内容");
+    public final TableField<MAccRecord, JsonArray> RECORD_JSON = createField(DSL.name("RECORD_JSON"), SQLDataType.CLOB, this, "「recordJson」- 上一次的记录内容", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.M_ACC.RECORD_RAW</code>. 「recordRaw」- 上一次的记录
      */
-    public final TableField<MAccRecord, String> RECORD_RAW = createField(DSL.name("RECORD_RAW"), SQLDataType.CLOB, this, "「recordRaw」- 上一次的记录");
+    public final TableField<MAccRecord, JsonArray> RECORD_RAW = createField(DSL.name("RECORD_RAW"), SQLDataType.CLOB, this, "「recordRaw」- 上一次的记录", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.M_ACC.RECORD_UNIQUE</code>. 「recordUnique」- 业务标识规则专用
@@ -110,7 +114,7 @@ public class MAcc extends TableImpl<MAccRecord> {
     /**
      * The column <code>ZDB.M_ACC.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MAccRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MAccRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_ACC.VERSION</code>. 「version」- 版本号

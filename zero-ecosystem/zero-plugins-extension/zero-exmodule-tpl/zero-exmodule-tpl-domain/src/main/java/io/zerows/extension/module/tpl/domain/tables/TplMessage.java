@@ -4,6 +4,8 @@
 package io.zerows.extension.module.tpl.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.Keys;
 import io.zerows.extension.module.tpl.domain.Zdb;
 import io.zerows.extension.module.tpl.domain.tables.records.TplMessageRecord;
@@ -116,7 +118,7 @@ public class TplMessage extends TableImpl<TplMessageRecord> {
     /**
      * The column <code>ZDB.TPL_MESSAGE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<TplMessageRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<TplMessageRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MESSAGE.VERSION</code>. 「version」- 版本号

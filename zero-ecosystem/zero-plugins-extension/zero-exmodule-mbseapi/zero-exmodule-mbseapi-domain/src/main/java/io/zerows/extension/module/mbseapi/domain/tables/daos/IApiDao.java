@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbseapi.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.IApi;
 import io.zerows.extension.module.mbseapi.domain.tables.records.IApiRecord;
 
@@ -55,7 +57,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>CONSUMES IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByConsumes(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByConsumes(Collection<JsonArray> values) {
                 return findManyByCondition(IApi.I_API.CONSUMES.in(values));
         }
 
@@ -63,14 +65,14 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>CONSUMES IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByConsumes(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByConsumes(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(IApi.I_API.CONSUMES.in(values),limit);
         }
 
         /**
      * Find records that have <code>IN_MAPPING IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByInMapping(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByInMapping(Collection<JsonObject> values) {
                 return findManyByCondition(IApi.I_API.IN_MAPPING.in(values));
         }
 
@@ -78,7 +80,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>IN_MAPPING IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByInMapping(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByInMapping(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IApi.I_API.IN_MAPPING.in(values),limit);
         }
 
@@ -100,7 +102,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>IN_RULE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByInRule(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByInRule(Collection<JsonObject> values) {
                 return findManyByCondition(IApi.I_API.IN_RULE.in(values));
         }
 
@@ -108,7 +110,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>IN_RULE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByInRule(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByInRule(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IApi.I_API.IN_RULE.in(values),limit);
         }
 
@@ -176,7 +178,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>PARAM_CONTAINED IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByParamContained(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByParamContained(Collection<JsonArray> values) {
                 return findManyByCondition(IApi.I_API.PARAM_CONTAINED.in(values));
         }
 
@@ -184,7 +186,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>PARAM_CONTAINED IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByParamContained(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByParamContained(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(IApi.I_API.PARAM_CONTAINED.in(values),limit);
         }
 
@@ -207,7 +209,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>PARAM_REQUIRED IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByParamRequired(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByParamRequired(Collection<JsonArray> values) {
                 return findManyByCondition(IApi.I_API.PARAM_REQUIRED.in(values));
         }
 
@@ -215,14 +217,14 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>PARAM_REQUIRED IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByParamRequired(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByParamRequired(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(IApi.I_API.PARAM_REQUIRED.in(values),limit);
         }
 
         /**
      * Find records that have <code>PRODUCES IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByProduces(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByProduces(Collection<JsonArray> values) {
                 return findManyByCondition(IApi.I_API.PRODUCES.in(values));
         }
 
@@ -230,7 +232,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>PRODUCES IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByProduces(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByProduces(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(IApi.I_API.PRODUCES.in(values),limit);
         }
 
@@ -451,7 +453,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(IApi.I_API.METADATA.in(values));
         }
 
@@ -459,7 +461,7 @@ public class IApiDao extends AbstractVertxDAO<IApiRecord, io.zerows.extension.mo
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IApi>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IApi.I_API.METADATA.in(values),limit);
         }
 

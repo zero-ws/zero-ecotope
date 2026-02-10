@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -30,22 +32,22 @@ public interface IMAcc extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.M_ACC.RECORD_JSON</code>. 「recordJson」- 上一次的记录内容
      */
-    public IMAcc setRecordJson(String value);
+    public IMAcc setRecordJson(JsonArray value);
 
     /**
      * Getter for <code>ZDB.M_ACC.RECORD_JSON</code>. 「recordJson」- 上一次的记录内容
      */
-    public String getRecordJson();
+    public JsonArray getRecordJson();
 
     /**
      * Setter for <code>ZDB.M_ACC.RECORD_RAW</code>. 「recordRaw」- 上一次的记录
      */
-    public IMAcc setRecordRaw(String value);
+    public IMAcc setRecordRaw(JsonArray value);
 
     /**
      * Getter for <code>ZDB.M_ACC.RECORD_RAW</code>. 「recordRaw」- 上一次的记录
      */
-    public String getRecordRaw();
+    public JsonArray getRecordRaw();
 
     /**
      * Setter for <code>ZDB.M_ACC.RECORD_UNIQUE</code>. 「recordUnique」- 业务标识规则专用
@@ -130,12 +132,12 @@ public interface IMAcc extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.M_ACC.METADATA</code>. 「metadata」- 元配置
      */
-    public IMAcc setMetadata(String value);
+    public IMAcc setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_ACC.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.M_ACC.VERSION</code>. 「version」- 版本号
@@ -206,8 +208,8 @@ public interface IMAcc extends VertxPojo, Serializable {
         @Override
         public default IMAcc fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
-                setOrThrow(this::setRecordJson,json::getString,"RECORD_JSON","java.lang.String");
-                setOrThrow(this::setRecordRaw,json::getString,"RECORD_RAW","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column RECORD_JSON!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column RECORD_RAW!
                 setOrThrow(this::setRecordUnique,json::getString,"RECORD_UNIQUE","java.lang.String");
                 setOrThrow(this::setModelId,json::getString,"MODEL_ID","java.lang.String");
                 setOrThrow(this::setModelKey,json::getString,"MODEL_KEY","java.lang.String");
@@ -216,7 +218,7 @@ public interface IMAcc extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -230,8 +232,8 @@ public interface IMAcc extends VertxPojo, Serializable {
         public default io.vertx.core.json.JsonObject toJson() {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
-                json.put("RECORD_JSON",getRecordJson());
-                json.put("RECORD_RAW",getRecordRaw());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column RECORD_JSON!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column RECORD_RAW!
                 json.put("RECORD_UNIQUE",getRecordUnique());
                 json.put("MODEL_ID",getModelId());
                 json.put("MODEL_KEY",getModelKey());
@@ -240,7 +242,7 @@ public interface IMAcc extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

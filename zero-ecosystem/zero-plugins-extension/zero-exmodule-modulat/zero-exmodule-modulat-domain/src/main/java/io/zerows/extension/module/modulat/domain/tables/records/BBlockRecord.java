@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BBlock;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBBlock;
 
@@ -96,7 +98,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * 允许的模型标识
      */
     @Override
-    public BBlockRecord setLicIdentifier(String value) {
+    public BBlockRecord setLicIdentifier(JsonArray value) {
         set(4, value);
         return this;
     }
@@ -106,15 +108,15 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * 允许的模型标识
      */
     @Override
-    public String getLicIdentifier() {
-        return (String) get(4);
+    public JsonArray getLicIdentifier() {
+        return (JsonArray) get(4);
     }
 
     /**
      * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
      */
     @Override
-    public BBlockRecord setLicMenu(String value) {
+    public BBlockRecord setLicMenu(JsonArray value) {
         set(5, value);
         return this;
     }
@@ -123,8 +125,8 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
      */
     @Override
-    public String getLicMenu() {
-        return (String) get(5);
+    public JsonArray getLicMenu() {
+        return (JsonArray) get(5);
     }
 
     /**
@@ -267,7 +269,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
     @Override
-    public BBlockRecord setUiConfig(String value) {
+    public BBlockRecord setUiConfig(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -276,15 +278,15 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Getter for <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
     @Override
-    public String getUiConfig() {
-        return (String) get(14);
+    public JsonObject getUiConfig() {
+        return (JsonObject) get(14);
     }
 
     /**
      * Setter for <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
     @Override
-    public BBlockRecord setUiContent(String value) {
+    public BBlockRecord setUiContent(JsonObject value) {
         set(15, value);
         return this;
     }
@@ -293,8 +295,8 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Getter for <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
     @Override
-    public String getUiContent() {
-        return (String) get(15);
+    public JsonObject getUiContent() {
+        return (JsonObject) get(15);
     }
 
     /**
@@ -335,7 +337,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
     @Override
-    public BBlockRecord setUiStyle(String value) {
+    public BBlockRecord setUiStyle(JsonObject value) {
         set(18, value);
         return this;
     }
@@ -344,8 +346,8 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Getter for <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
     @Override
-    public String getUiStyle() {
-        return (String) get(18);
+    public JsonObject getUiStyle() {
+        return (JsonObject) get(18);
     }
 
     /**
@@ -437,7 +439,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BBlockRecord setMetadata(String value) {
+    public BBlockRecord setMetadata(JsonObject value) {
         set(24, value);
         return this;
     }
@@ -446,8 +448,8 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(24);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(24);
     }
 
     /**
@@ -603,7 +605,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     /**
      * Create a detached, initialised BBlockRecord
      */
-    public BBlockRecord(String id, Boolean authorized, String bagId, String code, String licIdentifier, String licMenu, String name, LocalDateTime signAt, LocalDateTime signEnd, String signIssuer, String signLic, String signName, String signSecret, LocalDateTime signStart, String uiConfig, String uiContent, String uiIcon, Long uiSort, String uiStyle, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public BBlockRecord(String id, Boolean authorized, String bagId, String code, JsonArray licIdentifier, JsonArray licMenu, String name, LocalDateTime signAt, LocalDateTime signEnd, String signIssuer, String signLic, String signName, String signSecret, LocalDateTime signStart, JsonObject uiConfig, JsonObject uiContent, String uiIcon, Long uiSort, JsonObject uiStyle, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(BBlock.B_BLOCK);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -30,34 +31,34 @@ public interface IMyNotify extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.MY_NOTIFY.CONFIG_EMAIL</code>. 「configEmail」- 邮件配置
      */
-    public IMyNotify setConfigEmail(String value);
+    public IMyNotify setConfigEmail(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_NOTIFY.CONFIG_EMAIL</code>. 「configEmail」- 邮件配置
      */
-    public String getConfigEmail();
+    public JsonObject getConfigEmail();
 
     /**
      * Setter for <code>ZDB.MY_NOTIFY.CONFIG_INTERNAL</code>. 「configInternal」-
      * 站内信配置
      */
-    public IMyNotify setConfigInternal(String value);
+    public IMyNotify setConfigInternal(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_NOTIFY.CONFIG_INTERNAL</code>. 「configInternal」-
      * 站内信配置
      */
-    public String getConfigInternal();
+    public JsonObject getConfigInternal();
 
     /**
      * Setter for <code>ZDB.MY_NOTIFY.CONFIG_SMS</code>. 「configSms」- 短信配置
      */
-    public IMyNotify setConfigSms(String value);
+    public IMyNotify setConfigSms(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_NOTIFY.CONFIG_SMS</code>. 「configSms」- 短信配置
      */
-    public String getConfigSms();
+    public JsonObject getConfigSms();
 
     /**
      * Setter for <code>ZDB.MY_NOTIFY.OWNER_ID</code>. 「ownerId」- 拥有者ID
@@ -132,12 +133,12 @@ public interface IMyNotify extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.MY_NOTIFY.METADATA</code>. 「metadata」- 元配置
      */
-    public IMyNotify setMetadata(String value);
+    public IMyNotify setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_NOTIFY.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.MY_NOTIFY.VERSION</code>. 「version」- 版本号
@@ -208,9 +209,9 @@ public interface IMyNotify extends VertxPojo, Serializable {
         @Override
         public default IMyNotify fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
-                setOrThrow(this::setConfigEmail,json::getString,"CONFIG_EMAIL","java.lang.String");
-                setOrThrow(this::setConfigInternal,json::getString,"CONFIG_INTERNAL","java.lang.String");
-                setOrThrow(this::setConfigSms,json::getString,"CONFIG_SMS","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_EMAIL!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_INTERNAL!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_SMS!
                 setOrThrow(this::setOwnerId,json::getString,"OWNER_ID","java.lang.String");
                 setOrThrow(this::setOwnerType,json::getString,"OWNER_TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -218,7 +219,7 @@ public interface IMyNotify extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -232,9 +233,9 @@ public interface IMyNotify extends VertxPojo, Serializable {
         public default io.vertx.core.json.JsonObject toJson() {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
-                json.put("CONFIG_EMAIL",getConfigEmail());
-                json.put("CONFIG_INTERNAL",getConfigInternal());
-                json.put("CONFIG_SMS",getConfigSms());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_EMAIL!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_INTERNAL!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_SMS!
                 json.put("OWNER_ID",getOwnerId());
                 json.put("OWNER_TYPE",getOwnerType());
                 json.put("SIGMA",getSigma());
@@ -242,7 +243,7 @@ public interface IMyNotify extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

@@ -18,16 +18,6 @@ import java.util.function.Supplier;
 class JtRoute {
     private static final MDMBSEManager MANAGER = MDMBSEManager.of();
 
-    static Set<String> toSet(final Supplier<String> supplier) {
-        final String inputRequired = supplier.get();
-        final Set<String> result = new HashSet<>();
-        if (Ut.isNotNil(inputRequired) && Ut.isJArray(inputRequired)) {
-            final JsonArray mimeArr = new JsonArray(inputRequired);
-            mimeArr.stream().map(item -> (String) item).forEach(result::add);
-        }
-        return result;
-    }
-
     static String toPath(final HArk ark, final Supplier<String> uriSupplier,
                          final boolean secure) {
         return toPath(ark, uriSupplier, secure, MANAGER.setting());
@@ -66,15 +56,26 @@ class JtRoute {
         return uri.toString().replace("//", "/");
     }
 
-    static Set<MediaType> toMime(final Supplier<String> supplier) {
+    /**
+     * <pre>
+     *     consumes:
+     *     produces:
+     * </pre>
+     *
+     * @param supplier 执行 {@link JsonArray}
+     * @return MediaType set
+     */
+    static Set<MediaType> toMime(final Supplier<JsonArray> supplier) {
         /* Convert to MediaType of Rs */
-        final String mime = supplier.get();
+        final JsonArray mimeArr = Ut.valueJArray(supplier.get());
         final Set<MediaType> mimeSet = new HashSet<>();
-        if (Ut.isNotNil(mime) && Ut.isJArray(mime)) {
-            final JsonArray mimeArr = new JsonArray(mime);
-            mimeArr.stream().map(item -> (String) item)
-                .map(MediaType::valueOf).forEach(mimeSet::add);
-        }
+
+
+        /* MimeType */
+        mimeArr.stream().map(item -> (String) item)
+            .map(MediaType::valueOf).forEach(mimeSet::add);
+
+
         /* application/json */
         if (mimeSet.isEmpty()) {
             mimeSet.add(MediaType.APPLICATION_JSON_TYPE);

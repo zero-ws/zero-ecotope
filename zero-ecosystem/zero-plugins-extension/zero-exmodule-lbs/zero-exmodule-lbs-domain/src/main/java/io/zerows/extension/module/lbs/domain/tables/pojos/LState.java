@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILState;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,7 @@ public class LState implements VertxPojo, ILState {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -71,7 +72,7 @@ public class LState implements VertxPojo, ILState {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -293,7 +294,7 @@ public class LState implements VertxPojo, ILState {
      * Getter for <code>ZDB.L_STATE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -301,7 +302,7 @@ public class LState implements VertxPojo, ILState {
      * Setter for <code>ZDB.L_STATE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LState setMetadata(String metadata) {
+    public LState setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

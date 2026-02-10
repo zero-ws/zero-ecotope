@@ -4,6 +4,8 @@
 package io.zerows.extension.module.finance.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.Indexes;
 import io.zerows.extension.module.finance.domain.Keys;
 import io.zerows.extension.module.finance.domain.Zdb;
@@ -147,7 +149,7 @@ public class FPreAuthorize extends TableImpl<FPreAuthorizeRecord> {
     /**
      * The column <code>ZDB.F_PRE_AUTHORIZE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<FPreAuthorizeRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<FPreAuthorizeRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.F_PRE_AUTHORIZE.VERSION</code>. 「version」- 版本号

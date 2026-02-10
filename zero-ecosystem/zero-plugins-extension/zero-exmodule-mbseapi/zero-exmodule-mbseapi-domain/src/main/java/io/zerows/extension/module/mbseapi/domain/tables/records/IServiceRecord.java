@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbseapi.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.IService;
 import io.zerows.extension.module.mbseapi.domain.tables.interfaces.IIService;
 
@@ -131,7 +133,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * Setter for <code>ZDB.I_SERVICE.RULE_UNIQUE</code>. 「ruleUnique」- 唯一规则
      */
     @Override
-    public IServiceRecord setRuleUnique(String value) {
+    public IServiceRecord setRuleUnique(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -140,8 +142,8 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * Getter for <code>ZDB.I_SERVICE.RULE_UNIQUE</code>. 「ruleUnique」- 唯一规则
      */
     @Override
-    public String getRuleUnique() {
-        return (String) get(6);
+    public JsonObject getRuleUnique() {
+        return (JsonObject) get(6);
     }
 
     /**
@@ -185,7 +187,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 通道配置
      */
     @Override
-    public IServiceRecord setChannelConfig(String value) {
+    public IServiceRecord setChannelConfig(JsonObject value) {
         set(9, value);
         return this;
     }
@@ -195,8 +197,8 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 通道配置
      */
     @Override
-    public String getChannelConfig() {
-        return (String) get(9);
+    public JsonObject getChannelConfig() {
+        return (JsonObject) get(9);
     }
 
     /**
@@ -222,7 +224,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * Setter for <code>ZDB.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典配置
      */
     @Override
-    public IServiceRecord setDictConfig(String value) {
+    public IServiceRecord setDictConfig(JsonArray value) {
         set(11, value);
         return this;
     }
@@ -231,15 +233,15 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * Getter for <code>ZDB.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典配置
      */
     @Override
-    public String getDictConfig() {
-        return (String) get(11);
+    public JsonArray getDictConfig() {
+        return (JsonArray) get(11);
     }
 
     /**
      * Setter for <code>ZDB.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典消费配置
      */
     @Override
-    public IServiceRecord setDictEpsilon(String value) {
+    public IServiceRecord setDictEpsilon(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -248,8 +250,8 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * Getter for <code>ZDB.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典消费配置
      */
     @Override
-    public String getDictEpsilon() {
-        return (String) get(12);
+    public JsonObject getDictEpsilon() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -293,7 +295,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 映射配置
      */
     @Override
-    public IServiceRecord setMappingConfig(String value) {
+    public IServiceRecord setMappingConfig(JsonObject value) {
         set(15, value);
         return this;
     }
@@ -303,8 +305,8 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 映射配置
      */
     @Override
-    public String getMappingConfig() {
-        return (String) get(15);
+    public JsonObject getMappingConfig() {
+        return (JsonObject) get(15);
     }
 
     /**
@@ -331,7 +333,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 业务配置
      */
     @Override
-    public IServiceRecord setServiceConfig(String value) {
+    public IServiceRecord setServiceConfig(JsonObject value) {
         set(17, value);
         return this;
     }
@@ -341,8 +343,8 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 业务配置
      */
     @Override
-    public String getServiceConfig() {
-        return (String) get(17);
+    public JsonObject getServiceConfig() {
+        return (JsonObject) get(17);
     }
 
     /**
@@ -369,7 +371,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 数据库配置
      */
     @Override
-    public IServiceRecord setConfigDatabase(String value) {
+    public IServiceRecord setConfigDatabase(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -379,8 +381,8 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 数据库配置
      */
     @Override
-    public String getConfigDatabase() {
-        return (String) get(19);
+    public JsonObject getConfigDatabase() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -388,7 +390,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 「configIntegration」- 集成配置
      */
     @Override
-    public IServiceRecord setConfigIntegration(String value) {
+    public IServiceRecord setConfigIntegration(JsonObject value) {
         set(20, value);
         return this;
     }
@@ -398,8 +400,8 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * 「configIntegration」- 集成配置
      */
     @Override
-    public String getConfigIntegration() {
-        return (String) get(20);
+    public JsonObject getConfigIntegration() {
+        return (JsonObject) get(20);
     }
 
     /**
@@ -576,7 +578,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * Setter for <code>ZDB.I_SERVICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IServiceRecord setMetadata(String value) {
+    public IServiceRecord setMetadata(JsonObject value) {
         set(31, value);
         return this;
     }
@@ -585,8 +587,8 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      * Getter for <code>ZDB.I_SERVICE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(31);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(31);
     }
 
     /**
@@ -749,7 +751,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
     /**
      * Create a detached, initialised IServiceRecord
      */
-    public IServiceRecord(String id, String name, String namespace, String comment, String identifier, String identifierComponent, String ruleUnique, String channelType, String channelComponent, String channelConfig, String dictComponent, String dictConfig, String dictEpsilon, String mappingMode, String mappingComponent, String mappingConfig, String serviceComponent, String serviceConfig, String serviceRecord, String configDatabase, String configIntegration, String inScript, String outScript, Boolean isGraphic, Boolean isWorkflow, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IServiceRecord(String id, String name, String namespace, String comment, String identifier, String identifierComponent, JsonObject ruleUnique, String channelType, String channelComponent, JsonObject channelConfig, String dictComponent, JsonArray dictConfig, JsonObject dictEpsilon, String mappingMode, String mappingComponent, JsonObject mappingConfig, String serviceComponent, JsonObject serviceConfig, String serviceRecord, JsonObject configDatabase, JsonObject configIntegration, String inScript, String outScript, Boolean isGraphic, Boolean isWorkflow, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IService.I_SERVICE);
 
         setId(id);

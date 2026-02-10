@@ -24,7 +24,7 @@ public class FsReadOnly extends FsDefault {
         final JsonObject metadata = new JsonObject();
         metadata.put("deletion", Boolean.FALSE);
         metadata.put("edition", Boolean.FALSE);
-        directory.setMetadata(metadata.encode());
+        directory.setMetadata(metadata);
         return directory.setType(EmDirectory.Type.STORE.name());
     }
 }

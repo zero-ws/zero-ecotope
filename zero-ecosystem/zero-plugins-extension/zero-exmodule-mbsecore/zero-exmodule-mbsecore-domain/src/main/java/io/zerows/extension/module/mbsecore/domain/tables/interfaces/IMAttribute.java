@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -185,25 +186,25 @@ public interface IMAttribute extends VertxPojo, Serializable {
      * Setter for <code>ZDB.M_ATTRIBUTE.SOURCE_CONFIG</code>. 「sourceConfig」-
      * 数据集配置
      */
-    public IMAttribute setSourceConfig(String value);
+    public IMAttribute setSourceConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_ATTRIBUTE.SOURCE_CONFIG</code>. 「sourceConfig」-
      * 数据集配置
      */
-    public String getSourceConfig();
+    public JsonObject getSourceConfig();
 
     /**
      * Setter for <code>ZDB.M_ATTRIBUTE.SOURCE_EXTERNAL</code>.
      * 「sourceExternal」- 外部配置信息
      */
-    public IMAttribute setSourceExternal(String value);
+    public IMAttribute setSourceExternal(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_ATTRIBUTE.SOURCE_EXTERNAL</code>.
      * 「sourceExternal」- 外部配置信息
      */
-    public String getSourceExternal();
+    public JsonObject getSourceExternal();
 
     /**
      * Setter for <code>ZDB.M_ATTRIBUTE.SOURCE_FIELD</code>. 「sourceField」- 可选
@@ -219,13 +220,13 @@ public interface IMAttribute extends VertxPojo, Serializable {
      * Setter for <code>ZDB.M_ATTRIBUTE.SOURCE_REFERENCE</code>.
      * 「sourceReference」- 引用配置信息
      */
-    public IMAttribute setSourceReference(String value);
+    public IMAttribute setSourceReference(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_ATTRIBUTE.SOURCE_REFERENCE</code>.
      * 「sourceReference」- 引用配置信息
      */
-    public String getSourceReference();
+    public JsonObject getSourceReference();
 
     /**
      * Setter for <code>ZDB.M_ATTRIBUTE.TYPE</code>. 「type」- 类型
@@ -300,12 +301,12 @@ public interface IMAttribute extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 元配置
      */
-    public IMAttribute setMetadata(String value);
+    public IMAttribute setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.M_ATTRIBUTE.VERSION</code>. 「version」- 版本号
@@ -391,10 +392,10 @@ public interface IMAttribute extends VertxPojo, Serializable {
                 setOrThrow(this::setNormalize,json::getString,"NORMALIZE","java.lang.String");
                 setOrThrow(this::setOutComponent,json::getString,"OUT_COMPONENT","java.lang.String");
                 setOrThrow(this::setSource,json::getString,"SOURCE","java.lang.String");
-                setOrThrow(this::setSourceConfig,json::getString,"SOURCE_CONFIG","java.lang.String");
-                setOrThrow(this::setSourceExternal,json::getString,"SOURCE_EXTERNAL","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SOURCE_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SOURCE_EXTERNAL!
                 setOrThrow(this::setSourceField,json::getString,"SOURCE_FIELD","java.lang.String");
-                setOrThrow(this::setSourceReference,json::getString,"SOURCE_REFERENCE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SOURCE_REFERENCE!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setModelId,json::getString,"MODEL_ID","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -402,7 +403,7 @@ public interface IMAttribute extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -431,10 +432,10 @@ public interface IMAttribute extends VertxPojo, Serializable {
                 json.put("NORMALIZE",getNormalize());
                 json.put("OUT_COMPONENT",getOutComponent());
                 json.put("SOURCE",getSource());
-                json.put("SOURCE_CONFIG",getSourceConfig());
-                json.put("SOURCE_EXTERNAL",getSourceExternal());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SOURCE_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SOURCE_EXTERNAL!
                 json.put("SOURCE_FIELD",getSourceField());
-                json.put("SOURCE_REFERENCE",getSourceReference());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SOURCE_REFERENCE!
                 json.put("TYPE",getType());
                 json.put("MODEL_ID",getModelId());
                 json.put("SIGMA",getSigma());
@@ -442,7 +443,7 @@ public interface IMAttribute extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

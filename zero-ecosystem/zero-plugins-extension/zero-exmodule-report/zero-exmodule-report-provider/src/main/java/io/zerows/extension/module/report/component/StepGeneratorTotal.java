@@ -35,7 +35,7 @@ public class StepGeneratorTotal extends StepGeneratorBase {
         final JsonObject reportConfig = Ut.toJObject(report.getReportConfig());
         final JsonObject bottomTotal = Ut.valueJObject(reportConfig, RpConstant.ConfigField.TOTAL);
         final JsonObject totalCount = Ut.valueJObject(reportConfig, RpConstant.ConfigField.TOTAL_COUNT);
-        final JsonObject reportContent = new JsonObject(instance.getReportContent());
+        final JsonObject reportContent = Ut.valueJObject(instance.getReportContent());
         final JsonArray data = reportContent.getJsonArray(KName.DATA);
         final JsonArray children = new JsonArray();
         data.forEach(item -> {
@@ -100,7 +100,7 @@ public class StepGeneratorTotal extends StepGeneratorBase {
             data.add(entries);
         }
         reportContent.put(KName.DATA, data);
-        instance.setReportContent(reportContent.toString());
+        instance.setReportContent(reportContent);
         return Ux.future(instance);
     }
 }

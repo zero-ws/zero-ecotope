@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFCurrency;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,7 @@ public class FCurrency implements VertxPojo, IFCurrency {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -71,7 +72,7 @@ public class FCurrency implements VertxPojo, IFCurrency {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -295,7 +296,7 @@ public class FCurrency implements VertxPojo, IFCurrency {
      * Getter for <code>ZDB.F_CURRENCY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -303,7 +304,7 @@ public class FCurrency implements VertxPojo, IFCurrency {
      * Setter for <code>ZDB.F_CURRENCY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FCurrency setMetadata(String metadata) {
+    public FCurrency setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

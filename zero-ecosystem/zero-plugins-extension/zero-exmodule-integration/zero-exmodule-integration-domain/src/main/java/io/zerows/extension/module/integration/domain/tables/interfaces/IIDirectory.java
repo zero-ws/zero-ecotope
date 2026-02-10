@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -138,12 +139,12 @@ public interface IIDirectory extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
-    public IIDirectory setVisitGroup(String value);
+    public IIDirectory setVisitGroup(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
-    public String getVisitGroup();
+    public JsonObject getVisitGroup();
 
     /**
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_MODE</code>. 「visitMode」 - 目录模式：只读
@@ -160,12 +161,12 @@ public interface IIDirectory extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
-    public IIDirectory setVisitRole(String value);
+    public IIDirectory setVisitRole(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
-    public String getVisitRole();
+    public JsonObject getVisitRole();
 
     /**
      * Setter for <code>ZDB.I_DIRECTORY.TYPE</code>. 「type」- 类型
@@ -240,12 +241,12 @@ public interface IIDirectory extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_DIRECTORY.METADATA</code>. 「metadata」- 元配置
      */
-    public IIDirectory setMetadata(String value);
+    public IIDirectory setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_DIRECTORY.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.I_DIRECTORY.VERSION</code>. 「version」- 版本号
@@ -326,9 +327,9 @@ public interface IIDirectory extends VertxPojo, Serializable {
                 setOrThrow(this::setStorePath,json::getString,"STORE_PATH","java.lang.String");
                 setOrThrow(this::setVisit,json::getBoolean,"VISIT","java.lang.Boolean");
                 setOrThrow(this::setVisitComponent,json::getString,"VISIT_COMPONENT","java.lang.String");
-                setOrThrow(this::setVisitGroup,json::getString,"VISIT_GROUP","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VISIT_GROUP!
                 setOrThrow(this::setVisitMode,json::getString,"VISIT_MODE","java.lang.String");
-                setOrThrow(this::setVisitRole,json::getString,"VISIT_ROLE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VISIT_ROLE!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setCategory,json::getString,"CATEGORY","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -336,7 +337,7 @@ public interface IIDirectory extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -360,9 +361,9 @@ public interface IIDirectory extends VertxPojo, Serializable {
                 json.put("STORE_PATH",getStorePath());
                 json.put("VISIT",getVisit());
                 json.put("VISIT_COMPONENT",getVisitComponent());
-                json.put("VISIT_GROUP",getVisitGroup());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VISIT_GROUP!
                 json.put("VISIT_MODE",getVisitMode());
-                json.put("VISIT_ROLE",getVisitRole());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VISIT_ROLE!
                 json.put("TYPE",getType());
                 json.put("CATEGORY",getCategory());
                 json.put("SIGMA",getSigma());
@@ -370,7 +371,7 @@ public interface IIDirectory extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

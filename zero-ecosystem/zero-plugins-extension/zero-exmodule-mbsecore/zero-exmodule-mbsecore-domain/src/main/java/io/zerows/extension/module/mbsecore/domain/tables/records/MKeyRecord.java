@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MKey;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMKey;
 
@@ -44,7 +46,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArra
      */
     @Override
-    public MKeyRecord setColumns(String value) {
+    public MKeyRecord setColumns(JsonArray value) {
         set(1, value);
         return this;
     }
@@ -53,8 +55,8 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Getter for <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArra
      */
     @Override
-    public String getColumns() {
-        return (String) get(1);
+    public JsonArray getColumns() {
+        return (JsonArray) get(1);
     }
 
     /**
@@ -214,7 +216,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Setter for <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MKeyRecord setMetadata(String value) {
+    public MKeyRecord setMetadata(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -223,8 +225,8 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
      * Getter for <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(11);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -367,7 +369,7 @@ public class MKeyRecord extends UpdatableRecordImpl<MKeyRecord> implements Vertx
     /**
      * Create a detached, initialised MKeyRecord
      */
-    public MKeyRecord(String id, String columns, String comments, String entityId, String name, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MKeyRecord(String id, JsonArray columns, String comments, String entityId, String name, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MKey.M_KEY);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.TplMessage;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.ITplMessage;
 
@@ -233,7 +234,7 @@ public class TplMessageRecord extends UpdatableRecordImpl<TplMessageRecord> impl
      * Setter for <code>ZDB.TPL_MESSAGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public TplMessageRecord setMetadata(String value) {
+    public TplMessageRecord setMetadata(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -242,8 +243,8 @@ public class TplMessageRecord extends UpdatableRecordImpl<TplMessageRecord> impl
      * Getter for <code>ZDB.TPL_MESSAGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(12);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -387,7 +388,7 @@ public class TplMessageRecord extends UpdatableRecordImpl<TplMessageRecord> impl
     /**
      * Create a detached, initialised TplMessageRecord
      */
-    public TplMessageRecord(String id, String code, String exprComponent, String exprContent, String exprSubject, String name, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public TplMessageRecord(String id, String code, String exprComponent, String exprContent, String exprSubject, String name, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(TplMessage.TPL_MESSAGE);
 
         setId(id);

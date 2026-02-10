@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -50,42 +52,42 @@ public interface IBWeb extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
-    public IBWeb setLicContent(String value);
+    public IBWeb setLicContent(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
-    public String getLicContent();
+    public JsonArray getLicContent();
 
     /**
      * Setter for <code>ZDB.B_WEB.LIC_MODULE</code>. 「licModule」- 单独指定
      */
-    public IBWeb setLicModule(String value);
+    public IBWeb setLicModule(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_WEB.LIC_MODULE</code>. 「licModule」- 单独指定
      */
-    public String getLicModule();
+    public JsonArray getLicModule();
 
     /**
      * Setter for <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
-    public IBWeb setLicOp(String value);
+    public IBWeb setLicOp(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
-    public String getLicOp();
+    public JsonArray getLicOp();
 
     /**
      * Setter for <code>ZDB.B_WEB.LIC_TPL</code>. 「licTpl」- PAGE
      */
-    public IBWeb setLicTpl(String value);
+    public IBWeb setLicTpl(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_WEB.LIC_TPL</code>. 「licTpl」- PAGE
      */
-    public String getLicTpl();
+    public JsonArray getLicTpl();
 
     /**
      * Setter for <code>ZDB.B_WEB.TYPE</code>. 「type」- 类型
@@ -150,12 +152,12 @@ public interface IBWeb extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 元配置
      */
-    public IBWeb setMetadata(String value);
+    public IBWeb setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.B_WEB.VERSION</code>. 「version」- 版本号
@@ -228,17 +230,17 @@ public interface IBWeb extends VertxPojo, Serializable {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setBlockId,json::getString,"BLOCK_ID","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
-                setOrThrow(this::setLicContent,json::getString,"LIC_CONTENT","java.lang.String");
-                setOrThrow(this::setLicModule,json::getString,"LIC_MODULE","java.lang.String");
-                setOrThrow(this::setLicOp,json::getString,"LIC_OP","java.lang.String");
-                setOrThrow(this::setLicTpl,json::getString,"LIC_TPL","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_CONTENT!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_MODULE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_OP!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_TPL!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -254,17 +256,17 @@ public interface IBWeb extends VertxPojo, Serializable {
                 json.put("ID",getId());
                 json.put("BLOCK_ID",getBlockId());
                 json.put("CODE",getCode());
-                json.put("LIC_CONTENT",getLicContent());
-                json.put("LIC_MODULE",getLicModule());
-                json.put("LIC_OP",getLicOp());
-                json.put("LIC_TPL",getLicTpl());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_CONTENT!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_MODULE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_OP!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_TPL!
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

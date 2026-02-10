@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.KpFeature;
 import io.zerows.extension.module.report.domain.tables.records.KpFeatureRecord;
 
@@ -56,7 +57,7 @@ public class KpFeatureDao extends AbstractVertxDAO<KpFeatureRecord, io.zerows.ex
         /**
      * Find records that have <code>IN_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByInConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByInConfig(Collection<JsonObject> values) {
                 return findManyByCondition(KpFeature.KP_FEATURE.IN_CONFIG.in(values));
         }
 
@@ -64,7 +65,7 @@ public class KpFeatureDao extends AbstractVertxDAO<KpFeatureRecord, io.zerows.ex
      * Find records that have <code>IN_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByInConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByInConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpFeature.KP_FEATURE.IN_CONFIG.in(values),limit);
         }
 
@@ -102,7 +103,7 @@ public class KpFeatureDao extends AbstractVertxDAO<KpFeatureRecord, io.zerows.ex
         /**
      * Find records that have <code>OUT_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByOutConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByOutConfig(Collection<JsonObject> values) {
                 return findManyByCondition(KpFeature.KP_FEATURE.OUT_CONFIG.in(values));
         }
 
@@ -110,7 +111,7 @@ public class KpFeatureDao extends AbstractVertxDAO<KpFeatureRecord, io.zerows.ex
      * Find records that have <code>OUT_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByOutConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByOutConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpFeature.KP_FEATURE.OUT_CONFIG.in(values),limit);
         }
 
@@ -133,7 +134,7 @@ public class KpFeatureDao extends AbstractVertxDAO<KpFeatureRecord, io.zerows.ex
      * Find records that have <code>VALUE_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByValueConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByValueConfig(Collection<JsonObject> values) {
                 return findManyByCondition(KpFeature.KP_FEATURE.VALUE_CONFIG.in(values));
         }
 
@@ -141,7 +142,7 @@ public class KpFeatureDao extends AbstractVertxDAO<KpFeatureRecord, io.zerows.ex
      * Find records that have <code>VALUE_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByValueConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByValueConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpFeature.KP_FEATURE.VALUE_CONFIG.in(values),limit);
         }
 
@@ -284,7 +285,7 @@ public class KpFeatureDao extends AbstractVertxDAO<KpFeatureRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(KpFeature.KP_FEATURE.METADATA.in(values));
         }
 
@@ -292,7 +293,7 @@ public class KpFeatureDao extends AbstractVertxDAO<KpFeatureRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpFeature>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpFeature.KP_FEATURE.METADATA.in(values),limit);
         }
 

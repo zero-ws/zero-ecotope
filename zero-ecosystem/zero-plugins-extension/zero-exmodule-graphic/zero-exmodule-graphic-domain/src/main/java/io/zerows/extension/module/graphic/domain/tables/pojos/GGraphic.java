@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.interfaces.IGGraphic;
 
 import java.time.LocalDateTime;
@@ -27,7 +28,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
     private String mode;
     private String name;
     private String ownerId;
-    private String ui;
+    private JsonObject ui;
     private String type;
     private String modelId;
     private String modelKey;
@@ -37,7 +38,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -82,7 +83,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
         String mode,
         String name,
         String ownerId,
-        String ui,
+        JsonObject ui,
         String type,
         String modelId,
         String modelKey,
@@ -92,7 +93,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -278,7 +279,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Getter for <code>ZDB.G_GRAPHIC.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public String getUi() {
+    public JsonObject getUi() {
         return this.ui;
     }
 
@@ -286,7 +287,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public GGraphic setUi(String ui) {
+    public GGraphic setUi(JsonObject ui) {
         this.ui = ui;
         return this;
     }
@@ -450,7 +451,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Getter for <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -458,7 +459,7 @@ public class GGraphic implements VertxPojo, IGGraphic {
      * Setter for <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public GGraphic setMetadata(String metadata) {
+    public GGraphic setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

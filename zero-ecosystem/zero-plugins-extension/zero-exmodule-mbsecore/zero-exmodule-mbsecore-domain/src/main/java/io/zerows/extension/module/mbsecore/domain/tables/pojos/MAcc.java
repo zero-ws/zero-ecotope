@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMAcc;
 
 import java.time.LocalDateTime;
@@ -20,8 +22,8 @@ public class MAcc implements VertxPojo, IMAcc {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String recordJson;
-    private String recordRaw;
+    private JsonArray recordJson;
+    private JsonArray recordRaw;
     private String recordUnique;
     private String modelId;
     private String modelKey;
@@ -30,7 +32,7 @@ public class MAcc implements VertxPojo, IMAcc {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -61,8 +63,8 @@ public class MAcc implements VertxPojo, IMAcc {
 
     public MAcc(
         String id,
-        String recordJson,
-        String recordRaw,
+        JsonArray recordJson,
+        JsonArray recordRaw,
         String recordUnique,
         String modelId,
         String modelKey,
@@ -71,7 +73,7 @@ public class MAcc implements VertxPojo, IMAcc {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -123,7 +125,7 @@ public class MAcc implements VertxPojo, IMAcc {
      * Getter for <code>ZDB.M_ACC.RECORD_JSON</code>. 「recordJson」- 上一次的记录内容
      */
     @Override
-    public String getRecordJson() {
+    public JsonArray getRecordJson() {
         return this.recordJson;
     }
 
@@ -131,7 +133,7 @@ public class MAcc implements VertxPojo, IMAcc {
      * Setter for <code>ZDB.M_ACC.RECORD_JSON</code>. 「recordJson」- 上一次的记录内容
      */
     @Override
-    public MAcc setRecordJson(String recordJson) {
+    public MAcc setRecordJson(JsonArray recordJson) {
         this.recordJson = recordJson;
         return this;
     }
@@ -140,7 +142,7 @@ public class MAcc implements VertxPojo, IMAcc {
      * Getter for <code>ZDB.M_ACC.RECORD_RAW</code>. 「recordRaw」- 上一次的记录
      */
     @Override
-    public String getRecordRaw() {
+    public JsonArray getRecordRaw() {
         return this.recordRaw;
     }
 
@@ -148,7 +150,7 @@ public class MAcc implements VertxPojo, IMAcc {
      * Setter for <code>ZDB.M_ACC.RECORD_RAW</code>. 「recordRaw」- 上一次的记录
      */
     @Override
-    public MAcc setRecordRaw(String recordRaw) {
+    public MAcc setRecordRaw(JsonArray recordRaw) {
         this.recordRaw = recordRaw;
         return this;
     }
@@ -293,7 +295,7 @@ public class MAcc implements VertxPojo, IMAcc {
      * Getter for <code>ZDB.M_ACC.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -301,7 +303,7 @@ public class MAcc implements VertxPojo, IMAcc {
      * Setter for <code>ZDB.M_ACC.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MAcc setMetadata(String metadata) {
+    public MAcc setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

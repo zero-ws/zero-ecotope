@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EAsset;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEAsset;
 
@@ -918,7 +919,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Setter for <code>ZDB.E_ASSET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EAssetRecord setMetadata(String value) {
+    public EAssetRecord setMetadata(JsonObject value) {
         set(52, value);
         return this;
     }
@@ -927,8 +928,8 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
      * Getter for <code>ZDB.E_ASSET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(52);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(52);
     }
 
     /**
@@ -1112,7 +1113,7 @@ public class EAssetRecord extends UpdatableRecordImpl<EAssetRecord> implements V
     /**
      * Create a detached, initialised EAssetRecord
      */
-    public EAssetRecord(String id, LocalDateTime accountAt, String accountBy, String code, String comment, String companyId, String customerId, String deptId, LocalDateTime enterAt, String enterBy, LocalDateTime expiredAt, String expiredComment, String kAssignment, String kChange, String kDeprecated, String kDevalue, String kFixed, String kTax, String modelNumber, String name, Long num, Long numDeprecated, Long numDeprecating, Long numUsed, Long numUsing, String parentId, LocalDateTime scrapAt, String scrapBy, String storeId, String unit, LocalDateTime usedAt, String usedBy, String usedStatus, String userId, BigDecimal vDeprecatedA, BigDecimal vDeprecatedM, BigDecimal vDeReady, BigDecimal vNet, BigDecimal vNetAmount, BigDecimal vNetJunk, BigDecimal vOriginal, BigDecimal vTax, String wayAccording, String wayChange, String wayDeprecate, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EAssetRecord(String id, LocalDateTime accountAt, String accountBy, String code, String comment, String companyId, String customerId, String deptId, LocalDateTime enterAt, String enterBy, LocalDateTime expiredAt, String expiredComment, String kAssignment, String kChange, String kDeprecated, String kDevalue, String kFixed, String kTax, String modelNumber, String name, Long num, Long numDeprecated, Long numDeprecating, Long numUsed, Long numUsing, String parentId, LocalDateTime scrapAt, String scrapBy, String storeId, String unit, LocalDateTime usedAt, String usedBy, String usedStatus, String userId, BigDecimal vDeprecatedA, BigDecimal vDeprecatedM, BigDecimal vDeReady, BigDecimal vNet, BigDecimal vNetAmount, BigDecimal vNetJunk, BigDecimal vOriginal, BigDecimal vTax, String wayAccording, String wayChange, String wayDeprecate, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EAsset.E_ASSET);
 
         setId(id);

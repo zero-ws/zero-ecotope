@@ -54,7 +54,7 @@ public class BlockService implements BlockStub {
             // New Ui Config
             final JsonObject uiContent = new JsonObject();
             fields.fieldNames().forEach(field -> uiContent.put(field, data.getValue(field)));
-            block.setUiContent(uiContent.encode());
+            block.setUiContent(uiContent);
             // updatedAt / updatedBy
             block.setUpdatedAt(LocalDateTime.now());
             block.setUpdatedBy(data.getString(KName.UPDATED_BY));

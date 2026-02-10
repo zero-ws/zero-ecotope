@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.SVisitant;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISVisitant;
@@ -45,7 +46,7 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Setter for <code>ZDB.S_VISITANT.ACL_VARIETY</code>. 「aclVariety」- 多样性的属性集
      */
     @Override
-    public SVisitantRecord setAclVariety(String value) {
+    public SVisitantRecord setAclVariety(JsonArray value) {
         set(1, value);
         return this;
     }
@@ -54,15 +55,15 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Getter for <code>ZDB.S_VISITANT.ACL_VARIETY</code>. 「aclVariety」- 多样性的属性集
      */
     @Override
-    public String getAclVariety() {
-        return (String) get(1);
+    public JsonArray getAclVariety() {
+        return (JsonArray) get(1);
     }
 
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VERGE</code>. 「aclVerge」- 依赖属性集
      */
     @Override
-    public SVisitantRecord setAclVerge(String value) {
+    public SVisitantRecord setAclVerge(JsonArray value) {
         set(2, value);
         return this;
     }
@@ -71,15 +72,15 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Getter for <code>ZDB.S_VISITANT.ACL_VERGE</code>. 「aclVerge」- 依赖属性集
      */
     @Override
-    public String getAclVerge() {
-        return (String) get(2);
+    public JsonArray getAclVerge() {
+        return (JsonArray) get(2);
     }
 
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VIEW</code>. 「aclView」- 只读的属性集
      */
     @Override
-    public SVisitantRecord setAclView(String value) {
+    public SVisitantRecord setAclView(JsonArray value) {
         set(3, value);
         return this;
     }
@@ -88,15 +89,15 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Getter for <code>ZDB.S_VISITANT.ACL_VIEW</code>. 「aclView」- 只读的属性集
      */
     @Override
-    public String getAclView() {
-        return (String) get(3);
+    public JsonArray getAclView() {
+        return (JsonArray) get(3);
     }
 
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VISIBLE</code>. 「aclVisible」- 可见的属性集
      */
     @Override
-    public SVisitantRecord setAclVisible(String value) {
+    public SVisitantRecord setAclVisible(JsonArray value) {
         set(4, value);
         return this;
     }
@@ -105,15 +106,15 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Getter for <code>ZDB.S_VISITANT.ACL_VISIBLE</code>. 「aclVisible」- 可见的属性集
      */
     @Override
-    public String getAclVisible() {
-        return (String) get(4);
+    public JsonArray getAclVisible() {
+        return (JsonArray) get(4);
     }
 
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VOW</code>. 「aclVow」- 引用类属性集
      */
     @Override
-    public SVisitantRecord setAclVow(String value) {
+    public SVisitantRecord setAclVow(JsonArray value) {
         set(5, value);
         return this;
     }
@@ -122,8 +123,8 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Getter for <code>ZDB.S_VISITANT.ACL_VOW</code>. 「aclVow」- 引用类属性集
      */
     @Override
-    public String getAclVow() {
-        return (String) get(5);
+    public JsonArray getAclVow() {
+        return (JsonArray) get(5);
     }
 
     /**
@@ -131,7 +132,7 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Projection
      */
     @Override
-    public SVisitantRecord setDmColumn(String value) {
+    public SVisitantRecord setDmColumn(JsonArray value) {
         set(6, value);
         return this;
     }
@@ -141,15 +142,15 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Projection
      */
     @Override
-    public String getDmColumn() {
-        return (String) get(6);
+    public JsonArray getDmColumn() {
+        return (JsonArray) get(6);
     }
 
     /**
      * Setter for <code>ZDB.S_VISITANT.DM_QR</code>. 「dmQr」对应视图中的 Criteria
      */
     @Override
-    public SVisitantRecord setDmQr(String value) {
+    public SVisitantRecord setDmQr(JsonObject value) {
         set(7, value);
         return this;
     }
@@ -158,15 +159,15 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Getter for <code>ZDB.S_VISITANT.DM_QR</code>. 「dmQr」对应视图中的 Criteria
      */
     @Override
-    public String getDmQr() {
-        return (String) get(7);
+    public JsonObject getDmQr() {
+        return (JsonObject) get(7);
     }
 
     /**
      * Setter for <code>ZDB.S_VISITANT.DM_ROW</code>. 「dmRow」对应视图中 Rows
      */
     @Override
-    public SVisitantRecord setDmRow(String value) {
+    public SVisitantRecord setDmRow(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -175,8 +176,8 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
      * Getter for <code>ZDB.S_VISITANT.DM_ROW</code>. 「dmRow」对应视图中 Rows
      */
     @Override
-    public String getDmRow() {
-        return (String) get(8);
+    public JsonObject getDmRow() {
+        return (JsonObject) get(8);
     }
 
     /**
@@ -534,7 +535,7 @@ public class SVisitantRecord extends UpdatableRecordImpl<SVisitantRecord> implem
     /**
      * Create a detached, initialised SVisitantRecord
      */
-    public SVisitantRecord(String id, String aclVariety, String aclVerge, String aclView, String aclVisible, String aclVow, String dmColumn, String dmQr, String dmRow, String identifier, String mode, String phase, String seekKey, String viewId, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SVisitantRecord(String id, JsonArray aclVariety, JsonArray aclVerge, JsonArray aclView, JsonArray aclVisible, JsonArray aclVow, JsonArray dmColumn, JsonObject dmQr, JsonObject dmRow, String identifier, String mode, String phase, String seekKey, String viewId, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SVisitant.S_VISITANT);
 
         setId(id);

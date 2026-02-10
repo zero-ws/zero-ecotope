@@ -4,6 +4,8 @@
 package io.zerows.extension.module.mbsecore.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.Indexes;
 import io.zerows.extension.module.mbsecore.domain.Keys;
 import io.zerows.extension.module.mbsecore.domain.Zdb;
@@ -140,13 +142,13 @@ public class MAttribute extends TableImpl<MAttributeRecord> {
      * The column <code>ZDB.M_ATTRIBUTE.SOURCE_CONFIG</code>. 「sourceConfig」-
      * 数据集配置
      */
-    public final TableField<MAttributeRecord, String> SOURCE_CONFIG = createField(DSL.name("SOURCE_CONFIG"), SQLDataType.CLOB(65535), this, "「sourceConfig」- 数据集配置");
+    public final TableField<MAttributeRecord, JsonObject> SOURCE_CONFIG = createField(DSL.name("SOURCE_CONFIG"), SQLDataType.CLOB(65535), this, "「sourceConfig」- 数据集配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_ATTRIBUTE.SOURCE_EXTERNAL</code>.
      * 「sourceExternal」- 外部配置信息
      */
-    public final TableField<MAttributeRecord, String> SOURCE_EXTERNAL = createField(DSL.name("SOURCE_EXTERNAL"), SQLDataType.CLOB(65535), this, "「sourceExternal」- 外部配置信息");
+    public final TableField<MAttributeRecord, JsonObject> SOURCE_EXTERNAL = createField(DSL.name("SOURCE_EXTERNAL"), SQLDataType.CLOB(65535), this, "「sourceExternal」- 外部配置信息", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_ATTRIBUTE.SOURCE_FIELD</code>. 「sourceField」- 可选
@@ -157,7 +159,7 @@ public class MAttribute extends TableImpl<MAttributeRecord> {
      * The column <code>ZDB.M_ATTRIBUTE.SOURCE_REFERENCE</code>.
      * 「sourceReference」- 引用配置信息
      */
-    public final TableField<MAttributeRecord, String> SOURCE_REFERENCE = createField(DSL.name("SOURCE_REFERENCE"), SQLDataType.CLOB(65535), this, "「sourceReference」- 引用配置信息");
+    public final TableField<MAttributeRecord, JsonObject> SOURCE_REFERENCE = createField(DSL.name("SOURCE_REFERENCE"), SQLDataType.CLOB(65535), this, "「sourceReference」- 引用配置信息", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_ATTRIBUTE.TYPE</code>. 「type」- 类型
@@ -197,7 +199,7 @@ public class MAttribute extends TableImpl<MAttributeRecord> {
     /**
      * The column <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MAttributeRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MAttributeRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_ATTRIBUTE.VERSION</code>. 「version」- 版本号

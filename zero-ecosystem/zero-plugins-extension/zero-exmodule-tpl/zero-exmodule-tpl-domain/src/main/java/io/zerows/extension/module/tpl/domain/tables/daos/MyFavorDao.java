@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyFavor;
 import io.zerows.extension.module.tpl.domain.tables.records.MyFavorRecord;
 
@@ -145,7 +146,7 @@ public class MyFavorDao extends AbstractVertxDAO<MyFavorRecord, io.zerows.extens
         /**
      * Find records that have <code>URI_PARAM IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyFavor>> findManyByUriParam(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyFavor>> findManyByUriParam(Collection<JsonObject> values) {
                 return findManyByCondition(MyFavor.MY_FAVOR.URI_PARAM.in(values));
         }
 
@@ -153,7 +154,7 @@ public class MyFavorDao extends AbstractVertxDAO<MyFavorRecord, io.zerows.extens
      * Find records that have <code>URI_PARAM IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyFavor>> findManyByUriParam(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyFavor>> findManyByUriParam(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyFavor.MY_FAVOR.URI_PARAM.in(values),limit);
         }
 
@@ -250,7 +251,7 @@ public class MyFavorDao extends AbstractVertxDAO<MyFavorRecord, io.zerows.extens
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyFavor>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyFavor>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MyFavor.MY_FAVOR.METADATA.in(values));
         }
 
@@ -258,7 +259,7 @@ public class MyFavorDao extends AbstractVertxDAO<MyFavorRecord, io.zerows.extens
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyFavor>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyFavor>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyFavor.MY_FAVOR.METADATA.in(values),limit);
         }
 

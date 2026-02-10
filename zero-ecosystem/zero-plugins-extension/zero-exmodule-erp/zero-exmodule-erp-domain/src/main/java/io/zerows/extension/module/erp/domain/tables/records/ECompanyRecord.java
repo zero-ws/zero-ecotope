@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.ECompany;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IECompany;
 
@@ -511,7 +512,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Setter for <code>ZDB.E_COMPANY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public ECompanyRecord setMetadata(String value) {
+    public ECompanyRecord setMetadata(JsonObject value) {
         set(28, value);
         return this;
     }
@@ -520,8 +521,8 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      * Getter for <code>ZDB.E_COMPANY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(28);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(28);
     }
 
     /**
@@ -681,7 +682,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     /**
      * Create a detached, initialised ECompanyRecord
      */
-    public ECompanyRecord(String id, String address, String alias, String code, String comment, String companyId, String contactName, String contactOnline, String contactPhone, String corporationName, String corporationPhone, String customerId, String email, String fax, String homepage, String locationId, String logo, String name, String phone, String taxCode, String taxTitle, String title, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ECompanyRecord(String id, String address, String alias, String code, String comment, String companyId, String contactName, String contactOnline, String contactPhone, String corporationName, String corporationPhone, String customerId, String email, String fax, String homepage, String locationId, String logo, String name, String phone, String taxCode, String taxTitle, String title, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(ECompany.E_COMPANY);
 
         setId(id);

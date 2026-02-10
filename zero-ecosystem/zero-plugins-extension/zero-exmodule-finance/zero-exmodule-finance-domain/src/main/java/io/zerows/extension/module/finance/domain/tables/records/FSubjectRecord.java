@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FSubject;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFSubject;
 
@@ -284,7 +285,7 @@ public class FSubjectRecord extends UpdatableRecordImpl<FSubjectRecord> implemen
      * Setter for <code>ZDB.F_SUBJECT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FSubjectRecord setMetadata(String value) {
+    public FSubjectRecord setMetadata(JsonObject value) {
         set(15, value);
         return this;
     }
@@ -293,8 +294,8 @@ public class FSubjectRecord extends UpdatableRecordImpl<FSubjectRecord> implemen
      * Getter for <code>ZDB.F_SUBJECT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(15);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(15);
     }
 
     /**
@@ -441,7 +442,7 @@ public class FSubjectRecord extends UpdatableRecordImpl<FSubjectRecord> implemen
     /**
      * Create a detached, initialised FSubjectRecord
      */
-    public FSubjectRecord(String id, String code, String comment, String companyId, String helpCode, String name, String owner, String parentId, String serial, String category, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FSubjectRecord(String id, String code, String comment, String companyId, String helpCode, String name, String owner, String parentId, String serial, String category, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FSubject.F_SUBJECT);
 
         setId(id);

@@ -79,7 +79,7 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Setter for <code>ZDB.S_PATH.DM_CONDITION</code>. 「dmCondition」- 分组条件
      */
     @Override
-    public SPathRecord setDmCondition(String value) {
+    public SPathRecord setDmCondition(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -88,15 +88,15 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Getter for <code>ZDB.S_PATH.DM_CONDITION</code>. 「dmCondition」- 分组条件
      */
     @Override
-    public String getDmCondition() {
-        return (String) get(3);
+    public JsonObject getDmCondition() {
+        return (JsonObject) get(3);
     }
 
     /**
      * Setter for <code>ZDB.S_PATH.DM_CONFIG</code>. 「dmConfig」- 组配置信息
      */
     @Override
-    public SPathRecord setDmConfig(String value) {
+    public SPathRecord setDmConfig(JsonObject value) {
         set(4, value);
         return this;
     }
@@ -105,8 +105,8 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Getter for <code>ZDB.S_PATH.DM_CONFIG</code>. 「dmConfig」- 组配置信息
      */
     @Override
-    public String getDmConfig() {
-        return (String) get(4);
+    public JsonObject getDmConfig() {
+        return (JsonObject) get(4);
     }
 
     /**
@@ -130,7 +130,7 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Setter for <code>ZDB.S_PATH.MAPPING</code>. 「mapping」- 从
      */
     @Override
-    public SPathRecord setMapping(String value) {
+    public SPathRecord setMapping(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -139,8 +139,8 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Getter for <code>ZDB.S_PATH.MAPPING</code>. 「mapping」- 从
      */
     @Override
-    public String getMapping() {
-        return (String) get(6);
+    public JsonObject getMapping() {
+        return (JsonObject) get(6);
     }
 
     /**
@@ -251,7 +251,7 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Setter for <code>ZDB.S_PATH.UI_CONDITION</code>. 「uiCondition」- 查询模板
      */
     @Override
-    public SPathRecord setUiCondition(String value) {
+    public SPathRecord setUiCondition(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -260,15 +260,15 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Getter for <code>ZDB.S_PATH.UI_CONDITION</code>. 「uiCondition」- 查询模板
      */
     @Override
-    public String getUiCondition() {
-        return (String) get(13);
+    public JsonObject getUiCondition() {
+        return (JsonObject) get(13);
     }
 
     /**
      * Setter for <code>ZDB.S_PATH.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
     @Override
-    public SPathRecord setUiConfig(String value) {
+    public SPathRecord setUiConfig(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -277,8 +277,8 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Getter for <code>ZDB.S_PATH.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
     @Override
-    public String getUiConfig() {
-        return (String) get(14);
+    public JsonObject getUiConfig() {
+        return (JsonObject) get(14);
     }
 
     /**
@@ -302,7 +302,7 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Setter for <code>ZDB.S_PATH.UI_SURFACE</code>. 「uiSurface」- 界面呈现模式
      */
     @Override
-    public SPathRecord setUiSurface(String value) {
+    public SPathRecord setUiSurface(JsonObject value) {
         set(16, value);
         return this;
     }
@@ -311,8 +311,8 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
      * Getter for <code>ZDB.S_PATH.UI_SURFACE</code>. 「uiSurface」- 界面呈现模式
      */
     @Override
-    public String getUiSurface() {
-        return (String) get(16);
+    public JsonObject getUiSurface() {
+        return (JsonObject) get(16);
     }
 
     /**
@@ -586,7 +586,7 @@ public class SPathRecord extends UpdatableRecordImpl<SPathRecord> implements Ver
     /**
      * Create a detached, initialised SPathRecord
      */
-    public SPathRecord(String id, String code, String dmComponent, String dmCondition, String dmConfig, String dmType, String mapping, String name, String parentId, String phase, String runComponent, String runType, String uiComponent, String uiCondition, String uiConfig, Integer uiSort, String uiSurface, String uiType, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SPathRecord(String id, String code, String dmComponent, JsonObject dmCondition, JsonObject dmConfig, String dmType, JsonObject mapping, String name, String parentId, String phase, String runComponent, String runType, String uiComponent, JsonObject uiCondition, JsonObject uiConfig, Integer uiSort, JsonObject uiSurface, String uiType, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SPath.S_PATH);
 
         setId(id);

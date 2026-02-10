@@ -59,7 +59,7 @@ class StepGeneratorData extends StepGeneratorBase {
     @Override
     public Future<KpReportInstance> build(final KpReportInstance instance, final JsonObject request, final JsonArray sourceData) {
         // reportData
-        instance.setReportData(sourceData.encode());
+        instance.setReportData(sourceData);
         /*
          * 计算 reportContent
          */
@@ -69,12 +69,17 @@ class StepGeneratorData extends StepGeneratorBase {
             final JsonArray featureA = new JsonArray();
             features.forEach(feature -> {
                 final JsonObject featureItem = new JsonObject();
-                final String valueConfig = feature.getValueConfig();
-                if (valueConfig != null) {
-                    final JsonObject entries = new JsonObject(valueConfig);
-                    if (entries.getJsonObject("css") != null) {
-                        featureItem.mergeIn(entries.getJsonObject("css"));
-                    }
+//                final String valueConfig = feature.getValueConfig();
+//                if (valueConfig != null) {
+//                    final JsonObject entries = new JsonObject(valueConfig);
+//                    if (entries.getJsonObject("css") != null) {
+//                        featureItem.mergeIn(entries.getJsonObject("css"));
+//                    }
+//                }
+
+                final JsonObject entries = feature.getValueConfig();
+                if (entries.getJsonObject("css") != null) {
+                    featureItem.mergeIn(entries.getJsonObject("css"));
                 }
 
                 featureItem.put("dataIndex", feature.getName());
@@ -87,7 +92,7 @@ class StepGeneratorData extends StepGeneratorBase {
             final KpFeature featureOfDim = this.metadata().featureDim().get(VValue.ZERO);
             reportContent.put("dimension", featureOfDim.getName());
 
-            instance.setReportContent(reportContent.encode());
+            instance.setReportContent(reportContent);
 
             return Ux.future(instance);
         });

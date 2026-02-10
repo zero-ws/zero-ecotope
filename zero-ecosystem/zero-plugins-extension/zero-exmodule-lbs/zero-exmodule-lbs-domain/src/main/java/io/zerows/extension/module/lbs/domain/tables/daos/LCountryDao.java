@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LCountry;
 import io.zerows.extension.module.lbs.domain.tables.records.LCountryRecord;
 
@@ -206,7 +207,7 @@ public class LCountryDao extends AbstractVertxDAO<LCountryRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LCountry>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LCountry>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(LCountry.L_COUNTRY.METADATA.in(values));
         }
 
@@ -214,7 +215,7 @@ public class LCountryDao extends AbstractVertxDAO<LCountryRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LCountry>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.lbs.domain.tables.pojos.LCountry>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(LCountry.L_COUNTRY.METADATA.in(values),limit);
         }
 

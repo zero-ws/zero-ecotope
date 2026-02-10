@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFBillItem;
 
 import java.math.BigDecimal;
@@ -51,7 +52,7 @@ public class FBillItem implements VertxPojo, IFBillItem {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -132,7 +133,7 @@ public class FBillItem implements VertxPojo, IFBillItem {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -722,7 +723,7 @@ public class FBillItem implements VertxPojo, IFBillItem {
      * Getter for <code>ZDB.F_BILL_ITEM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -730,7 +731,7 @@ public class FBillItem implements VertxPojo, IFBillItem {
      * Setter for <code>ZDB.F_BILL_ITEM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FBillItem setMetadata(String metadata) {
+    public FBillItem setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

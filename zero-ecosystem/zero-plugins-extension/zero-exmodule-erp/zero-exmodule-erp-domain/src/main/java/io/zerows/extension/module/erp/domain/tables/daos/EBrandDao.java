@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EBrand;
 import io.zerows.extension.module.erp.domain.tables.records.EBrandRecord;
 
@@ -254,7 +255,7 @@ public class EBrandDao extends AbstractVertxDAO<EBrandRecord, io.zerows.extensio
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EBrand>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EBrand>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(EBrand.E_BRAND.METADATA.in(values));
         }
 
@@ -262,7 +263,7 @@ public class EBrandDao extends AbstractVertxDAO<EBrandRecord, io.zerows.extensio
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EBrand>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EBrand>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(EBrand.E_BRAND.METADATA.in(values),limit);
         }
 

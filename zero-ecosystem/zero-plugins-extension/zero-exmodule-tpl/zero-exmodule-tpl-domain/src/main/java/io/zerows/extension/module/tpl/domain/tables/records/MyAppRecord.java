@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyApp;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyApp;
 
@@ -231,7 +232,7 @@ public class MyAppRecord extends UpdatableRecordImpl<MyAppRecord> implements Ver
      * Setter for <code>ZDB.MY_APP.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MyAppRecord setMetadata(String value) {
+    public MyAppRecord setMetadata(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -240,8 +241,8 @@ public class MyAppRecord extends UpdatableRecordImpl<MyAppRecord> implements Ver
      * Getter for <code>ZDB.MY_APP.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(12);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -385,7 +386,7 @@ public class MyAppRecord extends UpdatableRecordImpl<MyAppRecord> implements Ver
     /**
      * Create a detached, initialised MyAppRecord
      */
-    public MyAppRecord(String id, String bagId, String owner, String ownerType, String position, Long uiSort, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MyAppRecord(String id, String bagId, String owner, String ownerType, String position, Long uiSort, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MyApp.MY_APP);
 
         setId(id);

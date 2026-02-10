@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -40,22 +41,22 @@ public interface IMyDesktop extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.MY_DESKTOP.UI_CONFIG</code>. 「uiConfig」- 看板配置
      */
-    public IMyDesktop setUiConfig(String value);
+    public IMyDesktop setUiConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_DESKTOP.UI_CONFIG</code>. 「uiConfig」- 看板配置
      */
-    public String getUiConfig();
+    public JsonObject getUiConfig();
 
     /**
      * Setter for <code>ZDB.MY_DESKTOP.UI_GRID</code>. 「uiGrid」- 布局配置
      */
-    public IMyDesktop setUiGrid(String value);
+    public IMyDesktop setUiGrid(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_DESKTOP.UI_GRID</code>. 「uiGrid」- 布局配置
      */
-    public String getUiGrid();
+    public JsonObject getUiGrid();
 
     /**
      * Setter for <code>ZDB.MY_DESKTOP.OWNER</code>. 「owner」- 拥有者ID
@@ -130,12 +131,12 @@ public interface IMyDesktop extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.MY_DESKTOP.METADATA</code>. 「metadata」- 附加配置
      */
-    public IMyDesktop setMetadata(String value);
+    public IMyDesktop setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_DESKTOP.METADATA</code>. 「metadata」- 附加配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.MY_DESKTOP.CREATED_AT</code>. 「createdAt」- 创建时间
@@ -197,8 +198,8 @@ public interface IMyDesktop extends VertxPojo, Serializable {
         public default IMyDesktop fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setBagId,json::getString,"BAG_ID","java.lang.String");
-                setOrThrow(this::setUiConfig,json::getString,"UI_CONFIG","java.lang.String");
-                setOrThrow(this::setUiGrid,json::getString,"UI_GRID","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_GRID!
                 setOrThrow(this::setOwner,json::getString,"OWNER","java.lang.String");
                 setOrThrow(this::setOwnerType,json::getString,"OWNER_TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -206,7 +207,7 @@ public interface IMyDesktop extends VertxPojo, Serializable {
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
                 setOrThrow(this::setUpdatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"UPDATED_AT","java.time.LocalDateTime");
@@ -220,8 +221,8 @@ public interface IMyDesktop extends VertxPojo, Serializable {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
                 json.put("BAG_ID",getBagId());
-                json.put("UI_CONFIG",getUiConfig());
-                json.put("UI_GRID",getUiGrid());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_GRID!
                 json.put("OWNER",getOwner());
                 json.put("OWNER_TYPE",getOwnerType());
                 json.put("SIGMA",getSigma());
@@ -229,7 +230,7 @@ public interface IMyDesktop extends VertxPojo, Serializable {
                 json.put("TENANT_ID",getTenantId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());
                 json.put("UPDATED_AT",getUpdatedAt()==null?null:getUpdatedAt().toString());

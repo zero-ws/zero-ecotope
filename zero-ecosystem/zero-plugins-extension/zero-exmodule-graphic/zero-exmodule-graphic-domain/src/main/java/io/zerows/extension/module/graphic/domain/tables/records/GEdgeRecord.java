@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.GEdge;
 import io.zerows.extension.module.graphic.domain.tables.interfaces.IGEdge;
 
@@ -78,7 +79,7 @@ public class GEdgeRecord extends UpdatableRecordImpl<GEdgeRecord> implements Ver
      * Setter for <code>ZDB.G_EDGE.RECORD_DATA</code>. 「recordData」 - 组中存储的数据信息
      */
     @Override
-    public GEdgeRecord setRecordData(String value) {
+    public GEdgeRecord setRecordData(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -87,8 +88,8 @@ public class GEdgeRecord extends UpdatableRecordImpl<GEdgeRecord> implements Ver
      * Getter for <code>ZDB.G_EDGE.RECORD_DATA</code>. 「recordData」 - 组中存储的数据信息
      */
     @Override
-    public String getRecordData() {
-        return (String) get(3);
+    public JsonObject getRecordData() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -146,7 +147,7 @@ public class GEdgeRecord extends UpdatableRecordImpl<GEdgeRecord> implements Ver
      * Setter for <code>ZDB.G_EDGE.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public GEdgeRecord setUi(String value) {
+    public GEdgeRecord setUi(JsonObject value) {
         set(7, value);
         return this;
     }
@@ -155,8 +156,8 @@ public class GEdgeRecord extends UpdatableRecordImpl<GEdgeRecord> implements Ver
      * Getter for <code>ZDB.G_EDGE.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public String getUi() {
-        return (String) get(7);
+    public JsonObject getUi() {
+        return (JsonObject) get(7);
     }
 
     /**
@@ -265,7 +266,7 @@ public class GEdgeRecord extends UpdatableRecordImpl<GEdgeRecord> implements Ver
      * Setter for <code>ZDB.G_EDGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public GEdgeRecord setMetadata(String value) {
+    public GEdgeRecord setMetadata(JsonObject value) {
         set(14, value);
         return this;
     }
@@ -274,8 +275,8 @@ public class GEdgeRecord extends UpdatableRecordImpl<GEdgeRecord> implements Ver
      * Getter for <code>ZDB.G_EDGE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(14);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(14);
     }
 
     /**
@@ -421,7 +422,7 @@ public class GEdgeRecord extends UpdatableRecordImpl<GEdgeRecord> implements Ver
     /**
      * Create a detached, initialised GEdgeRecord
      */
-    public GEdgeRecord(String id, String graphicId, String name, String recordData, String recordKey, String sourceKey, String targetKey, String ui, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public GEdgeRecord(String id, String graphicId, String name, JsonObject recordData, String recordKey, String sourceKey, String targetKey, JsonObject ui, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(GEdge.G_EDGE);
 
         setId(id);

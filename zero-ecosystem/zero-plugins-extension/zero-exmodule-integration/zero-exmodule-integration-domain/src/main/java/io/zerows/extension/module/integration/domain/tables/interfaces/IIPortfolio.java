@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -40,24 +41,24 @@ public interface IIPortfolio extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_CONFIG</code>. 「dataConfig」- 数据基础配置
      */
-    public IIPortfolio setDataConfig(String value);
+    public IIPortfolio setDataConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_PORTFOLIO.DATA_CONFIG</code>. 「dataConfig」- 数据基础配置
      */
-    public String getDataConfig();
+    public JsonObject getDataConfig();
 
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_INTEGRATION</code>.
      * 「dataIntegration」- 绑定好过后
      */
-    public IIPortfolio setDataIntegration(String value);
+    public IIPortfolio setDataIntegration(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_PORTFOLIO.DATA_INTEGRATION</code>.
      * 「dataIntegration」- 绑定好过后
      */
-    public String getDataIntegration();
+    public JsonObject getDataIntegration();
 
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_KEY</code>. 「dataKey」- LDAP路径做完
@@ -72,12 +73,12 @@ public interface IIPortfolio extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_SECURE</code>. 「dataSecure」- 安全专用配置
      */
-    public IIPortfolio setDataSecure(String value);
+    public IIPortfolio setDataSecure(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_PORTFOLIO.DATA_SECURE</code>. 「dataSecure」- 安全专用配置
      */
-    public String getDataSecure();
+    public JsonObject getDataSecure();
 
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.INTEGRATION_ID</code>. 「integrationId」-
@@ -136,12 +137,12 @@ public interface IIPortfolio extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.RUN_CONFIG</code>. 「runConfig」- 执行组件额外配置
      */
-    public IIPortfolio setRunConfig(String value);
+    public IIPortfolio setRunConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_PORTFOLIO.RUN_CONFIG</code>. 「runConfig」- 执行组件额外配置
      */
-    public String getRunConfig();
+    public JsonObject getRunConfig();
 
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.TYPE</code>. 「type」- 类型
@@ -216,12 +217,12 @@ public interface IIPortfolio extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.METADATA</code>. 「metadata」- 元配置
      */
-    public IIPortfolio setMetadata(String value);
+    public IIPortfolio setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_PORTFOLIO.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.I_PORTFOLIO.VERSION</code>. 「version」- 版本号
@@ -293,16 +294,16 @@ public interface IIPortfolio extends VertxPojo, Serializable {
         public default IIPortfolio fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
-                setOrThrow(this::setDataConfig,json::getString,"DATA_CONFIG","java.lang.String");
-                setOrThrow(this::setDataIntegration,json::getString,"DATA_INTEGRATION","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_INTEGRATION!
                 setOrThrow(this::setDataKey,json::getString,"DATA_KEY","java.lang.String");
-                setOrThrow(this::setDataSecure,json::getString,"DATA_SECURE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_SECURE!
                 setOrThrow(this::setIntegrationId,json::getString,"INTEGRATION_ID","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setOwner,json::getString,"OWNER","java.lang.String");
                 setOrThrow(this::setOwnerType,json::getString,"OWNER_TYPE","java.lang.String");
                 setOrThrow(this::setRunComponent,json::getString,"RUN_COMPONENT","java.lang.String");
-                setOrThrow(this::setRunConfig,json::getString,"RUN_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RUN_CONFIG!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setStatus,json::getString,"STATUS","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -310,7 +311,7 @@ public interface IIPortfolio extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -325,16 +326,16 @@ public interface IIPortfolio extends VertxPojo, Serializable {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
                 json.put("CODE",getCode());
-                json.put("DATA_CONFIG",getDataConfig());
-                json.put("DATA_INTEGRATION",getDataIntegration());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_INTEGRATION!
                 json.put("DATA_KEY",getDataKey());
-                json.put("DATA_SECURE",getDataSecure());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_SECURE!
                 json.put("INTEGRATION_ID",getIntegrationId());
                 json.put("NAME",getName());
                 json.put("OWNER",getOwner());
                 json.put("OWNER_TYPE",getOwnerType());
                 json.put("RUN_COMPONENT",getRunComponent());
-                json.put("RUN_CONFIG",getRunConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RUN_CONFIG!
                 json.put("TYPE",getType());
                 json.put("STATUS",getStatus());
                 json.put("SIGMA",getSigma());
@@ -342,7 +343,7 @@ public interface IIPortfolio extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

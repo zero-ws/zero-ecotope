@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EDept;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEDept;
 
@@ -248,7 +249,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Setter for <code>ZDB.E_DEPT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EDeptRecord setMetadata(String value) {
+    public EDeptRecord setMetadata(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -257,8 +258,8 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
      * Getter for <code>ZDB.E_DEPT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(13);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -403,7 +404,7 @@ public class EDeptRecord extends UpdatableRecordImpl<EDeptRecord> implements Ver
     /**
      * Create a detached, initialised EDeptRecord
      */
-    public EDeptRecord(String id, String code, String comment, String companyId, String deptId, String managerId, String managerName, String name, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EDeptRecord(String id, String code, String comment, String companyId, String deptId, String managerId, String managerName, String name, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EDept.E_DEPT);
 
         setId(id);

@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbseapi.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.interfaces.IIApi;
 
 import java.time.LocalDateTime;
@@ -21,18 +23,18 @@ public class IApi implements VertxPojo, IIApi {
 
     private String id;
     private String comment;
-    private String consumes;
-    private String inMapping;
+    private JsonArray consumes;
+    private JsonObject inMapping;
     private String inPlug;
-    private String inRule;
+    private JsonObject inRule;
     private String inScript;
     private String method;
     private String name;
     private String outWriter;
-    private String paramContained;
+    private JsonArray paramContained;
     private String paramMode;
-    private String paramRequired;
-    private String produces;
+    private JsonArray paramRequired;
+    private JsonArray produces;
     private Boolean secure;
     private String serviceId;
     private String uri;
@@ -47,7 +49,7 @@ public class IApi implements VertxPojo, IIApi {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -96,18 +98,18 @@ public class IApi implements VertxPojo, IIApi {
     public IApi(
         String id,
         String comment,
-        String consumes,
-        String inMapping,
+        JsonArray consumes,
+        JsonObject inMapping,
         String inPlug,
-        String inRule,
+        JsonObject inRule,
         String inScript,
         String method,
         String name,
         String outWriter,
-        String paramContained,
+        JsonArray paramContained,
         String paramMode,
-        String paramRequired,
-        String produces,
+        JsonArray paramRequired,
+        JsonArray produces,
         Boolean secure,
         String serviceId,
         String uri,
@@ -122,7 +124,7 @@ public class IApi implements VertxPojo, IIApi {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -208,7 +210,7 @@ public class IApi implements VertxPojo, IIApi {
      * Getter for <code>ZDB.I_API.CONSUMES</code>. 「consumes」- 当前接口使用的客户端
      */
     @Override
-    public String getConsumes() {
+    public JsonArray getConsumes() {
         return this.consumes;
     }
 
@@ -216,7 +218,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.CONSUMES</code>. 「consumes」- 当前接口使用的客户端
      */
     @Override
-    public IApi setConsumes(String consumes) {
+    public IApi setConsumes(JsonArray consumes) {
         this.consumes = consumes;
         return this;
     }
@@ -225,7 +227,7 @@ public class IApi implements VertxPojo, IIApi {
      * Getter for <code>ZDB.I_API.IN_MAPPING</code>. 「inMapping」- 参数映射规则
      */
     @Override
-    public String getInMapping() {
+    public JsonObject getInMapping() {
         return this.inMapping;
     }
 
@@ -233,7 +235,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.IN_MAPPING</code>. 「inMapping」- 参数映射规则
      */
     @Override
-    public IApi setInMapping(String inMapping) {
+    public IApi setInMapping(JsonObject inMapping) {
         this.inMapping = inMapping;
         return this;
     }
@@ -259,7 +261,7 @@ public class IApi implements VertxPojo, IIApi {
      * Getter for <code>ZDB.I_API.IN_RULE</code>. 「inRule」- 参数验证、转换基
      */
     @Override
-    public String getInRule() {
+    public JsonObject getInRule() {
         return this.inRule;
     }
 
@@ -267,7 +269,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.IN_RULE</code>. 「inRule」- 参数验证、转换基
      */
     @Override
-    public IApi setInRule(String inRule) {
+    public IApi setInRule(JsonObject inRule) {
         this.inRule = inRule;
         return this;
     }
@@ -345,7 +347,7 @@ public class IApi implements VertxPojo, IIApi {
      * 必须参数表
      */
     @Override
-    public String getParamContained() {
+    public JsonArray getParamContained() {
         return this.paramContained;
     }
 
@@ -354,7 +356,7 @@ public class IApi implements VertxPojo, IIApi {
      * 必须参数表
      */
     @Override
-    public IApi setParamContained(String paramContained) {
+    public IApi setParamContained(JsonArray paramContained) {
         this.paramContained = paramContained;
         return this;
     }
@@ -380,7 +382,7 @@ public class IApi implements VertxPojo, IIApi {
      * Getter for <code>ZDB.I_API.PARAM_REQUIRED</code>. 「paramRequired」- 必须参数表
      */
     @Override
-    public String getParamRequired() {
+    public JsonArray getParamRequired() {
         return this.paramRequired;
     }
 
@@ -388,7 +390,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.PARAM_REQUIRED</code>. 「paramRequired」- 必须参数表
      */
     @Override
-    public IApi setParamRequired(String paramRequired) {
+    public IApi setParamRequired(JsonArray paramRequired) {
         this.paramRequired = paramRequired;
         return this;
     }
@@ -397,7 +399,7 @@ public class IApi implements VertxPojo, IIApi {
      * Getter for <code>ZDB.I_API.PRODUCES</code>. 「produces」- 当前接口使用的服务端
      */
     @Override
-    public String getProduces() {
+    public JsonArray getProduces() {
         return this.produces;
     }
 
@@ -405,7 +407,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.PRODUCES</code>. 「produces」- 当前接口使用的服务端
      */
     @Override
-    public IApi setProduces(String produces) {
+    public IApi setProduces(JsonArray produces) {
         this.produces = produces;
         return this;
     }
@@ -654,7 +656,7 @@ public class IApi implements VertxPojo, IIApi {
      * Getter for <code>ZDB.I_API.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -662,7 +664,7 @@ public class IApi implements VertxPojo, IIApi {
      * Setter for <code>ZDB.I_API.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IApi setMetadata(String metadata) {
+    public IApi setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

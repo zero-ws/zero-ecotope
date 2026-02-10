@@ -19,8 +19,10 @@ import io.zerows.platform.metadata.KIntegration;
 import io.zerows.platform.metadata.KMap;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HRule;
+import io.zerows.support.Ut;
 import jakarta.ws.rs.core.MediaType;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
@@ -30,6 +32,13 @@ public class Jt {
 
     public static String jobCode(final IJob job) {
         return job.getNamespace() + VString.DASH + job.getCode();
+    }
+
+    public static Set<String> toSet(final Supplier<JsonArray> supplier) {
+        if (Objects.isNull(supplier)) {
+            return Set.of();
+        }
+        return Ut.toSet(supplier.get());
     }
 
     /*
@@ -45,12 +54,12 @@ public class Jt {
         return JtRoute.toPath(ark, uriSupplier, secure);
     }
 
-    public static Set<MediaType> toMime(final Supplier<String> supplier) {
+    public static Set<MediaType> toMimeObject(final Supplier<JsonArray> supplier) {
         return JtRoute.toMime(supplier);
     }
 
-    public static Set<String> toMimeString(final Supplier<String> supplier) {
-        return toMime(supplier).stream()
+    public static Set<String> toMimeString(final Supplier<JsonArray> supplier) {
+        return toMimeObject(supplier).stream()
             .map(type -> type.getType() + VString.SLASH + type.getSubtype())
             .collect(Collectors.toSet());
     }
@@ -78,10 +87,6 @@ public class Jt {
 
     public static Future<ConcurrentMap<String, JsonArray>> toDictionary(final String key, final String cacheKey, final String identifier, final KDictConfig dict) {
         return JtBusiness.toDictionary(key, cacheKey, identifier, dict);
-    }
-
-    public static Set<String> toSet(final Supplier<String> supplier) {
-        return JtRoute.toSet(supplier);
     }
 
     /*

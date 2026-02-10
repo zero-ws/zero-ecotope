@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbseapi.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.IService;
 import io.zerows.extension.module.mbseapi.domain.tables.records.IServiceRecord;
 
@@ -117,7 +119,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>RULE_UNIQUE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByRuleUnique(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByRuleUnique(Collection<JsonObject> values) {
                 return findManyByCondition(IService.I_SERVICE.RULE_UNIQUE.in(values));
         }
 
@@ -125,7 +127,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>RULE_UNIQUE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByRuleUnique(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByRuleUnique(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.RULE_UNIQUE.in(values),limit);
         }
 
@@ -165,7 +167,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>CHANNEL_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByChannelConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByChannelConfig(Collection<JsonObject> values) {
                 return findManyByCondition(IService.I_SERVICE.CHANNEL_CONFIG.in(values));
         }
 
@@ -173,7 +175,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>CHANNEL_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByChannelConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByChannelConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.CHANNEL_CONFIG.in(values),limit);
         }
 
@@ -197,7 +199,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>DICT_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByDictConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByDictConfig(Collection<JsonArray> values) {
                 return findManyByCondition(IService.I_SERVICE.DICT_CONFIG.in(values));
         }
 
@@ -205,7 +207,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>DICT_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByDictConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByDictConfig(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.DICT_CONFIG.in(values),limit);
         }
 
@@ -213,7 +215,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>DICT_EPSILON IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByDictEpsilon(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByDictEpsilon(Collection<JsonObject> values) {
                 return findManyByCondition(IService.I_SERVICE.DICT_EPSILON.in(values));
         }
 
@@ -221,7 +223,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>DICT_EPSILON IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByDictEpsilon(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByDictEpsilon(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.DICT_EPSILON.in(values),limit);
         }
 
@@ -261,7 +263,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>MAPPING_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByMappingConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByMappingConfig(Collection<JsonObject> values) {
                 return findManyByCondition(IService.I_SERVICE.MAPPING_CONFIG.in(values));
         }
 
@@ -269,7 +271,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>MAPPING_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByMappingConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByMappingConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.MAPPING_CONFIG.in(values),limit);
         }
 
@@ -293,7 +295,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>SERVICE_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByServiceConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByServiceConfig(Collection<JsonObject> values) {
                 return findManyByCondition(IService.I_SERVICE.SERVICE_CONFIG.in(values));
         }
 
@@ -301,7 +303,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>SERVICE_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByServiceConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByServiceConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.SERVICE_CONFIG.in(values),limit);
         }
 
@@ -325,7 +327,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>CONFIG_DATABASE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByConfigDatabase(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByConfigDatabase(Collection<JsonObject> values) {
                 return findManyByCondition(IService.I_SERVICE.CONFIG_DATABASE.in(values));
         }
 
@@ -333,7 +335,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>CONFIG_DATABASE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByConfigDatabase(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByConfigDatabase(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.CONFIG_DATABASE.in(values),limit);
         }
 
@@ -341,7 +343,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>CONFIG_INTEGRATION IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByConfigIntegration(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByConfigIntegration(Collection<JsonObject> values) {
                 return findManyByCondition(IService.I_SERVICE.CONFIG_INTEGRATION.in(values));
         }
 
@@ -349,7 +351,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>CONFIG_INTEGRATION IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByConfigIntegration(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByConfigIntegration(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.CONFIG_INTEGRATION.in(values),limit);
         }
 
@@ -507,7 +509,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(IService.I_SERVICE.METADATA.in(values));
         }
 
@@ -515,7 +517,7 @@ public class IServiceDao extends AbstractVertxDAO<IServiceRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IService>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IService.I_SERVICE.METADATA.in(values),limit);
         }
 

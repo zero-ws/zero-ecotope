@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IETeam;
 
 import java.time.LocalDateTime;
@@ -35,7 +36,7 @@ public class ETeam implements VertxPojo, IETeam {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -86,7 +87,7 @@ public class ETeam implements VertxPojo, IETeam {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -400,7 +401,7 @@ public class ETeam implements VertxPojo, IETeam {
      * Getter for <code>ZDB.E_TEAM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -408,7 +409,7 @@ public class ETeam implements VertxPojo, IETeam {
      * Setter for <code>ZDB.E_TEAM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public ETeam setMetadata(String metadata) {
+    public ETeam setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

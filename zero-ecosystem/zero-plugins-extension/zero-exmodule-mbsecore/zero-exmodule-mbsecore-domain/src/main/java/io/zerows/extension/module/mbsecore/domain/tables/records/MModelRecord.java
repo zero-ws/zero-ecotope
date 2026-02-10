@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MModel;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMModel;
 
@@ -182,7 +183,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.RULE_UNIQUE</code>. 「ruleUnique」- 当前模型的标识规则
      */
     @Override
-    public MModelRecord setRuleUnique(String value) {
+    public MModelRecord setRuleUnique(JsonObject value) {
         set(9, value);
         return this;
     }
@@ -191,15 +192,15 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Getter for <code>ZDB.M_MODEL.RULE_UNIQUE</code>. 「ruleUnique」- 当前模型的标识规则
      */
     @Override
-    public String getRuleUnique() {
-        return (String) get(9);
+    public JsonObject getRuleUnique() {
+        return (JsonObject) get(9);
     }
 
     /**
      * Setter for <code>ZDB.M_MODEL.SPIDER</code>. 「spider」- 主图格式
      */
     @Override
-    public MModelRecord setSpider(String value) {
+    public MModelRecord setSpider(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -208,8 +209,8 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Getter for <code>ZDB.M_MODEL.SPIDER</code>. 「spider」- 主图格式
      */
     @Override
-    public String getSpider() {
-        return (String) get(10);
+    public JsonObject getSpider() {
+        return (JsonObject) get(10);
     }
 
     /**
@@ -337,7 +338,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Setter for <code>ZDB.M_MODEL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MModelRecord setMetadata(String value) {
+    public MModelRecord setMetadata(JsonObject value) {
         set(18, value);
         return this;
     }
@@ -346,8 +347,8 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
      * Getter for <code>ZDB.M_MODEL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(18);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(18);
     }
 
     /**
@@ -497,7 +498,7 @@ public class MModelRecord extends UpdatableRecordImpl<MModelRecord> implements V
     /**
      * Create a detached, initialised MModelRecord
      */
-    public MModelRecord(String id, String alias, String categoryId, String categoryTree, String comments, String identifier, Boolean isTrack, String name, String namespace, String ruleUnique, String spider, String spiderComponent, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MModelRecord(String id, String alias, String categoryId, String categoryTree, String comments, String identifier, Boolean isTrack, String name, String namespace, JsonObject ruleUnique, JsonObject spider, String spiderComponent, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MModel.M_MODEL);
 
         setId(id);

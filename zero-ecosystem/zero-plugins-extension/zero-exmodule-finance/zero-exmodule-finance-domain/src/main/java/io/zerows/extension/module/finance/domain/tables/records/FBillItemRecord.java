@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FBillItem;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFBillItem;
 
@@ -563,7 +564,7 @@ public class FBillItemRecord extends UpdatableRecordImpl<FBillItemRecord> implem
      * Setter for <code>ZDB.F_BILL_ITEM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FBillItemRecord setMetadata(String value) {
+    public FBillItemRecord setMetadata(JsonObject value) {
         set(31, value);
         return this;
     }
@@ -572,8 +573,8 @@ public class FBillItemRecord extends UpdatableRecordImpl<FBillItemRecord> implem
      * Getter for <code>ZDB.F_BILL_ITEM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(31);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(31);
     }
 
     /**
@@ -736,7 +737,7 @@ public class FBillItemRecord extends UpdatableRecordImpl<FBillItemRecord> implem
     /**
      * Create a detached, initialised FBillItemRecord
      */
-    public FBillItemRecord(String id, BigDecimal amount, BigDecimal amountTotal, String billId, String code, String comment, LocalDateTime endAt, String groupBy, Boolean income, String manualNo, String name, LocalDateTime opAt, String opBy, String opNumber, String opShift, String payTermId, BigDecimal price, Integer quantity, String relatedId, String serial, String settlementId, LocalDateTime startAt, String subjectId, String unit, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FBillItemRecord(String id, BigDecimal amount, BigDecimal amountTotal, String billId, String code, String comment, LocalDateTime endAt, String groupBy, Boolean income, String manualNo, String name, LocalDateTime opAt, String opBy, String opNumber, String opShift, String payTermId, BigDecimal price, Integer quantity, String relatedId, String serial, String settlementId, LocalDateTime startAt, String subjectId, String unit, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FBillItem.F_BILL_ITEM);
 
         setId(id);

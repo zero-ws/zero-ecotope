@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBAuthority;
 
 import java.time.LocalDateTime;
@@ -22,17 +24,17 @@ public class BAuthority implements VertxPojo, IBAuthority {
     private String id;
     private String blockId;
     private String code;
-    private String licAction;
-    private String licPermission;
-    private String licResource;
-    private String licView;
+    private JsonArray licAction;
+    private JsonArray licPermission;
+    private JsonArray licResource;
+    private JsonArray licView;
     private String type;
     private String sigma;
     private String tenantId;
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -67,17 +69,17 @@ public class BAuthority implements VertxPojo, IBAuthority {
         String id,
         String blockId,
         String code,
-        String licAction,
-        String licPermission,
-        String licResource,
-        String licView,
+        JsonArray licAction,
+        JsonArray licPermission,
+        JsonArray licResource,
+        JsonArray licView,
         String type,
         String sigma,
         String tenantId,
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -165,7 +167,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Getter for <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
     @Override
-    public String getLicAction() {
+    public JsonArray getLicAction() {
         return this.licAction;
     }
 
@@ -173,7 +175,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
     @Override
-    public BAuthority setLicAction(String licAction) {
+    public BAuthority setLicAction(JsonArray licAction) {
         this.licAction = licAction;
         return this;
     }
@@ -183,7 +185,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * 所需权限集合
      */
     @Override
-    public String getLicPermission() {
+    public JsonArray getLicPermission() {
         return this.licPermission;
     }
 
@@ -192,7 +194,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * 所需权限集合
      */
     @Override
-    public BAuthority setLicPermission(String licPermission) {
+    public BAuthority setLicPermission(JsonArray licPermission) {
         this.licPermission = licPermission;
         return this;
     }
@@ -201,7 +203,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Getter for <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
     @Override
-    public String getLicResource() {
+    public JsonArray getLicResource() {
         return this.licResource;
     }
 
@@ -209,7 +211,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
     @Override
-    public BAuthority setLicResource(String licResource) {
+    public BAuthority setLicResource(JsonArray licResource) {
         this.licResource = licResource;
         return this;
     }
@@ -218,7 +220,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Getter for <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
     @Override
-    public String getLicView() {
+    public JsonArray getLicView() {
         return this.licView;
     }
 
@@ -226,7 +228,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
     @Override
-    public BAuthority setLicView(String licView) {
+    public BAuthority setLicView(JsonArray licView) {
         this.licView = licView;
         return this;
     }
@@ -337,7 +339,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Getter for <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -345,7 +347,7 @@ public class BAuthority implements VertxPojo, IBAuthority {
      * Setter for <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BAuthority setMetadata(String metadata) {
+    public BAuthority setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

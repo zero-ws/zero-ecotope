@@ -47,14 +47,8 @@ class JtDataObject {
     static HRule toRule(final IService service) {
         if (Objects.isNull(service)) {
             return null;
-        } else {
-            final String rules = service.getRuleUnique();
-            if (Ut.isNil(rules)) {
-                return null;
-            } else {
-                return HRule.of(rules);
-            }
         }
+        return HRule.of(service.getRuleUnique());
     }
 
     static Database toDatabase(final IService service) {

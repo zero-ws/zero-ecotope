@@ -5,6 +5,8 @@ package io.zerows.extension.module.report.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.KpReportInstance;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpReportInstance;
 
@@ -185,7 +187,7 @@ public class KpReportInstanceRecord extends UpdatableRecordImpl<KpReportInstance
      * 「reportContent」- 报表内容
      */
     @Override
-    public KpReportInstanceRecord setReportContent(String value) {
+    public KpReportInstanceRecord setReportContent(JsonObject value) {
         set(9, value);
         return this;
     }
@@ -195,8 +197,8 @@ public class KpReportInstanceRecord extends UpdatableRecordImpl<KpReportInstance
      * 「reportContent」- 报表内容
      */
     @Override
-    public String getReportContent() {
-        return (String) get(9);
+    public JsonObject getReportContent() {
+        return (JsonObject) get(9);
     }
 
     /**
@@ -204,7 +206,7 @@ public class KpReportInstanceRecord extends UpdatableRecordImpl<KpReportInstance
      * 报表最终数据
      */
     @Override
-    public KpReportInstanceRecord setReportData(String value) {
+    public KpReportInstanceRecord setReportData(JsonArray value) {
         set(10, value);
         return this;
     }
@@ -214,8 +216,8 @@ public class KpReportInstanceRecord extends UpdatableRecordImpl<KpReportInstance
      * 报表最终数据
      */
     @Override
-    public String getReportData() {
-        return (String) get(10);
+    public JsonArray getReportData() {
+        return (JsonArray) get(10);
     }
 
     /**
@@ -396,7 +398,7 @@ public class KpReportInstanceRecord extends UpdatableRecordImpl<KpReportInstance
      * Setter for <code>ZDB.KP_REPORT_INSTANCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpReportInstanceRecord setMetadata(String value) {
+    public KpReportInstanceRecord setMetadata(JsonObject value) {
         set(21, value);
         return this;
     }
@@ -405,8 +407,8 @@ public class KpReportInstanceRecord extends UpdatableRecordImpl<KpReportInstance
      * Getter for <code>ZDB.KP_REPORT_INSTANCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(21);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(21);
     }
 
     /**
@@ -567,7 +569,7 @@ public class KpReportInstanceRecord extends UpdatableRecordImpl<KpReportInstance
     /**
      * Create a detached, initialised KpReportInstanceRecord
      */
-    public KpReportInstanceRecord(String id, String description, String extra, String modeExpr, String name, String refId, String refType, LocalDateTime reportAt, String reportBy, String reportContent, String reportData, String reportId, String subtitle, String title, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public KpReportInstanceRecord(String id, String description, String extra, String modeExpr, String name, String refId, String refType, LocalDateTime reportAt, String reportBy, JsonObject reportContent, JsonArray reportData, String reportId, String subtitle, String title, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(KpReportInstance.KP_REPORT_INSTANCE);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LFloor;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILFloor;
 
@@ -197,7 +198,7 @@ public class LFloorRecord extends UpdatableRecordImpl<LFloorRecord> implements V
      * Setter for <code>ZDB.L_FLOOR.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LFloorRecord setMetadata(String value) {
+    public LFloorRecord setMetadata(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -206,8 +207,8 @@ public class LFloorRecord extends UpdatableRecordImpl<LFloorRecord> implements V
      * Getter for <code>ZDB.L_FLOOR.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(10);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(10);
     }
 
     /**
@@ -349,7 +350,7 @@ public class LFloorRecord extends UpdatableRecordImpl<LFloorRecord> implements V
     /**
      * Create a detached, initialised LFloorRecord
      */
-    public LFloorRecord(String id, String code, String name, Integer order, String tentId, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public LFloorRecord(String id, String code, String name, Integer order, String tentId, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(LFloor.L_FLOOR);
 
         setId(id);

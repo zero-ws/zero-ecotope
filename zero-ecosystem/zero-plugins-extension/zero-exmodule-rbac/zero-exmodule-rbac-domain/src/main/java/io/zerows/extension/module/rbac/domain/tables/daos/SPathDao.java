@@ -73,7 +73,7 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
      * Find records that have <code>DM_CONDITION IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByDmCondition(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByDmCondition(Collection<JsonObject> values) {
                 return findManyByCondition(SPath.S_PATH.DM_CONDITION.in(values));
         }
 
@@ -81,14 +81,14 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
      * Find records that have <code>DM_CONDITION IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByDmCondition(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByDmCondition(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPath.S_PATH.DM_CONDITION.in(values),limit);
         }
 
         /**
      * Find records that have <code>DM_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByDmConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByDmConfig(Collection<JsonObject> values) {
                 return findManyByCondition(SPath.S_PATH.DM_CONFIG.in(values));
         }
 
@@ -96,7 +96,7 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
      * Find records that have <code>DM_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByDmConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByDmConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPath.S_PATH.DM_CONFIG.in(values),limit);
         }
 
@@ -118,7 +118,7 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
         /**
      * Find records that have <code>MAPPING IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByMapping(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByMapping(Collection<JsonObject> values) {
                 return findManyByCondition(SPath.S_PATH.MAPPING.in(values));
         }
 
@@ -126,7 +126,7 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
      * Find records that have <code>MAPPING IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByMapping(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByMapping(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPath.S_PATH.MAPPING.in(values),limit);
         }
 
@@ -226,7 +226,7 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
      * Find records that have <code>UI_CONDITION IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiCondition(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiCondition(Collection<JsonObject> values) {
                 return findManyByCondition(SPath.S_PATH.UI_CONDITION.in(values));
         }
 
@@ -234,14 +234,14 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
      * Find records that have <code>UI_CONDITION IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiCondition(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiCondition(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPath.S_PATH.UI_CONDITION.in(values),limit);
         }
 
         /**
      * Find records that have <code>UI_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiConfig(Collection<JsonObject> values) {
                 return findManyByCondition(SPath.S_PATH.UI_CONFIG.in(values));
         }
 
@@ -249,7 +249,7 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
      * Find records that have <code>UI_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPath.S_PATH.UI_CONFIG.in(values),limit);
         }
 
@@ -271,7 +271,7 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
         /**
      * Find records that have <code>UI_SURFACE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiSurface(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiSurface(Collection<JsonObject> values) {
                 return findManyByCondition(SPath.S_PATH.UI_SURFACE.in(values));
         }
 
@@ -279,7 +279,7 @@ public class SPathDao extends AbstractVertxDAO<SPathRecord, io.zerows.extension.
      * Find records that have <code>UI_SURFACE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiSurface(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPath>> findManyByUiSurface(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(SPath.S_PATH.UI_SURFACE.in(values),limit);
         }
 

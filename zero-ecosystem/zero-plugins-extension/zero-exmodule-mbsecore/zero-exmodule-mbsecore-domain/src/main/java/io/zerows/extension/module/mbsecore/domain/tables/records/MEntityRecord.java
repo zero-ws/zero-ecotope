@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MEntity;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMEntity;
 
@@ -231,7 +232,7 @@ public class MEntityRecord extends UpdatableRecordImpl<MEntityRecord> implements
      * Setter for <code>ZDB.M_ENTITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MEntityRecord setMetadata(String value) {
+    public MEntityRecord setMetadata(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -240,8 +241,8 @@ public class MEntityRecord extends UpdatableRecordImpl<MEntityRecord> implements
      * Getter for <code>ZDB.M_ENTITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(12);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(12);
     }
 
     /**
@@ -385,7 +386,7 @@ public class MEntityRecord extends UpdatableRecordImpl<MEntityRecord> implements
     /**
      * Create a detached, initialised MEntityRecord
      */
-    public MEntityRecord(String id, String comments, String identifier, String name, String namespace, String tableName, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MEntityRecord(String id, String comments, String identifier, String name, String namespace, String tableName, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MEntity.M_ENTITY);
 
         setId(id);

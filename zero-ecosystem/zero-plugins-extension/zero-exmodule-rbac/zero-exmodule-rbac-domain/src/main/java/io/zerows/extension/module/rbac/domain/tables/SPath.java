@@ -74,12 +74,12 @@ public class SPath extends TableImpl<SPathRecord> {
     /**
      * The column <code>ZDB.S_PATH.DM_CONDITION</code>. 「dmCondition」- 分组条件
      */
-    public final TableField<SPathRecord, String> DM_CONDITION = createField(DSL.name("DM_CONDITION"), SQLDataType.CLOB(65535), this, "「dmCondition」- 分组条件");
+    public final TableField<SPathRecord, JsonObject> DM_CONDITION = createField(DSL.name("DM_CONDITION"), SQLDataType.CLOB(65535), this, "「dmCondition」- 分组条件", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PATH.DM_CONFIG</code>. 「dmConfig」- 组配置信息
      */
-    public final TableField<SPathRecord, String> DM_CONFIG = createField(DSL.name("DM_CONFIG"), SQLDataType.CLOB(65535), this, "「dmConfig」- 组配置信息");
+    public final TableField<SPathRecord, JsonObject> DM_CONFIG = createField(DSL.name("DM_CONFIG"), SQLDataType.CLOB(65535), this, "「dmConfig」- 组配置信息", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PATH.DM_TYPE</code>. 「dmType」- 分组类型
@@ -89,7 +89,7 @@ public class SPath extends TableImpl<SPathRecord> {
     /**
      * The column <code>ZDB.S_PATH.MAPPING</code>. 「mapping」- 从
      */
-    public final TableField<SPathRecord, String> MAPPING = createField(DSL.name("MAPPING"), SQLDataType.CLOB(65535), this, "「mapping」- 从");
+    public final TableField<SPathRecord, JsonObject> MAPPING = createField(DSL.name("MAPPING"), SQLDataType.CLOB(65535), this, "「mapping」- 从", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PATH.NAME</code>. 「name」- 名称
@@ -125,12 +125,12 @@ public class SPath extends TableImpl<SPathRecord> {
     /**
      * The column <code>ZDB.S_PATH.UI_CONDITION</code>. 「uiCondition」- 查询模板
      */
-    public final TableField<SPathRecord, String> UI_CONDITION = createField(DSL.name("UI_CONDITION"), SQLDataType.CLOB(65535), this, "「uiCondition」- 查询模板");
+    public final TableField<SPathRecord, JsonObject> UI_CONDITION = createField(DSL.name("UI_CONDITION"), SQLDataType.CLOB(65535), this, "「uiCondition」- 查询模板", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PATH.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
-    public final TableField<SPathRecord, String> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB(65535), this, "「uiConfig」- 界面配置");
+    public final TableField<SPathRecord, JsonObject> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB(65535), this, "「uiConfig」- 界面配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PATH.UI_SORT</code>. 「sort」- 该板块的排序
@@ -140,7 +140,7 @@ public class SPath extends TableImpl<SPathRecord> {
     /**
      * The column <code>ZDB.S_PATH.UI_SURFACE</code>. 「uiSurface」- 界面呈现模式
      */
-    public final TableField<SPathRecord, String> UI_SURFACE = createField(DSL.name("UI_SURFACE"), SQLDataType.CLOB(65535), this, "「uiSurface」- 界面呈现模式");
+    public final TableField<SPathRecord, JsonObject> UI_SURFACE = createField(DSL.name("UI_SURFACE"), SQLDataType.CLOB(65535), this, "「uiSurface」- 界面呈现模式", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.S_PATH.UI_TYPE</code>. 「uiType」- 目标数据源类型

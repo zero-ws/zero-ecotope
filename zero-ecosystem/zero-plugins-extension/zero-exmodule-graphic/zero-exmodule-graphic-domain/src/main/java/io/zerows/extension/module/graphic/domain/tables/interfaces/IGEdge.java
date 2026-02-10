@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -50,12 +51,12 @@ public interface IGEdge extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.G_EDGE.RECORD_DATA</code>. 「recordData」 - 组中存储的数据信息
      */
-    public IGEdge setRecordData(String value);
+    public IGEdge setRecordData(JsonObject value);
 
     /**
      * Getter for <code>ZDB.G_EDGE.RECORD_DATA</code>. 「recordData」 - 组中存储的数据信息
      */
-    public String getRecordData();
+    public JsonObject getRecordData();
 
     /**
      * Setter for <code>ZDB.G_EDGE.RECORD_KEY</code>. 「recordKey」 - 记录主键
@@ -90,12 +91,12 @@ public interface IGEdge extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.G_EDGE.UI</code>. 「ui」 - ui配置专用
      */
-    public IGEdge setUi(String value);
+    public IGEdge setUi(JsonObject value);
 
     /**
      * Getter for <code>ZDB.G_EDGE.UI</code>. 「ui」 - ui配置专用
      */
-    public String getUi();
+    public JsonObject getUi();
 
     /**
      * Setter for <code>ZDB.G_EDGE.TYPE</code>. 「type」- 类型
@@ -160,12 +161,12 @@ public interface IGEdge extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.G_EDGE.METADATA</code>. 「metadata」- 元配置
      */
-    public IGEdge setMetadata(String value);
+    public IGEdge setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.G_EDGE.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.G_EDGE.VERSION</code>. 「version」- 版本号
@@ -238,18 +239,18 @@ public interface IGEdge extends VertxPojo, Serializable {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setGraphicId,json::getString,"GRAPHIC_ID","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
-                setOrThrow(this::setRecordData,json::getString,"RECORD_DATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_DATA!
                 setOrThrow(this::setRecordKey,json::getString,"RECORD_KEY","java.lang.String");
                 setOrThrow(this::setSourceKey,json::getString,"SOURCE_KEY","java.lang.String");
                 setOrThrow(this::setTargetKey,json::getString,"TARGET_KEY","java.lang.String");
-                setOrThrow(this::setUi,json::getString,"UI","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -265,18 +266,18 @@ public interface IGEdge extends VertxPojo, Serializable {
                 json.put("ID",getId());
                 json.put("GRAPHIC_ID",getGraphicId());
                 json.put("NAME",getName());
-                json.put("RECORD_DATA",getRecordData());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_DATA!
                 json.put("RECORD_KEY",getRecordKey());
                 json.put("SOURCE_KEY",getSourceKey());
                 json.put("TARGET_KEY",getTargetKey());
-                json.put("UI",getUi());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI!
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

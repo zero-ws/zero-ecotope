@@ -78,7 +78,7 @@ public class JtUri extends JtCommercial implements Api {
     }
 
     public Set<MediaType> producesMime() {
-        return Jt.toMime(this.api::getProduces);
+        return Jt.toMimeObject(this.api::getProduces);
     }
 
     public Set<String> consumes() {

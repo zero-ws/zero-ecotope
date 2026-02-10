@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.GGraphic;
 import io.zerows.extension.module.graphic.domain.tables.records.GGraphicRecord;
 
@@ -145,7 +146,7 @@ public class GGraphicDao extends AbstractVertxDAO<GGraphicRecord, io.zerows.exte
         /**
      * Find records that have <code>UI IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GGraphic>> findManyByUi(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GGraphic>> findManyByUi(Collection<JsonObject> values) {
                 return findManyByCondition(GGraphic.G_GRAPHIC.UI.in(values));
         }
 
@@ -153,7 +154,7 @@ public class GGraphicDao extends AbstractVertxDAO<GGraphicRecord, io.zerows.exte
      * Find records that have <code>UI IN (values)</code> asynchronously limited
      * by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GGraphic>> findManyByUi(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GGraphic>> findManyByUi(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GGraphic.G_GRAPHIC.UI.in(values),limit);
         }
 
@@ -296,7 +297,7 @@ public class GGraphicDao extends AbstractVertxDAO<GGraphicRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GGraphic>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GGraphic>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(GGraphic.G_GRAPHIC.METADATA.in(values));
         }
 
@@ -304,7 +305,7 @@ public class GGraphicDao extends AbstractVertxDAO<GGraphicRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GGraphic>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.graphic.domain.tables.pojos.GGraphic>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(GGraphic.G_GRAPHIC.METADATA.in(values),limit);
         }
 

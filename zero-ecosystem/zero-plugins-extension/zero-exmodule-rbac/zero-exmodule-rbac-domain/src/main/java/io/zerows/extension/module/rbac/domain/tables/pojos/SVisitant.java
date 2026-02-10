@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISVisitant;
 
@@ -21,14 +22,14 @@ public class SVisitant implements VertxPojo, ISVisitant {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String aclVariety;
-    private String aclVerge;
-    private String aclView;
-    private String aclVisible;
-    private String aclVow;
-    private String dmColumn;
-    private String dmQr;
-    private String dmRow;
+    private JsonArray aclVariety;
+    private JsonArray aclVerge;
+    private JsonArray aclView;
+    private JsonArray aclVisible;
+    private JsonArray aclVow;
+    private JsonArray dmColumn;
+    private JsonObject dmQr;
+    private JsonObject dmRow;
     private String identifier;
     private String mode;
     private String phase;
@@ -80,14 +81,14 @@ public class SVisitant implements VertxPojo, ISVisitant {
 
     public SVisitant(
         String id,
-        String aclVariety,
-        String aclVerge,
-        String aclView,
-        String aclVisible,
-        String aclVow,
-        String dmColumn,
-        String dmQr,
-        String dmRow,
+        JsonArray aclVariety,
+        JsonArray aclVerge,
+        JsonArray aclView,
+        JsonArray aclVisible,
+        JsonArray aclVow,
+        JsonArray dmColumn,
+        JsonObject dmQr,
+        JsonObject dmRow,
         String identifier,
         String mode,
         String phase,
@@ -160,7 +161,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Getter for <code>ZDB.S_VISITANT.ACL_VARIETY</code>. 「aclVariety」- 多样性的属性集
      */
     @Override
-    public String getAclVariety() {
+    public JsonArray getAclVariety() {
         return this.aclVariety;
     }
 
@@ -168,7 +169,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Setter for <code>ZDB.S_VISITANT.ACL_VARIETY</code>. 「aclVariety」- 多样性的属性集
      */
     @Override
-    public SVisitant setAclVariety(String aclVariety) {
+    public SVisitant setAclVariety(JsonArray aclVariety) {
         this.aclVariety = aclVariety;
         return this;
     }
@@ -177,7 +178,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Getter for <code>ZDB.S_VISITANT.ACL_VERGE</code>. 「aclVerge」- 依赖属性集
      */
     @Override
-    public String getAclVerge() {
+    public JsonArray getAclVerge() {
         return this.aclVerge;
     }
 
@@ -185,7 +186,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Setter for <code>ZDB.S_VISITANT.ACL_VERGE</code>. 「aclVerge」- 依赖属性集
      */
     @Override
-    public SVisitant setAclVerge(String aclVerge) {
+    public SVisitant setAclVerge(JsonArray aclVerge) {
         this.aclVerge = aclVerge;
         return this;
     }
@@ -194,7 +195,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Getter for <code>ZDB.S_VISITANT.ACL_VIEW</code>. 「aclView」- 只读的属性集
      */
     @Override
-    public String getAclView() {
+    public JsonArray getAclView() {
         return this.aclView;
     }
 
@@ -202,7 +203,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Setter for <code>ZDB.S_VISITANT.ACL_VIEW</code>. 「aclView」- 只读的属性集
      */
     @Override
-    public SVisitant setAclView(String aclView) {
+    public SVisitant setAclView(JsonArray aclView) {
         this.aclView = aclView;
         return this;
     }
@@ -211,7 +212,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Getter for <code>ZDB.S_VISITANT.ACL_VISIBLE</code>. 「aclVisible」- 可见的属性集
      */
     @Override
-    public String getAclVisible() {
+    public JsonArray getAclVisible() {
         return this.aclVisible;
     }
 
@@ -219,7 +220,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Setter for <code>ZDB.S_VISITANT.ACL_VISIBLE</code>. 「aclVisible」- 可见的属性集
      */
     @Override
-    public SVisitant setAclVisible(String aclVisible) {
+    public SVisitant setAclVisible(JsonArray aclVisible) {
         this.aclVisible = aclVisible;
         return this;
     }
@@ -228,7 +229,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Getter for <code>ZDB.S_VISITANT.ACL_VOW</code>. 「aclVow」- 引用类属性集
      */
     @Override
-    public String getAclVow() {
+    public JsonArray getAclVow() {
         return this.aclVow;
     }
 
@@ -236,7 +237,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Setter for <code>ZDB.S_VISITANT.ACL_VOW</code>. 「aclVow」- 引用类属性集
      */
     @Override
-    public SVisitant setAclVow(String aclVow) {
+    public SVisitant setAclVow(JsonArray aclVow) {
         this.aclVow = aclVow;
         return this;
     }
@@ -246,7 +247,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Projection
      */
     @Override
-    public String getDmColumn() {
+    public JsonArray getDmColumn() {
         return this.dmColumn;
     }
 
@@ -255,7 +256,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Projection
      */
     @Override
-    public SVisitant setDmColumn(String dmColumn) {
+    public SVisitant setDmColumn(JsonArray dmColumn) {
         this.dmColumn = dmColumn;
         return this;
     }
@@ -264,7 +265,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Getter for <code>ZDB.S_VISITANT.DM_QR</code>. 「dmQr」对应视图中的 Criteria
      */
     @Override
-    public String getDmQr() {
+    public JsonObject getDmQr() {
         return this.dmQr;
     }
 
@@ -272,7 +273,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Setter for <code>ZDB.S_VISITANT.DM_QR</code>. 「dmQr」对应视图中的 Criteria
      */
     @Override
-    public SVisitant setDmQr(String dmQr) {
+    public SVisitant setDmQr(JsonObject dmQr) {
         this.dmQr = dmQr;
         return this;
     }
@@ -281,7 +282,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Getter for <code>ZDB.S_VISITANT.DM_ROW</code>. 「dmRow」对应视图中 Rows
      */
     @Override
-    public String getDmRow() {
+    public JsonObject getDmRow() {
         return this.dmRow;
     }
 
@@ -289,7 +290,7 @@ public class SVisitant implements VertxPojo, ISVisitant {
      * Setter for <code>ZDB.S_VISITANT.DM_ROW</code>. 「dmRow」对应视图中 Rows
      */
     @Override
-    public SVisitant setDmRow(String dmRow) {
+    public SVisitant setDmRow(JsonObject dmRow) {
         this.dmRow = dmRow;
         return this;
     }

@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISAction;
 
@@ -26,7 +27,7 @@ public class SAction implements VertxPojo, ISAction {
     private String method;
     private String name;
     private String permissionId;
-    private String renewalCredit;
+    private JsonArray renewalCredit;
     private String resourceId;
     private String uri;
     private String sigma;
@@ -73,7 +74,7 @@ public class SAction implements VertxPojo, ISAction {
         String method,
         String name,
         String permissionId,
-        String renewalCredit,
+        JsonArray renewalCredit,
         String resourceId,
         String uri,
         String sigma,
@@ -224,7 +225,7 @@ public class SAction implements VertxPojo, ISAction {
      * 被刷新的凭证
      */
     @Override
-    public String getRenewalCredit() {
+    public JsonArray getRenewalCredit() {
         return this.renewalCredit;
     }
 
@@ -233,7 +234,7 @@ public class SAction implements VertxPojo, ISAction {
      * 被刷新的凭证
      */
     @Override
-    public SAction setRenewalCredit(String renewalCredit) {
+    public SAction setRenewalCredit(JsonArray renewalCredit) {
         this.renewalCredit = renewalCredit;
         return this;
     }

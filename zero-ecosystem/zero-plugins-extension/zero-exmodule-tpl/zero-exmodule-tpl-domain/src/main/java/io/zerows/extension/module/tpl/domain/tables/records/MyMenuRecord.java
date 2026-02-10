@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyMenu;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyMenu;
 
@@ -333,7 +334,7 @@ public class MyMenuRecord extends UpdatableRecordImpl<MyMenuRecord> implements V
      * Setter for <code>ZDB.MY_MENU.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MyMenuRecord setMetadata(String value) {
+    public MyMenuRecord setMetadata(JsonObject value) {
         set(18, value);
         return this;
     }
@@ -342,8 +343,8 @@ public class MyMenuRecord extends UpdatableRecordImpl<MyMenuRecord> implements V
      * Getter for <code>ZDB.MY_MENU.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(18);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(18);
     }
 
     /**
@@ -493,7 +494,7 @@ public class MyMenuRecord extends UpdatableRecordImpl<MyMenuRecord> implements V
     /**
      * Create a detached, initialised MyMenuRecord
      */
-    public MyMenuRecord(String id, String icon, String owner, String ownerType, String page, String position, String text, String uiColorBg, String uiColorFg, String uiParent, Long uiSort, String uri, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MyMenuRecord(String id, String icon, String owner, String ownerType, String page, String position, String text, String uiColorBg, String uiColorFg, String uiParent, Long uiSort, String uri, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MyMenu.MY_MENU);
 
         setId(id);

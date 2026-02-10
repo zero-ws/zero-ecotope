@@ -5,6 +5,7 @@ package io.zerows.extension.module.graphic.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.tables.GNode;
 import io.zerows.extension.module.graphic.domain.tables.interfaces.IGNode;
 
@@ -117,7 +118,7 @@ public class GNodeRecord extends UpdatableRecordImpl<GNodeRecord> implements Ver
      * Setter for <code>ZDB.G_NODE.RECORD_DATA</code>. 「recordData」 - 该节点存储的数据信息
      */
     @Override
-    public GNodeRecord setRecordData(String value) {
+    public GNodeRecord setRecordData(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -126,8 +127,8 @@ public class GNodeRecord extends UpdatableRecordImpl<GNodeRecord> implements Ver
      * Getter for <code>ZDB.G_NODE.RECORD_DATA</code>. 「recordData」 - 该节点存储的数据信息
      */
     @Override
-    public String getRecordData() {
-        return (String) get(5);
+    public JsonObject getRecordData() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -151,7 +152,7 @@ public class GNodeRecord extends UpdatableRecordImpl<GNodeRecord> implements Ver
      * Setter for <code>ZDB.G_NODE.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public GNodeRecord setUi(String value) {
+    public GNodeRecord setUi(JsonObject value) {
         set(7, value);
         return this;
     }
@@ -160,8 +161,8 @@ public class GNodeRecord extends UpdatableRecordImpl<GNodeRecord> implements Ver
      * Getter for <code>ZDB.G_NODE.UI</code>. 「ui」 - ui配置专用
      */
     @Override
-    public String getUi() {
-        return (String) get(7);
+    public JsonObject getUi() {
+        return (JsonObject) get(7);
     }
 
     /**
@@ -287,7 +288,7 @@ public class GNodeRecord extends UpdatableRecordImpl<GNodeRecord> implements Ver
      * Setter for <code>ZDB.G_NODE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public GNodeRecord setMetadata(String value) {
+    public GNodeRecord setMetadata(JsonObject value) {
         set(15, value);
         return this;
     }
@@ -296,8 +297,8 @@ public class GNodeRecord extends UpdatableRecordImpl<GNodeRecord> implements Ver
      * Getter for <code>ZDB.G_NODE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(15);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(15);
     }
 
     /**
@@ -444,7 +445,7 @@ public class GNodeRecord extends UpdatableRecordImpl<GNodeRecord> implements Ver
     /**
      * Create a detached, initialised GNodeRecord
      */
-    public GNodeRecord(String id, String graphicId, String name, String recordClass, String recordComponent, String recordData, String recordKey, String ui, BigDecimal x, BigDecimal y, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public GNodeRecord(String id, String graphicId, String name, String recordClass, String recordComponent, JsonObject recordData, String recordKey, JsonObject ui, BigDecimal x, BigDecimal y, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(GNode.G_NODE);
 
         setId(id);

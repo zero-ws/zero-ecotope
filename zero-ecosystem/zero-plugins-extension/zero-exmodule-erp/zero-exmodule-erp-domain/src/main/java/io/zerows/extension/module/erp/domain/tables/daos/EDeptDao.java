@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EDept;
 import io.zerows.extension.module.erp.domain.tables.records.EDeptRecord;
 
@@ -221,7 +222,7 @@ public class EDeptDao extends AbstractVertxDAO<EDeptRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EDept>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EDept>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(EDept.E_DEPT.METADATA.in(values));
         }
 
@@ -229,7 +230,7 @@ public class EDeptDao extends AbstractVertxDAO<EDeptRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EDept>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EDept>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(EDept.E_DEPT.METADATA.in(values),limit);
         }
 

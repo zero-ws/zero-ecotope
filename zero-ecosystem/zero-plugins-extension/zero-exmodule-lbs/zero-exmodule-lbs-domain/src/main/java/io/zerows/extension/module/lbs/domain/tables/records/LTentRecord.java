@@ -5,6 +5,7 @@ package io.zerows.extension.module.lbs.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.lbs.domain.tables.LTent;
 import io.zerows.extension.module.lbs.domain.tables.interfaces.ILTent;
 
@@ -248,7 +249,7 @@ public class LTentRecord extends UpdatableRecordImpl<LTentRecord> implements Ver
      * Setter for <code>ZDB.L_TENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public LTentRecord setMetadata(String value) {
+    public LTentRecord setMetadata(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -257,8 +258,8 @@ public class LTentRecord extends UpdatableRecordImpl<LTentRecord> implements Ver
      * Getter for <code>ZDB.L_TENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(13);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -403,7 +404,7 @@ public class LTentRecord extends UpdatableRecordImpl<LTentRecord> implements Ver
     /**
      * Create a detached, initialised LTentRecord
      */
-    public LTentRecord(String id, String code, String contactName, String contactPhone, String locationId, String name, Integer order, String yardId, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public LTentRecord(String id, String code, String contactName, String contactPhone, String locationId, String name, Integer order, String yardId, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(LTent.L_TENT);
 
         setId(id);

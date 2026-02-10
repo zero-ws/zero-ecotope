@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MRelation;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MRelationRecord;
 
@@ -175,7 +176,7 @@ public class MRelationDao extends AbstractVertxDAO<MRelationRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MRelation>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MRelation>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MRelation.M_RELATION.METADATA.in(values));
         }
 
@@ -183,7 +184,7 @@ public class MRelationDao extends AbstractVertxDAO<MRelationRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MRelation>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MRelation>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MRelation.M_RELATION.METADATA.in(values),limit);
         }
 

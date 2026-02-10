@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -91,23 +92,23 @@ public interface IKpReport extends VertxPojo, Serializable {
      * Setter for <code>ZDB.KP_REPORT.REPORT_CONFIG</code>. 「reportConfig」-
      * 主表基础配置
      */
-    public IKpReport setReportConfig(String value);
+    public IKpReport setReportConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_REPORT.REPORT_CONFIG</code>. 「reportConfig」-
      * 主表基础配置
      */
-    public String getReportConfig();
+    public JsonObject getReportConfig();
 
     /**
      * Setter for <code>ZDB.KP_REPORT.REPORT_PARAM</code>. 「reportParam」- 报表参数配置
      */
-    public IKpReport setReportParam(String value);
+    public IKpReport setReportParam(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_REPORT.REPORT_PARAM</code>. 「reportParam」- 报表参数配置
      */
-    public String getReportParam();
+    public JsonObject getReportParam();
 
     /**
      * Setter for <code>ZDB.KP_REPORT.TITLE</code>. 「title」- 标题
@@ -182,12 +183,12 @@ public interface IKpReport extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.KP_REPORT.METADATA</code>. 「metadata」- 元配置
      */
-    public IKpReport setMetadata(String value);
+    public IKpReport setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_REPORT.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.KP_REPORT.VERSION</code>. 「version」- 版本号
@@ -264,8 +265,8 @@ public interface IKpReport extends VertxPojo, Serializable {
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setReportAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"REPORT_AT","java.time.LocalDateTime");
                 setOrThrow(this::setReportBy,json::getString,"REPORT_BY","java.lang.String");
-                setOrThrow(this::setReportConfig,json::getString,"REPORT_CONFIG","java.lang.String");
-                setOrThrow(this::setReportParam,json::getString,"REPORT_PARAM","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column REPORT_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column REPORT_PARAM!
                 setOrThrow(this::setTitle,json::getString,"TITLE","java.lang.String");
                 setOrThrow(this::setStatus,json::getString,"STATUS","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -273,7 +274,7 @@ public interface IKpReport extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -293,8 +294,8 @@ public interface IKpReport extends VertxPojo, Serializable {
                 json.put("NAME",getName());
                 json.put("REPORT_AT",getReportAt()==null?null:getReportAt().toString());
                 json.put("REPORT_BY",getReportBy());
-                json.put("REPORT_CONFIG",getReportConfig());
-                json.put("REPORT_PARAM",getReportParam());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column REPORT_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column REPORT_PARAM!
                 json.put("TITLE",getTitle());
                 json.put("STATUS",getStatus());
                 json.put("SIGMA",getSigma());
@@ -302,7 +303,7 @@ public interface IKpReport extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

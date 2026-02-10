@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
@@ -31,84 +32,84 @@ public interface ISVisitant extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VARIETY</code>. 「aclVariety」- 多样性的属性集
      */
-    public ISVisitant setAclVariety(String value);
+    public ISVisitant setAclVariety(JsonArray value);
 
     /**
      * Getter for <code>ZDB.S_VISITANT.ACL_VARIETY</code>. 「aclVariety」- 多样性的属性集
      */
-    public String getAclVariety();
+    public JsonArray getAclVariety();
 
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VERGE</code>. 「aclVerge」- 依赖属性集
      */
-    public ISVisitant setAclVerge(String value);
+    public ISVisitant setAclVerge(JsonArray value);
 
     /**
      * Getter for <code>ZDB.S_VISITANT.ACL_VERGE</code>. 「aclVerge」- 依赖属性集
      */
-    public String getAclVerge();
+    public JsonArray getAclVerge();
 
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VIEW</code>. 「aclView」- 只读的属性集
      */
-    public ISVisitant setAclView(String value);
+    public ISVisitant setAclView(JsonArray value);
 
     /**
      * Getter for <code>ZDB.S_VISITANT.ACL_VIEW</code>. 「aclView」- 只读的属性集
      */
-    public String getAclView();
+    public JsonArray getAclView();
 
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VISIBLE</code>. 「aclVisible」- 可见的属性集
      */
-    public ISVisitant setAclVisible(String value);
+    public ISVisitant setAclVisible(JsonArray value);
 
     /**
      * Getter for <code>ZDB.S_VISITANT.ACL_VISIBLE</code>. 「aclVisible」- 可见的属性集
      */
-    public String getAclVisible();
+    public JsonArray getAclVisible();
 
     /**
      * Setter for <code>ZDB.S_VISITANT.ACL_VOW</code>. 「aclVow」- 引用类属性集
      */
-    public ISVisitant setAclVow(String value);
+    public ISVisitant setAclVow(JsonArray value);
 
     /**
      * Getter for <code>ZDB.S_VISITANT.ACL_VOW</code>. 「aclVow」- 引用类属性集
      */
-    public String getAclVow();
+    public JsonArray getAclVow();
 
     /**
      * Setter for <code>ZDB.S_VISITANT.DM_COLUMN</code>. 「dmColumn」对应视图中的
      * Projection
      */
-    public ISVisitant setDmColumn(String value);
+    public ISVisitant setDmColumn(JsonArray value);
 
     /**
      * Getter for <code>ZDB.S_VISITANT.DM_COLUMN</code>. 「dmColumn」对应视图中的
      * Projection
      */
-    public String getDmColumn();
+    public JsonArray getDmColumn();
 
     /**
      * Setter for <code>ZDB.S_VISITANT.DM_QR</code>. 「dmQr」对应视图中的 Criteria
      */
-    public ISVisitant setDmQr(String value);
+    public ISVisitant setDmQr(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_VISITANT.DM_QR</code>. 「dmQr」对应视图中的 Criteria
      */
-    public String getDmQr();
+    public JsonObject getDmQr();
 
     /**
      * Setter for <code>ZDB.S_VISITANT.DM_ROW</code>. 「dmRow」对应视图中 Rows
      */
-    public ISVisitant setDmRow(String value);
+    public ISVisitant setDmRow(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_VISITANT.DM_ROW</code>. 「dmRow」对应视图中 Rows
      */
-    public String getDmRow();
+    public JsonObject getDmRow();
 
     /**
      * Setter for <code>ZDB.S_VISITANT.IDENTIFIER</code>. 「identifier」-
@@ -301,14 +302,14 @@ public interface ISVisitant extends VertxPojo, Serializable {
         @Override
         public default ISVisitant fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
-                setOrThrow(this::setAclVariety,json::getString,"ACL_VARIETY","java.lang.String");
-                setOrThrow(this::setAclVerge,json::getString,"ACL_VERGE","java.lang.String");
-                setOrThrow(this::setAclView,json::getString,"ACL_VIEW","java.lang.String");
-                setOrThrow(this::setAclVisible,json::getString,"ACL_VISIBLE","java.lang.String");
-                setOrThrow(this::setAclVow,json::getString,"ACL_VOW","java.lang.String");
-                setOrThrow(this::setDmColumn,json::getString,"DM_COLUMN","java.lang.String");
-                setOrThrow(this::setDmQr,json::getString,"DM_QR","java.lang.String");
-                setOrThrow(this::setDmRow,json::getString,"DM_ROW","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VARIETY!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VERGE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VIEW!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VISIBLE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VOW!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column DM_COLUMN!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DM_QR!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DM_ROW!
                 setOrThrow(this::setIdentifier,json::getString,"IDENTIFIER","java.lang.String");
                 setOrThrow(this::setMode,json::getString,"MODE","java.lang.String");
                 setOrThrow(this::setPhase,json::getString,"PHASE","java.lang.String");
@@ -334,14 +335,14 @@ public interface ISVisitant extends VertxPojo, Serializable {
         public default io.vertx.core.json.JsonObject toJson() {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
-                json.put("ACL_VARIETY",getAclVariety());
-                json.put("ACL_VERGE",getAclVerge());
-                json.put("ACL_VIEW",getAclView());
-                json.put("ACL_VISIBLE",getAclVisible());
-                json.put("ACL_VOW",getAclVow());
-                json.put("DM_COLUMN",getDmColumn());
-                json.put("DM_QR",getDmQr());
-                json.put("DM_ROW",getDmRow());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VARIETY!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VERGE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VIEW!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VISIBLE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column ACL_VOW!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column DM_COLUMN!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DM_QR!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DM_ROW!
                 json.put("IDENTIFIER",getIdentifier());
                 json.put("MODE",getMode());
                 json.put("PHASE",getPhase());

@@ -51,22 +51,22 @@ public interface ISPath extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_PATH.DM_CONDITION</code>. 「dmCondition」- 分组条件
      */
-    public ISPath setDmCondition(String value);
+    public ISPath setDmCondition(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PATH.DM_CONDITION</code>. 「dmCondition」- 分组条件
      */
-    public String getDmCondition();
+    public JsonObject getDmCondition();
 
     /**
      * Setter for <code>ZDB.S_PATH.DM_CONFIG</code>. 「dmConfig」- 组配置信息
      */
-    public ISPath setDmConfig(String value);
+    public ISPath setDmConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PATH.DM_CONFIG</code>. 「dmConfig」- 组配置信息
      */
-    public String getDmConfig();
+    public JsonObject getDmConfig();
 
     /**
      * Setter for <code>ZDB.S_PATH.DM_TYPE</code>. 「dmType」- 分组类型
@@ -81,12 +81,12 @@ public interface ISPath extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_PATH.MAPPING</code>. 「mapping」- 从
      */
-    public ISPath setMapping(String value);
+    public ISPath setMapping(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PATH.MAPPING</code>. 「mapping」- 从
      */
-    public String getMapping();
+    public JsonObject getMapping();
 
     /**
      * Setter for <code>ZDB.S_PATH.NAME</code>. 「name」- 名称
@@ -153,22 +153,22 @@ public interface ISPath extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_PATH.UI_CONDITION</code>. 「uiCondition」- 查询模板
      */
-    public ISPath setUiCondition(String value);
+    public ISPath setUiCondition(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PATH.UI_CONDITION</code>. 「uiCondition」- 查询模板
      */
-    public String getUiCondition();
+    public JsonObject getUiCondition();
 
     /**
      * Setter for <code>ZDB.S_PATH.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
-    public ISPath setUiConfig(String value);
+    public ISPath setUiConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PATH.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
-    public String getUiConfig();
+    public JsonObject getUiConfig();
 
     /**
      * Setter for <code>ZDB.S_PATH.UI_SORT</code>. 「sort」- 该板块的排序
@@ -183,12 +183,12 @@ public interface ISPath extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.S_PATH.UI_SURFACE</code>. 「uiSurface」- 界面呈现模式
      */
-    public ISPath setUiSurface(String value);
+    public ISPath setUiSurface(JsonObject value);
 
     /**
      * Getter for <code>ZDB.S_PATH.UI_SURFACE</code>. 「uiSurface」- 界面呈现模式
      */
-    public String getUiSurface();
+    public JsonObject getUiSurface();
 
     /**
      * Setter for <code>ZDB.S_PATH.UI_TYPE</code>. 「uiType」- 目标数据源类型
@@ -331,20 +331,20 @@ public interface ISPath extends VertxPojo, Serializable {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
                 setOrThrow(this::setDmComponent,json::getString,"DM_COMPONENT","java.lang.String");
-                setOrThrow(this::setDmCondition,json::getString,"DM_CONDITION","java.lang.String");
-                setOrThrow(this::setDmConfig,json::getString,"DM_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DM_CONDITION!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DM_CONFIG!
                 setOrThrow(this::setDmType,json::getString,"DM_TYPE","java.lang.String");
-                setOrThrow(this::setMapping,json::getString,"MAPPING","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column MAPPING!
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setParentId,json::getString,"PARENT_ID","java.lang.String");
                 setOrThrow(this::setPhase,json::getString,"PHASE","java.lang.String");
                 setOrThrow(this::setRunComponent,json::getString,"RUN_COMPONENT","java.lang.String");
                 setOrThrow(this::setRunType,json::getString,"RUN_TYPE","java.lang.String");
                 setOrThrow(this::setUiComponent,json::getString,"UI_COMPONENT","java.lang.String");
-                setOrThrow(this::setUiCondition,json::getString,"UI_CONDITION","java.lang.String");
-                setOrThrow(this::setUiConfig,json::getString,"UI_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONDITION!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
                 setOrThrow(this::setUiSort,json::getInteger,"UI_SORT","java.lang.Integer");
-                setOrThrow(this::setUiSurface,json::getString,"UI_SURFACE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_SURFACE!
                 setOrThrow(this::setUiType,json::getString,"UI_TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
@@ -367,20 +367,20 @@ public interface ISPath extends VertxPojo, Serializable {
                 json.put("ID",getId());
                 json.put("CODE",getCode());
                 json.put("DM_COMPONENT",getDmComponent());
-                json.put("DM_CONDITION",getDmCondition());
-                json.put("DM_CONFIG",getDmConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DM_CONDITION!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DM_CONFIG!
                 json.put("DM_TYPE",getDmType());
-                json.put("MAPPING",getMapping());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column MAPPING!
                 json.put("NAME",getName());
                 json.put("PARENT_ID",getParentId());
                 json.put("PHASE",getPhase());
                 json.put("RUN_COMPONENT",getRunComponent());
                 json.put("RUN_TYPE",getRunType());
                 json.put("UI_COMPONENT",getUiComponent());
-                json.put("UI_CONDITION",getUiCondition());
-                json.put("UI_CONFIG",getUiConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONDITION!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
                 json.put("UI_SORT",getUiSort());
-                json.put("UI_SURFACE",getUiSurface());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_SURFACE!
                 json.put("UI_TYPE",getUiType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());

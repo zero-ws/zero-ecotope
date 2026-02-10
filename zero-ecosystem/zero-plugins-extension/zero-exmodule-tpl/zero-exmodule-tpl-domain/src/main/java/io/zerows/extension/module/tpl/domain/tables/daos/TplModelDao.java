@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.TplModel;
 import io.zerows.extension.module.tpl.domain.tables.records.TplModelRecord;
 
@@ -70,7 +71,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
         /**
      * Find records that have <code>TPL_ACL IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplAcl(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplAcl(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_ACL.in(values));
         }
 
@@ -78,7 +79,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_ACL IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplAcl(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplAcl(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_ACL.in(values),limit);
         }
 
@@ -86,7 +87,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_ACL_VISIT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplAclVisit(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplAclVisit(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_ACL_VISIT.in(values));
         }
 
@@ -94,14 +95,14 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_ACL_VISIT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplAclVisit(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplAclVisit(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_ACL_VISIT.in(values),limit);
         }
 
         /**
      * Find records that have <code>TPL_API IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplApi(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplApi(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_API.in(values));
         }
 
@@ -109,7 +110,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_API IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplApi(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplApi(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_API.in(values),limit);
         }
 
@@ -117,7 +118,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_CATEGORY IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplCategory(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplCategory(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_CATEGORY.in(values));
         }
 
@@ -125,14 +126,14 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_CATEGORY IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplCategory(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplCategory(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_CATEGORY.in(values),limit);
         }
 
         /**
      * Find records that have <code>TPL_ENTITY IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplEntity(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplEntity(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_ENTITY.in(values));
         }
 
@@ -140,7 +141,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_ENTITY IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplEntity(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplEntity(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_ENTITY.in(values),limit);
         }
 
@@ -148,7 +149,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_INTEGRATION IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplIntegration(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplIntegration(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_INTEGRATION.in(values));
         }
 
@@ -156,14 +157,14 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_INTEGRATION IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplIntegration(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplIntegration(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_INTEGRATION.in(values),limit);
         }
 
         /**
      * Find records that have <code>TPL_JOB IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplJob(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplJob(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_JOB.in(values));
         }
 
@@ -171,14 +172,14 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_JOB IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplJob(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplJob(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_JOB.in(values),limit);
         }
 
         /**
      * Find records that have <code>TPL_MODEL IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplModel(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplModel(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_MODEL_.in(values));
         }
 
@@ -186,14 +187,14 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_MODEL IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplModel(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplModel(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_MODEL_.in(values),limit);
         }
 
         /**
      * Find records that have <code>TPL_UI IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUi(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUi(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_UI.in(values));
         }
 
@@ -201,7 +202,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_UI IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUi(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUi(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_UI.in(values),limit);
         }
 
@@ -209,7 +210,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_UI_FORM IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUiForm(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUiForm(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_UI_FORM.in(values));
         }
 
@@ -217,7 +218,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_UI_FORM IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUiForm(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUiForm(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_UI_FORM.in(values),limit);
         }
 
@@ -225,7 +226,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_UI_LIST IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUiList(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUiList(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_UI_LIST.in(values));
         }
 
@@ -233,7 +234,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>TPL_UI_LIST IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUiList(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByTplUiList(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.TPL_UI_LIST.in(values),limit);
         }
 
@@ -330,7 +331,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(TplModel.TPL_MODEL.METADATA.in(values));
         }
 
@@ -338,7 +339,7 @@ public class TplModelDao extends AbstractVertxDAO<TplModelRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplModel>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplModel.TPL_MODEL.METADATA.in(values),limit);
         }
 

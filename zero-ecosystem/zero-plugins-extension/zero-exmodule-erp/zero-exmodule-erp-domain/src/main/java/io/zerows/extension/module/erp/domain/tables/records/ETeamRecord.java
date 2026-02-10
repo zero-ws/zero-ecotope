@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.ETeam;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IETeam;
 
@@ -301,7 +302,7 @@ public class ETeamRecord extends UpdatableRecordImpl<ETeamRecord> implements Ver
      * Setter for <code>ZDB.E_TEAM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public ETeamRecord setMetadata(String value) {
+    public ETeamRecord setMetadata(JsonObject value) {
         set(16, value);
         return this;
     }
@@ -310,8 +311,8 @@ public class ETeamRecord extends UpdatableRecordImpl<ETeamRecord> implements Ver
      * Getter for <code>ZDB.E_TEAM.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(16);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(16);
     }
 
     /**
@@ -459,7 +460,7 @@ public class ETeamRecord extends UpdatableRecordImpl<ETeamRecord> implements Ver
     /**
      * Create a detached, initialised ETeamRecord
      */
-    public ETeamRecord(String id, String bindComponent, String bindConfig, String bindId, String code, String comment, String deptId, String leaderId, String leaderName, String name, String teamId, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ETeamRecord(String id, String bindComponent, String bindConfig, String bindId, String code, String comment, String deptId, String leaderId, String leaderName, String name, String teamId, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(ETeam.E_TEAM);
 
         setId(id);

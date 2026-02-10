@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.interfaces.IIPortfolio;
 
 import java.time.LocalDateTime;
@@ -21,16 +22,16 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
 
     private String id;
     private String code;
-    private String dataConfig;
-    private String dataIntegration;
+    private JsonObject dataConfig;
+    private JsonObject dataIntegration;
     private String dataKey;
-    private String dataSecure;
+    private JsonObject dataSecure;
     private String integrationId;
     private String name;
     private String owner;
     private String ownerType;
     private String runComponent;
-    private String runConfig;
+    private JsonObject runConfig;
     private String type;
     private String status;
     private String sigma;
@@ -38,7 +39,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -78,16 +79,16 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
     public IPortfolio(
         String id,
         String code,
-        String dataConfig,
-        String dataIntegration,
+        JsonObject dataConfig,
+        JsonObject dataIntegration,
         String dataKey,
-        String dataSecure,
+        JsonObject dataSecure,
         String integrationId,
         String name,
         String owner,
         String ownerType,
         String runComponent,
-        String runConfig,
+        JsonObject runConfig,
         String type,
         String status,
         String sigma,
@@ -95,7 +96,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -172,7 +173,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Getter for <code>ZDB.I_PORTFOLIO.DATA_CONFIG</code>. 「dataConfig」- 数据基础配置
      */
     @Override
-    public String getDataConfig() {
+    public JsonObject getDataConfig() {
         return this.dataConfig;
     }
 
@@ -180,7 +181,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_CONFIG</code>. 「dataConfig」- 数据基础配置
      */
     @Override
-    public IPortfolio setDataConfig(String dataConfig) {
+    public IPortfolio setDataConfig(JsonObject dataConfig) {
         this.dataConfig = dataConfig;
         return this;
     }
@@ -190,7 +191,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * 「dataIntegration」- 绑定好过后
      */
     @Override
-    public String getDataIntegration() {
+    public JsonObject getDataIntegration() {
         return this.dataIntegration;
     }
 
@@ -199,7 +200,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * 「dataIntegration」- 绑定好过后
      */
     @Override
-    public IPortfolio setDataIntegration(String dataIntegration) {
+    public IPortfolio setDataIntegration(JsonObject dataIntegration) {
         this.dataIntegration = dataIntegration;
         return this;
     }
@@ -225,7 +226,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Getter for <code>ZDB.I_PORTFOLIO.DATA_SECURE</code>. 「dataSecure」- 安全专用配置
      */
     @Override
-    public String getDataSecure() {
+    public JsonObject getDataSecure() {
         return this.dataSecure;
     }
 
@@ -233,7 +234,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_SECURE</code>. 「dataSecure」- 安全专用配置
      */
     @Override
-    public IPortfolio setDataSecure(String dataSecure) {
+    public IPortfolio setDataSecure(JsonObject dataSecure) {
         this.dataSecure = dataSecure;
         return this;
     }
@@ -331,7 +332,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Getter for <code>ZDB.I_PORTFOLIO.RUN_CONFIG</code>. 「runConfig」- 执行组件额外配置
      */
     @Override
-    public String getRunConfig() {
+    public JsonObject getRunConfig() {
         return this.runConfig;
     }
 
@@ -339,7 +340,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.RUN_CONFIG</code>. 「runConfig」- 执行组件额外配置
      */
     @Override
-    public IPortfolio setRunConfig(String runConfig) {
+    public IPortfolio setRunConfig(JsonObject runConfig) {
         this.runConfig = runConfig;
         return this;
     }
@@ -467,7 +468,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Getter for <code>ZDB.I_PORTFOLIO.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -475,7 +476,7 @@ public class IPortfolio implements VertxPojo, IIPortfolio {
      * Setter for <code>ZDB.I_PORTFOLIO.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IPortfolio setMetadata(String metadata) {
+    public IPortfolio setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

@@ -292,7 +292,7 @@ class IsDir {
                         created.setRunComponent(FsDefault.class.getName());
                     }
                 }
-                created.setMetadata(new JsonObject().encode());
+                created.setMetadata(new JsonObject());
 
                 // name / code / storePath
                 final String storePath = params.getString(KName.STORE_PATH);

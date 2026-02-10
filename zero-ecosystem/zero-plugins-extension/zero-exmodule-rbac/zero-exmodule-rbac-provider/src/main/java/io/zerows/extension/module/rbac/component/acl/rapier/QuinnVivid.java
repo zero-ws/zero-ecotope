@@ -69,8 +69,8 @@ public class QuinnVivid implements Quinn {
              */
             if (Objects.nonNull(virtual) && virtual) {
                 final JsonObject seeker = new JsonObject();
-                seeker.put(KName.CONFIG, Ut.toJObject(resource.getSeekConfig()));
-                seeker.put(KName.SYNTAX, Ut.toJObject(resource.getSeekSyntax()));
+                seeker.put(KName.CONFIG, resource.getSeekConfig());
+                seeker.put(KName.SYNTAX, resource.getSeekSyntax());
                 seeker.put(KName.COMPONENT, resource.getSeekComponent());
                 /* Store view object into json for future condition building */
                 bound.addSeeker(seeker);

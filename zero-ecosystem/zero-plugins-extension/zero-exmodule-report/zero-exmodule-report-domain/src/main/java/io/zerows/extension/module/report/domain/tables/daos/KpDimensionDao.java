@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.KpDimension;
 import io.zerows.extension.module.report.domain.tables.records.KpDimensionRecord;
 
@@ -41,7 +42,7 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
      * Find records that have <code>CHART_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByChartConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByChartConfig(Collection<JsonObject> values) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.CHART_CONFIG.in(values));
         }
 
@@ -49,7 +50,7 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
      * Find records that have <code>CHART_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByChartConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByChartConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.CHART_CONFIG.in(values),limit);
         }
 
@@ -86,7 +87,7 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
         /**
      * Find records that have <code>DATA_FIELD IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataField(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataField(Collection<JsonObject> values) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.DATA_FIELD.in(values));
         }
 
@@ -94,14 +95,14 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
      * Find records that have <code>DATA_FIELD IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataField(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataField(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.DATA_FIELD.in(values),limit);
         }
 
         /**
      * Find records that have <code>DATA_GROUP IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataGroup(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataGroup(Collection<JsonObject> values) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.DATA_GROUP.in(values));
         }
 
@@ -109,7 +110,7 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
      * Find records that have <code>DATA_GROUP IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataGroup(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataGroup(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.DATA_GROUP.in(values),limit);
         }
 
@@ -117,7 +118,7 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
      * Find records that have <code>DATA_OUTPUT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataOutput(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataOutput(Collection<JsonObject> values) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.DATA_OUTPUT.in(values));
         }
 
@@ -125,14 +126,14 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
      * Find records that have <code>DATA_OUTPUT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataOutput(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataOutput(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.DATA_OUTPUT.in(values),limit);
         }
 
         /**
      * Find records that have <code>DATA_QUERY IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataQuery(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataQuery(Collection<JsonObject> values) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.DATA_QUERY.in(values));
         }
 
@@ -140,7 +141,7 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
      * Find records that have <code>DATA_QUERY IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataQuery(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByDataQuery(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.DATA_QUERY.in(values),limit);
         }
 
@@ -313,7 +314,7 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.METADATA.in(values));
         }
 
@@ -321,7 +322,7 @@ public class KpDimensionDao extends AbstractVertxDAO<KpDimensionRecord, io.zerow
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpDimension>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpDimension.KP_DIMENSION.METADATA.in(values),limit);
         }
 

@@ -4,6 +4,8 @@
 package io.zerows.extension.module.mbsecore.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.Keys;
 import io.zerows.extension.module.mbsecore.domain.Zdb;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MModelRecord;
@@ -101,12 +103,12 @@ public class MModel extends TableImpl<MModelRecord> {
     /**
      * The column <code>ZDB.M_MODEL.RULE_UNIQUE</code>. 「ruleUnique」- 当前模型的标识规则
      */
-    public final TableField<MModelRecord, String> RULE_UNIQUE = createField(DSL.name("RULE_UNIQUE"), SQLDataType.CLOB(65535), this, "「ruleUnique」- 当前模型的标识规则");
+    public final TableField<MModelRecord, JsonObject> RULE_UNIQUE = createField(DSL.name("RULE_UNIQUE"), SQLDataType.CLOB(65535), this, "「ruleUnique」- 当前模型的标识规则", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_MODEL.SPIDER</code>. 「spider」- 主图格式
      */
-    public final TableField<MModelRecord, String> SPIDER = createField(DSL.name("SPIDER"), SQLDataType.CLOB(65535), this, "「spider」- 主图格式");
+    public final TableField<MModelRecord, JsonObject> SPIDER = createField(DSL.name("SPIDER"), SQLDataType.CLOB(65535), this, "「spider」- 主图格式", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_MODEL.SPIDER_COMPONENT</code>. 「spiderComponent」-
@@ -147,7 +149,7 @@ public class MModel extends TableImpl<MModelRecord> {
     /**
      * The column <code>ZDB.M_MODEL.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MModelRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MModelRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_MODEL.VERSION</code>. 「version」- 版本号

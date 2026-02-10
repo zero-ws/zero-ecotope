@@ -5,6 +5,7 @@ package io.zerows.extension.module.rbac.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.interfaces.ISView;
 
@@ -21,14 +22,14 @@ public class SView implements VertxPojo, ISView {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String criteria;
+    private JsonObject criteria;
     private String name;
     private String owner;
     private String ownerType;
     private String position;
-    private String projection;
+    private JsonArray projection;
     private String resourceId;
-    private String rows;
+    private JsonObject rows;
     private String title;
     private Boolean visitant;
     private String sigma;
@@ -72,14 +73,14 @@ public class SView implements VertxPojo, ISView {
 
     public SView(
         String id,
-        String criteria,
+        JsonObject criteria,
         String name,
         String owner,
         String ownerType,
         String position,
-        String projection,
+        JsonArray projection,
         String resourceId,
-        String rows,
+        JsonObject rows,
         String title,
         Boolean visitant,
         String sigma,
@@ -144,7 +145,7 @@ public class SView implements VertxPojo, ISView {
      * Getter for <code>ZDB.S_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
     @Override
-    public String getCriteria() {
+    public JsonObject getCriteria() {
         return this.criteria;
     }
 
@@ -152,7 +153,7 @@ public class SView implements VertxPojo, ISView {
      * Setter for <code>ZDB.S_VIEW.CRITERIA</code>. 「criteria」- 该资源的行查询
      */
     @Override
-    public SView setCriteria(String criteria) {
+    public SView setCriteria(JsonObject criteria) {
         this.criteria = criteria;
         return this;
     }
@@ -229,7 +230,7 @@ public class SView implements VertxPojo, ISView {
      * Getter for <code>ZDB.S_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
     @Override
-    public String getProjection() {
+    public JsonArray getProjection() {
         return this.projection;
     }
 
@@ -237,7 +238,7 @@ public class SView implements VertxPojo, ISView {
      * Setter for <code>ZDB.S_VIEW.PROJECTION</code>. 「projection」- 该资源的列定义
      */
     @Override
-    public SView setProjection(String projection) {
+    public SView setProjection(JsonArray projection) {
         this.projection = projection;
         return this;
     }
@@ -263,7 +264,7 @@ public class SView implements VertxPojo, ISView {
      * Getter for <code>ZDB.S_VIEW.ROWS</code>. 「rows」- 该资源针对保存
      */
     @Override
-    public String getRows() {
+    public JsonObject getRows() {
         return this.rows;
     }
 
@@ -271,7 +272,7 @@ public class SView implements VertxPojo, ISView {
      * Setter for <code>ZDB.S_VIEW.ROWS</code>. 「rows」- 该资源针对保存
      */
     @Override
-    public SView setRows(String rows) {
+    public SView setRows(JsonObject rows) {
         this.rows = rows;
         return this;
     }

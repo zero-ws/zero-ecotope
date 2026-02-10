@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FBook;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFBook;
 
@@ -402,7 +403,7 @@ public class FBookRecord extends UpdatableRecordImpl<FBookRecord> implements Ver
      * Setter for <code>ZDB.F_BOOK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FBookRecord setMetadata(String value) {
+    public FBookRecord setMetadata(JsonObject value) {
         set(22, value);
         return this;
     }
@@ -411,8 +412,8 @@ public class FBookRecord extends UpdatableRecordImpl<FBookRecord> implements Ver
      * Getter for <code>ZDB.F_BOOK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(22);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(22);
     }
 
     /**
@@ -566,7 +567,7 @@ public class FBookRecord extends UpdatableRecordImpl<FBookRecord> implements Ver
     /**
      * Create a detached, initialised FBookRecord
      */
-    public FBookRecord(String id, BigDecimal amount, Boolean checked, String checkedDesc, String code, String comment, Boolean exceed, String exceedDesc, Boolean major, String name, String orderId, String parentId, String serial, String type, String status, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FBookRecord(String id, BigDecimal amount, Boolean checked, String checkedDesc, String code, String comment, Boolean exceed, String exceedDesc, Boolean major, String name, String orderId, String parentId, String serial, String type, String status, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FBook.F_BOOK);
 
         setId(id);

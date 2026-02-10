@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbseapi.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -82,12 +84,12 @@ public interface IIService extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_SERVICE.RULE_UNIQUE</code>. 「ruleUnique」- 唯一规则
      */
-    public IIService setRuleUnique(String value);
+    public IIService setRuleUnique(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.RULE_UNIQUE</code>. 「ruleUnique」- 唯一规则
      */
-    public String getRuleUnique();
+    public JsonObject getRuleUnique();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.CHANNEL_TYPE</code>. 「channelType」- 通道类型
@@ -115,13 +117,13 @@ public interface IIService extends VertxPojo, Serializable {
      * Setter for <code>ZDB.I_SERVICE.CHANNEL_CONFIG</code>. 「channelConfig」-
      * 通道配置
      */
-    public IIService setChannelConfig(String value);
+    public IIService setChannelConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.CHANNEL_CONFIG</code>. 「channelConfig」-
      * 通道配置
      */
-    public String getChannelConfig();
+    public JsonObject getChannelConfig();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.DICT_COMPONENT</code>. 「dictComponent」-
@@ -138,22 +140,22 @@ public interface IIService extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典配置
      */
-    public IIService setDictConfig(String value);
+    public IIService setDictConfig(JsonArray value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典配置
      */
-    public String getDictConfig();
+    public JsonArray getDictConfig();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典消费配置
      */
-    public IIService setDictEpsilon(String value);
+    public IIService setDictEpsilon(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典消费配置
      */
-    public String getDictEpsilon();
+    public JsonObject getDictEpsilon();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.MAPPING_MODE</code>. 「mappingMode」- 映射模式
@@ -181,13 +183,13 @@ public interface IIService extends VertxPojo, Serializable {
      * Setter for <code>ZDB.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」-
      * 映射配置
      */
-    public IIService setMappingConfig(String value);
+    public IIService setMappingConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」-
      * 映射配置
      */
-    public String getMappingConfig();
+    public JsonObject getMappingConfig();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.SERVICE_COMPONENT</code>.
@@ -205,13 +207,13 @@ public interface IIService extends VertxPojo, Serializable {
      * Setter for <code>ZDB.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」-
      * 业务配置
      */
-    public IIService setServiceConfig(String value);
+    public IIService setServiceConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」-
      * 业务配置
      */
-    public String getServiceConfig();
+    public JsonObject getServiceConfig();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」-
@@ -229,25 +231,25 @@ public interface IIService extends VertxPojo, Serializable {
      * Setter for <code>ZDB.I_SERVICE.CONFIG_DATABASE</code>. 「configDatabase」-
      * 数据库配置
      */
-    public IIService setConfigDatabase(String value);
+    public IIService setConfigDatabase(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.CONFIG_DATABASE</code>. 「configDatabase」-
      * 数据库配置
      */
-    public String getConfigDatabase();
+    public JsonObject getConfigDatabase();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.CONFIG_INTEGRATION</code>.
      * 「configIntegration」- 集成配置
      */
-    public IIService setConfigIntegration(String value);
+    public IIService setConfigIntegration(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.CONFIG_INTEGRATION</code>.
      * 「configIntegration」- 集成配置
      */
-    public String getConfigIntegration();
+    public JsonObject getConfigIntegration();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.IN_SCRIPT</code>. 「inScript」- 前置脚本
@@ -352,12 +354,12 @@ public interface IIService extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_SERVICE.METADATA</code>. 「metadata」- 元配置
      */
-    public IIService setMetadata(String value);
+    public IIService setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_SERVICE.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.I_SERVICE.VERSION</code>. 「version」- 版本号
@@ -433,21 +435,21 @@ public interface IIService extends VertxPojo, Serializable {
                 setOrThrow(this::setComment,json::getString,"COMMENT","java.lang.String");
                 setOrThrow(this::setIdentifier,json::getString,"IDENTIFIER","java.lang.String");
                 setOrThrow(this::setIdentifierComponent,json::getString,"IDENTIFIER_COMPONENT","java.lang.String");
-                setOrThrow(this::setRuleUnique,json::getString,"RULE_UNIQUE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RULE_UNIQUE!
                 setOrThrow(this::setChannelType,json::getString,"CHANNEL_TYPE","java.lang.String");
                 setOrThrow(this::setChannelComponent,json::getString,"CHANNEL_COMPONENT","java.lang.String");
-                setOrThrow(this::setChannelConfig,json::getString,"CHANNEL_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CHANNEL_CONFIG!
                 setOrThrow(this::setDictComponent,json::getString,"DICT_COMPONENT","java.lang.String");
-                setOrThrow(this::setDictConfig,json::getString,"DICT_CONFIG","java.lang.String");
-                setOrThrow(this::setDictEpsilon,json::getString,"DICT_EPSILON","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column DICT_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DICT_EPSILON!
                 setOrThrow(this::setMappingMode,json::getString,"MAPPING_MODE","java.lang.String");
                 setOrThrow(this::setMappingComponent,json::getString,"MAPPING_COMPONENT","java.lang.String");
-                setOrThrow(this::setMappingConfig,json::getString,"MAPPING_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column MAPPING_CONFIG!
                 setOrThrow(this::setServiceComponent,json::getString,"SERVICE_COMPONENT","java.lang.String");
-                setOrThrow(this::setServiceConfig,json::getString,"SERVICE_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SERVICE_CONFIG!
                 setOrThrow(this::setServiceRecord,json::getString,"SERVICE_RECORD","java.lang.String");
-                setOrThrow(this::setConfigDatabase,json::getString,"CONFIG_DATABASE","java.lang.String");
-                setOrThrow(this::setConfigIntegration,json::getString,"CONFIG_INTEGRATION","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_DATABASE!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_INTEGRATION!
                 setOrThrow(this::setInScript,json::getString,"IN_SCRIPT","java.lang.String");
                 setOrThrow(this::setOutScript,json::getString,"OUT_SCRIPT","java.lang.String");
                 setOrThrow(this::setIsGraphic,json::getBoolean,"IS_GRAPHIC","java.lang.Boolean");
@@ -458,7 +460,7 @@ public interface IIService extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -477,21 +479,21 @@ public interface IIService extends VertxPojo, Serializable {
                 json.put("COMMENT",getComment());
                 json.put("IDENTIFIER",getIdentifier());
                 json.put("IDENTIFIER_COMPONENT",getIdentifierComponent());
-                json.put("RULE_UNIQUE",getRuleUnique());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RULE_UNIQUE!
                 json.put("CHANNEL_TYPE",getChannelType());
                 json.put("CHANNEL_COMPONENT",getChannelComponent());
-                json.put("CHANNEL_CONFIG",getChannelConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CHANNEL_CONFIG!
                 json.put("DICT_COMPONENT",getDictComponent());
-                json.put("DICT_CONFIG",getDictConfig());
-                json.put("DICT_EPSILON",getDictEpsilon());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column DICT_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DICT_EPSILON!
                 json.put("MAPPING_MODE",getMappingMode());
                 json.put("MAPPING_COMPONENT",getMappingComponent());
-                json.put("MAPPING_CONFIG",getMappingConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column MAPPING_CONFIG!
                 json.put("SERVICE_COMPONENT",getServiceComponent());
-                json.put("SERVICE_CONFIG",getServiceConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SERVICE_CONFIG!
                 json.put("SERVICE_RECORD",getServiceRecord());
-                json.put("CONFIG_DATABASE",getConfigDatabase());
-                json.put("CONFIG_INTEGRATION",getConfigIntegration());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_DATABASE!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CONFIG_INTEGRATION!
                 json.put("IN_SCRIPT",getInScript());
                 json.put("OUT_SCRIPT",getOutScript());
                 json.put("IS_GRAPHIC",getIsGraphic());
@@ -502,7 +504,7 @@ public interface IIService extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

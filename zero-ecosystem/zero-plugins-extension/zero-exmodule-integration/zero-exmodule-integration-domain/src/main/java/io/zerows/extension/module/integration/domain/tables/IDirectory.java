@@ -4,6 +4,8 @@
 package io.zerows.extension.module.integration.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.Keys;
 import io.zerows.extension.module.integration.domain.Zdb;
 import io.zerows.extension.module.integration.domain.tables.records.IDirectoryRecord;
@@ -114,7 +116,7 @@ public class IDirectory extends TableImpl<IDirectoryRecord> {
     /**
      * The column <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
-    public final TableField<IDirectoryRecord, String> VISIT_GROUP = createField(DSL.name("VISIT_GROUP"), SQLDataType.CLOB(65535), this, "「visitGroup」 - 目录访问组");
+    public final TableField<IDirectoryRecord, JsonObject> VISIT_GROUP = createField(DSL.name("VISIT_GROUP"), SQLDataType.CLOB(65535), this, "「visitGroup」 - 目录访问组", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_DIRECTORY.VISIT_MODE</code>. 「visitMode」 - 目录模式：只读
@@ -125,7 +127,7 @@ public class IDirectory extends TableImpl<IDirectoryRecord> {
     /**
      * The column <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
-    public final TableField<IDirectoryRecord, String> VISIT_ROLE = createField(DSL.name("VISIT_ROLE"), SQLDataType.CLOB(65535), this, "「visitRole」 - 目录访问角色");
+    public final TableField<IDirectoryRecord, JsonObject> VISIT_ROLE = createField(DSL.name("VISIT_ROLE"), SQLDataType.CLOB(65535), this, "「visitRole」 - 目录访问角色", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_DIRECTORY.TYPE</code>. 「type」- 类型
@@ -165,7 +167,7 @@ public class IDirectory extends TableImpl<IDirectoryRecord> {
     /**
      * The column <code>ZDB.I_DIRECTORY.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<IDirectoryRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<IDirectoryRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_DIRECTORY.VERSION</code>. 「version」- 版本号

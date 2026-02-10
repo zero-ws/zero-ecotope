@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EEmployee;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEEmployee;
 
@@ -422,7 +423,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Setter for <code>ZDB.E_EMPLOYEE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EEmployeeRecord setMetadata(String value) {
+    public EEmployeeRecord setMetadata(JsonObject value) {
         set(23, value);
         return this;
     }
@@ -431,8 +432,8 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      * Getter for <code>ZDB.E_EMPLOYEE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(23);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(23);
     }
 
     /**
@@ -587,7 +588,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     /**
      * Create a detached, initialised EEmployeeRecord
      */
-    public EEmployeeRecord(String id, String bankCard, String bankId, String companyId, String deptId, String identityId, String teamId, String viceEmail, String viceMobile, String viceName, String workExtension, LocalDateTime workHireAt, String workLocation, String workNumber, String workPhone, String workTitle, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EEmployeeRecord(String id, String bankCard, String bankId, String companyId, String deptId, String identityId, String teamId, String viceEmail, String viceMobile, String viceName, String workExtension, LocalDateTime workHireAt, String workLocation, String workNumber, String workPhone, String workTitle, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EEmployee.E_EMPLOYEE);
 
         setId(id);

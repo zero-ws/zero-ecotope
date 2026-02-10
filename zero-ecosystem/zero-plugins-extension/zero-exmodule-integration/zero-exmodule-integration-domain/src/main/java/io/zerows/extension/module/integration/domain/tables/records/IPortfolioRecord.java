@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.IPortfolio;
 import io.zerows.extension.module.integration.domain.tables.interfaces.IIPortfolio;
 
@@ -61,7 +62,7 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_CONFIG</code>. 「dataConfig」- 数据基础配置
      */
     @Override
-    public IPortfolioRecord setDataConfig(String value) {
+    public IPortfolioRecord setDataConfig(JsonObject value) {
         set(2, value);
         return this;
     }
@@ -70,8 +71,8 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * Getter for <code>ZDB.I_PORTFOLIO.DATA_CONFIG</code>. 「dataConfig」- 数据基础配置
      */
     @Override
-    public String getDataConfig() {
-        return (String) get(2);
+    public JsonObject getDataConfig() {
+        return (JsonObject) get(2);
     }
 
     /**
@@ -79,7 +80,7 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * 「dataIntegration」- 绑定好过后
      */
     @Override
-    public IPortfolioRecord setDataIntegration(String value) {
+    public IPortfolioRecord setDataIntegration(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -89,8 +90,8 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * 「dataIntegration」- 绑定好过后
      */
     @Override
-    public String getDataIntegration() {
-        return (String) get(3);
+    public JsonObject getDataIntegration() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -114,7 +115,7 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * Setter for <code>ZDB.I_PORTFOLIO.DATA_SECURE</code>. 「dataSecure」- 安全专用配置
      */
     @Override
-    public IPortfolioRecord setDataSecure(String value) {
+    public IPortfolioRecord setDataSecure(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -123,8 +124,8 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * Getter for <code>ZDB.I_PORTFOLIO.DATA_SECURE</code>. 「dataSecure」- 安全专用配置
      */
     @Override
-    public String getDataSecure() {
-        return (String) get(5);
+    public JsonObject getDataSecure() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -220,7 +221,7 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * Setter for <code>ZDB.I_PORTFOLIO.RUN_CONFIG</code>. 「runConfig」- 执行组件额外配置
      */
     @Override
-    public IPortfolioRecord setRunConfig(String value) {
+    public IPortfolioRecord setRunConfig(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -229,8 +230,8 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * Getter for <code>ZDB.I_PORTFOLIO.RUN_CONFIG</code>. 「runConfig」- 执行组件额外配置
      */
     @Override
-    public String getRunConfig() {
-        return (String) get(11);
+    public JsonObject getRunConfig() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -356,7 +357,7 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * Setter for <code>ZDB.I_PORTFOLIO.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IPortfolioRecord setMetadata(String value) {
+    public IPortfolioRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -365,8 +366,8 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
      * Getter for <code>ZDB.I_PORTFOLIO.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -517,7 +518,7 @@ public class IPortfolioRecord extends UpdatableRecordImpl<IPortfolioRecord> impl
     /**
      * Create a detached, initialised IPortfolioRecord
      */
-    public IPortfolioRecord(String id, String code, String dataConfig, String dataIntegration, String dataKey, String dataSecure, String integrationId, String name, String owner, String ownerType, String runComponent, String runConfig, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IPortfolioRecord(String id, String code, JsonObject dataConfig, JsonObject dataIntegration, String dataKey, JsonObject dataSecure, String integrationId, String name, String owner, String ownerType, String runComponent, JsonObject runConfig, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IPortfolio.I_PORTFOLIO);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -112,22 +113,22 @@ public interface IMModel extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.M_MODEL.RULE_UNIQUE</code>. 「ruleUnique」- 当前模型的标识规则
      */
-    public IMModel setRuleUnique(String value);
+    public IMModel setRuleUnique(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_MODEL.RULE_UNIQUE</code>. 「ruleUnique」- 当前模型的标识规则
      */
-    public String getRuleUnique();
+    public JsonObject getRuleUnique();
 
     /**
      * Setter for <code>ZDB.M_MODEL.SPIDER</code>. 「spider」- 主图格式
      */
-    public IMModel setSpider(String value);
+    public IMModel setSpider(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_MODEL.SPIDER</code>. 「spider」- 主图格式
      */
-    public String getSpider();
+    public JsonObject getSpider();
 
     /**
      * Setter for <code>ZDB.M_MODEL.SPIDER_COMPONENT</code>. 「spiderComponent」-
@@ -204,12 +205,12 @@ public interface IMModel extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.M_MODEL.METADATA</code>. 「metadata」- 元配置
      */
-    public IMModel setMetadata(String value);
+    public IMModel setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_MODEL.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.M_MODEL.VERSION</code>. 「version」- 版本号
@@ -288,8 +289,8 @@ public interface IMModel extends VertxPojo, Serializable {
                 setOrThrow(this::setIsTrack,json::getBoolean,"IS_TRACK","java.lang.Boolean");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setNamespace,json::getString,"NAMESPACE","java.lang.String");
-                setOrThrow(this::setRuleUnique,json::getString,"RULE_UNIQUE","java.lang.String");
-                setOrThrow(this::setSpider,json::getString,"SPIDER","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RULE_UNIQUE!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SPIDER!
                 setOrThrow(this::setSpiderComponent,json::getString,"SPIDER_COMPONENT","java.lang.String");
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
@@ -297,7 +298,7 @@ public interface IMModel extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -319,8 +320,8 @@ public interface IMModel extends VertxPojo, Serializable {
                 json.put("IS_TRACK",getIsTrack());
                 json.put("NAME",getName());
                 json.put("NAMESPACE",getNamespace());
-                json.put("RULE_UNIQUE",getRuleUnique());
-                json.put("SPIDER",getSpider());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RULE_UNIQUE!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column SPIDER!
                 json.put("SPIDER_COMPONENT",getSpiderComponent());
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
@@ -328,7 +329,7 @@ public interface IMModel extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

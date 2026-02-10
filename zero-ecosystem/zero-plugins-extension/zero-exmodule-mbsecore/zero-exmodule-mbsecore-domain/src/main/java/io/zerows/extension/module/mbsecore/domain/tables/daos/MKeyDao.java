@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MKey;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MKeyRecord;
 
@@ -40,7 +42,7 @@ public class MKeyDao extends AbstractVertxDAO<MKeyRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>COLUMNS IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey>> findManyByColumns(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey>> findManyByColumns(Collection<JsonArray> values) {
                 return findManyByCondition(MKey.M_KEY.COLUMNS.in(values));
         }
 
@@ -48,7 +50,7 @@ public class MKeyDao extends AbstractVertxDAO<MKeyRecord, io.zerows.extension.mo
      * Find records that have <code>COLUMNS IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey>> findManyByColumns(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey>> findManyByColumns(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(MKey.M_KEY.COLUMNS.in(values),limit);
         }
 
@@ -190,7 +192,7 @@ public class MKeyDao extends AbstractVertxDAO<MKeyRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MKey.M_KEY.METADATA.in(values));
         }
 
@@ -198,7 +200,7 @@ public class MKeyDao extends AbstractVertxDAO<MKeyRecord, io.zerows.extension.mo
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MKey>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MKey.M_KEY.METADATA.in(values),limit);
         }
 

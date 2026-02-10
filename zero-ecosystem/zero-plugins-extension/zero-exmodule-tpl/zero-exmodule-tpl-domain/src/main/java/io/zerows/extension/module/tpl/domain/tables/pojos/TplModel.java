@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.ITplModel;
 
 import java.time.LocalDateTime;
@@ -22,24 +23,24 @@ public class TplModel implements VertxPojo, ITplModel {
     private String id;
     private String code;
     private String name;
-    private String tplAcl;
-    private String tplAclVisit;
-    private String tplApi;
-    private String tplCategory;
-    private String tplEntity;
-    private String tplIntegration;
-    private String tplJob;
-    private String tplModel;
-    private String tplUi;
-    private String tplUiForm;
-    private String tplUiList;
+    private JsonObject tplAcl;
+    private JsonObject tplAclVisit;
+    private JsonObject tplApi;
+    private JsonObject tplCategory;
+    private JsonObject tplEntity;
+    private JsonObject tplIntegration;
+    private JsonObject tplJob;
+    private JsonObject tplModel;
+    private JsonObject tplUi;
+    private JsonObject tplUiForm;
+    private JsonObject tplUiList;
     private String type;
     private String sigma;
     private String tenantId;
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -81,24 +82,24 @@ public class TplModel implements VertxPojo, ITplModel {
         String id,
         String code,
         String name,
-        String tplAcl,
-        String tplAclVisit,
-        String tplApi,
-        String tplCategory,
-        String tplEntity,
-        String tplIntegration,
-        String tplJob,
-        String tplModel,
-        String tplUi,
-        String tplUiForm,
-        String tplUiList,
+        JsonObject tplAcl,
+        JsonObject tplAclVisit,
+        JsonObject tplApi,
+        JsonObject tplCategory,
+        JsonObject tplEntity,
+        JsonObject tplIntegration,
+        JsonObject tplJob,
+        JsonObject tplModel,
+        JsonObject tplUi,
+        JsonObject tplUiForm,
+        JsonObject tplUiList,
         String type,
         String sigma,
         String tenantId,
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -193,7 +194,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_ACL</code>. 「tplAcl」- 安全配置
      */
     @Override
-    public String getTplAcl() {
+    public JsonObject getTplAcl() {
         return this.tplAcl;
     }
 
@@ -201,7 +202,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_ACL</code>. 「tplAcl」- 安全配置
      */
     @Override
-    public TplModel setTplAcl(String tplAcl) {
+    public TplModel setTplAcl(JsonObject tplAcl) {
         this.tplAcl = tplAcl;
         return this;
     }
@@ -211,7 +212,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * 资源访问者配置
      */
     @Override
-    public String getTplAclVisit() {
+    public JsonObject getTplAclVisit() {
         return this.tplAclVisit;
     }
 
@@ -220,7 +221,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * 资源访问者配置
      */
     @Override
-    public TplModel setTplAclVisit(String tplAclVisit) {
+    public TplModel setTplAclVisit(JsonObject tplAclVisit) {
         this.tplAclVisit = tplAclVisit;
         return this;
     }
@@ -229,7 +230,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_API</code>. 「tplApi」- 接口配置
      */
     @Override
-    public String getTplApi() {
+    public JsonObject getTplApi() {
         return this.tplApi;
     }
 
@@ -237,7 +238,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_API</code>. 「tplApi」- 接口配置
      */
     @Override
-    public TplModel setTplApi(String tplApi) {
+    public TplModel setTplApi(JsonObject tplApi) {
         this.tplApi = tplApi;
         return this;
     }
@@ -246,7 +247,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_CATEGORY</code>. 「tplCategory」- 分类配置
      */
     @Override
-    public String getTplCategory() {
+    public JsonObject getTplCategory() {
         return this.tplCategory;
     }
 
@@ -254,7 +255,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_CATEGORY</code>. 「tplCategory」- 分类配置
      */
     @Override
-    public TplModel setTplCategory(String tplCategory) {
+    public TplModel setTplCategory(JsonObject tplCategory) {
         this.tplCategory = tplCategory;
         return this;
     }
@@ -263,7 +264,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_ENTITY</code>. 「tplEntity」- 实体配置
      */
     @Override
-    public String getTplEntity() {
+    public JsonObject getTplEntity() {
         return this.tplEntity;
     }
 
@@ -271,7 +272,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_ENTITY</code>. 「tplEntity」- 实体配置
      */
     @Override
-    public TplModel setTplEntity(String tplEntity) {
+    public TplModel setTplEntity(JsonObject tplEntity) {
         this.tplEntity = tplEntity;
         return this;
     }
@@ -281,7 +282,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * 集成配置
      */
     @Override
-    public String getTplIntegration() {
+    public JsonObject getTplIntegration() {
         return this.tplIntegration;
     }
 
@@ -290,7 +291,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * 集成配置
      */
     @Override
-    public TplModel setTplIntegration(String tplIntegration) {
+    public TplModel setTplIntegration(JsonObject tplIntegration) {
         this.tplIntegration = tplIntegration;
         return this;
     }
@@ -299,7 +300,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_JOB</code>. 「tplJob」- 任务配置
      */
     @Override
-    public String getTplJob() {
+    public JsonObject getTplJob() {
         return this.tplJob;
     }
 
@@ -307,7 +308,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_JOB</code>. 「tplJob」- 任务配置
      */
     @Override
-    public TplModel setTplJob(String tplJob) {
+    public TplModel setTplJob(JsonObject tplJob) {
         this.tplJob = tplJob;
         return this;
     }
@@ -316,7 +317,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_MODEL</code>. 「tplModel」- 模型配置
      */
     @Override
-    public String getTplModel() {
+    public JsonObject getTplModel() {
         return this.tplModel;
     }
 
@@ -324,7 +325,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_MODEL</code>. 「tplModel」- 模型配置
      */
     @Override
-    public TplModel setTplModel(String tplModel) {
+    public TplModel setTplModel(JsonObject tplModel) {
         this.tplModel = tplModel;
         return this;
     }
@@ -333,7 +334,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI</code>. 「tplUi」- 界面配置
      */
     @Override
-    public String getTplUi() {
+    public JsonObject getTplUi() {
         return this.tplUi;
     }
 
@@ -341,7 +342,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI</code>. 「tplUi」- 界面配置
      */
     @Override
-    public TplModel setTplUi(String tplUi) {
+    public TplModel setTplUi(JsonObject tplUi) {
         this.tplUi = tplUi;
         return this;
     }
@@ -350,7 +351,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI_FORM</code>. 「tplUiForm」- 界面表单配置
      */
     @Override
-    public String getTplUiForm() {
+    public JsonObject getTplUiForm() {
         return this.tplUiForm;
     }
 
@@ -358,7 +359,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI_FORM</code>. 「tplUiForm」- 界面表单配置
      */
     @Override
-    public TplModel setTplUiForm(String tplUiForm) {
+    public TplModel setTplUiForm(JsonObject tplUiForm) {
         this.tplUiForm = tplUiForm;
         return this;
     }
@@ -367,7 +368,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI_LIST</code>. 「tplUiList」- 界面列表配置
      */
     @Override
-    public String getTplUiList() {
+    public JsonObject getTplUiList() {
         return this.tplUiList;
     }
 
@@ -375,7 +376,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI_LIST</code>. 「tplUiList」- 界面列表配置
      */
     @Override
-    public TplModel setTplUiList(String tplUiList) {
+    public TplModel setTplUiList(JsonObject tplUiList) {
         this.tplUiList = tplUiList;
         return this;
     }
@@ -486,7 +487,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Getter for <code>ZDB.TPL_MODEL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -494,7 +495,7 @@ public class TplModel implements VertxPojo, ITplModel {
      * Setter for <code>ZDB.TPL_MODEL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public TplModel setMetadata(String metadata) {
+    public TplModel setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

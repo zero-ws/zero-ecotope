@@ -22,19 +22,19 @@ public class SPacket implements VertxPojo, ISPacket {
 
     private String id;
     private String code;
-    private String hConfig;
-    private String hMapping;
+    private JsonObject hConfig;
+    private JsonObject hMapping;
     private String hType;
-    private String qConfig;
-    private String qMapping;
+    private JsonObject qConfig;
+    private JsonObject qMapping;
     private String qType;
     private String resource;
     private String runComponent;
-    private String runConfig;
-    private String seekConfig;
-    private String seekSyntax;
-    private String vConfig;
-    private String vMapping;
+    private JsonObject runConfig;
+    private JsonObject seekConfig;
+    private JsonObject seekSyntax;
+    private JsonObject vConfig;
+    private JsonObject vMapping;
     private String vType;
     private String sigma;
     private String tenantId;
@@ -83,19 +83,19 @@ public class SPacket implements VertxPojo, ISPacket {
     public SPacket(
         String id,
         String code,
-        String hConfig,
-        String hMapping,
+        JsonObject hConfig,
+        JsonObject hMapping,
         String hType,
-        String qConfig,
-        String qMapping,
+        JsonObject qConfig,
+        JsonObject qMapping,
         String qType,
         String resource,
         String runComponent,
-        String runConfig,
-        String seekConfig,
-        String seekSyntax,
-        String vConfig,
-        String vMapping,
+        JsonObject runConfig,
+        JsonObject seekConfig,
+        JsonObject seekSyntax,
+        JsonObject vConfig,
+        JsonObject vMapping,
         String vType,
         String sigma,
         String tenantId,
@@ -181,7 +181,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.H_CONFIG</code>. 「hConfig」- 字段附加配置
      */
     @Override
-    public String getHConfig() {
+    public JsonObject getHConfig() {
         return this.hConfig;
     }
 
@@ -189,7 +189,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.H_CONFIG</code>. 「hConfig」- 字段附加配置
      */
     @Override
-    public SPacket setHConfig(String hConfig) {
+    public SPacket setHConfig(JsonObject hConfig) {
         this.hConfig = hConfig;
         return this;
     }
@@ -198,7 +198,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.H_MAPPING</code>. 「hMapping」- 字段映射关系
      */
     @Override
-    public String getHMapping() {
+    public JsonObject getHMapping() {
         return this.hMapping;
     }
 
@@ -206,7 +206,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.H_MAPPING</code>. 「hMapping」- 字段映射关系
      */
     @Override
-    public SPacket setHMapping(String hMapping) {
+    public SPacket setHMapping(JsonObject hMapping) {
         this.hMapping = hMapping;
         return this;
     }
@@ -232,7 +232,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.Q_CONFIG</code>. 「qConfig」- 条件配置
      */
     @Override
-    public String getQConfig() {
+    public JsonObject getQConfig() {
         return this.qConfig;
     }
 
@@ -240,7 +240,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.Q_CONFIG</code>. 「qConfig」- 条件配置
      */
     @Override
-    public SPacket setQConfig(String qConfig) {
+    public SPacket setQConfig(JsonObject qConfig) {
         this.qConfig = qConfig;
         return this;
     }
@@ -249,7 +249,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.Q_MAPPING</code>. 「qMapping」- 查询条件映射关系
      */
     @Override
-    public String getQMapping() {
+    public JsonObject getQMapping() {
         return this.qMapping;
     }
 
@@ -257,7 +257,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.Q_MAPPING</code>. 「qMapping」- 查询条件映射关系
      */
     @Override
-    public SPacket setQMapping(String qMapping) {
+    public SPacket setQMapping(JsonObject qMapping) {
         this.qMapping = qMapping;
         return this;
     }
@@ -319,7 +319,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.RUN_CONFIG</code>. 「runConfig」- 运行专用配置
      */
     @Override
-    public String getRunConfig() {
+    public JsonObject getRunConfig() {
         return this.runConfig;
     }
 
@@ -327,7 +327,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.RUN_CONFIG</code>. 「runConfig」- 运行专用配置
      */
     @Override
-    public SPacket setRunConfig(String runConfig) {
+    public SPacket setRunConfig(JsonObject runConfig) {
         this.runConfig = runConfig;
         return this;
     }
@@ -336,7 +336,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.SEEK_CONFIG</code>. 「seekConfig」- 访问者配置
      */
     @Override
-    public String getSeekConfig() {
+    public JsonObject getSeekConfig() {
         return this.seekConfig;
     }
 
@@ -344,7 +344,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.SEEK_CONFIG</code>. 「seekConfig」- 访问者配置
      */
     @Override
-    public SPacket setSeekConfig(String seekConfig) {
+    public SPacket setSeekConfig(JsonObject seekConfig) {
         this.seekConfig = seekConfig;
         return this;
     }
@@ -353,7 +353,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.SEEK_SYNTAX</code>. 「seekSyntax」- 访问者语法
      */
     @Override
-    public String getSeekSyntax() {
+    public JsonObject getSeekSyntax() {
         return this.seekSyntax;
     }
 
@@ -361,7 +361,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.SEEK_SYNTAX</code>. 「seekSyntax」- 访问者语法
      */
     @Override
-    public SPacket setSeekSyntax(String seekSyntax) {
+    public SPacket setSeekSyntax(JsonObject seekSyntax) {
         this.seekSyntax = seekSyntax;
         return this;
     }
@@ -370,7 +370,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.V_CONFIG</code>. 「vConfig」- 列配置
      */
     @Override
-    public String getVConfig() {
+    public JsonObject getVConfig() {
         return this.vConfig;
     }
 
@@ -378,7 +378,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.V_CONFIG</code>. 「vConfig」- 列配置
      */
     @Override
-    public SPacket setVConfig(String vConfig) {
+    public SPacket setVConfig(JsonObject vConfig) {
         this.vConfig = vConfig;
         return this;
     }
@@ -387,7 +387,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Getter for <code>ZDB.S_PACKET.V_MAPPING</code>. 「vMapping」- 列字段映射关系
      */
     @Override
-    public String getVMapping() {
+    public JsonObject getVMapping() {
         return this.vMapping;
     }
 
@@ -395,7 +395,7 @@ public class SPacket implements VertxPojo, ISPacket {
      * Setter for <code>ZDB.S_PACKET.V_MAPPING</code>. 「vMapping」- 列字段映射关系
      */
     @Override
-    public SPacket setVMapping(String vMapping) {
+    public SPacket setVMapping(JsonObject vMapping) {
         this.vMapping = vMapping;
         return this;
     }

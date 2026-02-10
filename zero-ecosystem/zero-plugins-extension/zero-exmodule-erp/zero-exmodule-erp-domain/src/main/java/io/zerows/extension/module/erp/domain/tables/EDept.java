@@ -4,6 +4,8 @@
 package io.zerows.extension.module.erp.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.Indexes;
 import io.zerows.extension.module.erp.domain.Keys;
 import io.zerows.extension.module.erp.domain.Zdb;
@@ -122,7 +124,7 @@ public class EDept extends TableImpl<EDeptRecord> {
     /**
      * The column <code>ZDB.E_DEPT.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<EDeptRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<EDeptRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.E_DEPT.VERSION</code>. 「version」- 版本号

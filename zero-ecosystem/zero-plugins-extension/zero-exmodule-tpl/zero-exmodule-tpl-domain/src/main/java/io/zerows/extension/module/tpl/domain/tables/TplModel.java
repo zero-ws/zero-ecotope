@@ -4,6 +4,8 @@
 package io.zerows.extension.module.tpl.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.Keys;
 import io.zerows.extension.module.tpl.domain.Zdb;
 import io.zerows.extension.module.tpl.domain.tables.records.TplModelRecord;
@@ -70,59 +72,59 @@ public class TplModel extends TableImpl<TplModelRecord> {
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_ACL</code>. 「tplAcl」- 安全配置
      */
-    public final TableField<TplModelRecord, String> TPL_ACL = createField(DSL.name("TPL_ACL"), SQLDataType.CLOB, this, "「tplAcl」- 安全配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_ACL = createField(DSL.name("TPL_ACL"), SQLDataType.CLOB, this, "「tplAcl」- 安全配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_ACL_VISIT</code>. 「tplAclVisit」-
      * 资源访问者配置
      */
-    public final TableField<TplModelRecord, String> TPL_ACL_VISIT = createField(DSL.name("TPL_ACL_VISIT"), SQLDataType.CLOB, this, "「tplAclVisit」- 资源访问者配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_ACL_VISIT = createField(DSL.name("TPL_ACL_VISIT"), SQLDataType.CLOB, this, "「tplAclVisit」- 资源访问者配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_API</code>. 「tplApi」- 接口配置
      */
-    public final TableField<TplModelRecord, String> TPL_API = createField(DSL.name("TPL_API"), SQLDataType.CLOB, this, "「tplApi」- 接口配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_API = createField(DSL.name("TPL_API"), SQLDataType.CLOB, this, "「tplApi」- 接口配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_CATEGORY</code>. 「tplCategory」- 分类配置
      */
-    public final TableField<TplModelRecord, String> TPL_CATEGORY = createField(DSL.name("TPL_CATEGORY"), SQLDataType.CLOB, this, "「tplCategory」- 分类配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_CATEGORY = createField(DSL.name("TPL_CATEGORY"), SQLDataType.CLOB, this, "「tplCategory」- 分类配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_ENTITY</code>. 「tplEntity」- 实体配置
      */
-    public final TableField<TplModelRecord, String> TPL_ENTITY = createField(DSL.name("TPL_ENTITY"), SQLDataType.CLOB, this, "「tplEntity」- 实体配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_ENTITY = createField(DSL.name("TPL_ENTITY"), SQLDataType.CLOB, this, "「tplEntity」- 实体配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_INTEGRATION</code>. 「tplIntegration」-
      * 集成配置
      */
-    public final TableField<TplModelRecord, String> TPL_INTEGRATION = createField(DSL.name("TPL_INTEGRATION"), SQLDataType.CLOB, this, "「tplIntegration」- 集成配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_INTEGRATION = createField(DSL.name("TPL_INTEGRATION"), SQLDataType.CLOB, this, "「tplIntegration」- 集成配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_JOB</code>. 「tplJob」- 任务配置
      */
-    public final TableField<TplModelRecord, String> TPL_JOB = createField(DSL.name("TPL_JOB"), SQLDataType.CLOB, this, "「tplJob」- 任务配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_JOB = createField(DSL.name("TPL_JOB"), SQLDataType.CLOB, this, "「tplJob」- 任务配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_MODEL</code>. 「tplModel」- 模型配置
      */
-    public final TableField<TplModelRecord, String> TPL_MODEL_ = createField(DSL.name("TPL_MODEL"), SQLDataType.CLOB, this, "「tplModel」- 模型配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_MODEL_ = createField(DSL.name("TPL_MODEL"), SQLDataType.CLOB, this, "「tplModel」- 模型配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_UI</code>. 「tplUi」- 界面配置
      */
-    public final TableField<TplModelRecord, String> TPL_UI = createField(DSL.name("TPL_UI"), SQLDataType.CLOB, this, "「tplUi」- 界面配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_UI = createField(DSL.name("TPL_UI"), SQLDataType.CLOB, this, "「tplUi」- 界面配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_UI_FORM</code>. 「tplUiForm」- 界面表单配置
      */
-    public final TableField<TplModelRecord, String> TPL_UI_FORM = createField(DSL.name("TPL_UI_FORM"), SQLDataType.CLOB, this, "「tplUiForm」- 界面表单配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_UI_FORM = createField(DSL.name("TPL_UI_FORM"), SQLDataType.CLOB, this, "「tplUiForm」- 界面表单配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TPL_UI_LIST</code>. 「tplUiList」- 界面列表配置
      */
-    public final TableField<TplModelRecord, String> TPL_UI_LIST = createField(DSL.name("TPL_UI_LIST"), SQLDataType.CLOB, this, "「tplUiList」- 界面列表配置");
+    public final TableField<TplModelRecord, JsonObject> TPL_UI_LIST = createField(DSL.name("TPL_UI_LIST"), SQLDataType.CLOB, this, "「tplUiList」- 界面列表配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.TYPE</code>. 「type」- 类型
@@ -157,7 +159,7 @@ public class TplModel extends TableImpl<TplModelRecord> {
     /**
      * The column <code>ZDB.TPL_MODEL.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<TplModelRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<TplModelRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_MODEL.VERSION</code>. 「version」- 版本号

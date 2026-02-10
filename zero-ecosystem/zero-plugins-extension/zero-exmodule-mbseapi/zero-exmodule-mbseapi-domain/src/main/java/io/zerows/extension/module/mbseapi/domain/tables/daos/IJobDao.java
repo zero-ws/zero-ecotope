@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbseapi.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.IJob;
 import io.zerows.extension.module.mbseapi.domain.tables.records.IJobRecord;
 
@@ -116,7 +117,7 @@ public class IJobDao extends AbstractVertxDAO<IJobRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>ADDITIONAL IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByAdditional(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByAdditional(Collection<JsonObject> values) {
                 return findManyByCondition(IJob.I_JOB.ADDITIONAL.in(values));
         }
 
@@ -124,7 +125,7 @@ public class IJobDao extends AbstractVertxDAO<IJobRecord, io.zerows.extension.mo
      * Find records that have <code>ADDITIONAL IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByAdditional(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByAdditional(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IJob.I_JOB.ADDITIONAL.in(values),limit);
         }
 
@@ -193,7 +194,7 @@ public class IJobDao extends AbstractVertxDAO<IJobRecord, io.zerows.extension.mo
      * Find records that have <code>DURATION_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByDurationConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByDurationConfig(Collection<JsonObject> values) {
                 return findManyByCondition(IJob.I_JOB.DURATION_CONFIG.in(values));
         }
 
@@ -201,7 +202,7 @@ public class IJobDao extends AbstractVertxDAO<IJobRecord, io.zerows.extension.mo
      * Find records that have <code>DURATION_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByDurationConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByDurationConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IJob.I_JOB.DURATION_CONFIG.in(values),limit);
         }
 
@@ -408,7 +409,7 @@ public class IJobDao extends AbstractVertxDAO<IJobRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(IJob.I_JOB.METADATA.in(values));
         }
 
@@ -416,7 +417,7 @@ public class IJobDao extends AbstractVertxDAO<IJobRecord, io.zerows.extension.mo
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbseapi.domain.tables.pojos.IJob>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IJob.I_JOB.METADATA.in(values),limit);
         }
 

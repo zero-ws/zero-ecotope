@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -61,23 +63,23 @@ public interface IBBlock extends VertxPojo, Serializable {
      * Setter for <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
      * 允许的模型标识
      */
-    public IBBlock setLicIdentifier(String value);
+    public IBBlock setLicIdentifier(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
      * 允许的模型标识
      */
-    public String getLicIdentifier();
+    public JsonArray getLicIdentifier();
 
     /**
      * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
      */
-    public IBBlock setLicMenu(String value);
+    public IBBlock setLicMenu(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
      */
-    public String getLicMenu();
+    public JsonArray getLicMenu();
 
     /**
      * Setter for <code>ZDB.B_BLOCK.NAME</code>. 「name」- 名称
@@ -162,22 +164,22 @@ public interface IBBlock extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
-    public IBBlock setUiConfig(String value);
+    public IBBlock setUiConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
-    public String getUiConfig();
+    public JsonObject getUiConfig();
 
     /**
      * Setter for <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
-    public IBBlock setUiContent(String value);
+    public IBBlock setUiContent(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
-    public String getUiContent();
+    public JsonObject getUiContent();
 
     /**
      * Setter for <code>ZDB.B_BLOCK.UI_ICON</code>. 「uiIcon」- 子模块图标
@@ -202,12 +204,12 @@ public interface IBBlock extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
-    public IBBlock setUiStyle(String value);
+    public IBBlock setUiStyle(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
-    public String getUiStyle();
+    public JsonObject getUiStyle();
 
     /**
      * Setter for <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
@@ -262,12 +264,12 @@ public interface IBBlock extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
      */
-    public IBBlock setMetadata(String value);
+    public IBBlock setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号
@@ -341,8 +343,8 @@ public interface IBBlock extends VertxPojo, Serializable {
                 setOrThrow(this::setAuthorized,json::getBoolean,"AUTHORIZED","java.lang.Boolean");
                 setOrThrow(this::setBagId,json::getString,"BAG_ID","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
-                setOrThrow(this::setLicIdentifier,json::getString,"LIC_IDENTIFIER","java.lang.String");
-                setOrThrow(this::setLicMenu,json::getString,"LIC_MENU","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_IDENTIFIER!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_MENU!
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setSignAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"SIGN_AT","java.time.LocalDateTime");
                 setOrThrow(this::setSignEnd,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"SIGN_END","java.time.LocalDateTime");
@@ -351,17 +353,17 @@ public interface IBBlock extends VertxPojo, Serializable {
                 setOrThrow(this::setSignName,json::getString,"SIGN_NAME","java.lang.String");
                 setOrThrow(this::setSignSecret,json::getString,"SIGN_SECRET","java.lang.String");
                 setOrThrow(this::setSignStart,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"SIGN_START","java.time.LocalDateTime");
-                setOrThrow(this::setUiConfig,json::getString,"UI_CONFIG","java.lang.String");
-                setOrThrow(this::setUiContent,json::getString,"UI_CONTENT","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONTENT!
                 setOrThrow(this::setUiIcon,json::getString,"UI_ICON","java.lang.String");
                 setOrThrow(this::setUiSort,json::getLong,"UI_SORT","java.lang.Long");
-                setOrThrow(this::setUiStyle,json::getString,"UI_STYLE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -378,8 +380,8 @@ public interface IBBlock extends VertxPojo, Serializable {
                 json.put("AUTHORIZED",getAuthorized());
                 json.put("BAG_ID",getBagId());
                 json.put("CODE",getCode());
-                json.put("LIC_IDENTIFIER",getLicIdentifier());
-                json.put("LIC_MENU",getLicMenu());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_IDENTIFIER!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_MENU!
                 json.put("NAME",getName());
                 json.put("SIGN_AT",getSignAt()==null?null:getSignAt().toString());
                 json.put("SIGN_END",getSignEnd()==null?null:getSignEnd().toString());
@@ -388,17 +390,17 @@ public interface IBBlock extends VertxPojo, Serializable {
                 json.put("SIGN_NAME",getSignName());
                 json.put("SIGN_SECRET",getSignSecret());
                 json.put("SIGN_START",getSignStart()==null?null:getSignStart().toString());
-                json.put("UI_CONFIG",getUiConfig());
-                json.put("UI_CONTENT",getUiContent());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONTENT!
                 json.put("UI_ICON",getUiIcon());
                 json.put("UI_SORT",getUiSort());
-                json.put("UI_STYLE",getUiStyle());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

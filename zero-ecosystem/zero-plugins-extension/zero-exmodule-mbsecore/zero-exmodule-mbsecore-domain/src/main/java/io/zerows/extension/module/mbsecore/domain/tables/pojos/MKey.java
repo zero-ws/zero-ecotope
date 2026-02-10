@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMKey;
 
 import java.time.LocalDateTime;
@@ -20,7 +22,7 @@ public class MKey implements VertxPojo, IMKey {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String columns;
+    private JsonArray columns;
     private String comments;
     private String entityId;
     private String name;
@@ -30,7 +32,7 @@ public class MKey implements VertxPojo, IMKey {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -61,7 +63,7 @@ public class MKey implements VertxPojo, IMKey {
 
     public MKey(
         String id,
-        String columns,
+        JsonArray columns,
         String comments,
         String entityId,
         String name,
@@ -71,7 +73,7 @@ public class MKey implements VertxPojo, IMKey {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -123,7 +125,7 @@ public class MKey implements VertxPojo, IMKey {
      * Getter for <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArra
      */
     @Override
-    public String getColumns() {
+    public JsonArray getColumns() {
         return this.columns;
     }
 
@@ -131,7 +133,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArra
      */
     @Override
-    public MKey setColumns(String columns) {
+    public MKey setColumns(JsonArray columns) {
         this.columns = columns;
         return this;
     }
@@ -293,7 +295,7 @@ public class MKey implements VertxPojo, IMKey {
      * Getter for <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -301,7 +303,7 @@ public class MKey implements VertxPojo, IMKey {
      * Setter for <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MKey setMetadata(String metadata) {
+    public MKey setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

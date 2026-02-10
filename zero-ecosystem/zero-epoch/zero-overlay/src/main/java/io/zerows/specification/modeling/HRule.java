@@ -14,9 +14,10 @@ import java.util.Set;
  * @author lang : 2023-05-09
  */
 public interface HRule extends Serializable {
-    static HRule of(final String content) {
-        return UtBase.deserialize(content, KRule.class);
-    }
+//
+//    static HRule of(final String content) {
+//        return UtBase.deserialize(content, KRule.class);
+//    }
 
     static HRule of(final JsonObject content) {
         return UtBase.deserialize(content, KRule.class);

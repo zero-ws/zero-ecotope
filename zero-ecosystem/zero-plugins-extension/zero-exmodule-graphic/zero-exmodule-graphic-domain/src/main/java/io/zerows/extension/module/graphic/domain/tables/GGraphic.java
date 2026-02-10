@@ -4,6 +4,8 @@
 package io.zerows.extension.module.graphic.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.Keys;
 import io.zerows.extension.module.graphic.domain.Zdb;
 import io.zerows.extension.module.graphic.domain.tables.records.GGraphicRecord;
@@ -99,7 +101,7 @@ public class GGraphic extends TableImpl<GGraphicRecord> {
     /**
      * The column <code>ZDB.G_GRAPHIC.UI</code>. 「ui」 - ui配置专用
      */
-    public final TableField<GGraphicRecord, String> UI = createField(DSL.name("UI"), SQLDataType.CLOB(65535), this, "「ui」 - ui配置专用");
+    public final TableField<GGraphicRecord, JsonObject> UI = createField(DSL.name("UI"), SQLDataType.CLOB(65535), this, "「ui」 - ui配置专用", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_GRAPHIC.TYPE</code>. 「type」- 类型
@@ -150,7 +152,7 @@ public class GGraphic extends TableImpl<GGraphicRecord> {
     /**
      * The column <code>ZDB.G_GRAPHIC.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<GGraphicRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<GGraphicRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_GRAPHIC.VERSION</code>. 「version」- 版本号

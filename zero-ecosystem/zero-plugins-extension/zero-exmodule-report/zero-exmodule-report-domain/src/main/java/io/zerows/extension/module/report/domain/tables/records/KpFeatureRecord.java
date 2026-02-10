@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.KpFeature;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpFeature;
 
@@ -63,7 +64,7 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
      * Setter for <code>ZDB.KP_FEATURE.IN_CONFIG</code>. 「inConfig」- 特殊输出配置
      */
     @Override
-    public KpFeatureRecord setInConfig(String value) {
+    public KpFeatureRecord setInConfig(JsonObject value) {
         set(2, value);
         return this;
     }
@@ -72,8 +73,8 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
      * Getter for <code>ZDB.KP_FEATURE.IN_CONFIG</code>. 「inConfig」- 特殊输出配置
      */
     @Override
-    public String getInConfig() {
-        return (String) get(2);
+    public JsonObject getInConfig() {
+        return (JsonObject) get(2);
     }
 
     /**
@@ -116,7 +117,7 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
      * Setter for <code>ZDB.KP_FEATURE.OUT_CONFIG</code>. 「outConfig」- 特殊输出配置
      */
     @Override
-    public KpFeatureRecord setOutConfig(String value) {
+    public KpFeatureRecord setOutConfig(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -125,8 +126,8 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
      * Getter for <code>ZDB.KP_FEATURE.OUT_CONFIG</code>. 「outConfig」- 特殊输出配置
      */
     @Override
-    public String getOutConfig() {
-        return (String) get(5);
+    public JsonObject getOutConfig() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -150,7 +151,7 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
      * Setter for <code>ZDB.KP_FEATURE.VALUE_CONFIG</code>. 「valueConfig」- 特征配置
      */
     @Override
-    public KpFeatureRecord setValueConfig(String value) {
+    public KpFeatureRecord setValueConfig(JsonObject value) {
         set(7, value);
         return this;
     }
@@ -159,8 +160,8 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
      * Getter for <code>ZDB.KP_FEATURE.VALUE_CONFIG</code>. 「valueConfig」- 特征配置
      */
     @Override
-    public String getValueConfig() {
-        return (String) get(7);
+    public JsonObject getValueConfig() {
+        return (JsonObject) get(7);
     }
 
     /**
@@ -322,7 +323,7 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
      * Setter for <code>ZDB.KP_FEATURE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpFeatureRecord setMetadata(String value) {
+    public KpFeatureRecord setMetadata(JsonObject value) {
         set(17, value);
         return this;
     }
@@ -331,8 +332,8 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
      * Getter for <code>ZDB.KP_FEATURE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(17);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(17);
     }
 
     /**
@@ -481,7 +482,7 @@ public class KpFeatureRecord extends UpdatableRecordImpl<KpFeatureRecord> implem
     /**
      * Create a detached, initialised KpFeatureRecord
      */
-    public KpFeatureRecord(String id, String inComponent, String inConfig, String name, String outComponent, String outConfig, String reportId, String valueConfig, String valueDisplay, String valuePath, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public KpFeatureRecord(String id, String inComponent, JsonObject inConfig, String name, String outComponent, JsonObject outConfig, String reportId, JsonObject valueConfig, String valueDisplay, String valuePath, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(KpFeature.KP_FEATURE);
 
         setId(id);

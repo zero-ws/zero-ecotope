@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FBillItem;
 import io.zerows.extension.module.finance.domain.tables.records.FBillItemRecord;
 
@@ -494,7 +495,7 @@ public class FBillItemDao extends AbstractVertxDAO<FBillItemRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.finance.domain.tables.pojos.FBillItem>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.finance.domain.tables.pojos.FBillItem>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(FBillItem.F_BILL_ITEM.METADATA.in(values));
         }
 
@@ -502,7 +503,7 @@ public class FBillItemDao extends AbstractVertxDAO<FBillItemRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.finance.domain.tables.pojos.FBillItem>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.finance.domain.tables.pojos.FBillItem>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(FBillItem.F_BILL_ITEM.METADATA.in(values),limit);
         }
 

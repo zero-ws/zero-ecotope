@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -42,12 +43,12 @@ public interface IKpFeature extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.KP_FEATURE.IN_CONFIG</code>. 「inConfig」- 特殊输出配置
      */
-    public IKpFeature setInConfig(String value);
+    public IKpFeature setInConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_FEATURE.IN_CONFIG</code>. 「inConfig」- 特殊输出配置
      */
-    public String getInConfig();
+    public JsonObject getInConfig();
 
     /**
      * Setter for <code>ZDB.KP_FEATURE.NAME</code>. 「name」- 名称
@@ -74,12 +75,12 @@ public interface IKpFeature extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.KP_FEATURE.OUT_CONFIG</code>. 「outConfig」- 特殊输出配置
      */
-    public IKpFeature setOutConfig(String value);
+    public IKpFeature setOutConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_FEATURE.OUT_CONFIG</code>. 「outConfig」- 特殊输出配置
      */
-    public String getOutConfig();
+    public JsonObject getOutConfig();
 
     /**
      * Setter for <code>ZDB.KP_FEATURE.REPORT_ID</code>. 「reportId」- 关联报表ID
@@ -94,12 +95,12 @@ public interface IKpFeature extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.KP_FEATURE.VALUE_CONFIG</code>. 「valueConfig」- 特征配置
      */
-    public IKpFeature setValueConfig(String value);
+    public IKpFeature setValueConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_FEATURE.VALUE_CONFIG</code>. 「valueConfig」- 特征配置
      */
-    public String getValueConfig();
+    public JsonObject getValueConfig();
 
     /**
      * Setter for <code>ZDB.KP_FEATURE.VALUE_DISPLAY</code>. 「valueDisplay」-
@@ -196,12 +197,12 @@ public interface IKpFeature extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.KP_FEATURE.METADATA</code>. 「metadata」- 元配置
      */
-    public IKpFeature setMetadata(String value);
+    public IKpFeature setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_FEATURE.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.KP_FEATURE.VERSION</code>. 「version」- 版本号
@@ -273,12 +274,12 @@ public interface IKpFeature extends VertxPojo, Serializable {
         public default IKpFeature fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setInComponent,json::getString,"IN_COMPONENT","java.lang.String");
-                setOrThrow(this::setInConfig,json::getString,"IN_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column IN_CONFIG!
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setOutComponent,json::getString,"OUT_COMPONENT","java.lang.String");
-                setOrThrow(this::setOutConfig,json::getString,"OUT_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column OUT_CONFIG!
                 setOrThrow(this::setReportId,json::getString,"REPORT_ID","java.lang.String");
-                setOrThrow(this::setValueConfig,json::getString,"VALUE_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VALUE_CONFIG!
                 setOrThrow(this::setValueDisplay,json::getString,"VALUE_DISPLAY","java.lang.String");
                 setOrThrow(this::setValuePath,json::getString,"VALUE_PATH","java.lang.String");
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
@@ -288,7 +289,7 @@ public interface IKpFeature extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -303,12 +304,12 @@ public interface IKpFeature extends VertxPojo, Serializable {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
                 json.put("IN_COMPONENT",getInComponent());
-                json.put("IN_CONFIG",getInConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column IN_CONFIG!
                 json.put("NAME",getName());
                 json.put("OUT_COMPONENT",getOutComponent());
-                json.put("OUT_CONFIG",getOutConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column OUT_CONFIG!
                 json.put("REPORT_ID",getReportId());
-                json.put("VALUE_CONFIG",getValueConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column VALUE_CONFIG!
                 json.put("VALUE_DISPLAY",getValueDisplay());
                 json.put("VALUE_PATH",getValuePath());
                 json.put("TYPE",getType());
@@ -318,7 +319,7 @@ public interface IKpFeature extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

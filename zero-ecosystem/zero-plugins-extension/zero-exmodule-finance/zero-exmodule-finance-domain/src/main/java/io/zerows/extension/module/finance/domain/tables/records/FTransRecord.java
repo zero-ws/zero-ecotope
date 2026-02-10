@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.FTrans;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFTrans;
 
@@ -370,7 +371,7 @@ public class FTransRecord extends UpdatableRecordImpl<FTransRecord> implements V
      * Setter for <code>ZDB.F_TRANS.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FTransRecord setMetadata(String value) {
+    public FTransRecord setMetadata(JsonObject value) {
         set(20, value);
         return this;
     }
@@ -379,8 +380,8 @@ public class FTransRecord extends UpdatableRecordImpl<FTransRecord> implements V
      * Getter for <code>ZDB.F_TRANS.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(20);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(20);
     }
 
     /**
@@ -532,7 +533,7 @@ public class FTransRecord extends UpdatableRecordImpl<FTransRecord> implements V
     /**
      * Create a detached, initialised FTransRecord
      */
-    public FTransRecord(String id, BigDecimal amount, BigDecimal amountGap, BigDecimal amountPre, String code, String comment, LocalDateTime endAt, String groupBy, String name, Boolean prepay, String rounded, String serial, LocalDateTime startAt, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public FTransRecord(String id, BigDecimal amount, BigDecimal amountGap, BigDecimal amountPre, String code, String comment, LocalDateTime endAt, String groupBy, String name, Boolean prepay, String rounded, String serial, LocalDateTime startAt, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(FTrans.F_TRANS);
 
         setId(id);

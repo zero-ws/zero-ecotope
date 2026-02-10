@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MField;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMField;
 
@@ -350,7 +351,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Setter for <code>ZDB.M_FIELD.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MFieldRecord setMetadata(String value) {
+    public MFieldRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -359,8 +360,8 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
      * Getter for <code>ZDB.M_FIELD.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -511,7 +512,7 @@ public class MFieldRecord extends UpdatableRecordImpl<MFieldRecord> implements V
     /**
      * Create a detached, initialised MFieldRecord
      */
-    public MFieldRecord(String id, String columnName, String columnType, String comments, String entityId, String format, String inComponent, Boolean isNullable, Boolean isPrimary, Integer length, String name, String outComponent, Integer precision, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MFieldRecord(String id, String columnName, String columnType, String comments, String entityId, String format, String inComponent, Boolean isNullable, Boolean isPrimary, Integer length, String name, String outComponent, Integer precision, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MField.M_FIELD);
 
         setId(id);

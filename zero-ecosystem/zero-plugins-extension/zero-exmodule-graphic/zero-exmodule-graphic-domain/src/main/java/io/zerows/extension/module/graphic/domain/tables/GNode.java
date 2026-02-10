@@ -4,6 +4,8 @@
 package io.zerows.extension.module.graphic.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.graphic.domain.Keys;
 import io.zerows.extension.module.graphic.domain.Zdb;
 import io.zerows.extension.module.graphic.domain.tables.records.GNodeRecord;
@@ -83,7 +85,7 @@ public class GNode extends TableImpl<GNodeRecord> {
     /**
      * The column <code>ZDB.G_NODE.RECORD_DATA</code>. 「recordData」 - 该节点存储的数据信息
      */
-    public final TableField<GNodeRecord, String> RECORD_DATA = createField(DSL.name("RECORD_DATA"), SQLDataType.CLOB(65535), this, "「recordData」 - 该节点存储的数据信息");
+    public final TableField<GNodeRecord, JsonObject> RECORD_DATA = createField(DSL.name("RECORD_DATA"), SQLDataType.CLOB(65535), this, "「recordData」 - 该节点存储的数据信息", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_NODE.RECORD_KEY</code>. 「recordKey」 - 记录主键
@@ -93,7 +95,7 @@ public class GNode extends TableImpl<GNodeRecord> {
     /**
      * The column <code>ZDB.G_NODE.UI</code>. 「ui」 - ui配置专用
      */
-    public final TableField<GNodeRecord, String> UI = createField(DSL.name("UI"), SQLDataType.CLOB(65535), this, "「ui」 - ui配置专用");
+    public final TableField<GNodeRecord, JsonObject> UI = createField(DSL.name("UI"), SQLDataType.CLOB(65535), this, "「ui」 - ui配置专用", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_NODE.X</code>. 「x」 - 当前节点在图上的x坐标
@@ -133,7 +135,7 @@ public class GNode extends TableImpl<GNodeRecord> {
     /**
      * The column <code>ZDB.G_NODE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<GNodeRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<GNodeRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.G_NODE.VERSION</code>. 「version」- 版本号

@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMModelCat;
 
 import java.time.LocalDateTime;
@@ -27,7 +28,7 @@ public class MModelCat implements VertxPojo, IMModelCat {
     private String tenantId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
@@ -60,7 +61,7 @@ public class MModelCat implements VertxPojo, IMModelCat {
         String tenantId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime updatedAt,
@@ -226,7 +227,7 @@ public class MModelCat implements VertxPojo, IMModelCat {
      * Getter for <code>ZDB.M_MODEL_CAT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -234,7 +235,7 @@ public class MModelCat implements VertxPojo, IMModelCat {
      * Setter for <code>ZDB.M_MODEL_CAT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public MModelCat setMetadata(String metadata) {
+    public MModelCat setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

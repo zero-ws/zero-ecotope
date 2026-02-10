@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BWeb;
 import io.zerows.extension.module.modulat.domain.tables.records.BWebRecord;
 
@@ -71,7 +73,7 @@ public class BWebDao extends AbstractVertxDAO<BWebRecord, io.zerows.extension.mo
      * Find records that have <code>LIC_CONTENT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicContent(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicContent(Collection<JsonArray> values) {
                 return findManyByCondition(BWeb.B_WEB.LIC_CONTENT.in(values));
         }
 
@@ -79,14 +81,14 @@ public class BWebDao extends AbstractVertxDAO<BWebRecord, io.zerows.extension.mo
      * Find records that have <code>LIC_CONTENT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicContent(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicContent(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BWeb.B_WEB.LIC_CONTENT.in(values),limit);
         }
 
         /**
      * Find records that have <code>LIC_MODULE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicModule(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicModule(Collection<JsonArray> values) {
                 return findManyByCondition(BWeb.B_WEB.LIC_MODULE.in(values));
         }
 
@@ -94,14 +96,14 @@ public class BWebDao extends AbstractVertxDAO<BWebRecord, io.zerows.extension.mo
      * Find records that have <code>LIC_MODULE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicModule(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicModule(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BWeb.B_WEB.LIC_MODULE.in(values),limit);
         }
 
         /**
      * Find records that have <code>LIC_OP IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicOp(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicOp(Collection<JsonArray> values) {
                 return findManyByCondition(BWeb.B_WEB.LIC_OP.in(values));
         }
 
@@ -109,14 +111,14 @@ public class BWebDao extends AbstractVertxDAO<BWebRecord, io.zerows.extension.mo
      * Find records that have <code>LIC_OP IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicOp(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicOp(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BWeb.B_WEB.LIC_OP.in(values),limit);
         }
 
         /**
      * Find records that have <code>LIC_TPL IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicTpl(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicTpl(Collection<JsonArray> values) {
                 return findManyByCondition(BWeb.B_WEB.LIC_TPL.in(values));
         }
 
@@ -124,7 +126,7 @@ public class BWebDao extends AbstractVertxDAO<BWebRecord, io.zerows.extension.mo
      * Find records that have <code>LIC_TPL IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicTpl(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByLicTpl(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BWeb.B_WEB.LIC_TPL.in(values),limit);
         }
 
@@ -221,7 +223,7 @@ public class BWebDao extends AbstractVertxDAO<BWebRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(BWeb.B_WEB.METADATA.in(values));
         }
 
@@ -229,7 +231,7 @@ public class BWebDao extends AbstractVertxDAO<BWebRecord, io.zerows.extension.mo
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BWeb>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(BWeb.B_WEB.METADATA.in(values),limit);
         }
 

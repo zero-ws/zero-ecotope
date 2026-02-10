@@ -4,6 +4,8 @@
 package io.zerows.extension.module.report.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.Keys;
 import io.zerows.extension.module.report.domain.Zdb;
 import io.zerows.extension.module.report.domain.tables.records.KpDataSetRecord;
@@ -70,23 +72,23 @@ public class KpDataSet extends TableImpl<KpDataSetRecord> {
      * The column <code>ZDB.KP_DATA_SET.DATA_CONFIG</code>. 「dataConfig」-
      * 数据查询过程中的配置
      */
-    public final TableField<KpDataSetRecord, String> DATA_CONFIG = createField(DSL.name("DATA_CONFIG"), SQLDataType.CLOB, this, "「dataConfig」- 数据查询过程中的配置");
+    public final TableField<KpDataSetRecord, JsonObject> DATA_CONFIG = createField(DSL.name("DATA_CONFIG"), SQLDataType.CLOB, this, "「dataConfig」- 数据查询过程中的配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DATA_SET.DATA_FIELD</code>. 「dataField」- 数据字段
      */
-    public final TableField<KpDataSetRecord, String> DATA_FIELD = createField(DSL.name("DATA_FIELD"), SQLDataType.CLOB, this, "「dataField」- 数据字段");
+    public final TableField<KpDataSetRecord, JsonObject> DATA_FIELD = createField(DSL.name("DATA_FIELD"), SQLDataType.CLOB, this, "「dataField」- 数据字段", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DATA_SET.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
-    public final TableField<KpDataSetRecord, String> DATA_QUERY = createField(DSL.name("DATA_QUERY"), SQLDataType.CLOB, this, "「dataQuery」- 数据查询配置");
+    public final TableField<KpDataSetRecord, JsonObject> DATA_QUERY = createField(DSL.name("DATA_QUERY"), SQLDataType.CLOB, this, "「dataQuery」- 数据查询配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DATA_SET.DATA_SOURCE</code>. 「dataSource」-
      * 基于什么内容做报表
      */
-    public final TableField<KpDataSetRecord, String> DATA_SOURCE = createField(DSL.name("DATA_SOURCE"), SQLDataType.CLOB, this, "「dataSource」- 基于什么内容做报表");
+    public final TableField<KpDataSetRecord, JsonObject> DATA_SOURCE = createField(DSL.name("DATA_SOURCE"), SQLDataType.CLOB, this, "「dataSource」- 基于什么内容做报表", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DATA_SET.NAME</code>. 「name」- 名称
@@ -97,7 +99,7 @@ public class KpDataSet extends TableImpl<KpDataSetRecord> {
      * The column <code>ZDB.KP_DATA_SET.SOURCE_CONFIG</code>. 「sourceConfig」-
      * 数据源相关配置
      */
-    public final TableField<KpDataSetRecord, String> SOURCE_CONFIG = createField(DSL.name("SOURCE_CONFIG"), SQLDataType.CLOB, this, "「sourceConfig」- 数据源相关配置");
+    public final TableField<KpDataSetRecord, JsonObject> SOURCE_CONFIG = createField(DSL.name("SOURCE_CONFIG"), SQLDataType.CLOB, this, "「sourceConfig」- 数据源相关配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DATA_SET.SOURCE_ID</code>. 「sourceId」- 额外数据源
@@ -142,7 +144,7 @@ public class KpDataSet extends TableImpl<KpDataSetRecord> {
     /**
      * The column <code>ZDB.KP_DATA_SET.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<KpDataSetRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<KpDataSetRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_DATA_SET.VERSION</code>. 「version」- 版本号

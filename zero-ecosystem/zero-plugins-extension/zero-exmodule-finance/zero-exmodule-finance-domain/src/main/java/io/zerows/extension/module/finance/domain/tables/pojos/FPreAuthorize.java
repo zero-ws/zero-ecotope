@@ -5,6 +5,7 @@ package io.zerows.extension.module.finance.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.finance.domain.tables.interfaces.IFPreAuthorize;
 
 import java.math.BigDecimal;
@@ -37,7 +38,7 @@ public class FPreAuthorize implements VertxPojo, IFPreAuthorize {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -90,7 +91,7 @@ public class FPreAuthorize implements VertxPojo, IFPreAuthorize {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -428,7 +429,7 @@ public class FPreAuthorize implements VertxPojo, IFPreAuthorize {
      * Getter for <code>ZDB.F_PRE_AUTHORIZE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -436,7 +437,7 @@ public class FPreAuthorize implements VertxPojo, IFPreAuthorize {
      * Setter for <code>ZDB.F_PRE_AUTHORIZE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public FPreAuthorize setMetadata(String metadata) {
+    public FPreAuthorize setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

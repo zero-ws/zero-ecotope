@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBBlock;
 
 import java.time.LocalDateTime;
@@ -23,8 +25,8 @@ public class BBlock implements VertxPojo, IBBlock {
     private Boolean authorized;
     private String bagId;
     private String code;
-    private String licIdentifier;
-    private String licMenu;
+    private JsonArray licIdentifier;
+    private JsonArray licMenu;
     private String name;
     private LocalDateTime signAt;
     private LocalDateTime signEnd;
@@ -33,17 +35,17 @@ public class BBlock implements VertxPojo, IBBlock {
     private String signName;
     private String signSecret;
     private LocalDateTime signStart;
-    private String uiConfig;
-    private String uiContent;
+    private JsonObject uiConfig;
+    private JsonObject uiContent;
     private String uiIcon;
     private Long uiSort;
-    private String uiStyle;
+    private JsonObject uiStyle;
     private String sigma;
     private String tenantId;
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -90,8 +92,8 @@ public class BBlock implements VertxPojo, IBBlock {
         Boolean authorized,
         String bagId,
         String code,
-        String licIdentifier,
-        String licMenu,
+        JsonArray licIdentifier,
+        JsonArray licMenu,
         String name,
         LocalDateTime signAt,
         LocalDateTime signEnd,
@@ -100,17 +102,17 @@ public class BBlock implements VertxPojo, IBBlock {
         String signName,
         String signSecret,
         LocalDateTime signStart,
-        String uiConfig,
-        String uiContent,
+        JsonObject uiConfig,
+        JsonObject uiContent,
         String uiIcon,
         Long uiSort,
-        String uiStyle,
+        JsonObject uiStyle,
         String sigma,
         String tenantId,
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -227,7 +229,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * 允许的模型标识
      */
     @Override
-    public String getLicIdentifier() {
+    public JsonArray getLicIdentifier() {
         return this.licIdentifier;
     }
 
@@ -236,7 +238,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * 允许的模型标识
      */
     @Override
-    public BBlock setLicIdentifier(String licIdentifier) {
+    public BBlock setLicIdentifier(JsonArray licIdentifier) {
         this.licIdentifier = licIdentifier;
         return this;
     }
@@ -245,7 +247,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
      */
     @Override
-    public String getLicMenu() {
+    public JsonArray getLicMenu() {
         return this.licMenu;
     }
 
@@ -253,7 +255,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
      */
     @Override
-    public BBlock setLicMenu(String licMenu) {
+    public BBlock setLicMenu(JsonArray licMenu) {
         this.licMenu = licMenu;
         return this;
     }
@@ -398,7 +400,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Getter for <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
     @Override
-    public String getUiConfig() {
+    public JsonObject getUiConfig() {
         return this.uiConfig;
     }
 
@@ -406,7 +408,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
     @Override
-    public BBlock setUiConfig(String uiConfig) {
+    public BBlock setUiConfig(JsonObject uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -415,7 +417,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Getter for <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
     @Override
-    public String getUiContent() {
+    public JsonObject getUiContent() {
         return this.uiContent;
     }
 
@@ -423,7 +425,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
     @Override
-    public BBlock setUiContent(String uiContent) {
+    public BBlock setUiContent(JsonObject uiContent) {
         this.uiContent = uiContent;
         return this;
     }
@@ -466,7 +468,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Getter for <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
     @Override
-    public String getUiStyle() {
+    public JsonObject getUiStyle() {
         return this.uiStyle;
     }
 
@@ -474,7 +476,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
     @Override
-    public BBlock setUiStyle(String uiStyle) {
+    public BBlock setUiStyle(JsonObject uiStyle) {
         this.uiStyle = uiStyle;
         return this;
     }
@@ -568,7 +570,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -576,7 +578,7 @@ public class BBlock implements VertxPojo, IBBlock {
      * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BBlock setMetadata(String metadata) {
+    public BBlock setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

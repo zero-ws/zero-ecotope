@@ -23,20 +23,20 @@ public class SPath implements VertxPojo, ISPath {
     private String id;
     private String code;
     private String dmComponent;
-    private String dmCondition;
-    private String dmConfig;
+    private JsonObject dmCondition;
+    private JsonObject dmConfig;
     private String dmType;
-    private String mapping;
+    private JsonObject mapping;
     private String name;
     private String parentId;
     private String phase;
     private String runComponent;
     private String runType;
     private String uiComponent;
-    private String uiCondition;
-    private String uiConfig;
+    private JsonObject uiCondition;
+    private JsonObject uiConfig;
     private Integer uiSort;
-    private String uiSurface;
+    private JsonObject uiSurface;
     private String uiType;
     private String sigma;
     private String tenantId;
@@ -88,20 +88,20 @@ public class SPath implements VertxPojo, ISPath {
         String id,
         String code,
         String dmComponent,
-        String dmCondition,
-        String dmConfig,
+        JsonObject dmCondition,
+        JsonObject dmConfig,
         String dmType,
-        String mapping,
+        JsonObject mapping,
         String name,
         String parentId,
         String phase,
         String runComponent,
         String runType,
         String uiComponent,
-        String uiCondition,
-        String uiConfig,
+        JsonObject uiCondition,
+        JsonObject uiConfig,
         Integer uiSort,
-        String uiSurface,
+        JsonObject uiSurface,
         String uiType,
         String sigma,
         String tenantId,
@@ -206,7 +206,7 @@ public class SPath implements VertxPojo, ISPath {
      * Getter for <code>ZDB.S_PATH.DM_CONDITION</code>. 「dmCondition」- 分组条件
      */
     @Override
-    public String getDmCondition() {
+    public JsonObject getDmCondition() {
         return this.dmCondition;
     }
 
@@ -214,7 +214,7 @@ public class SPath implements VertxPojo, ISPath {
      * Setter for <code>ZDB.S_PATH.DM_CONDITION</code>. 「dmCondition」- 分组条件
      */
     @Override
-    public SPath setDmCondition(String dmCondition) {
+    public SPath setDmCondition(JsonObject dmCondition) {
         this.dmCondition = dmCondition;
         return this;
     }
@@ -223,7 +223,7 @@ public class SPath implements VertxPojo, ISPath {
      * Getter for <code>ZDB.S_PATH.DM_CONFIG</code>. 「dmConfig」- 组配置信息
      */
     @Override
-    public String getDmConfig() {
+    public JsonObject getDmConfig() {
         return this.dmConfig;
     }
 
@@ -231,7 +231,7 @@ public class SPath implements VertxPojo, ISPath {
      * Setter for <code>ZDB.S_PATH.DM_CONFIG</code>. 「dmConfig」- 组配置信息
      */
     @Override
-    public SPath setDmConfig(String dmConfig) {
+    public SPath setDmConfig(JsonObject dmConfig) {
         this.dmConfig = dmConfig;
         return this;
     }
@@ -257,7 +257,7 @@ public class SPath implements VertxPojo, ISPath {
      * Getter for <code>ZDB.S_PATH.MAPPING</code>. 「mapping」- 从
      */
     @Override
-    public String getMapping() {
+    public JsonObject getMapping() {
         return this.mapping;
     }
 
@@ -265,7 +265,7 @@ public class SPath implements VertxPojo, ISPath {
      * Setter for <code>ZDB.S_PATH.MAPPING</code>. 「mapping」- 从
      */
     @Override
-    public SPath setMapping(String mapping) {
+    public SPath setMapping(JsonObject mapping) {
         this.mapping = mapping;
         return this;
     }
@@ -378,7 +378,7 @@ public class SPath implements VertxPojo, ISPath {
      * Getter for <code>ZDB.S_PATH.UI_CONDITION</code>. 「uiCondition」- 查询模板
      */
     @Override
-    public String getUiCondition() {
+    public JsonObject getUiCondition() {
         return this.uiCondition;
     }
 
@@ -386,7 +386,7 @@ public class SPath implements VertxPojo, ISPath {
      * Setter for <code>ZDB.S_PATH.UI_CONDITION</code>. 「uiCondition」- 查询模板
      */
     @Override
-    public SPath setUiCondition(String uiCondition) {
+    public SPath setUiCondition(JsonObject uiCondition) {
         this.uiCondition = uiCondition;
         return this;
     }
@@ -395,7 +395,7 @@ public class SPath implements VertxPojo, ISPath {
      * Getter for <code>ZDB.S_PATH.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
     @Override
-    public String getUiConfig() {
+    public JsonObject getUiConfig() {
         return this.uiConfig;
     }
 
@@ -403,7 +403,7 @@ public class SPath implements VertxPojo, ISPath {
      * Setter for <code>ZDB.S_PATH.UI_CONFIG</code>. 「uiConfig」- 界面配置
      */
     @Override
-    public SPath setUiConfig(String uiConfig) {
+    public SPath setUiConfig(JsonObject uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -429,7 +429,7 @@ public class SPath implements VertxPojo, ISPath {
      * Getter for <code>ZDB.S_PATH.UI_SURFACE</code>. 「uiSurface」- 界面呈现模式
      */
     @Override
-    public String getUiSurface() {
+    public JsonObject getUiSurface() {
         return this.uiSurface;
     }
 
@@ -437,7 +437,7 @@ public class SPath implements VertxPojo, ISPath {
      * Setter for <code>ZDB.S_PATH.UI_SURFACE</code>. 「uiSurface」- 界面呈现模式
      */
     @Override
-    public SPath setUiSurface(String uiSurface) {
+    public SPath setUiSurface(JsonObject uiSurface) {
         this.uiSurface = uiSurface;
         return this;
     }

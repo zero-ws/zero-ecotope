@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpReport;
 
 import java.time.LocalDateTime;
@@ -26,8 +27,8 @@ public class KpReport implements VertxPojo, IKpReport {
     private String name;
     private LocalDateTime reportAt;
     private String reportBy;
-    private String reportConfig;
-    private String reportParam;
+    private JsonObject reportConfig;
+    private JsonObject reportParam;
     private String title;
     private String status;
     private String sigma;
@@ -35,7 +36,7 @@ public class KpReport implements VertxPojo, IKpReport {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -77,8 +78,8 @@ public class KpReport implements VertxPojo, IKpReport {
         String name,
         LocalDateTime reportAt,
         String reportBy,
-        String reportConfig,
-        String reportParam,
+        JsonObject reportConfig,
+        JsonObject reportParam,
         String title,
         String status,
         String sigma,
@@ -86,7 +87,7 @@ public class KpReport implements VertxPojo, IKpReport {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -246,7 +247,7 @@ public class KpReport implements VertxPojo, IKpReport {
      * 主表基础配置
      */
     @Override
-    public String getReportConfig() {
+    public JsonObject getReportConfig() {
         return this.reportConfig;
     }
 
@@ -255,7 +256,7 @@ public class KpReport implements VertxPojo, IKpReport {
      * 主表基础配置
      */
     @Override
-    public KpReport setReportConfig(String reportConfig) {
+    public KpReport setReportConfig(JsonObject reportConfig) {
         this.reportConfig = reportConfig;
         return this;
     }
@@ -264,7 +265,7 @@ public class KpReport implements VertxPojo, IKpReport {
      * Getter for <code>ZDB.KP_REPORT.REPORT_PARAM</code>. 「reportParam」- 报表参数配置
      */
     @Override
-    public String getReportParam() {
+    public JsonObject getReportParam() {
         return this.reportParam;
     }
 
@@ -272,7 +273,7 @@ public class KpReport implements VertxPojo, IKpReport {
      * Setter for <code>ZDB.KP_REPORT.REPORT_PARAM</code>. 「reportParam」- 报表参数配置
      */
     @Override
-    public KpReport setReportParam(String reportParam) {
+    public KpReport setReportParam(JsonObject reportParam) {
         this.reportParam = reportParam;
         return this;
     }
@@ -400,7 +401,7 @@ public class KpReport implements VertxPojo, IKpReport {
      * Getter for <code>ZDB.KP_REPORT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -408,7 +409,7 @@ public class KpReport implements VertxPojo, IKpReport {
      * Setter for <code>ZDB.KP_REPORT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpReport setMetadata(String metadata) {
+    public KpReport setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

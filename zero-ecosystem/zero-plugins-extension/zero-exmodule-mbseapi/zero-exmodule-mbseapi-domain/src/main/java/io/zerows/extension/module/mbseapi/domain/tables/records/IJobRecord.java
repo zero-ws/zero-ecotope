@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbseapi.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbseapi.domain.tables.IJob;
 import io.zerows.extension.module.mbseapi.domain.tables.interfaces.IIJob;
 
@@ -130,7 +131,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置
      */
     @Override
-    public IJobRecord setAdditional(String value) {
+    public IJobRecord setAdditional(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -139,8 +140,8 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Getter for <code>ZDB.I_JOB.ADDITIONAL</code>. 「additional」- 额外配置
      */
     @Override
-    public String getAdditional() {
-        return (String) get(6);
+    public JsonObject getAdditional() {
+        return (JsonObject) get(6);
     }
 
     /**
@@ -217,7 +218,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」- 调度配置
      */
     @Override
-    public IJobRecord setDurationConfig(String value) {
+    public IJobRecord setDurationConfig(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -226,8 +227,8 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Getter for <code>ZDB.I_JOB.DURATION_CONFIG</code>. 「durationConfig」- 调度配置
      */
     @Override
-    public String getDurationConfig() {
-        return (String) get(11);
+    public JsonObject getDurationConfig() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -459,7 +460,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Setter for <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IJobRecord setMetadata(String value) {
+    public IJobRecord setMetadata(JsonObject value) {
         set(25, value);
         return this;
     }
@@ -468,8 +469,8 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
      * Getter for <code>ZDB.I_JOB.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(25);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(25);
     }
 
     /**
@@ -626,7 +627,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements Vertx
     /**
      * Create a detached, initialised IJobRecord
      */
-    public IJobRecord(String id, String name, String code, String group, String namespace, String comment, String additional, String proxy, String serviceId, Long duration, String durationComponent, String durationConfig, LocalTime runAt, String runFormula, Integer threshold, String incomeAddress, String incomeComponent, String outcomeAddress, String outcomeComponent, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IJobRecord(String id, String name, String code, String group, String namespace, String comment, JsonObject additional, String proxy, String serviceId, Long duration, String durationComponent, JsonObject durationConfig, LocalTime runAt, String runFormula, Integer threshold, String incomeAddress, String incomeComponent, String outcomeAddress, String outcomeComponent, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IJob.I_JOB);
 
         setId(id);

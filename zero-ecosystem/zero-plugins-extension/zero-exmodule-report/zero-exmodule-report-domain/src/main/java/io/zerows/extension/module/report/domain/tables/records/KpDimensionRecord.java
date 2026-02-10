@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.KpDimension;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpDimension;
 
@@ -45,7 +46,7 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * 若当前报表是图表
      */
     @Override
-    public KpDimensionRecord setChartConfig(String value) {
+    public KpDimensionRecord setChartConfig(JsonObject value) {
         set(1, value);
         return this;
     }
@@ -55,8 +56,8 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * 若当前报表是图表
      */
     @Override
-    public String getChartConfig() {
-        return (String) get(1);
+    public JsonObject getChartConfig() {
+        return (JsonObject) get(1);
     }
 
     /**
@@ -98,7 +99,7 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * 当前报表对应字段
      */
     @Override
-    public KpDimensionRecord setDataField(String value) {
+    public KpDimensionRecord setDataField(JsonObject value) {
         set(4, value);
         return this;
     }
@@ -108,15 +109,15 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * 当前报表对应字段
      */
     @Override
-    public String getDataField() {
-        return (String) get(4);
+    public JsonObject getDataField() {
+        return (JsonObject) get(4);
     }
 
     /**
      * Setter for <code>ZDB.KP_DIMENSION.DATA_GROUP</code>. 「dataGroup」- 分组维度处理
      */
     @Override
-    public KpDimensionRecord setDataGroup(String value) {
+    public KpDimensionRecord setDataGroup(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -125,8 +126,8 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * Getter for <code>ZDB.KP_DIMENSION.DATA_GROUP</code>. 「dataGroup」- 分组维度处理
      */
     @Override
-    public String getDataGroup() {
-        return (String) get(5);
+    public JsonObject getDataGroup() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -134,7 +135,7 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * 输出专用配置
      */
     @Override
-    public KpDimensionRecord setDataOutput(String value) {
+    public KpDimensionRecord setDataOutput(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -144,15 +145,15 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * 输出专用配置
      */
     @Override
-    public String getDataOutput() {
-        return (String) get(6);
+    public JsonObject getDataOutput() {
+        return (JsonObject) get(6);
     }
 
     /**
      * Setter for <code>ZDB.KP_DIMENSION.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
     @Override
-    public KpDimensionRecord setDataQuery(String value) {
+    public KpDimensionRecord setDataQuery(JsonObject value) {
         set(7, value);
         return this;
     }
@@ -161,8 +162,8 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * Getter for <code>ZDB.KP_DIMENSION.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
     @Override
-    public String getDataQuery() {
-        return (String) get(7);
+    public JsonObject getDataQuery() {
+        return (JsonObject) get(7);
     }
 
     /**
@@ -356,7 +357,7 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * Setter for <code>ZDB.KP_DIMENSION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpDimensionRecord setMetadata(String value) {
+    public KpDimensionRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -365,8 +366,8 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
      * Getter for <code>ZDB.KP_DIMENSION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -517,7 +518,7 @@ public class KpDimensionRecord extends UpdatableRecordImpl<KpDimensionRecord> im
     /**
      * Create a detached, initialised KpDimensionRecord
      */
-    public KpDimensionRecord(String id, String chartConfig, String chartType, String code, String dataField, String dataGroup, String dataOutput, String dataQuery, String dataSetId, String dataSort, String name, String reportId, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public KpDimensionRecord(String id, JsonObject chartConfig, String chartType, String code, JsonObject dataField, JsonObject dataGroup, JsonObject dataOutput, JsonObject dataQuery, String dataSetId, String dataSort, String name, String reportId, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(KpDimension.KP_DIMENSION);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MRelation;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMRelation;
 
@@ -197,7 +198,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Setter for <code>ZDB.M_RELATION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MRelationRecord setMetadata(String value) {
+    public MRelationRecord setMetadata(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -206,8 +207,8 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
      * Getter for <code>ZDB.M_RELATION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(10);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(10);
     }
 
     /**
@@ -349,7 +350,7 @@ public class MRelationRecord extends UpdatableRecordImpl<MRelationRecord> implem
     /**
      * Create a detached, initialised MRelationRecord
      */
-    public MRelationRecord(String id, String comments, String downstream, String upstream, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MRelationRecord(String id, String comments, String downstream, String upstream, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MRelation.M_RELATION);
 
         setId(id);

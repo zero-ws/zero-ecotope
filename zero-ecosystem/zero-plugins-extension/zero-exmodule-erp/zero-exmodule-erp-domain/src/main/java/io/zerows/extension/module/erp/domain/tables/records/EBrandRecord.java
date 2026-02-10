@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EBrand;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEBrand;
 
@@ -282,7 +283,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Setter for <code>ZDB.E_BRAND.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EBrandRecord setMetadata(String value) {
+    public EBrandRecord setMetadata(JsonObject value) {
         set(15, value);
         return this;
     }
@@ -291,8 +292,8 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
      * Getter for <code>ZDB.E_BRAND.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(15);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(15);
     }
 
     /**
@@ -439,7 +440,7 @@ public class EBrandRecord extends UpdatableRecordImpl<EBrandRecord> implements V
     /**
      * Create a detached, initialised EBrandRecord
      */
-    public EBrandRecord(String id, String alias, String area, String areaCategory, String areaName, String categoryCode, String categoryName, String code, String companyName, String name, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EBrandRecord(String id, String alias, String area, String areaCategory, String areaName, String categoryCode, String categoryName, String code, String companyName, String name, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EBrand.E_BRAND);
 
         setId(id);

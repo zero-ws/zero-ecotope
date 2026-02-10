@@ -63,18 +63,18 @@ public class QuinnView implements Quinn {
     private void updateData(final SView view, final JsonObject viewData) {
         // projection
         if (viewData.containsKey(VName.KEY_PROJECTION)) {
-            view.setProjection(Ut.valueJArray(viewData, VName.KEY_PROJECTION).encode());
+            view.setProjection(Ut.valueJArray(viewData, VName.KEY_PROJECTION));
         }
         // rows
         if (viewData.containsKey(KName.Rbac.ROWS)) {
-            view.setRows(Ut.valueJObject(viewData, KName.Rbac.ROWS).encode());
+            view.setRows(Ut.valueJObject(viewData, KName.Rbac.ROWS));
         }
         // criteria
         if (viewData.containsKey(VName.KEY_CRITERIA)) {
-            view.setCriteria(Ut.valueJObject(viewData, VName.KEY_CRITERIA).encode());
+            view.setCriteria(Ut.valueJObject(viewData, VName.KEY_CRITERIA));
         } else {
             // 只有查询条件存在清空
-            view.setCriteria(new JsonObject().encode());
+            view.setCriteria(new JsonObject());
         }
         /* Auditor Information */
         view.setUpdatedAt(LocalDateTime.now());

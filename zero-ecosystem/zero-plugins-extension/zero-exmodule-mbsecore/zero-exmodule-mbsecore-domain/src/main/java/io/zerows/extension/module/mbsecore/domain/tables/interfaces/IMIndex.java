@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -38,14 +40,14 @@ public interface IMIndex extends VertxPojo, Serializable {
     public Boolean getClustered();
 
     /**
-     * Setter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArra
+     * Setter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArray
      */
-    public IMIndex setColumns(String value);
+    public IMIndex setColumns(JsonArray value);
 
     /**
-     * Getter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArra
+     * Getter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArray
      */
-    public String getColumns();
+    public JsonArray getColumns();
 
     /**
      * Setter for <code>ZDB.M_INDEX.COMMENTS</code>. 「comments」- 当前索引的描述信息
@@ -140,12 +142,12 @@ public interface IMIndex extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 元配置
      */
-    public IMIndex setMetadata(String value);
+    public IMIndex setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.M_INDEX.VERSION</code>. 「version」- 版本号
@@ -217,7 +219,7 @@ public interface IMIndex extends VertxPojo, Serializable {
         public default IMIndex fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setClustered,json::getBoolean,"CLUSTERED","java.lang.Boolean");
-                setOrThrow(this::setColumns,json::getString,"COLUMNS","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column COLUMNS!
                 setOrThrow(this::setComments,json::getString,"COMMENTS","java.lang.String");
                 setOrThrow(this::setEntityId,json::getString,"ENTITY_ID","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
@@ -227,7 +229,7 @@ public interface IMIndex extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -242,7 +244,7 @@ public interface IMIndex extends VertxPojo, Serializable {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
                 json.put("CLUSTERED",getClustered());
-                json.put("COLUMNS",getColumns());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column COLUMNS!
                 json.put("COMMENTS",getComments());
                 json.put("ENTITY_ID",getEntityId());
                 json.put("NAME",getName());
@@ -252,7 +254,7 @@ public interface IMIndex extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -90,12 +91,12 @@ public interface IBBag extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_BAG.UI_CONFIG</code>. 「uiConfig」- 模块核心配置
      */
-    public IBBag setUiConfig(String value);
+    public IBBag setUiConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_BAG.UI_CONFIG</code>. 「uiConfig」- 模块核心配置
      */
-    public String getUiConfig();
+    public JsonObject getUiConfig();
 
     /**
      * Setter for <code>ZDB.B_BAG.UI_ICON</code>. 「uiIcon」- 模块图标
@@ -120,12 +121,12 @@ public interface IBBag extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
-    public IBBag setUiStyle(String value);
+    public IBBag setUiStyle(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
-    public String getUiStyle();
+    public JsonObject getUiStyle();
 
     /**
      * Setter for <code>ZDB.B_BAG.TYPE</code>. 「type」- 类型
@@ -190,12 +191,12 @@ public interface IBBag extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
      */
-    public IBBag setMetadata(String value);
+    public IBBag setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
@@ -272,17 +273,17 @@ public interface IBBag extends VertxPojo, Serializable {
                 setOrThrow(this::setNameAbbr,json::getString,"NAME_ABBR","java.lang.String");
                 setOrThrow(this::setNameFull,json::getString,"NAME_FULL","java.lang.String");
                 setOrThrow(this::setParentId,json::getString,"PARENT_ID","java.lang.String");
-                setOrThrow(this::setUiConfig,json::getString,"UI_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
                 setOrThrow(this::setUiIcon,json::getString,"UI_ICON","java.lang.String");
                 setOrThrow(this::setUiSort,json::getLong,"UI_SORT","java.lang.Long");
-                setOrThrow(this::setUiStyle,json::getString,"UI_STYLE","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -302,17 +303,17 @@ public interface IBBag extends VertxPojo, Serializable {
                 json.put("NAME_ABBR",getNameAbbr());
                 json.put("NAME_FULL",getNameFull());
                 json.put("PARENT_ID",getParentId());
-                json.put("UI_CONFIG",getUiConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
                 json.put("UI_ICON",getUiIcon());
                 json.put("UI_SORT",getUiSort());
-                json.put("UI_STYLE",getUiStyle());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

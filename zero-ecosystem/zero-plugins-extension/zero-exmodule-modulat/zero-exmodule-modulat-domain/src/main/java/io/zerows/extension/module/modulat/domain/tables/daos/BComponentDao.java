@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BComponent;
 import io.zerows.extension.module.modulat.domain.tables.records.BComponentRecord;
 
@@ -221,7 +222,7 @@ public class BComponentDao extends AbstractVertxDAO<BComponentRecord, io.zerows.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BComponent>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BComponent>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(BComponent.B_COMPONENT.METADATA.in(values));
         }
 
@@ -229,7 +230,7 @@ public class BComponentDao extends AbstractVertxDAO<BComponentRecord, io.zerows.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BComponent>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BComponent>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(BComponent.B_COMPONENT.METADATA.in(values),limit);
         }
 

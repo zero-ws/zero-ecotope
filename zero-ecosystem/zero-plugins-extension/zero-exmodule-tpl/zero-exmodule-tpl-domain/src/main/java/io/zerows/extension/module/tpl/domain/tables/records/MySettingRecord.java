@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MySetting;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMySetting;
 
@@ -358,7 +359,7 @@ public class MySettingRecord extends UpdatableRecordImpl<MySettingRecord> implem
      * Setter for <code>ZDB.MY_SETTING.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MySettingRecord setMetadata(String value) {
+    public MySettingRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -367,8 +368,8 @@ public class MySettingRecord extends UpdatableRecordImpl<MySettingRecord> implem
      * Getter for <code>ZDB.MY_SETTING.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -519,7 +520,7 @@ public class MySettingRecord extends UpdatableRecordImpl<MySettingRecord> implem
     /**
      * Create a detached, initialised MySettingRecord
      */
-    public MySettingRecord(String id, String myBag, String owner, String ownerType, String pColorPrimary, Boolean pColorWeak, String pContentWidth, Boolean pFixedHeader, Boolean pFixSiderBar, String pLayout, String pNavTheme, Boolean pPwa, String pToken, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MySettingRecord(String id, String myBag, String owner, String ownerType, String pColorPrimary, Boolean pColorWeak, String pContentWidth, Boolean pFixedHeader, Boolean pFixSiderBar, String pLayout, String pNavTheme, Boolean pPwa, String pToken, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MySetting.MY_SETTING);
 
         setId(id);
