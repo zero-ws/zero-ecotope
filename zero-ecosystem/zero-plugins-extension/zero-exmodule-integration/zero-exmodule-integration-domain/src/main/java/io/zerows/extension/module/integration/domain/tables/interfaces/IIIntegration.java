@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -80,12 +81,12 @@ public interface IIIntegration extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_INTEGRATION.OPTIONS</code>. 「options」 - 集成相关配置
      */
-    public IIIntegration setOptions(String value);
+    public IIIntegration setOptions(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_INTEGRATION.OPTIONS</code>. 「options」 - 集成相关配置
      */
-    public String getOptions();
+    public JsonObject getOptions();
 
     /**
      * Setter for <code>ZDB.I_INTEGRATION.OS_AUTHORIZE</code>. 「osAuthorize」 -
@@ -280,12 +281,12 @@ public interface IIIntegration extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.I_INTEGRATION.METADATA</code>. 「metadata」- 元配置
      */
-    public IIIntegration setMetadata(String value);
+    public IIIntegration setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.I_INTEGRATION.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.I_INTEGRATION.VERSION</code>. 「version」- 版本号
@@ -361,7 +362,7 @@ public interface IIIntegration extends VertxPojo, Serializable {
                 setOrThrow(this::setIpV4,json::getString,"IP_V4","java.lang.String");
                 setOrThrow(this::setIpV6,json::getString,"IP_V6","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
-                setOrThrow(this::setOptions,json::getString,"OPTIONS","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column OPTIONS!
                 setOrThrow(this::setOsAuthorize,json::getString,"OS_AUTHORIZE","java.lang.String");
                 setOrThrow(this::setOsKey,json::getString,"OS_KEY","java.lang.String");
                 setOrThrow(this::setOsSecret,json::getString,"OS_SECRET","java.lang.String");
@@ -380,7 +381,7 @@ public interface IIIntegration extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -399,7 +400,7 @@ public interface IIIntegration extends VertxPojo, Serializable {
                 json.put("IP_V4",getIpV4());
                 json.put("IP_V6",getIpV6());
                 json.put("NAME",getName());
-                json.put("OPTIONS",getOptions());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column OPTIONS!
                 json.put("OS_AUTHORIZE",getOsAuthorize());
                 json.put("OS_KEY",getOsKey());
                 json.put("OS_SECRET",getOsSecret());
@@ -418,7 +419,7 @@ public interface IIIntegration extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

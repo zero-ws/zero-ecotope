@@ -4,6 +4,8 @@
 package io.zerows.extension.module.integration.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.Keys;
 import io.zerows.extension.module.integration.domain.Zdb;
 import io.zerows.extension.module.integration.domain.tables.records.IIntegrationRecord;
@@ -85,7 +87,7 @@ public class IIntegration extends TableImpl<IIntegrationRecord> {
     /**
      * The column <code>ZDB.I_INTEGRATION.OPTIONS</code>. 「options」 - 集成相关配置
      */
-    public final TableField<IIntegrationRecord, String> OPTIONS = createField(DSL.name("OPTIONS"), SQLDataType.CLOB(65535), this, "「options」 - 集成相关配置");
+    public final TableField<IIntegrationRecord, JsonObject> OPTIONS = createField(DSL.name("OPTIONS"), SQLDataType.CLOB(65535), this, "「options」 - 集成相关配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_INTEGRATION.OS_AUTHORIZE</code>. 「osAuthorize」 -
@@ -185,7 +187,7 @@ public class IIntegration extends TableImpl<IIntegrationRecord> {
     /**
      * The column <code>ZDB.I_INTEGRATION.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<IIntegrationRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<IIntegrationRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.I_INTEGRATION.VERSION</code>. 「version」- 版本号

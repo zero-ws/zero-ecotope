@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.IPortfolio;
 import io.zerows.extension.module.integration.domain.tables.records.IPortfolioRecord;
 
@@ -56,7 +57,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
      * Find records that have <code>DATA_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataConfig(Collection<JsonObject> values) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.DATA_CONFIG.in(values));
         }
 
@@ -64,7 +65,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
      * Find records that have <code>DATA_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.DATA_CONFIG.in(values),limit);
         }
 
@@ -72,7 +73,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
      * Find records that have <code>DATA_INTEGRATION IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataIntegration(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataIntegration(Collection<JsonObject> values) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.DATA_INTEGRATION.in(values));
         }
 
@@ -80,7 +81,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
      * Find records that have <code>DATA_INTEGRATION IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataIntegration(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataIntegration(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.DATA_INTEGRATION.in(values),limit);
         }
 
@@ -103,7 +104,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
      * Find records that have <code>DATA_SECURE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataSecure(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataSecure(Collection<JsonObject> values) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.DATA_SECURE.in(values));
         }
 
@@ -111,7 +112,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
      * Find records that have <code>DATA_SECURE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataSecure(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByDataSecure(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.DATA_SECURE.in(values),limit);
         }
 
@@ -195,7 +196,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
         /**
      * Find records that have <code>RUN_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByRunConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByRunConfig(Collection<JsonObject> values) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.RUN_CONFIG.in(values));
         }
 
@@ -203,7 +204,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
      * Find records that have <code>RUN_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByRunConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByRunConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.RUN_CONFIG.in(values),limit);
         }
 
@@ -315,7 +316,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.METADATA.in(values));
         }
 
@@ -323,7 +324,7 @@ public class IPortfolioDao extends AbstractVertxDAO<IPortfolioRecord, io.zerows.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IPortfolio>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IPortfolio.I_PORTFOLIO.METADATA.in(values),limit);
         }
 

@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.IDirectory;
 import io.zerows.extension.module.integration.domain.tables.records.IDirectoryRecord;
 
@@ -195,7 +196,7 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
      * Find records that have <code>VISIT_GROUP IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitGroup(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitGroup(Collection<JsonObject> values) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_GROUP.in(values));
         }
 
@@ -203,7 +204,7 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
      * Find records that have <code>VISIT_GROUP IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitGroup(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitGroup(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_GROUP.in(values),limit);
         }
 
@@ -225,7 +226,7 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
         /**
      * Find records that have <code>VISIT_ROLE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitRole(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitRole(Collection<JsonObject> values) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_ROLE.in(values));
         }
 
@@ -233,7 +234,7 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
      * Find records that have <code>VISIT_ROLE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitRole(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitRole(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_ROLE.in(values),limit);
         }
 
@@ -345,7 +346,7 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.METADATA.in(values));
         }
 
@@ -353,7 +354,7 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.METADATA.in(values),limit);
         }
 

@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.interfaces.IIDirectory;
 
 import java.time.LocalDateTime;
@@ -30,9 +31,9 @@ public class IDirectory implements VertxPojo, IIDirectory {
     private String storePath;
     private Boolean visit;
     private String visitComponent;
-    private String visitGroup;
+    private JsonObject visitGroup;
     private String visitMode;
-    private String visitRole;
+    private JsonObject visitRole;
     private String type;
     private String category;
     private String sigma;
@@ -40,7 +41,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -91,9 +92,9 @@ public class IDirectory implements VertxPojo, IIDirectory {
         String storePath,
         Boolean visit,
         String visitComponent,
-        String visitGroup,
+        JsonObject visitGroup,
         String visitMode,
-        String visitRole,
+        JsonObject visitRole,
         String type,
         String category,
         String sigma,
@@ -101,7 +102,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -341,7 +342,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
     @Override
-    public String getVisitGroup() {
+    public JsonObject getVisitGroup() {
         return this.visitGroup;
     }
 
@@ -349,7 +350,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_GROUP</code>. 「visitGroup」 - 目录访问组
      */
     @Override
-    public IDirectory setVisitGroup(String visitGroup) {
+    public IDirectory setVisitGroup(JsonObject visitGroup) {
         this.visitGroup = visitGroup;
         return this;
     }
@@ -377,7 +378,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Getter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
     @Override
-    public String getVisitRole() {
+    public JsonObject getVisitRole() {
         return this.visitRole;
     }
 
@@ -385,7 +386,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.VISIT_ROLE</code>. 「visitRole」 - 目录访问角色
      */
     @Override
-    public IDirectory setVisitRole(String visitRole) {
+    public IDirectory setVisitRole(JsonObject visitRole) {
         this.visitRole = visitRole;
         return this;
     }
@@ -513,7 +514,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Getter for <code>ZDB.I_DIRECTORY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -521,7 +522,7 @@ public class IDirectory implements VertxPojo, IIDirectory {
      * Setter for <code>ZDB.I_DIRECTORY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IDirectory setMetadata(String metadata) {
+    public IDirectory setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

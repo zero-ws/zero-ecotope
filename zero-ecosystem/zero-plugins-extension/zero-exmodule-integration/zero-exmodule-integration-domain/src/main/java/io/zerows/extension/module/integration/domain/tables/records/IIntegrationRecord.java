@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.IIntegration;
 import io.zerows.extension.module.integration.domain.tables.interfaces.IIIntegration;
 
@@ -129,7 +130,7 @@ public class IIntegrationRecord extends UpdatableRecordImpl<IIntegrationRecord> 
      * Setter for <code>ZDB.I_INTEGRATION.OPTIONS</code>. 「options」 - 集成相关配置
      */
     @Override
-    public IIntegrationRecord setOptions(String value) {
+    public IIntegrationRecord setOptions(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -138,8 +139,8 @@ public class IIntegrationRecord extends UpdatableRecordImpl<IIntegrationRecord> 
      * Getter for <code>ZDB.I_INTEGRATION.OPTIONS</code>. 「options」 - 集成相关配置
      */
     @Override
-    public String getOptions() {
-        return (String) get(6);
+    public JsonObject getOptions() {
+        return (JsonObject) get(6);
     }
 
     /**
@@ -462,7 +463,7 @@ public class IIntegrationRecord extends UpdatableRecordImpl<IIntegrationRecord> 
      * Setter for <code>ZDB.I_INTEGRATION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public IIntegrationRecord setMetadata(String value) {
+    public IIntegrationRecord setMetadata(JsonObject value) {
         set(25, value);
         return this;
     }
@@ -471,8 +472,8 @@ public class IIntegrationRecord extends UpdatableRecordImpl<IIntegrationRecord> 
      * Getter for <code>ZDB.I_INTEGRATION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(25);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(25);
     }
 
     /**
@@ -629,7 +630,7 @@ public class IIntegrationRecord extends UpdatableRecordImpl<IIntegrationRecord> 
     /**
      * Create a detached, initialised IIntegrationRecord
      */
-    public IIntegrationRecord(String id, String endpoint, String hostname, String ipV4, String ipV6, String name, String options, String osAuthorize, String osKey, String osSecret, String osToken, String password, String path, Integer port, String protocol, String publicKey, Integer securePort, String secureProtocol, String username, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IIntegrationRecord(String id, String endpoint, String hostname, String ipV4, String ipV6, String name, JsonObject options, String osAuthorize, String osKey, String osSecret, String osToken, String password, String path, Integer port, String protocol, String publicKey, Integer securePort, String secureProtocol, String username, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IIntegration.I_INTEGRATION);
 
         setId(id);
