@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.TplModel;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.ITplModel;
 
@@ -78,7 +79,7 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Setter for <code>ZDB.TPL_MODEL.TPL_ACL</code>. 「tplAcl」- 安全配置
      */
     @Override
-    public TplModelRecord setTplAcl(String value) {
+    public TplModelRecord setTplAcl(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -87,8 +88,8 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_ACL</code>. 「tplAcl」- 安全配置
      */
     @Override
-    public String getTplAcl() {
-        return (String) get(3);
+    public JsonObject getTplAcl() {
+        return (JsonObject) get(3);
     }
 
     /**
@@ -96,7 +97,7 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * 资源访问者配置
      */
     @Override
-    public TplModelRecord setTplAclVisit(String value) {
+    public TplModelRecord setTplAclVisit(JsonObject value) {
         set(4, value);
         return this;
     }
@@ -106,15 +107,15 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * 资源访问者配置
      */
     @Override
-    public String getTplAclVisit() {
-        return (String) get(4);
+    public JsonObject getTplAclVisit() {
+        return (JsonObject) get(4);
     }
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_API</code>. 「tplApi」- 接口配置
      */
     @Override
-    public TplModelRecord setTplApi(String value) {
+    public TplModelRecord setTplApi(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -123,15 +124,15 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_API</code>. 「tplApi」- 接口配置
      */
     @Override
-    public String getTplApi() {
-        return (String) get(5);
+    public JsonObject getTplApi() {
+        return (JsonObject) get(5);
     }
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_CATEGORY</code>. 「tplCategory」- 分类配置
      */
     @Override
-    public TplModelRecord setTplCategory(String value) {
+    public TplModelRecord setTplCategory(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -140,15 +141,15 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_CATEGORY</code>. 「tplCategory」- 分类配置
      */
     @Override
-    public String getTplCategory() {
-        return (String) get(6);
+    public JsonObject getTplCategory() {
+        return (JsonObject) get(6);
     }
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_ENTITY</code>. 「tplEntity」- 实体配置
      */
     @Override
-    public TplModelRecord setTplEntity(String value) {
+    public TplModelRecord setTplEntity(JsonObject value) {
         set(7, value);
         return this;
     }
@@ -157,8 +158,8 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_ENTITY</code>. 「tplEntity」- 实体配置
      */
     @Override
-    public String getTplEntity() {
-        return (String) get(7);
+    public JsonObject getTplEntity() {
+        return (JsonObject) get(7);
     }
 
     /**
@@ -166,7 +167,7 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * 集成配置
      */
     @Override
-    public TplModelRecord setTplIntegration(String value) {
+    public TplModelRecord setTplIntegration(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -176,15 +177,15 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * 集成配置
      */
     @Override
-    public String getTplIntegration() {
-        return (String) get(8);
+    public JsonObject getTplIntegration() {
+        return (JsonObject) get(8);
     }
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_JOB</code>. 「tplJob」- 任务配置
      */
     @Override
-    public TplModelRecord setTplJob(String value) {
+    public TplModelRecord setTplJob(JsonObject value) {
         set(9, value);
         return this;
     }
@@ -193,15 +194,15 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_JOB</code>. 「tplJob」- 任务配置
      */
     @Override
-    public String getTplJob() {
-        return (String) get(9);
+    public JsonObject getTplJob() {
+        return (JsonObject) get(9);
     }
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_MODEL</code>. 「tplModel」- 模型配置
      */
     @Override
-    public TplModelRecord setTplModel(String value) {
+    public TplModelRecord setTplModel(JsonObject value) {
         set(10, value);
         return this;
     }
@@ -210,15 +211,15 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_MODEL</code>. 「tplModel」- 模型配置
      */
     @Override
-    public String getTplModel() {
-        return (String) get(10);
+    public JsonObject getTplModel() {
+        return (JsonObject) get(10);
     }
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI</code>. 「tplUi」- 界面配置
      */
     @Override
-    public TplModelRecord setTplUi(String value) {
+    public TplModelRecord setTplUi(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -227,15 +228,15 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI</code>. 「tplUi」- 界面配置
      */
     @Override
-    public String getTplUi() {
-        return (String) get(11);
+    public JsonObject getTplUi() {
+        return (JsonObject) get(11);
     }
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI_FORM</code>. 「tplUiForm」- 界面表单配置
      */
     @Override
-    public TplModelRecord setTplUiForm(String value) {
+    public TplModelRecord setTplUiForm(JsonObject value) {
         set(12, value);
         return this;
     }
@@ -244,15 +245,15 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI_FORM</code>. 「tplUiForm」- 界面表单配置
      */
     @Override
-    public String getTplUiForm() {
-        return (String) get(12);
+    public JsonObject getTplUiForm() {
+        return (JsonObject) get(12);
     }
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI_LIST</code>. 「tplUiList」- 界面列表配置
      */
     @Override
-    public TplModelRecord setTplUiList(String value) {
+    public TplModelRecord setTplUiList(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -261,8 +262,8 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI_LIST</code>. 「tplUiList」- 界面列表配置
      */
     @Override
-    public String getTplUiList() {
-        return (String) get(13);
+    public JsonObject getTplUiList() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -371,7 +372,7 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Setter for <code>ZDB.TPL_MODEL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public TplModelRecord setMetadata(String value) {
+    public TplModelRecord setMetadata(JsonObject value) {
         set(20, value);
         return this;
     }
@@ -380,8 +381,8 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
      * Getter for <code>ZDB.TPL_MODEL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(20);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(20);
     }
 
     /**
@@ -533,7 +534,7 @@ public class TplModelRecord extends UpdatableRecordImpl<TplModelRecord> implemen
     /**
      * Create a detached, initialised TplModelRecord
      */
-    public TplModelRecord(String id, String code, String name, String tplAcl, String tplAclVisit, String tplApi, String tplCategory, String tplEntity, String tplIntegration, String tplJob, String tplModel, String tplUi, String tplUiForm, String tplUiList, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public TplModelRecord(String id, String code, String name, JsonObject tplAcl, JsonObject tplAclVisit, JsonObject tplApi, JsonObject tplCategory, JsonObject tplEntity, JsonObject tplIntegration, JsonObject tplJob, JsonObject tplModel, JsonObject tplUi, JsonObject tplUiForm, JsonObject tplUiList, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(TplModel.TPL_MODEL);
 
         setId(id);

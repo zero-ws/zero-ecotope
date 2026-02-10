@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyNotify;
 
 import java.time.LocalDateTime;
@@ -20,9 +21,9 @@ public class MyNotify implements VertxPojo, IMyNotify {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String configEmail;
-    private String configInternal;
-    private String configSms;
+    private JsonObject configEmail;
+    private JsonObject configInternal;
+    private JsonObject configSms;
     private String ownerId;
     private String ownerType;
     private String sigma;
@@ -30,7 +31,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -61,9 +62,9 @@ public class MyNotify implements VertxPojo, IMyNotify {
 
     public MyNotify(
         String id,
-        String configEmail,
-        String configInternal,
-        String configSms,
+        JsonObject configEmail,
+        JsonObject configInternal,
+        JsonObject configSms,
         String ownerId,
         String ownerType,
         String sigma,
@@ -71,7 +72,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -123,7 +124,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
      * Getter for <code>ZDB.MY_NOTIFY.CONFIG_EMAIL</code>. 「configEmail」- 邮件配置
      */
     @Override
-    public String getConfigEmail() {
+    public JsonObject getConfigEmail() {
         return this.configEmail;
     }
 
@@ -131,7 +132,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
      * Setter for <code>ZDB.MY_NOTIFY.CONFIG_EMAIL</code>. 「configEmail」- 邮件配置
      */
     @Override
-    public MyNotify setConfigEmail(String configEmail) {
+    public MyNotify setConfigEmail(JsonObject configEmail) {
         this.configEmail = configEmail;
         return this;
     }
@@ -141,7 +142,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
      * 站内信配置
      */
     @Override
-    public String getConfigInternal() {
+    public JsonObject getConfigInternal() {
         return this.configInternal;
     }
 
@@ -150,7 +151,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
      * 站内信配置
      */
     @Override
-    public MyNotify setConfigInternal(String configInternal) {
+    public MyNotify setConfigInternal(JsonObject configInternal) {
         this.configInternal = configInternal;
         return this;
     }
@@ -159,7 +160,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
      * Getter for <code>ZDB.MY_NOTIFY.CONFIG_SMS</code>. 「configSms」- 短信配置
      */
     @Override
-    public String getConfigSms() {
+    public JsonObject getConfigSms() {
         return this.configSms;
     }
 
@@ -167,7 +168,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
      * Setter for <code>ZDB.MY_NOTIFY.CONFIG_SMS</code>. 「configSms」- 短信配置
      */
     @Override
-    public MyNotify setConfigSms(String configSms) {
+    public MyNotify setConfigSms(JsonObject configSms) {
         this.configSms = configSms;
         return this;
     }
@@ -295,7 +296,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
      * Getter for <code>ZDB.MY_NOTIFY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -303,7 +304,7 @@ public class MyNotify implements VertxPojo, IMyNotify {
      * Setter for <code>ZDB.MY_NOTIFY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MyNotify setMetadata(String metadata) {
+    public MyNotify setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

@@ -4,6 +4,8 @@
 package io.zerows.extension.module.tpl.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.Keys;
 import io.zerows.extension.module.tpl.domain.Zdb;
 import io.zerows.extension.module.tpl.domain.tables.records.MyFavorRecord;
@@ -95,7 +97,7 @@ public class MyFavor extends TableImpl<MyFavorRecord> {
     /**
      * The column <code>ZDB.MY_FAVOR.URI_PARAM</code>. 「uriParam」- 该收藏参数
      */
-    public final TableField<MyFavorRecord, String> URI_PARAM = createField(DSL.name("URI_PARAM"), SQLDataType.CLOB, this, "「uriParam」- 该收藏参数");
+    public final TableField<MyFavorRecord, JsonObject> URI_PARAM = createField(DSL.name("URI_PARAM"), SQLDataType.CLOB, this, "「uriParam」- 该收藏参数", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_FAVOR.TYPE</code>. 「type」- 类型
@@ -130,7 +132,7 @@ public class MyFavor extends TableImpl<MyFavorRecord> {
     /**
      * The column <code>ZDB.MY_FAVOR.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MyFavorRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MyFavorRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_FAVOR.VERSION</code>. 「version」- 版本号

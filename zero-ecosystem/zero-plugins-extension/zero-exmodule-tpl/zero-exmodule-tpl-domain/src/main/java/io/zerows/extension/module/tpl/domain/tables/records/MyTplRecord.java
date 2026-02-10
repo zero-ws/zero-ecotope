@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyTpl;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyTpl;
 
@@ -214,7 +215,7 @@ public class MyTplRecord extends UpdatableRecordImpl<MyTplRecord> implements Ver
      * Setter for <code>ZDB.MY_TPL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MyTplRecord setMetadata(String value) {
+    public MyTplRecord setMetadata(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -223,8 +224,8 @@ public class MyTplRecord extends UpdatableRecordImpl<MyTplRecord> implements Ver
      * Getter for <code>ZDB.MY_TPL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(11);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -367,7 +368,7 @@ public class MyTplRecord extends UpdatableRecordImpl<MyTplRecord> implements Ver
     /**
      * Create a detached, initialised MyTplRecord
      */
-    public MyTplRecord(String id, String owner, String ownerType, String tplId, String tplType, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MyTplRecord(String id, String owner, String ownerType, String tplId, String tplType, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MyTpl.MY_TPL);
 
         setId(id);

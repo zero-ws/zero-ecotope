@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -50,116 +51,116 @@ public interface ITplModel extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_ACL</code>. 「tplAcl」- 安全配置
      */
-    public ITplModel setTplAcl(String value);
+    public ITplModel setTplAcl(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_ACL</code>. 「tplAcl」- 安全配置
      */
-    public String getTplAcl();
+    public JsonObject getTplAcl();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_ACL_VISIT</code>. 「tplAclVisit」-
      * 资源访问者配置
      */
-    public ITplModel setTplAclVisit(String value);
+    public ITplModel setTplAclVisit(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_ACL_VISIT</code>. 「tplAclVisit」-
      * 资源访问者配置
      */
-    public String getTplAclVisit();
+    public JsonObject getTplAclVisit();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_API</code>. 「tplApi」- 接口配置
      */
-    public ITplModel setTplApi(String value);
+    public ITplModel setTplApi(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_API</code>. 「tplApi」- 接口配置
      */
-    public String getTplApi();
+    public JsonObject getTplApi();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_CATEGORY</code>. 「tplCategory」- 分类配置
      */
-    public ITplModel setTplCategory(String value);
+    public ITplModel setTplCategory(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_CATEGORY</code>. 「tplCategory」- 分类配置
      */
-    public String getTplCategory();
+    public JsonObject getTplCategory();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_ENTITY</code>. 「tplEntity」- 实体配置
      */
-    public ITplModel setTplEntity(String value);
+    public ITplModel setTplEntity(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_ENTITY</code>. 「tplEntity」- 实体配置
      */
-    public String getTplEntity();
+    public JsonObject getTplEntity();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_INTEGRATION</code>. 「tplIntegration」-
      * 集成配置
      */
-    public ITplModel setTplIntegration(String value);
+    public ITplModel setTplIntegration(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_INTEGRATION</code>. 「tplIntegration」-
      * 集成配置
      */
-    public String getTplIntegration();
+    public JsonObject getTplIntegration();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_JOB</code>. 「tplJob」- 任务配置
      */
-    public ITplModel setTplJob(String value);
+    public ITplModel setTplJob(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_JOB</code>. 「tplJob」- 任务配置
      */
-    public String getTplJob();
+    public JsonObject getTplJob();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_MODEL</code>. 「tplModel」- 模型配置
      */
-    public ITplModel setTplModel(String value);
+    public ITplModel setTplModel(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_MODEL</code>. 「tplModel」- 模型配置
      */
-    public String getTplModel();
+    public JsonObject getTplModel();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI</code>. 「tplUi」- 界面配置
      */
-    public ITplModel setTplUi(String value);
+    public ITplModel setTplUi(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI</code>. 「tplUi」- 界面配置
      */
-    public String getTplUi();
+    public JsonObject getTplUi();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI_FORM</code>. 「tplUiForm」- 界面表单配置
      */
-    public ITplModel setTplUiForm(String value);
+    public ITplModel setTplUiForm(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI_FORM</code>. 「tplUiForm」- 界面表单配置
      */
-    public String getTplUiForm();
+    public JsonObject getTplUiForm();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TPL_UI_LIST</code>. 「tplUiList」- 界面列表配置
      */
-    public ITplModel setTplUiList(String value);
+    public ITplModel setTplUiList(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.TPL_UI_LIST</code>. 「tplUiList」- 界面列表配置
      */
-    public String getTplUiList();
+    public JsonObject getTplUiList();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.TYPE</code>. 「type」- 类型
@@ -224,12 +225,12 @@ public interface ITplModel extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.TPL_MODEL.METADATA</code>. 「metadata」- 元配置
      */
-    public ITplModel setMetadata(String value);
+    public ITplModel setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_MODEL.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.TPL_MODEL.VERSION</code>. 「version」- 版本号
@@ -302,24 +303,24 @@ public interface ITplModel extends VertxPojo, Serializable {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
-                setOrThrow(this::setTplAcl,json::getString,"TPL_ACL","java.lang.String");
-                setOrThrow(this::setTplAclVisit,json::getString,"TPL_ACL_VISIT","java.lang.String");
-                setOrThrow(this::setTplApi,json::getString,"TPL_API","java.lang.String");
-                setOrThrow(this::setTplCategory,json::getString,"TPL_CATEGORY","java.lang.String");
-                setOrThrow(this::setTplEntity,json::getString,"TPL_ENTITY","java.lang.String");
-                setOrThrow(this::setTplIntegration,json::getString,"TPL_INTEGRATION","java.lang.String");
-                setOrThrow(this::setTplJob,json::getString,"TPL_JOB","java.lang.String");
-                setOrThrow(this::setTplModel,json::getString,"TPL_MODEL","java.lang.String");
-                setOrThrow(this::setTplUi,json::getString,"TPL_UI","java.lang.String");
-                setOrThrow(this::setTplUiForm,json::getString,"TPL_UI_FORM","java.lang.String");
-                setOrThrow(this::setTplUiList,json::getString,"TPL_UI_LIST","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_ACL!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_ACL_VISIT!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_API!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_CATEGORY!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_ENTITY!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_INTEGRATION!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_JOB!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_MODEL!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_UI!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_UI_FORM!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_UI_LIST!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -335,24 +336,24 @@ public interface ITplModel extends VertxPojo, Serializable {
                 json.put("ID",getId());
                 json.put("CODE",getCode());
                 json.put("NAME",getName());
-                json.put("TPL_ACL",getTplAcl());
-                json.put("TPL_ACL_VISIT",getTplAclVisit());
-                json.put("TPL_API",getTplApi());
-                json.put("TPL_CATEGORY",getTplCategory());
-                json.put("TPL_ENTITY",getTplEntity());
-                json.put("TPL_INTEGRATION",getTplIntegration());
-                json.put("TPL_JOB",getTplJob());
-                json.put("TPL_MODEL",getTplModel());
-                json.put("TPL_UI",getTplUi());
-                json.put("TPL_UI_FORM",getTplUiForm());
-                json.put("TPL_UI_LIST",getTplUiList());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_ACL!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_ACL_VISIT!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_API!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_CATEGORY!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_ENTITY!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_INTEGRATION!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_JOB!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_MODEL!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_UI!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_UI_FORM!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column TPL_UI_LIST!
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

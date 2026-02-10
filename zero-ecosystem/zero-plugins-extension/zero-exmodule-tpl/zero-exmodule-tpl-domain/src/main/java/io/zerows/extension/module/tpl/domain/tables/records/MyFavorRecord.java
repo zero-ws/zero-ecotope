@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyFavor;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyFavor;
 
@@ -163,7 +164,7 @@ public class MyFavorRecord extends UpdatableRecordImpl<MyFavorRecord> implements
      * Setter for <code>ZDB.MY_FAVOR.URI_PARAM</code>. 「uriParam」- 该收藏参数
      */
     @Override
-    public MyFavorRecord setUriParam(String value) {
+    public MyFavorRecord setUriParam(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -172,8 +173,8 @@ public class MyFavorRecord extends UpdatableRecordImpl<MyFavorRecord> implements
      * Getter for <code>ZDB.MY_FAVOR.URI_PARAM</code>. 「uriParam」- 该收藏参数
      */
     @Override
-    public String getUriParam() {
-        return (String) get(8);
+    public JsonObject getUriParam() {
+        return (JsonObject) get(8);
     }
 
     /**
@@ -282,7 +283,7 @@ public class MyFavorRecord extends UpdatableRecordImpl<MyFavorRecord> implements
      * Setter for <code>ZDB.MY_FAVOR.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MyFavorRecord setMetadata(String value) {
+    public MyFavorRecord setMetadata(JsonObject value) {
         set(15, value);
         return this;
     }
@@ -291,8 +292,8 @@ public class MyFavorRecord extends UpdatableRecordImpl<MyFavorRecord> implements
      * Getter for <code>ZDB.MY_FAVOR.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(15);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(15);
     }
 
     /**
@@ -439,7 +440,7 @@ public class MyFavorRecord extends UpdatableRecordImpl<MyFavorRecord> implements
     /**
      * Create a detached, initialised MyFavorRecord
      */
-    public MyFavorRecord(String id, String owner, String ownerType, String position, Long uiSort, String uri, String uriFull, String uriKey, String uriParam, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MyFavorRecord(String id, String owner, String ownerType, String position, Long uiSort, String uri, String uriFull, String uriKey, JsonObject uriParam, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MyFavor.MY_FAVOR);
 
         setId(id);

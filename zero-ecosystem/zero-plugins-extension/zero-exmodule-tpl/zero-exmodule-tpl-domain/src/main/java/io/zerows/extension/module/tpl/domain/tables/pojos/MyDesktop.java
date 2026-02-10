@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyDesktop;
 
 import java.time.LocalDateTime;
@@ -21,8 +22,8 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
 
     private String id;
     private String bagId;
-    private String uiConfig;
-    private String uiGrid;
+    private JsonObject uiConfig;
+    private JsonObject uiGrid;
     private String owner;
     private String ownerType;
     private String sigma;
@@ -30,7 +31,7 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
     private String tenantId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
@@ -60,8 +61,8 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
     public MyDesktop(
         String id,
         String bagId,
-        String uiConfig,
-        String uiGrid,
+        JsonObject uiConfig,
+        JsonObject uiGrid,
         String owner,
         String ownerType,
         String sigma,
@@ -69,7 +70,7 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
         String tenantId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         LocalDateTime createdAt,
         String createdBy,
         LocalDateTime updatedAt,
@@ -136,7 +137,7 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
      * Getter for <code>ZDB.MY_DESKTOP.UI_CONFIG</code>. 「uiConfig」- 看板配置
      */
     @Override
-    public String getUiConfig() {
+    public JsonObject getUiConfig() {
         return this.uiConfig;
     }
 
@@ -144,7 +145,7 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
      * Setter for <code>ZDB.MY_DESKTOP.UI_CONFIG</code>. 「uiConfig」- 看板配置
      */
     @Override
-    public MyDesktop setUiConfig(String uiConfig) {
+    public MyDesktop setUiConfig(JsonObject uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -153,7 +154,7 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
      * Getter for <code>ZDB.MY_DESKTOP.UI_GRID</code>. 「uiGrid」- 布局配置
      */
     @Override
-    public String getUiGrid() {
+    public JsonObject getUiGrid() {
         return this.uiGrid;
     }
 
@@ -161,7 +162,7 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
      * Setter for <code>ZDB.MY_DESKTOP.UI_GRID</code>. 「uiGrid」- 布局配置
      */
     @Override
-    public MyDesktop setUiGrid(String uiGrid) {
+    public MyDesktop setUiGrid(JsonObject uiGrid) {
         this.uiGrid = uiGrid;
         return this;
     }
@@ -289,7 +290,7 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
      * Getter for <code>ZDB.MY_DESKTOP.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -297,7 +298,7 @@ public class MyDesktop implements VertxPojo, IMyDesktop {
      * Setter for <code>ZDB.MY_DESKTOP.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public MyDesktop setMetadata(String metadata) {
+    public MyDesktop setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

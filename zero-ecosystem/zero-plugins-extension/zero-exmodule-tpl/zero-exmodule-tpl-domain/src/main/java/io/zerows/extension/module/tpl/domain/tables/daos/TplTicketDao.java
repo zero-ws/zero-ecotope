@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.TplTicket;
 import io.zerows.extension.module.tpl.domain.tables.records.TplTicketRecord;
 
@@ -103,7 +104,7 @@ public class TplTicketDao extends AbstractVertxDAO<TplTicketRecord, io.zerows.ex
      * Find records that have <code>RECORD_JSON IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByRecordJson(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByRecordJson(Collection<JsonObject> values) {
                 return findManyByCondition(TplTicket.TPL_TICKET.RECORD_JSON.in(values));
         }
 
@@ -111,7 +112,7 @@ public class TplTicketDao extends AbstractVertxDAO<TplTicketRecord, io.zerows.ex
      * Find records that have <code>RECORD_JSON IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByRecordJson(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByRecordJson(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplTicket.TPL_TICKET.RECORD_JSON.in(values),limit);
         }
 
@@ -149,7 +150,7 @@ public class TplTicketDao extends AbstractVertxDAO<TplTicketRecord, io.zerows.ex
         /**
      * Find records that have <code>UI_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByUiConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByUiConfig(Collection<JsonObject> values) {
                 return findManyByCondition(TplTicket.TPL_TICKET.UI_CONFIG.in(values));
         }
 
@@ -157,7 +158,7 @@ public class TplTicketDao extends AbstractVertxDAO<TplTicketRecord, io.zerows.ex
      * Find records that have <code>UI_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByUiConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByUiConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplTicket.TPL_TICKET.UI_CONFIG.in(values),limit);
         }
 
@@ -315,7 +316,7 @@ public class TplTicketDao extends AbstractVertxDAO<TplTicketRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(TplTicket.TPL_TICKET.METADATA.in(values));
         }
 
@@ -323,7 +324,7 @@ public class TplTicketDao extends AbstractVertxDAO<TplTicketRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.TplTicket>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(TplTicket.TPL_TICKET.METADATA.in(values),limit);
         }
 

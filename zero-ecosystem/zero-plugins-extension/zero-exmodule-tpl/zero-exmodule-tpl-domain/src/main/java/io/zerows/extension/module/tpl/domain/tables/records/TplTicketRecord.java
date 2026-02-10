@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.TplTicket;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.ITplTicket;
 
@@ -115,7 +116,7 @@ public class TplTicketRecord extends UpdatableRecordImpl<TplTicketRecord> implem
      * 上一次的记录内容
      */
     @Override
-    public TplTicketRecord setRecordJson(String value) {
+    public TplTicketRecord setRecordJson(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -125,8 +126,8 @@ public class TplTicketRecord extends UpdatableRecordImpl<TplTicketRecord> implem
      * 上一次的记录内容
      */
     @Override
-    public String getRecordJson() {
-        return (String) get(5);
+    public JsonObject getRecordJson() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -169,7 +170,7 @@ public class TplTicketRecord extends UpdatableRecordImpl<TplTicketRecord> implem
      * Setter for <code>ZDB.TPL_TICKET.UI_CONFIG</code>. 「uiConfig」- UI的配置
      */
     @Override
-    public TplTicketRecord setUiConfig(String value) {
+    public TplTicketRecord setUiConfig(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -178,8 +179,8 @@ public class TplTicketRecord extends UpdatableRecordImpl<TplTicketRecord> implem
      * Getter for <code>ZDB.TPL_TICKET.UI_CONFIG</code>. 「uiConfig」- UI的配置
      */
     @Override
-    public String getUiConfig() {
-        return (String) get(8);
+    public JsonObject getUiConfig() {
+        return (JsonObject) get(8);
     }
 
     /**
@@ -358,7 +359,7 @@ public class TplTicketRecord extends UpdatableRecordImpl<TplTicketRecord> implem
      * Setter for <code>ZDB.TPL_TICKET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public TplTicketRecord setMetadata(String value) {
+    public TplTicketRecord setMetadata(JsonObject value) {
         set(19, value);
         return this;
     }
@@ -367,8 +368,8 @@ public class TplTicketRecord extends UpdatableRecordImpl<TplTicketRecord> implem
      * Getter for <code>ZDB.TPL_TICKET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(19);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(19);
     }
 
     /**
@@ -519,7 +520,7 @@ public class TplTicketRecord extends UpdatableRecordImpl<TplTicketRecord> implem
     /**
      * Create a detached, initialised TplTicketRecord
      */
-    public TplTicketRecord(String id, String code, String description, String name, String recordComponent, String recordJson, Boolean system, String uiComponent, String uiConfig, String type, String status, String modelId, String modelKey, String modelCategory, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public TplTicketRecord(String id, String code, String description, String name, String recordComponent, JsonObject recordJson, Boolean system, String uiComponent, JsonObject uiConfig, String type, String status, String modelId, String modelKey, String modelCategory, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(TplTicket.TPL_TICKET);
 
         setId(id);

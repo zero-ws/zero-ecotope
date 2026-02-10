@@ -4,6 +4,8 @@
 package io.zerows.extension.module.tpl.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.Keys;
 import io.zerows.extension.module.tpl.domain.Zdb;
 import io.zerows.extension.module.tpl.domain.tables.records.TplTicketRecord;
@@ -82,7 +84,7 @@ public class TplTicket extends TableImpl<TplTicketRecord> {
      * The column <code>ZDB.TPL_TICKET.RECORD_JSON</code>. 「recordJson」-
      * 上一次的记录内容
      */
-    public final TableField<TplTicketRecord, String> RECORD_JSON = createField(DSL.name("RECORD_JSON"), SQLDataType.CLOB, this, "「recordJson」- 上一次的记录内容");
+    public final TableField<TplTicketRecord, JsonObject> RECORD_JSON = createField(DSL.name("RECORD_JSON"), SQLDataType.CLOB, this, "「recordJson」- 上一次的记录内容", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_TICKET.SYSTEM</code>. 「system」- 是否属于系统模板
@@ -98,7 +100,7 @@ public class TplTicket extends TableImpl<TplTicketRecord> {
     /**
      * The column <code>ZDB.TPL_TICKET.UI_CONFIG</code>. 「uiConfig」- UI的配置
      */
-    public final TableField<TplTicketRecord, String> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- UI的配置");
+    public final TableField<TplTicketRecord, JsonObject> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- UI的配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_TICKET.TYPE</code>. 「type」- 类型
@@ -154,7 +156,7 @@ public class TplTicket extends TableImpl<TplTicketRecord> {
     /**
      * The column <code>ZDB.TPL_TICKET.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<TplTicketRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<TplTicketRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.TPL_TICKET.VERSION</code>. 「version」- 版本号

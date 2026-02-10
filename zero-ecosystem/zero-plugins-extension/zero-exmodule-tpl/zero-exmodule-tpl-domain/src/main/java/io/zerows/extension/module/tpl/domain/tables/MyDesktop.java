@@ -4,6 +4,8 @@
 package io.zerows.extension.module.tpl.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.Keys;
 import io.zerows.extension.module.tpl.domain.Zdb;
 import io.zerows.extension.module.tpl.domain.tables.records.MyDesktopRecord;
@@ -63,12 +65,12 @@ public class MyDesktop extends TableImpl<MyDesktopRecord> {
     /**
      * The column <code>ZDB.MY_DESKTOP.UI_CONFIG</code>. 「uiConfig」- 看板配置
      */
-    public final TableField<MyDesktopRecord, String> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- 看板配置");
+    public final TableField<MyDesktopRecord, JsonObject> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- 看板配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_DESKTOP.UI_GRID</code>. 「uiGrid」- 布局配置
      */
-    public final TableField<MyDesktopRecord, String> UI_GRID = createField(DSL.name("UI_GRID"), SQLDataType.CLOB, this, "「uiGrid」- 布局配置");
+    public final TableField<MyDesktopRecord, JsonObject> UI_GRID = createField(DSL.name("UI_GRID"), SQLDataType.CLOB, this, "「uiGrid」- 布局配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_DESKTOP.OWNER</code>. 「owner」- 拥有者ID
@@ -108,7 +110,7 @@ public class MyDesktop extends TableImpl<MyDesktopRecord> {
     /**
      * The column <code>ZDB.MY_DESKTOP.METADATA</code>. 「metadata」- 附加配置
      */
-    public final TableField<MyDesktopRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 附加配置");
+    public final TableField<MyDesktopRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 附加配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_DESKTOP.CREATED_AT</code>. 「createdAt」- 创建时间

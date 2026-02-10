@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyApp;
 import io.zerows.extension.module.tpl.domain.tables.records.MyAppRecord;
 
@@ -205,7 +206,7 @@ public class MyAppDao extends AbstractVertxDAO<MyAppRecord, io.zerows.extension.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyApp>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyApp>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MyApp.MY_APP.METADATA.in(values));
         }
 
@@ -213,7 +214,7 @@ public class MyAppDao extends AbstractVertxDAO<MyAppRecord, io.zerows.extension.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyApp>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyApp>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyApp.MY_APP.METADATA.in(values),limit);
         }
 

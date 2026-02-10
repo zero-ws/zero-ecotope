@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -100,12 +101,12 @@ public interface IMyFavor extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.MY_FAVOR.URI_PARAM</code>. 「uriParam」- 该收藏参数
      */
-    public IMyFavor setUriParam(String value);
+    public IMyFavor setUriParam(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_FAVOR.URI_PARAM</code>. 「uriParam」- 该收藏参数
      */
-    public String getUriParam();
+    public JsonObject getUriParam();
 
     /**
      * Setter for <code>ZDB.MY_FAVOR.TYPE</code>. 「type」- 类型
@@ -170,12 +171,12 @@ public interface IMyFavor extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.MY_FAVOR.METADATA</code>. 「metadata」- 元配置
      */
-    public IMyFavor setMetadata(String value);
+    public IMyFavor setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.MY_FAVOR.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.MY_FAVOR.VERSION</code>. 「version」- 版本号
@@ -253,14 +254,14 @@ public interface IMyFavor extends VertxPojo, Serializable {
                 setOrThrow(this::setUri,json::getString,"URI","java.lang.String");
                 setOrThrow(this::setUriFull,json::getString,"URI_FULL","java.lang.String");
                 setOrThrow(this::setUriKey,json::getString,"URI_KEY","java.lang.String");
-                setOrThrow(this::setUriParam,json::getString,"URI_PARAM","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column URI_PARAM!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -281,14 +282,14 @@ public interface IMyFavor extends VertxPojo, Serializable {
                 json.put("URI",getUri());
                 json.put("URI_FULL",getUriFull());
                 json.put("URI_KEY",getUriKey());
-                json.put("URI_PARAM",getUriParam());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column URI_PARAM!
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

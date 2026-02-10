@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyNotify;
 import io.zerows.extension.module.tpl.domain.tables.records.MyNotifyRecord;
 
@@ -41,7 +42,7 @@ public class MyNotifyDao extends AbstractVertxDAO<MyNotifyRecord, io.zerows.exte
      * Find records that have <code>CONFIG_EMAIL IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigEmail(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigEmail(Collection<JsonObject> values) {
                 return findManyByCondition(MyNotify.MY_NOTIFY.CONFIG_EMAIL.in(values));
         }
 
@@ -49,7 +50,7 @@ public class MyNotifyDao extends AbstractVertxDAO<MyNotifyRecord, io.zerows.exte
      * Find records that have <code>CONFIG_EMAIL IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigEmail(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigEmail(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyNotify.MY_NOTIFY.CONFIG_EMAIL.in(values),limit);
         }
 
@@ -57,7 +58,7 @@ public class MyNotifyDao extends AbstractVertxDAO<MyNotifyRecord, io.zerows.exte
      * Find records that have <code>CONFIG_INTERNAL IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigInternal(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigInternal(Collection<JsonObject> values) {
                 return findManyByCondition(MyNotify.MY_NOTIFY.CONFIG_INTERNAL.in(values));
         }
 
@@ -65,14 +66,14 @@ public class MyNotifyDao extends AbstractVertxDAO<MyNotifyRecord, io.zerows.exte
      * Find records that have <code>CONFIG_INTERNAL IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigInternal(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigInternal(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyNotify.MY_NOTIFY.CONFIG_INTERNAL.in(values),limit);
         }
 
         /**
      * Find records that have <code>CONFIG_SMS IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigSms(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigSms(Collection<JsonObject> values) {
                 return findManyByCondition(MyNotify.MY_NOTIFY.CONFIG_SMS.in(values));
         }
 
@@ -80,7 +81,7 @@ public class MyNotifyDao extends AbstractVertxDAO<MyNotifyRecord, io.zerows.exte
      * Find records that have <code>CONFIG_SMS IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigSms(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByConfigSms(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyNotify.MY_NOTIFY.CONFIG_SMS.in(values),limit);
         }
 
@@ -192,7 +193,7 @@ public class MyNotifyDao extends AbstractVertxDAO<MyNotifyRecord, io.zerows.exte
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MyNotify.MY_NOTIFY.METADATA.in(values));
         }
 
@@ -200,7 +201,7 @@ public class MyNotifyDao extends AbstractVertxDAO<MyNotifyRecord, io.zerows.exte
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyNotify>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyNotify.MY_NOTIFY.METADATA.in(values),limit);
         }
 

@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.MyDesktop;
 import io.zerows.extension.module.tpl.domain.tables.records.MyDesktopRecord;
 
@@ -55,7 +56,7 @@ public class MyDesktopDao extends AbstractVertxDAO<MyDesktopRecord, io.zerows.ex
         /**
      * Find records that have <code>UI_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByUiConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByUiConfig(Collection<JsonObject> values) {
                 return findManyByCondition(MyDesktop.MY_DESKTOP.UI_CONFIG.in(values));
         }
 
@@ -63,14 +64,14 @@ public class MyDesktopDao extends AbstractVertxDAO<MyDesktopRecord, io.zerows.ex
      * Find records that have <code>UI_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByUiConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByUiConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyDesktop.MY_DESKTOP.UI_CONFIG.in(values),limit);
         }
 
         /**
      * Find records that have <code>UI_GRID IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByUiGrid(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByUiGrid(Collection<JsonObject> values) {
                 return findManyByCondition(MyDesktop.MY_DESKTOP.UI_GRID.in(values));
         }
 
@@ -78,7 +79,7 @@ public class MyDesktopDao extends AbstractVertxDAO<MyDesktopRecord, io.zerows.ex
      * Find records that have <code>UI_GRID IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByUiGrid(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByUiGrid(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyDesktop.MY_DESKTOP.UI_GRID.in(values),limit);
         }
 
@@ -190,7 +191,7 @@ public class MyDesktopDao extends AbstractVertxDAO<MyDesktopRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MyDesktop.MY_DESKTOP.METADATA.in(values));
         }
 
@@ -198,7 +199,7 @@ public class MyDesktopDao extends AbstractVertxDAO<MyDesktopRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.tpl.domain.tables.pojos.MyDesktop>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MyDesktop.MY_DESKTOP.METADATA.in(values),limit);
         }
 

@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -73,13 +74,13 @@ public interface ITplTicket extends VertxPojo, Serializable {
      * Setter for <code>ZDB.TPL_TICKET.RECORD_JSON</code>. 「recordJson」-
      * 上一次的记录内容
      */
-    public ITplTicket setRecordJson(String value);
+    public ITplTicket setRecordJson(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_TICKET.RECORD_JSON</code>. 「recordJson」-
      * 上一次的记录内容
      */
-    public String getRecordJson();
+    public JsonObject getRecordJson();
 
     /**
      * Setter for <code>ZDB.TPL_TICKET.SYSTEM</code>. 「system」- 是否属于系统模板
@@ -106,12 +107,12 @@ public interface ITplTicket extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.TPL_TICKET.UI_CONFIG</code>. 「uiConfig」- UI的配置
      */
-    public ITplTicket setUiConfig(String value);
+    public ITplTicket setUiConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_TICKET.UI_CONFIG</code>. 「uiConfig」- UI的配置
      */
-    public String getUiConfig();
+    public JsonObject getUiConfig();
 
     /**
      * Setter for <code>ZDB.TPL_TICKET.TYPE</code>. 「type」- 类型
@@ -218,12 +219,12 @@ public interface ITplTicket extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.TPL_TICKET.METADATA</code>. 「metadata」- 元配置
      */
-    public ITplTicket setMetadata(String value);
+    public ITplTicket setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.TPL_TICKET.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.TPL_TICKET.VERSION</code>. 「version」- 版本号
@@ -298,10 +299,10 @@ public interface ITplTicket extends VertxPojo, Serializable {
                 setOrThrow(this::setDescription,json::getString,"DESCRIPTION","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setRecordComponent,json::getString,"RECORD_COMPONENT","java.lang.String");
-                setOrThrow(this::setRecordJson,json::getString,"RECORD_JSON","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_JSON!
                 setOrThrow(this::setSystem,json::getBoolean,"SYSTEM","java.lang.Boolean");
                 setOrThrow(this::setUiComponent,json::getString,"UI_COMPONENT","java.lang.String");
-                setOrThrow(this::setUiConfig,json::getString,"UI_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setStatus,json::getString,"STATUS","java.lang.String");
                 setOrThrow(this::setModelId,json::getString,"MODEL_ID","java.lang.String");
@@ -312,7 +313,7 @@ public interface ITplTicket extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -330,10 +331,10 @@ public interface ITplTicket extends VertxPojo, Serializable {
                 json.put("DESCRIPTION",getDescription());
                 json.put("NAME",getName());
                 json.put("RECORD_COMPONENT",getRecordComponent());
-                json.put("RECORD_JSON",getRecordJson());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column RECORD_JSON!
                 json.put("SYSTEM",getSystem());
                 json.put("UI_COMPONENT",getUiComponent());
-                json.put("UI_CONFIG",getUiConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_CONFIG!
                 json.put("TYPE",getType());
                 json.put("STATUS",getStatus());
                 json.put("MODEL_ID",getModelId());
@@ -344,7 +345,7 @@ public interface ITplTicket extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

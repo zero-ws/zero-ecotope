@@ -4,6 +4,8 @@
 package io.zerows.extension.module.tpl.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.Keys;
 import io.zerows.extension.module.tpl.domain.Zdb;
 import io.zerows.extension.module.tpl.domain.tables.records.MyNotifyRecord;
@@ -60,18 +62,18 @@ public class MyNotify extends TableImpl<MyNotifyRecord> {
     /**
      * The column <code>ZDB.MY_NOTIFY.CONFIG_EMAIL</code>. 「configEmail」- 邮件配置
      */
-    public final TableField<MyNotifyRecord, String> CONFIG_EMAIL = createField(DSL.name("CONFIG_EMAIL"), SQLDataType.CLOB, this, "「configEmail」- 邮件配置");
+    public final TableField<MyNotifyRecord, JsonObject> CONFIG_EMAIL = createField(DSL.name("CONFIG_EMAIL"), SQLDataType.CLOB, this, "「configEmail」- 邮件配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_NOTIFY.CONFIG_INTERNAL</code>. 「configInternal」-
      * 站内信配置
      */
-    public final TableField<MyNotifyRecord, String> CONFIG_INTERNAL = createField(DSL.name("CONFIG_INTERNAL"), SQLDataType.CLOB, this, "「configInternal」- 站内信配置");
+    public final TableField<MyNotifyRecord, JsonObject> CONFIG_INTERNAL = createField(DSL.name("CONFIG_INTERNAL"), SQLDataType.CLOB, this, "「configInternal」- 站内信配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_NOTIFY.CONFIG_SMS</code>. 「configSms」- 短信配置
      */
-    public final TableField<MyNotifyRecord, String> CONFIG_SMS = createField(DSL.name("CONFIG_SMS"), SQLDataType.CLOB, this, "「configSms」- 短信配置");
+    public final TableField<MyNotifyRecord, JsonObject> CONFIG_SMS = createField(DSL.name("CONFIG_SMS"), SQLDataType.CLOB, this, "「configSms」- 短信配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_NOTIFY.OWNER_ID</code>. 「ownerId」- 拥有者ID
@@ -111,7 +113,7 @@ public class MyNotify extends TableImpl<MyNotifyRecord> {
     /**
      * The column <code>ZDB.MY_NOTIFY.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MyNotifyRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MyNotifyRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.MY_NOTIFY.VERSION</code>. 「version」- 版本号

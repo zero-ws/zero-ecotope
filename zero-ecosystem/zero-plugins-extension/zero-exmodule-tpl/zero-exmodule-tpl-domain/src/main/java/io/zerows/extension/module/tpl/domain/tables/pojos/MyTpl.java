@@ -5,6 +5,7 @@ package io.zerows.extension.module.tpl.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.tpl.domain.tables.interfaces.IMyTpl;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,7 @@ public class MyTpl implements VertxPojo, IMyTpl {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -71,7 +72,7 @@ public class MyTpl implements VertxPojo, IMyTpl {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -293,7 +294,7 @@ public class MyTpl implements VertxPojo, IMyTpl {
      * Getter for <code>ZDB.MY_TPL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -301,7 +302,7 @@ public class MyTpl implements VertxPojo, IMyTpl {
      * Setter for <code>ZDB.MY_TPL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MyTpl setMetadata(String metadata) {
+    public MyTpl setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }
