@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MModel;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MModelRecord;
 
@@ -163,7 +164,7 @@ public class MModelDao extends AbstractVertxDAO<MModelRecord, io.zerows.extensio
      * Find records that have <code>RULE_UNIQUE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyByRuleUnique(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyByRuleUnique(Collection<JsonObject> values) {
                 return findManyByCondition(MModel.M_MODEL.RULE_UNIQUE.in(values));
         }
 
@@ -171,14 +172,14 @@ public class MModelDao extends AbstractVertxDAO<MModelRecord, io.zerows.extensio
      * Find records that have <code>RULE_UNIQUE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyByRuleUnique(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyByRuleUnique(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MModel.M_MODEL.RULE_UNIQUE.in(values),limit);
         }
 
         /**
      * Find records that have <code>SPIDER IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyBySpider(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyBySpider(Collection<JsonObject> values) {
                 return findManyByCondition(MModel.M_MODEL.SPIDER.in(values));
         }
 
@@ -186,7 +187,7 @@ public class MModelDao extends AbstractVertxDAO<MModelRecord, io.zerows.extensio
      * Find records that have <code>SPIDER IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyBySpider(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyBySpider(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MModel.M_MODEL.SPIDER.in(values),limit);
         }
 
@@ -299,7 +300,7 @@ public class MModelDao extends AbstractVertxDAO<MModelRecord, io.zerows.extensio
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MModel.M_MODEL.METADATA.in(values));
         }
 
@@ -307,7 +308,7 @@ public class MModelDao extends AbstractVertxDAO<MModelRecord, io.zerows.extensio
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MModel>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MModel.M_MODEL.METADATA.in(values),limit);
         }
 

@@ -4,6 +4,8 @@
 package io.zerows.extension.module.mbsecore.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.Keys;
 import io.zerows.extension.module.mbsecore.domain.Zdb;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MEntityRecord;
@@ -115,7 +117,7 @@ public class MEntity extends TableImpl<MEntityRecord> {
     /**
      * The column <code>ZDB.M_ENTITY.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MEntityRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MEntityRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_ENTITY.VERSION</code>. 「version」- 版本号

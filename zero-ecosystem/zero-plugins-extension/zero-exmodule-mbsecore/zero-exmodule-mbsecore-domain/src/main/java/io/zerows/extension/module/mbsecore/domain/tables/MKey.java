@@ -4,6 +4,10 @@
 package io.zerows.extension.module.mbsecore.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.Indexes;
 import io.zerows.extension.module.mbsecore.domain.Keys;
 import io.zerows.extension.module.mbsecore.domain.Zdb;
@@ -62,7 +66,7 @@ public class MKey extends TableImpl<MKeyRecord> {
     /**
      * The column <code>ZDB.M_KEY.COLUMNS</code>. 「columns」- JsonArra
      */
-    public final TableField<MKeyRecord, String> COLUMNS = createField(DSL.name("COLUMNS"), SQLDataType.CLOB(65535), this, "「columns」- JsonArra");
+    public final TableField<MKeyRecord, JsonArray> COLUMNS = createField(DSL.name("COLUMNS"), SQLDataType.CLOB(65535), this, "「columns」- JsonArra", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.M_KEY.COMMENTS</code>. 「comments」- 当前属性的描述信息
@@ -112,7 +116,7 @@ public class MKey extends TableImpl<MKeyRecord> {
     /**
      * The column <code>ZDB.M_KEY.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MKeyRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MKeyRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_KEY.VERSION</code>. 「version」- 版本号

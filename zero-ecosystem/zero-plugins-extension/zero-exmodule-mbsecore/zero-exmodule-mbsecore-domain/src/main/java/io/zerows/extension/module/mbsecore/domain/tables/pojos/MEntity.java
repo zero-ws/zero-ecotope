@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMEntity;
 
 import java.time.LocalDateTime;
@@ -31,7 +32,7 @@ public class MEntity implements VertxPojo, IMEntity {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -74,7 +75,7 @@ public class MEntity implements VertxPojo, IMEntity {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -314,7 +315,7 @@ public class MEntity implements VertxPojo, IMEntity {
      * Getter for <code>ZDB.M_ENTITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -322,7 +323,7 @@ public class MEntity implements VertxPojo, IMEntity {
      * Setter for <code>ZDB.M_ENTITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MEntity setMetadata(String metadata) {
+    public MEntity setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

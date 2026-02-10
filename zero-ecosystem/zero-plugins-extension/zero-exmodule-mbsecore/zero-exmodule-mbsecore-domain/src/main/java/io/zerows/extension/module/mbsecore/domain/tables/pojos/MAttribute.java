@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMAttribute;
 
 import java.time.LocalDateTime;
@@ -35,10 +36,10 @@ public class MAttribute implements VertxPojo, IMAttribute {
     private String normalize;
     private String outComponent;
     private String source;
-    private String sourceConfig;
-    private String sourceExternal;
+    private JsonObject sourceConfig;
+    private JsonObject sourceExternal;
     private String sourceField;
-    private String sourceReference;
+    private JsonObject sourceReference;
     private String type;
     private String modelId;
     private String sigma;
@@ -46,7 +47,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -108,10 +109,10 @@ public class MAttribute implements VertxPojo, IMAttribute {
         String normalize,
         String outComponent,
         String source,
-        String sourceConfig,
-        String sourceExternal,
+        JsonObject sourceConfig,
+        JsonObject sourceExternal,
         String sourceField,
-        String sourceReference,
+        JsonObject sourceReference,
         String type,
         String modelId,
         String sigma,
@@ -119,7 +120,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -447,7 +448,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 数据集配置
      */
     @Override
-    public String getSourceConfig() {
+    public JsonObject getSourceConfig() {
         return this.sourceConfig;
     }
 
@@ -456,7 +457,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 数据集配置
      */
     @Override
-    public MAttribute setSourceConfig(String sourceConfig) {
+    public MAttribute setSourceConfig(JsonObject sourceConfig) {
         this.sourceConfig = sourceConfig;
         return this;
     }
@@ -466,7 +467,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 「sourceExternal」- 外部配置信息
      */
     @Override
-    public String getSourceExternal() {
+    public JsonObject getSourceExternal() {
         return this.sourceExternal;
     }
 
@@ -475,7 +476,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 「sourceExternal」- 外部配置信息
      */
     @Override
-    public MAttribute setSourceExternal(String sourceExternal) {
+    public MAttribute setSourceExternal(JsonObject sourceExternal) {
         this.sourceExternal = sourceExternal;
         return this;
     }
@@ -502,7 +503,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 「sourceReference」- 引用配置信息
      */
     @Override
-    public String getSourceReference() {
+    public JsonObject getSourceReference() {
         return this.sourceReference;
     }
 
@@ -511,7 +512,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * 「sourceReference」- 引用配置信息
      */
     @Override
-    public MAttribute setSourceReference(String sourceReference) {
+    public MAttribute setSourceReference(JsonObject sourceReference) {
         this.sourceReference = sourceReference;
         return this;
     }
@@ -639,7 +640,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Getter for <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -647,7 +648,7 @@ public class MAttribute implements VertxPojo, IMAttribute {
      * Setter for <code>ZDB.M_ATTRIBUTE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MAttribute setMetadata(String metadata) {
+    public MAttribute setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

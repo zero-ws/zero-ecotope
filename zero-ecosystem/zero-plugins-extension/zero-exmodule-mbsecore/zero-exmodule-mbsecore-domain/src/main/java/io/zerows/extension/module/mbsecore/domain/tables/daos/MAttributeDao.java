@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MAttribute;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MAttributeRecord;
 
@@ -269,7 +270,7 @@ public class MAttributeDao extends AbstractVertxDAO<MAttributeRecord, io.zerows.
      * Find records that have <code>SOURCE_CONFIG IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceConfig(Collection<JsonObject> values) {
                 return findManyByCondition(MAttribute.M_ATTRIBUTE.SOURCE_CONFIG.in(values));
         }
 
@@ -277,7 +278,7 @@ public class MAttributeDao extends AbstractVertxDAO<MAttributeRecord, io.zerows.
      * Find records that have <code>SOURCE_CONFIG IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MAttribute.M_ATTRIBUTE.SOURCE_CONFIG.in(values),limit);
         }
 
@@ -285,7 +286,7 @@ public class MAttributeDao extends AbstractVertxDAO<MAttributeRecord, io.zerows.
      * Find records that have <code>SOURCE_EXTERNAL IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceExternal(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceExternal(Collection<JsonObject> values) {
                 return findManyByCondition(MAttribute.M_ATTRIBUTE.SOURCE_EXTERNAL.in(values));
         }
 
@@ -293,7 +294,7 @@ public class MAttributeDao extends AbstractVertxDAO<MAttributeRecord, io.zerows.
      * Find records that have <code>SOURCE_EXTERNAL IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceExternal(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceExternal(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MAttribute.M_ATTRIBUTE.SOURCE_EXTERNAL.in(values),limit);
         }
 
@@ -317,7 +318,7 @@ public class MAttributeDao extends AbstractVertxDAO<MAttributeRecord, io.zerows.
      * Find records that have <code>SOURCE_REFERENCE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceReference(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceReference(Collection<JsonObject> values) {
                 return findManyByCondition(MAttribute.M_ATTRIBUTE.SOURCE_REFERENCE.in(values));
         }
 
@@ -325,7 +326,7 @@ public class MAttributeDao extends AbstractVertxDAO<MAttributeRecord, io.zerows.
      * Find records that have <code>SOURCE_REFERENCE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceReference(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyBySourceReference(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MAttribute.M_ATTRIBUTE.SOURCE_REFERENCE.in(values),limit);
         }
 
@@ -437,7 +438,7 @@ public class MAttributeDao extends AbstractVertxDAO<MAttributeRecord, io.zerows.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MAttribute.M_ATTRIBUTE.METADATA.in(values));
         }
 
@@ -445,7 +446,7 @@ public class MAttributeDao extends AbstractVertxDAO<MAttributeRecord, io.zerows.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAttribute>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MAttribute.M_ATTRIBUTE.METADATA.in(values),limit);
         }
 

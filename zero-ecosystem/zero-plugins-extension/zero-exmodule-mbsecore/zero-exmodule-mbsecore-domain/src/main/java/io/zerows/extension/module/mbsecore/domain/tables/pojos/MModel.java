@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMModel;
 
 import java.time.LocalDateTime;
@@ -28,8 +29,8 @@ public class MModel implements VertxPojo, IMModel {
     private Boolean isTrack;
     private String name;
     private String namespace;
-    private String ruleUnique;
-    private String spider;
+    private JsonObject ruleUnique;
+    private JsonObject spider;
     private String spiderComponent;
     private String type;
     private String sigma;
@@ -37,7 +38,7 @@ public class MModel implements VertxPojo, IMModel {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -83,8 +84,8 @@ public class MModel implements VertxPojo, IMModel {
         Boolean isTrack,
         String name,
         String namespace,
-        String ruleUnique,
-        String spider,
+        JsonObject ruleUnique,
+        JsonObject spider,
         String spiderComponent,
         String type,
         String sigma,
@@ -92,7 +93,7 @@ public class MModel implements VertxPojo, IMModel {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -289,7 +290,7 @@ public class MModel implements VertxPojo, IMModel {
      * Getter for <code>ZDB.M_MODEL.RULE_UNIQUE</code>. 「ruleUnique」- 当前模型的标识规则
      */
     @Override
-    public String getRuleUnique() {
+    public JsonObject getRuleUnique() {
         return this.ruleUnique;
     }
 
@@ -297,7 +298,7 @@ public class MModel implements VertxPojo, IMModel {
      * Setter for <code>ZDB.M_MODEL.RULE_UNIQUE</code>. 「ruleUnique」- 当前模型的标识规则
      */
     @Override
-    public MModel setRuleUnique(String ruleUnique) {
+    public MModel setRuleUnique(JsonObject ruleUnique) {
         this.ruleUnique = ruleUnique;
         return this;
     }
@@ -306,7 +307,7 @@ public class MModel implements VertxPojo, IMModel {
      * Getter for <code>ZDB.M_MODEL.SPIDER</code>. 「spider」- 主图格式
      */
     @Override
-    public String getSpider() {
+    public JsonObject getSpider() {
         return this.spider;
     }
 
@@ -314,7 +315,7 @@ public class MModel implements VertxPojo, IMModel {
      * Setter for <code>ZDB.M_MODEL.SPIDER</code>. 「spider」- 主图格式
      */
     @Override
-    public MModel setSpider(String spider) {
+    public MModel setSpider(JsonObject spider) {
         this.spider = spider;
         return this;
     }
@@ -444,7 +445,7 @@ public class MModel implements VertxPojo, IMModel {
      * Getter for <code>ZDB.M_MODEL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -452,7 +453,7 @@ public class MModel implements VertxPojo, IMModel {
      * Setter for <code>ZDB.M_MODEL.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MModel setMetadata(String metadata) {
+    public MModel setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

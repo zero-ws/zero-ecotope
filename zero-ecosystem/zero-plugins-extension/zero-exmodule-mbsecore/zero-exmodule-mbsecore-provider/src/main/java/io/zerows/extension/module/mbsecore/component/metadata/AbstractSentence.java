@@ -59,7 +59,7 @@ public abstract class AbstractSentence implements AoSentence, SqlStatement {
     public String segmentKey(final MKey key) {
         final StringBuilder segment = new StringBuilder();
         // 列处理
-        final JsonArray columns = new JsonArray(key.getColumns());
+        final JsonArray columns = key.getColumns(); // new JsonArray(key.getColumns());
         final List<String> columnList = new ArrayList<>();
         columns.forEach(column -> columnList.add("`" + column + "`"));
         final String columnStr = Ut.fromJoin(columnList, VString.COMMA);

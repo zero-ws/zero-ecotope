@@ -93,13 +93,7 @@ public class DataModel extends AbstractHModel implements Model {
 
     @Override
     protected HRule loadRule() {
-        final String content = this.model.getRuleUnique();
-        if (Ut.isNotNil(content)) {
-            return HRule.of(content);
-            // return Ut.deserialize(content, KRuleUnique.class);
-        } else {
-            return null;
-        }
+        return HRule.of(this.model.getRuleUnique());
     }
 
     // =================== Extension Api ====================

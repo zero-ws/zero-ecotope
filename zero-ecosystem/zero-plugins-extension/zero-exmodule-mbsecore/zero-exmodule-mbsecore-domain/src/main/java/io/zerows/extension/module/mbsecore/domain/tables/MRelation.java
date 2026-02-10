@@ -4,6 +4,8 @@
 package io.zerows.extension.module.mbsecore.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.Keys;
 import io.zerows.extension.module.mbsecore.domain.Zdb;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MRelationRecord;
@@ -105,7 +107,7 @@ public class MRelation extends TableImpl<MRelationRecord> {
     /**
      * The column <code>ZDB.M_RELATION.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<MRelationRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<MRelationRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.M_RELATION.VERSION</code>. 「version」- 版本号

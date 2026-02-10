@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MAcc;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MAccRecord;
 
@@ -41,7 +43,7 @@ public class MAccDao extends AbstractVertxDAO<MAccRecord, io.zerows.extension.mo
      * Find records that have <code>RECORD_JSON IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByRecordJson(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByRecordJson(Collection<JsonArray> values) {
                 return findManyByCondition(MAcc.M_ACC.RECORD_JSON.in(values));
         }
 
@@ -49,14 +51,14 @@ public class MAccDao extends AbstractVertxDAO<MAccRecord, io.zerows.extension.mo
      * Find records that have <code>RECORD_JSON IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByRecordJson(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByRecordJson(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(MAcc.M_ACC.RECORD_JSON.in(values),limit);
         }
 
         /**
      * Find records that have <code>RECORD_RAW IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByRecordRaw(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByRecordRaw(Collection<JsonArray> values) {
                 return findManyByCondition(MAcc.M_ACC.RECORD_RAW.in(values));
         }
 
@@ -64,7 +66,7 @@ public class MAccDao extends AbstractVertxDAO<MAccRecord, io.zerows.extension.mo
      * Find records that have <code>RECORD_RAW IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByRecordRaw(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByRecordRaw(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(MAcc.M_ACC.RECORD_RAW.in(values),limit);
         }
 
@@ -192,7 +194,7 @@ public class MAccDao extends AbstractVertxDAO<MAccRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MAcc.M_ACC.METADATA.in(values));
         }
 
@@ -200,7 +202,7 @@ public class MAccDao extends AbstractVertxDAO<MAccRecord, io.zerows.extension.mo
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MAcc>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MAcc.M_ACC.METADATA.in(values),limit);
         }
 

@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MAcc;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMAcc;
 
@@ -44,7 +46,7 @@ public class MAccRecord extends UpdatableRecordImpl<MAccRecord> implements Vertx
      * Setter for <code>ZDB.M_ACC.RECORD_JSON</code>. 「recordJson」- 上一次的记录内容
      */
     @Override
-    public MAccRecord setRecordJson(String value) {
+    public MAccRecord setRecordJson(JsonArray value) {
         set(1, value);
         return this;
     }
@@ -53,15 +55,15 @@ public class MAccRecord extends UpdatableRecordImpl<MAccRecord> implements Vertx
      * Getter for <code>ZDB.M_ACC.RECORD_JSON</code>. 「recordJson」- 上一次的记录内容
      */
     @Override
-    public String getRecordJson() {
-        return (String) get(1);
+    public JsonArray getRecordJson() {
+        return (JsonArray) get(1);
     }
 
     /**
      * Setter for <code>ZDB.M_ACC.RECORD_RAW</code>. 「recordRaw」- 上一次的记录
      */
     @Override
-    public MAccRecord setRecordRaw(String value) {
+    public MAccRecord setRecordRaw(JsonArray value) {
         set(2, value);
         return this;
     }
@@ -70,8 +72,8 @@ public class MAccRecord extends UpdatableRecordImpl<MAccRecord> implements Vertx
      * Getter for <code>ZDB.M_ACC.RECORD_RAW</code>. 「recordRaw」- 上一次的记录
      */
     @Override
-    public String getRecordRaw() {
-        return (String) get(2);
+    public JsonArray getRecordRaw() {
+        return (JsonArray) get(2);
     }
 
     /**
@@ -214,7 +216,7 @@ public class MAccRecord extends UpdatableRecordImpl<MAccRecord> implements Vertx
      * Setter for <code>ZDB.M_ACC.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MAccRecord setMetadata(String value) {
+    public MAccRecord setMetadata(JsonObject value) {
         set(11, value);
         return this;
     }
@@ -223,8 +225,8 @@ public class MAccRecord extends UpdatableRecordImpl<MAccRecord> implements Vertx
      * Getter for <code>ZDB.M_ACC.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(11);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(11);
     }
 
     /**
@@ -367,7 +369,7 @@ public class MAccRecord extends UpdatableRecordImpl<MAccRecord> implements Vertx
     /**
      * Create a detached, initialised MAccRecord
      */
-    public MAccRecord(String id, String recordJson, String recordRaw, String recordUnique, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MAccRecord(String id, JsonArray recordJson, JsonArray recordRaw, String recordUnique, String modelId, String modelKey, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MAcc.M_ACC);
 
         setId(id);

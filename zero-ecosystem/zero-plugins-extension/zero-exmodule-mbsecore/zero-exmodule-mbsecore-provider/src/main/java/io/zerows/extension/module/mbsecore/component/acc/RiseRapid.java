@@ -67,7 +67,7 @@ class RiseRapid implements Rise {
                 acc.setModelId(atom.identifier());
                 acc.setModelKey(key);
 
-                acc.setRecordJson(data.encode());
+                acc.setRecordJson(data);
                 acc.setActive(Boolean.TRUE);
 
                 final HArk ark = atom.ark();
@@ -79,7 +79,7 @@ class RiseRapid implements Rise {
                 return DB.on(MAccDao.class).insertAsync(acc);
             } else {
                 // Update
-                queried.setRecordJson(data.encode());
+                queried.setRecordJson(data);
                 queried.setUpdatedAt(LocalDateTime.now());
                 return DB.on(MAccDao.class).updateAsync(queried);
             }

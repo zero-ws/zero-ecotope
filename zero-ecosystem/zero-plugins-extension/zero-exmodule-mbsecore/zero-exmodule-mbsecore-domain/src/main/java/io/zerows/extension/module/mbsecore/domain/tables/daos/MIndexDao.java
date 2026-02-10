@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MIndex;
 import io.zerows.extension.module.mbsecore.domain.tables.records.MIndexRecord;
 
@@ -55,7 +57,7 @@ public class MIndexDao extends AbstractVertxDAO<MIndexRecord, io.zerows.extensio
         /**
      * Find records that have <code>COLUMNS IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex>> findManyByColumns(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex>> findManyByColumns(Collection<JsonArray> values) {
                 return findManyByCondition(MIndex.M_INDEX.COLUMNS.in(values));
         }
 
@@ -63,7 +65,7 @@ public class MIndexDao extends AbstractVertxDAO<MIndexRecord, io.zerows.extensio
      * Find records that have <code>COLUMNS IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex>> findManyByColumns(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex>> findManyByColumns(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(MIndex.M_INDEX.COLUMNS.in(values),limit);
         }
 
@@ -205,7 +207,7 @@ public class MIndexDao extends AbstractVertxDAO<MIndexRecord, io.zerows.extensio
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(MIndex.M_INDEX.METADATA.in(values));
         }
 
@@ -213,7 +215,7 @@ public class MIndexDao extends AbstractVertxDAO<MIndexRecord, io.zerows.extensio
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.mbsecore.domain.tables.pojos.MIndex>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(MIndex.M_INDEX.METADATA.in(values),limit);
         }
 

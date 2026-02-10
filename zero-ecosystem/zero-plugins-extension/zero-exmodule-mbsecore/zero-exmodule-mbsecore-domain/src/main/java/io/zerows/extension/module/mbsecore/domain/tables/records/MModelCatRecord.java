@@ -5,6 +5,7 @@ package io.zerows.extension.module.mbsecore.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.MModelCat;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMModelCat;
 
@@ -163,7 +164,7 @@ public class MModelCatRecord extends UpdatableRecordImpl<MModelCatRecord> implem
      * Setter for <code>ZDB.M_MODEL_CAT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public MModelCatRecord setMetadata(String value) {
+    public MModelCatRecord setMetadata(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -172,8 +173,8 @@ public class MModelCatRecord extends UpdatableRecordImpl<MModelCatRecord> implem
      * Getter for <code>ZDB.M_MODEL_CAT.METADATA</code>. 「metadata」- 附加配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(8);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(8);
     }
 
     /**
@@ -295,7 +296,7 @@ public class MModelCatRecord extends UpdatableRecordImpl<MModelCatRecord> implem
     /**
      * Create a detached, initialised MModelCatRecord
      */
-    public MModelCatRecord(String id, String name, String catName, String sigma, String appId, String tenantId, Boolean active, String language, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public MModelCatRecord(String id, String name, String catName, String sigma, String appId, String tenantId, Boolean active, String language, JsonObject metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(MModelCat.M_MODEL_CAT);
 
         setId(id);

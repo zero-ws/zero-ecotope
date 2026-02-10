@@ -5,6 +5,8 @@ package io.zerows.extension.module.mbsecore.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.mbsecore.domain.tables.interfaces.IMIndex;
 
 import java.time.LocalDateTime;
@@ -21,7 +23,7 @@ public class MIndex implements VertxPojo, IMIndex {
 
     private String id;
     private Boolean clustered;
-    private String columns;
+    private JsonArray columns;
     private String comments;
     private String entityId;
     private String name;
@@ -31,7 +33,7 @@ public class MIndex implements VertxPojo, IMIndex {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -64,7 +66,7 @@ public class MIndex implements VertxPojo, IMIndex {
     public MIndex(
         String id,
         Boolean clustered,
-        String columns,
+        JsonArray columns,
         String comments,
         String entityId,
         String name,
@@ -74,7 +76,7 @@ public class MIndex implements VertxPojo, IMIndex {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -141,18 +143,18 @@ public class MIndex implements VertxPojo, IMIndex {
     }
 
     /**
-     * Getter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArra
+     * Getter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArray
      */
     @Override
-    public String getColumns() {
+    public JsonArray getColumns() {
         return this.columns;
     }
 
     /**
-     * Setter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArra
+     * Setter for <code>ZDB.M_INDEX.COLUMNS</code>. 「columns」- JsonArray
      */
     @Override
-    public MIndex setColumns(String columns) {
+    public MIndex setColumns(JsonArray columns) {
         this.columns = columns;
         return this;
     }
@@ -314,7 +316,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Getter for <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -322,7 +324,7 @@ public class MIndex implements VertxPojo, IMIndex {
      * Setter for <code>ZDB.M_INDEX.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public MIndex setMetadata(String metadata) {
+    public MIndex setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }
