@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.ECustomer;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IECustomer;
 
@@ -544,7 +545,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Setter for <code>ZDB.E_CUSTOMER.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public ECustomerRecord setMetadata(String value) {
+    public ECustomerRecord setMetadata(JsonObject value) {
         set(30, value);
         return this;
     }
@@ -553,8 +554,8 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      * Getter for <code>ZDB.E_CUSTOMER.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(30);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(30);
     }
 
     /**
@@ -716,7 +717,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     /**
      * Create a detached, initialised ECustomerRecord
      */
-    public ECustomerRecord(String id, String address, String bankCard, String bankId, String code, String comment, String contactEmail, String contactName, String contactOnline, String contactPhone, String email, String fax, String homepage, String logo, String name, String phone, Boolean runUp, BigDecimal runUpAmount, String signName, String signPhone, String taxCode, String taxTitle, String title, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ECustomerRecord(String id, String address, String bankCard, String bankId, String code, String comment, String contactEmail, String contactName, String contactOnline, String contactPhone, String email, String fax, String homepage, String logo, String name, String phone, Boolean runUp, BigDecimal runUpAmount, String signName, String signPhone, String taxCode, String taxTitle, String title, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(ECustomer.E_CUSTOMER);
 
         setId(id);

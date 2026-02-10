@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EContract;
 import io.zerows.extension.module.erp.domain.tables.records.EContractRecord;
 
@@ -539,7 +540,7 @@ public class EContractDao extends AbstractVertxDAO<EContractRecord, io.zerows.ex
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EContract>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EContract>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(EContract.E_CONTRACT.METADATA.in(values));
         }
 
@@ -547,7 +548,7 @@ public class EContractDao extends AbstractVertxDAO<EContractRecord, io.zerows.ex
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EContract>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.erp.domain.tables.pojos.EContract>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(EContract.E_CONTRACT.METADATA.in(values),limit);
         }
 

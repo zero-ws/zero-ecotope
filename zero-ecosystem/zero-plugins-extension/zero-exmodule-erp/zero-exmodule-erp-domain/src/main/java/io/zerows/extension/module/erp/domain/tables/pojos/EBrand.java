@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEBrand;
 
 import java.time.LocalDateTime;
@@ -34,7 +35,7 @@ public class EBrand implements VertxPojo, IEBrand {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -83,7 +84,7 @@ public class EBrand implements VertxPojo, IEBrand {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -377,7 +378,7 @@ public class EBrand implements VertxPojo, IEBrand {
      * Getter for <code>ZDB.E_BRAND.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -385,7 +386,7 @@ public class EBrand implements VertxPojo, IEBrand {
      * Setter for <code>ZDB.E_BRAND.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EBrand setMetadata(String metadata) {
+    public EBrand setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

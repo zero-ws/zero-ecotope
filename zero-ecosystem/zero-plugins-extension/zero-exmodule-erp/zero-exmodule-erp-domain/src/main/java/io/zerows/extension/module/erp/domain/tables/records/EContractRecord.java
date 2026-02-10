@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EContract;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEContract;
 
@@ -606,7 +607,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Setter for <code>ZDB.E_CONTRACT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EContractRecord setMetadata(String value) {
+    public EContractRecord setMetadata(JsonObject value) {
         set(34, value);
         return this;
     }
@@ -615,8 +616,8 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      * Getter for <code>ZDB.E_CONTRACT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(34);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(34);
     }
 
     /**
@@ -782,7 +783,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
     /**
      * Create a detached, initialised EContractRecord
      */
-    public EContractRecord(String id, BigDecimal amount, String aAddress, String aLegal, String aName, String aPhone, String budget, String bAddress, String bLegal, String bName, String bPhone, String code, String deptId, String description, LocalDateTime endAt, String level, String name, String partyA, String partyB, LocalDateTime planEndAt, LocalDateTime planStartAt, String remark, LocalDateTime signedAt, String signedBy, LocalDateTime startAt, String subject, String title, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EContractRecord(String id, BigDecimal amount, String aAddress, String aLegal, String aName, String aPhone, String budget, String bAddress, String bLegal, String bName, String bPhone, String code, String deptId, String description, LocalDateTime endAt, String level, String name, String partyA, String partyB, LocalDateTime planEndAt, LocalDateTime planStartAt, String remark, LocalDateTime signedAt, String signedBy, LocalDateTime startAt, String subject, String title, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EContract.E_CONTRACT);
 
         setId(id);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EProject;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEProject;
 
@@ -487,7 +488,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Setter for <code>ZDB.E_PROJECT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EProjectRecord setMetadata(String value) {
+    public EProjectRecord setMetadata(JsonObject value) {
         set(27, value);
         return this;
     }
@@ -496,8 +497,8 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
      * Getter for <code>ZDB.E_PROJECT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(27);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(27);
     }
 
     /**
@@ -656,7 +657,7 @@ public class EProjectRecord extends UpdatableRecordImpl<EProjectRecord> implemen
     /**
      * Create a detached, initialised EProjectRecord
      */
-    public EProjectRecord(String id, BigDecimal amount, String budget, String code, String deptId, String description, LocalDateTime endAt, String icon, String leadBy, String level, String name, LocalDateTime planEndAt, LocalDateTime planStartAt, String priority, String remark, String risk, String shortName, LocalDateTime startAt, String subject, String title, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EProjectRecord(String id, BigDecimal amount, String budget, String code, String deptId, String description, LocalDateTime endAt, String icon, String leadBy, String level, String name, LocalDateTime planEndAt, LocalDateTime planStartAt, String priority, String remark, String risk, String shortName, LocalDateTime startAt, String subject, String title, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EProject.E_PROJECT);
 
         setId(id);

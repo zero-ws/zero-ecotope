@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEEmployee;
 
 import java.time.LocalDateTime;
@@ -42,7 +43,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -107,7 +108,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -549,7 +550,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Getter for <code>ZDB.E_EMPLOYEE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -557,7 +558,7 @@ public class EEmployee implements VertxPojo, IEEmployee {
      * Setter for <code>ZDB.E_EMPLOYEE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EEmployee setMetadata(String metadata) {
+    public EEmployee setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

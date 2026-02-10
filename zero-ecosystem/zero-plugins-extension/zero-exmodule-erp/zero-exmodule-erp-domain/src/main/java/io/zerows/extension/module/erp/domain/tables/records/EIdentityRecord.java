@@ -5,6 +5,7 @@ package io.zerows.extension.module.erp.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.erp.domain.tables.EIdentity;
 import io.zerows.extension.module.erp.domain.tables.interfaces.IEIdentity;
 
@@ -685,7 +686,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      * Setter for <code>ZDB.E_IDENTITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public EIdentityRecord setMetadata(String value) {
+    public EIdentityRecord setMetadata(JsonObject value) {
         set(38, value);
         return this;
     }
@@ -694,8 +695,8 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      * Getter for <code>ZDB.E_IDENTITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(38);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(38);
     }
 
     /**
@@ -865,7 +866,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
     /**
      * Create a detached, initialised EIdentityRecord
      */
-    public EIdentityRecord(String id, String address, LocalDateTime birthday, String carPlate, String code, String contactAddress, String contactEmail, String contactMobile, String contactPhone, String country, String driverLicense, String ecAlipay, String ecQq, String ecWechat, Boolean gender, String idcAddress, String idcBack, LocalDateTime idcExpiredAt, String idcFront, String idcIssuer, LocalDateTime idcIssueAt, String idcNumber, String idcType, String marital, String nation, String nativePlace, String passport, String realname, String urgentName, String urgentPhone, Boolean verified, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EIdentityRecord(String id, String address, LocalDateTime birthday, String carPlate, String code, String contactAddress, String contactEmail, String contactMobile, String contactPhone, String country, String driverLicense, String ecAlipay, String ecQq, String ecWechat, Boolean gender, String idcAddress, String idcBack, LocalDateTime idcExpiredAt, String idcFront, String idcIssuer, LocalDateTime idcIssueAt, String idcNumber, String idcType, String marital, String nation, String nativePlace, String passport, String realname, String urgentName, String urgentPhone, Boolean verified, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EIdentity.E_IDENTITY);
 
         setId(id);
