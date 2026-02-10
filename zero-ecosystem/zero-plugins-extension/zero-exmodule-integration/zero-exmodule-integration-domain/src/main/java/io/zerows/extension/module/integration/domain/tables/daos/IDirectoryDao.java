@@ -5,6 +5,7 @@ package io.zerows.extension.module.integration.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.integration.domain.tables.IDirectory;
 import io.zerows.extension.module.integration.domain.tables.records.IDirectoryRecord;
@@ -196,7 +197,7 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
      * Find records that have <code>VISIT_GROUP IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitGroup(Collection<JsonObject> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitGroup(Collection<JsonArray> values) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_GROUP.in(values));
         }
 
@@ -204,14 +205,14 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
      * Find records that have <code>VISIT_GROUP IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitGroup(Collection<JsonObject> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitGroup(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_GROUP.in(values),limit);
         }
 
         /**
      * Find records that have <code>VISIT_MODE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitMode(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitMode(Collection<JsonArray> values) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_MODE.in(values));
         }
 
@@ -219,14 +220,14 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
      * Find records that have <code>VISIT_MODE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitMode(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitMode(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_MODE.in(values),limit);
         }
 
         /**
      * Find records that have <code>VISIT_ROLE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitRole(Collection<JsonObject> values) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitRole(Collection<JsonArray> values) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_ROLE.in(values));
         }
 
@@ -234,7 +235,7 @@ public class IDirectoryDao extends AbstractVertxDAO<IDirectoryRecord, io.zerows.
      * Find records that have <code>VISIT_ROLE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitRole(Collection<JsonObject> values, int limit) {
+        public Future<List<io.zerows.extension.module.integration.domain.tables.pojos.IDirectory>> findManyByVisitRole(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(IDirectory.I_DIRECTORY.VISIT_ROLE.in(values),limit);
         }
 
