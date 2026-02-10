@@ -1,0 +1,4 @@
+UI 部分由于前端支持表达式配置，如 datum 可能会包含
+- {} / 标准结构
+- source=?,field=?,value=? / 兼容结构
+所以目前只有 UI 部分没有任何类似 TypeOfJooq 的扩展

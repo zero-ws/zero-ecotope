@@ -1,6 +1,7 @@
 package io.zerows.extension.module.workflow.metadata;
 
 import io.r2mo.function.Fn;
+import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.metadata.KFlow;
 import io.zerows.extension.module.workflow.boot.Wf;
 import io.zerows.extension.module.workflow.component.central.Behaviour;
@@ -126,19 +127,23 @@ public class EngineOn {
 
     // ----------------------- Fixed Save -------------------------
     public Movement stayMovement() {
-        return this.component(MovementStay.class, null);
+        final String keyComponent = this.metadata.recordComponentKey(MovementStay.class, null);
+        return this.component(MovementStay.class, keyComponent);
     }
 
     public Stay stayDraft() {
-        return this.component(StaySave.class, null);
+        final String keyComponent = this.metadata.recordComponentKey(StaySave.class, null);
+        return this.component(StaySave.class, keyComponent);
     }
 
     public Stay stayCancel() {
-        return this.component(StayCancel.class, null);
+        final String keyComponent = this.metadata.recordComponentKey(StayCancel.class, null);
+        return this.component(StayCancel.class, keyComponent);
     }
 
     public Stay stayClose() {
-        return this.component(StayClose.class, null);
+        final String keyComponent = this.metadata.recordComponentKey(StayClose.class, null);
+        return this.component(StayClose.class, keyComponent);
     }
 
     // ----------------------- Private Method -------------------------
@@ -159,7 +164,11 @@ public class EngineOn {
     }
 
 
-    @SuppressWarnings("all")
+    private <C extends Behaviour> C component(final Class<?> clazz, final JsonObject componentJ) {
+        final String keyComponent = this.metadata.recordComponentKey(clazz, null);
+        return this.component(clazz, keyComponent, componentJ);
+    }
+
     private <C extends Behaviour> C component(final Class<?> clazz, final String componentValue) {
         final String keyComponent = this.metadata.recordComponentKey(clazz, componentValue);
         /*
@@ -180,12 +189,20 @@ public class EngineOn {
          * - endComponent
          *   end workflow of closing ticket
          */
+        return this.component(clazz, keyComponent, null);
+    }
+
+
+    @SuppressWarnings("all")
+    private <C extends Behaviour> C component(final Class<?> clazz, final String keyComponent, final JsonObject componentJ) {
         return (C) WfPool.CC_COMPONENT.pick(() -> {
             final C instance = Ut.instance(clazz);
-            instance.bind(Ut.toJObject(componentValue))
-                // Level 1, Record for Transfer
-                // Level 2, Todo / Linkage for Movement
-                .bind(this.metadata);
+            if (Ut.isNotNil(componentJ)) {
+                instance.bind(componentJ);
+            }
+            instance.bind(this.metadata);
+            // Level 1, Record for Transfer
+            // Level 2, Todo / Linkage for Movement
             return instance;
         }, keyComponent);       // Critical Key Pool for different record configuration
     }
