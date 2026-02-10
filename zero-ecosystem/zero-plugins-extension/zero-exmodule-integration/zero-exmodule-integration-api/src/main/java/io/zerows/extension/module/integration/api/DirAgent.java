@@ -1,5 +1,6 @@
 package io.zerows.extension.module.integration.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -27,15 +28,18 @@ public interface DirAgent {
     @POST
     @Path("/i-directory")
     @Address(Addr.Directory.ADD)
+    @OpenApi
     JsonObject create(@BodyParam JsonObject body);
 
     @PUT
     @Path("/i-directory/:key")
     @Address(Addr.Directory.UPDATE)
+    @OpenApi
     JsonObject update(@PathParam(KName.KEY) String key, @BodyParam JsonObject body);
 
     @DELETE
     @Path("/i-directory/:key")
     @Address(Addr.Directory.DELETE)
+    @OpenApi
     JsonObject remove(@PathParam(KName.KEY) String key);
 }

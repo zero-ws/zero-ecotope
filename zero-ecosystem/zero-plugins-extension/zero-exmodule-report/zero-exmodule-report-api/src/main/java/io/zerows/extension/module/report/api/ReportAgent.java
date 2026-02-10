@@ -1,5 +1,6 @@
 package io.zerows.extension.module.report.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
@@ -36,6 +37,7 @@ public interface ReportAgent {
     @GET
     @Path("/report/query-all")
     @Address(Addr.Report.QUERY_ALL)
+    @OpenApi
     Future<JsonArray> fetchAllReports(@HeaderParam("X-App-Id") String appId);
 
     /**
@@ -52,35 +54,41 @@ public interface ReportAgent {
     @POST
     @Path("/report/query-page")
     @Address(Addr.Report.QUERY_PAGE)
+    @OpenApi
     Future<JsonObject> instancePaged(JsonObject query);
 
     @POST
     @Path("/report/single-of")
     @Address(Addr.Report.SINGLE_GENERATE)
+    @OpenApi
     Future<JsonObject> instanceGenerate(
         @QueryParam("reportId") String reportId, JsonObject query);
 
     @PUT
     @Path("/report/single-instance/:key")
     @Address(Addr.Report.SINGLE_SAVE)
+    @OpenApi
     Future<JsonObject> instanceSave(
         @PathParam(KName.KEY) String instanceId, JsonObject data);
 
     @DELETE
     @Path("/report/single-instance/:key")
     @Address(Addr.Report.SINGLE_DELETE)
+    @OpenApi
     Future<Boolean> instanceDelete(
         @PathParam(KName.KEY) String instanceId);
 
     @GET
     @Path("/report/single-instance/:key")
     @Address(Addr.Report.SINGLE_FETCH)
+    @OpenApi
     Future<JsonObject> instanceFetch(
         @PathParam(KName.KEY) String instanceId);
 
     @POST
     @Path("/report/single-export/:key")
     @Address(Addr.Report.SINGLE_EXPORT)
+    @OpenApi
     Future<Buffer> instanceExport(
         @PathParam(KName.KEY) String instanceId);
 }

@@ -1,5 +1,6 @@
 package io.zerows.extension.module.graphic.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -15,6 +16,7 @@ public interface GraphApi {
     @Path("/graphic/analyze/:key")
     @GET
     @Address(Addr.GRAPH_ANALYZE)
+    @OpenApi
     JsonObject searchGraph(@PathParam("key") String key,
                            @QueryParam("graph") String graph,
                            @QueryParam("level") Integer level);
