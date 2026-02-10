@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.KpReport;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpReport;
 
@@ -147,7 +148,7 @@ public class KpReportRecord extends UpdatableRecordImpl<KpReportRecord> implemen
      * 主表基础配置
      */
     @Override
-    public KpReportRecord setReportConfig(String value) {
+    public KpReportRecord setReportConfig(JsonObject value) {
         set(7, value);
         return this;
     }
@@ -157,15 +158,15 @@ public class KpReportRecord extends UpdatableRecordImpl<KpReportRecord> implemen
      * 主表基础配置
      */
     @Override
-    public String getReportConfig() {
-        return (String) get(7);
+    public JsonObject getReportConfig() {
+        return (JsonObject) get(7);
     }
 
     /**
      * Setter for <code>ZDB.KP_REPORT.REPORT_PARAM</code>. 「reportParam」- 报表参数配置
      */
     @Override
-    public KpReportRecord setReportParam(String value) {
+    public KpReportRecord setReportParam(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -174,8 +175,8 @@ public class KpReportRecord extends UpdatableRecordImpl<KpReportRecord> implemen
      * Getter for <code>ZDB.KP_REPORT.REPORT_PARAM</code>. 「reportParam」- 报表参数配置
      */
     @Override
-    public String getReportParam() {
-        return (String) get(8);
+    public JsonObject getReportParam() {
+        return (JsonObject) get(8);
     }
 
     /**
@@ -301,7 +302,7 @@ public class KpReportRecord extends UpdatableRecordImpl<KpReportRecord> implemen
      * Setter for <code>ZDB.KP_REPORT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpReportRecord setMetadata(String value) {
+    public KpReportRecord setMetadata(JsonObject value) {
         set(16, value);
         return this;
     }
@@ -310,8 +311,8 @@ public class KpReportRecord extends UpdatableRecordImpl<KpReportRecord> implemen
      * Getter for <code>ZDB.KP_REPORT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(16);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(16);
     }
 
     /**
@@ -459,7 +460,7 @@ public class KpReportRecord extends UpdatableRecordImpl<KpReportRecord> implemen
     /**
      * Create a detached, initialised KpReportRecord
      */
-    public KpReportRecord(String id, String code, String dataSetId, String dataTplId, String name, LocalDateTime reportAt, String reportBy, String reportConfig, String reportParam, String title, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public KpReportRecord(String id, String code, String dataSetId, String dataTplId, String name, LocalDateTime reportAt, String reportBy, JsonObject reportConfig, JsonObject reportParam, String title, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(KpReport.KP_REPORT);
 
         setId(id);

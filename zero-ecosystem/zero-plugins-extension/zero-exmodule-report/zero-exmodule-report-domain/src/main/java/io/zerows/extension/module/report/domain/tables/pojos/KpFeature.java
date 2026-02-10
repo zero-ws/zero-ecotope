@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpFeature;
 
 import java.time.LocalDateTime;
@@ -21,12 +22,12 @@ public class KpFeature implements VertxPojo, IKpFeature {
 
     private String id;
     private String inComponent;
-    private String inConfig;
+    private JsonObject inConfig;
     private String name;
     private String outComponent;
-    private String outConfig;
+    private JsonObject outConfig;
     private String reportId;
-    private String valueConfig;
+    private JsonObject valueConfig;
     private String valueDisplay;
     private String valuePath;
     private String type;
@@ -36,7 +37,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -74,12 +75,12 @@ public class KpFeature implements VertxPojo, IKpFeature {
     public KpFeature(
         String id,
         String inComponent,
-        String inConfig,
+        JsonObject inConfig,
         String name,
         String outComponent,
-        String outConfig,
+        JsonObject outConfig,
         String reportId,
-        String valueConfig,
+        JsonObject valueConfig,
         String valueDisplay,
         String valuePath,
         String type,
@@ -89,7 +90,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -166,7 +167,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
      * Getter for <code>ZDB.KP_FEATURE.IN_CONFIG</code>. 「inConfig」- 特殊输出配置
      */
     @Override
-    public String getInConfig() {
+    public JsonObject getInConfig() {
         return this.inConfig;
     }
 
@@ -174,7 +175,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
      * Setter for <code>ZDB.KP_FEATURE.IN_CONFIG</code>. 「inConfig」- 特殊输出配置
      */
     @Override
-    public KpFeature setInConfig(String inConfig) {
+    public KpFeature setInConfig(JsonObject inConfig) {
         this.inConfig = inConfig;
         return this;
     }
@@ -219,7 +220,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
      * Getter for <code>ZDB.KP_FEATURE.OUT_CONFIG</code>. 「outConfig」- 特殊输出配置
      */
     @Override
-    public String getOutConfig() {
+    public JsonObject getOutConfig() {
         return this.outConfig;
     }
 
@@ -227,7 +228,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
      * Setter for <code>ZDB.KP_FEATURE.OUT_CONFIG</code>. 「outConfig」- 特殊输出配置
      */
     @Override
-    public KpFeature setOutConfig(String outConfig) {
+    public KpFeature setOutConfig(JsonObject outConfig) {
         this.outConfig = outConfig;
         return this;
     }
@@ -253,7 +254,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
      * Getter for <code>ZDB.KP_FEATURE.VALUE_CONFIG</code>. 「valueConfig」- 特征配置
      */
     @Override
-    public String getValueConfig() {
+    public JsonObject getValueConfig() {
         return this.valueConfig;
     }
 
@@ -261,7 +262,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
      * Setter for <code>ZDB.KP_FEATURE.VALUE_CONFIG</code>. 「valueConfig」- 特征配置
      */
     @Override
-    public KpFeature setValueConfig(String valueConfig) {
+    public KpFeature setValueConfig(JsonObject valueConfig) {
         this.valueConfig = valueConfig;
         return this;
     }
@@ -425,7 +426,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
      * Getter for <code>ZDB.KP_FEATURE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -433,7 +434,7 @@ public class KpFeature implements VertxPojo, IKpFeature {
      * Setter for <code>ZDB.KP_FEATURE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpFeature setMetadata(String metadata) {
+    public KpFeature setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.KpDataSet;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpDataSet;
 
@@ -81,7 +82,7 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * 数据查询过程中的配置
      */
     @Override
-    public KpDataSetRecord setDataConfig(String value) {
+    public KpDataSetRecord setDataConfig(JsonObject value) {
         set(3, value);
         return this;
     }
@@ -91,15 +92,15 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * 数据查询过程中的配置
      */
     @Override
-    public String getDataConfig() {
-        return (String) get(3);
+    public JsonObject getDataConfig() {
+        return (JsonObject) get(3);
     }
 
     /**
      * Setter for <code>ZDB.KP_DATA_SET.DATA_FIELD</code>. 「dataField」- 数据字段
      */
     @Override
-    public KpDataSetRecord setDataField(String value) {
+    public KpDataSetRecord setDataField(JsonObject value) {
         set(4, value);
         return this;
     }
@@ -108,15 +109,15 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * Getter for <code>ZDB.KP_DATA_SET.DATA_FIELD</code>. 「dataField」- 数据字段
      */
     @Override
-    public String getDataField() {
-        return (String) get(4);
+    public JsonObject getDataField() {
+        return (JsonObject) get(4);
     }
 
     /**
      * Setter for <code>ZDB.KP_DATA_SET.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
     @Override
-    public KpDataSetRecord setDataQuery(String value) {
+    public KpDataSetRecord setDataQuery(JsonObject value) {
         set(5, value);
         return this;
     }
@@ -125,8 +126,8 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * Getter for <code>ZDB.KP_DATA_SET.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
     @Override
-    public String getDataQuery() {
-        return (String) get(5);
+    public JsonObject getDataQuery() {
+        return (JsonObject) get(5);
     }
 
     /**
@@ -134,7 +135,7 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * 基于什么内容做报表
      */
     @Override
-    public KpDataSetRecord setDataSource(String value) {
+    public KpDataSetRecord setDataSource(JsonObject value) {
         set(6, value);
         return this;
     }
@@ -144,8 +145,8 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * 基于什么内容做报表
      */
     @Override
-    public String getDataSource() {
-        return (String) get(6);
+    public JsonObject getDataSource() {
+        return (JsonObject) get(6);
     }
 
     /**
@@ -170,7 +171,7 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * 数据源相关配置
      */
     @Override
-    public KpDataSetRecord setSourceConfig(String value) {
+    public KpDataSetRecord setSourceConfig(JsonObject value) {
         set(8, value);
         return this;
     }
@@ -180,8 +181,8 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * 数据源相关配置
      */
     @Override
-    public String getSourceConfig() {
-        return (String) get(8);
+    public JsonObject getSourceConfig() {
+        return (JsonObject) get(8);
     }
 
     /**
@@ -324,7 +325,7 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * Setter for <code>ZDB.KP_DATA_SET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpDataSetRecord setMetadata(String value) {
+    public KpDataSetRecord setMetadata(JsonObject value) {
         set(17, value);
         return this;
     }
@@ -333,8 +334,8 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
      * Getter for <code>ZDB.KP_DATA_SET.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(17);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(17);
     }
 
     /**
@@ -483,7 +484,7 @@ public class KpDataSetRecord extends UpdatableRecordImpl<KpDataSetRecord> implem
     /**
      * Create a detached, initialised KpDataSetRecord
      */
-    public KpDataSetRecord(String id, String code, String dataComponent, String dataConfig, String dataField, String dataQuery, String dataSource, String name, String sourceConfig, String sourceId, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public KpDataSetRecord(String id, String code, String dataComponent, JsonObject dataConfig, JsonObject dataField, JsonObject dataQuery, JsonObject dataSource, String name, JsonObject sourceConfig, String sourceId, String type, String status, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(KpDataSet.KP_DATA_SET);
 
         setId(id);

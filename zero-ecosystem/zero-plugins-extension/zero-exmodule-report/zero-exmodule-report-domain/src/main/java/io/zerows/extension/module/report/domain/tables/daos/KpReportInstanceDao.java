@@ -5,6 +5,8 @@ package io.zerows.extension.module.report.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.KpReportInstance;
 import io.zerows.extension.module.report.domain.tables.records.KpReportInstanceRecord;
 
@@ -162,7 +164,7 @@ public class KpReportInstanceDao extends AbstractVertxDAO<KpReportInstanceRecord
      * Find records that have <code>REPORT_CONTENT IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByReportContent(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByReportContent(Collection<JsonObject> values) {
                 return findManyByCondition(KpReportInstance.KP_REPORT_INSTANCE.REPORT_CONTENT.in(values));
         }
 
@@ -170,7 +172,7 @@ public class KpReportInstanceDao extends AbstractVertxDAO<KpReportInstanceRecord
      * Find records that have <code>REPORT_CONTENT IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByReportContent(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByReportContent(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpReportInstance.KP_REPORT_INSTANCE.REPORT_CONTENT.in(values),limit);
         }
 
@@ -178,7 +180,7 @@ public class KpReportInstanceDao extends AbstractVertxDAO<KpReportInstanceRecord
      * Find records that have <code>REPORT_DATA IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByReportData(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByReportData(Collection<JsonArray> values) {
                 return findManyByCondition(KpReportInstance.KP_REPORT_INSTANCE.REPORT_DATA.in(values));
         }
 
@@ -186,7 +188,7 @@ public class KpReportInstanceDao extends AbstractVertxDAO<KpReportInstanceRecord
      * Find records that have <code>REPORT_DATA IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByReportData(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByReportData(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(KpReportInstance.KP_REPORT_INSTANCE.REPORT_DATA.in(values),limit);
         }
 
@@ -343,7 +345,7 @@ public class KpReportInstanceDao extends AbstractVertxDAO<KpReportInstanceRecord
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(KpReportInstance.KP_REPORT_INSTANCE.METADATA.in(values));
         }
 
@@ -351,7 +353,7 @@ public class KpReportInstanceDao extends AbstractVertxDAO<KpReportInstanceRecord
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.report.domain.tables.pojos.KpReportInstance>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(KpReportInstance.KP_REPORT_INSTANCE.METADATA.in(values),limit);
         }
 

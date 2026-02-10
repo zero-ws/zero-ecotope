@@ -4,6 +4,8 @@
 package io.zerows.extension.module.report.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.Keys;
 import io.zerows.extension.module.report.domain.Zdb;
 import io.zerows.extension.module.report.domain.tables.records.KpReportRecord;
@@ -91,12 +93,12 @@ public class KpReport extends TableImpl<KpReportRecord> {
      * The column <code>ZDB.KP_REPORT.REPORT_CONFIG</code>. 「reportConfig」-
      * 主表基础配置
      */
-    public final TableField<KpReportRecord, String> REPORT_CONFIG = createField(DSL.name("REPORT_CONFIG"), SQLDataType.CLOB, this, "「reportConfig」- 主表基础配置");
+    public final TableField<KpReportRecord, JsonObject> REPORT_CONFIG = createField(DSL.name("REPORT_CONFIG"), SQLDataType.CLOB, this, "「reportConfig」- 主表基础配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_REPORT.REPORT_PARAM</code>. 「reportParam」- 报表参数配置
      */
-    public final TableField<KpReportRecord, String> REPORT_PARAM = createField(DSL.name("REPORT_PARAM"), SQLDataType.CLOB, this, "「reportParam」- 报表参数配置");
+    public final TableField<KpReportRecord, JsonObject> REPORT_PARAM = createField(DSL.name("REPORT_PARAM"), SQLDataType.CLOB, this, "「reportParam」- 报表参数配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_REPORT.TITLE</code>. 「title」- 标题
@@ -136,7 +138,7 @@ public class KpReport extends TableImpl<KpReportRecord> {
     /**
      * The column <code>ZDB.KP_REPORT.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<KpReportRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<KpReportRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_REPORT.VERSION</code>. 「version」- 版本号

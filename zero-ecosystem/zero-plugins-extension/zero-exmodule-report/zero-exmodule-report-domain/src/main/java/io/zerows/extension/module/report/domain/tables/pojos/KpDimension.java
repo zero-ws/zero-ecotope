@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpDimension;
 
 import java.time.LocalDateTime;
@@ -20,13 +21,13 @@ public class KpDimension implements VertxPojo, IKpDimension {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private String chartConfig;
+    private JsonObject chartConfig;
     private String chartType;
     private String code;
-    private String dataField;
-    private String dataGroup;
-    private String dataOutput;
-    private String dataQuery;
+    private JsonObject dataField;
+    private JsonObject dataGroup;
+    private JsonObject dataOutput;
+    private JsonObject dataQuery;
     private String dataSetId;
     private String dataSort;
     private String name;
@@ -38,7 +39,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -77,13 +78,13 @@ public class KpDimension implements VertxPojo, IKpDimension {
 
     public KpDimension(
         String id,
-        String chartConfig,
+        JsonObject chartConfig,
         String chartType,
         String code,
-        String dataField,
-        String dataGroup,
-        String dataOutput,
-        String dataQuery,
+        JsonObject dataField,
+        JsonObject dataGroup,
+        JsonObject dataOutput,
+        JsonObject dataQuery,
         String dataSetId,
         String dataSort,
         String name,
@@ -95,7 +96,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -156,7 +157,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * 若当前报表是图表
      */
     @Override
-    public String getChartConfig() {
+    public JsonObject getChartConfig() {
         return this.chartConfig;
     }
 
@@ -165,7 +166,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * 若当前报表是图表
      */
     @Override
-    public KpDimension setChartConfig(String chartConfig) {
+    public KpDimension setChartConfig(JsonObject chartConfig) {
         this.chartConfig = chartConfig;
         return this;
     }
@@ -209,7 +210,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * 当前报表对应字段
      */
     @Override
-    public String getDataField() {
+    public JsonObject getDataField() {
         return this.dataField;
     }
 
@@ -218,7 +219,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * 当前报表对应字段
      */
     @Override
-    public KpDimension setDataField(String dataField) {
+    public KpDimension setDataField(JsonObject dataField) {
         this.dataField = dataField;
         return this;
     }
@@ -227,7 +228,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * Getter for <code>ZDB.KP_DIMENSION.DATA_GROUP</code>. 「dataGroup」- 分组维度处理
      */
     @Override
-    public String getDataGroup() {
+    public JsonObject getDataGroup() {
         return this.dataGroup;
     }
 
@@ -235,7 +236,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * Setter for <code>ZDB.KP_DIMENSION.DATA_GROUP</code>. 「dataGroup」- 分组维度处理
      */
     @Override
-    public KpDimension setDataGroup(String dataGroup) {
+    public KpDimension setDataGroup(JsonObject dataGroup) {
         this.dataGroup = dataGroup;
         return this;
     }
@@ -245,7 +246,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * 输出专用配置
      */
     @Override
-    public String getDataOutput() {
+    public JsonObject getDataOutput() {
         return this.dataOutput;
     }
 
@@ -254,7 +255,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * 输出专用配置
      */
     @Override
-    public KpDimension setDataOutput(String dataOutput) {
+    public KpDimension setDataOutput(JsonObject dataOutput) {
         this.dataOutput = dataOutput;
         return this;
     }
@@ -263,7 +264,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * Getter for <code>ZDB.KP_DIMENSION.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
     @Override
-    public String getDataQuery() {
+    public JsonObject getDataQuery() {
         return this.dataQuery;
     }
 
@@ -271,7 +272,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * Setter for <code>ZDB.KP_DIMENSION.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
     @Override
-    public KpDimension setDataQuery(String dataQuery) {
+    public KpDimension setDataQuery(JsonObject dataQuery) {
         this.dataQuery = dataQuery;
         return this;
     }
@@ -467,7 +468,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * Getter for <code>ZDB.KP_DIMENSION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -475,7 +476,7 @@ public class KpDimension implements VertxPojo, IKpDimension {
      * Setter for <code>ZDB.KP_DIMENSION.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpDimension setMetadata(String metadata) {
+    public KpDimension setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

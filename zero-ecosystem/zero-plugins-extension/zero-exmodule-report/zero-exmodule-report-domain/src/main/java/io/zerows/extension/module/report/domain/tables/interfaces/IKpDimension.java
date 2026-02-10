@@ -5,6 +5,7 @@ package io.zerows.extension.module.report.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -31,13 +32,13 @@ public interface IKpDimension extends VertxPojo, Serializable {
      * Setter for <code>ZDB.KP_DIMENSION.CHART_CONFIG</code>. 「chartConfig」-
      * 若当前报表是图表
      */
-    public IKpDimension setChartConfig(String value);
+    public IKpDimension setChartConfig(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DIMENSION.CHART_CONFIG</code>. 「chartConfig」-
      * 若当前报表是图表
      */
-    public String getChartConfig();
+    public JsonObject getChartConfig();
 
     /**
      * Setter for <code>ZDB.KP_DIMENSION.CHART_TYPE</code>. 「chartType」- 图表类型
@@ -63,45 +64,45 @@ public interface IKpDimension extends VertxPojo, Serializable {
      * Setter for <code>ZDB.KP_DIMENSION.DATA_FIELD</code>. 「dataField」-
      * 当前报表对应字段
      */
-    public IKpDimension setDataField(String value);
+    public IKpDimension setDataField(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DIMENSION.DATA_FIELD</code>. 「dataField」-
      * 当前报表对应字段
      */
-    public String getDataField();
+    public JsonObject getDataField();
 
     /**
      * Setter for <code>ZDB.KP_DIMENSION.DATA_GROUP</code>. 「dataGroup」- 分组维度处理
      */
-    public IKpDimension setDataGroup(String value);
+    public IKpDimension setDataGroup(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DIMENSION.DATA_GROUP</code>. 「dataGroup」- 分组维度处理
      */
-    public String getDataGroup();
+    public JsonObject getDataGroup();
 
     /**
      * Setter for <code>ZDB.KP_DIMENSION.DATA_OUTPUT</code>. 「dataOutput」-
      * 输出专用配置
      */
-    public IKpDimension setDataOutput(String value);
+    public IKpDimension setDataOutput(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DIMENSION.DATA_OUTPUT</code>. 「dataOutput」-
      * 输出专用配置
      */
-    public String getDataOutput();
+    public JsonObject getDataOutput();
 
     /**
      * Setter for <code>ZDB.KP_DIMENSION.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
-    public IKpDimension setDataQuery(String value);
+    public IKpDimension setDataQuery(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DIMENSION.DATA_QUERY</code>. 「dataQuery」- 数据查询配置
      */
-    public String getDataQuery();
+    public JsonObject getDataQuery();
 
     /**
      * Setter for <code>ZDB.KP_DIMENSION.DATA_SET_ID</code>. 「dataSetId」- 数据源ID
@@ -216,12 +217,12 @@ public interface IKpDimension extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.KP_DIMENSION.METADATA</code>. 「metadata」- 元配置
      */
-    public IKpDimension setMetadata(String value);
+    public IKpDimension setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.KP_DIMENSION.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.KP_DIMENSION.VERSION</code>. 「version」- 版本号
@@ -292,13 +293,13 @@ public interface IKpDimension extends VertxPojo, Serializable {
         @Override
         public default IKpDimension fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
-                setOrThrow(this::setChartConfig,json::getString,"CHART_CONFIG","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CHART_CONFIG!
                 setOrThrow(this::setChartType,json::getString,"CHART_TYPE","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
-                setOrThrow(this::setDataField,json::getString,"DATA_FIELD","java.lang.String");
-                setOrThrow(this::setDataGroup,json::getString,"DATA_GROUP","java.lang.String");
-                setOrThrow(this::setDataOutput,json::getString,"DATA_OUTPUT","java.lang.String");
-                setOrThrow(this::setDataQuery,json::getString,"DATA_QUERY","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_FIELD!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_GROUP!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_OUTPUT!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_QUERY!
                 setOrThrow(this::setDataSetId,json::getString,"DATA_SET_ID","java.lang.String");
                 setOrThrow(this::setDataSort,json::getString,"DATA_SORT","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
@@ -310,7 +311,7 @@ public interface IKpDimension extends VertxPojo, Serializable {
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -324,13 +325,13 @@ public interface IKpDimension extends VertxPojo, Serializable {
         public default io.vertx.core.json.JsonObject toJson() {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
-                json.put("CHART_CONFIG",getChartConfig());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column CHART_CONFIG!
                 json.put("CHART_TYPE",getChartType());
                 json.put("CODE",getCode());
-                json.put("DATA_FIELD",getDataField());
-                json.put("DATA_GROUP",getDataGroup());
-                json.put("DATA_OUTPUT",getDataOutput());
-                json.put("DATA_QUERY",getDataQuery());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_FIELD!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_GROUP!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_OUTPUT!
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column DATA_QUERY!
                 json.put("DATA_SET_ID",getDataSetId());
                 json.put("DATA_SORT",getDataSort());
                 json.put("NAME",getName());
@@ -342,7 +343,7 @@ public interface IKpDimension extends VertxPojo, Serializable {
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

@@ -5,6 +5,8 @@ package io.zerows.extension.module.report.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.tables.interfaces.IKpReportInstance;
 
 import java.time.LocalDateTime;
@@ -28,8 +30,8 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
     private String refType;
     private LocalDateTime reportAt;
     private String reportBy;
-    private String reportContent;
-    private String reportData;
+    private JsonObject reportContent;
+    private JsonArray reportData;
     private String reportId;
     private String subtitle;
     private String title;
@@ -40,7 +42,7 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -89,8 +91,8 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
         String refType,
         LocalDateTime reportAt,
         String reportBy,
-        String reportContent,
-        String reportData,
+        JsonObject reportContent,
+        JsonArray reportData,
         String reportId,
         String subtitle,
         String title,
@@ -101,7 +103,7 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -304,7 +306,7 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
      * 「reportContent」- 报表内容
      */
     @Override
-    public String getReportContent() {
+    public JsonObject getReportContent() {
         return this.reportContent;
     }
 
@@ -313,7 +315,7 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
      * 「reportContent」- 报表内容
      */
     @Override
-    public KpReportInstance setReportContent(String reportContent) {
+    public KpReportInstance setReportContent(JsonObject reportContent) {
         this.reportContent = reportContent;
         return this;
     }
@@ -323,7 +325,7 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
      * 报表最终数据
      */
     @Override
-    public String getReportData() {
+    public JsonArray getReportData() {
         return this.reportData;
     }
 
@@ -332,7 +334,7 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
      * 报表最终数据
      */
     @Override
-    public KpReportInstance setReportData(String reportData) {
+    public KpReportInstance setReportData(JsonArray reportData) {
         this.reportData = reportData;
         return this;
     }
@@ -515,7 +517,7 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
      * Getter for <code>ZDB.KP_REPORT_INSTANCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -523,7 +525,7 @@ public class KpReportInstance implements VertxPojo, IKpReportInstance {
      * Setter for <code>ZDB.KP_REPORT_INSTANCE.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public KpReportInstance setMetadata(String metadata) {
+    public KpReportInstance setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

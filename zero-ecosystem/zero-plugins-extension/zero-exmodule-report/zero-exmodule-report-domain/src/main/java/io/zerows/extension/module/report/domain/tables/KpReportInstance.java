@@ -4,6 +4,10 @@
 package io.zerows.extension.module.report.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.report.domain.Keys;
 import io.zerows.extension.module.report.domain.Zdb;
 import io.zerows.extension.module.report.domain.tables.records.KpReportInstanceRecord;
@@ -103,13 +107,13 @@ public class KpReportInstance extends TableImpl<KpReportInstanceRecord> {
      * The column <code>ZDB.KP_REPORT_INSTANCE.REPORT_CONTENT</code>.
      * 「reportContent」- 报表内容
      */
-    public final TableField<KpReportInstanceRecord, String> REPORT_CONTENT = createField(DSL.name("REPORT_CONTENT"), SQLDataType.CLOB, this, "「reportContent」- 报表内容");
+    public final TableField<KpReportInstanceRecord, JsonObject> REPORT_CONTENT = createField(DSL.name("REPORT_CONTENT"), SQLDataType.CLOB, this, "「reportContent」- 报表内容", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_REPORT_INSTANCE.REPORT_DATA</code>. 「reportData」-
      * 报表最终数据
      */
-    public final TableField<KpReportInstanceRecord, String> REPORT_DATA = createField(DSL.name("REPORT_DATA"), SQLDataType.CLOB, this, "「reportData」- 报表最终数据");
+    public final TableField<KpReportInstanceRecord, JsonArray> REPORT_DATA = createField(DSL.name("REPORT_DATA"), SQLDataType.CLOB, this, "「reportData」- 报表最终数据", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.KP_REPORT_INSTANCE.REPORT_ID</code>. 「reportId」-
@@ -166,7 +170,7 @@ public class KpReportInstance extends TableImpl<KpReportInstanceRecord> {
     /**
      * The column <code>ZDB.KP_REPORT_INSTANCE.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<KpReportInstanceRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<KpReportInstanceRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.KP_REPORT_INSTANCE.VERSION</code>. 「version」- 版本号

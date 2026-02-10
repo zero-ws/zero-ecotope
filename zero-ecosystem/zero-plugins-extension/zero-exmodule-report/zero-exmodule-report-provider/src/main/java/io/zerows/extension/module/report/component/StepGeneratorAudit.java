@@ -47,7 +47,7 @@ class StepGeneratorAudit extends StepGeneratorBase {
         // metadata
         final JsonObject metadata = Ut.valueJObject(reportConfig, KName.METADATA);
         if (Ut.isNotNil(metadata)) {
-            instance.setMetadata(metadata.encode());
+            instance.setMetadata(metadata);
         }
         return Future.succeededFuture(instance);
     }
