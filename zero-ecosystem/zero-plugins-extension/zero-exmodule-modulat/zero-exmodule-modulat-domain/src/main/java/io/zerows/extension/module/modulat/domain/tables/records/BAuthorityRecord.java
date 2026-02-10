@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BAuthority;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBAuthority;
 
@@ -78,7 +80,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
     @Override
-    public BAuthorityRecord setLicAction(String value) {
+    public BAuthorityRecord setLicAction(JsonArray value) {
         set(3, value);
         return this;
     }
@@ -87,8 +89,8 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Getter for <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
     @Override
-    public String getLicAction() {
-        return (String) get(3);
+    public JsonArray getLicAction() {
+        return (JsonArray) get(3);
     }
 
     /**
@@ -96,7 +98,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * 所需权限集合
      */
     @Override
-    public BAuthorityRecord setLicPermission(String value) {
+    public BAuthorityRecord setLicPermission(JsonArray value) {
         set(4, value);
         return this;
     }
@@ -106,15 +108,15 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * 所需权限集合
      */
     @Override
-    public String getLicPermission() {
-        return (String) get(4);
+    public JsonArray getLicPermission() {
+        return (JsonArray) get(4);
     }
 
     /**
      * Setter for <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
     @Override
-    public BAuthorityRecord setLicResource(String value) {
+    public BAuthorityRecord setLicResource(JsonArray value) {
         set(5, value);
         return this;
     }
@@ -123,15 +125,15 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Getter for <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
     @Override
-    public String getLicResource() {
-        return (String) get(5);
+    public JsonArray getLicResource() {
+        return (JsonArray) get(5);
     }
 
     /**
      * Setter for <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
     @Override
-    public BAuthorityRecord setLicView(String value) {
+    public BAuthorityRecord setLicView(JsonArray value) {
         set(6, value);
         return this;
     }
@@ -140,8 +142,8 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Getter for <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
     @Override
-    public String getLicView() {
-        return (String) get(6);
+    public JsonArray getLicView() {
+        return (JsonArray) get(6);
     }
 
     /**
@@ -250,7 +252,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Setter for <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BAuthorityRecord setMetadata(String value) {
+    public BAuthorityRecord setMetadata(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -259,8 +261,8 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
      * Getter for <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(13);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -405,7 +407,7 @@ public class BAuthorityRecord extends UpdatableRecordImpl<BAuthorityRecord> impl
     /**
      * Create a detached, initialised BAuthorityRecord
      */
-    public BAuthorityRecord(String id, String blockId, String code, String licAction, String licPermission, String licResource, String licView, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public BAuthorityRecord(String id, String blockId, String code, JsonArray licAction, JsonArray licPermission, JsonArray licResource, JsonArray licView, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(BAuthority.B_AUTHORITY);
 
         setId(id);

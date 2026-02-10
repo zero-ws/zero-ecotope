@@ -4,6 +4,10 @@
 package io.zerows.extension.module.modulat.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.Keys;
 import io.zerows.extension.module.modulat.domain.Zdb;
 import io.zerows.extension.module.modulat.domain.tables.records.BAuthorityRecord;
@@ -70,23 +74,23 @@ public class BAuthority extends TableImpl<BAuthorityRecord> {
     /**
      * The column <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
-    public final TableField<BAuthorityRecord, String> LIC_ACTION = createField(DSL.name("LIC_ACTION"), SQLDataType.CLOB, this, "「licAction」- 操作编码");
+    public final TableField<BAuthorityRecord, JsonArray> LIC_ACTION = createField(DSL.name("LIC_ACTION"), SQLDataType.CLOB, this, "「licAction」- 操作编码", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_AUTHORITY.LIC_PERMISSION</code>. 「licPermission」-
      * 所需权限集合
      */
-    public final TableField<BAuthorityRecord, String> LIC_PERMISSION = createField(DSL.name("LIC_PERMISSION"), SQLDataType.CLOB, this, "「licPermission」- 所需权限集合");
+    public final TableField<BAuthorityRecord, JsonArray> LIC_PERMISSION = createField(DSL.name("LIC_PERMISSION"), SQLDataType.CLOB, this, "「licPermission」- 所需权限集合", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
-    public final TableField<BAuthorityRecord, String> LIC_RESOURCE = createField(DSL.name("LIC_RESOURCE"), SQLDataType.CLOB, this, "「licResource」- 资源编码");
+    public final TableField<BAuthorityRecord, JsonArray> LIC_RESOURCE = createField(DSL.name("LIC_RESOURCE"), SQLDataType.CLOB, this, "「licResource」- 资源编码", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
-    public final TableField<BAuthorityRecord, String> LIC_VIEW = createField(DSL.name("LIC_VIEW"), SQLDataType.CLOB, this, "「licView」- 视图集合");
+    public final TableField<BAuthorityRecord, JsonArray> LIC_VIEW = createField(DSL.name("LIC_VIEW"), SQLDataType.CLOB, this, "「licView」- 视图集合", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_AUTHORITY.TYPE</code>. 「type」- 类型
@@ -121,7 +125,7 @@ public class BAuthority extends TableImpl<BAuthorityRecord> {
     /**
      * The column <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<BAuthorityRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<BAuthorityRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_AUTHORITY.VERSION</code>. 「version」- 版本号

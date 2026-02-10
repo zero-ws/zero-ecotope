@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -50,44 +52,44 @@ public interface IBAuthority extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
-    public IBAuthority setLicAction(String value);
+    public IBAuthority setLicAction(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_AUTHORITY.LIC_ACTION</code>. 「licAction」- 操作编码
      */
-    public String getLicAction();
+    public JsonArray getLicAction();
 
     /**
      * Setter for <code>ZDB.B_AUTHORITY.LIC_PERMISSION</code>. 「licPermission」-
      * 所需权限集合
      */
-    public IBAuthority setLicPermission(String value);
+    public IBAuthority setLicPermission(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_AUTHORITY.LIC_PERMISSION</code>. 「licPermission」-
      * 所需权限集合
      */
-    public String getLicPermission();
+    public JsonArray getLicPermission();
 
     /**
      * Setter for <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
-    public IBAuthority setLicResource(String value);
+    public IBAuthority setLicResource(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_AUTHORITY.LIC_RESOURCE</code>. 「licResource」- 资源编码
      */
-    public String getLicResource();
+    public JsonArray getLicResource();
 
     /**
      * Setter for <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
-    public IBAuthority setLicView(String value);
+    public IBAuthority setLicView(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_AUTHORITY.LIC_VIEW</code>. 「licView」- 视图集合
      */
-    public String getLicView();
+    public JsonArray getLicView();
 
     /**
      * Setter for <code>ZDB.B_AUTHORITY.TYPE</code>. 「type」- 类型
@@ -152,12 +154,12 @@ public interface IBAuthority extends VertxPojo, Serializable {
     /**
      * Setter for <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 元配置
      */
-    public IBAuthority setMetadata(String value);
+    public IBAuthority setMetadata(JsonObject value);
 
     /**
      * Getter for <code>ZDB.B_AUTHORITY.METADATA</code>. 「metadata」- 元配置
      */
-    public String getMetadata();
+    public JsonObject getMetadata();
 
     /**
      * Setter for <code>ZDB.B_AUTHORITY.VERSION</code>. 「version」- 版本号
@@ -230,17 +232,17 @@ public interface IBAuthority extends VertxPojo, Serializable {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
                 setOrThrow(this::setBlockId,json::getString,"BLOCK_ID","java.lang.String");
                 setOrThrow(this::setCode,json::getString,"CODE","java.lang.String");
-                setOrThrow(this::setLicAction,json::getString,"LIC_ACTION","java.lang.String");
-                setOrThrow(this::setLicPermission,json::getString,"LIC_PERMISSION","java.lang.String");
-                setOrThrow(this::setLicResource,json::getString,"LIC_RESOURCE","java.lang.String");
-                setOrThrow(this::setLicView,json::getString,"LIC_VIEW","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_ACTION!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_PERMISSION!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_RESOURCE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_VIEW!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
                 setOrThrow(this::setActive,json::getBoolean,"ACTIVE","java.lang.Boolean");
                 setOrThrow(this::setLanguage,json::getString,"LANGUAGE","java.lang.String");
-                setOrThrow(this::setMetadata,json::getString,"METADATA","java.lang.String");
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 setOrThrow(this::setVersion,json::getString,"VERSION","java.lang.String");
                 setOrThrow(this::setCreatedAt,key -> {String s = json.getString(key); return s==null?null:java.time.LocalDateTime.parse(s);},"CREATED_AT","java.time.LocalDateTime");
                 setOrThrow(this::setCreatedBy,json::getString,"CREATED_BY","java.lang.String");
@@ -256,17 +258,17 @@ public interface IBAuthority extends VertxPojo, Serializable {
                 json.put("ID",getId());
                 json.put("BLOCK_ID",getBlockId());
                 json.put("CODE",getCode());
-                json.put("LIC_ACTION",getLicAction());
-                json.put("LIC_PERMISSION",getLicPermission());
-                json.put("LIC_RESOURCE",getLicResource());
-                json.put("LIC_VIEW",getLicView());
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_ACTION!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_PERMISSION!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_RESOURCE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column LIC_VIEW!
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
                 json.put("ACTIVE",getActive());
                 json.put("LANGUAGE",getLanguage());
-                json.put("METADATA",getMetadata());
+                // Omitting unrecognized type io.vertx.core.json.JsonObject for column METADATA!
                 json.put("VERSION",getVersion());
                 json.put("CREATED_AT",getCreatedAt()==null?null:getCreatedAt().toString());
                 json.put("CREATED_BY",getCreatedBy());

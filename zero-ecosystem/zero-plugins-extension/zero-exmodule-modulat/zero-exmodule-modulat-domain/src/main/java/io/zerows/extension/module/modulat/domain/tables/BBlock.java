@@ -4,6 +4,10 @@
 package io.zerows.extension.module.modulat.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.Keys;
 import io.zerows.extension.module.modulat.domain.Zdb;
 import io.zerows.extension.module.modulat.domain.tables.records.BBlockRecord;
@@ -76,12 +80,12 @@ public class BBlock extends TableImpl<BBlockRecord> {
      * The column <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
      * 允许的模型标识
      */
-    public final TableField<BBlockRecord, String> LIC_IDENTIFIER = createField(DSL.name("LIC_IDENTIFIER"), SQLDataType.CLOB, this, "「licIdentifier」- 允许的模型标识");
+    public final TableField<BBlockRecord, JsonArray> LIC_IDENTIFIER = createField(DSL.name("LIC_IDENTIFIER"), SQLDataType.CLOB, this, "「licIdentifier」- 允许的模型标识", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
      */
-    public final TableField<BBlockRecord, String> LIC_MENU = createField(DSL.name("LIC_MENU"), SQLDataType.CLOB, this, "「licMenu」- 该Block包含");
+    public final TableField<BBlockRecord, JsonArray> LIC_MENU = createField(DSL.name("LIC_MENU"), SQLDataType.CLOB, this, "「licMenu」- 该Block包含", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_BLOCK.NAME</code>. 「name」- 名称
@@ -126,12 +130,12 @@ public class BBlock extends TableImpl<BBlockRecord> {
     /**
      * The column <code>ZDB.B_BLOCK.UI_CONFIG</code>. 「uiConfig」- 子模块核心配置
      */
-    public final TableField<BBlockRecord, String> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- 子模块核心配置");
+    public final TableField<BBlockRecord, JsonObject> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- 子模块核心配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_BLOCK.UI_CONTENT</code>. 「uiContent」- 配置数据
      */
-    public final TableField<BBlockRecord, String> UI_CONTENT = createField(DSL.name("UI_CONTENT"), SQLDataType.CLOB, this, "「uiContent」- 配置数据");
+    public final TableField<BBlockRecord, JsonObject> UI_CONTENT = createField(DSL.name("UI_CONTENT"), SQLDataType.CLOB, this, "「uiContent」- 配置数据", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_BLOCK.UI_ICON</code>. 「uiIcon」- 子模块图标
@@ -146,7 +150,7 @@ public class BBlock extends TableImpl<BBlockRecord> {
     /**
      * The column <code>ZDB.B_BLOCK.UI_STYLE</code>. 「uiStyle」- 子模块风格
      */
-    public final TableField<BBlockRecord, String> UI_STYLE = createField(DSL.name("UI_STYLE"), SQLDataType.CLOB(65535), this, "「uiStyle」- 子模块风格");
+    public final TableField<BBlockRecord, JsonObject> UI_STYLE = createField(DSL.name("UI_STYLE"), SQLDataType.CLOB(65535), this, "「uiStyle」- 子模块风格", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
@@ -176,7 +180,7 @@ public class BBlock extends TableImpl<BBlockRecord> {
     /**
      * The column <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<BBlockRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<BBlockRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号

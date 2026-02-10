@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BBlock;
 import io.zerows.extension.module.modulat.domain.tables.records.BBlockRecord;
 
@@ -86,7 +88,7 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
      * Find records that have <code>LIC_IDENTIFIER IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByLicIdentifier(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByLicIdentifier(Collection<JsonArray> values) {
                 return findManyByCondition(BBlock.B_BLOCK.LIC_IDENTIFIER.in(values));
         }
 
@@ -94,14 +96,14 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
      * Find records that have <code>LIC_IDENTIFIER IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByLicIdentifier(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByLicIdentifier(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BBlock.B_BLOCK.LIC_IDENTIFIER.in(values),limit);
         }
 
         /**
      * Find records that have <code>LIC_MENU IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByLicMenu(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByLicMenu(Collection<JsonArray> values) {
                 return findManyByCondition(BBlock.B_BLOCK.LIC_MENU.in(values));
         }
 
@@ -109,7 +111,7 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
      * Find records that have <code>LIC_MENU IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByLicMenu(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByLicMenu(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BBlock.B_BLOCK.LIC_MENU.in(values),limit);
         }
 
@@ -238,7 +240,7 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
         /**
      * Find records that have <code>UI_CONFIG IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiConfig(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiConfig(Collection<JsonObject> values) {
                 return findManyByCondition(BBlock.B_BLOCK.UI_CONFIG.in(values));
         }
 
@@ -246,14 +248,14 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
      * Find records that have <code>UI_CONFIG IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiConfig(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiConfig(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(BBlock.B_BLOCK.UI_CONFIG.in(values),limit);
         }
 
         /**
      * Find records that have <code>UI_CONTENT IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiContent(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiContent(Collection<JsonObject> values) {
                 return findManyByCondition(BBlock.B_BLOCK.UI_CONTENT.in(values));
         }
 
@@ -261,7 +263,7 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
      * Find records that have <code>UI_CONTENT IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiContent(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiContent(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(BBlock.B_BLOCK.UI_CONTENT.in(values),limit);
         }
 
@@ -298,7 +300,7 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
         /**
      * Find records that have <code>UI_STYLE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiStyle(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiStyle(Collection<JsonObject> values) {
                 return findManyByCondition(BBlock.B_BLOCK.UI_STYLE.in(values));
         }
 
@@ -306,7 +308,7 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
      * Find records that have <code>UI_STYLE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiStyle(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiStyle(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(BBlock.B_BLOCK.UI_STYLE.in(values),limit);
         }
 
@@ -388,7 +390,7 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(BBlock.B_BLOCK.METADATA.in(values));
         }
 
@@ -396,7 +398,7 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(BBlock.B_BLOCK.METADATA.in(values),limit);
         }
 

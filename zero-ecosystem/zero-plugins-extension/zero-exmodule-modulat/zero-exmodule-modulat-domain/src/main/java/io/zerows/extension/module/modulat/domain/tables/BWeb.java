@@ -4,6 +4,10 @@
 package io.zerows.extension.module.modulat.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.Keys;
 import io.zerows.extension.module.modulat.domain.Zdb;
 import io.zerows.extension.module.modulat.domain.tables.records.BWebRecord;
@@ -70,22 +74,22 @@ public class BWeb extends TableImpl<BWebRecord> {
     /**
      * The column <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
-    public final TableField<BWebRecord, String> LIC_CONTENT = createField(DSL.name("LIC_CONTENT"), SQLDataType.CLOB, this, "「licContent」- 内容编码");
+    public final TableField<BWebRecord, JsonArray> LIC_CONTENT = createField(DSL.name("LIC_CONTENT"), SQLDataType.CLOB, this, "「licContent」- 内容编码", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_WEB.LIC_MODULE</code>. 「licModule」- 单独指定
      */
-    public final TableField<BWebRecord, String> LIC_MODULE = createField(DSL.name("LIC_MODULE"), SQLDataType.CLOB, this, "「licModule」- 单独指定");
+    public final TableField<BWebRecord, JsonArray> LIC_MODULE = createField(DSL.name("LIC_MODULE"), SQLDataType.CLOB, this, "「licModule」- 单独指定", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
-    public final TableField<BWebRecord, String> LIC_OP = createField(DSL.name("LIC_OP"), SQLDataType.CLOB, this, "「licOp」- 界面操作");
+    public final TableField<BWebRecord, JsonArray> LIC_OP = createField(DSL.name("LIC_OP"), SQLDataType.CLOB, this, "「licOp」- 界面操作", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_WEB.LIC_TPL</code>. 「licTpl」- PAGE
      */
-    public final TableField<BWebRecord, String> LIC_TPL = createField(DSL.name("LIC_TPL"), SQLDataType.CLOB, this, "「licTpl」- PAGE");
+    public final TableField<BWebRecord, JsonArray> LIC_TPL = createField(DSL.name("LIC_TPL"), SQLDataType.CLOB, this, "「licTpl」- PAGE", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_WEB.TYPE</code>. 「type」- 类型
@@ -120,7 +124,7 @@ public class BWeb extends TableImpl<BWebRecord> {
     /**
      * The column <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<BWebRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<BWebRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_WEB.VERSION</code>. 「version」- 版本号

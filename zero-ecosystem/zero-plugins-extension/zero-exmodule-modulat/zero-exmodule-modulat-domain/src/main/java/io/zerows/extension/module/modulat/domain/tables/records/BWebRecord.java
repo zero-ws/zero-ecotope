@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BWeb;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBWeb;
 
@@ -78,7 +80,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
     @Override
-    public BWebRecord setLicContent(String value) {
+    public BWebRecord setLicContent(JsonArray value) {
         set(3, value);
         return this;
     }
@@ -87,15 +89,15 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Getter for <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
     @Override
-    public String getLicContent() {
-        return (String) get(3);
+    public JsonArray getLicContent() {
+        return (JsonArray) get(3);
     }
 
     /**
      * Setter for <code>ZDB.B_WEB.LIC_MODULE</code>. 「licModule」- 单独指定
      */
     @Override
-    public BWebRecord setLicModule(String value) {
+    public BWebRecord setLicModule(JsonArray value) {
         set(4, value);
         return this;
     }
@@ -104,15 +106,15 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Getter for <code>ZDB.B_WEB.LIC_MODULE</code>. 「licModule」- 单独指定
      */
     @Override
-    public String getLicModule() {
-        return (String) get(4);
+    public JsonArray getLicModule() {
+        return (JsonArray) get(4);
     }
 
     /**
      * Setter for <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
     @Override
-    public BWebRecord setLicOp(String value) {
+    public BWebRecord setLicOp(JsonArray value) {
         set(5, value);
         return this;
     }
@@ -121,15 +123,15 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Getter for <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
     @Override
-    public String getLicOp() {
-        return (String) get(5);
+    public JsonArray getLicOp() {
+        return (JsonArray) get(5);
     }
 
     /**
      * Setter for <code>ZDB.B_WEB.LIC_TPL</code>. 「licTpl」- PAGE
      */
     @Override
-    public BWebRecord setLicTpl(String value) {
+    public BWebRecord setLicTpl(JsonArray value) {
         set(6, value);
         return this;
     }
@@ -138,8 +140,8 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Getter for <code>ZDB.B_WEB.LIC_TPL</code>. 「licTpl」- PAGE
      */
     @Override
-    public String getLicTpl() {
-        return (String) get(6);
+    public JsonArray getLicTpl() {
+        return (JsonArray) get(6);
     }
 
     /**
@@ -248,7 +250,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Setter for <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BWebRecord setMetadata(String value) {
+    public BWebRecord setMetadata(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -257,8 +259,8 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
      * Getter for <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(13);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -403,7 +405,7 @@ public class BWebRecord extends UpdatableRecordImpl<BWebRecord> implements Vertx
     /**
      * Create a detached, initialised BWebRecord
      */
-    public BWebRecord(String id, String blockId, String code, String licContent, String licModule, String licOp, String licTpl, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public BWebRecord(String id, String blockId, String code, JsonArray licContent, JsonArray licModule, JsonArray licOp, JsonArray licTpl, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(BWeb.B_WEB);
 
         setId(id);

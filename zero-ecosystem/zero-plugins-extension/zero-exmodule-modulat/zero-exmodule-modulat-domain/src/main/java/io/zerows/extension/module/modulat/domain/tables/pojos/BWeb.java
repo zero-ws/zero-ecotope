@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBWeb;
 
 import java.time.LocalDateTime;
@@ -22,17 +24,17 @@ public class BWeb implements VertxPojo, IBWeb {
     private String id;
     private String blockId;
     private String code;
-    private String licContent;
-    private String licModule;
-    private String licOp;
-    private String licTpl;
+    private JsonArray licContent;
+    private JsonArray licModule;
+    private JsonArray licOp;
+    private JsonArray licTpl;
     private String type;
     private String sigma;
     private String tenantId;
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -67,17 +69,17 @@ public class BWeb implements VertxPojo, IBWeb {
         String id,
         String blockId,
         String code,
-        String licContent,
-        String licModule,
-        String licOp,
-        String licTpl,
+        JsonArray licContent,
+        JsonArray licModule,
+        JsonArray licOp,
+        JsonArray licTpl,
         String type,
         String sigma,
         String tenantId,
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -165,7 +167,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Getter for <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
     @Override
-    public String getLicContent() {
+    public JsonArray getLicContent() {
         return this.licContent;
     }
 
@@ -173,7 +175,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.LIC_CONTENT</code>. 「licContent」- 内容编码
      */
     @Override
-    public BWeb setLicContent(String licContent) {
+    public BWeb setLicContent(JsonArray licContent) {
         this.licContent = licContent;
         return this;
     }
@@ -182,7 +184,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Getter for <code>ZDB.B_WEB.LIC_MODULE</code>. 「licModule」- 单独指定
      */
     @Override
-    public String getLicModule() {
+    public JsonArray getLicModule() {
         return this.licModule;
     }
 
@@ -190,7 +192,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.LIC_MODULE</code>. 「licModule」- 单独指定
      */
     @Override
-    public BWeb setLicModule(String licModule) {
+    public BWeb setLicModule(JsonArray licModule) {
         this.licModule = licModule;
         return this;
     }
@@ -199,7 +201,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Getter for <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
     @Override
-    public String getLicOp() {
+    public JsonArray getLicOp() {
         return this.licOp;
     }
 
@@ -207,7 +209,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.LIC_OP</code>. 「licOp」- 界面操作
      */
     @Override
-    public BWeb setLicOp(String licOp) {
+    public BWeb setLicOp(JsonArray licOp) {
         this.licOp = licOp;
         return this;
     }
@@ -216,7 +218,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Getter for <code>ZDB.B_WEB.LIC_TPL</code>. 「licTpl」- PAGE
      */
     @Override
-    public String getLicTpl() {
+    public JsonArray getLicTpl() {
         return this.licTpl;
     }
 
@@ -224,7 +226,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.LIC_TPL</code>. 「licTpl」- PAGE
      */
     @Override
-    public BWeb setLicTpl(String licTpl) {
+    public BWeb setLicTpl(JsonArray licTpl) {
         this.licTpl = licTpl;
         return this;
     }
@@ -335,7 +337,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Getter for <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -343,7 +345,7 @@ public class BWeb implements VertxPojo, IBWeb {
      * Setter for <code>ZDB.B_WEB.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BWeb setMetadata(String metadata) {
+    public BWeb setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

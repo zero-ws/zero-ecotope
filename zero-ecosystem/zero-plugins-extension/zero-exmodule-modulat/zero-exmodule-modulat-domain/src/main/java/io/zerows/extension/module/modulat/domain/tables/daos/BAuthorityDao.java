@@ -5,6 +5,8 @@ package io.zerows.extension.module.modulat.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BAuthority;
 import io.zerows.extension.module.modulat.domain.tables.records.BAuthorityRecord;
 
@@ -70,7 +72,7 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
         /**
      * Find records that have <code>LIC_ACTION IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicAction(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicAction(Collection<JsonArray> values) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.LIC_ACTION.in(values));
         }
 
@@ -78,7 +80,7 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
      * Find records that have <code>LIC_ACTION IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicAction(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicAction(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.LIC_ACTION.in(values),limit);
         }
 
@@ -86,7 +88,7 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
      * Find records that have <code>LIC_PERMISSION IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicPermission(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicPermission(Collection<JsonArray> values) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.LIC_PERMISSION.in(values));
         }
 
@@ -94,7 +96,7 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
      * Find records that have <code>LIC_PERMISSION IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicPermission(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicPermission(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.LIC_PERMISSION.in(values),limit);
         }
 
@@ -102,7 +104,7 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
      * Find records that have <code>LIC_RESOURCE IN (values)</code>
      * asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicResource(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicResource(Collection<JsonArray> values) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.LIC_RESOURCE.in(values));
         }
 
@@ -110,14 +112,14 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
      * Find records that have <code>LIC_RESOURCE IN (values)</code>
      * asynchronously limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicResource(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicResource(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.LIC_RESOURCE.in(values),limit);
         }
 
         /**
      * Find records that have <code>LIC_VIEW IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicView(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicView(Collection<JsonArray> values) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.LIC_VIEW.in(values));
         }
 
@@ -125,7 +127,7 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
      * Find records that have <code>LIC_VIEW IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicView(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByLicView(Collection<JsonArray> values, int limit) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.LIC_VIEW.in(values),limit);
         }
 
@@ -222,7 +224,7 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
         /**
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByMetadata(Collection<String> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByMetadata(Collection<JsonObject> values) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.METADATA.in(values));
         }
 
@@ -230,7 +232,7 @@ public class BAuthorityDao extends AbstractVertxDAO<BAuthorityRecord, io.zerows.
      * Find records that have <code>METADATA IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByMetadata(Collection<String> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BAuthority>> findManyByMetadata(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(BAuthority.B_AUTHORITY.METADATA.in(values),limit);
         }
 

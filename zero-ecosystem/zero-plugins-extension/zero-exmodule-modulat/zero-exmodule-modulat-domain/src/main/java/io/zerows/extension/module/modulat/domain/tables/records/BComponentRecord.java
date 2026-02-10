@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BComponent;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBComponent;
 
@@ -252,7 +253,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Setter for <code>ZDB.B_COMPONENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BComponentRecord setMetadata(String value) {
+    public BComponentRecord setMetadata(JsonObject value) {
         set(13, value);
         return this;
     }
@@ -261,8 +262,8 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
      * Getter for <code>ZDB.B_COMPONENT.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
-        return (String) get(13);
+    public JsonObject getMetadata() {
+        return (JsonObject) get(13);
     }
 
     /**
@@ -407,7 +408,7 @@ public class BComponentRecord extends UpdatableRecordImpl<BComponentRecord> impl
     /**
      * Create a detached, initialised BComponentRecord
      */
-    public BComponentRecord(String id, String blockId, Boolean integrated, String mavenAid, String mavenGid, String specImpl, String specInterface, String type, String sigma, String tenantId, String appId, Boolean active, String language, String metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public BComponentRecord(String id, String blockId, Boolean integrated, String mavenAid, String mavenGid, String specImpl, String specInterface, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(BComponent.B_COMPONENT);
 
         setId(id);

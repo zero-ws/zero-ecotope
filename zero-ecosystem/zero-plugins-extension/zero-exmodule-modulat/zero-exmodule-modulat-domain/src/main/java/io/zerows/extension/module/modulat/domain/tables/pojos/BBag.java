@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBBag;
 
 import java.time.LocalDateTime;
@@ -26,17 +27,17 @@ public class BBag implements VertxPojo, IBBag {
     private String nameAbbr;
     private String nameFull;
     private String parentId;
-    private String uiConfig;
+    private JsonObject uiConfig;
     private String uiIcon;
     private Long uiSort;
-    private String uiStyle;
+    private JsonObject uiStyle;
     private String type;
     private String sigma;
     private String tenantId;
     private String appId;
     private Boolean active;
     private String language;
-    private String metadata;
+    private JsonObject metadata;
     private String version;
     private LocalDateTime createdAt;
     private String createdBy;
@@ -79,17 +80,17 @@ public class BBag implements VertxPojo, IBBag {
         String nameAbbr,
         String nameFull,
         String parentId,
-        String uiConfig,
+        JsonObject uiConfig,
         String uiIcon,
         Long uiSort,
-        String uiStyle,
+        JsonObject uiStyle,
         String type,
         String sigma,
         String tenantId,
         String appId,
         Boolean active,
         String language,
-        String metadata,
+        JsonObject metadata,
         String version,
         LocalDateTime createdAt,
         String createdBy,
@@ -249,7 +250,7 @@ public class BBag implements VertxPojo, IBBag {
      * Getter for <code>ZDB.B_BAG.UI_CONFIG</code>. 「uiConfig」- 模块核心配置
      */
     @Override
-    public String getUiConfig() {
+    public JsonObject getUiConfig() {
         return this.uiConfig;
     }
 
@@ -257,7 +258,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.UI_CONFIG</code>. 「uiConfig」- 模块核心配置
      */
     @Override
-    public BBag setUiConfig(String uiConfig) {
+    public BBag setUiConfig(JsonObject uiConfig) {
         this.uiConfig = uiConfig;
         return this;
     }
@@ -300,7 +301,7 @@ public class BBag implements VertxPojo, IBBag {
      * Getter for <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
     @Override
-    public String getUiStyle() {
+    public JsonObject getUiStyle() {
         return this.uiStyle;
     }
 
@@ -308,7 +309,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
     @Override
-    public BBag setUiStyle(String uiStyle) {
+    public BBag setUiStyle(JsonObject uiStyle) {
         this.uiStyle = uiStyle;
         return this;
     }
@@ -419,7 +420,7 @@ public class BBag implements VertxPojo, IBBag {
      * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public String getMetadata() {
+    public JsonObject getMetadata() {
         return this.metadata;
     }
 
@@ -427,7 +428,7 @@ public class BBag implements VertxPojo, IBBag {
      * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
      */
     @Override
-    public BBag setMetadata(String metadata) {
+    public BBag setMetadata(JsonObject metadata) {
         this.metadata = metadata;
         return this;
     }

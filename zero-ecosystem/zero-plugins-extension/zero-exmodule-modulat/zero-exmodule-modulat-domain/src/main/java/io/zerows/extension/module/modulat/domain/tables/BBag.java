@@ -4,6 +4,8 @@
 package io.zerows.extension.module.modulat.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.Keys;
 import io.zerows.extension.module.modulat.domain.Zdb;
 import io.zerows.extension.module.modulat.domain.tables.records.BBagRecord;
@@ -90,7 +92,7 @@ public class BBag extends TableImpl<BBagRecord> {
     /**
      * The column <code>ZDB.B_BAG.UI_CONFIG</code>. 「uiConfig」- 模块核心配置
      */
-    public final TableField<BBagRecord, String> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- 模块核心配置");
+    public final TableField<BBagRecord, JsonObject> UI_CONFIG = createField(DSL.name("UI_CONFIG"), SQLDataType.CLOB, this, "「uiConfig」- 模块核心配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_BAG.UI_ICON</code>. 「uiIcon」- 模块图标
@@ -105,7 +107,7 @@ public class BBag extends TableImpl<BBagRecord> {
     /**
      * The column <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
-    public final TableField<BBagRecord, String> UI_STYLE = createField(DSL.name("UI_STYLE"), SQLDataType.CLOB(65535), this, "「uiStyle」- 模块风格");
+    public final TableField<BBagRecord, JsonObject> UI_STYLE = createField(DSL.name("UI_STYLE"), SQLDataType.CLOB(65535), this, "「uiStyle」- 模块风格", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_BAG.TYPE</code>. 「type」- 类型
@@ -140,7 +142,7 @@ public class BBag extends TableImpl<BBagRecord> {
     /**
      * The column <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
      */
-    public final TableField<BBagRecord, String> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置");
+    public final TableField<BBagRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
 
     /**
      * The column <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
