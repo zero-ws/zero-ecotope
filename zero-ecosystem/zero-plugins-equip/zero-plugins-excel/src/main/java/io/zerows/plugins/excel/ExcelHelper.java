@@ -105,6 +105,15 @@ class ExcelHelper {
             .map(ExExpr.of()::parse)
             .forEach(dataArray::add);
 
+        if (Objects.isNull(this.tenant)) {
+            /*
+             * TENANT @
+             * 若未配置 init/oob/environment.json
+             * 则下边规则都跳过。
+             */
+            return Future.succeededFuture(dataArray);
+        }
+
         /* dictionary for static part */
         return DataTaker.ofStatic(this.tenant).extract(dataArray, tableName)
             /* dictionary for dynamic part */
@@ -206,9 +215,17 @@ class ExcelHelper {
             /* Bind current directory for ExTable to support expression cell syntax */
             dataSet.forEach(table -> table.setDirectory(exWorkbook.getDirectory()));
 
-
-            final ExDataApply apply = ExDataApply.of(this.tenant);
-            apply.applyData(dataSet);
+            /*
+             * TENANT @
+             * 特殊导入处理，默认位置
+             * src/main/resources/
+             *                    init/oob/environment.json
+             * 或者位于 vertx.yml 中的 excel 配置
+             */
+            if (Objects.nonNull(this.tenant)) {
+                final ExDataApply apply = ExDataApply.of(this.tenant);
+                apply.applyData(dataSet);
+            }
 
 
             sheets.addAll(dataSet);
