@@ -44,6 +44,14 @@ public class SISDirectoryActor extends MDModuleActor {
     @Override
     protected Future<Boolean> startAsync(final HAmbient ambient, final Vertx vertxRef) {
         final AtConfig config = this.manager().config();
+        
+        final boolean disabled = Ut.isNil(config.getFileIntegration());
+        if (disabled) {
+            if (IS_DOC.getAndSet(Boolean.FALSE)) {
+                log.info("{} 文档平台已禁用 Document Platform Disabled !!", AtConstant.K_PREFIX);
+            }
+            return Future.succeededFuture(Boolean.TRUE);
+        }
 
         /* 网盘配置 */
         log.info("{} 本地路径：\"{}\" @ type = {}, 目录类型：{}", KeConstant.K_PREFIX_STORE,
@@ -70,13 +78,6 @@ public class SISDirectoryActor extends MDModuleActor {
     }
 
     private Future<Boolean> startDocAsync(final HArk v, final AtConfig config) {
-        final boolean disabled = Ut.isNil(config.getFileIntegration());
-        if (disabled) {
-            if (IS_DOC.getAndSet(Boolean.FALSE)) {
-                log.info("{} 文档平台已禁用 Document Platform Disabled !!", AtConstant.K_PREFIX);
-            }
-            return Future.succeededFuture(Boolean.TRUE);
-        }
         // 此处提前调用 initialize 方法，此方法保证无副作用的多次调用即可
         final DocBStub docStub = PLUGIN.createSingleton(DocBuilder.class);
         // Here mapApp function extract `id`
