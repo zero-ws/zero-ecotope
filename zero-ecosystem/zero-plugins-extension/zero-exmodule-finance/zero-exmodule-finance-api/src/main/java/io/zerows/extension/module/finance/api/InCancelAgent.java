@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -32,5 +33,6 @@ public interface InCancelAgent {
     @PUT
     @Path("/bill-item/cancel/:type")
     @Address(Addr.BillItem.UP_CANCEL)
+    @OpenApi
     JsonObject upCancel(@PathParam(KName.TYPE) String type, @BodyParam JsonObject data);
 }

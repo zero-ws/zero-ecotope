@@ -1,5 +1,6 @@
 package io.zerows.extension.module.modulat.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -23,6 +24,7 @@ public interface BagAgent {
     @GET
     @Path("/bag")
     @Address(Addr.Module.FETCH)
+    @OpenApi
     JsonArray bag(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId);
 
     /*
@@ -33,6 +35,7 @@ public interface BagAgent {
     @GET
     @Path("/bag/extension")
     @Address(Addr.Module.BY_EXTENSION)
+    @OpenApi
     JsonArray bagByApp(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId);
 
     /*
@@ -44,6 +47,7 @@ public interface BagAgent {
     @POST
     @Path("/block/process")
     @Address(Addr.Module.UP_PROCESS)
+    @OpenApi
     Boolean process(@BodyParam JsonObject body);
 
     /*
@@ -57,5 +61,6 @@ public interface BagAgent {
     @POST
     @Path("/block/authorize")
     @Address(Addr.Module.UP_AUTHORIZE)
+    @OpenApi
     Boolean authorize(@BodyParam JsonObject body);
 }

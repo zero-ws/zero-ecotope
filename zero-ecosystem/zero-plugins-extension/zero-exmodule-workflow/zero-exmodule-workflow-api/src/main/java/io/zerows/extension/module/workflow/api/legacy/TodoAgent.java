@@ -1,5 +1,6 @@
 package io.zerows.extension.module.workflow.api.legacy;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -17,5 +18,6 @@ public interface TodoAgent {
     @Path("/todo/:key")
     @GET
     @Address(HighWay.Todo.BY_ID)
+    @OpenApi
     JsonObject byId(@PathParam("key") String key);
 }

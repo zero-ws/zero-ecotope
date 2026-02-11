@@ -1,5 +1,6 @@
 package io.zerows.extension.module.integration.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -26,11 +27,13 @@ public interface MessageAgent {
     @Path("/message/type/:type")
     @GET
     @Address(Addr.Message.FETCH_TYPED)
+    @OpenApi
     JsonArray fetchTyped(@PathParam(KName.TYPE) String type);
 
     @Path("/message/batch/:status")
     @PUT
     @Address(Addr.Message.UPDATE_STATUS)
+    @OpenApi
     JsonArray readMessage(@PathParam(KName.STATUS) String status,
                           @BodyParam JsonArray keys);
 
@@ -59,11 +62,13 @@ public interface MessageAgent {
     @Path("/message")
     @POST
     @Address(Addr.Message.ADD)
+    @OpenApi
     JsonObject addMessage(@BodyParam JsonObject data);
 
 
     @Path("/message/batch")
     @DELETE
     @Address(Addr.Message.DELETE_BATCH)
+    @OpenApi
     JsonObject deleteMessage(@BodyParam JsonArray keys);
 }

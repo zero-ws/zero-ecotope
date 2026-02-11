@@ -89,9 +89,9 @@ public class BuilderOfMSUser extends AbstractBuilder<MSUser> {
 
             // Scope
             R2MO.vScope(entity,
-                user::getId,
                 user::getAppId,
-                user::getTenantId
+                user::getTenantId,
+                user::getId
             );
 
             // Audit

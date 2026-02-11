@@ -257,11 +257,11 @@ public final class Ux extends _Where {
 
     // 暴露异步方法
     public static <T> Future<T> waitAsync(Supplier<T> executor) {
-        return Task.async(executor);
+        return WaitTask.async(executor);
     }
 
     public static <T> Future<T> waitVirtual(Supplier<T> executor) {
-        return Task.asyncVirtual(executor);
+        return WaitTask.asyncVirtual(executor);
     }
 
     public static <T> void waitVirtualAt(Actuator actuator) {
@@ -269,6 +269,15 @@ public final class Ux extends _Where {
             Fn.jvmAt(actuator::exec);
             return null;
         });
+    }
+
+    // 带 DI 的 SPI 查找，业务层必须
+    public static <T> T waitService(final Class<T> interfaceCls, final String name) {
+        return WaitHPI.waitService(interfaceCls, name);
+    }
+
+    public static <T> T waitService(final Class<T> interfaceCls) {
+        return WaitHPI.waitService(interfaceCls, null);
     }
 
     // NEW END -------------------------------------------------

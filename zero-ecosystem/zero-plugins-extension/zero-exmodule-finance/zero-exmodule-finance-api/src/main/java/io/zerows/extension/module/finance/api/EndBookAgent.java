@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -25,5 +26,6 @@ public interface EndBookAgent {
     @PUT
     @Path("/settle/book/finalize")
     @Address(Addr.Settle.UP_BOOK)
+    @OpenApi
     JsonObject finalizeBook(@BodyParam JsonArray books);
 }

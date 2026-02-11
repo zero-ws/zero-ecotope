@@ -23,7 +23,7 @@ public class Amalgam {
     public static void logGroup(final Class<?> clazz,
                                 final List<ProfileRole> roles) {
         final Logger logger = LoggerFactory.getLogger(clazz);
-        logger.info("{} 组选择 {} / 数量 {}", ScConstant.K_PREFIX, Ut.fromJoin(getGroups(roles)), String.valueOf(roles.size()));
+        logger.debug("{} 组选择 {} / 数量 {}", ScConstant.K_PREFIX, Ut.fromJoin(getGroups(roles)), String.valueOf(roles.size()));
     }
 
     public static List<ProfileRole> parent(final List<ProfileRole> roles,

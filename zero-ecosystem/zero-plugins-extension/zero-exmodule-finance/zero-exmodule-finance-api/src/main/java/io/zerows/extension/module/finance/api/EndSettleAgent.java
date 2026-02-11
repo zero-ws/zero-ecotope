@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -45,6 +46,7 @@ public interface EndSettleAgent {
     @Path("/trans/direct")
     @POST
     @Address(Addr.Trans.START_DIRECT)
+    @OpenApi
     JsonObject directAsync(@BodyParam JsonObject body);
 
     /**
@@ -60,6 +62,7 @@ public interface EndSettleAgent {
     @Path("/trans/delay")
     @POST
     @Address(Addr.Trans.START_DELAY)
+    @OpenApi
     JsonObject delayAsync(@BodyParam JsonObject body);
 
 
@@ -77,5 +80,6 @@ public interface EndSettleAgent {
     @Path("/trans/debt")
     @POST
     @Address(Addr.Trans.START_DEBT)
+    @OpenApi
     JsonObject debtAsync(@BodyParam JsonObject body);
 }

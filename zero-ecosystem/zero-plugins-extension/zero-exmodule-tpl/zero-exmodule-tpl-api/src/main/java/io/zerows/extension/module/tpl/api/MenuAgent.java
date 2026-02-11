@@ -1,5 +1,6 @@
 package io.zerows.extension.module.tpl.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -23,6 +24,7 @@ public interface MenuAgent {
     @POST
     @Path("/my/menu/fetch")
     @Address(Addr.Menu.MY_FETCH)
+    @OpenApi
     JsonArray fetchMy(@BodyParam JsonObject body);
 
     /*
@@ -54,5 +56,6 @@ public interface MenuAgent {
     @POST
     @Path("/my/menu/save")
     @Address(Addr.Menu.MY_SAVE)
+    @OpenApi
     JsonArray saveMy(@BodyParam JsonObject body);
 }

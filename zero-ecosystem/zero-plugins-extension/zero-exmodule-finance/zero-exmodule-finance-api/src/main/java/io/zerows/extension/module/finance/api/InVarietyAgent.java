@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -28,6 +29,7 @@ public interface InVarietyAgent {
     @PUT
     @Path("/bill-item/split/:key")
     @Address(Addr.BillItem.UP_SPLIT)
+    @OpenApi
     JsonObject upSplit(@PathParam(KName.KEY) String key, @BodyParam JsonObject data);
 
     /**
@@ -41,6 +43,7 @@ public interface InVarietyAgent {
     @Path("/bill-item/revert/:key")
     @Address(Addr.BillItem.UP_REVERT)
     @Off(address = Addr.Notify.REVERSAL_ORDER)
+    @OpenApi
     JsonObject upRevert(@PathParam(KName.KEY) String key, @BodyParam JsonObject data);
 
     /**
@@ -53,5 +56,6 @@ public interface InVarietyAgent {
     @PUT
     @Path("/bill-item/transfer/:key")
     @Address(Addr.Bill.UP_TRANSFER)
+    @OpenApi
     JsonObject upTransfer(@PathParam(KName.KEY) String bookId, @BodyParam JsonObject data);
 }

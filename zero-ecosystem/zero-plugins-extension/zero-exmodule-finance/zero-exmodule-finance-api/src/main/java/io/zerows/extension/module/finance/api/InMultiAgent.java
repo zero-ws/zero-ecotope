@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -94,5 +95,6 @@ public interface InMultiAgent {
     @POST
     @Path("/bill/multi")
     @Address(Addr.Bill.IN_MULTI)
+    @OpenApi
     JsonObject inMulti(@BodyParam JsonObject data);
 }

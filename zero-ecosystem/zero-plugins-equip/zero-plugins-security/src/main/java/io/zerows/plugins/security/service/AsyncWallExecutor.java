@@ -5,8 +5,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.annotations.Wall;
+import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.web.Account;
 import io.zerows.sdk.security.WallExecutor;
+import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
@@ -43,4 +45,44 @@ public abstract class AsyncWallExecutor implements WallExecutor {
      * @return 登录请求对象
      */
     protected abstract LoginRequest createRequest(JsonObject credentials);
+
+    @Override
+    public Future<JsonObject> authorize(final User user) {
+        final AsyncAuthorization resource = AsyncAuthorization.of();
+        Objects.requireNonNull(resource, "[ XMOD ] 授权组件为空 / authorize");
+        return resource.seekAuthorized(user);
+    }
+
+    /**
+     * <pre>
+     *     参数提取核心
+     *     - username
+     *     - password
+     *     - id
+     *     - habitus
+     *     - session
+     *     - metadata
+     *       - uri              带路径参数
+     *       - requestUri       实际请求参数
+     *       - method           请求方法
+     *       - view
+     *         - view           视图名
+     *         - position       视图位置信息
+     *     - headers
+     *       - X-App-Id
+     *       - X-Tenant-Id
+     *       - X-Sigma
+     * </pre>
+     *
+     * @param params 资源提取参数
+     * @return 资源信息
+     */
+    @Override
+    public Future<JsonObject> resource(final JsonObject params) {
+        final JsonObject headers = Ut.valueJObject(params, "headers");
+        final String appId = Ut.valueString(headers, KWeb.HEADER.X_APP_ID);
+        final AsyncAuthorization resource = AsyncAuthorization.of(appId);
+        Objects.requireNonNull(resource, "[ XMOD ] 授权组件为空 / resource");
+        return resource.seekResource(params);
+    }
 }

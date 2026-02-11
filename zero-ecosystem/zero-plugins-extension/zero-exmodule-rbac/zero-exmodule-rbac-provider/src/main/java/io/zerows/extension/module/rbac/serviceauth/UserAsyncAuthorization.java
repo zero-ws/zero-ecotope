@@ -1,5 +1,6 @@
-package io.zerows.extension.module.rbac.serviceimpl;
+package io.zerows.extension.module.rbac.serviceauth;
 
+import io.r2mo.typed.annotation.SPID;
 import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -18,11 +19,11 @@ import io.zerows.extension.module.rbac.exception._80210Exception404ResourceMissi
 import io.zerows.extension.module.rbac.exception._80211Exception403ActionDinned;
 import io.zerows.extension.module.rbac.metadata.logged.ScResource;
 import io.zerows.extension.module.rbac.metadata.logged.ScUser;
-import io.zerows.extension.module.rbac.servicespec.AccreditStub;
 import io.zerows.extension.module.rbac.servicespec.ActionStub;
 import io.zerows.extension.skeleton.common.enums.OwnerType;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.plugins.cache.HMM;
+import io.zerows.plugins.security.service.AsyncAuthorization;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
@@ -31,7 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Objects;
 
 @Slf4j
-public class AccreditService implements AccreditStub {
+@SPID(priority = 216)
+public class UserAsyncAuthorization implements AsyncAuthorization {
 
     @Inject
     private transient ActionStub stub;
@@ -44,13 +46,18 @@ public class AccreditService implements AccreditStub {
      * }
      */
     @Override
-    public Future<JsonObject> profile(final User user) {
+    public Future<JsonObject> seekAuthorized(final User user) {
         final ScUser scUser = ScUser.login(user);
         return scUser.permissions();
     }
 
     @Override
-    public Future<JsonObject> resource(final JsonObject requestData) {
+    public Future<User> seekProfile(final User logged) {
+        return ScUser.initProfile(logged).map(v -> logged);
+    }
+
+    @Override
+    public Future<JsonObject> seekResource(final JsonObject requestData) {
         final ScResource request = ScResource.create(requestData);
         // First Phase
         return HMM.<String, JsonObject>of(ScConstant.POOL_RESOURCES)
@@ -80,7 +87,8 @@ public class AccreditService implements AccreditStub {
         final String keyView = resource.keyView();
         final ScUser user = ScUser.login(habitus);
         if (Objects.isNull(user)) {
-            return Future.succeededFuture(new JsonObject());
+            // 访问被禁止/拒绝，无用户信息只是单纯不执行 inspectView，但核心授权方法依旧要进行
+            return Future.succeededFuture(response);
         }
         return user.view(keyView).compose(viewData -> {
             if (Objects.nonNull(viewData)) {

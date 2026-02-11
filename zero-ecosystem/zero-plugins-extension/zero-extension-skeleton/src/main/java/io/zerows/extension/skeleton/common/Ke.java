@@ -27,7 +27,7 @@ public class Ke extends _Um {
      * Jooq related:
      * Read jooq configuration database name `catalog`
      *
-     * 1. findDatabase()
+     * 1. getDatabase()
      * 2. getConfiguration()
      */
     public static String getDatabase() {

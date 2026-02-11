@@ -1,5 +1,6 @@
 package io.zerows.extension.module.workflow.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -20,10 +21,12 @@ public interface ReportAgent {
     @POST
     @Path("/up/report/list")
     @Address(HighWay.Report.TICKET_LIST)
+    @OpenApi
     JsonObject list(@BodyParam JsonObject body);
 
     @POST
     @Path("/up/report/activity")
     @Address(HighWay.Report.TICKET_ACTIVITY)
+    @OpenApi
     JsonArray fetchActivity(@BodyParam JsonObject body);
 }

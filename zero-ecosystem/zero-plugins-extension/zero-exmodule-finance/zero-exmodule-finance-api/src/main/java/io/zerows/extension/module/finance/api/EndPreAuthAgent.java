@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -24,5 +25,6 @@ public interface EndPreAuthAgent {
     @PUT
     @Path("/settle/authorize/unlock")
     @Address(Addr.Settle.UNLOCK_AUTHORIZE)
+    @OpenApi
     JsonObject unlockAuthorize(@BodyParam JsonArray authorize);
 }

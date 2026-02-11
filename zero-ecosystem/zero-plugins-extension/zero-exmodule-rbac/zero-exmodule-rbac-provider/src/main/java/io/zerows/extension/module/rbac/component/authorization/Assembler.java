@@ -69,7 +69,7 @@ public class Assembler {
                  * not be new HashSet<>() here, but first.getAuthorities() instead.
                  * KRef below line:  DEFAULT AUTHORITIES
                  */
-                final ProfileRole first = profiles.iterator().next();
+                final ProfileRole first = profiles.getFirst();
                 /* 1. permissions = [] */
                 /* 2. roles = [] */
                 final JsonArray roles = new JsonArray();

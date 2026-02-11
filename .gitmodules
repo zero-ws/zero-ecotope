@@ -1,0 +1,3 @@
+[submodule "zero-ui"]
+	path = zero-ui
+	url = git@gitee.com:silentbalanceyh/scaffold-ui.git

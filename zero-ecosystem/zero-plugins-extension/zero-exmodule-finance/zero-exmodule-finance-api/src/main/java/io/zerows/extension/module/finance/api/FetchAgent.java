@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
@@ -32,16 +33,19 @@ public interface FetchAgent {
     @GET
     @Path("/bills/order/:orderId")
     @Address(Addr.BillItem.FETCH_AGGR)
+    @OpenApi
     JsonObject fetchItem(@PathParam("orderId") String orderId);
 
     @GET
     @Path("/bills/:key")
     @Address(Addr.Bill.FETCH_BILL)
+    @OpenApi
     JsonObject fetchByKey(@PathParam(KName.KEY) String key);
 
     @POST
     @Path("/bills/search/full")
     @Address(Addr.Bill.FETCH_BILLS)
+    @OpenApi
     JsonObject fetchBills(@BodyParam JsonObject query);
 
 
@@ -51,6 +55,7 @@ public interface FetchAgent {
     @GET
     @Path("/books/order/:orderId")
     @Address(Addr.BillItem.FETCH_BOOK)
+    @OpenApi
     JsonArray fetchBooks(@PathParam("orderId") String orderId);
 
     /*
@@ -61,5 +66,6 @@ public interface FetchAgent {
     @GET
     @Path("/fm-book/:key")
     @Address(Addr.BillItem.FETCH_BOOK_BY_KEY)
+    @OpenApi
     JsonObject fetchBook(@PathParam(KName.KEY) String key);
 }

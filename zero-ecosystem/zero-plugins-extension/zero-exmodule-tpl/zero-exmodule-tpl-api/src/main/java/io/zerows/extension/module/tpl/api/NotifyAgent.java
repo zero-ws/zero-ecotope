@@ -1,5 +1,6 @@
 package io.zerows.extension.module.tpl.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -25,6 +26,7 @@ public interface NotifyAgent {
     @PUT
     @Path("/my/notify/:key")
     @Address(Addr.Notify.MY_FETCH)
+    @OpenApi
     JsonObject saveNotify(@PathParam(KName.KEY) String user,
                           @BodyParam JsonObject data);
 
@@ -34,5 +36,6 @@ public interface NotifyAgent {
     @GET
     @Path("/my/notify/:key")
     @Address(Addr.Notify.MY_SAVE)
+    @OpenApi
     JsonObject fetchNotify(@PathParam(KName.KEY) String user);
 }

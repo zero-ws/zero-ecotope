@@ -5,7 +5,8 @@ import io.r2mo.jaas.element.MSRole;
 import io.r2mo.typed.domain.extension.AbstractBuilder;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SRole;
-import io.zerows.support.Ut;
+
+import java.util.Objects;
 
 public class BuilderOfMSRole extends AbstractBuilder<MSRole> {
 
@@ -14,12 +15,14 @@ public class BuilderOfMSRole extends AbstractBuilder<MSRole> {
     public <R> MSRole create(final R source) {
         if (source instanceof final SRole roleEntity) {
             final MSRole entity = new MSRole();
-            entity.setAdmin(roleEntity.getPower());
+            // 检查 NullPointerException
+            final Boolean isAdmin = Objects.isNull(roleEntity.getPower()) ? Boolean.FALSE : roleEntity.getPower();
+            entity.setAdmin(isAdmin);
             entity.setName(roleEntity.getName());
             entity.setCode(roleEntity.getCode());
 
             // metadata
-            entity.extension(KName.METADATA, Ut.toJObject(roleEntity.getMetadata()));
+            entity.extension(KName.METADATA, roleEntity.getMetadata());
 
             // Active
             R2MO.vActive(entity,
@@ -30,9 +33,9 @@ public class BuilderOfMSRole extends AbstractBuilder<MSRole> {
 
             // Scope
             R2MO.vScope(entity,
-                roleEntity::getId,
                 roleEntity::getAppId,
-                roleEntity::getTenantId
+                roleEntity::getTenantId,
+                roleEntity::getId
             );
 
             // Audit
@@ -42,6 +45,7 @@ public class BuilderOfMSRole extends AbstractBuilder<MSRole> {
                 roleEntity::getUpdatedBy,
                 roleEntity::getUpdatedAt
             );
+            return entity;
         }
         return null;
     }

@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 @Slf4j
-class Task {
+class WaitTask {
 
     private static final StoreVertx store = StoreVertx.of();
     private static final long LEGACY_TIMEOUT_SEC = 60;

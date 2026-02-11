@@ -95,6 +95,11 @@ class BackendProviderLogged extends BackendProviderBase {
         // 合并账号
         final JsonObject stored = cachedJ.copy();
         stored.mergeIn(credentialsJ, true);
+        /*
+         * 特殊合并
+         * - roles
+         * - groups
+         */
         return Future.succeededFuture(User.create(stored));
     }
 }

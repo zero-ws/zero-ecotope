@@ -1,5 +1,6 @@
 package io.zerows.extension.module.finance.api;
 
+import io.r2mo.openapi.annotations.OpenApi;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
@@ -58,6 +59,7 @@ public interface InSingleAgent {
     @POST
     @Path("/bill/pre")
     @Address(Addr.Bill.IN_PRE)
+    @OpenApi
     JsonObject inPre(@BodyParam JsonObject data);
 
     /**
@@ -86,5 +88,6 @@ public interface InSingleAgent {
     @POST
     @Path("/bill/single")
     @Address(Addr.Bill.IN_COMMON)
+    @OpenApi
     JsonObject inCommon(@BodyParam JsonObject data);
 }

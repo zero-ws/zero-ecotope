@@ -19,7 +19,7 @@ import java.util.List;
  * @author lang : 2024-01-11
  */
 @Queue
-public class InMutliActor {
+public class InMultiActor {
 
     @Inject
     private transient InBillStub billStub;

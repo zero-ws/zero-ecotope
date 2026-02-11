@@ -5,6 +5,10 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.boot.MDRBACManager;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.metadata.ScConfig;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,13 +19,16 @@ import java.util.Set;
  * 1) priority
  * 2) permissions
  */
+@Data
 public class ProfileRole implements Serializable {
 
     private static final ScConfig CONFIG = MDRBACManager.of().config();
-    private transient final Integer priority;
-    private final transient ScRole role;
+    @Setter(AccessLevel.NONE)
+    private final Integer priority;
+    private final ScRole role;
     /* GroupId Process */
-    private transient ProfileGroup reference;
+    @Accessors(chain = true)
+    private ProfileGroup group;
 
     public ProfileRole(final JsonObject data) {
         /* Role Id */
@@ -48,28 +55,12 @@ public class ProfileRole implements Serializable {
         return this;
     }
 
-    public Integer getPriority() {
-        return this.priority;
-    }
-
     public String getKey() {
         return this.role.key();
     }
 
     public Set<String> getAuthorities() {
         return this.role.authorities();
-    }
-
-    /*
-     * For uniform processing
-     */
-    public ProfileGroup getGroup() {
-        return this.reference;
-    }
-
-    public ProfileRole setGroup(final ProfileGroup reference) {
-        this.reference = reference;
-        return this;
     }
 
     @Override
@@ -94,7 +85,7 @@ public class ProfileRole implements Serializable {
         return "ProfileRole{" +
             "priority=" + this.priority +
             ", role=" + this.role +
-            ", reference=" + this.reference +
+            ", group=" + this.group +
             '}';
     }
 }
