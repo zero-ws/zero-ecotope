@@ -48,3 +48,4 @@ archive
 # 特殊 Exclude
 !x.log
 !document/tree*.json
+.r2mo/repo/
