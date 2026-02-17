@@ -145,7 +145,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 
+     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
      */
     @Override
     public Boolean getEntry() {
@@ -153,7 +153,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 
+     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
      */
     @Override
     public BBag setEntry(Boolean entry) {
@@ -383,7 +383,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public Boolean getActive() {
@@ -391,7 +391,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public BBag setActive(Boolean active) {
@@ -400,7 +400,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public String getLanguage() {
@@ -408,7 +408,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public BBag setLanguage(String language) {
@@ -417,7 +417,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public JsonObject getMetadata() {
@@ -425,7 +425,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public BBag setMetadata(JsonObject metadata) {
@@ -434,7 +434,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {
@@ -442,7 +442,7 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本
      */
     @Override
     public BBag setVersion(String version) {

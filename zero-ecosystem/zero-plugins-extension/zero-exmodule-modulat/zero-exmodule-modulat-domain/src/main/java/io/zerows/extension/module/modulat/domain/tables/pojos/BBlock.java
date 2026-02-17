@@ -40,6 +40,7 @@ public class BBlock implements VertxPojo, IBBlock {
     private String uiIcon;
     private Long uiSort;
     private JsonObject uiStyle;
+    private JsonArray uiOpen;
     private String sigma;
     private String tenantId;
     private String appId;
@@ -74,6 +75,7 @@ public class BBlock implements VertxPojo, IBBlock {
         this.uiIcon = value.getUiIcon();
         this.uiSort = value.getUiSort();
         this.uiStyle = value.getUiStyle();
+        this.uiOpen = value.getUiOpen();
         this.sigma = value.getSigma();
         this.tenantId = value.getTenantId();
         this.appId = value.getAppId();
@@ -107,6 +109,7 @@ public class BBlock implements VertxPojo, IBBlock {
         String uiIcon,
         Long uiSort,
         JsonObject uiStyle,
+        JsonArray uiOpen,
         String sigma,
         String tenantId,
         String appId,
@@ -138,6 +141,7 @@ public class BBlock implements VertxPojo, IBBlock {
         this.uiIcon = uiIcon;
         this.uiSort = uiSort;
         this.uiStyle = uiStyle;
+        this.uiOpen = uiOpen;
         this.sigma = sigma;
         this.tenantId = tenantId;
         this.appId = appId;
@@ -226,7 +230,7 @@ public class BBlock implements VertxPojo, IBBlock {
 
     /**
      * Getter for <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
-     * 允许的模型标识
+     * 允许的模型
      */
     @Override
     public JsonArray getLicIdentifier() {
@@ -235,7 +239,7 @@ public class BBlock implements VertxPojo, IBBlock {
 
     /**
      * Setter for <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
-     * 允许的模型标识
+     * 允许的模型
      */
     @Override
     public BBlock setLicIdentifier(JsonArray licIdentifier) {
@@ -244,7 +248,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
+     * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 允许的菜单
      */
     @Override
     public JsonArray getLicMenu() {
@@ -252,7 +256,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
+     * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 允许的菜单
      */
     @Override
     public BBlock setLicMenu(JsonArray licMenu) {
@@ -482,6 +486,23 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
+     * Getter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    @Override
+    public JsonArray getUiOpen() {
+        return this.uiOpen;
+    }
+
+    /**
+     * Setter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    @Override
+    public BBlock setUiOpen(JsonArray uiOpen) {
+        this.uiOpen = uiOpen;
+        return this;
+    }
+
+    /**
      * Getter for <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
@@ -533,7 +554,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public Boolean getActive() {
@@ -541,7 +562,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public BBlock setActive(Boolean active) {
@@ -550,7 +571,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public String getLanguage() {
@@ -558,7 +579,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public BBlock setLanguage(String language) {
@@ -567,7 +588,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public JsonObject getMetadata() {
@@ -575,7 +596,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public BBlock setMetadata(JsonObject metadata) {
@@ -584,7 +605,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {
@@ -592,7 +613,7 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本
      */
     @Override
     public BBlock setVersion(String version) {
@@ -791,6 +812,12 @@ public class BBlock implements VertxPojo, IBBlock {
         }
         else if (!this.uiStyle.equals(other.uiStyle))
             return false;
+        if (this.uiOpen == null) {
+            if (other.uiOpen != null)
+                return false;
+        }
+        else if (!this.uiOpen.equals(other.uiOpen))
+            return false;
         if (this.sigma == null) {
             if (other.sigma != null)
                 return false;
@@ -883,6 +910,7 @@ public class BBlock implements VertxPojo, IBBlock {
         result = prime * result + ((this.uiIcon == null) ? 0 : this.uiIcon.hashCode());
         result = prime * result + ((this.uiSort == null) ? 0 : this.uiSort.hashCode());
         result = prime * result + ((this.uiStyle == null) ? 0 : this.uiStyle.hashCode());
+        result = prime * result + ((this.uiOpen == null) ? 0 : this.uiOpen.hashCode());
         result = prime * result + ((this.sigma == null) ? 0 : this.sigma.hashCode());
         result = prime * result + ((this.tenantId == null) ? 0 : this.tenantId.hashCode());
         result = prime * result + ((this.appId == null) ? 0 : this.appId.hashCode());
@@ -920,6 +948,7 @@ public class BBlock implements VertxPojo, IBBlock {
         sb.append(", ").append(uiIcon);
         sb.append(", ").append(uiSort);
         sb.append(", ").append(uiStyle);
+        sb.append(", ").append(uiOpen);
         sb.append(", ").append(sigma);
         sb.append(", ").append(tenantId);
         sb.append(", ").append(appId);
@@ -961,6 +990,7 @@ public class BBlock implements VertxPojo, IBBlock {
         setUiIcon(from.getUiIcon());
         setUiSort(from.getUiSort());
         setUiStyle(from.getUiStyle());
+        setUiOpen(from.getUiOpen());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());
         setAppId(from.getAppId());

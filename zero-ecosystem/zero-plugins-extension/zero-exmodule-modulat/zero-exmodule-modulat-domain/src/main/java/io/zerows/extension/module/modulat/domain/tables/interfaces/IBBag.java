@@ -29,12 +29,12 @@ public interface IBBag extends VertxPojo, Serializable {
     public String getId();
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 
+     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
      */
     public IBBag setEntry(Boolean value);
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 
+     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
      */
     public Boolean getEntry();
 
@@ -169,42 +169,42 @@ public interface IBBag extends VertxPojo, Serializable {
     public String getAppId();
 
     /**
-     * Setter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 启用
      */
     public IBBag setActive(Boolean value);
 
     /**
-     * Getter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言
      */
     public IBBag setLanguage(String value);
 
     /**
-     * Getter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元数据
      */
     public IBBag setMetadata(JsonObject value);
 
     /**
-     * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元数据
      */
     public JsonObject getMetadata();
 
     /**
-     * Setter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本
      */
     public IBBag setVersion(String value);
 
     /**
-     * Getter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本
      */
     public String getVersion();
 

@@ -61,23 +61,23 @@ public interface IBBlock extends VertxPojo, Serializable {
 
     /**
      * Setter for <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
-     * 允许的模型标识
+     * 允许的模型
      */
     public IBBlock setLicIdentifier(JsonArray value);
 
     /**
      * Getter for <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
-     * 允许的模型标识
+     * 允许的模型
      */
     public JsonArray getLicIdentifier();
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
+     * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 允许的菜单
      */
     public IBBlock setLicMenu(JsonArray value);
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
+     * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 允许的菜单
      */
     public JsonArray getLicMenu();
 
@@ -212,6 +212,16 @@ public interface IBBlock extends VertxPojo, Serializable {
     public JsonObject getUiStyle();
 
     /**
+     * Setter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    public IBBlock setUiOpen(JsonArray value);
+
+    /**
+     * Getter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    public JsonArray getUiOpen();
+
+    /**
      * Setter for <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     public IBBlock setSigma(String value);
@@ -242,42 +252,42 @@ public interface IBBlock extends VertxPojo, Serializable {
     public String getAppId();
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 启用
      */
     public IBBlock setActive(Boolean value);
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言
      */
     public IBBlock setLanguage(String value);
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元数据
      */
     public IBBlock setMetadata(JsonObject value);
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元数据
      */
     public JsonObject getMetadata();
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本
      */
     public IBBlock setVersion(String value);
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本
      */
     public String getVersion();
 
@@ -358,6 +368,7 @@ public interface IBBlock extends VertxPojo, Serializable {
                 setOrThrow(this::setUiIcon,json::getString,"UI_ICON","java.lang.String");
                 setOrThrow(this::setUiSort,json::getLong,"UI_SORT","java.lang.Long");
                 // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column UI_OPEN!
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
@@ -395,6 +406,7 @@ public interface IBBlock extends VertxPojo, Serializable {
                 json.put("UI_ICON",getUiIcon());
                 json.put("UI_SORT",getUiSort());
                 // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column UI_OPEN!
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());
