@@ -29,6 +29,18 @@ public class ApiSmsActor {
     @Inject
     private SmsStub smsStub;
 
+    /**
+     * 关于发送短信过程中图片验证码的说明
+     * <pre>
+     *     security:
+     *       captcha:
+     *         enabled: true      # 图片验证码必须打开（功能要可用），{@link CaptchaStub} 内部会校验
+     *       captcha-sms:
+     *         image: true        # 发送短信时需要图片验证码，两个条件都满足才会启用图片验证码校验
+     * </pre>
+     * @param request 基础请求
+     * @return 发送结果
+     */
     @Address(ApiAddr.API_AUTH_SMS_SEND)
     public Future<Boolean> sendAsync(final SmsLoginRequest request) {
         // mobile 非空 / 格式校验
@@ -39,11 +51,9 @@ public class ApiSmsActor {
         if (!R2MO.isMobile(mobile)) {
             return Fx.failOut(_80382Exception400MobileFormat.class, mobile);
         }
-        // captcha / captchaId 可选非空校验
-        return this.captchaStub.validateRequired(request)
-            // 验证码校验
-            .compose(validated -> this.captchaStub.validate(validated.captchaId(), validated.captcha()))
-            // 发送邮件
+
+        return this.sendVerify(request)
+            // 发送短信
             .compose(nil -> this.smsStub.sendCaptcha(mobile))
             // 发送结果
             .compose(sent -> {
@@ -52,6 +62,18 @@ public class ApiSmsActor {
                 }
                 return Ux.futureT();
             });
+    }
+
+    private Future<Boolean> sendVerify(final SmsLoginRequest request){
+        final SmsAuthConfig config = SmsAuthActor.configOf();
+        if(config.isImage()){
+            // captcha / captchaId 可选非空校验
+            return this.captchaStub.validateRequired(request).compose(validated ->
+                // 验证码校验
+                this.captchaStub.validate(validated.captchaId(), validated.captcha())
+            );
+        }
+        return Future.succeededFuture(Boolean.TRUE);
     }
 
     @Address(ApiAddr.API_AUTH_SMS_LOGIN)

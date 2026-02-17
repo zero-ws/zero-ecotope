@@ -11,6 +11,7 @@ public class EmailAuthConfig implements Serializable {
     private int expiredAt = 300;
     private String subject;
     private String template = "captcha-email";
+    private boolean image = false;
 
     public Duration expiredAt() {
         return Duration.ofSeconds(this.expiredAt);

@@ -149,4 +149,27 @@ interface Addr {
         // Tag Linkage，标签关联，直接关联实体标签信息填充 R_TAG_OBJECT
         String MODEL_OF_TAGS = Prefix._EVENT + "X-TAG/SYNC-LINKAGE";
     }
+
+    interface Tenant {
+        // Tenant Status Management
+        String ACTIVATE = Prefix._EVENT + "X-TENANT/ACTIVATE";
+        String DEACTIVATE = Prefix._EVENT + "X-TENANT/DEACTIVATE";
+        String STATUS_HISTORY = Prefix._EVENT + "X-TENANT/STATUS/HISTORY";
+
+        // Tenant Quota Management
+        String QUOTA_GET = Prefix._EVENT + "X-TENANT/QUOTA/GET";
+        String QUOTA_UPDATE = Prefix._EVENT + "X-TENANT/QUOTA/UPDATE";
+
+        // Tenant Statistics
+        String STATISTICS = Prefix._EVENT + "X-TENANT/STATISTICS";
+    }
+
+    interface Subscription {
+        // Dashboard
+        String DASHBOARD = Prefix._EVENT + "X-SUBSCRIPTION/DASHBOARD";
+
+        // Subscription Special Operations
+        String CANCEL = Prefix._EVENT + "X-SUBSCRIPTION/CANCEL";
+        String RENEW = Prefix._EVENT + "X-SUBSCRIPTION/RENEW";
+    }
 }
