@@ -2,6 +2,7 @@ package io.zerows.support.base;
 
 import cn.hutool.core.date.DateUtil;
 import com.hubspot.jinjava.Jinjava;
+import com.hubspot.jinjava.interpret.Context;
 import com.hubspot.jinjava.lib.fn.ELFunctionDefinition;
 import io.zerows.platform.ENV;
 import org.yaml.snakeyaml.DumperOptions;
@@ -37,9 +38,9 @@ class UCompiler {
 
     static {
         // 注册全局函数，如 R2_NOW()
-        JINJAVA.getGlobalContext().registerFunction(
-            new ELFunctionDefinition("", "R2_NOW", DateUtil.class, "now")
-        );
+        final Context context = JINJAVA.getGlobalContext();
+        context.registerFunction(new ELFunctionDefinition("", "R2_NOW", DateUtil.class, "now"));
+        context.registerFunction(new ELFunctionDefinition("", "R2_BY", R2Fun.class, "by"));
     }
 
     /**

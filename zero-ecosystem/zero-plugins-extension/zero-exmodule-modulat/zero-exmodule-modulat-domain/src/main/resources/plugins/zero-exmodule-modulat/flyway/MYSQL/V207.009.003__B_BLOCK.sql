@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS `B_BLOCK` (
     `AUTHORIZED`      BIT(1)        DEFAULT NULL COMMENT '「authorized」- 是否授权',
     `BAG_ID`          VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「bagId」- 所属包ID',
     `CODE`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「code」- 编号',
-    `LIC_IDENTIFIER`  LONGTEXT      COLLATE utf8mb4_bin COMMENT '「licIdentifier」- 允许的模型标识',
-    `LIC_MENU`        LONGTEXT      COLLATE utf8mb4_bin COMMENT '「licMenu」- 该Block包含',                   -- 该Block包含的菜单
+    `LIC_IDENTIFIER`  LONGTEXT      COLLATE utf8mb4_bin COMMENT '「licIdentifier」- 允许的模型',
+    `LIC_MENU`        LONGTEXT      COLLATE utf8mb4_bin COMMENT '「licMenu」- 允许的菜单',                     -- 该Block包含的菜单
     `NAME`            VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
     `SIGN_AT`         DATETIME      DEFAULT NULL COMMENT '「signAt」- 发证时间',
     `SIGN_END`        DATETIME      DEFAULT NULL COMMENT '「signEnd」- 证书过期时间',
@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `B_BLOCK` (
     `UI_ICON`         VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uiIcon」- 子模块图标',
     `UI_SORT`         BIGINT        DEFAULT NULL COMMENT '「uiSort」- 子模块排序',
     `UI_STYLE`        TEXT          COLLATE utf8mb4_bin COMMENT '「uiStyle」- 子模块风格',
+    `UI_OPEN`         TEXT          COLLATE utf8mb4_bin COMMENT '「uiOpen」- 开放属性',
 
     -- ==================================================================================================
     -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)
@@ -34,10 +35,10 @@ CREATE TABLE IF NOT EXISTS `B_BLOCK` (
     `TENANT_ID`       VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「tenantId」- 租户ID',            -- [业务隔离] SaaS 租户/具体公司标识,
     `APP_ID`          VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「appId」- 应用ID',               -- [逻辑隔离] 区分同一租户下的不同应用,
     -- --------------------------------------------------------------------------------------------------
-    `ACTIVE`          BIT(1)        DEFAULT NULL COMMENT '「active」- 是否启用',                              -- [状态] 1=启用/正常, 0=禁用/冻结,
-    `LANGUAGE`        VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言偏好',        -- [国际化] 如: zh_CN, en_US,
-    `METADATA`        TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元配置',                       -- [扩展] JSON格式，存储非结构化配置,
-    `VERSION`         VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本号', -- [版本]
+    `ACTIVE`          BIT(1)        DEFAULT NULL COMMENT '「active」- 启用',                              -- [状态] 1=启用/正常, 0=禁用/冻结,
+    `LANGUAGE`        VARCHAR(10)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「language」- 语言',        -- [国际化] 如: zh_CN, en_US,
+    `METADATA`        TEXT          COLLATE utf8mb4_bin COMMENT '「metadata」- 元数据',                       -- [扩展] JSON格式，存储非结构化配置,
+    `VERSION`         VARCHAR(64)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「version」- 版本', -- [版本]
     -- ==================================================================================================
     `CREATED_AT`      DATETIME      DEFAULT NULL COMMENT '「createdAt」- 创建时间',                           -- [审计] 创建时间
     `CREATED_BY`      VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「createdBy」- 创建人',         -- [审计] 创建人

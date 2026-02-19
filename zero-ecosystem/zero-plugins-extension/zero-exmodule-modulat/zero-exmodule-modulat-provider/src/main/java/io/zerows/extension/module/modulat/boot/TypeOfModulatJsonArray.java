@@ -23,7 +23,8 @@ public class TypeOfModulatJsonArray extends TypeOfJsonArray {
             // BBlock
             Map.of(
                 BBlock.B_BLOCK.LIC_IDENTIFIER.getName(), BBlock.B_BLOCK.getName(),
-                BBlock.B_BLOCK.LIC_MENU.getName(), BBlock.B_BLOCK.getName()
+                BBlock.B_BLOCK.LIC_MENU.getName(), BBlock.B_BLOCK.getName(),
+                BBlock.B_BLOCK.UI_OPEN.getName(), BBlock.B_BLOCK.getName()
             ),
             // BWeb
             Map.of(

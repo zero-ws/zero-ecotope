@@ -78,14 +78,14 @@ public class BBlock extends TableImpl<BBlockRecord> {
 
     /**
      * The column <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
-     * 允许的模型标识
+     * 允许的模型
      */
-    public final TableField<BBlockRecord, JsonArray> LIC_IDENTIFIER = createField(DSL.name("LIC_IDENTIFIER"), SQLDataType.CLOB, this, "「licIdentifier」- 允许的模型标识", new JooqJsonArrayConverter());
+    public final TableField<BBlockRecord, JsonArray> LIC_IDENTIFIER = createField(DSL.name("LIC_IDENTIFIER"), SQLDataType.CLOB, this, "「licIdentifier」- 允许的模型", new JooqJsonArrayConverter());
 
     /**
-     * The column <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
+     * The column <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 允许的菜单
      */
-    public final TableField<BBlockRecord, JsonArray> LIC_MENU = createField(DSL.name("LIC_MENU"), SQLDataType.CLOB, this, "「licMenu」- 该Block包含", new JooqJsonArrayConverter());
+    public final TableField<BBlockRecord, JsonArray> LIC_MENU = createField(DSL.name("LIC_MENU"), SQLDataType.CLOB, this, "「licMenu」- 允许的菜单", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_BLOCK.NAME</code>. 「name」- 名称
@@ -153,6 +153,11 @@ public class BBlock extends TableImpl<BBlockRecord> {
     public final TableField<BBlockRecord, JsonObject> UI_STYLE = createField(DSL.name("UI_STYLE"), SQLDataType.CLOB(65535), this, "「uiStyle」- 子模块风格", new JooqJsonObjectConverter());
 
     /**
+     * The column <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    public final TableField<BBlockRecord, JsonArray> UI_OPEN = createField(DSL.name("UI_OPEN"), SQLDataType.CLOB(65535), this, "「uiOpen」- 开放属性", new JooqJsonArrayConverter());
+
+    /**
      * The column <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     public final TableField<BBlockRecord, String> SIGMA = createField(DSL.name("SIGMA"), SQLDataType.VARCHAR(128), this, "「sigma」- 统一标识");
@@ -168,24 +173,24 @@ public class BBlock extends TableImpl<BBlockRecord> {
     public final TableField<BBlockRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用ID");
 
     /**
-     * The column <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 启用
      */
-    public final TableField<BBlockRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 是否启用");
+    public final TableField<BBlockRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 启用");
 
     /**
-     * The column <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言偏好
+     * The column <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言
      */
-    public final TableField<BBlockRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 语言偏好");
+    public final TableField<BBlockRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 语言");
 
     /**
-     * The column <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
+     * The column <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元数据
      */
-    public final TableField<BBlockRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
+    public final TableField<BBlockRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元数据", new JooqJsonObjectConverter());
 
     /**
-     * The column <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号
+     * The column <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本
      */
-    public final TableField<BBlockRecord, String> VERSION = createField(DSL.name("VERSION"), SQLDataType.VARCHAR(64), this, "「version」- 版本号");
+    public final TableField<BBlockRecord, String> VERSION = createField(DSL.name("VERSION"), SQLDataType.VARCHAR(64), this, "「version」- 版本");
 
     /**
      * The column <code>ZDB.B_BLOCK.CREATED_AT</code>. 「createdAt」- 创建时间

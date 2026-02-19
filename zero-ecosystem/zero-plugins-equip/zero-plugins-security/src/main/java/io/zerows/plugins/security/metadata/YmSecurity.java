@@ -23,6 +23,9 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * <pre>
  *     security:                {@link YmSecurity}
+ *       development:
+ *         header-name: ""
+ *         header-value: ""
  *       # 授权部分 ---------------
  *       authorization:
  *         enabled: true
@@ -76,6 +79,12 @@ public class YmSecurity implements Serializable {
     private Limit limit = new Limit();
     private Scope scope = new Scope();
     private YmSecurityCaptcha captcha;
+    // 跳过图片验证码的专用配置
+    /*
+     * 1. 模式一：username / password
+     * 2. 模式二：header-name = header-value（推荐方式）
+     */
+    private YmSecurityDevelopment development;
     private YmSecurityAuthorization authorization = new YmSecurityAuthorization();
     // 2. 核心目标：用来存储不同类型的安全配置
     // 注意：这里加 @JsonIgnore 是为了防止默认序列化行为冲突，我们将通过 getter/setter 或 AnyGetter 处理

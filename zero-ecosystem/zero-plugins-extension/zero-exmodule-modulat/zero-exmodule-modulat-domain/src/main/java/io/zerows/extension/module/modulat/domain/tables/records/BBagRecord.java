@@ -42,7 +42,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 
+     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
      */
     @Override
     public BBagRecord setEntry(Boolean value) {
@@ -51,7 +51,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 
+     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
      */
     @Override
     public Boolean getEntry() {
@@ -280,7 +280,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public BBagRecord setActive(Boolean value) {
@@ -289,7 +289,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public Boolean getActive() {
@@ -297,7 +297,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public BBagRecord setLanguage(String value) {
@@ -306,7 +306,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public String getLanguage() {
@@ -314,7 +314,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public BBagRecord setMetadata(JsonObject value) {
@@ -323,7 +323,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public JsonObject getMetadata() {
@@ -331,7 +331,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本
      */
     @Override
     public BBagRecord setVersion(String value) {
@@ -340,7 +340,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {

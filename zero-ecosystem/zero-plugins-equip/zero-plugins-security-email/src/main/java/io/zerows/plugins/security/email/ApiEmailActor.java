@@ -28,6 +28,18 @@ public class ApiEmailActor {
     @Inject
     private EmailStub emailStub;
 
+    /**
+     * 关于发送过程图片验证码的说明
+     * <pre>
+     *     security:
+     *       captcha:
+     *         enabled: true      # 图片验证码必须打开（功能要可用），{@link CaptchaStub} 内部会校验
+     *       captcha-email:
+     *         image: true        # 发送邮件时需要图片验证码，两个条件都满足才会启用图片验证码校验
+     * </pre>
+     * @param request 基础请求
+     * @return 发送结果
+     */
     @Address(ApiAddr.API_AUTH_EMAIL_SEND)
     public Future<Boolean> sendAsync(final EmailLoginRequest request) {
         // email 非空 / 格式校验
@@ -38,10 +50,7 @@ public class ApiEmailActor {
         if (!R2MO.isEmail(email)) {
             return Fx.failOut(_80362Exception400EmailFormat.class, email);
         }
-        // captcha / captchaId 可选非空校验
-        return this.captchaStub.validateRequired(request)
-            // 验证码校验
-            .compose(validated -> this.captchaStub.validate(validated.captchaId(), validated.captcha()))
+        return this.sendVerify(request)
             // 发送邮件
             .compose(nil -> this.emailStub.sendCaptcha(email))
             // 发送结果
@@ -51,6 +60,17 @@ public class ApiEmailActor {
                 }
                 return Ux.futureT();
             });
+    }
+
+    private Future<Boolean> sendVerify(final EmailLoginRequest request){
+        final EmailAuthConfig config = EmailAuthActor.configOf();
+        if(config.isImage()){
+            // captcha / captchaId 可选非空校验
+            return this.captchaStub.validateRequired(request).compose(validated ->
+                // 验证码校验
+                this.captchaStub.validate(validated.captchaId(), validated.captcha()));
+        }
+        return Future.succeededFuture(Boolean.TRUE);
     }
 
     @Address(ApiAddr.API_AUTH_EMAIL_LOGIN)

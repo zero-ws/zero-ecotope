@@ -95,7 +95,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
 
     /**
      * Setter for <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
-     * 允许的模型标识
+     * 允许的模型
      */
     @Override
     public BBlockRecord setLicIdentifier(JsonArray value) {
@@ -105,7 +105,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
 
     /**
      * Getter for <code>ZDB.B_BLOCK.LIC_IDENTIFIER</code>. 「licIdentifier」-
-     * 允许的模型标识
+     * 允许的模型
      */
     @Override
     public JsonArray getLicIdentifier() {
@@ -113,7 +113,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
+     * Setter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 允许的菜单
      */
     @Override
     public BBlockRecord setLicMenu(JsonArray value) {
@@ -122,7 +122,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 该Block包含
+     * Getter for <code>ZDB.B_BLOCK.LIC_MENU</code>. 「licMenu」- 允许的菜单
      */
     @Override
     public JsonArray getLicMenu() {
@@ -351,11 +351,28 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     }
 
     /**
+     * Setter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    @Override
+    public BBlockRecord setUiOpen(JsonArray value) {
+        set(19, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    @Override
+    public JsonArray getUiOpen() {
+        return (JsonArray) get(19);
+    }
+
+    /**
      * Setter for <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public BBlockRecord setSigma(String value) {
-        set(19, value);
+        set(20, value);
         return this;
     }
 
@@ -364,7 +381,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public String getSigma() {
-        return (String) get(19);
+        return (String) get(20);
     }
 
     /**
@@ -372,7 +389,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public BBlockRecord setTenantId(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -381,7 +398,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public String getTenantId() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -389,7 +406,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public BBlockRecord setAppId(String value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -398,75 +415,75 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public String getAppId() {
-        return (String) get(21);
+        return (String) get(22);
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public BBlockRecord setActive(Boolean value) {
-        set(22, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 是否启用
-     */
-    @Override
-    public Boolean getActive() {
-        return (Boolean) get(22);
-    }
-
-    /**
-     * Setter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言偏好
-     */
-    @Override
-    public BBlockRecord setLanguage(String value) {
         set(23, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.B_BLOCK.ACTIVE</code>. 「active」- 启用
      */
     @Override
-    public String getLanguage() {
-        return (String) get(23);
+    public Boolean getActive() {
+        return (Boolean) get(23);
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言
      */
     @Override
-    public BBlockRecord setMetadata(JsonObject value) {
+    public BBlockRecord setLanguage(String value) {
         set(24, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.B_BLOCK.LANGUAGE</code>. 「language」- 语言
      */
     @Override
-    public JsonObject getMetadata() {
-        return (JsonObject) get(24);
+    public String getLanguage() {
+        return (String) get(24);
     }
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元数据
      */
     @Override
-    public BBlockRecord setVersion(String value) {
+    public BBlockRecord setMetadata(JsonObject value) {
         set(25, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.B_BLOCK.METADATA</code>. 「metadata」- 元数据
+     */
+    @Override
+    public JsonObject getMetadata() {
+        return (JsonObject) get(25);
+    }
+
+    /**
+     * Setter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本
+     */
+    @Override
+    public BBlockRecord setVersion(String value) {
+        set(26, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.B_BLOCK.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {
-        return (String) get(25);
+        return (String) get(26);
     }
 
     /**
@@ -474,7 +491,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public BBlockRecord setCreatedAt(LocalDateTime value) {
-        set(26, value);
+        set(27, value);
         return this;
     }
 
@@ -483,7 +500,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(26);
+        return (LocalDateTime) get(27);
     }
 
     /**
@@ -491,7 +508,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public BBlockRecord setCreatedBy(String value) {
-        set(27, value);
+        set(28, value);
         return this;
     }
 
@@ -500,7 +517,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(27);
+        return (String) get(28);
     }
 
     /**
@@ -508,7 +525,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public BBlockRecord setUpdatedAt(LocalDateTime value) {
-        set(28, value);
+        set(29, value);
         return this;
     }
 
@@ -517,7 +534,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(28);
+        return (LocalDateTime) get(29);
     }
 
     /**
@@ -525,7 +542,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public BBlockRecord setUpdatedBy(String value) {
-        set(29, value);
+        set(30, value);
         return this;
     }
 
@@ -534,7 +551,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(29);
+        return (String) get(30);
     }
 
     // -------------------------------------------------------------------------
@@ -571,6 +588,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
         setUiIcon(from.getUiIcon());
         setUiSort(from.getUiSort());
         setUiStyle(from.getUiStyle());
+        setUiOpen(from.getUiOpen());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());
         setAppId(from.getAppId());
@@ -605,7 +623,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
     /**
      * Create a detached, initialised BBlockRecord
      */
-    public BBlockRecord(String id, Boolean authorized, String bagId, String code, JsonArray licIdentifier, JsonArray licMenu, String name, LocalDateTime signAt, LocalDateTime signEnd, String signIssuer, String signLic, String signName, String signSecret, LocalDateTime signStart, JsonObject uiConfig, JsonObject uiContent, String uiIcon, Long uiSort, JsonObject uiStyle, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public BBlockRecord(String id, Boolean authorized, String bagId, String code, JsonArray licIdentifier, JsonArray licMenu, String name, LocalDateTime signAt, LocalDateTime signEnd, String signIssuer, String signLic, String signName, String signSecret, LocalDateTime signStart, JsonObject uiConfig, JsonObject uiContent, String uiIcon, Long uiSort, JsonObject uiStyle, JsonArray uiOpen, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(BBlock.B_BLOCK);
 
         setId(id);
@@ -627,6 +645,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
         setUiIcon(uiIcon);
         setUiSort(uiSort);
         setUiStyle(uiStyle);
+        setUiOpen(uiOpen);
         setSigma(sigma);
         setTenantId(tenantId);
         setAppId(appId);
@@ -667,6 +686,7 @@ public class BBlockRecord extends UpdatableRecordImpl<BBlockRecord> implements V
             setUiIcon(value.getUiIcon());
             setUiSort(value.getUiSort());
             setUiStyle(value.getUiStyle());
+            setUiOpen(value.getUiOpen());
             setSigma(value.getSigma());
             setTenantId(value.getTenantId());
             setAppId(value.getAppId());

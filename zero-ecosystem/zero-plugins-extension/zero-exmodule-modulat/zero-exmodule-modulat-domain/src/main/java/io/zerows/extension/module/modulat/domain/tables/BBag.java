@@ -60,9 +60,9 @@ public class BBag extends TableImpl<BBagRecord> {
     public final TableField<BBagRecord, String> ID = createField(DSL.name("ID"), SQLDataType.VARCHAR(36).nullable(false), this, "「id」- 主键");
 
     /**
-     * The column <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 
+     * The column <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
      */
-    public final TableField<BBagRecord, Boolean> ENTRY = createField(DSL.name("ENTRY"), SQLDataType.BIT, this, "「entry」- ");
+    public final TableField<BBagRecord, Boolean> ENTRY = createField(DSL.name("ENTRY"), SQLDataType.BIT, this, "「entry」-");
 
     /**
      * The column <code>ZDB.B_BAG.ENTRY_ID</code>. 「entryId」- 入口专用ID
@@ -97,7 +97,7 @@ public class BBag extends TableImpl<BBagRecord> {
     /**
      * The column <code>ZDB.B_BAG.UI_ICON</code>. 「uiIcon」- 模块图标
      */
-    public final TableField<BBagRecord, String> UI_ICON = createField(DSL.name("UI_ICON"), SQLDataType.VARCHAR(255), this, "「uiIcon」- 模块图标");
+    public final TableField<BBagRecord, String> UI_ICON = createField(DSL.name("UI_ICON"), SQLDataType.CLOB(65535), this, "「uiIcon」- 模块图标");
 
     /**
      * The column <code>ZDB.B_BAG.UI_SORT</code>. 「uiSort」- 模块排序
@@ -130,24 +130,24 @@ public class BBag extends TableImpl<BBagRecord> {
     public final TableField<BBagRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用ID");
 
     /**
-     * The column <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>ZDB.B_BAG.ACTIVE</code>. 「active」- 启用
      */
-    public final TableField<BBagRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 是否启用");
+    public final TableField<BBagRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 启用");
 
     /**
-     * The column <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言偏好
+     * The column <code>ZDB.B_BAG.LANGUAGE</code>. 「language」- 语言
      */
-    public final TableField<BBagRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 语言偏好");
+    public final TableField<BBagRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 语言");
 
     /**
-     * The column <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元配置
+     * The column <code>ZDB.B_BAG.METADATA</code>. 「metadata」- 元数据
      */
-    public final TableField<BBagRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
+    public final TableField<BBagRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元数据", new JooqJsonObjectConverter());
 
     /**
-     * The column <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本号
+     * The column <code>ZDB.B_BAG.VERSION</code>. 「version」- 版本
      */
-    public final TableField<BBagRecord, String> VERSION = createField(DSL.name("VERSION"), SQLDataType.VARCHAR(64), this, "「version」- 版本号");
+    public final TableField<BBagRecord, String> VERSION = createField(DSL.name("VERSION"), SQLDataType.VARCHAR(64), this, "「version」- 版本");
 
     /**
      * The column <code>ZDB.B_BAG.CREATED_AT</code>. 「createdAt」- 创建时间
