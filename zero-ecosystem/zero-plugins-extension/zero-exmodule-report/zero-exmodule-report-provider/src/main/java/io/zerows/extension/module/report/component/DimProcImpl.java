@@ -67,7 +67,7 @@ class DimProcImpl extends DimProcBase {
         final Set<String> dataSet = dimensions.stream().map(KpDimension::getDataSetId).collect(Collectors.toSet());
         return DB.on(KpDataSetDao.class).<KpDataSet, String>fetchInAsync(KName.KEY, dataSet).compose(dataSets -> {
             final ConcurrentMap<String, Future<JsonArray>> resultMap = new ConcurrentHashMap<>();
-            if (dataSets.size() > 0) {
+            if (!dataSets.isEmpty()) {
                 final KpDataSet kpDataSet = dataSets.get(0);
                 final JsonObject sourceJ = Ut.toJObject(kpDataSet.getDataSource());
                 final DataSet executor = DataSet.of(sourceJ);

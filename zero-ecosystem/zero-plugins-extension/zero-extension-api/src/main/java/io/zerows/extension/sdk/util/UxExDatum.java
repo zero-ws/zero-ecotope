@@ -37,7 +37,7 @@ class UxExDatum {
         if (Ut.isNotNil(source) && Ut.isNotNil(code)) {
             return Ut.itJArray(source)
                 .filter(item -> code.equals(item.getValue(KName.CODE)))
-                .map(item -> item.getString(KName.KEY))
+                .map(item -> item.getString(KName.ID))
                 .findAny().orElse(null);
         } else {
             return null;

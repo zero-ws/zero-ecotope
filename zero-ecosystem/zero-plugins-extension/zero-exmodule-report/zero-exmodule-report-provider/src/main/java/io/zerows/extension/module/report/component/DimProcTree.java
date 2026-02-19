@@ -54,7 +54,7 @@ class DimProcTree extends DimProcBase {
     private JsonArray dimBuild(final JsonArray data, final EmDim.Type.Tree mode,
                                final JsonObject config) {
         final String keyTree = Ut.valueString(config, "keyTree", KName.PARENT_ID);
-        final String keyId = Ut.valueString(config, "keyId", KName.KEY);
+        final String keyId = Ut.valueString(config, "keyId", KName.ID);
         final String keyLeaf = Ut.valueString(config, "keyLeaf", "leaf");
 
         final String labelField = Ut.valueString(config, "labelField");

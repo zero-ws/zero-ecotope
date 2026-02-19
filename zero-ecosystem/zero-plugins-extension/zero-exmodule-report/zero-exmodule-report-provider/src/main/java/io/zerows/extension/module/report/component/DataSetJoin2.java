@@ -1,8 +1,14 @@
 package io.zerows.extension.module.report.component;
 
+import io.r2mo.base.dbe.Join;
 import io.r2mo.base.dbe.common.DBNode;
 import io.r2mo.base.dbe.common.DBRef;
+import io.r2mo.base.program.R2Mapping;
+import io.r2mo.base.program.R2Vector;
+import io.r2mo.dbe.jooq.core.domain.JooqMap;
+import io.r2mo.dbe.jooq.spi.LoadREF;
 import io.r2mo.typed.common.Kv;
+import io.r2mo.vertx.jooq.AsyncMeta;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -14,8 +20,11 @@ import io.zerows.epoch.web.MDConnect;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
+import org.jooq.Table;
 
+import java.text.MessageFormat;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2024-10-22
@@ -27,18 +36,20 @@ class DataSetJoin2 extends DataSetBase {
     protected final JsonObject children = new JsonObject();
     protected final Kv<String, String> kvJoin;
     protected final JsonObject aliasJ = new JsonObject();
+    private static final String DEFAULT_YML = "pojo/{0}.yml";
 
     DataSetJoin2(final JsonObject sourceJ) {
         final String active = Ut.valueString(sourceJ, KName.ACTIVE);
         this.active = OCacheConfiguration.entireConnect(active);
         Objects.requireNonNull(this.active);
-        final String standBy = Ut.valueString(sourceJ, "standby");
-        this.standBy = OCacheConfiguration.entireConnect(standBy);
+
+        final String standby = Ut.valueString(sourceJ, "standby");
+        this.standBy = OCacheConfiguration.entireConnect(standby);
         Objects.requireNonNull(this.standBy);
         this.children.mergeIn(Ut.valueJObject(sourceJ, KName.CHILDREN));
 
-        final String activeField = Ut.valueString(sourceJ, "active.field", KName.KEY);
-        final String standbyField = Ut.valueString(sourceJ, "standby.field", KName.KEY);
+        final String activeField = Ut.valueString(sourceJ, "active.field", KName.ID);
+        final String standbyField = Ut.valueString(sourceJ, "standby.field", KName.ID);
         this.kvJoin = Kv.create(activeField, standbyField);
 
         this.aliasJ.mergeIn(Ut.valueJObject(sourceJ, KName.ALIAS));
@@ -108,19 +119,43 @@ class DataSetJoin2 extends DataSetBase {
      */
     public ADJ ofADJ() {
         final DBNode nodeLeft = this.active.forJoin();
+        nodeLeft.entity(this.active.meta().pojo());
+        final Table<?> tables = LoadREF.of().loadTable(this.active.meta().pojo());
+        AsyncMeta or2 = AsyncMeta.getOr(this.active.getDao());
+        Table<?> table2 = or2.metaTable();
+        if(tables!=null){
+            final ConcurrentMap<String, String> mapping = JooqMap.build(tables, this.active.meta().pojo());
+            nodeLeft.vector().mappingColumn(mapping);
+        }
         final DBNode nodeRight = this.standBy.forJoin();
+        nodeRight.entity(this.standBy.meta().pojo());
+        final Table<?> tables2 = LoadREF.of().loadTable(this.standBy.meta().pojo());
+        AsyncMeta or = AsyncMeta.getOr(this.standBy.getDao());
+        Table<?> table1 = or.metaTable();
+        if(tables2!=null){
+            final ConcurrentMap<String, String> mapping2 = JooqMap.build(tables2, this.standBy.meta().pojo());
+            nodeRight.vector().mappingColumn(mapping2);
+        }
+
         final DBRef ref = DBRef.of(nodeLeft, nodeRight, this.kvJoin);
-        // 别名计算和追加
+        // 先设置别名到 DBRef，然后使用 DBRef 创建 ADJ
         for (final String table : this.aliasJ.fieldNames()) {
             final JsonArray array = Ut.valueJArray(this.aliasJ, table);
             if (2 != array.size()) {
-                log.warn("[ ZERO ] 请检查 findAlias 的配置信息：{} / {}", table, array.encode());
+                log.warn("[ ZERO ] 请检查 alias 的配置信息：{} / {}", table, array.encode());
                 continue;
             }
             final String name = array.getString(0);
             final String alias = array.getString(1);
+            log.info("[ ZERO ] 设置别名到DBRef / Table = {}, Name = {}, Alias = {}", table, name, alias);
             ref.alias(table, name, alias);
         }
-        return DB.on(ref);
+
+        // 使用配置好别名的 DBRef 创建 ADJ
+        final ADJ on = DB.on(ref);
+        log.info("[ ZERO ] ADJ创建完成 / Active = {}, StandBy = {}, Alias配置数量 = {}",
+            this.active.getTable(), this.standBy.getTable(), this.aliasJ.size());
+
+        return on;
     }
 }

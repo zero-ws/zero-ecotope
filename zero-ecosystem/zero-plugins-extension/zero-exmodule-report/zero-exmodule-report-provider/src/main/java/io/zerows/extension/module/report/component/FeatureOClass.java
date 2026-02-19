@@ -27,7 +27,8 @@ class FeatureOClass implements FeatureO {
         if (Ut.isNil(outComponentCls)) {
             return Future.succeededFuture(new ConcurrentHashMap<>());
         }
-        final JsonObject outConfig = Ut.toJObject(feature.getOutConfig());
+        JsonObject outConfig1 = feature.getOutConfig();
+        final JsonObject outConfig = Objects.isNull(outConfig1) ? new JsonObject() : Ut.toJObject(outConfig1);
         final ROutComponent outComponent = CC_OUT.pick(() -> Ut.instance(outComponentCls), outComponentCls);
         if (Objects.isNull(outComponent)) {
             return Future.succeededFuture(new ConcurrentHashMap<>());

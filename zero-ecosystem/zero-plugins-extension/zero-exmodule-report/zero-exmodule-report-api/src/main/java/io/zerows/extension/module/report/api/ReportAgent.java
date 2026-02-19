@@ -58,7 +58,7 @@ public interface ReportAgent {
     Future<JsonObject> instancePaged(JsonObject query);
 
     @POST
-    @Path("/report/single-of")
+    @Path("/report/single-generate")
     @Address(Addr.Report.SINGLE_GENERATE)
     @OpenApi
     Future<JsonObject> instanceGenerate(
