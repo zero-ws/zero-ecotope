@@ -7,10 +7,6 @@ import io.vertx.core.shareddata.ClusterSerializable;
 import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.plugins.monitor.client.QuotaMetric;
 
-/*
- * Connect to HArk part for configuration in each application
- * This interface may call HArk in future with adapter.
- */
 public interface Ark {
     Cc<String, Ark> CC_ARK = Cc.openThread();
 

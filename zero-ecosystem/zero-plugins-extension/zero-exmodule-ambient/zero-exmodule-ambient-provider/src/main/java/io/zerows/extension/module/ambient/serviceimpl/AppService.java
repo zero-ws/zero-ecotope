@@ -32,9 +32,7 @@ public class AppService implements AppStub {
         return DB.on(XAppDao.class)
             /* Fetch By Name */
             .<XApp>fetchOneAsync(KName.NAME, name)
-            /* Convert to InJson */
             .compose(Ux::futureJ)
-            /* Before App Initialized ( Public Api ) */
             .compose(appData -> {
                 appData.remove(KName.APP_KEY);
                 appData.remove(KName.APP_SECRET);

@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.interfaces;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
@@ -29,24 +30,24 @@ public interface IBBag extends VertxPojo, Serializable {
     public String getId();
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
+     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 入口菜单
      */
-    public IBBag setEntry(Boolean value);
+    public IBBag setEntry(String value);
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
+     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 入口菜单
      */
-    public Boolean getEntry();
+    public String getEntry();
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY_ID</code>. 「entryId」- 入口专用ID
+     * Setter for <code>ZDB.B_BAG.STORE</code>. 「store」- 配置键名
      */
-    public IBBag setEntryId(String value);
+    public IBBag setStore(String value);
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY_ID</code>. 「entryId」- 入口专用ID
+     * Getter for <code>ZDB.B_BAG.STORE</code>. 「store」- 配置键名
      */
-    public String getEntryId();
+    public String getStore();
 
     /**
      * Setter for <code>ZDB.B_BAG.NAME</code>. 「name」- 名称
@@ -127,6 +128,16 @@ public interface IBBag extends VertxPojo, Serializable {
      * Getter for <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
     public JsonObject getUiStyle();
+
+    /**
+     * Setter for <code>ZDB.B_BAG.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    public IBBag setUiOpen(JsonArray value);
+
+    /**
+     * Getter for <code>ZDB.B_BAG.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    public JsonArray getUiOpen();
 
     /**
      * Setter for <code>ZDB.B_BAG.TYPE</code>. 「type」- 类型
@@ -267,8 +278,8 @@ public interface IBBag extends VertxPojo, Serializable {
         @Override
         public default IBBag fromJson(io.vertx.core.json.JsonObject json) {
                 setOrThrow(this::setId,json::getString,"ID","java.lang.String");
-                setOrThrow(this::setEntry,json::getBoolean,"ENTRY","java.lang.Boolean");
-                setOrThrow(this::setEntryId,json::getString,"ENTRY_ID","java.lang.String");
+                setOrThrow(this::setEntry,json::getString,"ENTRY","java.lang.String");
+                setOrThrow(this::setStore,json::getString,"STORE","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
                 setOrThrow(this::setNameAbbr,json::getString,"NAME_ABBR","java.lang.String");
                 setOrThrow(this::setNameFull,json::getString,"NAME_FULL","java.lang.String");
@@ -277,6 +288,7 @@ public interface IBBag extends VertxPojo, Serializable {
                 setOrThrow(this::setUiIcon,json::getString,"UI_ICON","java.lang.String");
                 setOrThrow(this::setUiSort,json::getLong,"UI_SORT","java.lang.Long");
                 // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column UI_OPEN!
                 setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
@@ -298,7 +310,7 @@ public interface IBBag extends VertxPojo, Serializable {
                 io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
                 json.put("ID",getId());
                 json.put("ENTRY",getEntry());
-                json.put("ENTRY_ID",getEntryId());
+                json.put("STORE",getStore());
                 json.put("NAME",getName());
                 json.put("NAME_ABBR",getNameAbbr());
                 json.put("NAME_FULL",getNameFull());
@@ -307,6 +319,7 @@ public interface IBBag extends VertxPojo, Serializable {
                 json.put("UI_ICON",getUiIcon());
                 json.put("UI_SORT",getUiSort());
                 // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
+                // Omitting unrecognized type io.vertx.core.json.JsonArray for column UI_OPEN!
                 json.put("TYPE",getType());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());

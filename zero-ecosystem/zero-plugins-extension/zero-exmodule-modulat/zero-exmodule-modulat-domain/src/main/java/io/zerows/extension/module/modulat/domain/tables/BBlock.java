@@ -153,11 +153,6 @@ public class BBlock extends TableImpl<BBlockRecord> {
     public final TableField<BBlockRecord, JsonObject> UI_STYLE = createField(DSL.name("UI_STYLE"), SQLDataType.CLOB(65535), this, "「uiStyle」- 子模块风格", new JooqJsonObjectConverter());
 
     /**
-     * The column <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
-     */
-    public final TableField<BBlockRecord, JsonArray> UI_OPEN = createField(DSL.name("UI_OPEN"), SQLDataType.CLOB(65535), this, "「uiOpen」- 开放属性", new JooqJsonArrayConverter());
-
-    /**
      * The column <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     public final TableField<BBlockRecord, String> SIGMA = createField(DSL.name("SIGMA"), SQLDataType.VARCHAR(128), this, "「sigma」- 统一标识");

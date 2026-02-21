@@ -10,7 +10,6 @@ import io.zerows.extension.module.modulat.servicespec.BagArgStub;
 import io.zerows.extension.skeleton.common.enums.TypeBag;
 import io.zerows.platform.constant.VValue;
 import io.zerows.platform.enums.modeling.EmModel;
-import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
 import java.util.List;
@@ -26,13 +25,8 @@ public abstract class ArkBase implements Ark {
     }
 
     protected JsonObject buildQr(final String input, final EmModel.By by, final Set<TypeBag> bags) {
-        final JsonObject conditionJ = Ux.whereAnd();
-        switch (by) {
-            case BY_KEY -> conditionJ.put(KName.APP_KEY, input);
-            case BY_SIGMA -> conditionJ.put(KName.SIGMA, input);
-            case BY_TENANT -> conditionJ.put(KName.Tenant.ID, input);
-            default -> conditionJ.put(KName.APP_ID, input);
-        }
+        // 抽取分别处理的判断逻辑，这种逻辑有利于复用逻辑，方便后续扩展
+        final JsonObject conditionJ = by.whereBy(input);
         if (Objects.nonNull(bags) && !bags.isEmpty()) {
             if (VValue.ONE == bags.size()) {
                 final TypeBag bag = bags.iterator().next();

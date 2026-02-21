@@ -313,21 +313,6 @@ public class BBlockDao extends AbstractVertxDAO<BBlockRecord, io.zerows.extensio
         }
 
         /**
-     * Find records that have <code>UI_OPEN IN (values)</code> asynchronously
-     */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiOpen(Collection<JsonArray> values) {
-                return findManyByCondition(BBlock.B_BLOCK.UI_OPEN.in(values));
-        }
-
-        /**
-     * Find records that have <code>UI_OPEN IN (values)</code> asynchronously
-     * limited by the given limit
-     */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyByUiOpen(Collection<JsonArray> values, int limit) {
-                return findManyByCondition(BBlock.B_BLOCK.UI_OPEN.in(values),limit);
-        }
-
-        /**
      * Find records that have <code>SIGMA IN (values)</code> asynchronously
      */
         public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBlock>> findManyBySigma(Collection<String> values) {

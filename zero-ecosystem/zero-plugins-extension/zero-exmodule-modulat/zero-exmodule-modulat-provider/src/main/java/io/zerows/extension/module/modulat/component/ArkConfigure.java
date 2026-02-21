@@ -42,18 +42,37 @@ class ArkConfigure extends ArkBase {
     public Future<ClusterSerializable> modularize(final String appId,
                                                   final boolean open,
                                                   final EmModel.By by) {
-        if (open) {
-            // 跳过缓存
-            return this.modularizeInternal(appId, true, by)
-                .compose(Ux::future);
+        // 提取原始数据
+        final JsonObject stored = BAG_ADMIN.get(appId);
+        if (Ut.isNotNil(stored)) {
+
         }
-        // 启用缓存
-        if (BAG_ADMIN.containsKey(appId)) {
-            return Ux.future(BAG_ADMIN.get(appId));
-        }
-        return this.modularizeInternal(appId, false, by).compose(stored -> {
-            BAG_ADMIN.put(appId, stored);
-            return Ux.future(stored);
+        return Future.succeededFuture(stored);
+    }
+
+    /**
+     * 📘[JSON] --> 查询条件
+     * <pre>
+     * {
+     *     "": true,
+     *     "appId": "???",
+     *     "type,i": ["EXTENSION", "COMMERCE", "FOUNDATION"],
+     *     "parentId,n": null
+     * }
+     * </pre>
+     * 新版路由中，BAG 会直接提取 EXTENSION 类型的模型信息，parentId = NULL 在旧版中可用，因为旧版没有入口根包的概念，而新版中会包含一个入口
+     * 根包，检查 B_BAG 数据表
+     *
+     * @param appId 应用 id
+     * @param by    查询方式
+     * @return 查询结果
+     */
+    private Future<JsonObject> fetchStored(final String appId, final EmModel.By by) {
+        final JsonObject condition = this.buildQr(appId, by);
+        log.debug("{} 功能包查询：`{}`", BkConstant.K_PREFIX, condition.encode());
+        return DB.on(BBagDao.class).<BBag>fetchAsync(condition).compose(bags -> {
+
+            return null;
         });
     }
     // private static final Cc<String, Future<JsonObject>> ASYNC_BAG_ADMIN = Cc.openA();
@@ -76,6 +95,9 @@ class ArkConfigure extends ArkBase {
         condition.put(KName.PARENT_ID + ",n", null);
         log.debug("{} 模块集合条件：{}", BkConstant.K_PREFIX, condition.encode());
         return DB.on(BBagDao.class).<BBag>fetchAsync(condition).compose(bags -> {
+            /*
+             * 此处读取的 bags 的数据
+             */
             final ConcurrentMap<String, Future<JsonObject>> futures = new ConcurrentHashMap<>();
             // open = true 的时候要开放
             final ConcurrentMap<String, Set<String>> openMap = new ConcurrentHashMap<>();
@@ -110,6 +132,7 @@ class ArkConfigure extends ArkBase {
             });
         });
     }
+
 
     static class Mom implements QuotaMetric.Supervisor<String, JsonObject> {
 

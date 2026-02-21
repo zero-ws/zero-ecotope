@@ -4,7 +4,9 @@
 package io.zerows.extension.module.modulat.domain.tables;
 
 
+import io.r2mo.vertx.jooq.generate.configuration.JooqJsonArrayConverter;
 import io.r2mo.vertx.jooq.generate.configuration.JooqJsonObjectConverter;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.Keys;
 import io.zerows.extension.module.modulat.domain.Zdb;
@@ -60,14 +62,14 @@ public class BBag extends TableImpl<BBagRecord> {
     public final TableField<BBagRecord, String> ID = createField(DSL.name("ID"), SQLDataType.VARCHAR(36).nullable(false), this, "「id」- 主键");
 
     /**
-     * The column <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
+     * The column <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 入口菜单
      */
-    public final TableField<BBagRecord, Boolean> ENTRY = createField(DSL.name("ENTRY"), SQLDataType.BIT, this, "「entry」-");
+    public final TableField<BBagRecord, String> ENTRY = createField(DSL.name("ENTRY"), SQLDataType.VARCHAR(128), this, "「entry」- 入口菜单");
 
     /**
-     * The column <code>ZDB.B_BAG.ENTRY_ID</code>. 「entryId」- 入口专用ID
+     * The column <code>ZDB.B_BAG.STORE</code>. 「store」- 配置键名
      */
-    public final TableField<BBagRecord, String> ENTRY_ID = createField(DSL.name("ENTRY_ID"), SQLDataType.VARCHAR(36), this, "「entryId」- 入口专用ID");
+    public final TableField<BBagRecord, String> STORE = createField(DSL.name("STORE"), SQLDataType.VARCHAR(255), this, "「store」- 配置键名");
 
     /**
      * The column <code>ZDB.B_BAG.NAME</code>. 「name」- 名称
@@ -108,6 +110,11 @@ public class BBag extends TableImpl<BBagRecord> {
      * The column <code>ZDB.B_BAG.UI_STYLE</code>. 「uiStyle」- 模块风格
      */
     public final TableField<BBagRecord, JsonObject> UI_STYLE = createField(DSL.name("UI_STYLE"), SQLDataType.CLOB(65535), this, "「uiStyle」- 模块风格", new JooqJsonObjectConverter());
+
+    /**
+     * The column <code>ZDB.B_BAG.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    public final TableField<BBagRecord, JsonArray> UI_OPEN = createField(DSL.name("UI_OPEN"), SQLDataType.CLOB(65535), this, "「uiOpen」- 开放属性", new JooqJsonArrayConverter());
 
     /**
      * The column <code>ZDB.B_BAG.TYPE</code>. 「type」- 类型
