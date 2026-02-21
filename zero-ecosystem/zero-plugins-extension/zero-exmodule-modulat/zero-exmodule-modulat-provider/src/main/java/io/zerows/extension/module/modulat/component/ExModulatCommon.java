@@ -1,14 +1,9 @@
 package io.zerows.extension.module.modulat.component;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.extension.skeleton.spi.ExModulat;
-import io.zerows.program.Ux;
-import io.zerows.support.Ut;
-
-import java.util.Objects;
+import io.zerows.platform.enums.modeling.EmModel;
 
 
 public class ExModulatCommon implements ExModulat {
@@ -21,8 +16,13 @@ public class ExModulatCommon implements ExModulat {
      * </pre>
      * 特殊的 mXxx 的配置对应的值
      * <pre>
-     *     1. Bag 中使用 UI_CONFIG 进行配置
-     *        校验 mXxx 是否存在配置重复
+     *     mXxx 键值提取的基本规则，如果 entry 有值，表示为入口 Bag，这种场景下会直接提取 mXxx 的值，若子模块中有和它同名
+     *     的 mXxx，则直接使用父类的 mXxx 键值用来存储相关数据信息，取值必须基于 Block 才可执行。
+     *
+     *     父子 store 的提取规则
+     *     1. 父 store + 子 store (null），直接使用 父 store 的值
+     *     2. 父 null  + 子 store，直接使用子 store 的值
+     *     3. 父 store + 子 store，同时使用父子 store 的值
      * </pre>
      *
      * @param appId 应用Id
@@ -31,21 +31,7 @@ public class ExModulatCommon implements ExModulat {
      */
     @Override
     public Future<JsonObject> extension(final String appId, final boolean open) {
-        Objects.requireNonNull(appId);
-        final JsonObject appJ = Ut.vId(appId);
-        return Ark.ofConfigure().modularize(appId, open).compose(moduleJ -> {
-            appJ.mergeIn((JsonObject) moduleJ, true);
-            if (open) {
-                // open = true 可启用“登录参数”
-                return Ux.future(appJ);
-            }
-
-            // open = false 的时候才读取 bags 节点的数据，否则不读取
-            return Ark.ofBag().modularize(appId, false).compose(bagJ -> {
-                final JsonArray bags = (JsonArray) bagJ;
-                appJ.put(KName.App.BAGS, bags);
-                return Ux.future(appJ);
-            });
-        });
+        final EquipFor equipFor = EquipFor.of(open);
+        return equipFor.configure(appId, EmModel.By.BY_ID);
     }
 }

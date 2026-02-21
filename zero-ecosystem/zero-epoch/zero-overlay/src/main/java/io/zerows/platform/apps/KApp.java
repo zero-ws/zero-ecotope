@@ -170,13 +170,30 @@ public class KApp implements HApp, HLog {
         return this;
     }
 
+    /**
+     * 注意此方法仅合并 config / data 两个部分，其他部分不合并
+     * <pre>
+     *     1. config 可能会在配置管理中变化
+     *     2. data   数据部分也可能在管理中变化
+     * </pre>
+     * 强制要求 ns, id 这种标识属性一旦赋予则不发生变化，场景
+     * <pre>
+     *     1. 标识属性相同时 -> 更新应用配置和数据
+     *     2. 表示属性不同时 -> 配置拷贝、数据拷贝
+     * </pre>
+     *
+     * @param target 被合并的目标对象
+     * @return 当前对象
+     */
     @Override
     public HApp apply(final HApp target) {
         if (Objects.isNull(target)) {
             return this;
         }
         if (target.equals(this)) {
+            // Fix: 解决 app 中数据 data = {} 的问题，此处要合并
             this.option().mergeIn(UtBase.valueJObject(target.option()));
+            this.data().mergeIn(UtBase.valueJObject(target.data()));
             return this;
         } else {
             throw new _40101Exception500CombineApp(this.ns, this.name);

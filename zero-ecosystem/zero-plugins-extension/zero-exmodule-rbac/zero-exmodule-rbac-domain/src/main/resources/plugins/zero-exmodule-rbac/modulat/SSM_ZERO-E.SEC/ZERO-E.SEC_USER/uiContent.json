@@ -1,4 +1,6 @@
 {
   "pLoginWechat": true,
+  "pLoginWecom": true,
+  "pLoginEmail": true,
   "pLoginSMS": true
 }
