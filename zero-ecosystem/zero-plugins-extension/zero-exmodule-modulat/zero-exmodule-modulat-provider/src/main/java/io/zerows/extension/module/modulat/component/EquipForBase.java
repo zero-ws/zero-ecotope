@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public abstract class EquipForBase implements EquipFor {
@@ -40,7 +41,10 @@ public abstract class EquipForBase implements EquipFor {
     protected Future<Map<String, List<BBag>>> fetchBags(final JsonObject condition) {
         this.log().info("{} 查询所有功能包：{}", BkConstant.K_PREFIX, condition);
         return DB.on(BBagDao.class).<BBag>fetchAsync(condition).compose(bags -> {
-
+            // 无值空返回
+            if (Objects.isNull(bags) || bags.isEmpty()) {
+                return Future.succeededFuture(new ConcurrentHashMap<>());
+            }
             return null;
         });
     }
