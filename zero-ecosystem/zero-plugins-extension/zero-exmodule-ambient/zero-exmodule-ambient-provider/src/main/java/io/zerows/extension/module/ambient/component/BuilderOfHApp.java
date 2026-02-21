@@ -135,12 +135,15 @@ public class BuilderOfHApp extends AbstractBuilder<HArk> {
             // 核心标识部分
             data.put(KName.ID, app.getId());
             data.put(KName.KEY, app.getId());
+
             /*
-             * 此处为何 appId 不直接提取 app.getAppId() 呢？此时是启动模式，启动的是主应用，appId 是子应用专用标识，简单说
-             * X_APP 中的 appId 字段只有在多应用场景下才会有值，单应用场景下该值为空字符串，所以启动过程中的 appId 直接使用
-             * id 即可，所以此处的 APP_ID 和 ID 是相同的
+             * 注意 XApp 中 id 和 appId 的含义有所不同
+             * - id 是 XApp 的主键，唯一标识一条记录
+             * - appId 是当前应用的附属应用 id，即当应用
+             *   - 成为子应用时，appId = 父应用 id
+             *   - 成为独立应用时，appId = null
              */
-            data.put(KName.APP_ID, app.getId());
+            data.put(KName.APP_ID, app.getAppId());
             data.put(KName.APP_KEY, app.getAppKey());
             data.put(KName.SIGMA, app.getSigma());
 

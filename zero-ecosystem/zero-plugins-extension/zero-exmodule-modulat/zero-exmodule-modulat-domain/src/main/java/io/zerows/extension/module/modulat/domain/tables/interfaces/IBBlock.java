@@ -212,16 +212,6 @@ public interface IBBlock extends VertxPojo, Serializable {
     public JsonObject getUiStyle();
 
     /**
-     * Setter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
-     */
-    public IBBlock setUiOpen(JsonArray value);
-
-    /**
-     * Getter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
-     */
-    public JsonArray getUiOpen();
-
-    /**
      * Setter for <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     public IBBlock setSigma(String value);
@@ -368,7 +358,6 @@ public interface IBBlock extends VertxPojo, Serializable {
                 setOrThrow(this::setUiIcon,json::getString,"UI_ICON","java.lang.String");
                 setOrThrow(this::setUiSort,json::getLong,"UI_SORT","java.lang.Long");
                 // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
-                // Omitting unrecognized type io.vertx.core.json.JsonArray for column UI_OPEN!
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
@@ -406,7 +395,6 @@ public interface IBBlock extends VertxPojo, Serializable {
                 json.put("UI_ICON",getUiIcon());
                 json.put("UI_SORT",getUiSort());
                 // Omitting unrecognized type io.vertx.core.json.JsonObject for column UI_STYLE!
-                // Omitting unrecognized type io.vertx.core.json.JsonArray for column UI_OPEN!
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());

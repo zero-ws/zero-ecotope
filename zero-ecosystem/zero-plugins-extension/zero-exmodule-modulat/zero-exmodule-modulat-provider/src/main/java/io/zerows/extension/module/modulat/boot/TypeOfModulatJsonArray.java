@@ -2,6 +2,7 @@ package io.zerows.extension.module.modulat.boot;
 
 import io.r2mo.vertx.jooq.generate.configuration.TypeOfJsonArray;
 import io.zerows.extension.module.modulat.domain.tables.BAuthority;
+import io.zerows.extension.module.modulat.domain.tables.BBag;
 import io.zerows.extension.module.modulat.domain.tables.BBlock;
 import io.zerows.extension.module.modulat.domain.tables.BWeb;
 
@@ -23,8 +24,11 @@ public class TypeOfModulatJsonArray extends TypeOfJsonArray {
             // BBlock
             Map.of(
                 BBlock.B_BLOCK.LIC_IDENTIFIER.getName(), BBlock.B_BLOCK.getName(),
-                BBlock.B_BLOCK.LIC_MENU.getName(), BBlock.B_BLOCK.getName(),
-                BBlock.B_BLOCK.UI_OPEN.getName(), BBlock.B_BLOCK.getName()
+                BBlock.B_BLOCK.LIC_MENU.getName(), BBlock.B_BLOCK.getName()
+            ),
+            // BBag
+            Map.of(
+                BBag.B_BAG.UI_OPEN.getName(), BBag.B_BAG.getName()
             ),
             // BWeb
             Map.of(

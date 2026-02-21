@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.daos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.AbstractVertxDAO;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BBag;
 import io.zerows.extension.module.modulat.domain.tables.records.BBagRecord;
@@ -41,7 +42,7 @@ public class BBagDao extends AbstractVertxDAO<BBagRecord, io.zerows.extension.mo
         /**
      * Find records that have <code>ENTRY IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByEntry(Collection<Boolean> values) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByEntry(Collection<String> values) {
                 return findManyByCondition(BBag.B_BAG.ENTRY.in(values));
         }
 
@@ -49,23 +50,23 @@ public class BBagDao extends AbstractVertxDAO<BBagRecord, io.zerows.extension.mo
      * Find records that have <code>ENTRY IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByEntry(Collection<Boolean> values, int limit) {
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByEntry(Collection<String> values, int limit) {
                 return findManyByCondition(BBag.B_BAG.ENTRY.in(values),limit);
         }
 
         /**
-     * Find records that have <code>ENTRY_ID IN (values)</code> asynchronously
+     * Find records that have <code>STORE IN (values)</code> asynchronously
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByEntryId(Collection<String> values) {
-                return findManyByCondition(BBag.B_BAG.ENTRY_ID.in(values));
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByStore(Collection<String> values) {
+                return findManyByCondition(BBag.B_BAG.STORE.in(values));
         }
 
         /**
-     * Find records that have <code>ENTRY_ID IN (values)</code> asynchronously
+     * Find records that have <code>STORE IN (values)</code> asynchronously
      * limited by the given limit
      */
-        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByEntryId(Collection<String> values, int limit) {
-                return findManyByCondition(BBag.B_BAG.ENTRY_ID.in(values),limit);
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByStore(Collection<String> values, int limit) {
+                return findManyByCondition(BBag.B_BAG.STORE.in(values),limit);
         }
 
         /**
@@ -186,6 +187,21 @@ public class BBagDao extends AbstractVertxDAO<BBagRecord, io.zerows.extension.mo
      */
         public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByUiStyle(Collection<JsonObject> values, int limit) {
                 return findManyByCondition(BBag.B_BAG.UI_STYLE.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>UI_OPEN IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByUiOpen(Collection<JsonArray> values) {
+                return findManyByCondition(BBag.B_BAG.UI_OPEN.in(values));
+        }
+
+        /**
+     * Find records that have <code>UI_OPEN IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.modulat.domain.tables.pojos.BBag>> findManyByUiOpen(Collection<JsonArray> values, int limit) {
+                return findManyByCondition(BBag.B_BAG.UI_OPEN.in(values),limit);
         }
 
         /**

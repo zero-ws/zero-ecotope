@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.pojos;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBBag;
 
@@ -21,8 +22,8 @@ public class BBag implements VertxPojo, IBBag {
     private static final long serialVersionUID = 1L;
 
     private String id;
-    private Boolean entry;
-    private String entryId;
+    private String entry;
+    private String store;
     private String name;
     private String nameAbbr;
     private String nameFull;
@@ -31,6 +32,7 @@ public class BBag implements VertxPojo, IBBag {
     private String uiIcon;
     private Long uiSort;
     private JsonObject uiStyle;
+    private JsonArray uiOpen;
     private String type;
     private String sigma;
     private String tenantId;
@@ -49,7 +51,7 @@ public class BBag implements VertxPojo, IBBag {
     public BBag(IBBag value) {
         this.id = value.getId();
         this.entry = value.getEntry();
-        this.entryId = value.getEntryId();
+        this.store = value.getStore();
         this.name = value.getName();
         this.nameAbbr = value.getNameAbbr();
         this.nameFull = value.getNameFull();
@@ -58,6 +60,7 @@ public class BBag implements VertxPojo, IBBag {
         this.uiIcon = value.getUiIcon();
         this.uiSort = value.getUiSort();
         this.uiStyle = value.getUiStyle();
+        this.uiOpen = value.getUiOpen();
         this.type = value.getType();
         this.sigma = value.getSigma();
         this.tenantId = value.getTenantId();
@@ -74,8 +77,8 @@ public class BBag implements VertxPojo, IBBag {
 
     public BBag(
         String id,
-        Boolean entry,
-        String entryId,
+        String entry,
+        String store,
         String name,
         String nameAbbr,
         String nameFull,
@@ -84,6 +87,7 @@ public class BBag implements VertxPojo, IBBag {
         String uiIcon,
         Long uiSort,
         JsonObject uiStyle,
+        JsonArray uiOpen,
         String type,
         String sigma,
         String tenantId,
@@ -99,7 +103,7 @@ public class BBag implements VertxPojo, IBBag {
     ) {
         this.id = id;
         this.entry = entry;
-        this.entryId = entryId;
+        this.store = store;
         this.name = name;
         this.nameAbbr = nameAbbr;
         this.nameFull = nameFull;
@@ -108,6 +112,7 @@ public class BBag implements VertxPojo, IBBag {
         this.uiIcon = uiIcon;
         this.uiSort = uiSort;
         this.uiStyle = uiStyle;
+        this.uiOpen = uiOpen;
         this.type = type;
         this.sigma = sigma;
         this.tenantId = tenantId;
@@ -145,36 +150,36 @@ public class BBag implements VertxPojo, IBBag {
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
+     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 入口菜单
      */
     @Override
-    public Boolean getEntry() {
+    public String getEntry() {
         return this.entry;
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
+     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 入口菜单
      */
     @Override
-    public BBag setEntry(Boolean entry) {
+    public BBag setEntry(String entry) {
         this.entry = entry;
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY_ID</code>. 「entryId」- 入口专用ID
+     * Getter for <code>ZDB.B_BAG.STORE</code>. 「store」- 配置键名
      */
     @Override
-    public String getEntryId() {
-        return this.entryId;
+    public String getStore() {
+        return this.store;
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY_ID</code>. 「entryId」- 入口专用ID
+     * Setter for <code>ZDB.B_BAG.STORE</code>. 「store」- 配置键名
      */
     @Override
-    public BBag setEntryId(String entryId) {
-        this.entryId = entryId;
+    public BBag setStore(String store) {
+        this.store = store;
         return this;
     }
 
@@ -311,6 +316,23 @@ public class BBag implements VertxPojo, IBBag {
     @Override
     public BBag setUiStyle(JsonObject uiStyle) {
         this.uiStyle = uiStyle;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.B_BAG.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    @Override
+    public JsonArray getUiOpen() {
+        return this.uiOpen;
+    }
+
+    /**
+     * Setter for <code>ZDB.B_BAG.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    @Override
+    public BBag setUiOpen(JsonArray uiOpen) {
+        this.uiOpen = uiOpen;
         return this;
     }
 
@@ -539,11 +561,11 @@ public class BBag implements VertxPojo, IBBag {
         }
         else if (!this.entry.equals(other.entry))
             return false;
-        if (this.entryId == null) {
-            if (other.entryId != null)
+        if (this.store == null) {
+            if (other.store != null)
                 return false;
         }
-        else if (!this.entryId.equals(other.entryId))
+        else if (!this.store.equals(other.store))
             return false;
         if (this.name == null) {
             if (other.name != null)
@@ -592,6 +614,12 @@ public class BBag implements VertxPojo, IBBag {
                 return false;
         }
         else if (!this.uiStyle.equals(other.uiStyle))
+            return false;
+        if (this.uiOpen == null) {
+            if (other.uiOpen != null)
+                return false;
+        }
+        else if (!this.uiOpen.equals(other.uiOpen))
             return false;
         if (this.type == null) {
             if (other.type != null)
@@ -674,7 +702,7 @@ public class BBag implements VertxPojo, IBBag {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.entry == null) ? 0 : this.entry.hashCode());
-        result = prime * result + ((this.entryId == null) ? 0 : this.entryId.hashCode());
+        result = prime * result + ((this.store == null) ? 0 : this.store.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result + ((this.nameAbbr == null) ? 0 : this.nameAbbr.hashCode());
         result = prime * result + ((this.nameFull == null) ? 0 : this.nameFull.hashCode());
@@ -683,6 +711,7 @@ public class BBag implements VertxPojo, IBBag {
         result = prime * result + ((this.uiIcon == null) ? 0 : this.uiIcon.hashCode());
         result = prime * result + ((this.uiSort == null) ? 0 : this.uiSort.hashCode());
         result = prime * result + ((this.uiStyle == null) ? 0 : this.uiStyle.hashCode());
+        result = prime * result + ((this.uiOpen == null) ? 0 : this.uiOpen.hashCode());
         result = prime * result + ((this.type == null) ? 0 : this.type.hashCode());
         result = prime * result + ((this.sigma == null) ? 0 : this.sigma.hashCode());
         result = prime * result + ((this.tenantId == null) ? 0 : this.tenantId.hashCode());
@@ -704,7 +733,7 @@ public class BBag implements VertxPojo, IBBag {
 
         sb.append(id);
         sb.append(", ").append(entry);
-        sb.append(", ").append(entryId);
+        sb.append(", ").append(store);
         sb.append(", ").append(name);
         sb.append(", ").append(nameAbbr);
         sb.append(", ").append(nameFull);
@@ -713,6 +742,7 @@ public class BBag implements VertxPojo, IBBag {
         sb.append(", ").append(uiIcon);
         sb.append(", ").append(uiSort);
         sb.append(", ").append(uiStyle);
+        sb.append(", ").append(uiOpen);
         sb.append(", ").append(type);
         sb.append(", ").append(sigma);
         sb.append(", ").append(tenantId);
@@ -738,7 +768,7 @@ public class BBag implements VertxPojo, IBBag {
     public void from(IBBag from) {
         setId(from.getId());
         setEntry(from.getEntry());
-        setEntryId(from.getEntryId());
+        setStore(from.getStore());
         setName(from.getName());
         setNameAbbr(from.getNameAbbr());
         setNameFull(from.getNameFull());
@@ -747,6 +777,7 @@ public class BBag implements VertxPojo, IBBag {
         setUiIcon(from.getUiIcon());
         setUiSort(from.getUiSort());
         setUiStyle(from.getUiStyle());
+        setUiOpen(from.getUiOpen());
         setType(from.getType());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());

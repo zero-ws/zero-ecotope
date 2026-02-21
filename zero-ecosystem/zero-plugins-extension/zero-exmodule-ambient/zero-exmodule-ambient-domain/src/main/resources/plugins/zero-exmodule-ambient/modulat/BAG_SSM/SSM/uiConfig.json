@@ -1,9 +1,4 @@
 {
-  "store": "mSetting",
-  "open": [
-    "pLoginWechat",
-    "pLoginSMS"
-  ],
   "config": {
     "_page": {
       "title": "系统参数设置",

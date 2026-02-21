@@ -5,6 +5,7 @@ package io.zerows.extension.module.modulat.domain.tables.records;
 
 
 import io.r2mo.vertx.jooq.shared.internal.VertxPojo;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.modulat.domain.tables.BBag;
 import io.zerows.extension.module.modulat.domain.tables.interfaces.IBBag;
@@ -42,36 +43,36 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
+     * Setter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 入口菜单
      */
     @Override
-    public BBagRecord setEntry(Boolean value) {
+    public BBagRecord setEntry(String value) {
         set(1, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」-
+     * Getter for <code>ZDB.B_BAG.ENTRY</code>. 「entry」- 入口菜单
      */
     @Override
-    public Boolean getEntry() {
-        return (Boolean) get(1);
+    public String getEntry() {
+        return (String) get(1);
     }
 
     /**
-     * Setter for <code>ZDB.B_BAG.ENTRY_ID</code>. 「entryId」- 入口专用ID
+     * Setter for <code>ZDB.B_BAG.STORE</code>. 「store」- 配置键名
      */
     @Override
-    public BBagRecord setEntryId(String value) {
+    public BBagRecord setStore(String value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.B_BAG.ENTRY_ID</code>. 「entryId」- 入口专用ID
+     * Getter for <code>ZDB.B_BAG.STORE</code>. 「store」- 配置键名
      */
     @Override
-    public String getEntryId() {
+    public String getStore() {
         return (String) get(2);
     }
 
@@ -212,11 +213,28 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     }
 
     /**
+     * Setter for <code>ZDB.B_BAG.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    @Override
+    public BBagRecord setUiOpen(JsonArray value) {
+        set(11, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.B_BAG.UI_OPEN</code>. 「uiOpen」- 开放属性
+     */
+    @Override
+    public JsonArray getUiOpen() {
+        return (JsonArray) get(11);
+    }
+
+    /**
      * Setter for <code>ZDB.B_BAG.TYPE</code>. 「type」- 类型
      */
     @Override
     public BBagRecord setType(String value) {
-        set(11, value);
+        set(12, value);
         return this;
     }
 
@@ -225,7 +243,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public String getType() {
-        return (String) get(11);
+        return (String) get(12);
     }
 
     /**
@@ -233,7 +251,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setSigma(String value) {
-        set(12, value);
+        set(13, value);
         return this;
     }
 
@@ -242,7 +260,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public String getSigma() {
-        return (String) get(12);
+        return (String) get(13);
     }
 
     /**
@@ -250,7 +268,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setTenantId(String value) {
-        set(13, value);
+        set(14, value);
         return this;
     }
 
@@ -259,7 +277,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public String getTenantId() {
-        return (String) get(13);
+        return (String) get(14);
     }
 
     /**
@@ -267,7 +285,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setAppId(String value) {
-        set(14, value);
+        set(15, value);
         return this;
     }
 
@@ -276,7 +294,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public String getAppId() {
-        return (String) get(14);
+        return (String) get(15);
     }
 
     /**
@@ -284,7 +302,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setActive(Boolean value) {
-        set(15, value);
+        set(16, value);
         return this;
     }
 
@@ -293,7 +311,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(15);
+        return (Boolean) get(16);
     }
 
     /**
@@ -301,7 +319,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setLanguage(String value) {
-        set(16, value);
+        set(17, value);
         return this;
     }
 
@@ -310,7 +328,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public String getLanguage() {
-        return (String) get(16);
+        return (String) get(17);
     }
 
     /**
@@ -318,7 +336,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setMetadata(JsonObject value) {
-        set(17, value);
+        set(18, value);
         return this;
     }
 
@@ -327,7 +345,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public JsonObject getMetadata() {
-        return (JsonObject) get(17);
+        return (JsonObject) get(18);
     }
 
     /**
@@ -335,7 +353,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setVersion(String value) {
-        set(18, value);
+        set(19, value);
         return this;
     }
 
@@ -344,7 +362,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public String getVersion() {
-        return (String) get(18);
+        return (String) get(19);
     }
 
     /**
@@ -352,7 +370,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setCreatedAt(LocalDateTime value) {
-        set(19, value);
+        set(20, value);
         return this;
     }
 
@@ -361,7 +379,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(19);
+        return (LocalDateTime) get(20);
     }
 
     /**
@@ -369,7 +387,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setCreatedBy(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -378,7 +396,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -386,7 +404,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setUpdatedAt(LocalDateTime value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -395,7 +413,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(21);
+        return (LocalDateTime) get(22);
     }
 
     /**
@@ -403,7 +421,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public BBagRecord setUpdatedBy(String value) {
-        set(22, value);
+        set(23, value);
         return this;
     }
 
@@ -412,7 +430,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(22);
+        return (String) get(23);
     }
 
     // -------------------------------------------------------------------------
@@ -432,7 +450,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     public void from(IBBag from) {
         setId(from.getId());
         setEntry(from.getEntry());
-        setEntryId(from.getEntryId());
+        setStore(from.getStore());
         setName(from.getName());
         setNameAbbr(from.getNameAbbr());
         setNameFull(from.getNameFull());
@@ -441,6 +459,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
         setUiIcon(from.getUiIcon());
         setUiSort(from.getUiSort());
         setUiStyle(from.getUiStyle());
+        setUiOpen(from.getUiOpen());
         setType(from.getType());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());
@@ -476,12 +495,12 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
     /**
      * Create a detached, initialised BBagRecord
      */
-    public BBagRecord(String id, Boolean entry, String entryId, String name, String nameAbbr, String nameFull, String parentId, JsonObject uiConfig, String uiIcon, Long uiSort, JsonObject uiStyle, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public BBagRecord(String id, String entry, String store, String name, String nameAbbr, String nameFull, String parentId, JsonObject uiConfig, String uiIcon, Long uiSort, JsonObject uiStyle, JsonArray uiOpen, String type, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(BBag.B_BAG);
 
         setId(id);
         setEntry(entry);
-        setEntryId(entryId);
+        setStore(store);
         setName(name);
         setNameAbbr(nameAbbr);
         setNameFull(nameFull);
@@ -490,6 +509,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
         setUiIcon(uiIcon);
         setUiSort(uiSort);
         setUiStyle(uiStyle);
+        setUiOpen(uiOpen);
         setType(type);
         setSigma(sigma);
         setTenantId(tenantId);
@@ -514,7 +534,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
         if (value != null) {
             setId(value.getId());
             setEntry(value.getEntry());
-            setEntryId(value.getEntryId());
+            setStore(value.getStore());
             setName(value.getName());
             setNameAbbr(value.getNameAbbr());
             setNameFull(value.getNameFull());
@@ -523,6 +543,7 @@ public class BBagRecord extends UpdatableRecordImpl<BBagRecord> implements Vertx
             setUiIcon(value.getUiIcon());
             setUiSort(value.getUiSort());
             setUiStyle(value.getUiStyle());
+            setUiOpen(value.getUiOpen());
             setType(value.getType());
             setSigma(value.getSigma());
             setTenantId(value.getTenantId());

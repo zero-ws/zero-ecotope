@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS `B_BLOCK` (
     `UI_ICON`         VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uiIcon」- 子模块图标',
     `UI_SORT`         BIGINT        DEFAULT NULL COMMENT '「uiSort」- 子模块排序',
     `UI_STYLE`        TEXT          COLLATE utf8mb4_bin COMMENT '「uiStyle」- 子模块风格',
-    `UI_OPEN`         TEXT          COLLATE utf8mb4_bin COMMENT '「uiOpen」- 开放属性',
 
     -- ==================================================================================================
     -- ☁️ 4. 多租户与上下文属性 (Multi-Tenancy & Context)

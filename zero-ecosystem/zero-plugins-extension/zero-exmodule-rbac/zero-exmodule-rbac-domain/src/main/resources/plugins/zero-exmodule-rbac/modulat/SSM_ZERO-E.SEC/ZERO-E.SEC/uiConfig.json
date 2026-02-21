@@ -7,6 +7,10 @@
         ],
         [
           "pLoginWechat,微信登录,,,aiCheckbox,valuePropName=checked",
+          "pLoginWecom,企微登录,,,aiCheckbox,valuePropName=checked"
+        ],
+        [
+          "pLoginEmail,邮箱登录,,,aiCheckbox,valuePropName=checked",
           "pLoginSMS,短信登录,,,aiCheckbox,valuePropName=checked"
         ]
       ]

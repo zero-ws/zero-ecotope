@@ -1,5 +1,8 @@
 package io.zerows.platform.enums.modeling;
 
+import io.vertx.core.json.JsonObject;
+import io.zerows.platform.constant.VName;
+
 /**
  * @author lang : 2023-05-31
  */
@@ -37,6 +40,33 @@ public class EmModel {
         BY_ID,              // APP_ID
         BY_KEY,             // APP_KEY
         BY_TENANT,          // TENANT_ID
-        BY_SIGMA            // SIGMA
+        BY_SIGMA;           // SIGMA
+
+        /**
+         * 直接根据自身值提取查询条件
+         * <pre>
+         *     - APP_KEY        = ?
+         *     - SIGMA          = ?
+         *     - TENANT_ID      = ?
+         *     - APP_ID         = ?
+         * </pre>
+         *
+         * @param value 查询值
+         * @return 查询条件 JsonObject
+         */
+        public JsonObject whereBy(final String value) {
+            final JsonObject conditionJ = new JsonObject()
+                .put("", Boolean.TRUE);
+
+            // 直接使用 this 引用当前枚举值
+            switch (this) {
+                case BY_KEY -> conditionJ.put(VName.APP_KEY, value);
+                case BY_SIGMA -> conditionJ.put(VName.SIGMA, value);
+                case BY_TENANT -> conditionJ.put(VName.TENANT_ID, value);
+                case BY_ID -> conditionJ.put(VName.APP_ID, value);
+                default -> conditionJ.put(VName.APP_ID, value); // 保底逻辑
+            }
+            return conditionJ;
+        }
     }
 }

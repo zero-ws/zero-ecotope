@@ -8,16 +8,21 @@ CREATE TABLE IF NOT EXISTS `B_BAG` (
     -- ==================================================================================================
     -- 📝 2. 业务字段区 (Business Fields)
     -- ==================================================================================================
-    `ENTRY`       BIT(1)        DEFAULT NULL COMMENT '「entry」-',                                           -- 是否入口（带入口为应用，当前APP_ID下安装内容）
-    `ENTRY_ID`    VARCHAR(36)   DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「entryId」- 入口专用ID',           -- 入口专用ID，关联 X_MENU 中的ID，其余的直接使用链接
+    `ENTRY`       VARCHAR(128)  DEFAULT NULL COLLATE utf8mb4_bin COMMENT '「entry」- 入口菜单',               -- 入口专用ID，关联 X_MENU 中的ID，其余的直接使用链接
+    `STORE`       VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「store」- 配置键名',               -- store，必须是 m 前缀
     `NAME`        VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「name」- 名称',
     `NAME_ABBR`   VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「nameAbbr」- 模块缩写',
     `NAME_FULL`   VARCHAR(255)  COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「nameFull」- 模块全名',
     `PARENT_ID`   VARCHAR(36)   COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「parentId」- 父节点',
+    
+    -- ==================================================================================================
+    -- 📝   界面配置特殊说明
+    -- ==================================================================================================
     `UI_CONFIG`   LONGTEXT      COLLATE utf8mb4_bin COMMENT '「uiConfig」- 模块核心配置',
     `UI_ICON`     TEXT          COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uiIcon」- 模块图标',
     `UI_SORT`     BIGINT        DEFAULT NULL COMMENT '「uiSort」- 模块排序',
     `UI_STYLE`    TEXT          COLLATE utf8mb4_bin COMMENT '「uiStyle」- 模块风格',
+    `UI_OPEN`     TEXT          COLLATE utf8mb4_bin DEFAULT NULL COMMENT '「uiOpen」- 开放属性',              -- 以模块为标准
 
     -- ==================================================================================================
     -- 🧩 3. 模型关联与多态 (Polymorphic Associations)

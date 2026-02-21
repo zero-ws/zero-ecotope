@@ -40,7 +40,6 @@ public class BBlock implements VertxPojo, IBBlock {
     private String uiIcon;
     private Long uiSort;
     private JsonObject uiStyle;
-    private JsonArray uiOpen;
     private String sigma;
     private String tenantId;
     private String appId;
@@ -75,7 +74,6 @@ public class BBlock implements VertxPojo, IBBlock {
         this.uiIcon = value.getUiIcon();
         this.uiSort = value.getUiSort();
         this.uiStyle = value.getUiStyle();
-        this.uiOpen = value.getUiOpen();
         this.sigma = value.getSigma();
         this.tenantId = value.getTenantId();
         this.appId = value.getAppId();
@@ -109,7 +107,6 @@ public class BBlock implements VertxPojo, IBBlock {
         String uiIcon,
         Long uiSort,
         JsonObject uiStyle,
-        JsonArray uiOpen,
         String sigma,
         String tenantId,
         String appId,
@@ -141,7 +138,6 @@ public class BBlock implements VertxPojo, IBBlock {
         this.uiIcon = uiIcon;
         this.uiSort = uiSort;
         this.uiStyle = uiStyle;
-        this.uiOpen = uiOpen;
         this.sigma = sigma;
         this.tenantId = tenantId;
         this.appId = appId;
@@ -486,23 +482,6 @@ public class BBlock implements VertxPojo, IBBlock {
     }
 
     /**
-     * Getter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
-     */
-    @Override
-    public JsonArray getUiOpen() {
-        return this.uiOpen;
-    }
-
-    /**
-     * Setter for <code>ZDB.B_BLOCK.UI_OPEN</code>. 「uiOpen」- 开放属性
-     */
-    @Override
-    public BBlock setUiOpen(JsonArray uiOpen) {
-        this.uiOpen = uiOpen;
-        return this;
-    }
-
-    /**
      * Getter for <code>ZDB.B_BLOCK.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
@@ -812,12 +791,6 @@ public class BBlock implements VertxPojo, IBBlock {
         }
         else if (!this.uiStyle.equals(other.uiStyle))
             return false;
-        if (this.uiOpen == null) {
-            if (other.uiOpen != null)
-                return false;
-        }
-        else if (!this.uiOpen.equals(other.uiOpen))
-            return false;
         if (this.sigma == null) {
             if (other.sigma != null)
                 return false;
@@ -910,7 +883,6 @@ public class BBlock implements VertxPojo, IBBlock {
         result = prime * result + ((this.uiIcon == null) ? 0 : this.uiIcon.hashCode());
         result = prime * result + ((this.uiSort == null) ? 0 : this.uiSort.hashCode());
         result = prime * result + ((this.uiStyle == null) ? 0 : this.uiStyle.hashCode());
-        result = prime * result + ((this.uiOpen == null) ? 0 : this.uiOpen.hashCode());
         result = prime * result + ((this.sigma == null) ? 0 : this.sigma.hashCode());
         result = prime * result + ((this.tenantId == null) ? 0 : this.tenantId.hashCode());
         result = prime * result + ((this.appId == null) ? 0 : this.appId.hashCode());
@@ -948,7 +920,6 @@ public class BBlock implements VertxPojo, IBBlock {
         sb.append(", ").append(uiIcon);
         sb.append(", ").append(uiSort);
         sb.append(", ").append(uiStyle);
-        sb.append(", ").append(uiOpen);
         sb.append(", ").append(sigma);
         sb.append(", ").append(tenantId);
         sb.append(", ").append(appId);
@@ -990,7 +961,6 @@ public class BBlock implements VertxPojo, IBBlock {
         setUiIcon(from.getUiIcon());
         setUiSort(from.getUiSort());
         setUiStyle(from.getUiStyle());
-        setUiOpen(from.getUiOpen());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());
         setAppId(from.getAppId());

@@ -209,6 +209,17 @@ class UJson {
 
     @SuppressWarnings("unchecked")
     static JsonObject toJObject(final Object value) {
+        /*
+        java.lang.NullPointerException: Cannot invoke "Object.getClass()" because "value" is null
+            at io.zerows.support.base.UJson.lambda$toJObject$2(UJson.java:218)
+            at io.r2mo.function.FnJvm.lambda$jvmAt$0(FnJvm.java:16)
+            at io.r2mo.function.FnJvm.jvmOr(FnJvm.java:30)
+            at io.r2mo.function.FnJvm.jvmAt(FnJvm.java:15)
+            at io.r2mo.function.Fn.jvmAt(Fn.java:41)
+         */
+        if (Objects.isNull(value)) {
+            return new JsonObject();
+        }
         if (value instanceof final JsonObject directJ) {
             return directJ;
         }
@@ -237,6 +248,9 @@ class UJson {
     }
 
     static JsonArray toJArray(final Object value) {
+        if (Objects.isNull(value)) {
+            return new JsonArray();
+        }
         if (value instanceof final JsonArray directA) {
             return directA;
         }
