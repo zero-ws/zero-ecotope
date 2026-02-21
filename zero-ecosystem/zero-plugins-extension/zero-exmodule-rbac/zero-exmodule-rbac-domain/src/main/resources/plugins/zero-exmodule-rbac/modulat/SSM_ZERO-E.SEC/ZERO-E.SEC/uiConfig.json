@@ -1,9 +1,4 @@
 {
-  "store": "mSecurity",
-  "open": [
-    "pLoginWechat",
-    "pLoginSMS"
-  ],
   "config": {
     "_form": {
       "ui": [
