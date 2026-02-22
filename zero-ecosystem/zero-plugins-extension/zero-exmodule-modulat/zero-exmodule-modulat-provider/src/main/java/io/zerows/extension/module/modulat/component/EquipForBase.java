@@ -98,13 +98,22 @@ public abstract class EquipForBase implements EquipFor {
             return combiner.configure(bag, blocks);
         }).map(data -> {
             final JsonObject dataJ = data.copy();
-            final JsonArray uiOpen = bag.getUiOpen();
-            if (isOpen && Ut.isNotNil(uiOpen)) {
-                final Set<String> openSet = Ut.toSet(uiOpen);
-                openSet.forEach(dataJ::remove);
+            if (isOpen) {
+                final Set<String> openSet = this.dataOpen(bag);
+                final Set<String> dataKeys = dataJ.fieldNames();
+                final Set<String> removeKeys = Ut.elementDiff(dataKeys, openSet);
+                removeKeys.forEach(dataJ::remove);
             }
             return dataJ;
         });
+    }
+
+    private Set<String> dataOpen(final BBag bag) {
+        final JsonArray uiOpen = bag.getUiOpen();
+        final Set<String> openSet = Ut.toSet(bag.getUiOpen());
+        openSet.add(KName.__.METADATA);
+        openSet.add("pBag");
+        return openSet;
     }
 
     private Future<JsonObject> dataAsync(final List<BBag> bagList, final boolean isOpen) {
