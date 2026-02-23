@@ -3,6 +3,7 @@ package io.zerows.extension.module.modulat.component;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
 import io.zerows.platform.enums.modeling.EmModel;
 
 public class EquipForOpen extends EquipForBase {
@@ -17,6 +18,7 @@ public class EquipForOpen extends EquipForBase {
         return this.fetchBags(condition)
             .compose(map -> this.dataAsync(map, true))
             .map(result -> {
+                result.put(KName.KEY,appId);
                 OPEN_DATA.put(appId, result);
                 return result;
             });

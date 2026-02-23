@@ -29,7 +29,7 @@ class FeatureORefer implements FeatureO {
             final JsonObject subRecord = Ut.elementSubset(record, filterObj.fieldNames());
             return subRecord.equals(filterObj);
         }).forEach(item -> {
-            final String key = Ut.valueString(item, KName.KEY);
+            final String key = Ut.valueString(item, KName.ID);
             final Object valueResult;
             if (fieldExpr.contains("`")) {
                 // 表达式处理

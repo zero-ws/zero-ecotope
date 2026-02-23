@@ -64,6 +64,8 @@ public interface KName extends VName {
         String BLOCK = "block";
 
         String BAGS = "bags";
+        // 替代 bags 的新节点名，用于 extension 返回结果中挂载 B_BAG 原始列表
+        String APPS = "apps";
     }
 
 

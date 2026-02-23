@@ -38,6 +38,9 @@ class ScCache {
 
         final String viewKey = Ke.keyView(context);
         final ScUser scUser = ScUser.login(habitus);
+        if(scUser==null){
+            return Ux.futureJ();
+        }
         /*
          * 此处需要针对缓存中的 matrix 执行拷贝，后续流程中会直接执行如下流程
          * cache matrix -> Before + Visitant -> 影响 matrix

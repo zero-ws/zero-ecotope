@@ -78,7 +78,7 @@ class StepGeneratorData extends StepGeneratorBase {
 //                }
 
                 final JsonObject entries = feature.getValueConfig();
-                if (entries.getJsonObject("css") != null) {
+                if (entries!=null&&entries.getJsonObject("css") != null) {
                     featureItem.mergeIn(entries.getJsonObject("css"));
                 }
 
@@ -130,8 +130,10 @@ class StepGeneratorData extends StepGeneratorBase {
          */
         final ConcurrentMap<String, Future<ConcurrentMap<String, Object>>> preFeatureMap = new ConcurrentHashMap<>();
         featureDetail.forEach(feature -> {
-            final FeatureO oFeature = FeatureO.of(feature.getValuePath());
-            preFeatureMap.put(feature.getName(), oFeature.outAsync(sourceData, params, feature));
+            if(feature.getValuePath()!=null){
+                final FeatureO oFeature = FeatureO.of(feature.getValuePath());
+                preFeatureMap.put(feature.getName(), oFeature.outAsync(sourceData, params, feature));
+            }
         });
         return Fx.combineM(preFeatureMap).compose(matrixMap -> {
             // 抽取维度配置
@@ -147,7 +149,7 @@ class StepGeneratorData extends StepGeneratorBase {
                  * - key
                  */
                 final JsonObject dataRecord = new JsonObject();
-                final String recordKey = Ut.valueString(item, KName.KEY);
+                final String recordKey = Ut.valueString(item, KName.ID);
                 dataRecord.put(KName.KEY, recordKey);      // 记录 key
 
                 final String dimKey = Ut.valueString(item, dimField);           // 维度键

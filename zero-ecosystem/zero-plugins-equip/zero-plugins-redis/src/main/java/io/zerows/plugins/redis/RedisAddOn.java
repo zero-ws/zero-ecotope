@@ -45,6 +45,7 @@ class RedisAddOn extends AddOnVertx<Redis> {
     protected Redis createInstanceBy(final String name) {
         final JsonObject options = this.config().options();
         final RedisOptions redisOptions = new RedisOptions(options);
+        redisOptions.setConnectionString(options.getString("connectionString"));
         /*
          * TODO: 扩展异步模式 -> 后期分布式使用
          * Redis.createStandaloneClient()

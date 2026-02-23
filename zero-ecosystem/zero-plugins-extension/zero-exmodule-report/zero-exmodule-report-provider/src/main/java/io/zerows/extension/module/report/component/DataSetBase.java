@@ -72,6 +72,10 @@ public abstract class DataSetBase implements DataSet {
             } else {
                 condition.put(this.loadKey(refConfig) + ",i", ids);
             }
+            if(refConfig.containsKey("fieldNotNull")){
+                String string = refConfig.getString("fieldNotNull");
+                condition.put(string+",!n","");
+            }
             final DataSet dataSet = DataSet.of(refConfig);
             dataMap.put(whereField, dataSet.loadAsync(condition));
             // input / refField -> output
@@ -135,7 +139,7 @@ public abstract class DataSetBase implements DataSet {
 
     private String loadKey(final JsonObject refConfig) {
         final String whereKey = Ut.valueString(refConfig, "where");
-        return Ut.isNil(whereKey) ? KName.KEY : whereKey;
+        return Ut.isNil(whereKey) ? KName.ID : whereKey;
     }
 
     private String loadKey(final String refField, final JsonObject refConfig) {

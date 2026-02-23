@@ -28,7 +28,7 @@ class FeatureOParam implements FeatureO {
         // 这种类型每条记录都应该有
         final ConcurrentMap<String, Object> resultMap = new ConcurrentHashMap<>();
         Ut.itJArray(dataSource).forEach(item -> {
-            final String key = Ut.valueString(item, KName.KEY);
+            final String key = Ut.valueString(item, KName.ID);
             resultMap.put(key, valueResult);
         });
         return Ux.future(resultMap);

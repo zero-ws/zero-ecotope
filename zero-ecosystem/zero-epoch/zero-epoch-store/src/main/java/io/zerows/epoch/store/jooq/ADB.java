@@ -973,25 +973,25 @@ public class ADB {
     }
 
     // map ✅ ------> executed ✅ ------> map ❌
-    public <T> ConcurrentMap<String, List<T>> group(final JsonObject criteria, final String field) {
-        return new ConcurrentHashMap<>(this.<T>dbe().findGroupBy(criteria, field));
+    public <T> ConcurrentMap<String, List<T>> group(final String field,final JsonObject criteria) {
+        return new ConcurrentHashMap<>(this.<T>dbe().findGroupBy(field,criteria));
     }
 
     // map ✅ ------> executed ✅ ------> map ✅
-    public <T> ConcurrentMap<String, JsonArray> groupJ(final JsonObject criteria, final String field) {
-        return new ConcurrentHashMap<>(this.<T>dbe().findGroupByJ(criteria, field));
+    public <T> ConcurrentMap<String, JsonArray> groupJ(final String field,final JsonObject criteria) {
+        return new ConcurrentHashMap<>(this.<T>dbe().findGroupByJ(field,criteria));
     }
 
     // map ✅ ------> executed ✅ ------> map ❌
     public <T> Future<ConcurrentMap<String, List<T>>> groupAsync(final JsonObject criteria, final String field) {
-        return this.<T>dbe().findGroupByAsync(criteria, field)
+        return this.<T>dbe().findGroupByAsync(field,criteria)
             // 特殊转换
             .compose(map -> Future.succeededFuture(new ConcurrentHashMap<>(map)));
     }
 
     // map ✅ ------> executed ✅ ------> map ✅
     public <T> Future<ConcurrentMap<String, JsonArray>> groupJAsync(final JsonObject criteria, final String field) {
-        return this.<T>dbe().findGroupByAsyncJ(criteria, field)
+        return this.<T>dbe().findGroupByAsyncJ(field,criteria)
             // 特殊转换
             .compose(map -> Future.succeededFuture(new ConcurrentHashMap<>(map)));
     }

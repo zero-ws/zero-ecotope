@@ -85,12 +85,12 @@ public class FetchActor {
         // Search Bills by Pagination ( Qr Engine )
         return DB.on(FBillDao.class).searchJAsync(query).compose(response -> {
             final JsonArray bill = Ut.valueJArray(response, KName.LIST);
-            final Set<String> bills = Ut.valueSetString(bill, KName.KEY);
+            final Set<String> bills = Ut.valueSetString(bill, KName.ID);
             return DB.on(FBillItemDao.class).fetchJInAsync("billId", Ut.toJArray(bills))
                 .compose(items -> {
                     final ConcurrentMap<String, JsonArray> grouped = Ut.elementGroup(items, "billId");
                     Ut.itJArray(bill).forEach(json -> {
-                        final String key = json.getString(KName.KEY);
+                        final String key = json.getString(KName.ID);
                         if (grouped.containsKey(key)) {
                             json.put(KName.ITEMS, grouped.getOrDefault(key, new JsonArray()));
                         } else {
@@ -161,7 +161,7 @@ public class FetchActor {
                     final JsonArray authArray = Ux.toJson(authorized);
                     final ConcurrentMap<String, JsonArray> grouped = Ut.elementGroup(authArray, "bookId");
                     Ut.itJArray(bookArray).forEach(bookJson -> {
-                        final String key = bookJson.getString(KName.KEY);
+                        final String key = bookJson.getString(KName.ID);
                         bookJson.put("authorize", grouped.getOrDefault(key, new JsonArray()));
                     });
                     return Ux.future(bookArray);

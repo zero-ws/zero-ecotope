@@ -27,11 +27,12 @@ class FeatureOData implements FeatureO {
 
         final ConcurrentMap<String, Object> resultMap = new ConcurrentHashMap<>();
         Ut.itJArray(dataSource).forEach(item -> {
-            final String key = Ut.valueString(item, KName.KEY);
+            final String key = Ut.valueString(item, KName.ID);
             final Object valueResult = Ut.visitString(item, fieldPath);
 
             if (Objects.nonNull(valueResult)) {
-                final JsonObject valueConfig = Ut.toJObject(feature.getValueConfig());
+                final Object rawConfig = feature.getValueConfig();
+                final JsonObject valueConfig = Objects.isNull(rawConfig) ? new JsonObject() : Ut.toJObject(rawConfig);
                 final Object valueFinal = T.formatValue(valueResult, valueConfig);
                 resultMap.put(key, valueFinal);
             }

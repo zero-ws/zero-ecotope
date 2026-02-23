@@ -29,7 +29,7 @@ public class ModelService implements ModelStub {
         final JsonObject filters = new JsonObject()
             .put("", Boolean.TRUE)
             .put("entry", entry)
-            .put("id", appId);
+            .put(KName.APP_ID, appId);
         /* Cache Module for future usage */
         return this.fetchModule(filters, () -> DB.on(XModuleDao.class)
             .fetchOneAsync(filters)
