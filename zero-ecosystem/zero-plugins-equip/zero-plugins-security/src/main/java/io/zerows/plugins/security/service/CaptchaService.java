@@ -12,11 +12,7 @@ import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.plugins.security.SecurityActor;
-import io.zerows.plugins.security.exception._80200Exception401CaptchaWrong;
-import io.zerows.plugins.security.exception._80201Exception401CaptchaExpired;
-import io.zerows.plugins.security.exception._80212Exception500CaptchaDisabled;
-import io.zerows.plugins.security.exception._80213Exception500CaptchaGeneration;
-import io.zerows.plugins.security.exception._80242Exception400CaptchaRequired;
+import io.zerows.plugins.security.exception.*;
 import io.zerows.plugins.security.metadata.YmSecurity;
 import io.zerows.plugins.security.metadata.YmSecurityCaptcha;
 import io.zerows.program.Ux;
@@ -153,10 +149,10 @@ public class CaptchaService implements CaptchaStub {
         final CaptchaArgs arguments = Objects.requireNonNull(configCaptcha.captchaConfig()).forArguments();
         return UserCache.of().authorize(captchaId, arguments).<Future<String>>compose().compose(cached -> {
             if (Objects.isNull(cached)) {
-                throw new _80201Exception401CaptchaExpired(captchaId, captcha);
+                return Fx.failOut(_80201Exception401CaptchaExpired.class,captcha);
             }
             if (!cached.equalsIgnoreCase(captcha)) {
-                throw new _80200Exception401CaptchaWrong(captcha);
+                return Fx.failOut(_80200Exception401CaptchaWrong.class,captcha);
             }
             // 移除验证码 / 认证成功之后再移除
             UserCache.of().authorizeKo(captchaId, arguments);

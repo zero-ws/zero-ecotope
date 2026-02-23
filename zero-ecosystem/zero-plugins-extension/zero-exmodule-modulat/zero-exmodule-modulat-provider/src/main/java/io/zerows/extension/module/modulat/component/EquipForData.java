@@ -12,6 +12,7 @@ import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.program.Ux;
 
 import java.util.List;
+import java.util.Objects;
 
 public class EquipForData extends EquipForBase {
     private static final Cc<String, JsonObject> FULL_DATA = Cc.open();
@@ -38,8 +39,8 @@ public class EquipForData extends EquipForBase {
         return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
             .map((List<BBag> bags) -> {
                 JsonArray json = Ux.toJson(bags);
-
-                result.put(KName.App.APPS, json);
+                result.put(KName.App.BAGS, json);
+                result.put(KName.KEY,appId);
                 return result;
             });
     }

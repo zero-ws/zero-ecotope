@@ -40,11 +40,8 @@ public class PowerApp {
 
 
         // 直接调用 HPI 处理
-        // 必须走 extension(JsonObject, boolean) 这个 default 方法，让它在内部将 key 合并进返回结果；
-        // 直接调 extension(String, boolean) 时返回的只有包数据，不含 key，后面的合法性校验会失败
-        final JsonObject appJson = new JsonObject().put(KName.KEY, appId);
         return HPI.of(ExModulat.class).waitAsync(
-            modulat -> modulat.extension(appJson, open),
+            modulat -> modulat.extension(appId, open),
             JsonObject::new
         ).compose(storedJ -> {
             final String configApp = Ut.valueString(storedJ, KName.KEY);
@@ -55,10 +52,10 @@ public class PowerApp {
 
             // 抓取应用相关的 HMod 缓存
             final PowerApp app = new PowerApp(appId);
-            /* 移除 apps / key，只保留 mXxx 格式的模块配置节点 */
+            /* 移除 bags / key */
             final JsonObject configAppJ = storedJ.copy();
             configAppJ.remove(KName.KEY);
-            configAppJ.remove(KName.App.APPS);
+            configAppJ.remove(KName.App.BAGS);
             Ut.itJObject(configAppJ, JsonObject.class)
                 .map(entry -> new PowerMod(entry.getKey(), entry.getValue()))
                 .forEach(app::block);
