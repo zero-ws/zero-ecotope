@@ -2,6 +2,7 @@ package io.zerows.plugins.security.weco;
 
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
+import io.r2mo.jaas.session.UserAt;
 import io.r2mo.xync.weco.WeCoSession;
 import io.r2mo.xync.weco.wechat.WeArgsCallback;
 import io.r2mo.xync.weco.wechat.WeArgsSignature;
@@ -100,15 +101,29 @@ public class WeChatService implements WeChatStub {
         }).compose(userAt -> {
             final TokenDynamicResponse response = new TokenDynamicResponse(userAt);
             // 更新 token 保证 WeCoSession 中的 /wechat-status 能检查到最新的 Token
-            final String sessionKey = WeCoSession.keyOf(uuid);
-            final Duration expiredAt = Duration.ofSeconds(this.configMp.getExpireSeconds());
-            return WeCoAsyncSession.of().saveAsync(sessionKey, response.getToken(), expiredAt).compose(checked -> {
-                // 响应信息
-                final JsonObject responseJ = new JsonObject();
-                responseJ.put(KName.ID, userAt.id().toString());
-                responseJ.put(KName.TOKEN, response.getToken());
-                return Future.succeededFuture(responseJ);
-            });
+
+            /*
+             * Fix：Token 提取要依赖新流程，双兼容模型处理
+             */
+            final String token = response.getToken();
+            if (StrUtil.isNotEmpty(token)) {
+                return this.extract(uuid, userAt, token);
+            }
+
+            return response.getTokenAsync().<Future<String>>compose()
+                .compose(tokenAsync -> this.extract(uuid, userAt, tokenAsync));
+        });
+    }
+
+    private Future<JsonObject> extract(final String uuid, final UserAt userAt, final String token) {
+        final String sessionKey = WeCoSession.keyOf(uuid);
+        final Duration expiredAt = Duration.ofSeconds(this.configMp.getExpireSeconds());
+        return WeCoAsyncSession.of().saveAsync(sessionKey, token, expiredAt).compose(checked -> {
+            // 响应信息
+            final JsonObject responseJ = new JsonObject();
+            responseJ.put(KName.ID, userAt.id().toString());
+            responseJ.put(KName.TOKEN, token);
+            return Future.succeededFuture(responseJ);
         });
     }
 
