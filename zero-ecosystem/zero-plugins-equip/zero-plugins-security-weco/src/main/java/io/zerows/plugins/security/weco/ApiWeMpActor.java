@@ -1,5 +1,7 @@
 package io.zerows.plugins.security.weco;
 
+import io.r2mo.xync.weco.WeCoSession;
+import io.r2mo.xync.weco.WeCoStatus;
 import io.r2mo.xync.weco.wechat.WeArgsCallback;
 import io.r2mo.xync.weco.wechat.WeArgsSignature;
 import io.r2mo.xync.weco.wechat.WeChatType;
@@ -7,11 +9,15 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
+import io.zerows.plugins.weco.WeCoActor;
+import io.zerows.plugins.weco.WeCoAsyncSession;
+import io.zerows.plugins.weco.metadata.WeCoConfig;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 
+import java.time.Duration;
 import java.util.Objects;
 
 @Queue
@@ -97,13 +103,24 @@ public class ApiWeMpActor {
                 .build();
 
             // 构造登录专用请求
+            final String uuidTicket = uuid;
             return this.weChatStub.extract(uuid, params).compose(response -> {
                 final String id = response.getString("id");
                 final String token = response.getString("token");
                 log.info("[ ZERO ] ( WeChat ) 用户关注/扫描成功，Token 已就绪，ID = {}, Token = {}", id, token);
                 return Future.succeededFuture("success");
-            });
+            }).recover(error -> this.writeFailure(uuidTicket, error));
         }
         return Future.succeededFuture();
+    }
+
+    private Future<String> writeFailure(final String uuid, final Throwable error) {
+        final WeCoConfig.WeChatMp configMp = WeCoActor.configOfWeChatMp();
+        log.error(error.getMessage(), error);
+        final String sessionKey = WeCoSession.keyOf(uuid);
+        final Duration expiredAt = Duration.ofSeconds(configMp.getExpireSeconds());
+        return WeCoAsyncSession.of()
+            .saveAsync(sessionKey, WeCoStatus.FAILURE.name(), expiredAt)
+            .compose(nil -> Future.succeededFuture());
     }
 }
