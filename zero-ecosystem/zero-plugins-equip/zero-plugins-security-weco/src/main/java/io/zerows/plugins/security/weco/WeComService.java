@@ -92,19 +92,24 @@ public class WeComService implements WeComStub {
             if (Objects.isNull(userAt)) {
                 return Fx.failOut(_81553Exception401WeComAuthFailure.class);
             }
-
             final TokenDynamicResponse response = new TokenDynamicResponse(userAt);
             final String token = response.getToken();
+            if (StrUtil.isEmpty(token)) {
+                return response.getTokenAsync().compose();
+            } else {
+                return Future.succeededFuture(token);
+            }
+        }).compose(token -> {
             if (StrUtil.isEmpty(token)) {
                 return Fx.failOut(_81553Exception401WeComAuthFailure.class);
             }
             log.info("[ ZERO ] ( WeCo ) WeCom 认证通过, UserID: {}", (String) ref.get());
             final String sessionKey = WeCoSession.keyOf(request.getState());
-            final String cached = WeCoSession.of().get(sessionKey, Duration.ofSeconds(this.config.getExpireSeconds()));
-
-            final WeComIdentify identify = new WeComIdentify(cached);
-            identify.token(token);
-            return Future.succeededFuture(identify);
+            return WeCoAsyncSession.of().getAsync(sessionKey, Duration.ofSeconds(this.config.getExpireSeconds())).compose(cached -> {
+                final WeComIdentify identify = new WeComIdentify(cached);
+                identify.token(token);
+                return Future.succeededFuture(identify);
+            });
         });
     }
 

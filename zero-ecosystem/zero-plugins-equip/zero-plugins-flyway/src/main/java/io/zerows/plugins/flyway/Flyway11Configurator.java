@@ -21,7 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Flyway 11 配置构造器：
@@ -326,11 +325,7 @@ final class Flyway11Configurator {
         }
         // 环境变量的执行和处理
         final ENV env = ENV.of();
-        Set.of(
-            "DEV_MOBILE",
-            "DEV_EMAIL",
-            "DEV_ALIPAY"
-        ).forEach(varName -> {
+        FlywayDev.DEV_PRIVATE.forEach(varName -> {
             final String devMobile = env.get(varName);
             outMap.put(varName, devMobile);
         });

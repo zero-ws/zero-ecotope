@@ -70,8 +70,9 @@ public class UserAuthService implements UserAuthStub {
             case LDAP -> "ldapEmail";
             case SMS -> "mobile";
             case EMAIL -> "email";
-            case ID_WECHAT -> "weUnionId";
-            case ID_WECOM -> "cpUnionId";
+            // Fix: [ R2MO ] 无法找到对应的 Column 名称: 输入字段 = weUnionId, 绑定实体 = null, messageDisplay=null)
+            case ID_WECHAT -> "weUnion";
+            case ID_WECOM -> "cpUnion";
             default -> null;
         };
     }

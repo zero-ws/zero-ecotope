@@ -8,6 +8,8 @@ import io.r2mo.base.exchange.UniResponse;
 import io.r2mo.spi.SPI;
 import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.json.JObject;
+import io.r2mo.typed.webflow.Akka;
+import io.r2mo.typed.webflow.AkkaOf;
 import io.r2mo.xync.weco.WeCoActionType;
 import io.r2mo.xync.weco.WeCoConstant;
 import io.r2mo.xync.weco.wechat.WeArgsCallback;
@@ -132,8 +134,24 @@ class WeChatClientImpl implements WeChatClient {
         final UniProvider provider = CC_PROVIDER.pick(() -> SPI.findOne(UniProvider.class, "UNI_WECHAT"));
 
         // 4. 执行并返回
-        final UniResponse response = provider.exchange(account, message, context);
-        final JObject result = (JObject) response.content();
-        return Future.succeededFuture(Objects.nonNull(result) ? result.data() : new JsonObject());
+        final Akka<UniResponse> akka = provider.exchangeAsync(account, message, context);
+        /*
+         * Fix: AbstractException(messageArgs=null, messageContent=[ R2MO ] 同步流程不支持异步 Async 调用！, messageDisplay=null)
+         */
+        if (akka instanceof AkkaOf<UniResponse>) {
+            // 同步流程
+            final UniResponse response = akka.get();
+            final JObject result = (JObject) response.content();
+            return Future.succeededFuture(Objects.nonNull(result) ? result.data() : new JsonObject());
+        } else {
+            // 异步流程
+            return akka.<Future<UniResponse>>compose().compose(response -> {
+                final JObject result = (JObject) response.content();
+                return Future.succeededFuture(Objects.nonNull(result) ? result.data() : new JsonObject());
+            });
+        }
+        // final UniResponse response = provider.exchange(account, message, context);
+        // final JObject result = (JObject) response.content();
+        // return Future.succeededFuture(Objects.nonNull(result) ? result.data() : new JsonObject());
     }
 }

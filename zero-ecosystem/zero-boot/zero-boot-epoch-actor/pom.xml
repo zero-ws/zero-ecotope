@@ -10,6 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>zero-boot-epoch-actor</artifactId>
     <name>✅️ - Zero::Boot::Epoch Actor</name>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Import Stack -->
+            <dependency>
+                <groupId>io.zerows</groupId>
+                <artifactId>zero-0216</artifactId>
+                <version>${revision}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <!--
         FIX: Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath,
@@ -60,14 +72,6 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-resolver-dns</artifactId>
-        </dependency>
-        <!-- Import Stack -->
-        <dependency>
-            <groupId>io.zerows</groupId>
-            <artifactId>zero-0216</artifactId>
-            <version>${revision}</version>
-            <scope>import</scope>
-            <type>pom</type>
         </dependency>
         <!--
         底层默认实现追加

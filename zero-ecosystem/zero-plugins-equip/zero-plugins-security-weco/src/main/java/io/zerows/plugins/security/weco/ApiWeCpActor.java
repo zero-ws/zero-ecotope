@@ -1,14 +1,26 @@
 package io.zerows.plugins.security.weco;
 
+import cn.hutool.core.util.StrUtil;
+import io.r2mo.function.Fn;
+import io.r2mo.typed.exception.WebException;
 import io.r2mo.typed.json.JObject;
+import io.r2mo.xync.weco.WeCoSession;
+import io.r2mo.xync.weco.wecom.WeComIdentify;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.plugins.security.weco.exception._81553Exception401WeComAuthFailure;
+import io.zerows.plugins.weco.WeCoActor;
+import io.zerows.plugins.weco.WeCoAsyncSession;
+import io.zerows.plugins.weco.metadata.WeCoConfig;
 import io.zerows.support.Fx;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
 @Queue
 @Slf4j
@@ -38,7 +50,6 @@ public class ApiWeCpActor {
         // 2. 业务校验 & 获取 UserID
         return this.comStub.validate(request).compose(validated -> {
             try {
-
                 // 4. 重定向到目标地址
                 final String url = validated.url();
                 final String token = validated.token();
@@ -48,6 +59,24 @@ public class ApiWeCpActor {
                 log.error(ex.getMessage(), ex);
                 return Fx.failOut(_81553Exception401WeComAuthFailure.class);
             }
+        }).recover(error -> this.writeFailure(state, error));
+    }
+
+    private Future<String> writeFailure(final String state, final Throwable error) {
+        final WeCoConfig.WeComCp configCp = WeCoActor.configOfWeComCp();
+        log.error(error.getMessage(), error);
+        final String sessionKey = WeCoSession.keyOf(state);
+        final Duration expiredAt = Duration.ofSeconds(configCp.getExpireSeconds());
+        return WeCoAsyncSession.of().getAsync(sessionKey, expiredAt).compose(cached -> {
+            final WeComIdentify identify = new WeComIdentify(cached);
+            final WebException failure = Fx.failAt(error);
+
+            final String message = StrUtil.isEmpty(failure.getInfo()) ? failure.getMessage() : failure.getInfo();
+            final String encoded = Fn.jvmOr(() -> URLEncoder.encode(message, StandardCharsets.UTF_8));
+
+            final String url = identify.url();
+            final String pageErr = url.contains("?") ? url + "&ERR_WE_CP=" + encoded : url + "?ERR_WE_CP=" + encoded;
+            return Future.succeededFuture(pageErr);
         });
     }
 
