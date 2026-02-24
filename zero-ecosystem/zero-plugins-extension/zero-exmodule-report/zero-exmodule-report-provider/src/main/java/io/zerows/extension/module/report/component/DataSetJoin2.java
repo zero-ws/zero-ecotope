@@ -1,30 +1,21 @@
 package io.zerows.extension.module.report.component;
 
 import io.r2mo.base.dbe.Join;
-import io.r2mo.base.dbe.common.DBNode;
-import io.r2mo.base.dbe.common.DBRef;
-import io.r2mo.base.program.R2Mapping;
-import io.r2mo.base.program.R2Vector;
-import io.r2mo.dbe.jooq.core.domain.JooqMap;
-import io.r2mo.dbe.jooq.spi.LoadREF;
 import io.r2mo.typed.common.Kv;
-import io.r2mo.vertx.jooq.AsyncMeta;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.management.OCacheConfiguration;
+import io.zerows.epoch.store.DBSActor;
 import io.zerows.epoch.store.jooq.ADJ;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.MDConnect;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
-import org.jooq.Table;
 
-import java.text.MessageFormat;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author lang : 2024-10-22
@@ -42,7 +33,6 @@ class DataSetJoin2 extends DataSetBase {
         final String active = Ut.valueString(sourceJ, KName.ACTIVE);
         this.active = OCacheConfiguration.entireConnect(active);
         Objects.requireNonNull(this.active);
-
         final String standby = Ut.valueString(sourceJ, "standby");
         this.standBy = OCacheConfiguration.entireConnect(standby);
         Objects.requireNonNull(this.standBy);
@@ -54,7 +44,6 @@ class DataSetJoin2 extends DataSetBase {
 
         this.aliasJ.mergeIn(Ut.valueJObject(sourceJ, KName.ALIAS));
     }
-
     @Override
     public Future<JsonArray> loadAsync(final JsonObject params, final JsonObject queryJ) {
         // final JsonObject queryJ = Ut.toJObject(this.dataSet.getDataQuery());
@@ -72,90 +61,78 @@ class DataSetJoin2 extends DataSetBase {
 
     /**
      * 构造多表访问器
-     * findAlias 的数据结构如
-     * <pre><code>
-     *     "findAlias": {
-     *          "{TABLE1}": [
-     *              field1,
-     *              field2,
-     *          ],
-     *          "{TABLE2}": [
-     *              field1,
-     *              field2
-     *          ]
-     *     }
-     * </code></pre>
-     * <p>
-     * 此处针对数据结构要做一个说明，此处的数据结构
      * <pre>
-     *     {
-     *         "active": "X_CATEGORY",
-     *         "active.field": "key",
-     *         "standby": "F_PAY_TERM",
-     *         "standby.field": "category",
-     *         "findAlias": {
-     *             "X_CATEGORY": [
-     *                 "key",
-     *                 "categoryId"
-     *             ],
-     *             "F_PAY_TERM": [
-     *                 "key",
-     *                 "payTermId"
-     *             ]
-     *         }
+     * 配置示例：
+     * {
+     *     "active": "X_CATEGORY",
+     *     "active.field": "key",
+     *     "standby": "F_PAY_TERM",
+     *     "standby.field": "category",
+     *     "alias": {
+     *         "X_CATEGORY": ["key", "categoryId"],
+     *         "F_PAY_TERM": ["key", "payTermId"]
      *     }
-     * </pre>
-     * 根据上述数据结构，整体配置如下
-     * <pre>
-     *     1. X_CATEGORY JOIN F_PAY_TERM
-     *     2. on X_CATEGORY.key = F_PAY_TERM.category
-     *     3. 别名用于提取时使用
-     *        findAlias -> X_CATEGORY.key -> categoryId
-     *                 F_PAY_TERM.payTermId -> payTermId
-     *     *: 此处非列名，全是属性名
-     * </pre>
+     * }
      *
-     * @return 多表访问器
+     * 说明：
+     * 1. X_CATEGORY JOIN F_PAY_TERM ON X_CATEGORY.key = F_PAY_TERM.category
+     * 2. alias 用于字段别名映射：X_CATEGORY.key -> categoryId
+     * </pre>
      */
     public ADJ ofADJ() {
-        final DBNode nodeLeft = this.active.forJoin();
-        nodeLeft.entity(this.active.meta().pojo());
-        final Table<?> tables = LoadREF.of().loadTable(this.active.meta().pojo());
-        AsyncMeta or2 = AsyncMeta.getOr(this.active.getDao());
-        Table<?> table2 = or2.metaTable();
-        if(tables!=null){
-            final ConcurrentMap<String, String> mapping = JooqMap.build(tables, this.active.meta().pojo());
-            nodeLeft.vector().mappingColumn(mapping);
-        }
-        final DBNode nodeRight = this.standBy.forJoin();
-        nodeRight.entity(this.standBy.meta().pojo());
-        final Table<?> tables2 = LoadREF.of().loadTable(this.standBy.meta().pojo());
-        AsyncMeta or = AsyncMeta.getOr(this.standBy.getDao());
-        Table<?> table1 = or.metaTable();
-        if(tables2!=null){
-            final ConcurrentMap<String, String> mapping2 = JooqMap.build(tables2, this.standBy.meta().pojo());
-            nodeRight.vector().mappingColumn(mapping2);
-        }
+        final Join join = Join.of(
+            this.active.meta().dao(),
+            this.kvJoin.key(),
+            this.standBy.meta().dao(),
+            this.kvJoin.value()
+        );
 
-        final DBRef ref = DBRef.of(nodeLeft, nodeRight, this.kvJoin);
-        // 先设置别名到 DBRef，然后使用 DBRef 创建 ADJ
-        for (final String table : this.aliasJ.fieldNames()) {
-            final JsonArray array = Ut.valueJArray(this.aliasJ, table);
-            if (2 != array.size()) {
-                log.warn("[ ZERO ] 请检查 alias 的配置信息：{} / {}", table, array.encode());
-                continue;
-            }
-            final String name = array.getString(0);
-            final String alias = array.getString(1);
-            log.info("[ ZERO ] 设置别名到DBRef / Table = {}, Name = {}, Alias = {}", table, name, alias);
-            ref.alias(table, name, alias);
+        final Kv<String, String> vectorPojo = Kv.create(
+            this.active.getPojoFile(),
+            this.standBy.getPojoFile()
+        );
+
+        final ADJ adj = DB.on(join, vectorPojo, DBSActor.ofDBS());
+
+        if (!this.aliasJ.isEmpty()) {
+            log.info("[ ZERO ] 设置别名，配置：{}", this.aliasJ.encode());
+            this.aliasJ.fieldNames().forEach(table -> this.applyAlias(adj, table));
         }
 
-        // 使用配置好别名的 DBRef 创建 ADJ
-        final ADJ on = DB.on(ref);
-        log.info("[ ZERO ] ADJ创建完成 / Active = {}, StandBy = {}, Alias配置数量 = {}",
-            this.active.getTable(), this.standBy.getTable(), this.aliasJ.size());
+        return adj;
+    }
 
-        return on;
+    private void applyAlias(final ADJ adj, final String table) {
+        final JsonArray array = Ut.valueJArray(this.aliasJ, table);
+        if (array.size() != 2) {
+            log.warn("[ ZERO ] alias 配置错误：{} / {}", table, array.encode());
+            return;
+        }
+
+        final Class<?> daoClass = this.resolveDaoClass(table);
+        if (daoClass == null) {
+            log.warn("[ ZERO ] 未知的表名：{}", table);
+            return;
+        }
+
+        final String name = array.getString(0);
+        final String alias = array.getString(1);
+
+        try {
+            adj.alias(daoClass, name, alias);
+            log.info("[ ZERO ] 别名设置成功 / {} -> {}.{}", alias, table, name);
+        } catch (Exception ex) {
+            log.warn("[ ZERO ] 别名设置失败：{}.{} -> {}", table, name, alias);
+        }
+    }
+
+    private Class<?> resolveDaoClass(final String table) {
+        if (table.equals(this.active.getTable())) {
+            return this.active.meta().dao();
+        }
+        if (table.equals(this.standBy.getTable())) {
+            return this.standBy.meta().dao();
+        }
+        return null;
     }
 }
