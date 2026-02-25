@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.text.MessageFormat;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,16 +30,26 @@ import java.util.concurrent.ConcurrentMap;
 @Slf4j
 class IxSetupModule extends IxSetupBase<KModule> {
     // URI 集合
-    private static final Set<String> URI_SET = new HashSet<>();
+    private static final Set<String> URI_POST = new LinkedHashSet<>();
+    private static final Set<String> URI_PRE = new HashSet<>();
     // Module 集合
     private static final MultiKeyMap<KModule> MODULE_MAP = new MultiKeyMap<>();
 
     IxSetupModule(final IxConfig config) {
         super(config);
+        // 替换模式
+        Ut.itJString(config.getPatterns()).forEach(pattern -> {
+            final String uri = MessageFormat.format(pattern, ":actor");
+            URI_PRE.add(uri);
+        });
     }
 
-    static Set<String> stored() {
-        return URI_SET;
+    static Set<String> uriPost() {
+        return URI_POST;
+    }
+
+    static Set<String> uriPre() {
+        return URI_PRE;
     }
 
     /**
@@ -77,7 +88,8 @@ class IxSetupModule extends IxSetupBase<KModule> {
             MODULE_MAP.put(identifier, module, module.getName());
             log.info("{} `{}` 加载完成，actor = `{}`", KeConstant.K_PREFIX_CRUD, identifier, actor);
         }));
-        log.info("{} IxSetupModule 配置完成 ! Size = {}, Uris = {}", KeConstant.K_PREFIX_CRUD, MODULE_MAP.values().size(), URI_SET.size());
+        log.info("{} IxSetupModule 配置完成 ! Size = {}, Uris = {}",
+            KeConstant.K_PREFIX_CRUD, MODULE_MAP.values().size(), URI_POST.size());
         return true;
     }
 
@@ -123,7 +135,7 @@ class IxSetupModule extends IxSetupBase<KModule> {
     private void configure(final String actor, final JsonArray patterns) {
         Ut.itJString(patterns)
             .map(pattern -> MessageFormat.format(pattern, actor))
-            .forEach(URI_SET::add);
+            .forEach(URI_POST::add);
     }
 
 

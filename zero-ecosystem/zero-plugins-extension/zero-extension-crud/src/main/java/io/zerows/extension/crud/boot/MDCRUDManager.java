@@ -63,8 +63,12 @@ public class MDCRUDManager extends MDModuleManager<Boolean, IxConfig> {
         return this.setupRule.map(actor);
     }
 
-    public Set<String> getUris() {
-        return IxSetupModule.stored();
+    public Set<String> uriPost() {
+        return IxSetupModule.uriPost();
+    }
+
+    public Set<String> uriPre() {
+        return IxSetupModule.uriPre();
     }
 
     public String getColumnKey() {
