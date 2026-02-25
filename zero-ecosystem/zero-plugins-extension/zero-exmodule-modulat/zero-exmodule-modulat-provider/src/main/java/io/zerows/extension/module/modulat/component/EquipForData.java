@@ -57,12 +57,11 @@ public class EquipForData extends EquipForBase {
     private Future<JsonObject> attachApps(final JsonObject result, final String appId, final EmModel.By by) {
         final JsonObject condition = this.buildQr(appId, by);
         condition.put(KName.ENTRY + ",!n", "");
-        return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
-            .map((final List<BBag> bags) -> {
-                final JsonArray json = Ux.toJson(bags);
-                result.put(KName.APPS, json);
-                result.put(KName.KEY, appId);
-                return result;
-            });
+        return DB.on(BBagDao.class).<BBag>fetchAsync(condition).map((final List<BBag> bags) -> {
+            final JsonArray json = Ux.toJson(bags);
+            result.put(KName.APPS, json);
+            result.put(KName.ID, appId);
+            return result;
+        });
     }
 }

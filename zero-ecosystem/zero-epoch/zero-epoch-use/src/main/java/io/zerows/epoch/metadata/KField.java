@@ -10,6 +10,7 @@ import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.support.Ut;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -77,6 +78,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Data
 public class KField implements Serializable {
     /**
      * 主键属性值，默认 `key`
@@ -140,67 +142,13 @@ public class KField implements Serializable {
     private JsonArray attachment;
 
     public String getKey() {
+        if (Objects.isNull(this.key)) {
+            this.key = KName.ID;
+        }
+        if (KName.KEY.equals(this.key)) {
+            this.key = KName.ID;
+        }
         return this.key;
-    }
-
-    public void setKey(final String key) {
-        this.key = key;
-    }
-
-    public JsonArray getUnique() {
-        return this.unique;
-    }
-
-    public void setUnique(final JsonArray unique) {
-        this.unique = unique;
-    }
-
-    public JsonObject getCreated() {
-        return this.created;
-    }
-
-    public void setCreated(final JsonObject created) {
-        this.created = created;
-    }
-
-    public JsonObject getUpdated() {
-        return this.updated;
-    }
-
-    public void setUpdated(final JsonObject updated) {
-        this.updated = updated;
-    }
-
-    public JsonObject getNumbers() {
-        return this.numbers;
-    }
-
-    public void setNumbers(final JsonObject numbers) {
-        this.numbers = numbers;
-    }
-
-    public JsonArray getObject() {
-        return this.object;
-    }
-
-    public void setObject(final JsonArray object) {
-        this.object = object;
-    }
-
-    public JsonArray getArray() {
-        return this.array;
-    }
-
-    public void setArray(final JsonArray array) {
-        this.array = array;
-    }
-
-    public JsonArray getAttachment() {
-        return this.attachment;
-    }
-
-    public void setAttachment(final JsonArray attachment) {
-        this.attachment = attachment;
     }
 
 

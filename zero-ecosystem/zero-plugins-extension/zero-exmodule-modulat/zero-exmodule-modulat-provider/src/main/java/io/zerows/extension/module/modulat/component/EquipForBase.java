@@ -1,7 +1,6 @@
 package io.zerows.extension.module.modulat.component;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
@@ -109,7 +108,6 @@ public abstract class EquipForBase implements EquipFor {
     }
 
     private Set<String> dataOpen(final BBag bag) {
-        final JsonArray uiOpen = bag.getUiOpen();
         final Set<String> openSet = Ut.toSet(bag.getUiOpen());
         openSet.add(KName.__.METADATA);
         openSet.add(KName.KEY_P);
