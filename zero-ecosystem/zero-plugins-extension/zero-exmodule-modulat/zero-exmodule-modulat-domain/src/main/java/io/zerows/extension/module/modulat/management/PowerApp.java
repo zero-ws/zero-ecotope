@@ -44,7 +44,7 @@ public class PowerApp {
             modulat -> modulat.extension(appId, open),
             JsonObject::new
         ).compose(storedJ -> {
-            final String configApp = Ut.valueString(storedJ, KName.KEY);
+            final String configApp = Ut.vId(storedJ); // Ut.valueString(storedJ, KName.KEY);
             if (!appId.equals(configApp)) {
                 return Ux.future(null);
             }
