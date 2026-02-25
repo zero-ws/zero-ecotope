@@ -60,7 +60,7 @@ public class EquipForData extends EquipForBase {
         return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
             .map((final List<BBag> bags) -> {
                 final JsonArray json = Ux.toJson(bags);
-                result.put(KName.App.BAGS, json);
+                result.put(KName.APPS, json);
                 result.put(KName.KEY, appId);
                 return result;
             });
