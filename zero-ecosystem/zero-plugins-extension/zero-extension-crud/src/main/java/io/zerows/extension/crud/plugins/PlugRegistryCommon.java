@@ -13,7 +13,7 @@ public class PlugRegistryCommon implements PlugRegistry {
     /*
      * Get module uris from the configuration of crud
      */
-    private static final Set<String> URIS = Ix.getUris();
+    private static final Set<String> URIS = Ix.uriPost();
 
     @Override
     public Set<String> analyze(final Set<String> routes) {

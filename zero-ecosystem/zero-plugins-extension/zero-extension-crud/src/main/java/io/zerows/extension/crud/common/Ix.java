@@ -204,9 +204,14 @@ public class Ix {
         return MDCRUDManager.of().getActor(actor);
     }
 
-    public static Set<String> getUris() {
-        return MDCRUDManager.of().getUris();
+    public static Set<String> uriPost() {
+        return MDCRUDManager.of().uriPost();
     }
+
+    public static Set<String> uriPre() {
+        return MDCRUDManager.of().uriPre();
+    }
+
 
     public static ConcurrentMap<String, List<WebRule>> getRules(final String actor) {
         return MDCRUDManager.of().getRules(actor);

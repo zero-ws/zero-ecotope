@@ -64,11 +64,11 @@ public class PowerApp {
         });
     }
 
-    public static Future<PowerApp> getRefresh(final String appId, final boolean open) {
+    public static Future<PowerApp> getRefresh(final String appId) {
         // 移除旧缓存
         CC_APP.remove(appId);
         // 重建以达到 Refresh 的目的
-        return getCreated(appId, open);
+        return getCreated(appId, false);
     }
 
     public PowerApp block(final HMod mod) {

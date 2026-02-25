@@ -64,10 +64,13 @@ class ProfileParameter {
          * Build metadata
          */
         final JsonObject metadata = new JsonObject();
+
+        
         /*
-         * Old: request.uri()
-         * New: request.path()
-         * path() will remove all query string part
+         * FIX 路径参数引起的 CRUD Engine 的解析错误问题
+         * 1 / uri = 还原之后的内容，可能会包含 :actor 这种
+         * 2 / requestUri = 实际请求的内容，包含具体的参数值，例如 /api/mock/lang
+         * 但是这个逻辑会在 CRUD 解析流程中直接反向得到 :actor
          */
         metadata.put(KName.URI, OCacheUri.Tool.recovery(request.path(), request.method()));
         metadata.put(KName.URI_REQUEST, request.path());
