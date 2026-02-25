@@ -112,7 +112,7 @@ public abstract class EquipForBase implements EquipFor {
         final JsonArray uiOpen = bag.getUiOpen();
         final Set<String> openSet = Ut.toSet(bag.getUiOpen());
         openSet.add(KName.__.METADATA);
-        openSet.add("pBag");
+        openSet.add(KName.KEY_P);
         return openSet;
     }
 
