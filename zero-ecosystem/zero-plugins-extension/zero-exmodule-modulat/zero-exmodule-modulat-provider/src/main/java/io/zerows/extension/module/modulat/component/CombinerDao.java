@@ -15,7 +15,7 @@ public class CombinerDao implements Combiner<JsonObject, BBag> {
     @Override
     public Future<JsonObject> configure(final JsonObject response, final BBag bag) {
         final JsonObject uiConfig = Ut.toJObject(bag.getUiConfig());
-        final String store = uiConfig.getString(KName.STORE, null);
+        final String store = bag.getStore(); // uiConfig.getString(KName.STORE, null);
         if (Ut.isNil(store)) {
             return Ux.future(response);
         }
