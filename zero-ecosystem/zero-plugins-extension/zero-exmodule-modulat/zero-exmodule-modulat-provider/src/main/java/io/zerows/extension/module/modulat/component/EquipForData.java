@@ -12,7 +12,6 @@ import io.zerows.platform.enums.modeling.EmModel;
 import io.zerows.program.Ux;
 
 import java.util.List;
-import java.util.Objects;
 
 public class EquipForData extends EquipForBase {
     private static final Cc<String, JsonObject> FULL_DATA = Cc.open();
@@ -32,15 +31,37 @@ public class EquipForData extends EquipForBase {
             });
     }
 
-    // 将当前 appId 对应的 B_BAG 原始列表作为 apps 节点挂载到结果中
+    /**
+     * 在 open = false 的场景下，XApp + BBag 是一对多的关系，但多端依赖的不是 XApp 部分，而是 BBag 的树型结构
+     * <pre>
+     *                                 XApp ( appId )
+     *     - Bag-01 /                     app-01
+     *           - Bag-0101               .....
+     *           - Bag-0102               .....
+     *     - Bag-02 /                     .....
+     *           - Bag-0201               .....
+     *           - Bag-0202               .....
+     * </pre>
+     * 最终的 App 结构
+     * <pre>
+     *     - mXxx
+     *     - mYyy
+     *     - apps ( 替换旧版 bags )
+     * </pre>
+     *
+     * @param result 当前构造的结果集
+     * @param appId  应用ID
+     * @param by     查询方式
+     * @return 附加了应用信息的结果集
+     */
     private Future<JsonObject> attachApps(final JsonObject result, final String appId, final EmModel.By by) {
         final JsonObject condition = this.buildQr(appId, by);
-        condition.put(KName.ENTRY+",!n", "");
+        condition.put(KName.ENTRY + ",!n", "");
         return DB.on(BBagDao.class).<BBag>fetchAsync(condition)
-            .map((List<BBag> bags) -> {
-                JsonArray json = Ux.toJson(bags);
-                result.put(KName.App.BAGS, json);
-                result.put(KName.KEY,appId);
+            .map((final List<BBag> bags) -> {
+                final JsonArray json = Ux.toJson(bags);
+                result.put(KName.APPS, json);
+                result.put(KName.KEY, appId);
                 return result;
             });
     }

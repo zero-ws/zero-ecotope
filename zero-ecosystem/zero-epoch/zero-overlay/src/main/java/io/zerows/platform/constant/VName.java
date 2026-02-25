@@ -103,6 +103,7 @@ public interface VName {
     String DEVELOPMENT = "development";          /* Development: for development */
 
     String APP = "application";                  /* Reserved: */
+    String APPS = "apps";                        /* apps 专用 */
 
     String KEY = "key";                          /* Common: primary key */
     String KEY_P = "pKey";                       /* Common: argument key */
