@@ -188,7 +188,7 @@ class AuthorizationHandlerResource {
                 // 跳过认证
                 final User user = context.user();
                 final String logged = user.principal().getString(KName.HABITUS);
-                log.info("[ PLUG ] ( Secure ) 403 用户授权命中缓存：habitus = {} / resource = {}", logged, resource);
+                log.info("[ PLUG ] ( Secure ) 403 用户授权命中缓存：habitus = {} / resource = `{}`", logged, resource);
                 return Future.succeededFuture(Boolean.FALSE);
             } else {
                 // 等待认证

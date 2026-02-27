@@ -7,9 +7,11 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
-import io.zerows.cortex.extension.PlugAuditor;
-import io.zerows.cortex.extension.PlugRegion;
 import io.zerows.cortex.webflow.Later;
+import io.zerows.cosmic.webflow.Ambit;
+import io.zerows.cosmic.webflow.AmbitNext;
+import io.zerows.cosmic.webflow.AmbitReply;
+import io.zerows.cosmic.webflow.UnderApply;
 import io.zerows.epoch.annotations.Format;
 import io.zerows.epoch.annotations.Redirect;
 import io.zerows.epoch.constant.KWeb;
@@ -284,8 +286,7 @@ public final class AckFlow {
     /**
      *
      * Extension System of:
-     * 1) {@link PlugAuditor}
-     * 2) {@link PlugRegion}
+     * 1) {@link UnderApply}
      *
      * @param context RoutingContext
      * @param entity  Entity

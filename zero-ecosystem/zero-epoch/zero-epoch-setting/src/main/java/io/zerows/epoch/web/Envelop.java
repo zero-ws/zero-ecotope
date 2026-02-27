@@ -169,6 +169,10 @@ public class Envelop implements Serializable {
         EnRib.set(this.data, field, value, null);
     }
 
+    public <T> T value(final String field) {
+        return EnRib.get(this.data, field);
+    }
+
     /* Set findRunning in `data` part ( with Index ) */
     public void value(final Integer argIndex, final String field, final Object value) {
         EnRib.set(this.data, field, value, argIndex);

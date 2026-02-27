@@ -7,7 +7,11 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.specification.atomic.HPlug;
 import io.zerows.specification.configuration.HConfig;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 插件专用配置项，其数据格式如
@@ -22,6 +26,7 @@ import java.util.Objects;
 public class ZeroPlugins {
     private static final Cc<String, HPlug> CC_PLUGIN = Cc.openThread();
     private static final Cc<String, ZeroPlugins> CC_SKELETON = Cc.open();
+    private static final Cc<Class<?>, Set<Class<?>>> VECTOR = Cc.open();
     private final Vertx vertxRef;
 
     private ZeroPlugins(final Vertx vertxRef) {
@@ -34,8 +39,19 @@ public class ZeroPlugins {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends HPlug> T createPlugin(final Class<?> interfaceCls) {
-        final HConfig config = NodeStore.findPlugin(this.vertxRef, interfaceCls);
+    public <T extends HPlug> List<T> createPlugin(final Class<T> interfaceCls) {
+        final Set<Class<?>> implList = VECTOR.pick(() -> ConfigPlugins.configured()
+            .stream().filter(interfaceCls::isAssignableFrom).collect(Collectors.toSet()), interfaceCls);
+        final List<T> instances = new ArrayList<>();
+        implList.stream()
+            .map(item -> this.createPluginInternal((Class<T>) item))
+            .forEach(instances::add);
+        return instances;
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T extends HPlug> T createPluginInternal(final Class<T> implInput) {
+        final HConfig config = NodeStore.findPlugin(this.vertxRef, implInput);
         if (Objects.isNull(config)) {
             return null;
         }

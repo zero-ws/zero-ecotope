@@ -109,13 +109,20 @@ class EnRibData {
 
     static <T> void set(final JsonObject data, final String field, final T value, final Integer argIndex) {
         final Object reference = getData(data, argIndex);
-        if (reference instanceof JsonObject) {
-            final JsonObject ref = (JsonObject) reference;
+        if (reference instanceof final JsonObject ref) {
             ref.put(field, value);
-        } else if (reference instanceof JsonArray) {
-            final JsonArray ref = (JsonArray) reference;
+        } else if (reference instanceof final JsonArray ref) {
             Ut.itJArray(ref).forEach(refEach -> refEach.put(field, value));
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    static <T> T get(final JsonObject data, final String field) {
+        final Object reference = getData(data, null);
+        if (reference instanceof final JsonObject ref) {
+            return (T) ref.getValue(field);
+        }
+        return null;
     }
 
     /*

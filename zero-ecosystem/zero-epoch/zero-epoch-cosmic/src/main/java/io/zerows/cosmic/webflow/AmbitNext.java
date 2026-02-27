@@ -1,8 +1,14 @@
-package io.zerows.cosmic.bootstrap;
+package io.zerows.cosmic.webflow;
 
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.epoch.jigsaw.ZeroPlugins;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.support.Fx;
+
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * @author lang : 2024-06-27
@@ -23,8 +29,6 @@ public class AmbitNext implements Ambit {
              * 1. 创建：createdAt, createdBy
              * 2. 更新：updatedAt, updatedBy
              */
-            .compose(processed -> Ambit.of(AmbitPAudit_.class).then(context, processed))
-
 
             /*
              * DataRegion 前置处理
@@ -42,6 +46,17 @@ public class AmbitNext implements Ambit {
              * 3. criteria / projection 可能被更改
              * 4. 结果会被修正
              */
-            .compose(processed -> Ambit.of(AmbitPRegion_.class).then(context, processed));
+            .compose(processed -> this.beforeApply(context, processed));
+    }
+
+
+    private Future<Envelop> beforeApply(final RoutingContext context, final Envelop envelop) {
+        final Vertx vertx = context.vertx();
+
+        final List<UnderApply> underApply = ZeroPlugins.of(vertx).createPlugin(UnderApply.class);
+        final List<Function<Envelop, Future<Envelop>>> underApplyFn = underApply.stream()
+            .map(item -> (Function<Envelop, Future<Envelop>>) (envelopInput -> item.before(context, envelopInput)))
+            .toList();
+        return Fx.passion(envelop, underApplyFn);
     }
 }

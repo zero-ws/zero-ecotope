@@ -1,4 +1,4 @@
-package io.zerows.cosmic.bootstrap;
+package io.zerows.cosmic.webflow;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
