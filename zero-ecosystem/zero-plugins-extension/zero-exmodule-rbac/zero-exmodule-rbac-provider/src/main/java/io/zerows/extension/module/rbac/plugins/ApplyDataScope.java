@@ -11,7 +11,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.epoch.management.OCacheUri;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.skeleton.spi.ExApply;
+import io.zerows.extension.skeleton.spi.ExDefault;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
@@ -39,9 +39,9 @@ public class ApplyDataScope implements UnderApply {
 
         final JsonArray exclude = auditor.getJsonArray(EXCLUDE, new JsonArray());
         final Set<String> excludeSet = Ut.toSet(exclude);
-        final List<ExApply> applyList = HPI.findMany(ExApply.class);
-        applyList.stream().map(ExApply::ruleExclude).forEach(excludeSet::addAll);
-        auditor.put(EXCLUDE, Ut.toJArray(applyList));
+        final List<ExDefault> applyList = HPI.findMany(ExDefault.class);
+        applyList.stream().map(ExDefault::ruleExclude).forEach(excludeSet::addAll);
+        auditor.put(EXCLUDE, Ut.toJArray(excludeSet));
         this.config.mergeIn(auditor);
         return this;
     }
@@ -50,20 +50,22 @@ public class ApplyDataScope implements UnderApply {
     public Future<Envelop> before(final RoutingContext context,
                                   final Envelop envelop) {
         final HttpServerRequest request = context.request();
+
+
         if (this.isDisabled(request)) {
             return Future.succeededFuture(envelop);
         }
+
+        /*
+         * appId / tenantId / sigma
+         */
+        this.applyScope(request, envelop);
 
         /*
          * createdBy / createdAt
          * updatedBy / updatedAt
          */
         this.applyAuditor(request, envelop);
-
-        /*
-         * appId / tenantId / sigma
-         */
-        this.applyScope(request, envelop);
         return Ux.future(envelop);
     }
 
@@ -123,7 +125,7 @@ public class ApplyDataScope implements UnderApply {
 
     private boolean isDisabled(final HttpServerRequest request) {
         final HttpMethod method = request.method();
-        if (HttpMethod.POST != method || HttpMethod.PUT != method) {
+        if (HttpMethod.POST != method && HttpMethod.PUT != method) {
             // 请求方法必须是 POST 和 PUT
             return true;
         }
@@ -141,6 +143,10 @@ public class ApplyDataScope implements UnderApply {
         }
 
         final String path = request.path();
+        if (!path.startsWith(prefix)) {
+            // 基础路径不匹配
+            return true;
+        }
         final String recovery = OCacheUri.Tool.recovery(path, request.method());
         final long except = exclude.stream().filter(Objects::nonNull)
             .map(item -> (String) item)
