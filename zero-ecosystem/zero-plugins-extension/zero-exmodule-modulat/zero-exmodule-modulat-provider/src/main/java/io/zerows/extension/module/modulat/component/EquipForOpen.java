@@ -10,6 +10,11 @@ public class EquipForOpen extends EquipForBase {
     private static final Cc<String, JsonObject> OPEN_DATA = Cc.open();
 
     @Override
+    public void invalidate(final String appId) {
+        OPEN_DATA.remove(appId);
+    }
+
+    @Override
     public Future<JsonObject> configure(final String appId, final EmModel.By by) {
         if (OPEN_DATA.containsKey(appId)) {
             return Future.succeededFuture(OPEN_DATA.get(appId));

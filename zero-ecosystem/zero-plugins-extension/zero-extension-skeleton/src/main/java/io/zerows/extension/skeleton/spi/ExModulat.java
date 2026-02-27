@@ -139,4 +139,6 @@ public interface ExModulat {
     }
 
     Future<JsonObject> extension(String appId, boolean open);
+
+    default void invalidate(String appId) {}
 }
