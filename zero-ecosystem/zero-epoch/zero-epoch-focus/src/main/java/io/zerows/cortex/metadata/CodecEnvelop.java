@@ -1,4 +1,4 @@
-package io.zerows.cortex.extension;
+package io.zerows.cortex.metadata;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.MessageCodec;

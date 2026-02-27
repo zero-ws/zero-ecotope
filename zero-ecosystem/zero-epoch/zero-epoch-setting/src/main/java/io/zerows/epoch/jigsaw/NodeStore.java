@@ -151,12 +151,12 @@ public class NodeStore {
      * 此处只针对 plugins 的特殊操作
      */
     public static HConfig findPlugin(final Vertx vertxRef,
-                                     final Class<?> interfaceCls) {
+                                     final Class<?> implClass) {
         return Optional.ofNullable(ofSetting(vertxRef))
             .map(setting -> setting.extension("plugins"))
             .filter(plugins -> plugins instanceof ConfigPlugins)
             .map(plugins -> (ConfigPlugins) plugins)
-            .map(plugins -> plugins.pluginOne(interfaceCls))
+            .map(plugins -> plugins.plugin(implClass))
             .orElse(null);
     }
 }

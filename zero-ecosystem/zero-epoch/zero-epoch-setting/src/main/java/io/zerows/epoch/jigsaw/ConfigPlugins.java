@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 @Slf4j
 public class ConfigPlugins extends ConfigNorm {
-    private final ConcurrentMap<Class<?>, HConfig> pluginMap = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<Class<?>, HConfig> PLUGINS = new ConcurrentHashMap<>();
 
     public ConfigPlugins plugin(final JsonObject pluginsJ) {
         if (Objects.isNull(pluginsJ) || Ut.isNil(pluginsJ)) {
@@ -27,25 +27,21 @@ public class ConfigPlugins extends ConfigNorm {
             final Class<?> pluginCls = SourceReflect.clazz(name);
             if (Objects.nonNull(pluginCls)) {
                 final JsonObject options = Ut.valueJObject(pluginsJ, name);
-                this.pluginMap.put(pluginCls, new ConfigNorm().putOptions(options).putExecutor(pluginCls));
+                PLUGINS.put(pluginCls, new ConfigNorm().putOptions(options).putExecutor(pluginCls));
             }
         });
         return this;
     }
 
     public HConfig plugin(final Class<?> pluginCls) {
-        return this.pluginMap.getOrDefault(pluginCls, null);
+        return PLUGINS.getOrDefault(pluginCls, null);
     }
 
     public Set<HConfig> plugin() {
-        return new ConcurrentHashSet<>(this.pluginMap.values());
+        return new ConcurrentHashSet<>(PLUGINS.values());
     }
 
-    public HConfig pluginOne(final Class<?> interfaceCls) {
-        return this.pluginMap.keySet().stream()
-            .filter(interfaceCls::isAssignableFrom)
-            .map(this.pluginMap::get)
-            .filter(Objects::nonNull)
-            .findAny().orElse(null);
+    public static Set<Class<?>> configured() {
+        return PLUGINS.keySet();
     }
 }

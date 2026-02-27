@@ -6,7 +6,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.core.eventbus.EventBus;
-import io.zerows.cortex.extension.CodecEnvelop;
+import io.zerows.cortex.metadata.CodecEnvelop;
 import io.zerows.epoch.web.Envelop;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;

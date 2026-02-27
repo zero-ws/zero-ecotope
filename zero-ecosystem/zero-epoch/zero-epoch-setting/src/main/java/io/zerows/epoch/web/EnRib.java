@@ -31,6 +31,10 @@ class EnRib {
         return EnRibData.get(data);
     }
 
+    static <T> T get(final JsonObject data, final String field) {
+        return EnRibData.get(data, field);
+    }
+
     static <T> T get(final JsonObject data, final Class<?> clazz) {
         return EnRibData.get(data, clazz);
     }

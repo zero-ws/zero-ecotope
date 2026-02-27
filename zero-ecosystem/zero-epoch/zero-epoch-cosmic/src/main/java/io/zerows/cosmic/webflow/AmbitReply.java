@@ -1,10 +1,16 @@
-package io.zerows.cosmic.bootstrap;
+package io.zerows.cosmic.webflow;
 
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.r2mo.typed.webflow.WebState;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.epoch.jigsaw.ZeroPlugins;
 import io.zerows.epoch.web.Envelop;
+import io.zerows.support.Fx;
+
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * @author lang : 2024-06-27
@@ -25,7 +31,19 @@ public class AmbitReply implements Ambit {
             // 直接返回
             return Future.succeededFuture(envelop);
         }
-        // 非直接返回，OK 的场景才生效
-        return Ambit.of(AmbitP_Region.class).then(context, envelop);
+        /*
+         *  - After
+         */
+        return this.afterApply(context, envelop);
+    }
+
+    private Future<Envelop> afterApply(final RoutingContext context, final Envelop envelop) {
+        final Vertx vertx = context.vertx();
+
+        final List<UnderApply> underApply = ZeroPlugins.of(vertx).createPlugin(UnderApply.class);
+        final List<Function<Envelop, Future<Envelop>>> underApplyFn = underApply.stream()
+            .map(item -> (Function<Envelop, Future<Envelop>>) (envelopInput -> item.after(context, envelopInput)))
+            .toList();
+        return Fx.passion(envelop, underApplyFn);
     }
 }

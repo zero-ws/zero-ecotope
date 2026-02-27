@@ -1,4 +1,4 @@
-package io.zerows.cosmic.bootstrap;
+package io.zerows.cosmic.webflow;
 
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
@@ -28,16 +28,13 @@ public class AmbitQBE implements Ambit {
              */
             return Future.succeededFuture(envelop);
         }
-        return HPI.of(HQBE.class).waitAsync(
-            hqbe -> {
-                /*
-                 * 1. 先做Base64的解码
-                 * 2. 再根据解码结果隐式替换 Envelop 中的 criteria 部分，QR 专用
-                 */
-                final JsonObject qbeJ = Ut.toJObject(Ut.decryptBase64(qbe));
-                return hqbe.before(qbeJ, envelop);
-            },
-            () -> envelop
-        );
+        return HPI.of(HQBE.class).waitAsync(hqbe -> {
+            /*
+             * 1. 先做Base64的解码
+             * 2. 再根据解码结果隐式替换 Envelop 中的 criteria 部分，QR 专用
+             */
+            final JsonObject qbeJ = Ut.toJObject(Ut.decryptBase64(qbe));
+            return hqbe.before(qbeJ, envelop);
+        }, () -> envelop);
     }
 }
