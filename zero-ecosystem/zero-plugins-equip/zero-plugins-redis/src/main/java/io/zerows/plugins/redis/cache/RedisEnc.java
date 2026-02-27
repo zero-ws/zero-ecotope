@@ -74,10 +74,9 @@ class RedisEnc {
             return container.toBuffer();
         }
 
-        // 3. 业务 POJO (如 UserAt) 的正确处理
-        // [修复点]：直接调用 Ut.serialize(value)，让它保留 POJO 本身的序列化特征。
-        final JsonObject serialized = Ut.serializeJson(value);
-        return serialized.toBuffer();
+        // 其余所有类型（POJO、List<POJO> 等）统一通过 options.classV() 驱动的
+        // 自定义 UJackson.MAPPER 序列化，确保 LocalDateTime 等 Java8 时间类型被正确处理
+        return Buffer.buffer(Ut.serialize(value.toString()));
     }
 
     private static boolean isBasic(final Object value) {
