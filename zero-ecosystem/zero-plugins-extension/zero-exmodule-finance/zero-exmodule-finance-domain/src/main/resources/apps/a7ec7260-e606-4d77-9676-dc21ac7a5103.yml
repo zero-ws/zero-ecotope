@@ -1,0 +1,18 @@
+data:
+  # 独立应用专用属性
+  domain: www.zerows.io.finance
+  port: 7500
+  endpoint: /app/finance
+  context: /app-finance
+  urlLogin: /login/index
+  urlAdmin: /fm/admin-debt
+
+  # 附属应用专用属性
+  name: app.zero.finance
+  code: app.zero.finance
+  title: 财务管理中心
+  entry: zero.fan
+
+  # 集成专用属性
+  appSecret: 92A974A625720C0EE8EE99A3F8EE9471
+  appKey: kS7fY1wE5cB3gR1cD9yQ9rX1mX0sA0eJ2mA8iX7hQ3uH0vP6lH1uT6gB0fQ6xK3a

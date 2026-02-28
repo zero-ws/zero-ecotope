@@ -1,0 +1,18 @@
+data:
+  # 独立应用专用属性
+  domain: www.zerows.io.asset
+  port: 7600
+  endpoint: /app/asset
+  context: /app-asset
+  urlLogin: /login/index
+  urlAdmin: /dashboard/asset
+
+  # 附属应用专用属性
+  name: app.zero.asset
+  code: app.zero.asset
+  title: 资产管理中心
+  entry: zero.am
+
+  # 集成专用属性
+  appSecret: A3ACF6F0EB495BDDF3E20BA0D1F014BF
+  appKey: rK6mA6uX8lV1kS3jX2lT3nU9rW0cT5oL9tJ0jM9hN7dY5wW5hW5uF0mI0kS6dH2c

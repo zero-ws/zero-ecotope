@@ -1,0 +1,18 @@
+data:
+  # 独立应用专用属性
+  domain: www.zerows.io.report
+  port: 7200
+  endpoint: /app/report
+  context: /app-report
+  urlLogin: /login/index
+  urlAdmin: /dashboard/reporting
+
+  # 附属应用专用属性
+  name: app.zero.report
+  code: app.zero.report
+  title: 报表管理中心
+  entry: zero.rsm
+
+  # 集成专用属性
+  appSecret: 2F114A8377925F4048DF15FDB438E430
+  appKey: qR0kY5dA0bD0nA1aP6tZ2gZ9xR8vI8pG3nL1jO1fK6dL4mW7dX6xD8dX4vB7cA1l

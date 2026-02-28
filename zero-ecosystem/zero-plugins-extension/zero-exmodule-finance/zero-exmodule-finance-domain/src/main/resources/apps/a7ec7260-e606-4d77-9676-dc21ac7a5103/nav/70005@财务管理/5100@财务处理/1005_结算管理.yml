@@ -1,0 +1,4 @@
+data:
+  name: zero.fms.process.settle
+  icon: pay-circle
+  uri: /fm/admin-settle
