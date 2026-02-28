@@ -1,0 +1,13 @@
+{
+  "name": "x-log",
+  "daoCls": "X_LOG",
+  "field": {
+    "unique": [
+      [
+        "id",
+        "appId"
+      ]
+    ]
+  },
+  "tag": "资源管理/日志"
+}
