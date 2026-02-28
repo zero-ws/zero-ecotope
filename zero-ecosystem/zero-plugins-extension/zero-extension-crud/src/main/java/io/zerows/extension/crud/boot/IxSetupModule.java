@@ -163,9 +163,7 @@ class IxSetupModule extends IxSetupBase<KModule> {
         /* Auditor Processing */
         final KField field = Objects.isNull(module.getField()) ? new KField() : module.getField();
         // key -> key
-        if (Objects.isNull(field.getKey())) {
-            field.setKey(KName.ID);
-        }
+        field.setKey(KName.ID);
         // created
         final JsonObject created = Ut.valueJObject(field.getCreated());
         if (!created.containsKey(KName.AT)) {
