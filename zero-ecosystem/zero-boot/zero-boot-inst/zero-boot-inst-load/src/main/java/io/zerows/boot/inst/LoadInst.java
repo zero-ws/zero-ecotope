@@ -1,16 +1,13 @@
 package io.zerows.boot.inst;
 
-import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.boot.test.metadata.ArgLoad;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.jigsaw.NodePre;
+import io.zerows.extension.skeleton.boot.DataImport;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
-
-import java.net.URI;
-import java.util.List;
 
 /**
  * 「单应用」目前版本
@@ -48,33 +45,27 @@ public class LoadInst {
 
         // 构造启动器（构造命令启动器）
         final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args, NodePre::ensureDB);
-        container.start((vertx, config) -> runApp(vertx).onComplete(res -> {
-            log.info("[ ZERO ] ( LoadInst ) 应用初始化完成，开始执行数据导入...");
-            runLoad(vertx, oob, vPath, prefix);
-        }));
-    }
-
-    private static Future<Boolean> runApp(final Vertx vertx) {
-        final List<URI> apps = InstApps.of().ioApp();
-        // 应用导入
-
-        // 菜单计算和导入
-        return Future.succeededFuture(Boolean.TRUE);
+        container.start((vertx, config) -> {
+            // 加载应用和菜单数据到数据库
+            BuildApp.run(vertx).onComplete(res -> {
+                log.info("[ ZERO ] ( LoadInst ) 应用初始化完成，开始执行数据导入...");
+                // runLoad(vertx, oob, vPath, prefix);
+            });
+        });
     }
 
     private static void runLoad(final Vertx vertx,
                                 final boolean oob,
                                 final String vPath,
                                 final String prefix) {
-        return;
         // 构造数据导入器
-//        final DataImport importer = DataImport.of(vertx);
-//        if (oob) {
-//            // 开启 OOB      ---> loadWith
-//            importer.loadWith(vPath, prefix);
-//        } else {
-//            // 不开启 OOB   ---> load
-//            importer.load(vPath, prefix);
-//        }
+        final DataImport importer = DataImport.of(vertx);
+        if (oob) {
+            // 开启 OOB      ---> loadWith
+            importer.loadWith(vPath, prefix);
+        } else {
+            // 不开启 OOB   ---> load
+            importer.load(vPath, prefix);
+        }
     }
 }

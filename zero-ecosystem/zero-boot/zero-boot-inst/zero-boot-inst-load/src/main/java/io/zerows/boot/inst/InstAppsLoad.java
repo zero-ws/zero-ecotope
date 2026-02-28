@@ -84,11 +84,11 @@ class InstAppsLoad implements InstApps {
                 if (children != null) {
                     for (final File child : children) {
                         if (child.isFile() && child.getName().endsWith(".yml")) {
-                            log.info("[ INST ] [File] 加载直属 yml 文件: {}", child.getName());
+                            log.info("[ INST ] [File] 加载直属 yml 文件: `apps/{}`", child.getName());
                             // 直接使用 toURI() 存入 Set
                             APPS.get(Boolean.TRUE).add(child.toURI());
                         } else if (child.isDirectory()) {
-                            log.info("[ INST ] [File] 加载直属目录: {}", child.getName());
+                            log.info("[ INST ] [File] 加载直属目录: `apps/{}`", child.getName());
                             // 直接使用 toURI() 存入 Set
                             APPS.get(Boolean.FALSE).add(child.toURI());
                         }
