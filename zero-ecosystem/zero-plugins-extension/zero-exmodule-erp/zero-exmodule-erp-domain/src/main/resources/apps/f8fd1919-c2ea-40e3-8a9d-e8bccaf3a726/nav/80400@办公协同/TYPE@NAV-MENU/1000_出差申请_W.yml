@@ -1,0 +1,4 @@
+data:
+  name: zero.bsm.dash.trip
+  icon: "cab:BLOCK_BSM_TRIP"
+  uri: "/workflow/open?name=process.oa.trip"

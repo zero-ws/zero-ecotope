@@ -1,14 +1,13 @@
 data:
   # 独立应用专用属性
-  domain: www.zerows.setting.io
+  domain: www.zerows.io.setting
   port: 7100
   endpoint: /app/setting
   context: /app-setting
   urlLogin: /login/index
-  urlAdmin: /main/index
+  urlAdmin: /dashboard/resource
 
   # 附属应用专用属性
-  id: 5e61e0b9-908f-44c4-ae1a-ff569010747e
   name: app.zero.setting
   code: app.zero.setting
   title: 平台系统设置

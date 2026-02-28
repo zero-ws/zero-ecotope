@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.office.assignment.open
+  icon: file-add
+  uri: "/workflow/open?name=process.oa.assignment"

@@ -1,0 +1,4 @@
+data:
+  name: zero.cm.dash.out
+  icon: "cab:BLOCK_WF_OUT"
+  uri: "/workflow/open?name=process.vendor.check-out"

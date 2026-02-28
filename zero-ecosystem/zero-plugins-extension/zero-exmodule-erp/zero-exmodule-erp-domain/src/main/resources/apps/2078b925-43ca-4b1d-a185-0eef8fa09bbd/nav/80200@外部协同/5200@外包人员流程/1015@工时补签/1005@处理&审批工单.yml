@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.vendor.hour.approval
+  icon: audit
+  uri: "/workflow/queue?name=process.vendor.hour"

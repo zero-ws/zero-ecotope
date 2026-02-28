@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.office.training.done
+  icon: history
+  uri: "/workflow/done?name=process.oa.training"

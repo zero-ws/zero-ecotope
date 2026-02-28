@@ -1,0 +1,18 @@
+data:
+  # 独立应用专用属性
+  domain: www.zerows.io.workflow
+  port: 7700
+  endpoint: /app/workflow
+  context: /app-workflow
+  urlLogin: /login/index
+  urlAdmin: /dashboard/workflow
+
+  # 附属应用专用属性
+  name: app.zero.workflow
+  code: app.zero.workflow
+  title: 流程管理中心
+  entry: zero.wf
+
+  # 集成专用属性
+  appSecret: C1C5F394306EB72084C1073C695F0298
+  appKey: tG3qP9mF3mI4aO8lB6xE5nT3dF6hG3aG7nJ2vJ8qX3aF6rW3rT5sF1pQ9dX4yV7w

@@ -1,0 +1,18 @@
+data:
+  # 独立应用专用属性
+  domain: www.zerows.io.customer
+  port: 7400
+  endpoint: /app/customer
+  context: /app-customer
+  urlLogin: /login/index
+  urlAdmin: /dashboard/vendor
+
+  # 附属应用专用属性
+  name: app.zero.customer
+  code: app.zero.customer
+  title: 客户管理中心
+  entry: zero.cm
+
+  # 集成专用属性
+  appSecret: 6E2F0930CB80A186005109BE9E17AA9C
+  appKey: jF1rP4vL1iE8eP8cO8jH0lW0yF8dH8qB3iP3lV3bQ0nR7bH1xG9oE4iE6nC4bR2p

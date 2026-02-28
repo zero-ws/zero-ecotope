@@ -1,0 +1,4 @@
+data:
+  name: zero.cm.dash.hour
+  icon: "cab:BLOCK_WF_HOUR"
+  uri: "/workflow/open?name=process.vendor.hour"

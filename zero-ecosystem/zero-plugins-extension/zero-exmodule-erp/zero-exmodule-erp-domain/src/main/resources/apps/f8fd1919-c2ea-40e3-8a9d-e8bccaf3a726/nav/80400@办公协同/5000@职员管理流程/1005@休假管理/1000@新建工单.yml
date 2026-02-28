@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.office.vacation.open
+  icon: file-add
+  uri: "/workflow/open?name=process.oa.vacation"

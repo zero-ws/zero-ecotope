@@ -1,0 +1,4 @@
+data:
+  name: zero.bsm.notify.open
+  icon: plus
+  uri: /notify/publish

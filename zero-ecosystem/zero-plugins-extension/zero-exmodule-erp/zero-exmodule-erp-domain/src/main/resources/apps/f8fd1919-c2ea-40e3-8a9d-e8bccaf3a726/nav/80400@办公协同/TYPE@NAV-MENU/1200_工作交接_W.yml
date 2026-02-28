@@ -1,0 +1,4 @@
+data:
+  name: zero.bsm.dash.assignment
+  icon: "cab:BLOCK_BSM_ASSIGNMENT"
+  uri: "/workflow/open?name=process.oa.assignment"

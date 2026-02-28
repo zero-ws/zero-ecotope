@@ -1,0 +1,5 @@
+data:
+  type: BAG-MENU
+  name: zero.wf
+  icon: clock-circle
+  uri: /dashboard/workflow

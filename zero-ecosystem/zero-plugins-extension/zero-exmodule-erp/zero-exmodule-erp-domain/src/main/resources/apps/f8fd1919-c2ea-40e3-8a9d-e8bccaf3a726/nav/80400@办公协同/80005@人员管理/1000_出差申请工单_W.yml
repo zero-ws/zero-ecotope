@@ -1,0 +1,5 @@
+data:
+  type: SC-MENU
+  name: process.oa.trip
+  icon: car
+  uri: "/workflow/open?name=process.oa.trip"

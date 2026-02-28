@@ -1,0 +1,4 @@
+data:
+  name: zero.bsm.dash.vacation
+  icon: "cab:BLOCK_BSM_VACATION"
+  uri: "/workflow/open?name=process.oa.vacation"

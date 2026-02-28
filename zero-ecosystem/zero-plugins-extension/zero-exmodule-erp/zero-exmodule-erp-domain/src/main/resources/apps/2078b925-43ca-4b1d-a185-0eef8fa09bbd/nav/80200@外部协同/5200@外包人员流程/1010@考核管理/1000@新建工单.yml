@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.vendor.assessment.open
+  icon: file-add
+  uri: "/workflow/open?name=process.vendor.assessment"

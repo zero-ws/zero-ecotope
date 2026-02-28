@@ -1,0 +1,4 @@
+data:
+  name: process.vendor.assessment
+  icon: file
+  uri: "/workflow/open?name=process.vendor.assessment"
