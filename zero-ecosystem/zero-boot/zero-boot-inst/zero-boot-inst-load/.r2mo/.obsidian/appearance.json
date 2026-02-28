@@ -1,0 +1,10 @@
+{
+  "theme": "moonstone",
+  "cssTheme": "Retro Windows",
+  "interfaceFontFamily": "",
+  "baseFontSize": 18,
+  "textFontFamily": "Hannotate TC",
+  "enabledCssSnippets": [
+    "body-font"
+  ]
+}
