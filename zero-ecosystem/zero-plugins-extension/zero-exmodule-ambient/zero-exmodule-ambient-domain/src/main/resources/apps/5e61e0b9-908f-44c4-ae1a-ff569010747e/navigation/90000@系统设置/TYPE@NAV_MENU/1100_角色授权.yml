@@ -1,0 +1,4 @@
+data:
+  name: zero.ssm.dash.authority
+  icon: "cab:BLOCK_SSM_AUTH"
+  uri: /rbac/authority-role

@@ -1,0 +1,4 @@
+data:
+  name: zero.ssm.log.workflow
+  icon: gateway
+  uri: /system/workflow

@@ -1,0 +1,19 @@
+data:
+  # 独立应用专用属性
+  domain: www.zerows.setting.io
+  port: 7100
+  endpoint: /app/setting
+  context: /app-setting
+  urlLogin: /login/index
+  urlAdmin: /main/index
+
+  # 附属应用专用属性
+  id: 5e61e0b9-908f-44c4-ae1a-ff569010747e
+  name: app.zero.setting
+  code: app.zero.setting
+  title: 平台系统设置
+  entry: zero.ssm
+
+  # 集成专用属性
+  appSecret: CC2CFA8BD8481162A05AED45B93118CA
+  appKey: vS4vX9dS0nO1pE6pP7hS8sU9kG7gL3qX1yG1bM2fN4pN5yY3nT1fW0zT6vF7mQ1w

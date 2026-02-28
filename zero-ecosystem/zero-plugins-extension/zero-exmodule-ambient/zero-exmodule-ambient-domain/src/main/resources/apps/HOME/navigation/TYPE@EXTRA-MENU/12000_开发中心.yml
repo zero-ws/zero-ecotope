@@ -1,0 +1,5 @@
+data:
+  name: zero.extra.research
+  icon: code
+  metadata:
+    confirm: true

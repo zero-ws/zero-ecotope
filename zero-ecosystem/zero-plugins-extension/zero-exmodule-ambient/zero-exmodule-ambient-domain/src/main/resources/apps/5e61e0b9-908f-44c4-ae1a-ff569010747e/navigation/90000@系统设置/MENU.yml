@@ -1,0 +1,5 @@
+data:
+  type: BAG-MENU
+  name: zero.ssm
+  icon: deployment-unit
+  uri: /dashboard/resource
