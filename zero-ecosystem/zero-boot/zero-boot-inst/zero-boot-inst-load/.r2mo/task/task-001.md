@@ -1,6 +1,6 @@
 ---
 runAt: 2026-02-28.20-18-10
-title: 任务
+title: 开发应用和菜单同步程序
 ---
 完善代码 `io.zerows.boot.inst.LoadInst` 的核心逻辑
 
