@@ -50,6 +50,9 @@ public class BuildApp {
             // 3. 加载实例映射配置（从 apps/instance.yml 和缓存标识文件）
             final Map<String, String> instanceMap = loadInstanceMap();
 
+            // 3.1 加载 init 配置（从 apps/instance.yml 的 init 节点）
+            final JsonObject initConfig = loadInitConfig();
+
             // 4. 从缓存目录和数据库加载额外的映射
             return loadCacheMappings(vertx, cacheDir, instanceMap)
                 .compose(mergedMap -> {
@@ -60,7 +63,7 @@ public class BuildApp {
                     log.info("[ INST ] 扫描到 {} 个应用文件，{} 个菜单目录", appUris.size(), menuDirUris.size());
 
                     // 6. 加载应用和菜单数据
-                    final BuildMenuLoader loader = BuildMenuLoader.create(vertx, globalConfig, mergedMap);
+                    final BuildMenuLoader loader = BuildMenuLoader.create(vertx, globalConfig, mergedMap, initConfig);
                     return loader.loadApps(appUris)
                         .compose(v -> loader.loadMenus(menuDirUris))
                         .compose(v -> {
@@ -201,6 +204,46 @@ public class BuildApp {
         } catch (final Exception e) {
             log.error("[ INST ] 加载实例映射失败", e);
             return new java.util.HashMap<>();
+        }
+    }
+
+    /**
+     * 从 apps/instance.yml 加载 init 配置
+     * 格式: init: { menu: {...}, app: {...} }
+     * 返回: JsonObject
+     */
+    private static JsonObject loadInitConfig() {
+        try {
+            // 优先从 classpath 加载
+            final JsonObject classpathInit = InstApps.of().ioInit();
+            if (classpathInit != null && !classpathInit.isEmpty()) {
+                return classpathInit;
+            }
+
+            // 如果 classpath 中没有，尝试从文件系统加载
+            final String r2moHome = System.getenv("R2MO_HOME");
+            final String basePath = (r2moHome != null && !r2moHome.trim().isEmpty())
+                ? r2moHome
+                : System.getProperty("user.dir");
+
+            final File instanceFile = new File(basePath + "/apps/instance.yml");
+            if (!instanceFile.exists()) {
+                log.debug("[ INST ] 未找到 instance.yml，使用空 init 配置");
+                return new JsonObject();
+            }
+
+            final JsonObject instanceJ = Ut.ioYaml(instanceFile.getAbsolutePath());
+            if (instanceJ == null || !instanceJ.containsKey("init")) {
+                log.debug("[ INST ] instance.yml 中未找到 init 节点");
+                return new JsonObject();
+            }
+
+            final JsonObject init = instanceJ.getJsonObject("init");
+            log.info("[ INST ] 加载 init 配置完成");
+            return init;
+        } catch (final Exception e) {
+            log.error("[ INST ] 加载 init 配置失败", e);
+            return new JsonObject();
         }
     }
 

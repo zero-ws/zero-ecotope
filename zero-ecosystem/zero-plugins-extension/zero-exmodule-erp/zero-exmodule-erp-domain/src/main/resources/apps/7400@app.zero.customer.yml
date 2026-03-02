@@ -5,7 +5,7 @@ data:
   endpoint: /app/customer
   context: /app-customer
   urlLogin: /login/index
-  urlAdmin: /dashboard/vendor
+  urlAdmin: /dashboard/customer
 
   # 附属应用专用属性
   name: app.zero.customer

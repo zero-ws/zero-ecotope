@@ -37,15 +37,17 @@ class BuildMenuLoader {
     private final Map<String, String> dirNameToAppId = new ConcurrentHashMap<>(); // 目录名 -> 应用UUID
     private final Map<String, String> instanceMap; // code -> UUID 映射（来自 instance.yml）
     private final JsonObject globalConfig;
+    private final JsonObject initConfig; // init 配置（来自 instance.yml 的 init 节点）
 
-    private BuildMenuLoader(final Vertx vertx, final JsonObject globalConfig, final Map<String, String> instanceMap) {
+    private BuildMenuLoader(final Vertx vertx, final JsonObject globalConfig, final Map<String, String> instanceMap, final JsonObject initConfig) {
         this.vertx = vertx;
         this.globalConfig = globalConfig;
         this.instanceMap = instanceMap;
+        this.initConfig = initConfig;
     }
 
-    static BuildMenuLoader create(final Vertx vertx, final JsonObject globalConfig, final Map<String, String> instanceMap) {
-        return new BuildMenuLoader(vertx, globalConfig, instanceMap);
+    static BuildMenuLoader create(final Vertx vertx, final JsonObject globalConfig, final Map<String, String> instanceMap, final JsonObject initConfig) {
+        return new BuildMenuLoader(vertx, globalConfig, instanceMap, initConfig);
     }
 
     /**
@@ -372,6 +374,66 @@ class BuildMenuLoader {
     }
 
     /**
+     * 应用 init.menu 配置覆盖
+     * 从 instance.yml 的 init.menu 节点读取配置，使用 mergeIn 方法覆盖菜单属性
+     *
+     * 示例配置：
+     * init:
+     *   menu:
+     *     name: zero.cm
+     *     uri: /ambient/customer/corporation
+     *     text: 客户管理
+     *
+     * @param menu 菜单对象
+     * @param menuName 菜单名称（用于匹配）
+     */
+    private void applyInitMenuConfig(final XMenu menu, final String menuName) {
+        if (this.initConfig == null || !this.initConfig.containsKey("menu")) {
+            return;
+        }
+
+        final JsonObject menuConfig = this.initConfig.getJsonObject("menu");
+        if (menuConfig == null || menuConfig.isEmpty()) {
+            return;
+        }
+
+        // 检查是否匹配当前菜单（通过 name 字段）
+        final String configName = menuConfig.getString("name");
+        if (configName == null || !configName.equals(menuName)) {
+            return;
+        }
+
+        // 将菜单对象序列化为 JsonObject
+        final JsonObject menuJson = Ut.serializeJson(menu);
+
+        // 使用 mergeIn 方法覆盖属性（menuConfig 中的字段会覆盖 menuJson 中的同名字段）
+        menuJson.mergeIn(menuConfig);
+
+        // 反序列化回 XMenu 对象
+        final XMenu updatedMenu = Ut.deserialize(menuJson, XMenu.class);
+
+        // 复制所有字段到原菜单对象
+        menu.setId(updatedMenu.getId());
+        menu.setName(updatedMenu.getName());
+        menu.setText(updatedMenu.getText());
+        menu.setUri(updatedMenu.getUri());
+        menu.setType(updatedMenu.getType());
+        menu.setOrder(updatedMenu.getOrder());
+        menu.setLevel(updatedMenu.getLevel());
+        menu.setParentId(updatedMenu.getParentId());
+        menu.setAppId(updatedMenu.getAppId());
+        menu.setIcon(updatedMenu.getIcon());
+        menu.setMetadata(updatedMenu.getMetadata());
+        menu.setSigma(updatedMenu.getSigma());
+        menu.setLanguage(updatedMenu.getLanguage());
+        menu.setActive(updatedMenu.getActive());
+        menu.setTenantId(updatedMenu.getTenantId());
+        menu.setVersion(updatedMenu.getVersion());
+
+        log.debug("[ INST ] 应用 init.menu 配置覆盖: {} -> {}", menuName, menuConfig.encode());
+    }
+
+    /**
      * 从 URI 提取目录名（非 UUID）
      * 例如：apps/desktop/nav → desktop
      */
@@ -573,12 +635,16 @@ class BuildMenuLoader {
         // 填充全局字段
         this.fillGlobalFieldsForMenu(menu);
 
+        // 应用 init.menu 配置覆盖（如果存在）
+        this.applyInitMenuConfig(menu, name);
+
         return menu;
     }
 
     /**
      * 解析文件名或目录名
      * 格式: {order}@{text} 或 {order}_{text}
+     * 去除 text 中的 _W 和 _P 后缀
      */
     private String[] parseFileName(final String fileName) {
         String name = fileName;
@@ -599,6 +665,13 @@ class BuildMenuLoader {
         if (sepIndex > 0) {
             order = name.substring(0, sepIndex);
             text = name.substring(sepIndex + 1);
+        }
+
+        // 去除 text 中的 _W 和 _P 后缀
+        if (text.endsWith("_W")) {
+            text = text.substring(0, text.length() - 2);
+        } else if (text.endsWith("_P")) {
+            text = text.substring(0, text.length() - 2);
         }
 
         return new String[]{order, text};

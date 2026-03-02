@@ -24,4 +24,11 @@ public interface InstApps {
      * @return Map<name, UUID>
      */
     Map<String, String> ioInstance();
+
+    /**
+     * 读取 apps/instance.yml 中的 init 配置
+     * 格式：init 根节点，包含 menu、app 等配置
+     * @return JsonObject，包含 init 配置
+     */
+    io.vertx.core.json.JsonObject ioInit();
 }

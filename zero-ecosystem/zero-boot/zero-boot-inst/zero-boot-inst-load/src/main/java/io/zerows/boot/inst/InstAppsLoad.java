@@ -110,6 +110,31 @@ class InstAppsLoad implements InstApps {
         }
     }
 
+    @Override
+    public io.vertx.core.json.JsonObject ioInit() {
+        this.initIfNeeded();
+        if (instanceYmlUri == null) {
+            log.debug("[ INST ] 未找到 apps/instance.yml");
+            return new io.vertx.core.json.JsonObject();
+        }
+
+        try {
+            final String path = instanceYmlUri.getPath();
+            final io.vertx.core.json.JsonObject data = io.zerows.support.Ut.ioYaml(path);
+            if (data == null || !data.containsKey("init")) {
+                log.debug("[ INST ] instance.yml 中未找到 init 节点");
+                return new io.vertx.core.json.JsonObject();
+            }
+
+            final io.vertx.core.json.JsonObject init = data.getJsonObject("init");
+            log.info("[ INST ] 加载 init 配置完成");
+            return init;
+        } catch (final Exception e) {
+            log.error("[ INST ] 读取 init 配置失败", e);
+            return new io.vertx.core.json.JsonObject();
+        }
+    }
+
     /**
      * 解析本地文件系统（用于开发环境 IDE 中直接运行）
      */
