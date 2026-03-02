@@ -49,7 +49,7 @@ public class LoadInst {
             // 加载应用和菜单数据到数据库
             BuildApp.run(vertx).onComplete(res -> {
                 log.info("[ ZERO ] ( LoadInst ) 应用初始化完成，开始执行数据导入...");
-                // runLoad(vertx, oob, vPath, prefix);
+                runLoad(vertx, oob, vPath, prefix);
             });
         });
     }
