@@ -49,12 +49,12 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getName();
 
     /**
-     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 标题
      */
     public IXApp setTitle(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 标题
      */
     public String getTitle();
 
@@ -69,22 +69,22 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getCopyRight();
 
     /**
-     * Setter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 管理员Email
+     * Setter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 邮箱
      */
     public IXApp setEmail(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 管理员Email
+     * Getter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 邮箱
      */
     public String getEmail();
 
     /**
-     * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
+     * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案
      */
     public IXApp setIcp(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
+     * Getter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案
      */
     public String getIcp();
 
@@ -99,72 +99,72 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getLogo();
 
     /**
-     * Setter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
+     * Setter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 图标
      */
     public IXApp setFavicon(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
+     * Getter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 图标
      */
     public String getFavicon();
 
     /**
-     * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口
      */
     public IXApp setEntry(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     * Getter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口
      */
     public String getEntry();
 
     /**
-     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 域名
      */
     public IXApp setDomain(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 域名
      */
     public String getDomain();
 
     /**
-     * Setter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口号
+     * Setter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口
      */
     public IXApp setPort(Integer value);
 
     /**
-     * Getter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口号
+     * Getter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口
      */
     public Integer getPort();
 
     /**
-     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
+     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 路径
      */
     public IXApp setContext(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
+     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 路径
      */
     public String getContext();
 
     /**
-     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- 服务地址
      */
     public IXApp setEndpoint(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- 服务地址
      */
     public String getEndpoint();
 
     /**
-     * Setter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理业URL
+     * Setter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理页
      */
     public IXApp setUrlAdmin(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理业URL
+     * Getter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理页
      */
     public String getUrlAdmin();
 
@@ -179,22 +179,22 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getUrlLogin();
 
     /**
-     * Setter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     * Setter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查
      */
     public IXApp setUrlHealth(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     * Getter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查
      */
     public String getUrlHealth();
 
     /**
-     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 应用Key
      */
     public IXApp setAppKey(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 应用Key
      */
     public String getAppKey();
 
@@ -249,52 +249,52 @@ public interface IXApp extends VertxPojo, Serializable {
     public String getTenantId();
 
     /**
-     * Setter for <code>ZDB.X_APP.APP_ID</code>. 「appId」- 父应用ID
+     * Setter for <code>ZDB.X_APP.APP_ID</code>. 「appId」- 父应用
      */
     public IXApp setAppId(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.APP_ID</code>. 「appId」- 父应用ID
+     * Getter for <code>ZDB.X_APP.APP_ID</code>. 「appId」- 父应用
      */
     public String getAppId();
 
     /**
-     * Setter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 启用
      */
     public IXApp setActive(Boolean value);
 
     /**
-     * Getter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 语言
      */
     public IXApp setLanguage(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元数据
      */
     public IXApp setMetadata(JsonObject value);
 
     /**
-     * Getter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元数据
      */
     public JsonObject getMetadata();
 
     /**
-     * Setter for <code>ZDB.X_APP.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.X_APP.VERSION</code>. 「version」- 版本
      */
     public IXApp setVersion(String value);
 
     /**
-     * Getter for <code>ZDB.X_APP.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.X_APP.VERSION</code>. 「version」- 版本
      */
     public String getVersion();
 

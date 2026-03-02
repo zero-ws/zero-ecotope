@@ -117,24 +117,24 @@ public class XMenu extends TableImpl<XMenuRecord> {
     public final TableField<XMenuRecord, String> APP_ID = createField(DSL.name("APP_ID"), SQLDataType.VARCHAR(36), this, "「appId」- 应用ID");
 
     /**
-     * The column <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 启用
      */
-    public final TableField<XMenuRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 是否启用");
+    public final TableField<XMenuRecord, Boolean> ACTIVE = createField(DSL.name("ACTIVE"), SQLDataType.BIT, this, "「active」- 启用");
 
     /**
-     * The column <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言偏好
+     * The column <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言
      */
-    public final TableField<XMenuRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 语言偏好");
+    public final TableField<XMenuRecord, String> LANGUAGE = createField(DSL.name("LANGUAGE"), SQLDataType.VARCHAR(10), this, "「language」- 语言");
 
     /**
-     * The column <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
+     * The column <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元数据
      */
-    public final TableField<XMenuRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元配置", new JooqJsonObjectConverter());
+    public final TableField<XMenuRecord, JsonObject> METADATA = createField(DSL.name("METADATA"), SQLDataType.CLOB(65535), this, "「metadata」- 元数据", new JooqJsonObjectConverter());
 
     /**
-     * The column <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本号
+     * The column <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本
      */
-    public final TableField<XMenuRecord, String> VERSION = createField(DSL.name("VERSION"), SQLDataType.VARCHAR(64), this, "「version」- 版本号");
+    public final TableField<XMenuRecord, String> VERSION = createField(DSL.name("VERSION"), SQLDataType.VARCHAR(64), this, "「version」- 版本");
 
     /**
      * The column <code>ZDB.X_MENU.CREATED_AT</code>. 「createdAt」- 创建时间
