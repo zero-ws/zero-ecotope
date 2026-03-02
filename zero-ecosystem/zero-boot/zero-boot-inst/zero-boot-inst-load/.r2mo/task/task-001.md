@@ -17,3 +17,8 @@ running:
 2. 最终输出到目标 `apps` 时输出已插入数据库中的 `apps/instance.yml` 对应的实例表，静态 UUID 加插入时对应的 UUID。
 3. 导入数据库的过程中检查目标目录对应 `apps/instance.yml`，将此处 UUID 和静态合并构造最终导入 XApp 的 UUID映射表。
 4. 我已移除掉 XApp 中使用 name 和 code 做 unique 的基本规则。
+
+## 现有BUG
+
+1. 最终创建 apps 的缓存时目录名应该使用 `X_APP` 中的 `id`，而不是目前加载的目录名。
+2. 最终导入 `X_MENU` 菜单信息时的 `appId` 应该引用 `X_APP` 中的 id（UUID），而不是目录名。

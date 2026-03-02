@@ -27,7 +27,8 @@ class BuildMenuLoader {
     private final Map<String, List<XMenu>> menus = new ConcurrentHashMap<>();
     private final Map<String, String> menuUuidCache = new ConcurrentHashMap<>();
     private final Map<String, String> dirPathToMenuId = new ConcurrentHashMap<>(); // 目录路径 -> 菜单ID
-    private final Map<String, String> instanceMap; // name -> UUID 映射（来自 instance.yml）
+    private final Map<String, String> dirNameToAppId = new ConcurrentHashMap<>(); // 目录名 -> 应用UUID
+    private final Map<String, String> instanceMap; // code -> UUID 映射（来自 instance.yml）
     private final JsonObject globalConfig;
 
     private BuildMenuLoader(final JsonObject globalConfig, final Map<String, String> instanceMap) {
@@ -68,16 +69,25 @@ class BuildMenuLoader {
 
         for (final URI uri : menuDirUris) {
             try {
-                final String appId = this.extractAppIdFromUri(uri);
-                if (appId == null) {
-                    log.warn("[ INST ] 无法提取 appId");
+                final String dirName = this.extractAppIdFromUri(uri);
+                if (dirName == null) {
+                    log.warn("[ INST ] 无法提取目录名");
                     continue;
                 }
 
-                // HOME 目录使用全局配置的 appId，其他使用目录名
-                final String actualAppId = "HOME".equals(appId)
-                    ? this.globalConfig.getString("appId")
-                    : appId;
+                // 从目录名映射到应用UUID
+                String actualAppId;
+                if ("HOME".equals(dirName)) {
+                    // HOME 目录使用全局配置的 appId
+                    actualAppId = this.globalConfig.getString("appId");
+                } else {
+                    // 其他目录从映射表中查找对应的应用UUID
+                    actualAppId = this.dirNameToAppId.get(dirName);
+                    if (actualAppId == null) {
+                        log.warn("[ INST ] 未找到目录 {} 对应的应用UUID，跳过", dirName);
+                        continue;
+                    }
+                }
 
                 // 加载当前模块的菜单
                 final List<XMenu> appMenus = this.loadMenusFromDirectory(uri, actualAppId);
@@ -115,6 +125,9 @@ class BuildMenuLoader {
             return null;
         }
 
+        // 提取目录名（用于建立映射关系）
+        final String dirName = this.extractDirNameFromAppUri(uri);
+
         // 加载 YAML 文件
         final JsonObject data = Ut.ioYaml(path);
         if (data == null || !data.containsKey("data")) {
@@ -127,15 +140,31 @@ class BuildMenuLoader {
         // 使用反序列化创建 XApp 对象
         final XApp app = Ut.deserialize(appData, XApp.class);
 
-        // ID 策略：yml 中有 id 则使用，否则生成新 UUID
+        // ID 策略：
+        // 1. yml 中有 id 则使用
+        // 2. 否则检查 instance.yml 中是否有映射（code -> UUID）
+        // 3. 都没有则生成新 UUID
         String appId = appData.getString("id");
         if (appId == null || appId.isEmpty()) {
-            appId = UUID.randomUUID().toString();
-            log.debug("[ INST ] 应用未指定 id，生成新 UUID: {}", appId);
+            // 检查 instance.yml 映射
+            final String code = appData.getString("code");
+            if (code != null && this.instanceMap.containsKey(code)) {
+                appId = this.instanceMap.get(code);
+                log.debug("[ INST ] 应用使用 instance.yml 映射: {} -> {}", code, appId);
+            } else {
+                appId = UUID.randomUUID().toString();
+                log.debug("[ INST ] 应用未指定 id，生成新 UUID: {}", appId);
+            }
         } else {
             log.debug("[ INST ] 应用使用 yml 中的 id: {}", appId);
         }
         app.setId(appId);
+
+        // 建立目录名到应用UUID的映射（用于菜单加载）
+        if (dirName != null) {
+            this.dirNameToAppId.put(dirName, appId);
+            log.debug("[ INST ] 建立映射: 目录 {} -> 应用UUID {}", dirName, appId);
+        }
 
         // 从 globalConfig 填充公共字段
         this.fillGlobalFields(app);
@@ -198,7 +227,7 @@ class BuildMenuLoader {
     }
 
     /**
-     * 从 URI 提取 appId（目录名，非 UUID）
+     * 从 URI 提取目录名（非 UUID）
      * 例如：apps/desktop/nav → desktop
      */
     private String extractAppIdFromUri(final URI uri) {
@@ -213,6 +242,32 @@ class BuildMenuLoader {
         if (slashIndex > 0) {
             // 返回目录名（可以是任意字符串，不限于 UUID）
             return afterApps.substring(0, slashIndex);
+        }
+
+        return afterApps;
+    }
+
+    /**
+     * 从应用 URI 提取目录名
+     * 例如：apps/desktop/desktop.yml → desktop
+     */
+    private String extractDirNameFromAppUri(final URI uri) {
+        final String path = uri.getPath();
+        final String[] parts = path.split("/apps/");
+        if (parts.length < 2) {
+            return null;
+        }
+
+        final String afterApps = parts[1];
+        final int slashIndex = afterApps.indexOf('/');
+        if (slashIndex > 0) {
+            return afterApps.substring(0, slashIndex);
+        }
+
+        // 如果没有斜杠，说明是 apps/{name}.yml 格式
+        final String fileName = afterApps;
+        if (fileName.endsWith(".yml")) {
+            return fileName.substring(0, fileName.length() - 4);
         }
 
         return afterApps;

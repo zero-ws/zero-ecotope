@@ -138,11 +138,19 @@ public class BuildApp {
 
     /**
      * 加载实例映射配置
-     * 从 apps/instance.yml 加载目录名到 UUID 的映射
-     * 格式: { "custom-dir-name": "uuid-value" }
+     * 从 apps/instance.yml 加载 code 到 UUID 的映射
+     * 格式: running: { UUID: code }
+     * 返回: Map<code, UUID>
      */
     private static Map<String, String> loadInstanceMap() {
         try {
+            // 优先从 classpath 加载
+            final Map<String, String> classpathMap = InstApps.of().ioInstance();
+            if (!classpathMap.isEmpty()) {
+                return classpathMap;
+            }
+
+            // 如果 classpath 中没有，尝试从文件系统加载
             final String r2moHome = System.getenv("R2MO_HOME");
             final String basePath = (r2moHome != null && !r2moHome.trim().isEmpty())
                 ? r2moHome
@@ -155,13 +163,22 @@ public class BuildApp {
             }
 
             final JsonObject instanceJ = Ut.ioYaml(instanceFile.getAbsolutePath());
+            if (instanceJ == null || !instanceJ.containsKey("running")) {
+                log.warn("[ INST ] instance.yml 格式错误，缺少 running 节点");
+                return new java.util.HashMap<>();
+            }
+
+            final JsonObject running = instanceJ.getJsonObject("running");
             final Map<String, String> instanceMap = new java.util.HashMap<>();
 
-            instanceJ.forEach(entry -> {
-                if (entry.getValue() instanceof String) {
-                    instanceMap.put(entry.getKey(), (String) entry.getValue());
+            // 遍历 running 节点，格式：UUID=code，构造 code -> UUID 映射
+            for (final String uuid : running.fieldNames()) {
+                final String code = running.getString(uuid);
+                if (code != null && !code.isEmpty()) {
+                    instanceMap.put(code, uuid);
+                    log.debug("[ INST ] 加载实例映射: {} -> {}", code, uuid);
                 }
-            });
+            }
 
             log.info("[ INST ] 加载实例映射: {} 条记录", instanceMap.size());
             return instanceMap;
