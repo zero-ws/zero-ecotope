@@ -157,6 +157,7 @@ class BuildMenuPersister {
     /**
      * Upsert 菜单数据
      * 唯一键：NAME + APP_ID
+     * 策略：以 XApp 加载的菜单为准（数据库优先）
      * 返回 "insert" 或 "update" 或 "skip"
      */
     private Future<String> upsertMenu(final XMenu menu) {
@@ -182,32 +183,15 @@ class BuildMenuPersister {
                             return "insert";
                         });
                 } else {
-                    // 存在，使用数据库中的 ID 更新
-                    // 如果 ID 不同，需要先删除旧记录再插入新记录
-                    if (!menu.getId().equals(existing.getId())) {
-                        log.debug("[ INST ] 菜单 {} 的 ID 变化: {} -> {}",
-                            menu.getName(), existing.getId(), menu.getId());
-                        // 删除旧记录
-                        return DB.on(XMenuDao.class)
-                            .deleteByIdAsync(existing.getId())
-                            .compose(deleted -> {
-                                // 插入新记录
-                                return DB.on(XMenuDao.class)
-                                    .insertAsync(menu)
-                                    .map(inserted -> {
-                                        log.debug("[ INST ] 重新插入菜单: {} ({})", menu.getText(), menu.getName());
-                                        return "update";
-                                    });
-                            });
-                    } else {
-                        // ID 相同，直接更新
-                        return DB.on(XMenuDao.class)
-                            .updateAsync(menu)
-                            .map(updated -> {
-                                log.debug("[ INST ] 更新菜单: {} ({})", menu.getText(), menu.getName());
-                                return "update";
-                            });
-                    }
+                    // 存在，使用数据库中的 ID（保持 ID 稳定性）
+                    // 将传入菜单的 ID 替换为数据库中的 ID，然后更新
+                    menu.setId(existing.getId());
+                    return DB.on(XMenuDao.class)
+                        .updateAsync(menu)
+                        .map(updated -> {
+                            log.debug("[ INST ] 更新菜单: {} ({})", menu.getText(), menu.getName());
+                            return "update";
+                        });
                 }
             })
             .recover(err -> {
