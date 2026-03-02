@@ -11,7 +11,7 @@ data:
   name: app.zero.workflow
   code: app.zero.workflow
   title: 流程管理中心
-  entry: zero.wf
+  entry: zero.wm
 
   # 集成专用属性
   appSecret: C1C5F394306EB72084C1073C695F0298

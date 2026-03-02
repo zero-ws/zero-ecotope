@@ -1,0 +1,4 @@
+data:
+  name: zero.wm.office.assignment.approval
+  icon: audit
+  uri: "/workflow/queue?name=process.oa.assignment"
