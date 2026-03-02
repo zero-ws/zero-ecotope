@@ -47,7 +47,7 @@ public class MenuService implements MenuStub {
             if (ids.isEmpty()) {
                 return Ux.futureL();
             }
-            return DB.on(XMenuDao.class).<XMenu>fetchInAsync(KName.APP_ID, ids);
+            return DB.on(XMenuDao.class).<XMenu, String>fetchInAsync(KName.APP_ID, ids);
         }).compose(Ux::futureA);
     }
 }
