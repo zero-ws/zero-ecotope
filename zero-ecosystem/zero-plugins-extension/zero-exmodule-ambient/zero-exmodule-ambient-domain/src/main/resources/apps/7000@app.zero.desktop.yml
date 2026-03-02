@@ -1,0 +1,18 @@
+data:
+  # 独立应用专用属性
+  domain: www.zerows.io.desktop
+  port: 7000
+  endpoint: /app/desktop
+  context: /app-desktop
+  urlLogin: /login/index
+  urlAdmin: /main/index
+
+  # 附属应用专用属性
+  name: app.zero.desktop
+  code: app.zero.desktop
+  title: 个人服务台
+  entry: zero.desktop
+
+  # 集成专用属性
+  appSecret: M8HV62AZS6FMC5BQR6GJ5LBVXWYTBMBZ
+  appKey: lSuXGjzmoGgll0vvMCp10YZhgOiAfxkpojOME84Q6JqdwVEX3gyQmCpX18RT4cQ8

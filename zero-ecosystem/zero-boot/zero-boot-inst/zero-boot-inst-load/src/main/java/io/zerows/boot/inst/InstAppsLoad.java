@@ -23,6 +23,7 @@ class InstAppsLoad implements InstApps {
     // Boolean.FALSE -> 存储 目录 的 URI 集合 (ioRunning)
     private static final Map<Boolean, Set<URI>> APPS = new HashMap<>();
     private static volatile boolean initialized = false;
+    private static URI instanceYmlUri = null;
 
     static {
         APPS.put(Boolean.TRUE, new LinkedHashSet<>());
@@ -73,6 +74,42 @@ class InstAppsLoad implements InstApps {
         return new ArrayList<>(APPS.get(Boolean.FALSE));
     }
 
+    @Override
+    public Map<String, String> ioInstance() {
+        this.initIfNeeded();
+        if (instanceYmlUri == null) {
+            log.debug("[ INST ] 未找到 apps/instance.yml");
+            return new HashMap<>();
+        }
+
+        try {
+            final String path = instanceYmlUri.getPath();
+            final io.vertx.core.json.JsonObject data = io.zerows.support.Ut.ioYaml(path);
+            if (data == null || !data.containsKey("running")) {
+                log.warn("[ INST ] instance.yml 格式错误，缺少 running 节点");
+                return new HashMap<>();
+            }
+
+            final io.vertx.core.json.JsonObject running = data.getJsonObject("running");
+            final Map<String, String> instanceMap = new HashMap<>();
+
+            // 遍历 running 节点，格式：UUID=name
+            for (final String uuid : running.fieldNames()) {
+                final String name = running.getString(uuid);
+                if (name != null && !name.isEmpty()) {
+                    instanceMap.put(name, uuid);
+                    log.debug("[ INST ] 加载实例映射: {} -> {}", name, uuid);
+                }
+            }
+
+            log.info("[ INST ] 加载 instance.yml 完成，共 {} 个映射", instanceMap.size());
+            return instanceMap;
+        } catch (final Exception e) {
+            log.error("[ INST ] 读取 instance.yml 失败", e);
+            return new HashMap<>();
+        }
+    }
+
     /**
      * 解析本地文件系统（用于开发环境 IDE 中直接运行）
      */
@@ -84,9 +121,15 @@ class InstAppsLoad implements InstApps {
                 if (children != null) {
                     for (final File child : children) {
                         if (child.isFile() && child.getName().endsWith(".yml")) {
-                            log.info("[ INST ] [File] 加载直属 yml 文件: `apps/{}`", child.getName());
-                            // 直接使用 toURI() 存入 Set
-                            APPS.get(Boolean.TRUE).add(child.toURI());
+                            // 检查是否是 instance.yml
+                            if ("instance.yml".equals(child.getName())) {
+                                instanceYmlUri = child.toURI();
+                                log.info("[ INST ] [File] 找到 instance.yml");
+                            } else {
+                                log.info("[ INST ] [File] 加载直属 yml 文件: `apps/{}`", child.getName());
+                                // 直接使用 toURI() 存入 Set
+                                APPS.get(Boolean.TRUE).add(child.toURI());
+                            }
                         } else if (child.isDirectory()) {
                             log.info("[ INST ] [File] 加载直属目录: `apps/{}`", child.getName());
                             // 直接使用 toURI() 存入 Set
@@ -100,9 +143,6 @@ class InstAppsLoad implements InstApps {
         }
     }
 
-    /**
-     * 解析 JAR 包内部文件系统
-     */
     /**
      * 解析 JAR 包内部文件系统
      */
@@ -126,10 +166,17 @@ class InstAppsLoad implements InstApps {
                     if (!entry.isDirectory()) {
                         // 1. 获取直属 .yml 文件：相对路径中不能包含 '/' (不递归)
                         if (!relativePath.contains("/") && relativePath.endsWith(".yml")) {
-                            log.info("[ INST ] [JAR] 加载直属 yml 文件: {}", entryName);
-                            // 修复 JDK 20+ 警告：直接使用 URI 构造，并安全处理可能的空格
-                            final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
-                            APPS.get(Boolean.TRUE).add(new URI(uriStr.replace(" ", "%20")));
+                            // 检查是否是 instance.yml
+                            if ("instance.yml".equals(relativePath)) {
+                                final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
+                                instanceYmlUri = new URI(uriStr.replace(" ", "%20"));
+                                log.info("[ INST ] [JAR] 找到 instance.yml");
+                            } else {
+                                log.info("[ INST ] [JAR] 加载直属 yml 文件: {}", entryName);
+                                // 修复 JDK 20+ 警告：直接使用 URI 构造，并安全处理可能的空格
+                                final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
+                                APPS.get(Boolean.TRUE).add(new URI(uriStr.replace(" ", "%20")));
+                            }
                         }
                     } else {
                         // 2. 获取直属目录：相对路径以 '/' 结尾，且去掉结尾的 '/' 后不再包含其他 '/' (不递归)

@@ -27,14 +27,16 @@ class BuildMenuLoader {
     private final Map<String, List<XMenu>> menus = new ConcurrentHashMap<>();
     private final Map<String, String> menuUuidCache = new ConcurrentHashMap<>();
     private final Map<String, String> dirPathToMenuId = new ConcurrentHashMap<>(); // 目录路径 -> 菜单ID
+    private final Map<String, String> instanceMap; // name -> UUID 映射（来自 instance.yml）
     private final JsonObject globalConfig;
 
-    private BuildMenuLoader(final JsonObject globalConfig) {
+    private BuildMenuLoader(final JsonObject globalConfig, final Map<String, String> instanceMap) {
         this.globalConfig = globalConfig;
+        this.instanceMap = instanceMap;
     }
 
-    static BuildMenuLoader create(final JsonObject globalConfig) {
-        return new BuildMenuLoader(globalConfig);
+    static BuildMenuLoader create(final JsonObject globalConfig, final Map<String, String> instanceMap) {
+        return new BuildMenuLoader(globalConfig, instanceMap);
     }
 
     /**
@@ -113,13 +115,10 @@ class BuildMenuLoader {
             return null;
         }
 
-        // 提取 UUID (文件名去掉 .yml 后缀)
-        final String appId = fileName.substring(0, fileName.length() - 4);
-
         // 加载 YAML 文件
         final JsonObject data = Ut.ioYaml(path);
         if (data == null || !data.containsKey("data")) {
-            log.warn("[ INST ] 应用文件格式错误");
+            log.warn("[ INST ] 应用文件格式错误: {}", path);
             return null;
         }
 
@@ -127,6 +126,15 @@ class BuildMenuLoader {
 
         // 使用反序列化创建 XApp 对象
         final XApp app = Ut.deserialize(appData, XApp.class);
+
+        // ID 策略：yml 中有 id 则使用，否则生成新 UUID
+        String appId = appData.getString("id");
+        if (appId == null || appId.isEmpty()) {
+            appId = UUID.randomUUID().toString();
+            log.debug("[ INST ] 应用未指定 id，生成新 UUID: {}", appId);
+        } else {
+            log.debug("[ INST ] 应用使用 yml 中的 id: {}", appId);
+        }
         app.setId(appId);
 
         // 从 globalConfig 填充公共字段
@@ -190,7 +198,8 @@ class BuildMenuLoader {
     }
 
     /**
-     * 从 URI 提取 appId
+     * 从 URI 提取 appId（目录名，非 UUID）
+     * 例如：apps/desktop/nav → desktop
      */
     private String extractAppIdFromUri(final URI uri) {
         final String path = uri.getPath();
@@ -202,6 +211,7 @@ class BuildMenuLoader {
         final String afterApps = parts[1];
         final int slashIndex = afterApps.indexOf('/');
         if (slashIndex > 0) {
+            // 返回目录名（可以是任意字符串，不限于 UUID）
             return afterApps.substring(0, slashIndex);
         }
 
@@ -304,14 +314,14 @@ class BuildMenuLoader {
                                    final int level, final String fileName, final File parentDir) throws Exception {
         final JsonObject data = Ut.ioYaml(file.getAbsolutePath());
         if (data == null || !data.containsKey("data")) {
-            log.warn("[ INST ] 菜单文件格式错误");
+            log.warn("[ INST ] 菜单文件格式错误: {}", file.getAbsolutePath());
             return null;
         }
 
         final JsonObject menuData = data.getJsonObject("data");
         final String name = menuData.getString("name");
         if (name == null) {
-            log.warn("[ INST ] 菜单缺少 name 字段");
+            log.warn("[ INST ] 菜单缺少 name 字段: {}", file.getAbsolutePath());
             return null;
         }
 
@@ -320,12 +330,19 @@ class BuildMenuLoader {
         final Long order = parts[0] != null ? Long.parseLong(parts[0]) : 0L;
         final String text = parts[1];
 
-        // 检查缓存中是否已有此菜单的 UUID
-        final String cacheKey = appId + ":" + name;
-        String menuId = this.menuUuidCache.get(cacheKey);
-        if (menuId == null) {
-            menuId = UUID.randomUUID().toString();
-            this.menuUuidCache.put(cacheKey, menuId);
+        // ID 策略：yml 中有 id 则使用，否则生成新 UUID
+        String menuId = menuData.getString("id");
+        if (menuId == null || menuId.isEmpty()) {
+            // 检查缓存中是否已有此菜单的 UUID（基于 appId:name）
+            final String cacheKey = appId + ":" + name;
+            menuId = this.menuUuidCache.get(cacheKey);
+            if (menuId == null) {
+                menuId = UUID.randomUUID().toString();
+                this.menuUuidCache.put(cacheKey, menuId);
+                log.debug("[ INST ] 菜单未指定 id，生成新 UUID: {} (name={})", menuId, name);
+            }
+        } else {
+            log.debug("[ INST ] 菜单使用 yml 中的 id: {} (name={})", menuId, name);
         }
 
         // 使用反序列化创建 XMenu 对象

@@ -44,14 +44,17 @@ public class BuildApp {
             // 1. 加载全局配置（从 environment.json 的 global 节点）
             final JsonObject globalConfig = loadGlobalConfig();
 
-            // 2. 扫描应用和菜单目录
+            // 2. 加载实例映射配置（从 apps/instance.yml）
+            final Map<String, String> instanceMap = loadInstanceMap();
+
+            // 3. 扫描应用和菜单目录
             final List<URI> appUris = InstApps.of().ioApp();        // apps/{UUID}.yml
             final List<URI> menuDirUris = InstApps.of().ioRunning(); // apps/{UUID}/nav/
 
             log.info("[ INST ] 扫描到 {} 个应用文件，{} 个菜单目录", appUris.size(), menuDirUris.size());
 
-            // 3. 加载应用和菜单数据
-            final BuildMenuLoader loader = BuildMenuLoader.create(globalConfig);
+            // 4. 加载应用和菜单数据
+            final BuildMenuLoader loader = BuildMenuLoader.create(globalConfig, instanceMap);
             loader.loadApps(appUris);
             loader.loadMenus(menuDirUris);
 
@@ -130,6 +133,41 @@ public class BuildApp {
             return new JsonObject()
                 .put("language", "cn")
                 .put("active", true);
+        }
+    }
+
+    /**
+     * 加载实例映射配置
+     * 从 apps/instance.yml 加载目录名到 UUID 的映射
+     * 格式: { "custom-dir-name": "uuid-value" }
+     */
+    private static Map<String, String> loadInstanceMap() {
+        try {
+            final String r2moHome = System.getenv("R2MO_HOME");
+            final String basePath = (r2moHome != null && !r2moHome.trim().isEmpty())
+                ? r2moHome
+                : System.getProperty("user.dir");
+
+            final File instanceFile = new File(basePath + "/apps/instance.yml");
+            if (!instanceFile.exists()) {
+                log.debug("[ INST ] 未找到 instance.yml，使用空映射");
+                return new java.util.HashMap<>();
+            }
+
+            final JsonObject instanceJ = Ut.ioYaml(instanceFile.getAbsolutePath());
+            final Map<String, String> instanceMap = new java.util.HashMap<>();
+
+            instanceJ.forEach(entry -> {
+                if (entry.getValue() instanceof String) {
+                    instanceMap.put(entry.getKey(), (String) entry.getValue());
+                }
+            });
+
+            log.info("[ INST ] 加载实例映射: {} 条记录", instanceMap.size());
+            return instanceMap;
+        } catch (final Exception e) {
+            log.error("[ INST ] 加载实例映射失败", e);
+            return new java.util.HashMap<>();
         }
     }
 
