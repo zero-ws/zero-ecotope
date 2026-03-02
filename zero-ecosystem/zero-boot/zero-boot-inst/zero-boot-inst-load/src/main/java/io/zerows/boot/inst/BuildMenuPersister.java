@@ -85,40 +85,58 @@ class BuildMenuPersister {
     /**
      * 保存菜单数据到数据库
      * 返回 [新增数, 更新数]
+     *
+     * 核心逻辑（支持反复导入）：
+     * 1. 第一轮：查询数据库，建立 NAME+APP_ID -> 数据库ID 的映射
+     * 2. 第二轮：确定所有菜单的最终 ID（数据库已有则用数据库 ID，否则用新生成的 ID）
+     * 3. 第三轮：修正所有菜单的 PARENT_ID（使用第二轮建立的映射）
+     * 4. 第四轮：执行 upsert 操作
      */
     Future<int[]> saveMenus(final Map<String, List<XMenu>> menus) {
         log.info("[ INST ] 开始保存菜单");
 
         final AtomicInteger insertCount = new AtomicInteger(0);
         final AtomicInteger updateCount = new AtomicInteger(0);
-        final List<Future<String>> futures = new ArrayList<>();
 
-        for (final Map.Entry<String, List<XMenu>> entry : menus.entrySet()) {
-            final String appId = entry.getKey();
-            final List<XMenu> appMenus = entry.getValue();
+        // 第一轮：查询数据库，建立 NAME+APP_ID -> 数据库ID 的映射
+        return this.buildMenuIdMapping(menus)
+            .compose(dbIdMapping -> {
+                // 第二轮：确定所有菜单的最终 ID，建立 新ID -> 最终ID 的映射
+                final Map<String, String> finalIdMapping = this.determineFinalIds(menus, dbIdMapping);
 
-            for (final XMenu menu : appMenus) {
-                final Future<String> future = this.upsertMenu(menu)
-                    .onSuccess(action -> {
-                        if ("insert".equals(action)) {
-                            insertCount.incrementAndGet();
-                        } else if ("update".equals(action)) {
-                            updateCount.incrementAndGet();
-                        }
-                    });
-                futures.add(future);
-            }
+                // 第三轮：修正所有菜单的 ID 和 PARENT_ID
+                this.fixMenuIds(menus, finalIdMapping);
 
-            // 生成缓存文件
-            this.generateMenuCache(appId, appMenus);
-        }
+                // 第四轮：执行 upsert 操作
+                final List<Future<String>> futures = new ArrayList<>();
 
-        return Future.all(futures).map(v -> {
-            final int inserted = insertCount.get();
-            final int updated = updateCount.get();
-            log.info("[ INST ] 菜单保存完成: 新增 {} / 更新 {}", inserted, updated);
-            return new int[]{inserted, updated};
-        });
+                for (final Map.Entry<String, List<XMenu>> entry : menus.entrySet()) {
+                    final String appId = entry.getKey();
+                    final List<XMenu> appMenus = entry.getValue();
+
+                    for (final XMenu menu : appMenus) {
+                        final Future<String> future = this.upsertMenu(menu)
+                            .onSuccess(action -> {
+                                if ("insert".equals(action)) {
+                                    insertCount.incrementAndGet();
+                                } else if ("update".equals(action)) {
+                                    updateCount.incrementAndGet();
+                                }
+                            });
+                        futures.add(future);
+                    }
+
+                    // 生成缓存文件
+                    this.generateMenuCache(appId, appMenus);
+                }
+
+                return Future.all(futures).map(v -> {
+                    final int inserted = insertCount.get();
+                    final int updated = updateCount.get();
+                    log.info("[ INST ] 菜单保存完成: 新增 {} / 更新 {}", inserted, updated);
+                    return new int[]{inserted, updated};
+                });
+            });
     }
 
     /**
@@ -198,6 +216,94 @@ class BuildMenuPersister {
                 log.error("[ INST ] 保存菜单失败", err);
                 return Future.succeededFuture("skip");
             });
+    }
+
+    /**
+     * 建立菜单 ID 映射
+     * 查询数据库中所有菜单，建立 NAME+APP_ID -> 数据库ID 的映射
+     */
+    private Future<Map<String, String>> buildMenuIdMapping(final Map<String, List<XMenu>> menus) {
+        final Map<String, String> idMapping = new java.util.HashMap<>();
+
+        // 收集所有 APP_ID
+        final List<String> appIds = new ArrayList<>(menus.keySet());
+
+        // 查询数据库中这些应用的所有菜单
+        final List<Future<Void>> futures = new ArrayList<>();
+        for (final String appId : appIds) {
+            final Future<Void> future = DB.on(XMenuDao.class)
+                .<XMenu>fetchAsync("APP_ID", appId)
+                .map(dbMenus -> {
+                    // 建立映射：NAME+APP_ID -> 数据库ID
+                    for (final XMenu dbMenu : dbMenus) {
+                        final String key = dbMenu.getName() + ":" + dbMenu.getAppId();
+                        idMapping.put(key, dbMenu.getId());
+                    }
+                    return null;
+                });
+            futures.add(future);
+        }
+
+        return Future.all(futures).map(v -> {
+            log.debug("[ INST ] 建立菜单 ID 映射: {} 个", idMapping.size());
+            return idMapping;
+        });
+    }
+
+    /**
+     * 确定所有菜单的最终 ID
+     * 如果菜单在数据库中已存在，使用数据库 ID；否则使用新生成的 ID
+     * 返回：新ID -> 最终ID 的映射
+     */
+    private Map<String, String> determineFinalIds(final Map<String, List<XMenu>> menus,
+                                                   final Map<String, String> dbIdMapping) {
+        final Map<String, String> finalIdMapping = new java.util.HashMap<>();
+
+        for (final Map.Entry<String, List<XMenu>> entry : menus.entrySet()) {
+            final String appId = entry.getKey();
+            final List<XMenu> appMenus = entry.getValue();
+
+            for (final XMenu menu : appMenus) {
+                final String originalId = menu.getId();
+                final String key = menu.getName() + ":" + appId;
+                final String dbId = dbIdMapping.get(key);
+
+                if (dbId != null) {
+                    // 数据库中已存在，使用数据库 ID
+                    finalIdMapping.put(originalId, dbId);
+                    menu.setId(dbId);
+                } else {
+                    // 数据库中不存在，使用新生成的 ID
+                    finalIdMapping.put(originalId, originalId);
+                }
+            }
+        }
+
+        log.debug("[ INST ] 确定最终 ID: {} 个菜单", finalIdMapping.size());
+        return finalIdMapping;
+    }
+
+    /**
+     * 修正菜单的 PARENT_ID
+     * 使用 finalIdMapping 将新生成的 PARENT_ID 替换为最终 ID
+     */
+    private void fixMenuIds(final Map<String, List<XMenu>> menus, final Map<String, String> finalIdMapping) {
+        int fixedCount = 0;
+
+        for (final List<XMenu> appMenus : menus.values()) {
+            for (final XMenu menu : appMenus) {
+                if (menu.getParentId() != null) {
+                    final String finalParentId = finalIdMapping.get(menu.getParentId());
+                    if (finalParentId != null && !finalParentId.equals(menu.getParentId())) {
+                        // 修正 PARENT_ID
+                        menu.setParentId(finalParentId);
+                        fixedCount++;
+                    }
+                }
+            }
+        }
+
+        log.debug("[ INST ] 修正 PARENT_ID: {} 个菜单", fixedCount);
     }
 
     /**

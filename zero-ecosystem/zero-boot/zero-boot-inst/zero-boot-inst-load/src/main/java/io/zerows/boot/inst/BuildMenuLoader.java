@@ -33,6 +33,7 @@ class BuildMenuLoader {
     private final Map<String, List<XMenu>> menus = new ConcurrentHashMap<>();
     private final Map<String, String> menuUuidCache = new ConcurrentHashMap<>();
     private final Map<String, String> dirPathToMenuId = new ConcurrentHashMap<>(); // 目录路径 -> 菜单ID
+    private final Map<String, Integer> menuIdToLevel = new ConcurrentHashMap<>(); // 菜单ID -> Level
     private final Map<String, String> dirNameToAppId = new ConcurrentHashMap<>(); // 目录名 -> 应用UUID
     private final Map<String, String> instanceMap; // code -> UUID 映射（来自 instance.yml）
     private final JsonObject globalConfig;
@@ -77,10 +78,71 @@ class BuildMenuLoader {
     /**
      * 从 URI 列表加载菜单数据
      * 返回 Future，支持异步操作
+     *
+     * 三阶段加载（解决并行扫描时父子菜单顺序问题）：
+     * 1. 第一阶段：收集所有 MENU.yml 的 ID 和目录映射，但不计算 level
+     * 2. 第二阶段：在所有菜单 ID 已知后，计算每个菜单的 level
+     * 3. 第三阶段：加载所有菜单，处理父子关系
      */
     Future<Void> loadMenus(final List<URI> menuDirUris) {
         log.info("[ INST ] 开始加载菜单数据，共 {} 个目录", menuDirUris.size());
 
+        // 第一阶段：收集所有 MENU.yml 的 ID 和目录映射
+        log.info("[ INST ] 第一阶段：收集所有 MENU.yml 的 ID 和目录映射");
+        for (final URI uri : menuDirUris) {
+            try {
+                final String dirName = this.extractAppIdFromUri(uri);
+                if (dirName == null) {
+                    continue;
+                }
+
+                String actualAppId;
+                if ("HOME".equals(dirName)) {
+                    actualAppId = this.globalConfig.getString("appId");
+                } else {
+                    actualAppId = this.dirNameToAppId.get(dirName);
+                    if (actualAppId == null) {
+                        continue;
+                    }
+                }
+
+                // 第一阶段：只收集 ID 和目录映射
+                this.collectMenuIds(uri, actualAppId);
+            } catch (final Exception e) {
+                log.error("[ INST ] 收集菜单 ID 失败", e);
+            }
+        }
+        log.info("[ INST ] 第一阶段完成，共收集 {} 个菜单 ID", this.dirPathToMenuId.size());
+
+        // 第二阶段：计算所有菜单的 level
+        log.info("[ INST ] 第二阶段：计算所有菜单的 level");
+        for (final URI uri : menuDirUris) {
+            try {
+                final String dirName = this.extractAppIdFromUri(uri);
+                if (dirName == null) {
+                    continue;
+                }
+
+                String actualAppId;
+                if ("HOME".equals(dirName)) {
+                    actualAppId = this.globalConfig.getString("appId");
+                } else {
+                    actualAppId = this.dirNameToAppId.get(dirName);
+                    if (actualAppId == null) {
+                        continue;
+                    }
+                }
+
+                // 第二阶段：计算 level
+                this.calculateMenuLevels(uri, actualAppId);
+            } catch (final Exception e) {
+                log.error("[ INST ] 计算菜单 level 失败", e);
+            }
+        }
+        log.info("[ INST ] 第二阶段完成，共计算 {} 个菜单 level", this.menuIdToLevel.size());
+
+        // 第三阶段：正式加载所有菜单
+        log.info("[ INST ] 第三阶段：加载所有菜单");
         for (final URI uri : menuDirUris) {
             try {
                 final String dirName = this.extractAppIdFromUri(uri);
@@ -392,13 +454,16 @@ class BuildMenuLoader {
         XMenu currentMenu = null;
         final File menuFile = new File(dir, "MENU.yml");
         if (menuFile.exists()) {
-            currentMenu = this.loadMenuFromFile(menuFile, appId, parentId, level, dir.getName(), dir);
+            // 从缓存中获取正确的 level
+            final String relativePath = this.getRelativePath(navRoot, dir);
+            final String dirKey = appId + ":" + relativePath;
+            final String cachedMenuId = this.dirPathToMenuId.get(dirKey);
+            final Integer cachedLevel = cachedMenuId != null ? this.menuIdToLevel.get(cachedMenuId) : null;
+            final int actualLevel = cachedLevel != null ? cachedLevel : level;
+
+            currentMenu = this.loadMenuFromFile(menuFile, appId, parentId, actualLevel, dir.getName(), dir);
             if (currentMenu != null) {
                 result.add(currentMenu);
-                // 缓存相对路径到菜单 ID 的映射（用于跨模块查找）
-                final String relativePath = this.getRelativePath(navRoot, dir);
-                final String dirKey = appId + ":" + relativePath;
-                this.dirPathToMenuId.put(dirKey, currentMenu.getId());
             }
         }
 
@@ -421,9 +486,15 @@ class BuildMenuLoader {
         // 如果 parentId 不为 null，直接使用传入的值（来自上层递归）
 
         // 确定子菜单的 level
-        // 如果当前目录有 MENU.yml，子菜单 level = 当前 level + 1
-        // 如果当前目录没有 MENU.yml，子菜单 level = 当前 level（不增加层级）
-        final int childLevel = currentMenu != null ? level + 1 : level;
+        // 如果有 currentParentId，从缓存中获取其 level，子菜单 level = 父 level + 1
+        // 否则使用传入的 level
+        int childLevel = level + 1;
+        if (currentParentId != null) {
+            final Integer parentLevel = this.menuIdToLevel.get(currentParentId);
+            if (parentLevel != null) {
+                childLevel = parentLevel + 1;
+            }
+        }
 
         // 处理子目录和文件
         for (final File file : files) {
@@ -561,5 +632,227 @@ class BuildMenuLoader {
             return relative;
         }
         return dir.getName(); // 后备方案
+    }
+
+    /**
+     * 第一阶段：收集所有 MENU.yml 的 ID 和目录映射
+     * 只收集 ID，不计算 level（因为父菜单可能还未扫描）
+     */
+    private void collectMenuIds(final URI uri, final String appId) throws Exception {
+        final File appDir = new File(uri.getPath());
+        final File navDir = new File(appDir, "nav");
+
+        if (!navDir.exists() || !navDir.isDirectory()) {
+            return;
+        }
+
+        // 递归收集所有 MENU.yml 的 ID
+        this.collectMenuIdsRecursive(navDir, navDir, appId);
+    }
+
+    /**
+     * 递归收集 MENU.yml 的 ID 和目录映射
+     */
+    private void collectMenuIdsRecursive(final File navRoot, final File dir, final String appId) throws Exception {
+        final File[] files = dir.listFiles();
+        if (files == null) {
+            return;
+        }
+
+        // 检查当前目录是否有 MENU.yml
+        final File menuFile = new File(dir, "MENU.yml");
+        if (menuFile.exists()) {
+            // 读取 MENU.yml 获取 name 和 id
+            final JsonObject data = Ut.ioYaml(menuFile.getAbsolutePath());
+            if (data != null && data.containsKey("data")) {
+                final JsonObject menuData = data.getJsonObject("data");
+                final String name = menuData.getString("name");
+                if (name != null) {
+                    // 生成或获取菜单 ID
+                    String menuId = menuData.getString("id");
+                    if (menuId == null || menuId.isEmpty()) {
+                        final String cacheKey = appId + ":" + name;
+                        menuId = this.menuUuidCache.get(cacheKey);
+                        if (menuId == null) {
+                            menuId = UUID.randomUUID().toString();
+                            this.menuUuidCache.put(cacheKey, menuId);
+                        }
+                    }
+
+                    // 建立目录路径到菜单ID的映射
+                    final String relativePath = this.getRelativePath(navRoot, dir);
+                    final String dirKey = appId + ":" + relativePath;
+                    this.dirPathToMenuId.put(dirKey, menuId);
+                    log.debug("[ INST ] 收集菜单 ID: {} -> {} (name={})", relativePath, menuId, name);
+                }
+            }
+        }
+
+        // 递归处理子目录
+        for (final File file : files) {
+            if (file.isDirectory()) {
+                this.collectMenuIdsRecursive(navRoot, file, appId);
+            }
+        }
+    }
+
+    /**
+     * 第二阶段：计算所有菜单的 level
+     * 此时所有菜单 ID 已知，可以正确计算跨模块的层级关系
+     */
+    private void calculateMenuLevels(final URI uri, final String appId) throws Exception {
+        final File appDir = new File(uri.getPath());
+        final File navDir = new File(appDir, "nav");
+
+        if (!navDir.exists() || !navDir.isDirectory()) {
+            return;
+        }
+
+        // 递归计算所有菜单的 level
+        this.calculateMenuLevelsRecursive(navDir, navDir, appId, null);
+    }
+
+    /**
+     * 递归计算菜单的 level
+     */
+    private void calculateMenuLevelsRecursive(final File navRoot, final File dir, final String appId,
+                                              final String parentId) throws Exception {
+        final File[] files = dir.listFiles();
+        if (files == null) {
+            return;
+        }
+
+        // 先从缓存中获取当前目录的菜单 ID
+        final String relativePath = this.getRelativePath(navRoot, dir);
+        final String dirKey = appId + ":" + relativePath;
+        String currentMenuId = this.dirPathToMenuId.get(dirKey);
+
+        // 如果当前目录有菜单，计算其 level
+        if (currentMenuId != null && !this.menuIdToLevel.containsKey(currentMenuId)) {
+            int level;
+            if (parentId == null) {
+                // 顶级菜单，level = 1
+                level = 1;
+            } else {
+                // 子菜单，level = 父菜单 level + 1
+                final Integer parentLevel = this.menuIdToLevel.get(parentId);
+                if (parentLevel != null) {
+                    level = parentLevel + 1;
+                } else {
+                    // 父菜单的 level 还未计算，递归计算父菜单
+                    log.warn("[ INST ] 父菜单 {} 的 level 未计算，使用默认值", parentId);
+                    level = 1;
+                }
+            }
+            this.menuIdToLevel.put(currentMenuId, level);
+            log.debug("[ INST ] 计算菜单 level: {} -> level={}", currentMenuId, level);
+        }
+
+        // 确定传递给子目录的 parentId
+        final String childParentId = currentMenuId != null ? currentMenuId : parentId;
+
+        // 递归处理子目录
+        for (final File file : files) {
+            if (file.isDirectory()) {
+                this.calculateMenuLevelsRecursive(navRoot, file, appId, childParentId);
+            }
+        }
+    }
+
+    /**
+     * 预扫描菜单目录，只收集 MENU.yml 的路径映射
+     * 用于建立全局的目录路径到菜单ID的缓存（跨模块）
+     * @deprecated 已被 collectMenuIds 和 calculateMenuLevels 替代
+     */
+    @Deprecated
+    private void preScanMenuDirectories(final URI uri, final String appId) throws Exception {
+        final File appDir = new File(uri.getPath());
+        final File navDir = new File(appDir, "nav");
+
+        if (!navDir.exists() || !navDir.isDirectory()) {
+            return;
+        }
+
+        // 递归扫描所有 MENU.yml，从 level=1 开始
+        this.preScanRecursive(navDir, navDir, appId, null, 1);
+    }
+
+    /**
+     * 递归扫描目录，只处理 MENU.yml
+     * 同时计算并缓存每个菜单的 level
+     * @deprecated 已被 collectMenuIdsRecursive 和 calculateMenuLevelsRecursive 替代
+     */
+    @Deprecated
+    private void preScanRecursive(final File navRoot, final File dir, final String appId,
+                                   final String parentId, final int level) throws Exception {
+        final File[] files = dir.listFiles();
+        if (files == null) {
+            return;
+        }
+
+        // 先检查缓存中是否已有此目录的菜单（跨模块）
+        final String relativePath = this.getRelativePath(navRoot, dir);
+        final String dirKey = appId + ":" + relativePath;
+        String currentMenuId = this.dirPathToMenuId.get(dirKey);
+        Integer currentLevel = currentMenuId != null ? this.menuIdToLevel.get(currentMenuId) : null;
+
+        // 检查当前目录是否有 MENU.yml
+        final File menuFile = new File(dir, "MENU.yml");
+        if (menuFile.exists()) {
+            // 读取 MENU.yml 获取 name 和 id
+            final JsonObject data = Ut.ioYaml(menuFile.getAbsolutePath());
+            if (data != null && data.containsKey("data")) {
+                final JsonObject menuData = data.getJsonObject("data");
+                final String name = menuData.getString("name");
+                if (name != null) {
+                    // 生成或获取菜单 ID
+                    String menuId = menuData.getString("id");
+                    if (menuId == null || menuId.isEmpty()) {
+                        final String cacheKey = appId + ":" + name;
+                        menuId = this.menuUuidCache.get(cacheKey);
+                        if (menuId == null) {
+                            menuId = UUID.randomUUID().toString();
+                            this.menuUuidCache.put(cacheKey, menuId);
+                        }
+                    }
+
+                    // 计算当前菜单的 level
+                    int calculatedLevel;
+                    if (parentId == null) {
+                        // 顶级菜单，level = 1
+                        calculatedLevel = 1;
+                    } else {
+                        // 子菜单，level = 父菜单 level + 1
+                        final Integer parentLevel = this.menuIdToLevel.get(parentId);
+                        calculatedLevel = (parentLevel != null ? parentLevel : 0) + 1;
+                    }
+
+                    // 建立目录路径到菜单ID的映射
+                    this.dirPathToMenuId.put(dirKey, menuId);
+                    this.menuIdToLevel.put(menuId, calculatedLevel);
+
+                    currentMenuId = menuId;
+                    currentLevel = calculatedLevel;
+                    log.debug("[ INST ] 预扫描缓存: {} -> {} (name={}, level={})", relativePath, menuId, name, calculatedLevel);
+                }
+            }
+        }
+
+        // 确定传递给子目录的 parentId 和 level
+        String childParentId = parentId;
+        int childLevel = level;
+
+        if (currentMenuId != null && currentLevel != null) {
+            // 当前目录有菜单（可能来自缓存或当前模块）
+            childParentId = currentMenuId;
+            childLevel = currentLevel + 1;
+        }
+
+        // 递归处理子目录
+        for (final File file : files) {
+            if (file.isDirectory()) {
+                this.preScanRecursive(navRoot, file, appId, childParentId, childLevel);
+            }
+        }
     }
 }

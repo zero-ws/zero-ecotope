@@ -2,4 +2,4 @@ data:
   type: BAG-MENU
   name: zero.cm
   icon: team
-  uri: EXPAND
+  uri: /dashboard/customer
