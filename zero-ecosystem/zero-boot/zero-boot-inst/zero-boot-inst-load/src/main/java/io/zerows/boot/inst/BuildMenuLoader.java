@@ -1,6 +1,11 @@
 package io.zerows.boot.inst;
 
+import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XMenu;
 import io.zerows.support.Ut;
@@ -23,6 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 class BuildMenuLoader {
 
+    private final Vertx vertx;
     private final Map<String, XApp> apps = new ConcurrentHashMap<>();
     private final Map<String, List<XMenu>> menus = new ConcurrentHashMap<>();
     private final Map<String, String> menuUuidCache = new ConcurrentHashMap<>();
@@ -31,40 +37,48 @@ class BuildMenuLoader {
     private final Map<String, String> instanceMap; // code -> UUID 映射（来自 instance.yml）
     private final JsonObject globalConfig;
 
-    private BuildMenuLoader(final JsonObject globalConfig, final Map<String, String> instanceMap) {
+    private BuildMenuLoader(final Vertx vertx, final JsonObject globalConfig, final Map<String, String> instanceMap) {
+        this.vertx = vertx;
         this.globalConfig = globalConfig;
         this.instanceMap = instanceMap;
     }
 
-    static BuildMenuLoader create(final JsonObject globalConfig, final Map<String, String> instanceMap) {
-        return new BuildMenuLoader(globalConfig, instanceMap);
+    static BuildMenuLoader create(final Vertx vertx, final JsonObject globalConfig, final Map<String, String> instanceMap) {
+        return new BuildMenuLoader(vertx, globalConfig, instanceMap);
     }
 
     /**
      * 从 URI 列表加载应用数据
+     * 返回 Future，支持异步数据库查询
      */
-    void loadApps(final List<URI> appUris) {
+    Future<Void> loadApps(final List<URI> appUris) {
         log.info("[ INST ] 开始加载应用数据，共 {} 个文件", appUris.size());
 
+        final List<Future<Void>> futures = new ArrayList<>();
         for (final URI uri : appUris) {
-            try {
-                final XApp app = this.loadAppFromUri(uri);
-                if (app != null) {
-                    this.apps.put(app.getId(), app);
-                    log.debug("[ INST ] 加载应用: {}", app.getName());
-                }
-            } catch (final Exception e) {
-                log.error("[ INST ] 加载应用失败", e);
-            }
+            final Future<Void> future = this.loadAppFromUri(uri)
+                .onSuccess(app -> {
+                    if (app != null) {
+                        this.apps.put(app.getId(), app);
+                        log.debug("[ INST ] 加载应用: {}", app.getName());
+                    }
+                })
+                .onFailure(err -> log.error("[ INST ] 加载应用失败", err))
+                .mapEmpty();
+            futures.add(future);
         }
 
-        log.info("[ INST ] 应用加载完成，共 {} 个", this.apps.size());
+        return Future.all(futures).map(v -> {
+            log.info("[ INST ] 应用加载完成，共 {} 个", this.apps.size());
+            return null;
+        });
     }
 
     /**
      * 从 URI 列表加载菜单数据
+     * 返回 Future，支持异步操作
      */
-    void loadMenus(final List<URI> menuDirUris) {
+    Future<Void> loadMenus(final List<URI> menuDirUris) {
         log.info("[ INST ] 开始加载菜单数据，共 {} 个目录", menuDirUris.size());
 
         for (final URI uri : menuDirUris) {
@@ -104,6 +118,7 @@ class BuildMenuLoader {
         // 统计总数
         final int totalMenus = this.menus.values().stream().mapToInt(List::size).sum();
         log.info("[ INST ] 菜单加载完成，共 {} 个应用，{} 个菜单", this.menus.size(), totalMenus);
+        return Future.succeededFuture();
     }
 
     Map<String, XApp> getApps() {
@@ -116,60 +131,128 @@ class BuildMenuLoader {
 
     /**
      * 从 URI 加载单个应用
+     * 核心逻辑：
+     * 1. 先从数据库查询（使用 Z_APP_ID + CODE）
+     * 2. 数据库优先，查到则使用数据库的 UUID
+     * 3. 查不到才执行纯添加流程（yml id → instance.yml 映射 → 生成新 UUID）
      */
-    private XApp loadAppFromUri(final URI uri) throws Exception {
-        final String path = uri.getPath();
-        final String fileName = Paths.get(path).getFileName().toString();
+    private Future<XApp> loadAppFromUri(final URI uri) {
+        try {
+            final String path = uri.getPath();
+            final String fileName = Paths.get(path).getFileName().toString();
 
-        if (!fileName.endsWith(".yml")) {
-            return null;
-        }
-
-        // 提取目录名（用于建立映射关系）
-        final String dirName = this.extractDirNameFromAppUri(uri);
-
-        // 加载 YAML 文件
-        final JsonObject data = Ut.ioYaml(path);
-        if (data == null || !data.containsKey("data")) {
-            log.warn("[ INST ] 应用文件格式错误: {}", path);
-            return null;
-        }
-
-        final JsonObject appData = data.getJsonObject("data");
-
-        // 使用反序列化创建 XApp 对象
-        final XApp app = Ut.deserialize(appData, XApp.class);
-
-        // ID 策略：
-        // 1. yml 中有 id 则使用
-        // 2. 否则检查 instance.yml 中是否有映射（code -> UUID）
-        // 3. 都没有则生成新 UUID
-        String appId = appData.getString("id");
-        if (appId == null || appId.isEmpty()) {
-            // 检查 instance.yml 映射
-            final String code = appData.getString("code");
-            if (code != null && this.instanceMap.containsKey(code)) {
-                appId = this.instanceMap.get(code);
-                log.debug("[ INST ] 应用使用 instance.yml 映射: {} -> {}", code, appId);
-            } else {
-                appId = UUID.randomUUID().toString();
-                log.debug("[ INST ] 应用未指定 id，生成新 UUID: {}", appId);
+            if (!fileName.endsWith(".yml")) {
+                return Future.succeededFuture(null);
             }
-        } else {
-            log.debug("[ INST ] 应用使用 yml 中的 id: {}", appId);
+
+            // 提取目录名（用于建立映射关系）
+            final String dirName = this.extractDirNameFromAppUri(uri);
+
+            // 加载 YAML 文件
+            final JsonObject data = Ut.ioYaml(path);
+            if (data == null || !data.containsKey("data")) {
+                log.warn("[ INST ] 应用文件格式错误: {}", path);
+                return Future.succeededFuture(null);
+            }
+
+            final JsonObject appData = data.getJsonObject("data");
+            final String code = appData.getString("code");
+            if (code == null || code.isEmpty()) {
+                log.warn("[ INST ] 应用缺少 code 字段: {}", path);
+                return Future.succeededFuture(null);
+            }
+
+            // 获取 Z_APP_ID 环境变量
+            final String zAppId = this.globalConfig.getString("appId");
+            if (zAppId == null || zAppId.isEmpty()) {
+                log.warn("[ INST ] 未配置 Z_APP_ID (globalConfig.appId)");
+                return Future.succeededFuture(null);
+            }
+
+            // 1. 先从数据库查询（WHERE APP_ID=? AND CODE=?）
+            return this.queryAppFromDatabase(zAppId, code)
+                .compose(dbApp -> {
+                    if (dbApp != null) {
+                        // 数据库中存在，使用数据库的 UUID
+                        log.info("[ INST ] 从数据库加载应用: {} (UUID={})", code, dbApp.getId());
+
+                        // 使用反序列化创建 XApp 对象，然后用数据库的 ID 覆盖
+                        final XApp app = Ut.deserialize(appData, XApp.class);
+                        app.setId(dbApp.getId());
+
+                        // 建立目录名到应用UUID的映射（用于菜单加载）
+                        if (dirName != null) {
+                            this.dirNameToAppId.put(dirName, app.getId());
+                            log.debug("[ INST ] 建立映射: 目录 {} -> 应用UUID {}", dirName, app.getId());
+                        }
+
+                        // 从 globalConfig 填充公共字段
+                        this.fillGlobalFields(app);
+
+                        return Future.succeededFuture(app);
+                    } else {
+                        // 数据库中不存在，执行纯添加流程
+                        log.info("[ INST ] 数据库中未找到应用: {} (APP_ID={})", code, zAppId);
+
+                        // 使用反序列化创建 XApp 对象
+                        final XApp app = Ut.deserialize(appData, XApp.class);
+
+                        // ID 策略：
+                        // 1. yml 中有 id 则使用
+                        // 2. 否则检查 instance.yml 中是否有映射（code -> UUID）
+                        // 3. 都没有则生成新 UUID
+                        String appId = appData.getString("id");
+                        if (appId == null || appId.isEmpty()) {
+                            // 检查 instance.yml 映射
+                            if (this.instanceMap.containsKey(code)) {
+                                appId = this.instanceMap.get(code);
+                                log.debug("[ INST ] 应用使用 instance.yml 映射: {} -> {}", code, appId);
+                            } else {
+                                appId = UUID.randomUUID().toString();
+                                log.debug("[ INST ] 应用未指定 id，生成新 UUID: {}", appId);
+                            }
+                        } else {
+                            log.debug("[ INST ] 应用使用 yml 中的 id: {}", appId);
+                        }
+                        app.setId(appId);
+
+                        // 建立目录名到应用UUID的映射（用于菜单加载）
+                        if (dirName != null) {
+                            this.dirNameToAppId.put(dirName, appId);
+                            log.debug("[ INST ] 建立映射: 目录 {} -> 应用UUID {}", dirName, appId);
+                        }
+
+                        // 从 globalConfig 填充公共字段
+                        this.fillGlobalFields(app);
+
+                        return Future.succeededFuture(app);
+                    }
+                });
+        } catch (final Exception e) {
+            log.error("[ INST ] 加载应用失败", e);
+            return Future.failedFuture(e);
         }
-        app.setId(appId);
+    }
 
-        // 建立目录名到应用UUID的映射（用于菜单加载）
-        if (dirName != null) {
-            this.dirNameToAppId.put(dirName, appId);
-            log.debug("[ INST ] 建立映射: 目录 {} -> 应用UUID {}", dirName, appId);
-        }
-
-        // 从 globalConfig 填充公共字段
-        this.fillGlobalFields(app);
-
-        return app;
+    /**
+     * 从数据库查询应用（WHERE APP_ID=? AND CODE=?）
+     */
+    private Future<XApp> queryAppFromDatabase(final String appId, final String code) {
+        return DB.on(XAppDao.class)
+            .<XApp>fetchAsync("APP_ID", appId)
+            .map(apps -> {
+                // 过滤出匹配 CODE 的应用
+                for (final XApp app : apps) {
+                    if (code.equals(app.getCode())) {
+                        return app;
+                    }
+                }
+                return null;
+            })
+            .recover(err -> {
+                log.error("[ INST ] 查询数据库失败", err);
+                return Future.succeededFuture(null);
+            });
     }
 
     /**

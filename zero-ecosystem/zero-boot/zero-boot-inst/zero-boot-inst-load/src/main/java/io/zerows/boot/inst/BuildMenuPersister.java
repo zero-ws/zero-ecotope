@@ -71,6 +71,13 @@ class BuildMenuPersister {
             final int inserted = insertCount.get();
             final int updated = updateCount.get();
             log.info("[ INST ] 应用保存完成: 新增 {} / 更新 {}", inserted, updated);
+
+            // 生成 instance.yml
+            this.generateInstanceYml(apps);
+
+            // 生成缓存标识文件 apps/{UUID}/{code}
+            this.generateCacheMarkers(apps);
+
             return new int[]{inserted, updated};
         });
     }
@@ -212,6 +219,7 @@ class BuildMenuPersister {
     /**
      * 生成菜单缓存文件
      * 使用 YAMLMapper 输出标准 YAML 格式
+     * 匹配逻辑：只在缓存不存在或内容不匹配时才重新生成
      */
     private void generateMenuCache(final String appId, final List<XMenu> menus) {
         try {
@@ -237,11 +245,90 @@ class BuildMenuPersister {
             final String yamlContent = YAML_MAPPER.writerWithDefaultPrettyPrinter()
                 .writeValueAsString(jsonObject);
 
-            Files.write(Paths.get(cacheFilePath), yamlContent.getBytes());
+            // 检查缓存是否存在
+            final File cacheFile = new File(cacheFilePath);
+            boolean shouldWrite = true;
+            if (cacheFile.exists()) {
+                // 读取现有缓存内容
+                final String existingContent = new String(Files.readAllBytes(Paths.get(cacheFilePath)));
+                if (existingContent.equals(yamlContent)) {
+                    // 内容匹配，跳过写入
+                    shouldWrite = false;
+                    log.debug("[ INST ] 缓存匹配，跳过生成: {} ({} 个菜单)", appId, menus.size());
+                } else {
+                    log.debug("[ INST ] 缓存不匹配，重新生成: {} ({} 个菜单)", appId, menus.size());
+                }
+            } else {
+                log.debug("[ INST ] 缓存不存在，生成新缓存: {} ({} 个菜单)", appId, menus.size());
+            }
 
-            log.debug("[ INST ] 生成缓存: {} ({} 个菜单)", appId, menus.size());
+            if (shouldWrite) {
+                Files.write(Paths.get(cacheFilePath), yamlContent.getBytes());
+                log.debug("[ INST ] 生成缓存: {} ({} 个菜单)", appId, menus.size());
+            }
         } catch (final Exception e) {
             log.error("[ INST ] 生成缓存失败", e);
+        }
+    }
+
+    /**
+     * 生成 instance.yml 文件
+     * 格式: running: { UUID: code }
+     * 包含所有已插入数据库的应用实例映射
+     */
+    private void generateInstanceYml(final Map<String, XApp> apps) {
+        try {
+            // 构造 YAML 内容（手动拼接以确保格式正确）
+            final StringBuilder yamlContent = new StringBuilder();
+            yamlContent.append("running:\n");
+
+            for (final XApp app : apps.values()) {
+                if (app.getId() != null && app.getCode() != null) {
+                    // 格式: "  UUID: code" (无引号)
+                    yamlContent.append("  ")
+                        .append(app.getId())
+                        .append(": ")
+                        .append(app.getCode())
+                        .append("\n");
+                }
+            }
+
+            // 写入文件
+            final String instanceFilePath = this.cacheDir + "/instance.yml";
+            Files.write(Paths.get(instanceFilePath), yamlContent.toString().getBytes());
+
+            log.info("[ INST ] 生成 instance.yml: {} 个应用实例", apps.size());
+        } catch (final Exception e) {
+            log.error("[ INST ] 生成 instance.yml 失败", e);
+        }
+    }
+
+    /**
+     * 生成缓存标识文件
+     * 在 apps/{UUID}/ 目录下创建 {code} 空白文件
+     * 用于重新导入时标识应用，防止缓存重新生成
+     */
+    private void generateCacheMarkers(final Map<String, XApp> apps) {
+        try {
+            for (final XApp app : apps.values()) {
+                if (app.getId() != null && app.getCode() != null) {
+                    // 创建 apps/{UUID}/ 目录
+                    final File appDir = new File(this.cacheDir, app.getId());
+                    if (!appDir.exists()) {
+                        appDir.mkdirs();
+                    }
+
+                    // 创建 apps/{UUID}/{code} 空白文件
+                    final File markerFile = new File(appDir, app.getCode());
+                    if (!markerFile.exists()) {
+                        markerFile.createNewFile();
+                        log.debug("[ INST ] 创建缓存标识: {}/{}", app.getId(), app.getCode());
+                    }
+                }
+            }
+            log.info("[ INST ] 生成缓存标识文件完成");
+        } catch (final Exception e) {
+            log.error("[ INST ] 生成缓存标识文件失败", e);
         }
     }
 }

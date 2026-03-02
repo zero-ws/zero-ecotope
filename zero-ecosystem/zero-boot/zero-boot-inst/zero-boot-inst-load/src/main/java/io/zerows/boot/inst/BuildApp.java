@@ -44,57 +44,73 @@ public class BuildApp {
             // 1. 加载全局配置（从 environment.json 的 global 节点）
             final JsonObject globalConfig = loadGlobalConfig();
 
-            // 2. 加载实例映射配置（从 apps/instance.yml）
+            // 2. 解析缓存目录
+            final String cacheDir = resolveCacheDir();
+
+            // 3. 加载实例映射配置（从 apps/instance.yml 和缓存标识文件）
             final Map<String, String> instanceMap = loadInstanceMap();
 
-            // 3. 扫描应用和菜单目录
-            final List<URI> appUris = InstApps.of().ioApp();        // apps/{UUID}.yml
-            final List<URI> menuDirUris = InstApps.of().ioRunning(); // apps/{UUID}/nav/
+            // 4. 从缓存目录和数据库加载额外的映射
+            return loadCacheMappings(vertx, cacheDir, instanceMap)
+                .compose(mergedMap -> {
+                    // 5. 扫描应用和菜单目录
+                    final List<URI> appUris = InstApps.of().ioApp();        // apps/{UUID}.yml
+                    final List<URI> menuDirUris = InstApps.of().ioRunning(); // apps/{UUID}/nav/
 
-            log.info("[ INST ] 扫描到 {} 个应用文件，{} 个菜单目录", appUris.size(), menuDirUris.size());
+                    log.info("[ INST ] 扫描到 {} 个应用文件，{} 个菜单目录", appUris.size(), menuDirUris.size());
 
-            // 4. 加载应用和菜单数据
-            final BuildMenuLoader loader = BuildMenuLoader.create(globalConfig, instanceMap);
-            loader.loadApps(appUris);
-            loader.loadMenus(menuDirUris);
+                    // 6. 加载应用和菜单数据
+                    final BuildMenuLoader loader = BuildMenuLoader.create(vertx, globalConfig, mergedMap);
+                    return loader.loadApps(appUris)
+                        .compose(v -> loader.loadMenus(menuDirUris))
+                        .compose(v -> {
 
-            final Map<String, XApp> apps = loader.getApps();
-            final Map<String, List<XMenu>> menus = loader.getMenus();
+                            final Map<String, XApp> apps = loader.getApps();
+                            final Map<String, List<XMenu>> menus = loader.getMenus();
 
-            if (apps.isEmpty() && menus.isEmpty()) {
-                log.warn("[ INST ] 未加载到任何应用或菜单数据");
-                return Future.succeededFuture(false);
-            }
+                            if (apps.isEmpty() && menus.isEmpty()) {
+                                log.warn("[ INST ] 未加载到任何应用或菜单数据");
+                                return Future.succeededFuture(false);
+                            }
 
-            // 4. 创建缓存目录（apps/{UUID}/menu.yml）
-            // 优先使用 R2MO_HOME 环境变量，未配置则使用当前目录
-            final String cacheDir = resolveCacheDir();
-            final File cacheDirFile = new File(cacheDir);
-            if (!cacheDirFile.exists()) {
-                final boolean created = cacheDirFile.mkdirs();
-                log.info("[ INST ] 创建缓存目录: {}", cacheDir);
-            } else {
-                log.info("[ INST ] 使用缓存目录: {}", cacheDir);
-            }
+                            // 7. 创建缓存目录（apps/{UUID}/menu.yml）
+                            final File cacheDirFile = new File(cacheDir);
+                            if (!cacheDirFile.exists()) {
+                                final boolean created = cacheDirFile.mkdirs();
+                                log.info("[ INST ] 创建缓存目录: {}", cacheDir);
+                            } else {
+                                log.info("[ INST ] 使用缓存目录: {}", cacheDir);
+                            }
 
-            // 5. 持久化到数据库（XApp 按 ID 判重，XMenu 按 NAME+APP_ID 判重）
-            final BuildMenuPersister persister = BuildMenuPersister.create(vertx, cacheDir);
+                            // 8. 持久化到数据库（XApp 按 ID 判重，XMenu 按 NAME+APP_ID 判重）
+                            final BuildMenuPersister persister = BuildMenuPersister.create(vertx, cacheDir);
 
-            return persister.saveApps(apps)
-                .compose(appStats -> persister.saveMenus(menus)
-                    .map(menuStats -> {
-                        final int totalMenus = menus.values().stream().mapToInt(List::size).sum();
-                        log.info("[ INST ] ========================================");
-                        log.info("[ INST ] 导入统计:");
-                        log.info("[ INST ]   应用: 加载 {} / 新增 {} / 更新 {}", apps.size(), appStats[0], appStats[1]);
-                        log.info("[ INST ]   菜单: 加载 {} / 新增 {} / 更新 {}", totalMenus, menuStats[0], menuStats[1]);
-                        log.info("[ INST ]   缓存: {}", cacheDir);
-                        log.info("[ INST ] ========================================");
-                        return true;
-                    })
-                )
+                            return persister.saveApps(apps)
+                                .compose(appStats -> persister.saveMenus(menus)
+                                    .map(menuStats -> {
+                                        final int totalMenus = menus.values().stream().mapToInt(List::size).sum();
+                                        log.info("[ INST ] ========================================");
+                                        log.info("[ INST ] 导入统计:");
+                                        log.info("[ INST ]   应用: 加载 {} / 新增 {} / 更新 {}", apps.size(), appStats[0], appStats[1]);
+                                        log.info("[ INST ]   菜单: 加载 {} / 新增 {} / 更新 {}", totalMenus, menuStats[0], menuStats[1]);
+                                        log.info("[ INST ]   缓存: {}", cacheDir);
+                                        log.info("[ INST ]   实例: {}/instance.yml", cacheDir);
+                                        log.info("[ INST ] ========================================");
+                                        return true;
+                                    })
+                                )
+                                .recover(err -> {
+                                    log.error("[ INST ] 导入失败", err);
+                                    return Future.succeededFuture(false);
+                                });
+                        })
+                        .recover(err -> {
+                            log.error("[ INST ] 加载缓存映射失败", err);
+                            return Future.succeededFuture(false);
+                        });
+                })
                 .recover(err -> {
-                    log.error("[ INST ] 导入失败", err);
+                    log.error("[ INST ] 加载缓存映射失败", err);
                     return Future.succeededFuture(false);
                 });
         } catch (final Exception e) {
@@ -185,6 +201,60 @@ public class BuildApp {
         } catch (final Exception e) {
             log.error("[ INST ] 加载实例映射失败", e);
             return new java.util.HashMap<>();
+        }
+    }
+
+    /**
+     * 从缓存目录和数据库加载额外的映射
+     * 扫描 apps/{UUID}/{code} 标识文件，与数据库中的应用进行匹配
+     * 返回合并后的 code -> UUID 映射
+     */
+    private static Future<Map<String, String>> loadCacheMappings(
+        final Vertx vertx,
+        final String cacheDir,
+        final Map<String, String> instanceMap
+    ) {
+        try {
+            final File cacheDirFile = new File(cacheDir);
+            if (!cacheDirFile.exists() || !cacheDirFile.isDirectory()) {
+                log.debug("[ INST ] 缓存目录不存在，使用 instance.yml 映射");
+                return Future.succeededFuture(instanceMap);
+            }
+
+            // 扫描缓存目录，查找 apps/{UUID}/{code} 标识文件
+            final Map<String, String> cacheMap = new java.util.HashMap<>();
+            final File[] uuidDirs = cacheDirFile.listFiles(File::isDirectory);
+            if (uuidDirs == null || uuidDirs.length == 0) {
+                log.debug("[ INST ] 缓存目录为空，使用 instance.yml 映射");
+                return Future.succeededFuture(instanceMap);
+            }
+
+            for (final File uuidDir : uuidDirs) {
+                final String uuid = uuidDir.getName();
+                final File[] files = uuidDir.listFiles(File::isFile);
+                if (files != null) {
+                    for (final File file : files) {
+                        final String code = file.getName();
+                        // 跳过 menu.yml 等非标识文件
+                        if (!code.endsWith(".yml") && !code.endsWith(".yaml")) {
+                            cacheMap.put(code, uuid);
+                            log.debug("[ INST ] 从缓存加载映射: {} -> {}", code, uuid);
+                        }
+                    }
+                }
+            }
+
+            // 合并映射：instance.yml 优先级更高
+            final Map<String, String> mergedMap = new java.util.HashMap<>(cacheMap);
+            mergedMap.putAll(instanceMap);
+
+            log.info("[ INST ] 加载缓存映射: {} 条记录（instance.yml: {}, 缓存: {}）",
+                mergedMap.size(), instanceMap.size(), cacheMap.size());
+
+            return Future.succeededFuture(mergedMap);
+        } catch (final Exception e) {
+            log.error("[ INST ] 加载缓存映射失败", e);
+            return Future.succeededFuture(instanceMap);
         }
     }
 
