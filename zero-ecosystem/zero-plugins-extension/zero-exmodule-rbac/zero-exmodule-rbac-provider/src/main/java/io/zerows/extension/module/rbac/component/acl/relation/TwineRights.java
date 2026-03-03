@@ -24,7 +24,7 @@ public class TwineRights implements ScTwine<String> {
      */
     @Override
     public Future<JsonObject> identAsync(final JsonObject userJ) {
-        final String key = Ut.valueString(userJ, KName.KEY);
+        final String key = Ut.vId(userJ);
         return Junc.role().identAsync(key).compose(roles -> {
             userJ.put(KName.ROLE, Ut.encryptBase64(roles.encodePrettily()));
             return Ux.future();
