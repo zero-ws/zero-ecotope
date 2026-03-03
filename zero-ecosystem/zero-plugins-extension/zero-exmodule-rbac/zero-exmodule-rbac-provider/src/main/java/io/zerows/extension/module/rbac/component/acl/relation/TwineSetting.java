@@ -20,7 +20,7 @@ import io.zerows.support.Ut;
 public class TwineSetting implements ScTwine<SUser> {
     @Override
     public Future<JsonObject> identAsync(final JsonObject userJ) {
-        final String userId = Ut.valueString(userJ, KName.KEY);
+        final String userId = Ut.vId(userJ);
         final String sigma = Ut.valueString(userJ, KName.SIGMA);
         return HPI.of(ExSetting.class).waitAsync(
             stub -> stub.settingAsync(userId, sigma),

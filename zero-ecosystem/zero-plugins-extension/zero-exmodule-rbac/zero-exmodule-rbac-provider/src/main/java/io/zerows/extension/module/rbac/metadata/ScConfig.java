@@ -3,15 +3,23 @@ package io.zerows.extension.module.rbac.metadata;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.hashing.HashingStrategy;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.MDConfig;
+import io.zerows.integrated.jackson.JsonArrayDeserializer;
+import io.zerows.integrated.jackson.JsonArraySerializer;
 import io.zerows.integrated.jackson.JsonObjectDeserializer;
 import io.zerows.integrated.jackson.JsonObjectSerializer;
 import io.zerows.mbse.metadata.KQr;
 import io.zerows.support.Ut;
 import lombok.Data;
+import lombok.ToString;
 
-import java.util.concurrent.TimeUnit;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
  * Security configuration data
@@ -20,46 +28,6 @@ import java.util.concurrent.TimeUnit;
 @Data
 public class ScConfig implements MDConfig {
     private static final Cc<String, KQr> CC_KQR = Cc.open();
-    // --------------- 图片验证码相关属性
-    /**
-     * 图片验证码长度
-     */
-    private final Integer imageLength = 5;
-    /**
-     * 图片验证码过期时间（秒）
-     */
-    private final Integer imageExpired = 30;
-    /**
-     * 图片验证码宽度（像素）
-     */
-    private final Integer imageWidth = 180;
-    /**
-     * 图片验证码高度（像素）
-     */
-    private final Integer imageHeight = 40;
-
-
-    // ---------------- 授权码相关属性
-    /**
-     * 授权码超时时间（秒）
-     */
-    private final Integer codeExpired = 30;
-    /**
-     * 授权码长度
-     */
-    private final Integer codeLength = 8;
-
-
-    // ---------------- 短信验证码相关属性
-    /**
-     * 短信码超时时间（秒）
-     */
-    private final Integer messageExpired = 60;
-    /**
-     * 短信码长度
-     */
-    private final Integer messageLength = 4;
-
 
     // ----------------- 令牌相关属性
     /**
@@ -80,7 +48,7 @@ public class ScConfig implements MDConfig {
      *     3. 用户组 - 角色（多对多）
      * </code></pre>
      */
-    private final Boolean supportGroup = Boolean.FALSE;
+    private Boolean supportGroup = Boolean.FALSE;
 
 
     // ----------------- 布尔开关
@@ -91,7 +59,7 @@ public class ScConfig implements MDConfig {
      * </code></pre>
      * 支持权限对应的二级缓存，有了二级缓存后，权限计算的 Profile 会变得相对复杂
      */
-    private final Boolean supportSecondary = Boolean.FALSE;
+    private Boolean supportSecondary = Boolean.FALSE;
     /**
      * 是否支持多应用模型，多应用模型和多租户模型区别
      * <pre><code>
@@ -102,7 +70,7 @@ public class ScConfig implements MDConfig {
      *        一个 sigma 会包含多个 id
      * </code></pre>
      */
-    private final Boolean supportMultiApp = Boolean.TRUE;
+    private Boolean supportMultiApp = Boolean.TRUE;
     /**
      * 是否支持 zero-is 的集成管理模块，若支持集成管理模块，则会开启集成存储模式
      * <pre><code>
@@ -112,22 +80,19 @@ public class ScConfig implements MDConfig {
      *        支持集成管理，可搭载额外的存储模块，对应 zero-is 扩展的内容。
      * </code></pre>
      */
-    private final Boolean supportIntegration = Boolean.FALSE;
-    /**
-     * 是否支持图片验证码
-     * <pre><code>
-     *     true: 支持图片验证码
-     *     false：不支持图片验证码
-     * </code></pre>
-     */
-    private final Boolean supportCaptcha = Boolean.FALSE;
+    private Boolean supportIntegration = Boolean.FALSE;
+
+    // ----------------- 默认值系统
+
+    private Default valueDefault;
+
+    private Resource valueResource;
+
+    // ----------------- 登录限制设置
     /**
      * 异常登录次数限制，如果您密码错误次数超过了此属性的设置，那么账号将被锁定
      */
-    private final Integer verifyLimitation = null;
-
-
-    // ----------------- 登录限制设置
+    private Integer verifyLimitation = 3;
     /**
      * 启用登录限制之后会启用此属性，此属性表示登录限制的时间间隔，常用属性如
      * <pre><code>
@@ -136,7 +101,7 @@ public class ScConfig implements MDConfig {
      * </code></pre>
      * 上述含义表示登录限制为 3 次，账号锁定之后会设置 300 秒（5分钟）时间来解锁账号
      */
-    private final Integer verifyDuration = 300;
+    private Integer verifyDuration = 300;
     /**
      * 用于标识安全实体的专用限制
      * 1) User，用户标识
@@ -146,36 +111,16 @@ public class ScConfig implements MDConfig {
      * 5) Action，操作标识
      * 6) Resource，资源标识
      */
-    private final ScCondition condition = new ScCondition();
+    private Condition condition = new Condition();
 
 
     // ----------------- 安全实体 Qr 配置
-    /**
-     * 令牌超时时间（分钟）
-     */
-    private Long tokenExpired = 30L;
-    /**
-     * 默认初始化密码，如果您的密码是此密码，那么前端会跳转到密码修改页面
-     */
-    private String initializePassword;
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject initialize = new JsonObject();
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject category = new JsonObject();
-
-    /**
-     * 默认使用分钟，所以此处分钟转秒
-     *
-     * @return 返回秒
-     */
-    public Integer getTokenExpired() {
-        if (null == this.tokenExpired) {
-            this.tokenExpired = 0L;
-        }
-        return Math.toIntExact(TimeUnit.MINUTES.toSeconds(this.tokenExpired));
-    }
 
     public KQr category(final String name) {
         return CC_KQR.pick(() -> {
@@ -193,19 +138,76 @@ public class ScConfig implements MDConfig {
     public String toString() {
         return "ScConfig{" +
             ", condition=" + this.condition +
-            ", codeExpired=" + this.codeExpired +
-            ", codeLength=" + this.codeLength +
-            ", tokenExpired=" + this.tokenExpired +
             ", supportGroup=" + this.supportGroup +
             ", supportSecondary=" + this.supportSecondary +
             ", supportMultiApp=" + this.supportMultiApp +
             ", supportIntegration=" + this.supportIntegration +
-            ", verifyCode=" + this.supportCaptcha +
             ", verifyLimitation=" + this.verifyLimitation +
             ", verifyDuration=" + this.verifyDuration +
-            ", initializePassword='" + this.initializePassword + '\'' +
             ", initialize=" + this.initialize +
             ", category=" + this.category +
+            ", valueDefault=" + this.valueDefault +
             '}';
+    }
+
+    @Data
+    public static class Resource implements Serializable {
+        private String menu = "91a78ce8-30c7-4894-b235-730eb3e61255";
+    }
+
+    @Data
+    public static class Condition implements Serializable {
+        @JsonSerialize(using = JsonArraySerializer.class)
+        @JsonDeserialize(using = JsonArrayDeserializer.class)
+        private JsonArray user = new JsonArray().add(KName.SIGMA);
+
+        @JsonSerialize(using = JsonArraySerializer.class)
+        @JsonDeserialize(using = JsonArrayDeserializer.class)
+        private JsonArray role = new JsonArray().add(KName.SIGMA);
+
+        @JsonSerialize(using = JsonArraySerializer.class)
+        @JsonDeserialize(using = JsonArrayDeserializer.class)
+        private JsonArray group = new JsonArray().add(KName.SIGMA);
+        @JsonSerialize(using = JsonArraySerializer.class)
+        @JsonDeserialize(using = JsonArrayDeserializer.class)
+        private JsonArray action = new JsonArray().add(KName.SIGMA);
+        @JsonSerialize(using = JsonArraySerializer.class)
+        @JsonDeserialize(using = JsonArrayDeserializer.class)
+        private JsonArray permission = new JsonArray().add(KName.SIGMA);
+        @JsonSerialize(using = JsonArraySerializer.class)
+        @JsonDeserialize(using = JsonArrayDeserializer.class)
+        private JsonArray resource = new JsonArray().add(KName.SIGMA);
+
+        @Override
+        public String toString() {
+            return "ScCondition{" +
+                "user=" + this.user +
+                ", role=" + this.role +
+                ", group=" + this.group +
+                ", action=" + this.action +
+                ", permission=" + this.permission +
+                ", resource=" + this.resource +
+                '}';
+        }
+    }
+
+    @Data
+    @ToString
+    public static class Default implements Serializable {
+        // 加密过的默认密码
+        private String userPassword;
+
+        // 角色权限 CODE
+        private Set<String> rolePermissions = new HashSet<>();
+        // 角色菜单 NAME
+        private Set<String> roleMenus = new HashSet<>();
+
+        private static final HashingStrategy STRATEGY = HashingStrategy.load();
+        private static final String DEFAULT_ALG = "sha512";
+        private static final String DEFAULT_PASSWORD = "12345678";
+    }
+
+    public static String defaultPassword() {
+        return Default.STRATEGY.hash(Default.DEFAULT_ALG, null, null, Default.DEFAULT_PASSWORD);
     }
 }

@@ -6,8 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.Account;
-import io.zerows.epoch.web.MDConfiguration;
-import io.zerows.extension.module.rbac.boot.MDRBACManager;
+import io.zerows.extension.module.rbac.boot.Sc;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SPermissionDao;
@@ -27,22 +26,16 @@ public class RoleService implements RoleStub {
 
     @Override
     public Future<JsonObject> roleSave(final JsonObject data, final User user) {
-        // 1. 加载配置信息
-        final MDConfiguration config = MDRBACManager.of().configuration();
-        final JsonObject configData = config.inConfiguration();
-        final JsonObject initializeRole = configData.getJsonObject(ScAuthKey.INITIALIZE_ROLE);
-        final JsonObject initializePermissions = configData.getJsonObject(ScAuthKey.INITIALIZE_PERMISSIONS);
-
-        // 2. 提取权限码
-        final JsonArray permCodes = initializeRole.getJsonArray(ScAuthKey.PERMISSIONS);
+        // 1. 提取权限码
+        final JsonArray permCodes = Sc.valuePermissions();
         final JsonObject queryCondition = new JsonObject().put(ScAuthKey.AUTH_CODE, permCodes);
 
-        // 3. 转换数据模型
+        // 2. 转换数据模型
         final SRole sRole = Ut.fromJson(data, SRole.class);
 
         return DB.on(SRoleDao.class).insertAsync(sRole)
             .compose(role -> this.savePermissions(role.getId(), queryCondition))
-            .compose(nil -> this.saveDefaultView(sRole, user, initializePermissions))
+            .compose(nil -> this.saveDefaultView(sRole, user, Sc.valueMenus()))
             .map(role -> (Ux.toJson(sRole)));
     }
 
@@ -71,7 +64,7 @@ public class RoleService implements RoleStub {
         view.setName(ScAuthKey.DEFAULT);
         view.setOwner(role.getId());
         view.setOwnerType(ScAuthKey.OWNER_TYPE_ROLE);
-        view.setResourceId(ScAuthKey.DEFAULT_RESOURCE_ID);
+        view.setResourceId(Sc.resourceMenu());
         view.setProjection(new JsonArray());
         view.setCriteria(new JsonObject());
         view.setRows(initPermissions);

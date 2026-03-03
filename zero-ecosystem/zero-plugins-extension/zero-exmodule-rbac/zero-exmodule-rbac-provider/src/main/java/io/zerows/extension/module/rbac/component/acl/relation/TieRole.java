@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class TieRole implements ScTie<String, JsonArray> {
     @Override
     public Future<JsonArray> identAsync(final JsonObject userJ) {
-        final String userKey = Ut.valueString(userJ, KName.KEY);
+        final String userKey = Ut.vId(userJ);
         return Ke.umALink(ScAuthKey.F_USER_ID, userKey, RUserRoleDao.class, RUserRole::getPriority)
             .compose(result -> {
                 final JsonArray roles = new JsonArray();
