@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPacket;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPath;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
@@ -30,6 +31,18 @@ public class Sc {
 
     public static String valuePassword() {
         return ScGenerated.valuePassword();
+    }
+
+    public static JsonArray valuePermissions() {
+        return ScGenerated.valuePermissions();
+    }
+
+    public static JsonObject valueMenus() {
+        return new JsonObject().put(KName.NAME, ScGenerated.valueMenus());
+    }
+
+    public static String resourceMenu() {
+        return ScGenerated.resourceMenu();
     }
 
     public static String valueProfile(final SResource resource) {

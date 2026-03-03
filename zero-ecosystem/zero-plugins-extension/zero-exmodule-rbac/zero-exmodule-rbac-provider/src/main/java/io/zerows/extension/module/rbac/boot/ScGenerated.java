@@ -12,6 +12,7 @@ import io.zerows.support.Ut;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -20,8 +21,48 @@ import java.util.UUID;
 class ScGenerated {
     private static final ScConfig CONFIG = MDRBACManager.of().config();
 
+    static String resourceMenu() {
+        final ScConfig.Resource valueResource = CONFIG.getValueResource();
+        if (Objects.isNull(valueResource)) {
+            return null;
+        }
+        return valueResource.getMenu();
+    }
+
     static String valuePassword() {
-        return CONFIG.getInitializePassword();
+        final ScConfig.Default valueDefault = CONFIG.getValueDefault();
+        if (Objects.isNull(valueDefault)) {
+            return ScConfig.defaultPassword();
+        }
+        final String valuePassword = valueDefault.getUserPassword();
+        if (Ut.isNil(valuePassword)) {
+            return ScConfig.defaultPassword();
+        }
+        return valuePassword;
+    }
+
+    static JsonArray valuePermissions() {
+        final ScConfig.Default valueDefault = CONFIG.getValueDefault();
+        if (Objects.isNull(valueDefault)) {
+            return new JsonArray();
+        }
+        final Set<String> permissions = valueDefault.getRolePermissions();
+        if (Objects.isNull(permissions) || permissions.isEmpty()) {
+            return new JsonArray();
+        }
+        return Ut.toJArray(permissions);
+    }
+
+    static JsonArray valueMenus() {
+        final ScConfig.Default valueDefault = CONFIG.getValueDefault();
+        if (Objects.isNull(valueDefault)) {
+            return new JsonArray();
+        }
+        final Set<String> menus = valueDefault.getRoleMenus();
+        if (Objects.isNull(menus) || menus.isEmpty()) {
+            return new JsonArray();
+        }
+        return Ut.toJArray(menus);
     }
 
     static Future<List<SUser>> valueAuth(final JsonArray userA, final String sigma) {
