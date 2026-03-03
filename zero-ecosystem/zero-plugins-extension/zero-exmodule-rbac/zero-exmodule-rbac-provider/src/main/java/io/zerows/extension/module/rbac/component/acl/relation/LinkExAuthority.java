@@ -15,7 +15,7 @@ import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.module.rbac.metadata.ScConfig;
 import io.zerows.extension.skeleton.spi.ExOwner;
-import io.zerows.extension.skeleton.spi.ScTwine;
+import io.zerows.extension.skeleton.spi.ScLink;
 import io.zerows.mbse.metadata.KQr;
 import io.zerows.platform.metadata.KRef;
 import io.zerows.program.Ux;
@@ -66,7 +66,7 @@ import java.util.stream.Collectors;
  *   3.3）initialize 为导入时的模板数据
  */
 @Slf4j
-class TwineExtension implements ScTwine<SUser> {
+class LinkExAuthority implements ScLink.Extension<SUser> {
 
     private static final ScConfig CONFIG = MDRBACManager.of().config();
 
@@ -77,7 +77,7 @@ class TwineExtension implements ScTwine<SUser> {
         if (Objects.isNull(qr) || !qr.valid()) {
             return DB.on(SUserDao.class).fetchJOneAsync(query);
         }
-        return TwineQr.normalize(qr, query)
+        return LinkUtil.normalize(qr, query)
             .compose(queryJ ->
                 DB.on(Join.of(
                     SUserDao.class, KName.MODEL_KEY,
@@ -86,23 +86,6 @@ class TwineExtension implements ScTwine<SUser> {
             )
             // Connect to `groups`
             .compose(this::connect);
-        //            .compose(queryJ -> {
-        //
-        //
-        //                final ADJ searcher = DB.join();
-        //                /*
-        //                 * S_USER ( modelKey )
-        //                 *    JOIN
-        //                 * XXX ( key )
-        //                 * 额外步骤
-        //                 * */
-        //                searcher.add(SUserDao.class, KName.MODEL_KEY);
-        //                final Class<?> clazz = qr.getClassDao();
-        //                searcher.join(clazz);
-        //                return searcher.searchAsync(queryJ)
-        //                    // Connect to `groups`
-        //                    .compose(this::connect);
-        //            });
     }
 
     /**
@@ -118,7 +101,7 @@ class TwineExtension implements ScTwine<SUser> {
      * @return 返回追加到响应数据中的扩展信息
      */
     @Override
-    public Future<JsonObject> identAsync(final SUser user) {
+    public Future<JsonObject> fetchAsync(final SUser user) {
         final KRef ref = new KRef();
         return this.runSingle(user, qr -> {
                 final ADB jq = DB.on(qr.getClassDao());
@@ -147,7 +130,7 @@ class TwineExtension implements ScTwine<SUser> {
     }
 
     @Override
-    public Future<JsonObject> identAsync(final SUser key, final JsonObject updatedData) {
+    public Future<JsonObject> saveAsync(final SUser key, final JsonObject updatedData) {
         /* User model key */
         return this.runSingle(key, qr -> {
             /* Read Extension information */
@@ -158,7 +141,7 @@ class TwineExtension implements ScTwine<SUser> {
     }
 
     @Override
-    public Future<JsonArray> identAsync(final Collection<SUser> users) {
+    public Future<JsonArray> fetchAsync(final Collection<SUser> users) {
         return this.runBatch(this.compress(users)).compose(map -> {
             final JsonArray combineA = new JsonArray();
             final JsonArray extensionA = new JsonArray();
@@ -268,7 +251,7 @@ class TwineExtension implements ScTwine<SUser> {
     private Future<JsonObject> connect(final JsonObject pagination) {
         final JsonArray users = Ut.valueJArray(pagination, KName.LIST);
         final Set<String> userKeys = Ut.valueSetString(users, KName.KEY);
-        return Junc.refRights().identAsync(userKeys).compose(relations -> {
+        return LinkManager.refPerms().fetchAsync(userKeys).compose(relations -> {
             // 分组
             final ConcurrentMap<String, JsonArray> grouped =
                 Ut.elementGroup(relations, ScAuthKey.F_USER_ID);

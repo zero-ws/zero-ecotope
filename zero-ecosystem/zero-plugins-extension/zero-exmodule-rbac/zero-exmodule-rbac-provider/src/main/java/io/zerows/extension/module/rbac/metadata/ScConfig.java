@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.hashing.HashingStrategy;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.web.MDConfig;
 import io.zerows.integrated.jackson.JsonArrayDeserializer;
@@ -201,13 +200,5 @@ public class ScConfig implements MDConfig {
         private Set<String> rolePermissions = new HashSet<>();
         // 角色菜单 NAME
         private Set<String> roleMenus = new HashSet<>();
-
-        private static final HashingStrategy STRATEGY = HashingStrategy.load();
-        private static final String DEFAULT_ALG = "sha512";
-        private static final String DEFAULT_PASSWORD = "12345678";
-    }
-
-    public static String defaultPassword() {
-        return Default.STRATEGY.hash(Default.DEFAULT_ALG, null, null, Default.DEFAULT_PASSWORD);
     }
 }

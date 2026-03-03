@@ -7,7 +7,7 @@ import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
-import io.zerows.extension.skeleton.spi.ScTwine;
+import io.zerows.extension.skeleton.spi.ScLink;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
@@ -18,7 +18,7 @@ import java.util.Collection;
  *
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-class TwineModel implements ScTwine<String> {
+class LinkExModel implements ScLink.Extension<String> {
     /*
      * 参数转换成查询条件
      * {
@@ -28,7 +28,7 @@ class TwineModel implements ScTwine<String> {
      * }
      */
     @Override
-    public Future<JsonObject> identAsync(final JsonObject condition) {
+    public Future<JsonObject> fetchAsync(final JsonObject condition) {
         final JsonObject conditionJ = this.mappedJ(condition);
         // sigma 在查询过程中需追加
         Ut.valueCopy(conditionJ, condition,
@@ -38,13 +38,13 @@ class TwineModel implements ScTwine<String> {
     }
 
     @Override
-    public Future<JsonObject> identAsync(final String key) {
+    public Future<JsonObject> fetchAsync(final String key) {
         return DB.on(SUserDao.class).fetchJByIdAsync(key);
     }
 
     @Override
-    public Future<JsonObject> identAsync(final String key, final JsonObject updatedData) {
-        return this.identAsync(key).compose(original -> {
+    public Future<JsonObject> saveAsync(final String key, final JsonObject updatedData) {
+        return this.fetchAsync(key).compose(original -> {
             if (Ut.isNotNil(original)) {
                 /*
                  * 只更新引用，不更新数据，主要更新 S_USER 中的两个核心字段
@@ -62,7 +62,7 @@ class TwineModel implements ScTwine<String> {
     }
 
     @Override
-    public Future<JsonArray> identAsync(final Collection<String> keys) {
+    public Future<JsonArray> fetchAsync(final Collection<String> keys) {
         final JsonArray keysA = Ut.toJArray(keys);
         return DB.on(SUserDao.class).fetchJInAsync(KName.MODEL_KEY, keysA);
     }

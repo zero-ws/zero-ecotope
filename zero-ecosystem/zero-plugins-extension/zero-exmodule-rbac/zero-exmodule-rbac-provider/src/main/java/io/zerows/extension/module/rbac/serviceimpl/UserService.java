@@ -2,12 +2,9 @@ package io.zerows.extension.module.rbac.serviceimpl;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.boot.Sc;
-import io.zerows.extension.module.rbac.component.acl.relation.Junc;
-import io.zerows.extension.module.rbac.domain.tables.daos.RUserGroupDao;
-import io.zerows.extension.module.rbac.domain.tables.daos.RUserRoleDao;
+import io.zerows.extension.module.rbac.component.acl.relation.LinkManager;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.module.rbac.servicespec.UserStub;
@@ -38,39 +35,14 @@ public class UserService implements UserStub {
             /* User Information */
             .<SUser>fetchByIdAsync(userId)
             /* Employee Information */
-            .compose(Junc.refExtension()::identAsync)
+            .compose(LinkManager.refExtension()::fetchAsync)
             /* Relation for roles / groups */
-            .compose(Junc.refRights()::identAsync)
+            .compose(LinkManager.refPerms()::fetchAsync)
             /* Setting for user */
-            .compose(Junc.refSetting()::identAsync);
+            .compose(LinkManager.refSetting()::fetchAsync);
     }
 
     // ================== Basic Part of S_User ================
-
-    @Override
-    public Future<JsonObject> fetchAuthorized(final SUser query) {
-        return null;
-//        return DB.on(OUserDao.class).fetchOneAsync(ScAuthKey.F_CLIENT_ID, query.getId())
-//            .compose(Ux::futureJ)
-//            .compose(ouserJson -> {
-//                final JsonObject userJson = Ut.serializeJson(query);
-//                final JsonObject merged = Ut.valueAppend(userJson, ouserJson);
-//                return UObject.create(merged).pickup(
-//                    KName.KEY,                /* client_id parameter */
-//                    ScAuthKey.SCOPE,              /* scope parameter */
-//                    ScAuthKey.STATE,              /* state parameter */
-//                    ScAuthKey.F_CLIENT_SECRET,    /* client_secret parameter */
-//                    ScAuthKey.F_GRANT_TYPE        /* grant_type parameter */
-//                ).denull().toFuture();
-//            }).compose(response -> {
-//                final String initPwd = Sc.valuePassword();
-//                if (initPwd.equals(query.getPassword())) {
-//                    /* Password Init */
-//                    response.put(KName.PASSWORD, false);
-//                }
-//                return Ux.future(response);
-//            });
-    }
 
     /*
      * 只附加更新关联对象，该API不更新和账号本身相关的内容如
@@ -83,7 +55,7 @@ public class UserService implements UserStub {
         final SUser user = Ux.fromJson(params, SUser.class);
         user.setId(userId);
         return DB.on(SUserDao.class).updateAsync(userId, user)
-            .compose(userInfo -> Junc.refExtension().identAsync(userInfo, params));
+            .compose(userInfo -> LinkManager.refExtension().saveAsync(userInfo, params));
     }
 
     @Override
@@ -91,38 +63,24 @@ public class UserService implements UserStub {
         final SUser user = Ux.fromJson(params, SUser.class);
         /*
          * 创建账号时如果没有密码则设置初始密码
-         * 初始密码配置位置：plugin/rbac/configuration.json
+         * 初始密码配置位置：plugin/-rbac/configuration.json
          */
         if (Objects.isNull(user.getPassword())) {
             user.setPassword(Sc.valuePassword());
+        } else {
+            final String encrypt = Sc.valuePassword(user.getPassword());
+            user.setPassword(encrypt);
         }
         final KRef refer = new KRef();
         return DB.on(SUserDao.class).insertAsync(user)
             .compose(refer::future)
-            // 创建认证信息
-            // .compose(inserted -> Sc.valueAuth(inserted, params))
-            // Insert new OUser Record
-            // .compose(oUser -> DB.on(OUserDao.class).insertAsync(oUser))
-            // delete attribute: password from user information To avoid update to EMPTY string
             .compose(entity -> Ux.futureJ(refer.<SUser>get().setPassword(null)));
     }
 
     @Override
     public Future<Boolean> deleteUser(final String userKey) {
-        final ADB sUserDao = DB.on(SUserDao.class);
-        // final ADB oUserDao = DB.on(OUserDao.class);
-        final ADB rUserRoleDao = DB.on(RUserRoleDao.class);
-        final ADB rUserGroupDao = DB.on(RUserGroupDao.class);
-
-        return null;
-//        return oUserDao.fetchOneAsync(new JsonObject().put(KName.CLIENT_ID, userKey))
-//            /* delete OUser record */
-//            // .compose(item -> oUserDao.deleteByIdAsync(Ux.toJson(item).getString(KName.KEY)))
-//            /* delete related role records */
-//            .compose(oUserFlag -> rUserRoleDao.deleteByAsync(new JsonObject().put(KName.USER_ID, userKey)))
-//            /* delete related group records */
-//            .compose(rUserRoleFlag -> rUserGroupDao.deleteByAsync(new JsonObject().put(KName.USER_ID, userKey)))
-//            /* delete SUser record */
-//            .compose(rUserGroupFlag -> sUserDao.deleteByIdAsync(userKey));
+        return DB.on(SUserDao.class).deleteByIdAsync(userKey)
+            .compose(nil -> LinkManager.role().removeAsync(userKey))
+            .compose(nil -> LinkManager.group().removeAsync(userKey));
     }
 }

@@ -7,8 +7,8 @@ import io.vertx.ext.web.Session;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.module.rbac.component.acl.relation.Junc;
-import io.zerows.extension.module.rbac.servicespec.LoginStub;
+import io.zerows.extension.module.rbac.component.acl.relation.LinkManager;
+import io.zerows.extension.module.rbac.metadata.logged.ScUser;
 import io.zerows.extension.module.rbac.servicespec.UserStub;
 import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.program.Ux;
@@ -23,9 +23,6 @@ public class UserActor {
     @Inject
     private transient UserStub stub;
 
-    @Inject
-    private transient LoginStub loginStub;
-
     @Address(Addr.User.PASSWORD)
     public Future<JsonObject> password(final Envelop envelop) {
         /*
@@ -33,7 +30,7 @@ public class UserActor {
          */
         final String userId = envelop.userId();
         final JsonObject params = Ux.getJson(envelop);
-        return Junc.refRights().identAsync(userId, params);
+        return LinkManager.refPerms().saveAsync(userId, params);
     }
 
     @Address(Addr.User.PROFILE)
@@ -47,7 +44,7 @@ public class UserActor {
     public Future<Boolean> logout(final Envelop envelop) {
         final String token = envelop.token();
         final String habitus = envelop.habitus();
-        return this.loginStub.logout(token, habitus).compose(result -> {
+        return ScUser.logout(habitus).compose(result -> {
             /*
              * Here we should do
              * 1. Session / ES Purging
@@ -68,7 +65,7 @@ public class UserActor {
 
     @Address(Addr.User.GET)
     public Future<JsonObject> getById(final String key) {
-        return Junc.refRights().identAsync(key);
+        return LinkManager.refPerms().fetchAsync(key);
     }
 
     @Address(Addr.User.ADD)
@@ -78,14 +75,14 @@ public class UserActor {
 
     @Address(Addr.User.UPDATE)
     public Future<JsonObject> update(final String key, final JsonObject data) {
-        return Junc.refRights().identAsync(key, data);
+        return LinkManager.refPerms().saveAsync(key, data);
     }
 
     @Address(Addr.User.DELETE)
     public Future<Boolean> delete(final String key) {
         // SPI: ExTrash
         return HPI.of(ExTrash.class).waitOr(
-            tunnel -> Junc.refRights().identAsync(key)
+            tunnel -> LinkManager.refPerms().fetchAsync(key)
                 .compose(user -> tunnel.backupAsync("sec.user", user))
                 .compose(backup -> this.stub.deleteUser(key)),
             () -> this.stub.deleteUser(key)
@@ -104,6 +101,6 @@ public class UserActor {
 
     @Address(Addr.User.QR_USER_SEARCH)
     public Future<JsonObject> searchByType(final String identifier, final JsonObject criteria) {
-        return Junc.refExtension().searchAsync(identifier, criteria);
+        return LinkManager.refExtension().searchAsync(identifier, criteria);
     }
 }

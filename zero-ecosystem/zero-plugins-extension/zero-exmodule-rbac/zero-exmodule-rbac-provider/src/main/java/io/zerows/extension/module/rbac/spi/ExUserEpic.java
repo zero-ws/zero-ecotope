@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
-import io.zerows.extension.module.rbac.component.acl.relation.Junc;
+import io.zerows.extension.module.rbac.component.acl.relation.LinkManager;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.skeleton.spi.ExUser;
@@ -26,17 +26,17 @@ public class ExUserEpic implements ExUser {
     // ------------------ Model Id / Model Key --------------------
     @Override
     public Future<JsonObject> rapport(final JsonObject condition) {
-        return Junc.refModel().identAsync(condition);
+        return LinkManager.refModel().fetchAsync(condition);
     }
 
     @Override
     public Future<JsonObject> rapport(final String key, final JsonObject params) {
-        return Junc.refModel().identAsync(key, params);
+        return LinkManager.refModel().saveAsync(key, params);
     }
 
     @Override
     public Future<JsonArray> rapport(final Set<String> keys) {
-        return Junc.refModel().identAsync(keys);
+        return LinkManager.refModel().fetchAsync(keys);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ExUserEpic implements ExUser {
 
     @Override
     public Future<JsonArray> userGroup(final String key) {
-        return Junc.group().identAsync(key).compose(relations -> {
+        return LinkManager.group().fetchAsync(key).compose(relations -> {
             final JsonArray groupKeys = new JsonArray();
             Ut.itJArray(relations).forEach(item -> groupKeys.add(item.getValue(ScAuthKey.F_GROUP_ID)));
             return Ux.future(groupKeys);
@@ -58,7 +58,7 @@ public class ExUserEpic implements ExUser {
 
     @Override
     public Future<JsonArray> userRole(final String key) {
-        return Junc.role().identAsync(key).compose(relations -> {
+        return LinkManager.role().fetchAsync(key).compose(relations -> {
             final JsonArray roleKeys = new JsonArray();
             Ut.itJArray(relations).forEach(item -> roleKeys.add(item.getValue(ScAuthKey.F_ROLE_ID)));
             return Ux.future(roleKeys);
@@ -73,7 +73,7 @@ public class ExUserEpic implements ExUser {
             .compose(userRef::future)
             .compose(queried -> {
                 if (extension) {
-                    return Junc.refExtension().identAsync(queried);
+                    return LinkManager.refExtension().fetchAsync(queried);
                 } else {
                     return Ux.futureA();
                 }
