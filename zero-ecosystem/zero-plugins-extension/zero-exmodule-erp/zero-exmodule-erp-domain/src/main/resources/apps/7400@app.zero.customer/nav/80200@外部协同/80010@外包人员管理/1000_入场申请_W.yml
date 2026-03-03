@@ -1,0 +1,4 @@
+data:
+  name: process.vendor.check-in
+  icon: login
+  uri: "/workflow/open?name=process.vendor.check-in"

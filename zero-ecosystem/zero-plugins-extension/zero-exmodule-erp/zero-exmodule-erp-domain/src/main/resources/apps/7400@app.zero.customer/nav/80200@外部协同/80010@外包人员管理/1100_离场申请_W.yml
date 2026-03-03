@@ -1,0 +1,4 @@
+data:
+  name: process.vendor.check-out
+  icon: logout
+  uri: "/workflow/open?name=process.vendor.check-out"

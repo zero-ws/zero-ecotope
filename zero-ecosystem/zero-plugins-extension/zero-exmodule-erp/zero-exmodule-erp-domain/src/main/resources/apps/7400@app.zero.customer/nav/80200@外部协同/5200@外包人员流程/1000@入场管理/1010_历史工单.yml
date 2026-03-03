@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.vendor.in.done
+  icon: history
+  uri: "/workflow/done?name=process.vendor.check-in"

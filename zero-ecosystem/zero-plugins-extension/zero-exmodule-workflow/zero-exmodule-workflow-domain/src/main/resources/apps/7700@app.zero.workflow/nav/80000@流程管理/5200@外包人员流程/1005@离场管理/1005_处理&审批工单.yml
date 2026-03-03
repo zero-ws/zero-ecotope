@@ -1,0 +1,4 @@
+data:
+  name: zero.wm.vendor.out.approval
+  icon: audit
+  uri: "/workflow/queue?name=process.vendor.check-out"

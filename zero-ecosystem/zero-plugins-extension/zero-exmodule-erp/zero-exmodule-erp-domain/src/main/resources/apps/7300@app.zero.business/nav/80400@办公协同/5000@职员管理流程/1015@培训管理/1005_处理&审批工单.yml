@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.office.training.approval
+  icon: audit
+  uri: "/workflow/queue?name=process.oa.training"

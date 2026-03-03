@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.vendor.in.approval
+  icon: audit
+  uri: "/workflow/queue?name=process.vendor.check-in"

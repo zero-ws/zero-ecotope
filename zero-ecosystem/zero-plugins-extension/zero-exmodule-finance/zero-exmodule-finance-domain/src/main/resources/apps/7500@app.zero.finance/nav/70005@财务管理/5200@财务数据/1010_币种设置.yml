@@ -1,0 +1,4 @@
+data:
+  name: zero.fms.data.currency
+  icon: pay-circle
+  uri: /fm/currency

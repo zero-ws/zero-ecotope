@@ -1,0 +1,4 @@
+data:
+  name: zero.ssm.dash.password
+  icon: "cab:BLOCK_SSM_PWD"
+  uri: /rbac/password-admin

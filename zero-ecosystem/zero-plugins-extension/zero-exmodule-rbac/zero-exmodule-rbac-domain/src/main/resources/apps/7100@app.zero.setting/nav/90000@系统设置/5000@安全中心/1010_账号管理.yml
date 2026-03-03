@@ -1,0 +1,4 @@
+data:
+  name: zero.ssm.rbac.user
+  icon: user
+  uri: /rbac/user

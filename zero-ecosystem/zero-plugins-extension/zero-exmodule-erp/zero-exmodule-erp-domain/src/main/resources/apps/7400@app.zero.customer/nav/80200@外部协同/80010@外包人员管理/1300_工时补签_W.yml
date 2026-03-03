@@ -1,0 +1,4 @@
+data:
+  name: process.vendor.hour
+  icon: clock-circle
+  uri: "/workflow/open?name=process.vendor.hour"

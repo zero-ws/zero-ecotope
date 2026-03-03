@@ -1,0 +1,18 @@
+data:
+  # 独立应用专用属性
+  domain: www.zerows.io.business
+  port: 7300
+  endpoint: /app/business
+  context: /app-business
+  urlLogin: /login/index
+  urlAdmin: /dashboard/business
+
+  # 附属应用专用属性
+  name: app.zero.business
+  code: app.zero.business
+  title: 业务管理中心
+  entry: zero.bsm
+
+  # 集成专用属性
+  appSecret: 8A4F41AA0612ADACBA60EFFF131769A2
+  appKey: tD6uF4sX8iJ1sT1xV5gI0dX0tK0kS3hN8lI0aP4dG3tW0iI2nE5iK4jA4xL7pP9r

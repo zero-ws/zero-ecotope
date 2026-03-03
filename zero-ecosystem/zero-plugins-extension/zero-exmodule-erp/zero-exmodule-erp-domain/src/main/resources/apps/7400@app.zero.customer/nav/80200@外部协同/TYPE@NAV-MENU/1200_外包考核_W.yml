@@ -1,0 +1,4 @@
+data:
+  name: zero.cm.dash.check
+  icon: "cab:BLOCK_WF_CHECK"
+  uri: "/workflow/open?name=process.vendor.assessment"

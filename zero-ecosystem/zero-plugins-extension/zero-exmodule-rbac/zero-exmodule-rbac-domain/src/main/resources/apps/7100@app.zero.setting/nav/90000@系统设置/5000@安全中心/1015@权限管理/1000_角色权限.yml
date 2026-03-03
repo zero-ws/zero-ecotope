@@ -1,0 +1,4 @@
+data:
+  name: zero.ssm.rbac.authority.role
+  icon: profile
+  uri: /rbac/authority-role

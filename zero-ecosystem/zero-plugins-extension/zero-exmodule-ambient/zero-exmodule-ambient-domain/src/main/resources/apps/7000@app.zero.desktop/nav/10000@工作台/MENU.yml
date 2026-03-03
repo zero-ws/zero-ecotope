@@ -1,0 +1,5 @@
+data:
+  type: BAG-MENU
+  name: zero.desktop
+  icon: desktop
+  uri: /main/index

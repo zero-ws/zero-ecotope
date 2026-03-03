@@ -320,7 +320,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public Boolean getActive() {
@@ -328,7 +328,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public XMenu setActive(Boolean active) {
@@ -337,7 +337,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public String getLanguage() {
@@ -345,7 +345,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public XMenu setLanguage(String language) {
@@ -354,7 +354,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public JsonObject getMetadata() {
@@ -362,7 +362,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public XMenu setMetadata(JsonObject metadata) {
@@ -371,7 +371,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {
@@ -379,7 +379,7 @@ public class XMenu implements VertxPojo, IXMenu {
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本
      */
     @Override
     public XMenu setVersion(String version) {

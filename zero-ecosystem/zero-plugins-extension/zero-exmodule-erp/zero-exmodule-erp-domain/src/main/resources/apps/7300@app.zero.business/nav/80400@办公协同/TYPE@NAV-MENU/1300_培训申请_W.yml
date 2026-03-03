@@ -1,0 +1,4 @@
+data:
+  name: zero.bsm.dash.training
+  icon: "cab:BLOCK_BSM_TRAINING"
+  uri: "/workflow/open?name=process.oa.training"

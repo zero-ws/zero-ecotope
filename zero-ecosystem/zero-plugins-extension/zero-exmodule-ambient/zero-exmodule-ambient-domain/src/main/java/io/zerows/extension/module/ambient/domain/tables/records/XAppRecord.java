@@ -76,7 +76,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Setter for <code>ZDB.X_APP.TITLE</code>. 「title」- 标题
      */
     @Override
     public XAppRecord setTitle(String value) {
@@ -85,7 +85,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 应用标题
+     * Getter for <code>ZDB.X_APP.TITLE</code>. 「title」- 标题
      */
     @Override
     public String getTitle() {
@@ -110,7 +110,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 管理员Email
+     * Setter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 邮箱
      */
     @Override
     public XAppRecord setEmail(String value) {
@@ -119,7 +119,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 管理员Email
+     * Getter for <code>ZDB.X_APP.EMAIL</code>. 「email」- 邮箱
      */
     @Override
     public String getEmail() {
@@ -127,7 +127,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
+     * Setter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案
      */
     @Override
     public XAppRecord setIcp(String value) {
@@ -136,7 +136,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案号
+     * Getter for <code>ZDB.X_APP.ICP</code>. 「icp」- ICP备案
      */
     @Override
     public String getIcp() {
@@ -161,7 +161,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
+     * Setter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 图标
      */
     @Override
     public XAppRecord setFavicon(String value) {
@@ -170,7 +170,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 小图标
+     * Getter for <code>ZDB.X_APP.FAVICON</code>. 「favicon」- 图标
      */
     @Override
     public String getFavicon() {
@@ -178,7 +178,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     * Setter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口
      */
     @Override
     public XAppRecord setEntry(String value) {
@@ -187,7 +187,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口菜单
+     * Getter for <code>ZDB.X_APP.ENTRY</code>. 「entry」- 入口
      */
     @Override
     public String getEntry() {
@@ -195,7 +195,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     * Setter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 域名
      */
     @Override
     public XAppRecord setDomain(String value) {
@@ -204,7 +204,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 服务器域
+     * Getter for <code>ZDB.X_APP.DOMAIN</code>. 「domain」- 域名
      */
     @Override
     public String getDomain() {
@@ -212,7 +212,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口号
+     * Setter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口
      */
     @Override
     public XAppRecord setPort(Integer value) {
@@ -221,7 +221,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口号
+     * Getter for <code>ZDB.X_APP.PORT</code>. 「port」- 端口
      */
     @Override
     public Integer getPort() {
@@ -229,7 +229,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
+     * Setter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 路径
      */
     @Override
     public XAppRecord setContext(String value) {
@@ -238,7 +238,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 应用路径
+     * Getter for <code>ZDB.X_APP.CONTEXT</code>. 「context」- 路径
      */
     @Override
     public String getContext() {
@@ -246,7 +246,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     * Setter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- 服务地址
      */
     @Override
     public XAppRecord setEndpoint(String value) {
@@ -255,7 +255,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- Web服务端地址
+     * Getter for <code>ZDB.X_APP.ENDPOINT</code>. 「endpoint」- 服务地址
      */
     @Override
     public String getEndpoint() {
@@ -263,7 +263,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理业URL
+     * Setter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理页
      */
     @Override
     public XAppRecord setUrlAdmin(String value) {
@@ -272,7 +272,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理业URL
+     * Getter for <code>ZDB.X_APP.URL_ADMIN</code>. 「urlAdmin」- 管理页
      */
     @Override
     public String getUrlAdmin() {
@@ -297,7 +297,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     * Setter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查
      */
     @Override
     public XAppRecord setUrlHealth(String value) {
@@ -306,7 +306,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查URL
+     * Getter for <code>ZDB.X_APP.URL_HEALTH</code>. 「urlHealth」- 健康检查
      */
     @Override
     public String getUrlHealth() {
@@ -314,7 +314,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     * Setter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 应用Key
      */
     @Override
     public XAppRecord setAppKey(String value) {
@@ -323,7 +323,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 敏感标识符
+     * Getter for <code>ZDB.X_APP.APP_KEY</code>. 「appKey」- 应用Key
      */
     @Override
     public String getAppKey() {
@@ -416,7 +416,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.APP_ID</code>. 「appId」- 父应用ID
+     * Setter for <code>ZDB.X_APP.APP_ID</code>. 「appId」- 父应用
      */
     @Override
     public XAppRecord setAppId(String value) {
@@ -425,7 +425,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.APP_ID</code>. 「appId」- 父应用ID
+     * Getter for <code>ZDB.X_APP.APP_ID</code>. 「appId」- 父应用
      */
     @Override
     public String getAppId() {
@@ -433,7 +433,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public XAppRecord setActive(Boolean value) {
@@ -442,7 +442,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.X_APP.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public Boolean getActive() {
@@ -450,7 +450,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public XAppRecord setLanguage(String value) {
@@ -459,7 +459,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.X_APP.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public String getLanguage() {
@@ -467,7 +467,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public XAppRecord setMetadata(JsonObject value) {
@@ -476,7 +476,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.X_APP.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public JsonObject getMetadata() {
@@ -484,7 +484,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Setter for <code>ZDB.X_APP.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.X_APP.VERSION</code>. 「version」- 版本
      */
     @Override
     public XAppRecord setVersion(String value) {
@@ -493,7 +493,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Vertx
     }
 
     /**
-     * Getter for <code>ZDB.X_APP.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.X_APP.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {

@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.office.vacation.approval
+  icon: audit
+  uri: "/workflow/queue?name=process.oa.vacation"

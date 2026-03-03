@@ -1,0 +1,6 @@
+data:
+  name: zero.extra.notify
+  icon: sound
+  metadata:
+    confirm: true
+    plugin: ExNotify

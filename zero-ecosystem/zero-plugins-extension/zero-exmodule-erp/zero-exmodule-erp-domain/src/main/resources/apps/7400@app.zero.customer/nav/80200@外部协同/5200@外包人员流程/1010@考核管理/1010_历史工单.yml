@@ -1,0 +1,4 @@
+data:
+  name: zero.wf.vendor.assessment.done
+  icon: history
+  uri: "/workflow/done?name=process.vendor.assessment"

@@ -139,42 +139,42 @@ public interface IXMenu extends VertxPojo, Serializable {
     public String getAppId();
 
     /**
-     * Setter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 启用
      */
     public IXMenu setActive(Boolean value);
 
     /**
-     * Getter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言
      */
     public IXMenu setLanguage(String value);
 
     /**
-     * Getter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元数据
      */
     public IXMenu setMetadata(JsonObject value);
 
     /**
-     * Getter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元数据
      */
     public JsonObject getMetadata();
 
     /**
-     * Setter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本
      */
     public IXMenu setVersion(String value);
 
     /**
-     * Getter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本
      */
     public String getVersion();
 

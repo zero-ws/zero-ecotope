@@ -1,0 +1,4 @@
+data:
+  name: zero.wm.office.trip.approval
+  icon: audit
+  uri: "/workflow/queue?name=process.oa.trip"

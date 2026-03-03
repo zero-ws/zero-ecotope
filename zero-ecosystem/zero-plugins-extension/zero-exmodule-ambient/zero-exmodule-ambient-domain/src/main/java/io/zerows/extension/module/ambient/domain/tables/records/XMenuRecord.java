@@ -229,7 +229,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public XMenuRecord setActive(Boolean value) {
@@ -238,7 +238,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.X_MENU.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public Boolean getActive() {
@@ -246,7 +246,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public XMenuRecord setLanguage(String value) {
@@ -255,7 +255,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.X_MENU.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public String getLanguage() {
@@ -263,7 +263,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public XMenuRecord setMetadata(JsonObject value) {
@@ -272,7 +272,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.X_MENU.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public JsonObject getMetadata() {
@@ -280,7 +280,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Setter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本
      */
     @Override
     public XMenuRecord setVersion(String value) {
@@ -289,7 +289,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Ver
     }
 
     /**
-     * Getter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.X_MENU.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {

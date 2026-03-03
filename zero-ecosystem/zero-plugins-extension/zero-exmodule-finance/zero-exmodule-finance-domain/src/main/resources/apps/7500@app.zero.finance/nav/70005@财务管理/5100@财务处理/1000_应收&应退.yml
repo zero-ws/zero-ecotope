@@ -1,0 +1,4 @@
+data:
+  name: zero.fms.process.debt
+  icon: transaction
+  uri: /fm/admin-debt

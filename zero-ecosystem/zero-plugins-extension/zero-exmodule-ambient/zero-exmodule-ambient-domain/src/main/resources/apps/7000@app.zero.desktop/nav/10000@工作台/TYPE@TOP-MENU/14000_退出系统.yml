@@ -1,0 +1,5 @@
+data:
+  name: zero.personal.logout
+  icon: logout
+  metadata:
+    function: fnLogout

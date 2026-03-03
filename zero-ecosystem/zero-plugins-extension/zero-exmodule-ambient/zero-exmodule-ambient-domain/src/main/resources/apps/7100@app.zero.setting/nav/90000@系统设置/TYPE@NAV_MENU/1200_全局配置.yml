@@ -1,0 +1,4 @@
+data:
+  name: zero.ssm.dash.environment
+  icon: "cab:BLOCK_SSM_SETTING"
+  uri: /system/setting

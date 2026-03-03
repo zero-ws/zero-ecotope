@@ -1,0 +1,4 @@
+data:
+  name: zero.cm.dash.in
+  icon: "cab:BLOCK_WF_IN"
+  uri: "/workflow/open?name=process.vendor.check-in"

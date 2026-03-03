@@ -1,0 +1,4 @@
+data:
+  name: zero.fms.process.transaction
+  icon: file-done
+  uri: /fm/transaction

@@ -1,0 +1,4 @@
+data:
+  name: zero.personal.notify
+  icon: notification
+  uri: /personal/setting-notify

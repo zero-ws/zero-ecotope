@@ -1,0 +1,5 @@
+data:
+  type: BAG-MENU
+  name: zero.rsm
+  icon: area-chart
+  uri: /dashboard/reporting
