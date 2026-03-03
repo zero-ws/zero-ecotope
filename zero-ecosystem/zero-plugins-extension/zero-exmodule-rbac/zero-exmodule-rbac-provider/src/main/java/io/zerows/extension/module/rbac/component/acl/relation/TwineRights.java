@@ -3,6 +3,7 @@ package io.zerows.extension.module.rbac.component.acl.relation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.hashing.HashingStrategy;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
@@ -83,7 +84,16 @@ public class TwineRights implements ScTwine<String> {
             if (Objects.isNull(queried)) {
                 return Ux.futureJ();
             }
+            if (params.containsKey(KName.PASSWORD)) {
+                final String password = params.getString(KName.PASSWORD);
+                if (Objects.nonNull(password) && !password.isEmpty()) {
+                    HashingStrategy load = HashingStrategy.load();
+                    String pbkdf2 = load.hash("sha512", null,null, password);
+                    params.put(KName.PASSWORD, pbkdf2);
+                }
+            }
             final SUser updated = Ux.updateT(queried, params);
+
             /* User Saving here */
             return jq.updateJAsync(userKey, updated).compose(userJ -> {
                 // Be sure the response contains `roles` and `groups`

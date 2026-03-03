@@ -2,6 +2,8 @@ package io.zerows.extension.module.rbac.serviceimpl;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.hashing.HashingStrategy;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.boot.Sc;
@@ -95,6 +97,10 @@ public class UserService implements UserStub {
          */
         if (Objects.isNull(user.getPassword())) {
             user.setPassword(Sc.valuePassword());
+        }else {
+            HashingStrategy load = HashingStrategy.load();
+            String pbkdf2 = load.hash("sha512", null,null, user.getPassword());
+            user.setPassword(pbkdf2);
         }
         final KRef refer = new KRef();
         return DB.on(SUserDao.class).insertAsync(user)

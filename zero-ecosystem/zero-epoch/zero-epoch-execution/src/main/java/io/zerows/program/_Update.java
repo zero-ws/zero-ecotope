@@ -31,7 +31,7 @@ class _Update extends _To {
     }
 
     public static <T> List<T> updateT(final List<T> query, final JsonArray params) {
-        return Ut.updateT(query, params, KName.KEY);
+        return Ut.updateT(query, params, KName.ID);
     }
 
     public static <T> List<T> updateT(final List<T> query, final JsonArray params, final String field) {
@@ -39,7 +39,7 @@ class _Update extends _To {
     }
 
     public static JsonArray updateJ(final JsonArray query, final JsonArray params) {
-        return Ut.updateJ(query, params, KName.KEY);
+        return Ut.updateJ(query, params, KName.ID);
     }
 
     public static JsonArray updateJ(final JsonArray query, final JsonArray params, final String field) {
@@ -51,7 +51,7 @@ class _Update extends _To {
     }
 
     public static HRecord[] updateR(final HRecord[] record, final JsonArray array) {
-        return updateR(record, array, KName.KEY);
+        return updateR(record, array, KName.ID);
     }
 
     public static HRecord[] updateR(final HRecord[] record, final JsonArray array, final String field) {
