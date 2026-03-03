@@ -1,4 +1,4 @@
-package io.zerows.boot.inst;
+package io.zerows.boot.extension.appcontainer;
 
 import lombok.extern.slf4j.Slf4j;
 

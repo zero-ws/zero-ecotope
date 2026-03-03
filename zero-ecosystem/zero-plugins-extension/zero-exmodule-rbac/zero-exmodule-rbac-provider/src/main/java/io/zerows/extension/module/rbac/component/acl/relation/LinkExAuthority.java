@@ -33,7 +33,8 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/*
+/**
+ * <pre>
  * 关联关系：用户扩展组件
  * 1）当用户和额外的表执行链接时，会启用用户扩展组件，根据类型执行相连
  * 2）目前的分组和规划
@@ -41,12 +42,12 @@ import java.util.stream.Collectors;
  *    用户 + 客户 = 三方账号
  *    用户 + 会员 = 会员账号
  * 3）其配置扩展区间的核心配置如下（以员工为例）
- * src/plugin/rbac/configuration.json 文件
- * {
+ * src/plugin/???-rbac/configuration.json 文件
+ *   {
  *     "....",
  *     "category": {
  *          "employee": {
- *               "classDao": "io.zerows.extension.commerce.erp.domain.tables.daos.EEmployeeDao",
+ *               "classDao": "io.zerows.extension.module.erp.domain.tables.daos.EEmployeeDao",
  *               "condition": {
  *                   "workNumber,!n": ""
  *               },
@@ -55,15 +56,20 @@ import java.util.stream.Collectors;
  *               }
  *          }
  *     },
- *     "initializePassword": "xxxx",
+ *     "valueDefault": {
+ *         "userPassword": "???",
+ *         "rolePermissions": [],
+ *         "roleMenus": []
+ *     },
  *     "initialize": {
  *         "scope": "vie.app.xx",
  *         "grantType": "authorization_code"
  *     }
- * }
+ *   }
  *   3.1）此处 employee 代表类型，即 S_USER 中 MODEL_ID 存储的值
  *   3.2）modelKey -> employeeId 为前端提供语义级消费
  *   3.3）initialize 为导入时的模板数据
+ * </pre>
  */
 @Slf4j
 class LinkExAuthority implements ScLink.Extension<SUser> {
