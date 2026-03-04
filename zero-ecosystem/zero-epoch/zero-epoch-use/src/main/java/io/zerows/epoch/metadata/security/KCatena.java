@@ -39,10 +39,8 @@ public class KCatena implements Serializable {
     }
 
     public static KPermit permit(final JsonObject input) {
-        final String sigma = Ut.valueString(input, KName.SIGMA);
-        final String code = Ut.valueString(input, KName.CODE);
         // 绑定基础信息：code, sigma, name
-        final KPermit permit = KPermit.create(code, sigma, Ut.valueString(input, KName.NAME));
+        final KPermit permit = KPermit.create(input);
 
 
         // 维度信息绑定

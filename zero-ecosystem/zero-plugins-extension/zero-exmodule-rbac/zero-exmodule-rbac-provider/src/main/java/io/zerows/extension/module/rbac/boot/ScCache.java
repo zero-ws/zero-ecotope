@@ -2,6 +2,7 @@ package io.zerows.extension.module.rbac.boot;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.shareddata.ClusterSerializable;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPath;
@@ -17,12 +18,12 @@ import java.util.function.Function;
 
 class ScCache {
 
-    static <R> Future<R> admitPath(final SPath path, final Function<SPath, Future<R>> executor, final String suffix) {
+    static Future<ClusterSerializable> admitPath(final SPath path, final Function<SPath, Future<ClusterSerializable>> executor, final String suffix) {
         // Cache Enabled for Default
         final String admitPool = ScConstant.POOL_ADMIN;
         // Each sigma has been mapped to single pool
         final String poolName = admitPool + VString.SLASH + path.getSigma() + VString.SLASH + suffix;
-        final HMM<String, R> mmAdmit = HMM.of(poolName);
+        final HMM<String, ClusterSerializable> mmAdmit = HMM.of(poolName);
         return mmAdmit.cached(path.getId(), () -> executor.apply(path), 3600);
     }
 
@@ -38,7 +39,7 @@ class ScCache {
 
         final String viewKey = Ke.keyView(context);
         final ScUser scUser = ScUser.login(habitus);
-        if(scUser==null){
+        if (scUser == null) {
             return Ux.futureJ();
         }
         /*

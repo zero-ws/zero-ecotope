@@ -93,6 +93,7 @@ public abstract class InvokerBase implements Invoker {
             } else {
                 // Readible codec for configured information, error flow needed.
                 final WebException found = FnVertx.failAt(handler.cause());
+                this.logger().error(found.getMessage(), found);
                 message.reply(Envelop.failure(found));
             }
         };

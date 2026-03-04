@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
-import io.zerows.extension.module.rbac.boot.Sc;
 import io.zerows.extension.module.rbac.common.ScOwner;
 import io.zerows.extension.module.rbac.component.HValveAdmit;
 import io.zerows.extension.module.rbac.component.acl.rapier.Quest;
@@ -31,50 +30,49 @@ public class RuleService implements RuleStub {
     private static final Cc<String, HValve> CC_VALVE = Cc.openThread();
 
     @Override
-    public Future<JsonObject> regionAsync(final SPath input) {
+    public Future<JsonObject> regionAsync(final SPath path) {
         /*
          * Major Path Configuration
          * 1. Not null and `runComponent` is not null
          * 2. `parentId` is null
          * 3. Sort By `uiSort`
          */
-        return Sc.cachePath(input, path -> DB.on(SPathDao.class).fetchJAsync(KName.PARENT_ID, path.getId())
-            .compose(children -> {
-                /*
-                 * Extract `runComponent` to web `HValve` and then run it based join configured
-                 * Information here.
-                 */
-                final Class<?> clazz = Ut.clazz(path.getRunComponent(), HValveAdmit.class);
-                if (Objects.isNull(clazz)) {
-                    return Ux.future();
-                }
-                final String cacheKey = path.getSigma() + VString.SLASH + path.getCode();
-                final HValve value = CC_VALVE.pick(() -> Ut.instance(clazz), cacheKey);
-                final JsonObject pathJ = Ux.toJson(path);
-                /*
-                 * JsonObject Configuration for SPath here
-                 */
-                Ut.valueToJObject(pathJ,
-                    // UI Configuration
-                    KName.UI_CONFIG,
-                    KName.UI_CONDITION,
-                    KName.UI_SURFACE,
-                    // DM Configuration
-                    KName.DM_CONDITION,
-                    KName.DM_CONFIG,
-                    // metadata / mapping
-                    KName.METADATA,
-                    KName.MAPPING
-                );
-                /*
-                 * Build map based join `code` for Area usage
-                 * `children` of pathJ
-                 */
-                if (!children.isEmpty()) {
-                    pathJ.put(KName.CHILDREN, children);
-                }
-                return value.configure(pathJ);
-            }));
+        return DB.on(SPathDao.class).fetchJAsync(KName.PARENT_ID, path.getId()).compose(children -> {
+            /*
+             * Extract `runComponent` to web `HValve` and then run it based join configured
+             * Information here.
+             */
+            final Class<?> clazz = Ut.clazz(path.getRunComponent(), HValveAdmit.class);
+            if (Objects.isNull(clazz)) {
+                return Ux.future();
+            }
+            final String cacheKey = path.getSigma() + VString.SLASH + path.getCode();
+            final HValve value = CC_VALVE.pick(() -> Ut.instance(clazz), cacheKey);
+            final JsonObject pathJ = Ux.toJson(path);
+            /*
+             * JsonObject Configuration for SPath here
+             */
+            Ut.valueToJObject(pathJ,
+                // UI Configuration
+                KName.UI_CONFIG,
+                KName.UI_CONDITION,
+                KName.UI_SURFACE,
+                // DM Configuration
+                KName.DM_CONDITION,
+                KName.DM_CONFIG,
+                // metadata / mapping
+                KName.METADATA,
+                KName.MAPPING
+            );
+            /*
+             * Build map based join `code` for Area usage
+             * `children` of pathJ
+             */
+            if (!children.isEmpty()) {
+                pathJ.put(KName.CHILDREN, children);
+            }
+            return value.configure(pathJ);
+        });
     }
 
     @Override
@@ -91,21 +89,20 @@ public class RuleService implements RuleStub {
             .compose(packets -> Quest.syntax().fetchAsync(pathData, packets, owner));
     }
 
-    private Future<List<SPacket>> packetAsync(final SPath input) {
-        if (Objects.isNull(input)) {
+    private Future<List<SPacket>> packetAsync(final SPath path) {
+        if (Objects.isNull(path)) {
             return Ux.futureL();
         }
-        return Sc.cachePocket(input, path -> DB.on(SPathDao.class).<SPath>fetchAsync(KName.PARENT_ID, path.getId())
-            .compose(children -> {
-                // CODE IN (?, ?, ?) AND SIGMA = ?
-                final JsonObject condition = Ux.whereAnd()
-                    .put(KName.SIGMA, path.getSigma());
-                final JsonArray codes = new JsonArray().add(path.getCode());
-                children.forEach(child -> codes.add(child.getCode()));
-                condition.put(KName.CODE + ",i", codes);
-                // SPath -> SPacket
-                return DB.on(SPacketDao.class).fetchAsync(condition);
-            }));
+        return DB.on(SPathDao.class).<SPath>fetchAsync(KName.PARENT_ID, path.getId()).compose(children -> {
+            // CODE IN (?, ?, ?) AND SIGMA = ?
+            final JsonObject condition = Ux.whereAnd()
+                .put(KName.SIGMA, path.getSigma());
+            final JsonArray codes = new JsonArray().add(path.getCode());
+            children.forEach(child -> codes.add(child.getCode()));
+            condition.put(KName.CODE + ",i", codes);
+            // SPath -> SPacket
+            return DB.on(SPacketDao.class).fetchAsync(condition);
+        });
     }
 
     @Override

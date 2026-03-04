@@ -11,6 +11,7 @@ import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.specification.modeling.HAtom;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -18,6 +19,7 @@ import java.util.function.Function;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
+@Slf4j
 public abstract class AbstractAdmit implements HAdmit {
     protected transient HAtom atom;
     protected transient HArk ark;
@@ -45,7 +47,7 @@ public abstract class AbstractAdmit implements HAdmit {
      */
     @Override
     public final Future<JsonObject> configure(final KPermit permit) {
-        return this.configure(permit, null);
+        return this.configure(permit, permit.request());
     }
 
     protected Future<JsonObject> configure(final KPermit permit, final JsonObject requestJ, final Function<KPermit, JsonObject> supplierJ) {
@@ -150,7 +152,6 @@ public abstract class AbstractAdmit implements HAdmit {
         final JsonObject qrJ = Ut.valueJObject(inputJ, KName.Rbac.QR);
         // 复制原始记录（创建副本以防止混乱）
         final JsonObject normalizedJ = inputJ.copy();
-        // 维度计算只会存在于 compile 中，此处只做 qr 的处理
         normalizedJ.put(KName.Rbac.QR, this.configureQr(qrJ, requestJ));
         return normalizedJ;
     }

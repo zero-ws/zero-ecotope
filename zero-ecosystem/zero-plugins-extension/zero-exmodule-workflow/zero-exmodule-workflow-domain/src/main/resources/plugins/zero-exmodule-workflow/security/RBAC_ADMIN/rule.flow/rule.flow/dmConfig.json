@@ -1,6 +1,6 @@
 {
   "items": {
-    "dao": "cn.vertxup.workflow.domain.tables.daos.WFlowDao"
+    "dao": "W_FLOW"
   },
   "webAction": [
     {

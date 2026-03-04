@@ -3,9 +3,9 @@ package io.zerows.extension.module.rbac.boot;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.shareddata.ClusterSerializable;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.rbac.domain.tables.pojos.SPacket;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPath;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
@@ -17,11 +17,11 @@ import java.util.function.Supplier;
 
 public class Sc {
 
-    public static Future<JsonObject> cachePath(final SPath path, final Function<SPath, Future<JsonObject>> executor) {
+    public static Future<ClusterSerializable> cachePath(final SPath path, final Function<SPath, Future<ClusterSerializable>> executor) {
         return ScCache.admitPath(path, executor, "PATH");
     }
 
-    public static Future<List<SPacket>> cachePocket(final SPath path, final Function<SPath, Future<List<SPacket>>> executor) {
+    public static Future<ClusterSerializable> cachePocket(final SPath path, final Function<SPath, Future<ClusterSerializable>> executor) {
         return ScCache.admitPath(path, executor, "POCKET");
     }
 

@@ -36,6 +36,7 @@ public class KPermit implements Serializable {
      * -- 3. 查询模板
      * -- 4. 组件设置
      */
+    private final JsonObject request = new JsonObject();
     // ------------------- DIM 配置 --------------------
     private final JsonObject shapeQr = new JsonObject();
     private final JsonObject shapeConfig = new JsonObject();
@@ -58,18 +59,15 @@ public class KPermit implements Serializable {
      * -- 2. 关联权限
      * -- 3. 关联接口
      */
-    private KPermit(final String code, final String sigma, final String name) {
-        this.code = code;
-        this.sigma = sigma;
-        this.name = name;
+    private KPermit(final JsonObject inputJ) {
+        this.code = Ut.valueString(inputJ, KName.CODE);
+        this.sigma = Ut.valueString(inputJ, KName.SIGMA);
+        this.name = Ut.valueString(inputJ, KName.NAME);
+        this.request.mergeIn(inputJ, true);
     }
 
-    public static KPermit create(final String code, final String sigma) {
-        return new KPermit(code, sigma, null);
-    }
-
-    public static KPermit create(final String code, final String sigma, final String name) {
-        return new KPermit(code, sigma, name);
+    public static KPermit create(final JsonObject inputJ) {
+        return new KPermit(inputJ);
     }
 
     // ===================== 维度配置
@@ -90,6 +88,10 @@ public class KPermit implements Serializable {
         final JsonObject mappingJ = Ut.valueJObject(mapping);
         this.shapeMapping.mergeIn(mappingJ, true);
         return this;
+    }
+
+    public JsonObject request() {
+        return this.request;
     }
 
     // ===================== 配置提取

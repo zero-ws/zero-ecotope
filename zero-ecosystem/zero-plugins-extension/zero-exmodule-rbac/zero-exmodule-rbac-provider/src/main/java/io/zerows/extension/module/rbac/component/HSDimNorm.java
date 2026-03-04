@@ -4,7 +4,9 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.management.OCacheDao;
 import io.zerows.epoch.metadata.security.KPermit;
+import io.zerows.epoch.web.MDMeta;
 import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.sdk.security.AbstractAdmit;
@@ -24,7 +26,14 @@ public class HSDimNorm extends AbstractAdmit {
     public Future<JsonObject> compile(final KPermit permit, final JsonObject request) {
         return Fx.combineJ(request, KName.ITEMS,
             itemJ -> {
-                final Class<?> daoCls = Ut.valueC(itemJ, KName.DAO, null);
+                Class<?> daoCls = null;
+                // 进一步提取，看此处是否配置的表名
+                final String tableName = Ut.valueString(itemJ, KName.DAO);
+                final OCacheDao stored = OCacheDao.of();
+                final MDMeta meta = stored.valueGet(tableName);
+                if (Objects.nonNull(meta)) {
+                    daoCls = meta.dao();
+                }
                 if (Objects.isNull(daoCls)) {
                     /*
                      * 1. 前端模式（直接返回，无子类逻辑）
@@ -52,7 +61,7 @@ public class HSDimNorm extends AbstractAdmit {
                      * 2. config 就为 itemJ 本身
                      */
                     final JsonObject inputJ = permit.dmJ();
-                    final JsonObject qrJ = this.configureQr(Ut.valueJObject(inputJ, KName.Rbac.QR), null);
+                    final JsonObject qrJ = this.configureQr(Ut.valueJObject(inputJ, KName.Rbac.QR), request);
                     return this.compile(permit, qrJ, itemJ.copy())
                         .compose(itemA -> this.normalize(itemA, permit))
                         .compose(Future::succeededFuture);
