@@ -33,6 +33,10 @@ public class Sc {
         return ScGenerated.valuePassword();
     }
 
+    public static String valuePassword(final String password) {
+        return ScGenerated.valuePassword(password);
+    }
+
     public static JsonArray valuePermissions() {
         return ScGenerated.valuePermissions();
     }

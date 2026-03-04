@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.extension.skeleton.spi.ExSetting;
-import io.zerows.extension.skeleton.spi.ScTwine;
+import io.zerows.extension.skeleton.spi.ScLink;
 import io.zerows.platform.exception._60050Exception501NotSupport;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
@@ -17,9 +17,9 @@ import io.zerows.support.Ut;
  *
  * @author lang : 2024-04-09
  */
-public class TwineSetting implements ScTwine<SUser> {
+public class LinkExSetting implements ScLink.Extension<SUser> {
     @Override
-    public Future<JsonObject> identAsync(final JsonObject userJ) {
+    public Future<JsonObject> fetchAsync(final JsonObject userJ) {
         final String userId = Ut.vId(userJ);
         final String sigma = Ut.valueString(userJ, KName.SIGMA);
         return HPI.of(ExSetting.class).waitAsync(
@@ -32,12 +32,12 @@ public class TwineSetting implements ScTwine<SUser> {
     }
 
     @Override
-    public Future<JsonObject> identAsync(final SUser key) {
+    public Future<JsonObject> fetchAsync(final SUser key) {
         return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 
     @Override
-    public Future<JsonObject> identAsync(final SUser userJ, final JsonObject updatedJ) {
+    public Future<JsonObject> saveAsync(final SUser userJ, final JsonObject updatedJ) {
         return FnVertx.failOut(_60050Exception501NotSupport.class, this.getClass());
     }
 }

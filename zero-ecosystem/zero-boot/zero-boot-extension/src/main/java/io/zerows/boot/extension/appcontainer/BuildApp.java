@@ -1,4 +1,4 @@
-package io.zerows.boot.inst;
+package io.zerows.boot.extension.appcontainer;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;

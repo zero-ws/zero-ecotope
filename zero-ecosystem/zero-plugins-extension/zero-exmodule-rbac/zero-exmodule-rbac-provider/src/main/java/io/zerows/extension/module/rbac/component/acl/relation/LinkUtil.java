@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.epoch.metadata.UArray;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserGroupDao;
@@ -17,12 +18,30 @@ import io.zerows.support.Fx;
 import io.zerows.support.Ut;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class TwineQr {
+public class LinkUtil {
+
+    public static <T> Future<JsonArray> fetchBy(final String field, final String key, final Class<?> daoCls) {
+        return DB.on(daoCls).<T>fetchAsync(field, key)
+            .compose(Ux::futureA)
+            .compose(relation -> UArray.create(relation)
+                .remove(field).toFuture());
+    }
+
+    public static <T> Future<List<T>> fetchBy(final String field, final String key, final Class<?> daoCls, final Function<T, Integer> priorityFn) {
+        return DB.on(daoCls).<T>fetchAsync(field, key)
+            .compose(result -> {
+                result.sort(Comparator.comparing(priorityFn));
+                return Ux.future(result);
+            });
+    }
 
     static Future<JsonObject> normalize(final KQr qr, final JsonObject query) {
         // The original `criteria` from query part, fix Null Pointer Issue
@@ -68,8 +87,8 @@ class TwineQr {
 
     private static Future<JsonObject> normalizeJ(final JsonObject criteriaJ) {
         return Ux.future(criteriaJ)
-            .compose(TwineQr::normalizeG)
-            .compose(TwineQr::normalizeR);
+            .compose(LinkUtil::normalizeG)
+            .compose(LinkUtil::normalizeR);
     }
 
     /*

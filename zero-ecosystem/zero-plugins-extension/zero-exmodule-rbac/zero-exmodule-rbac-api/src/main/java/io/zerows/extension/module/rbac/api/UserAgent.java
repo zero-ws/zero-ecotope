@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.rbac.component.acl.relation.Junc;
+import io.zerows.extension.module.rbac.component.acl.relation.LinkManager;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -99,7 +99,7 @@ public interface UserAgent {
      * 登录过程读取用户基本信息，步骤
      * <pre><code>
      *     1. 先调用 {@link SUserDao} 直接读取数据表中基本记录
-     *     2. 调用 {@link Junc} 三个子接口提取相关配置
+     *     2. 调用 {@link LinkManager} 三个子接口提取相关配置
      *        2.1. User + Employee 按 Join 读取员工信息或其他相关信息
      *        2.2. 权限信息：
      *             {

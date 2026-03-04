@@ -2,7 +2,6 @@ package io.zerows.extension.module.rbac.servicespec;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 
 /*
  * Basic user interface
@@ -20,11 +19,6 @@ public interface UserStub {
      * delete user including related roles and groups
      */
     Future<Boolean> deleteUser(String userKey);
-
-    // ====================== Login Information =============================
-
-    Future<JsonObject> fetchAuthorized(SUser query);
-
     // ====================== Information ( By Type ) =======================
 
 

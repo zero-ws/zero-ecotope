@@ -1,4 +1,4 @@
-package io.zerows.boot.inst;
+package io.zerows.boot.extension.appcontainer;
 
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import io.vertx.core.Future;
@@ -85,7 +85,7 @@ class BuildMenuPersister {
     /**
      * 保存菜单数据到数据库
      * 返回 [新增数, 更新数]
-     *
+     * <p>
      * 核心逻辑（支持反复导入）：
      * 1. 第一轮：查询数据库，建立 NAME+APP_ID -> 数据库ID 的映射
      * 2. 第二轮：确定所有菜单的最终 ID（数据库已有则用数据库 ID，否则用新生成的 ID）
@@ -256,7 +256,7 @@ class BuildMenuPersister {
      * 返回：新ID -> 最终ID 的映射
      */
     private Map<String, String> determineFinalIds(final Map<String, List<XMenu>> menus,
-                                                   final Map<String, String> dbIdMapping) {
+                                                  final Map<String, String> dbIdMapping) {
         final Map<String, String> finalIdMapping = new java.util.HashMap<>();
 
         for (final Map.Entry<String, List<XMenu>> entry : menus.entrySet()) {

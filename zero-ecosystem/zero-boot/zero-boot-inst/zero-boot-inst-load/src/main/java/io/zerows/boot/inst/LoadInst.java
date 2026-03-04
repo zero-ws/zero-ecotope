@@ -1,6 +1,7 @@
 package io.zerows.boot.inst;
 
 import io.vertx.core.Vertx;
+import io.zerows.boot.extension.appcontainer.BuildApp;
 import io.zerows.boot.test.metadata.ArgLoad;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.constant.KName;

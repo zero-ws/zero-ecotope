@@ -1,9 +1,8 @@
-package io.zerows.boot.inst;
+package io.zerows.boot.extension.appcontainer;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
@@ -80,7 +79,7 @@ class BuildMenuLoader {
     /**
      * 从 URI 列表加载菜单数据
      * 返回 Future，支持异步操作
-     *
+     * <p>
      * 三阶段加载（解决并行扫描时父子菜单顺序问题）：
      * 1. 第一阶段：收集所有 MENU.yml 的 ID 和目录映射，但不计算 level
      * 2. 第二阶段：在所有菜单 ID 已知后，计算每个菜单的 level
@@ -98,7 +97,7 @@ class BuildMenuLoader {
                     continue;
                 }
 
-                String actualAppId;
+                final String actualAppId;
                 if ("HOME".equals(dirName)) {
                     actualAppId = this.globalConfig.getString("appId");
                 } else {
@@ -125,7 +124,7 @@ class BuildMenuLoader {
                     continue;
                 }
 
-                String actualAppId;
+                final String actualAppId;
                 if ("HOME".equals(dirName)) {
                     actualAppId = this.globalConfig.getString("appId");
                 } else {
@@ -154,7 +153,7 @@ class BuildMenuLoader {
                 }
 
                 // 从目录名映射到应用UUID
-                String actualAppId;
+                final String actualAppId;
                 if ("HOME".equals(dirName)) {
                     // HOME 目录使用全局配置的 appId
                     actualAppId = this.globalConfig.getString("appId");
@@ -376,15 +375,15 @@ class BuildMenuLoader {
     /**
      * 应用 init.menu 配置覆盖
      * 从 instance.yml 的 init.menu 节点读取配置，使用 mergeIn 方法覆盖菜单属性
-     *
+     * <p>
      * 示例配置：
      * init:
-     *   menu:
-     *     name: zero.cm
-     *     uri: /ambient/customer/corporation
-     *     text: 客户管理
+     * menu:
+     * name: zero.cm
+     * uri: /ambient/customer/corporation
+     * text: 客户管理
      *
-     * @param menu 菜单对象
+     * @param menu     菜单对象
      * @param menuName 菜单名称（用于匹配）
      */
     private void applyInitMenuConfig(final XMenu menu, final String menuName) {
@@ -503,6 +502,7 @@ class BuildMenuLoader {
 
     /**
      * 递归加载菜单
+     *
      * @param navRoot nav 目录的根路径，用于计算相对路径
      */
     private void loadMenusRecursive(final File navRoot, final File dir, final String appId, final String parentId,
@@ -579,6 +579,7 @@ class BuildMenuLoader {
 
     /**
      * 从文件加载单个菜单
+     *
      * @param parentDir 菜单文件所在的目录，用于提取 TYPE
      */
     private XMenu loadMenuFromFile(final File file, final String appId, final String parentId,
@@ -798,11 +799,11 @@ class BuildMenuLoader {
         // 先从缓存中获取当前目录的菜单 ID
         final String relativePath = this.getRelativePath(navRoot, dir);
         final String dirKey = appId + ":" + relativePath;
-        String currentMenuId = this.dirPathToMenuId.get(dirKey);
+        final String currentMenuId = this.dirPathToMenuId.get(dirKey);
 
         // 如果当前目录有菜单，计算其 level
         if (currentMenuId != null && !this.menuIdToLevel.containsKey(currentMenuId)) {
-            int level;
+            final int level;
             if (parentId == null) {
                 // 顶级菜单，level = 1
                 level = 1;
@@ -835,6 +836,7 @@ class BuildMenuLoader {
     /**
      * 预扫描菜单目录，只收集 MENU.yml 的路径映射
      * 用于建立全局的目录路径到菜单ID的缓存（跨模块）
+     *
      * @deprecated 已被 collectMenuIds 和 calculateMenuLevels 替代
      */
     @Deprecated
@@ -853,11 +855,12 @@ class BuildMenuLoader {
     /**
      * 递归扫描目录，只处理 MENU.yml
      * 同时计算并缓存每个菜单的 level
+     *
      * @deprecated 已被 collectMenuIdsRecursive 和 calculateMenuLevelsRecursive 替代
      */
     @Deprecated
     private void preScanRecursive(final File navRoot, final File dir, final String appId,
-                                   final String parentId, final int level) throws Exception {
+                                  final String parentId, final int level) throws Exception {
         final File[] files = dir.listFiles();
         if (files == null) {
             return;
@@ -890,7 +893,7 @@ class BuildMenuLoader {
                     }
 
                     // 计算当前菜单的 level
-                    int calculatedLevel;
+                    final int calculatedLevel;
                     if (parentId == null) {
                         // 顶级菜单，level = 1
                         calculatedLevel = 1;

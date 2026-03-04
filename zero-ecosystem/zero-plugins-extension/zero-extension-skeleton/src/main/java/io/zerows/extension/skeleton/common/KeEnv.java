@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.MMAdapt;
-import io.zerows.epoch.metadata.UArray;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.Account;
@@ -19,7 +18,6 @@ import io.zerows.support.Ut;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -176,21 +174,6 @@ class KeEnv {
             },
             () -> data
         );
-    }
-
-    static <T> Future<JsonArray> daoR(final String field, final String key, final Class<?> daoCls) {
-        return DB.on(daoCls).<T>fetchAsync(field, key)
-            .compose(Ux::futureA)
-            .compose(relation -> UArray.create(relation)
-                .remove(field).toFuture());
-    }
-
-    static <T> Future<List<T>> daoR(final String field, final String key, final Class<?> daoCls, final Function<T, Integer> priorityFn) {
-        return DB.on(daoCls).<T>fetchAsync(field, key)
-            .compose(result -> {
-                result.sort(Comparator.comparing(priorityFn));
-                return Ux.future(result);
-            });
     }
 
     /*

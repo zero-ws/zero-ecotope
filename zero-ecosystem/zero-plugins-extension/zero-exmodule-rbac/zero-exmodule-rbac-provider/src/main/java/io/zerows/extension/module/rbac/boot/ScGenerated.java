@@ -2,6 +2,7 @@ package io.zerows.extension.module.rbac.boot;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
+import io.vertx.ext.auth.hashing.HashingStrategy;
 import io.zerows.epoch.constant.KWeb;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
@@ -20,6 +21,9 @@ import java.util.UUID;
  */
 class ScGenerated {
     private static final ScConfig CONFIG = MDRBACManager.of().config();
+    private static final HashingStrategy STRATEGY = HashingStrategy.load();
+    private static final String DEFAULT_ALG = "sha512";
+    private static final String DEFAULT_PASSWORD = "12345678";
 
     static String resourceMenu() {
         final ScConfig.Resource valueResource = CONFIG.getValueResource();
@@ -32,13 +36,20 @@ class ScGenerated {
     static String valuePassword() {
         final ScConfig.Default valueDefault = CONFIG.getValueDefault();
         if (Objects.isNull(valueDefault)) {
-            return ScConfig.defaultPassword();
+            return valuePassword(DEFAULT_PASSWORD);
         }
         final String valuePassword = valueDefault.getUserPassword();
         if (Ut.isNil(valuePassword)) {
-            return ScConfig.defaultPassword();
+            return valuePassword(DEFAULT_PASSWORD);
         }
         return valuePassword;
+    }
+
+    static String valuePassword(final String password) {
+        if (Ut.isNil(password)) {
+            return null;
+        }
+        return STRATEGY.hash(DEFAULT_ALG, null, null, password);
     }
 
     static JsonArray valuePermissions() {
