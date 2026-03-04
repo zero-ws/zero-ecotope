@@ -27,10 +27,8 @@ import java.util.concurrent.ConcurrentMap;
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 public class QuinnVisit implements Quinn {
-    private final transient SyntaxRegion syntaxRegion;
 
     public QuinnVisit() {
-        this.syntaxRegion = new SyntaxRegion();
     }
 
     @Override
@@ -50,8 +48,24 @@ public class QuinnVisit implements Quinn {
             }
             // 资源访问者保存流程
             return this.saveVisitant(view, visitantData)
-                .compose(visitants -> this.syntaxRegion.regionJ(view, visitants));
+                .compose(visitants -> this.regionJ(view, visitants));
         }).compose(json -> Ux.future((T) json));
+    }
+
+    private Future<JsonObject> regionJ(final SView view, final List<SVisitant> visitants) {
+        final JsonObject response = Ux.toJson(view);
+        response.put(KName.VIEW, view.getName());
+        response.put(KName.VIRTUAL, Boolean.TRUE);
+        {
+            // v, q, h
+            response.put(KName.Rbac.PACK_H, Ut.toJObject(view.getRows()));
+            response.put(KName.Rbac.PACK_Q, Ut.toJObject(view.getCriteria()));
+            response.put(KName.Rbac.PACK_V, Ut.toJArray(view.getProjection()));
+        }
+        final JsonObject visitantJ = new JsonObject();
+        visitants.forEach(visitant -> visitantJ.put(visitant.getSeekKey(), Ux.toJson(visitant)));
+        response.put(KName.Rbac.VISITANT, visitantJ);
+        return Ux.future(response);
     }
 
     /*
@@ -127,7 +141,7 @@ public class QuinnVisit implements Quinn {
                 return Ux.futureJ();
             }
             return DB.on(SVisitantDao.class).<SVisitant>fetchAsync(KName.VIEW_ID, view.getId())
-                .compose(visitants -> this.syntaxRegion.regionJ(view, visitants));
+                .compose(visitants -> this.regionJ(view, visitants));
         }).compose(json -> Ux.future((T) json));
     }
 }

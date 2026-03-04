@@ -10,8 +10,6 @@ import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
 import io.zerows.extension.module.rbac.domain.tables.RUserRole;
 import io.zerows.extension.module.rbac.domain.tables.SAction;
 import io.zerows.extension.module.rbac.domain.tables.SGroup;
-import io.zerows.extension.module.rbac.domain.tables.SPacket;
-import io.zerows.extension.module.rbac.domain.tables.SPath;
 import io.zerows.extension.module.rbac.domain.tables.SPermSet;
 import io.zerows.extension.module.rbac.domain.tables.SPermission;
 import io.zerows.extension.module.rbac.domain.tables.SResource;
@@ -56,16 +54,6 @@ public class Tables {
      * 组
      */
     public static final SGroup S_GROUP = SGroup.S_GROUP;
-
-    /**
-     * S_PACKET
-     */
-    public static final SPacket S_PACKET = SPacket.S_PACKET;
-
-    /**
-     * S_PATH
-     */
-    public static final SPath S_PATH = SPath.S_PATH;
 
     /**
      * S_PERM_SET

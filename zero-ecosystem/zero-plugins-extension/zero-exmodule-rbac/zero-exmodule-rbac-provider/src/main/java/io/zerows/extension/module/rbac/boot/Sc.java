@@ -3,30 +3,20 @@ package io.zerows.extension.module.rbac.boot;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.shareddata.ClusterSerializable;
 import io.vertx.ext.web.RoutingContext;
 import io.zerows.epoch.constant.KName;
-import io.zerows.extension.module.rbac.domain.tables.pojos.SPath;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SUser;
 import io.zerows.sdk.security.Acl;
 
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Sc {
 
-    public static Future<ClusterSerializable> cachePath(final SPath path, final Function<SPath, Future<ClusterSerializable>> executor) {
-        return ScCache.admitPath(path, executor, "PATH");
-    }
-
-    public static Future<ClusterSerializable> cachePocket(final SPath path, final Function<SPath, Future<ClusterSerializable>> executor) {
-        return ScCache.admitPath(path, executor, "POCKET");
-    }
 
     public static Future<JsonObject> cacheView(final RoutingContext context, final String habitus) {
-        return ScCache.view(context, habitus);
+        return ScAcl.view(context, habitus);
     }
 
     public static String valuePassword() {
