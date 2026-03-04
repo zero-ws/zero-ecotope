@@ -88,7 +88,7 @@ public class LinkExPerm implements ScLink.Extension<String> {
             if (params.containsKey(KName.PASSWORD)) {
                 final String password = params.getString(KName.PASSWORD);
                 if (Objects.nonNull(password) && !password.isEmpty()) {
-                    String valuePassword = Sc.valuePassword(password);
+                    final String valuePassword = Sc.valuePassword(password);
                     params.put(KName.PASSWORD, valuePassword);
                 }
             }
