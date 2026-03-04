@@ -26,6 +26,7 @@ import java.util.Set;
 @Slf4j
 public class ApplyDataScope implements UnderApply {
     private final static String EXCLUDE = "exclude";
+    private final static String INCLUDE = "include";
     private final transient JsonObject config = new JsonObject();
 
     @Override
@@ -39,9 +40,18 @@ public class ApplyDataScope implements UnderApply {
 
         final JsonArray exclude = auditor.getJsonArray(EXCLUDE, new JsonArray());
         final Set<String> excludeSet = Ut.toSet(exclude);
+
+        final JsonArray include = auditor.getJsonArray(INCLUDE, new JsonArray());
+        final Set<String> includeSet = Ut.toSet(include);
+
         final List<ExDefault> applyList = HPI.findMany(ExDefault.class);
+
         applyList.stream().map(ExDefault::ruleExclude).forEach(excludeSet::addAll);
         auditor.put(EXCLUDE, Ut.toJArray(excludeSet));
+
+        applyList.stream().map(ExDefault::ruleInclude).forEach(includeSet::addAll);
+        auditor.put(INCLUDE, Ut.toJArray(includeSet));
+
         this.config.mergeIn(auditor);
         return this;
     }
@@ -147,11 +157,18 @@ public class ApplyDataScope implements UnderApply {
             // 基础路径不匹配
             return true;
         }
+
         final String recovery = OCacheUri.Tool.recovery(path, request.method());
         final long except = exclude.stream().filter(Objects::nonNull)
             .map(item -> (String) item)
-            .filter(recovery::startsWith)
+            /*
+             * 由于 recovery 本身是已经还原过的路径，所以可直接使用 equals 以防止误伤，比如
+             * - /api/:actor/search 是 EXCLUDE
+             * - /api/:actor 则不应该被 EXCLUDE，如果使用 startsWith 的方式就会导致此处匹配会大于 0
+             */
+            .filter(recovery::equals)
             .count();
+        // 如果 except 大于 0，说明有匹配的 exclude，直接禁用
         return 0 < except;
     }
 }

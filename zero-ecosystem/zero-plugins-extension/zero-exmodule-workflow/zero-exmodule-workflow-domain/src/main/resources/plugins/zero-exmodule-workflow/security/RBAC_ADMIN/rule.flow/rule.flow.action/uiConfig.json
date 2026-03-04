@@ -1,5 +1,5 @@
 {
-  "dao": "cn.vertxup.ui.domain.tables.daos.UiOpDao",
+  "dao": "UI_OP",
   "output": {
     "group": "controlId"
   }
