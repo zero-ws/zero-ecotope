@@ -3,9 +3,11 @@ package io.zerows.extension.module.rbac.component.acl.relation;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.hashing.HashingStrategy;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.rbac.boot.Sc;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
@@ -83,7 +85,15 @@ public class LinkExPerm implements ScLink.Extension<String> {
             if (Objects.isNull(queried)) {
                 return Ux.futureJ();
             }
+            if (params.containsKey(KName.PASSWORD)) {
+                final String password = params.getString(KName.PASSWORD);
+                if (Objects.nonNull(password) && !password.isEmpty()) {
+                    final String valuePassword = Sc.valuePassword(password);
+                    params.put(KName.PASSWORD, valuePassword);
+                }
+            }
             final SUser updated = Ux.updateT(queried, params);
+
             /* User Saving here */
             return jq.updateJAsync(userKey, updated).compose(userJ -> {
                 // Be sure the response contains `roles` and `groups`

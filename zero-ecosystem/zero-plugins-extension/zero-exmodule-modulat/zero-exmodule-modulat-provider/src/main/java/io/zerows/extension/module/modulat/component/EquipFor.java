@@ -21,4 +21,7 @@ public interface EquipFor {
     }
 
     Future<JsonObject> configure(String appId, EmModel.By by);
+
+    default void invalidate(String appId) {
+    }
 }
