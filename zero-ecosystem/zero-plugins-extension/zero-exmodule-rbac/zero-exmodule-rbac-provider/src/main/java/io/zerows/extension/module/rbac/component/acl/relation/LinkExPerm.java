@@ -7,6 +7,7 @@ import io.vertx.ext.auth.hashing.HashingStrategy;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.rbac.boot.Sc;
 import io.zerows.extension.module.rbac.common.ScAuthKey;
 import io.zerows.extension.module.rbac.domain.tables.daos.RUserGroupDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SUserDao;
@@ -87,9 +88,8 @@ public class LinkExPerm implements ScLink.Extension<String> {
             if (params.containsKey(KName.PASSWORD)) {
                 final String password = params.getString(KName.PASSWORD);
                 if (Objects.nonNull(password) && !password.isEmpty()) {
-                    HashingStrategy load = HashingStrategy.load();
-                    String pbkdf2 = load.hash("sha512", null,null, password);
-                    params.put(KName.PASSWORD, pbkdf2);
+                    String valuePassword = Sc.valuePassword(password);
+                    params.put(KName.PASSWORD, valuePassword);
                 }
             }
             final SUser updated = Ux.updateT(queried, params);
