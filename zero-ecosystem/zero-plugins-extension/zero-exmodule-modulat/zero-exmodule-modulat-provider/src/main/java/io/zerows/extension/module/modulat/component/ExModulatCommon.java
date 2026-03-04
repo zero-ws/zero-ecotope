@@ -34,4 +34,10 @@ public class ExModulatCommon implements ExModulat {
         final EquipFor equipFor = EquipFor.of(open);
         return equipFor.configure(appId, EmModel.By.BY_ID);
     }
+
+    @Override
+    public void invalidate(final String appId) {
+        EquipFor.of(false).invalidate(appId);
+        EquipFor.of(true).invalidate(appId);
+    }
 }

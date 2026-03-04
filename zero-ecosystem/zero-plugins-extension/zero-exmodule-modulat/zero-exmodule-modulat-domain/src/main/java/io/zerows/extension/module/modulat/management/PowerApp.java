@@ -65,9 +65,12 @@ public class PowerApp {
     }
 
     public static Future<PowerApp> getRefresh(final String appId) {
-        // 移除旧缓存
+        // 移除全部缓存层：CC_APP / EquipForData.FULL_DATA / EquipForOpen.OPEN_DATA
         CC_APP.remove(appId);
-        // 重建以达到 Refresh 的目的
+        HPI.of(ExModulat.class).waitUntil(modulat -> {
+            modulat.invalidate(appId);
+            return null;
+        }, () -> null);
         return getCreated(appId, false);
     }
 
