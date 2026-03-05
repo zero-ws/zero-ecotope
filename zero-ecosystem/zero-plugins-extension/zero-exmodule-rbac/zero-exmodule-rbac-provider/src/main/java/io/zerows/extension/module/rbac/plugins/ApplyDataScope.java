@@ -97,8 +97,6 @@ public class ApplyDataScope implements UnderApply {
             final String sigma = request.getHeader(KWeb.HEADER.X_SIGMA);
             Optional.ofNullable(sigma).ifPresent(v -> envelop.value(KName.SIGMA, v));
         }
-
-        // @Me 专用
     }
 
     private void applyAuditor(final HttpServerRequest request, final Envelop envelop) {

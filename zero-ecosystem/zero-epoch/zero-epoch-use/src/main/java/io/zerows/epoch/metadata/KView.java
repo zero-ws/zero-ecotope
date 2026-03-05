@@ -40,6 +40,16 @@ public class KView extends JsonObject {
         }
     }
 
+    /**
+     * 参数说明
+     * <pre>
+     *     - 若不传入，则默认：view = DEFAULT / position = DEFAULT
+     *     - 若传入格式应该为：["view", "position"]，其中 position 可选，若不传入，则默认 position = DEFAULT
+     * </pre>
+     *
+     * @param input 核心数据
+     * @return 数据结构
+     */
     public static KView create(final JsonArray input) {
         final String view;
         final String position;

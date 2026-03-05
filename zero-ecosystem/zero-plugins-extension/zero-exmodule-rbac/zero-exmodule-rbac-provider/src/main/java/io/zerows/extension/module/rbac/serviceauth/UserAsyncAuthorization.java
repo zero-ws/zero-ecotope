@@ -91,7 +91,8 @@ public class UserAsyncAuthorization implements AsyncAuthorization {
             return Future.succeededFuture(response);
         }
         return user.view(keyView).compose(viewData -> {
-            if (Objects.nonNull(viewData)) {
+            // 解决视图问题
+            if (Ut.isNotNil(viewData)) {
                 return Ux.future(response);
             }
             /*

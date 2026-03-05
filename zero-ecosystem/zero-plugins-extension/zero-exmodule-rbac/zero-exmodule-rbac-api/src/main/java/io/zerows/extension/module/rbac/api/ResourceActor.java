@@ -5,10 +5,12 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.domain.tables.daos.SActionDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SResourceDao;
 import io.zerows.extension.module.rbac.servicespec.ResourceStub;
+import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,17 +38,16 @@ public class ResourceActor {
             SResourceDao.class,
             SActionDao.class, "resourceId"
         )).searchAsync(query);
-        //        return DB.join()
-        //            /*
-        //             * Join in jooq here:
-        //             *
-        //             * S_RESOURCE ( key )
-        //             *      JOIN
-        //             * S_ACTION ( resourceId )
-        //             */
-        //            .add(SResourceDao.class)
-        //            .join(SActionDao.class, "resourceId")
-        //            .searchAsync(query);
+    }
+
+    @Address(Addr.Authority.RESOURCE_BY_ACTION)
+    public Future<JsonObject> fetchResourceByAction(final JsonObject query) {
+        final JsonObject queryJ = Ut.elementSubset(query, KName.METHOD, KName.URI, KName.APP_ID);
+        log.info("[ PLUG ] 资源查询：{}", queryJ.encode());
+        return DB.on(Join.of(
+            SResourceDao.class,
+            SActionDao.class, "resourceId"
+        )).fetchOneAsync(queryJ);
     }
 
     @Address(Addr.Authority.RESOURCE_GET_CASCADE)

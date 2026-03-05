@@ -50,4 +50,10 @@ public interface ResourceAgent {
     @Address(Addr.Authority.RESOURCE_DELETE_CASCADE)
     @OpenApi
     Boolean deleteResourceById(@PathParam("key") String key);
+
+    @Path("resource/by-action")
+    @POST
+    @Address(Addr.Authority.RESOURCE_BY_ACTION)
+    @OpenApi
+    Boolean fetchResourceByAction(@BodyParam JsonObject query);
 }

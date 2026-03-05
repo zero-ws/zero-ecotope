@@ -5,6 +5,7 @@ import io.r2mo.vertx.common.exception.VertxWebException;
 /**
  * @author lang : 2025-09-30
  */
+@Deprecated
 public class _80206Exception401TokenCounter extends VertxWebException {
     public _80206Exception401TokenCounter(final Integer size,
                                           final String userKey) {

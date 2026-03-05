@@ -31,6 +31,7 @@ public class ZeroPlugins {
 
     private ZeroPlugins(final Vertx vertxRef) {
         this.vertxRef = vertxRef;
+        // 启用插件后可直接通过它执行扩展
     }
 
     public static ZeroPlugins of(final Vertx vertxRef) {

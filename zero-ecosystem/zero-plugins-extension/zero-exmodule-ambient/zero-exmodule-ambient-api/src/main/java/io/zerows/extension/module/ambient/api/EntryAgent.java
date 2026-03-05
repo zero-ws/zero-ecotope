@@ -47,18 +47,6 @@ public interface EntryAgent {
     JsonObject byName(@PathParam("name") String name);
 
     /**
-     * 读取应用之下所有的菜单
-     *
-     * @param appId 应用ID
-     * @return 菜单数据
-     */
-    @Path("/api/menus")
-    @GET
-    @Address(Addr.Menu.BY_APP_ID)
-    @OpenApi
-    JsonArray menuByApp(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId);
-
-    /**
      * 登录之后读取应用信息，此处读取内容包括
      * <pre><code>
      *     1. 加上 appSecret / appKey 两个字段
@@ -75,4 +63,16 @@ public interface EntryAgent {
     @Address(Addr.App.BY_ID)
     @OpenApi
     JsonObject appById(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId);
+
+    /**
+     * 读取应用之下所有的菜单
+     *
+     * @param appId 应用ID
+     * @return 菜单数据
+     */
+    @Path("/api/menus")
+    @GET
+    @Address(Addr.Menu.BY_APP_ID)
+    @OpenApi
+    JsonArray menuByApp(@HeaderParam(KWeb.HEADER.X_APP_ID) String appId);
 }

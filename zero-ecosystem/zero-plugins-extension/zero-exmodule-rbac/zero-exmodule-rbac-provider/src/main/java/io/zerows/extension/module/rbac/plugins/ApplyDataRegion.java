@@ -52,7 +52,7 @@ public class ApplyDataRegion implements UnderApply {
         return Sc.cacheView(context, envelop.habitus()).compose(matrix -> {
             if (this.isRegion(matrix)) {
                 log.info("{} --> DataRegion 前置：uri = {}, region = {}",
-                    ScConstant.K_PREFIX, context.request().path(), matrix.encode());
+                    ScConstant.K_PREFIX, context.request().path(), matrix.hashCode());
                 /*
                  * Select cosmo by matrix
                  */
@@ -77,7 +77,7 @@ public class ApplyDataRegion implements UnderApply {
         /* Get Critical parameters */
         return Sc.cacheView(context, response.habitus()).compose(matrix -> {
             if (this.isRegion(matrix)) {
-                log.info("{} <-- DataRegion 后置：{}", ScConstant.K_PREFIX, matrix.encode());
+                log.info("{} <-- DataRegion 后置：{}", ScConstant.K_PREFIX, matrix.hashCode());
                 /*
                  * Select cosmo by matrix
                  */

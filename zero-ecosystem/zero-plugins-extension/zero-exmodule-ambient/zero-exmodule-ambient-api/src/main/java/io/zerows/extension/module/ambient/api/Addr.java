@@ -25,6 +25,8 @@ interface Addr {
     interface Menu {
 
         String BY_APP_ID = Prefix._EVENT + "X-MENU/APP-ID";
+
+        String ACL_FOR_MENU = Prefix._EVENT + "X-MENU/ADMIN/ACL";
     }
 
     interface Init {
