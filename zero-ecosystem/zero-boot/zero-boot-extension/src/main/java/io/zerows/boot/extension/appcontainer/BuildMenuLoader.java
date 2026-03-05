@@ -25,6 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 负责从 apps 目录加载 XApp 和 XMenu 数据
  */
 @Slf4j
+@SuppressWarnings("all")
 class BuildMenuLoader {
 
     private final Vertx vertx;

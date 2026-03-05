@@ -17,6 +17,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 @Slf4j
+@SuppressWarnings("all")
 class InstAppsLoad implements InstApps {
     // 约定：
     // Boolean.TRUE  -> 存储 yml 文件的 URI 集合 (ioApp)

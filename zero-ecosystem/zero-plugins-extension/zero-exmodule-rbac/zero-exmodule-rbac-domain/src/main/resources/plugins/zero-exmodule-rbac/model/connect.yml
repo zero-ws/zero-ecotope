@@ -30,12 +30,6 @@
   unique:
     - code
     - sigma
-# Permission Set Configuration
-- dao: S_PERM_SET
-  unique:
-    - name
-    - code
-    - sigma
 # Relation:  Role - Permission
 - dao: R_ROLE_PERM
   unique:
@@ -61,14 +55,4 @@
 - dao: S_VISITANT
   unique:
     - code
-    - sigma
-# Path/Packet Rule Configuration
-- dao: S_PATH
-  unique:
-    - code
-    - sigma
-- dao: S_PACKET
-  unique:
-    - code
-    - resource
     - sigma
