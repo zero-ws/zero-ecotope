@@ -10,7 +10,6 @@ import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
 import io.zerows.extension.module.rbac.domain.tables.RUserRole;
 import io.zerows.extension.module.rbac.domain.tables.SAction;
 import io.zerows.extension.module.rbac.domain.tables.SGroup;
-import io.zerows.extension.module.rbac.domain.tables.SPermSet;
 import io.zerows.extension.module.rbac.domain.tables.SPermission;
 import io.zerows.extension.module.rbac.domain.tables.SResource;
 import io.zerows.extension.module.rbac.domain.tables.SRole;
@@ -54,11 +53,6 @@ public class Tables {
      * 组
      */
     public static final SGroup S_GROUP = SGroup.S_GROUP;
-
-    /**
-     * S_PERM_SET
-     */
-    public static final SPermSet S_PERM_SET = SPermSet.S_PERM_SET;
 
     /**
      * S_PERMISSION

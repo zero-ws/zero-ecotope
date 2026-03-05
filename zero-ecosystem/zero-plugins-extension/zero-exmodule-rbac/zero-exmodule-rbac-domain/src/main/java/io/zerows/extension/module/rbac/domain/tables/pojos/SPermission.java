@@ -25,6 +25,8 @@ public class SPermission implements VertxPojo, ISPermission {
     private String comment;
     private String identifier;
     private String name;
+    private String type;
+    private String directory;
     private String sigma;
     private String tenantId;
     private String appId;
@@ -45,6 +47,8 @@ public class SPermission implements VertxPojo, ISPermission {
         this.comment = value.getComment();
         this.identifier = value.getIdentifier();
         this.name = value.getName();
+        this.type = value.getType();
+        this.directory = value.getDirectory();
         this.sigma = value.getSigma();
         this.tenantId = value.getTenantId();
         this.appId = value.getAppId();
@@ -64,6 +68,8 @@ public class SPermission implements VertxPojo, ISPermission {
         String comment,
         String identifier,
         String name,
+        String type,
+        String directory,
         String sigma,
         String tenantId,
         String appId,
@@ -81,6 +87,8 @@ public class SPermission implements VertxPojo, ISPermission {
         this.comment = comment;
         this.identifier = identifier;
         this.name = name;
+        this.type = type;
+        this.directory = directory;
         this.sigma = sigma;
         this.tenantId = tenantId;
         this.appId = appId;
@@ -185,6 +193,40 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
+     * Getter for <code>ZDB.S_PERMISSION.TYPE</code>. 「type」- 权限类型
+     */
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    /**
+     * Setter for <code>ZDB.S_PERMISSION.TYPE</code>. 「type」- 权限类型
+     */
+    @Override
+    public SPermission setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.S_PERMISSION.DIRECTORY</code>. 「directory」- 权限目录
+     */
+    @Override
+    public String getDirectory() {
+        return this.directory;
+    }
+
+    /**
+     * Setter for <code>ZDB.S_PERMISSION.DIRECTORY</code>. 「directory」- 权限目录
+     */
+    @Override
+    public SPermission setDirectory(String directory) {
+        this.directory = directory;
+        return this;
+    }
+
+    /**
      * Getter for <code>ZDB.S_PERMISSION.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
@@ -236,7 +278,7 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public Boolean getActive() {
@@ -244,7 +286,7 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 启用
      */
     @Override
     public SPermission setActive(Boolean active) {
@@ -253,7 +295,7 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public String getLanguage() {
@@ -261,7 +303,7 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言
      */
     @Override
     public SPermission setLanguage(String language) {
@@ -270,7 +312,7 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public JsonObject getMetadata() {
@@ -278,7 +320,7 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元数据
      */
     @Override
     public SPermission setMetadata(JsonObject metadata) {
@@ -287,7 +329,7 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {
@@ -295,7 +337,7 @@ public class SPermission implements VertxPojo, ISPermission {
     }
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本
      */
     @Override
     public SPermission setVersion(String version) {
@@ -410,6 +452,18 @@ public class SPermission implements VertxPojo, ISPermission {
         }
         else if (!this.name.equals(other.name))
             return false;
+        if (this.type == null) {
+            if (other.type != null)
+                return false;
+        }
+        else if (!this.type.equals(other.type))
+            return false;
+        if (this.directory == null) {
+            if (other.directory != null)
+                return false;
+        }
+        else if (!this.directory.equals(other.directory))
+            return false;
         if (this.sigma == null) {
             if (other.sigma != null)
                 return false;
@@ -488,6 +542,8 @@ public class SPermission implements VertxPojo, ISPermission {
         result = prime * result + ((this.comment == null) ? 0 : this.comment.hashCode());
         result = prime * result + ((this.identifier == null) ? 0 : this.identifier.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.type == null) ? 0 : this.type.hashCode());
+        result = prime * result + ((this.directory == null) ? 0 : this.directory.hashCode());
         result = prime * result + ((this.sigma == null) ? 0 : this.sigma.hashCode());
         result = prime * result + ((this.tenantId == null) ? 0 : this.tenantId.hashCode());
         result = prime * result + ((this.appId == null) ? 0 : this.appId.hashCode());
@@ -511,6 +567,8 @@ public class SPermission implements VertxPojo, ISPermission {
         sb.append(", ").append(comment);
         sb.append(", ").append(identifier);
         sb.append(", ").append(name);
+        sb.append(", ").append(type);
+        sb.append(", ").append(directory);
         sb.append(", ").append(sigma);
         sb.append(", ").append(tenantId);
         sb.append(", ").append(appId);
@@ -538,6 +596,8 @@ public class SPermission implements VertxPojo, ISPermission {
         setComment(from.getComment());
         setIdentifier(from.getIdentifier());
         setName(from.getName());
+        setType(from.getType());
+        setDirectory(from.getDirectory());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());
         setAppId(from.getAppId());

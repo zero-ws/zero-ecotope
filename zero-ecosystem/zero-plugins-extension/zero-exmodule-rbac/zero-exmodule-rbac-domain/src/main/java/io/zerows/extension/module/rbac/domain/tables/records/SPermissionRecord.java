@@ -110,11 +110,45 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
+     * Setter for <code>ZDB.S_PERMISSION.TYPE</code>. 「type」- 权限类型
+     */
+    @Override
+    public SPermissionRecord setType(String value) {
+        set(5, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.S_PERMISSION.TYPE</code>. 「type」- 权限类型
+     */
+    @Override
+    public String getType() {
+        return (String) get(5);
+    }
+
+    /**
+     * Setter for <code>ZDB.S_PERMISSION.DIRECTORY</code>. 「directory」- 权限目录
+     */
+    @Override
+    public SPermissionRecord setDirectory(String value) {
+        set(6, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.S_PERMISSION.DIRECTORY</code>. 「directory」- 权限目录
+     */
+    @Override
+    public String getDirectory() {
+        return (String) get(6);
+    }
+
+    /**
      * Setter for <code>ZDB.S_PERMISSION.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public SPermissionRecord setSigma(String value) {
-        set(5, value);
+        set(7, value);
         return this;
     }
 
@@ -123,7 +157,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public String getSigma() {
-        return (String) get(5);
+        return (String) get(7);
     }
 
     /**
@@ -131,7 +165,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public SPermissionRecord setTenantId(String value) {
-        set(6, value);
+        set(8, value);
         return this;
     }
 
@@ -140,7 +174,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public String getTenantId() {
-        return (String) get(6);
+        return (String) get(8);
     }
 
     /**
@@ -148,7 +182,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public SPermissionRecord setAppId(String value) {
-        set(7, value);
+        set(9, value);
         return this;
     }
 
@@ -157,75 +191,75 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public String getAppId() {
-        return (String) get(7);
-    }
-
-    /**
-     * Setter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
-     */
-    @Override
-    public SPermissionRecord setActive(Boolean value) {
-        set(8, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
-     */
-    @Override
-    public Boolean getActive() {
-        return (Boolean) get(8);
-    }
-
-    /**
-     * Setter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言偏好
-     */
-    @Override
-    public SPermissionRecord setLanguage(String value) {
-        set(9, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言偏好
-     */
-    @Override
-    public String getLanguage() {
         return (String) get(9);
     }
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 启用
      */
     @Override
-    public SPermissionRecord setMetadata(JsonObject value) {
+    public SPermissionRecord setActive(Boolean value) {
         set(10, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 启用
      */
     @Override
-    public JsonObject getMetadata() {
-        return (JsonObject) get(10);
+    public Boolean getActive() {
+        return (Boolean) get(10);
     }
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言
      */
     @Override
-    public SPermissionRecord setVersion(String value) {
+    public SPermissionRecord setLanguage(String value) {
         set(11, value);
         return this;
     }
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言
+     */
+    @Override
+    public String getLanguage() {
+        return (String) get(11);
+    }
+
+    /**
+     * Setter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元数据
+     */
+    @Override
+    public SPermissionRecord setMetadata(JsonObject value) {
+        set(12, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元数据
+     */
+    @Override
+    public JsonObject getMetadata() {
+        return (JsonObject) get(12);
+    }
+
+    /**
+     * Setter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本
+     */
+    @Override
+    public SPermissionRecord setVersion(String value) {
+        set(13, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本
      */
     @Override
     public String getVersion() {
-        return (String) get(11);
+        return (String) get(13);
     }
 
     /**
@@ -233,7 +267,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public SPermissionRecord setCreatedAt(LocalDateTime value) {
-        set(12, value);
+        set(14, value);
         return this;
     }
 
@@ -242,7 +276,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(12);
+        return (LocalDateTime) get(14);
     }
 
     /**
@@ -250,7 +284,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public SPermissionRecord setCreatedBy(String value) {
-        set(13, value);
+        set(15, value);
         return this;
     }
 
@@ -259,7 +293,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(13);
+        return (String) get(15);
     }
 
     /**
@@ -267,7 +301,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public SPermissionRecord setUpdatedAt(LocalDateTime value) {
-        set(14, value);
+        set(16, value);
         return this;
     }
 
@@ -276,7 +310,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(14);
+        return (LocalDateTime) get(16);
     }
 
     /**
@@ -284,7 +318,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public SPermissionRecord setUpdatedBy(String value) {
-        set(15, value);
+        set(17, value);
         return this;
     }
 
@@ -293,7 +327,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(15);
+        return (String) get(17);
     }
 
     // -------------------------------------------------------------------------
@@ -316,6 +350,8 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
         setComment(from.getComment());
         setIdentifier(from.getIdentifier());
         setName(from.getName());
+        setType(from.getType());
+        setDirectory(from.getDirectory());
         setSigma(from.getSigma());
         setTenantId(from.getTenantId());
         setAppId(from.getAppId());
@@ -350,7 +386,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     /**
      * Create a detached, initialised SPermissionRecord
      */
-    public SPermissionRecord(String id, String code, String comment, String identifier, String name, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SPermissionRecord(String id, String code, String comment, String identifier, String name, String type, String directory, String sigma, String tenantId, String appId, Boolean active, String language, JsonObject metadata, String version, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SPermission.S_PERMISSION);
 
         setId(id);
@@ -358,6 +394,8 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
         setComment(comment);
         setIdentifier(identifier);
         setName(name);
+        setType(type);
+        setDirectory(directory);
         setSigma(sigma);
         setTenantId(tenantId);
         setAppId(appId);
@@ -384,6 +422,8 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
             setComment(value.getComment());
             setIdentifier(value.getIdentifier());
             setName(value.getName());
+            setType(value.getType());
+            setDirectory(value.getDirectory());
             setSigma(value.getSigma());
             setTenantId(value.getTenantId());
             setAppId(value.getAppId());

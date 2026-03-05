@@ -1,0 +1,4 @@
+data:
+  keyword: "app.menu.fetch"
+  resource: "resource.ambient"
+  identifier: "x.menu"

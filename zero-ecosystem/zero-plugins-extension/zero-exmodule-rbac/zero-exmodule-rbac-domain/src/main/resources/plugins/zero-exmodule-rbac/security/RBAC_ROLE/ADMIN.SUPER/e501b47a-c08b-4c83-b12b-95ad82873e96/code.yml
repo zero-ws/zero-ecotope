@@ -1,0 +1,7 @@
+data:
+  # 原 login.index 权限文件
+  - "perm.private.person.admin"
+  - "perm.private.company.fetch"
+  - "perm.acl.view.admin"
+  - "perm.app.fetch"
+  - "perm.resource.fetch"

@@ -8,17 +8,13 @@ import io.zerows.epoch.store.jooq.ADB;
 import io.zerows.epoch.store.jooq.DB;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SActionDao;
-import io.zerows.extension.module.rbac.domain.tables.daos.SPermSetDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SPermissionDao;
 import io.zerows.extension.module.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SAction;
-import io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPermission;
 import io.zerows.extension.module.rbac.metadata.logged.ScRole;
 import io.zerows.extension.module.rbac.servicespec.ActionStub;
 import io.zerows.extension.module.rbac.servicespec.PermStub;
-import io.zerows.platform.constant.VName;
-import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import io.zerows.support.Ut;
@@ -27,8 +23,6 @@ import jakarta.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -120,40 +114,7 @@ public class PermService implements PermStub {
 
     @Override
     public Future<JsonObject> searchAsync(final JsonObject query, final String sigma) {
-        /*
-         * Result for searching join S_PERMISSIONS
-         */
-        return DB.on(SPermSetDao.class).<SPermSet>fetchAsync(KName.SIGMA, sigma).compose(setList -> {
-            /*
-             * Extract perm codes to set
-             */
-            final Set<String> codes = setList.stream().map(SPermSet::getCode).collect(Collectors.toSet());
-
-            /*
-             * Search permissions that related current
-             */
-            final JsonObject criteriaRef = query.getJsonObject(VName.KEY_CRITERIA);
-            /*
-             * Combine condition here
-             */
-            final JsonObject criteria = new JsonObject();
-            criteria.put(KName.SIGMA, sigma);
-            criteria.put("code,!i", Ut.toJArray(codes));
-            criteria.put(VString.EMPTY, Boolean.TRUE);
-            if (Ut.isNotNil(criteriaRef)) {
-                criteria.put("$0", criteriaRef.copy());
-            }
-            /*
-             * criteria ->
-             * SIGMA = ??? AND CODE NOT IN (???)
-             * */
-            query.put(VName.KEY_CRITERIA, criteria);
-
-            /*
-             * Replace for criteria
-             */
-            return DB.on(SPermissionDao.class).searchJAsync(query);
-        });
+        return Ux.futureJ();
     }
 
     @Override
