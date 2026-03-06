@@ -1,0 +1,13 @@
+data:
+  # CRUD - 字段管理
+  - "perm.crud.field.fetch"
+  - "perm.crud.field.write"
+  - "perm.crud.field.meta"
+  # CRUD - 实体管理
+  - "perm.crud.entity.fetch"
+  - "perm.crud.entity.write"
+  - "perm.crud.entity.meta"
+  # CRUD - 模型管理
+  - "perm.crud.model.fetch"
+  - "perm.crud.model.write"
+  - "perm.crud.model.meta"

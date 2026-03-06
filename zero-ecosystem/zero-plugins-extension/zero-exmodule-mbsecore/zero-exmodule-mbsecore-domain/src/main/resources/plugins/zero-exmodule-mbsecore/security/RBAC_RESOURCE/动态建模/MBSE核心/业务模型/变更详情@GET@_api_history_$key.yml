@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.mbse.history.by-key"
+  resource: "resource.ambient"
+  identifier: "x.activity"
