@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.views.by.id&position"
+  resource: "resource.ui"
+  identifier: "ui.view"

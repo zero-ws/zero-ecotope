@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.my.menu.fetch"
+  resource: "resource.ambient"
