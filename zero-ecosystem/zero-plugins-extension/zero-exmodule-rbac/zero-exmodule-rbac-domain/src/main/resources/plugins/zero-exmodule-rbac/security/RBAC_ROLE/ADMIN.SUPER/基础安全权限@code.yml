@@ -5,7 +5,11 @@ data:
   - "perm.rbac.privacy.company"
   - "perm.rbac.privacy.user"
   - "perm.rbac.resource.fetch"
-  # CRUD
+  # CRUD - 操作管理
   - "perm.crud.action.fetch"
   - "perm.crud.action.write"
   - "perm.crud.action.meta"
+  # CRUD - 用户组管理
+  - "perm.crud.group.fetch"
+  - "perm.crud.group.write"
+  - "perm.crud.group.meta"

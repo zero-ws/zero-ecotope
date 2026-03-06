@@ -207,21 +207,22 @@ class BuildPermLoader {
             return;
         }
 
+        // 使用反序列化创建 SPermission（自动映射 YAML 中的所有字段）
+        final SPermission permission = Ut.deserialize(permData, SPermission.class);
+
         // 生成 ID
         final String permId = UUID.randomUUID().toString();
-
-        // 创建 SPermission
-        final SPermission permission = new SPermission();
         permission.setId(permId);
-        permission.setCode(code);
-        permission.setIdentifier(identifier);
+
+        // 覆盖目录结构字段
         permission.setName(permName);
         permission.setType(type);
         permission.setDirectory(directory);
 
-        // comment：如果存在就用文件中的，否则用全路径
-        final String comment = permData.getString("comment");
-        permission.setComment(comment != null ? comment : type + "/" + directory + "/" + permName);
+        // comment：如果 YAML 中没有，使用全路径 TYPE/DIRECTORY/NAME
+        if (permission.getComment() == null || permission.getComment().isEmpty()) {
+            permission.setComment(type + "/" + directory + "/" + permName);
+        }
 
         // 填充全局字段
         this.fillGlobalFields(permission);
@@ -242,6 +243,9 @@ class BuildPermLoader {
      * data:
      * keyword: "acl.role-view.fetch"
      * resource: "resource.security"
+     * level: 10 (可选)
+     * virtual: true (可选)
+     * ... (其他字段可选)
      */
     private void loadActionAndResource(final File file, final String type, final String directory,
                                        final String permName) throws Exception {
@@ -284,8 +288,8 @@ class BuildPermLoader {
         final String actionId = UUID.randomUUID().toString();
         final String resourceId = UUID.randomUUID().toString();
 
-        // 创建 SAction
-        final SAction action = new SAction();
+        // 使用反序列化创建 SAction（自动映射 YAML 中的所有字段）
+        final SAction action = Ut.deserialize(actionData, SAction.class);
         action.setId(actionId);
         action.setCode("act." + keyword);
         action.setName(actionName);
@@ -294,19 +298,37 @@ class BuildPermLoader {
         action.setPermissionId(permissionId);
         action.setResourceId(resourceId);
 
-        // 设置 level 默认值
-        action.setLevel(this.getDefaultLevel(method));
+        // 如果 YAML 中没有 level，设置默认值
+        if (action.getLevel() == null) {
+            action.setLevel(this.getDefaultLevel(method));
+        }
 
         this.fillGlobalFields(action);
 
-        // 创建 SResource
-        final SResource resource = new SResource();
+        // 使用反序列化创建 SResource（自动映射 YAML 中的所有字段）
+        final SResource resource = Ut.deserialize(actionData, SResource.class);
         resource.setId(resourceId);
         resource.setCode("res." + keyword);
         resource.setName(actionName);
-        resource.setType(resourceType);
         resource.setIdentifier(permIdentifier);  // 使用 permIdentifier，不是 permName
-        resource.setModeRole("UNION");
+
+        // 覆盖 type 字段（从 YAML 的 resource 字段映射）
+        if (resourceType != null) {
+            resource.setType(resourceType);
+        }
+
+        // level 与关联的 Action 保持一致
+        resource.setLevel(action.getLevel());
+
+        // 如果 YAML 中没有 modeRole，设置默认值
+        if (resource.getModeRole() == null || resource.getModeRole().isEmpty()) {
+            resource.setModeRole("UNION");
+        }
+
+        // comment：如果 YAML 中没有，使用 name 作为 fallback
+        if (resource.getComment() == null || resource.getComment().isEmpty()) {
+            resource.setComment(actionName);
+        }
 
         this.fillGlobalFields(resource);
 
