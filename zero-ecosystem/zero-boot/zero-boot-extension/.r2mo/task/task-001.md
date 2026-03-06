@@ -1,8 +1,10 @@
 ---
 runAt: 2026-03-05.22-36-15
 title: 开发完整的权限导入程序 BuildPerm
+status: completed
+completedAt: 2026-03-06.00-00-00
 ---
-包名：`io.zerows.extension.appcontainer` 
+包名：`io.zerows.extension.appcontainer`
 
 环境变量文件位于测试目录中，具体全局环境变量、`init/environment.json` 中加载数据的部分直接参考 BuildApp 中的用法，用 BuildShared 加载，环境变量部分在 BuildApp 中也有相关说明。
 
@@ -14,10 +16,10 @@ title: 开发完整的权限导入程序 BuildPerm
 ## 输入目录
 
 参考：plugins/{MID}/security/ 目录下的两个核心目录
-- 资源定义：`RBAC_RESOURCE` 
-- 角色权限：`RBAC_ROLE` 
+- 资源定义：`RBAC_RESOURCE`
+- 角色权限：`RBAC_ROLE`
 
-参考输入目录（其中一个模块）：`/Users/lang/zero-cloud/app-zero/zero-ecotope/zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-domain/src/main/resources/plugins/zero-exmodule-rbac/security` 
+参考输入目录（其中一个模块）：`/Users/lang/zero-cloud/app-zero/zero-ecotope/zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-domain/src/main/resources/plugins/zero-exmodule-rbac/security`
 
 - 根据参考，加载当前应用环境中的类路径下所有 `plugins/{MID}/security/` 中的两个目录名下边内容
 - 目前系统包括 15 个 exmodule，后期可能更多，但每个 exmodule 的路径都是 `plusing/{MID}/security/` 一致
@@ -25,10 +27,10 @@ title: 开发完整的权限导入程序 BuildPerm
 
 ## 核心实体
 
-- 操作：`S_ACTION` 
-- 资源：`S_RESOURCE` 
-- 权限：`S_PERMISSION` 
-- 角色和权限关联：`R_ROLE_PERM` 
+- 操作：`S_ACTION`
+- 资源：`S_RESOURCE`
+- 权限：`S_PERMISSION`
+- 角色和权限关联：`R_ROLE_PERM`
 三种实体对应的 `pojos` 位于：/Users/lang/zero-cloud/app-zero/zero-ecotope/zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-domain/src/main/java/io/zerows/extension/module/rbac/domain/tables/ 下，`daos` 也在子目录中。
 
 ## 数据填充规则
@@ -61,7 +63,7 @@ title: 开发完整的权限导入程序 BuildPerm
 	- `SResource` 的 `code` = `res.${keyword}`
 - `resource`：对应到 `SResource` 中的 `type`
 - 级别 level 默认值：
-	- GET = 1 
+	- GET = 1
 	- POST = 4
 	- PUT = 8
 	- DELETE = 12
@@ -75,16 +77,88 @@ title: 开发完整的权限导入程序 BuildPerm
 
 #### R_ROLE_PERM
 
-- 一级目录：对应角色的 CODE，可查找唯一角色
-- 二级目录名：关联角色数据，{code}@{priority}，priority没有时就只有 code，此时 priority = 0
-- 二级目录/xxx@{field}.yml：文件内容，内容中是数组，field = code 时表示查询权限的规则：code in 内容，注意只加载 `yml` 后缀文件
+- 一级目录名：关联角色数据，{code}@{priority}，priority没有时就只有 code，此时 priority = 0
+- 一级目录名/xxx@{field}.yml：文件内容，内容中是数组，field = code 时表示查询权限的规则：code in 内容，注意只加载 `yml` 后缀文件
 
 #### 关于关联的UUID
 
 - `SAction` 中的 `permissionId` 直接和它所在的父目录，`resourceId` 就是对应的 `SResource` 实体。
 - `SResource` 和 `SPermission` 的ID可以直接生成
 - 新生成条件：
-	- 如果数据库中不存在时生成新的，根据规则计算出来的 code + appId 查询数据库
+	- ��果数据库中不存在时生成新的，根据规则计算出来的 code + appId 查询数据库
 	- 若数据库中存在则直接使用存在的 id
 - 生成条件同时作用于 `SPermission / SAction / SResource`
 - 导入具有幂等性，都要采用 `upsert` 的方式。
+
+---
+
+## 实现记录
+
+### 完成时间
+2026-03-06 00:00
+
+### 创建的文件
+
+1. **InstPerm.java** - 权限目录扫描接口
+   - `ioResource()` - 扫描 `plugins/{MID}/security/RBAC_RESOURCE/` 目录
+   - `ioRole()` - 扫描 `plugins/{MID}/security/RBAC_ROLE/` 目录
+
+2. **InstPermLoad.java** - 权限目录扫描实现
+   - 支持文件系统和 JAR 包两种环境
+   - 从 classpath 扫描所有模块的 security 目录
+   - 懒加载初始化，确保扫描且仅扫描一次
+
+3. **BuildPermLoader.java** - 权限数据加载器
+   - **SPermission**: 从 PERM.yml 加载，目录结构映射 type/directory/name
+   - **SAction & SResource**: 从 `{name}@{method}@{uri}.yml` 文件加载
+   - **RRolePerm**: 从角色 CODE 目录下的 yml 文件加载
+   - 实现了 roleCode 到 roleId 的映射关系
+
+4. **BuildPermPersister.java** - 权限数据持久化器
+   - 按 `code + appId` 唯一键判重
+   - 使用 upsert 实现幂等导入
+   - 自动关联 roleId（从数据库查询角色映射）
+   - 支持 SPermission、SAction、SResource、RRolePerm 的保存
+
+5. **BuildPerm.java** - 权限导入入口程序
+   - 加载全局配置（environment.json 的 global 节点）
+   - 扫描 security 目录
+   - 加载权限数据
+   - 持久化到数据库
+   - 输出统计信息
+
+### 实现的核心功能
+
+#### 目录结构解析
+- **RBAC_RESOURCE**: 三级目录结构（type/directory/name）
+  - PERM.yml 定义权限基本信息
+  - action yml 文件定义操作和资源
+
+- **RBAC_ROLE**: 一级目录结构（{code}@{priority}）
+  - yml 文件定义角色权限关联
+  - 支持 priority 可选（默认为 0）
+
+#### 数据填充规则
+- 一级目录名 → SPermission.type
+- 二级目录名 → SPermission.directory
+- 三级目录名 → SPermission.name
+- PERM.yml → code, identifier, comment
+- 文件名 `{name}@{method}@{uri}.yml` → SAction.name/method/uri，SResource.name
+- level 默认值：GET=1, POST=4, PUT=8, DELETE=12
+- modeRole 默认值：UNION
+- URI 转换：`_` → `/`，`$` → `:`
+
+#### 幂等导入
+- 按 code + appId 查询数据库判断是否存在
+- 存在则更新（保留原 ID）
+- 不存在则插入（生成新 ID）
+- 支持多次导入不会产生重复数据
+
+### 编译状态
+✅ 项目编译通过 (BUILD SUCCESS)
+
+### 参考实现
+- 参考 BuildApp 的实现模式
+- 参考 BuildMenuLoader/BuildMenuPersister 的加载和持久化模式
+- 使用 BuildShared 加载全局配置
+- 使用 DBE (Database Engine) 进行数据库操作

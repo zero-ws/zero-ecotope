@@ -1,3 +1,3 @@
 data:
-  keyword: "rbac.privacy.user.info"
+  keyword: "crud.action.batch.edit"
   resource: "resource.security"

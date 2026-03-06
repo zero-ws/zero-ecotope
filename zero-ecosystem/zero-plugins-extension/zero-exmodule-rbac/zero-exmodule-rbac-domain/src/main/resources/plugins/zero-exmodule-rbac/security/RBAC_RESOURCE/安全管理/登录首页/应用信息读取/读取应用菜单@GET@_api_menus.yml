@@ -1,4 +1,4 @@
 data:
-  keyword: "app.menu.fetch"
+  keyword: "rbac.app.menu.fetch"
   resource: "resource.ambient"
   identifier: "x.menu"

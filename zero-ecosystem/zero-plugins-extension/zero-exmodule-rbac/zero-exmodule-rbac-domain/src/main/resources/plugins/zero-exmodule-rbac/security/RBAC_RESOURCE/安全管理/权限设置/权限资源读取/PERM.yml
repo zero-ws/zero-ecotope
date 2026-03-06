@@ -1,3 +1,3 @@
 data:
-  code: "perm.resource.fetch"
+  code: "perm.rbac.resource.fetch"
   identifier: "sec.resource"

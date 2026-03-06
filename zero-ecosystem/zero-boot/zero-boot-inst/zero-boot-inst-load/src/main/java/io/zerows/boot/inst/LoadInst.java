@@ -2,6 +2,7 @@ package io.zerows.boot.inst;
 
 import io.vertx.core.Vertx;
 import io.zerows.boot.extension.appcontainer.BuildApp;
+import io.zerows.boot.extension.appcontainer.BuildPerm;
 import io.zerows.boot.test.metadata.ArgLoad;
 import io.zerows.epoch.boot.ZeroLauncher;
 import io.zerows.epoch.constant.KName;
@@ -48,8 +49,11 @@ public class LoadInst {
         final ZeroLauncher<Vertx> container = ZeroLauncher.create(clazz, args, NodePre::ensureDB);
         container.start((vertx, config) -> {
             // 加载应用和菜单数据到数据库
-            BuildApp.run(vertx).onComplete(res -> {
-                log.info("[ ZERO ] ( LoadInst ) 应用初始化完成，开始执行数据导入...");
+            BuildApp.run(vertx).compose(done -> {
+                log.info("[ ZERO ] ( LoadInst ) 应用初始化完成！！");
+                return BuildPerm.run(vertx);
+            }).onComplete(res -> {
+                log.info("[ ZERO ] ( LoadInst ) 权限设置完成！！开始执行数据导入...");
                 runLoad(vertx, oob, vPath, prefix);
             });
         });
