@@ -1,0 +1,10 @@
+data:
+  keyword: "crud.trans.by-key"
+  resource: "resource.finance"
+  virtual: true
+  seekSyntax:
+    phase: AFTER
+    data:
+      type: RECORD
+      viewId: "`${viewId}`"
+      identifier: "fm.trans"
