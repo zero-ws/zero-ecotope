@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.brand.if.existing"
+  resource: "resource.organization"

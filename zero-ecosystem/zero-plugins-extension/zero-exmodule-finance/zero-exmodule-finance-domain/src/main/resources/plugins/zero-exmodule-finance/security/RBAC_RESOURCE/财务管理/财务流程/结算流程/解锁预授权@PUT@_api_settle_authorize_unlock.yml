@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.fms.preauthorize.unlock"
+  resource: "resource.finance"
+  identifier: "fm.preauthorize"

@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.identity.batch.import"
+  resource: "resource.organization"

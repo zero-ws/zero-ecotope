@@ -1,0 +1,3 @@
+data:
+  code: "perm.crud.customer.fetch"
+  identifier: "res.customer"

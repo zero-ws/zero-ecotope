@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.fms.batch.settlement"
+  resource: "resource.finance"
+  identifier: "fm.settlement"

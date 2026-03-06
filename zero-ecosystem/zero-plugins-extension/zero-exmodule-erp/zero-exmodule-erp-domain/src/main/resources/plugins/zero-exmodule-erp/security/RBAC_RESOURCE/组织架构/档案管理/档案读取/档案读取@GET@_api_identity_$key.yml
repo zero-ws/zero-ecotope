@@ -1,0 +1,10 @@
+data:
+  keyword: "crud.identity.by-key"
+  resource: "resource.organization"
+  virtual: true
+  seekSyntax:
+    phase: AFTER
+    data:
+      type: RECORD
+      viewId: "`${viewId}`"
+      identifier: "res.identity"

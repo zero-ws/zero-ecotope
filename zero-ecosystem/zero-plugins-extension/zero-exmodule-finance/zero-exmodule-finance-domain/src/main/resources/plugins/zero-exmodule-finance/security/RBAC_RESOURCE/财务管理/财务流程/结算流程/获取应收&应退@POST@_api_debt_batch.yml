@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.fms.batch.debt"
+  resource: "resource.finance"
+  identifier: "fm.debt"

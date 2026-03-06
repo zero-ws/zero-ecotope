@@ -1,0 +1,37 @@
+data:
+  # CRUD - 品牌管理
+  - "perm.crud.brand.fetch"
+  - "perm.crud.brand.write"
+  - "perm.crud.brand.meta"
+  # CRUD - 公司管理
+  - "perm.crud.company.fetch"
+  - "perm.crud.company.write"
+  - "perm.crud.company.meta"
+  # CRUD - 合同管理
+  - "perm.crud.contract.fetch"
+  - "perm.crud.contract.write"
+  - "perm.crud.contract.meta"
+  # CRUD - 客户管理
+  - "perm.crud.customer.fetch"
+  - "perm.crud.customer.write"
+  - "perm.crud.customer.meta"
+  # CRUD - 部门管理
+  - "perm.crud.dept.fetch"
+  - "perm.crud.dept.write"
+  - "perm.crud.dept.meta"
+  # CRUD - 员工管理
+  - "perm.crud.employee.fetch"
+  - "perm.crud.employee.write"
+  - "perm.crud.employee.meta"
+  # CRUD - 档案管理
+  - "perm.crud.identity.fetch"
+  - "perm.crud.identity.write"
+  - "perm.crud.identity.meta"
+  # CRUD - 项目管理
+  - "perm.crud.project.fetch"
+  - "perm.crud.project.write"
+  - "perm.crud.project.meta"
+  # CRUD - 团队管理
+  - "perm.crud.team.fetch"
+  - "perm.crud.team.write"
+  - "perm.crud.team.meta"

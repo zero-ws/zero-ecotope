@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.employee.batch.delete"
+  resource: "resource.organization"
