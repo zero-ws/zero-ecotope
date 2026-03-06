@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.app.document.by-trashed"
+  resource: "resource.ambient"

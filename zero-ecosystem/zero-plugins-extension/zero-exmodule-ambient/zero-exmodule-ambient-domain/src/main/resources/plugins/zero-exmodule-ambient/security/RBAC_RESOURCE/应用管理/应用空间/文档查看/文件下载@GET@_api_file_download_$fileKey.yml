@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.app.file-download.by-key"
+  resource: "resource.ambient"

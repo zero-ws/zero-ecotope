@@ -1,0 +1,29 @@
+data:
+  # CRUD - 标签管理
+  - "perm.crud.x-tag.fetch"
+  - "perm.crud.x-tag.write"
+  - "perm.crud.x-tag.meta"
+  # CRUD - 列表字典
+  - "perm.crud.x-tabular.fetch"
+  - "perm.crud.x-tabular.write"
+  - "perm.crud.x-tabular.meta"
+  # CRUD - 日志管理
+  - "perm.crud.x-log.fetch"
+  - "perm.crud.x-log.write"
+  - "perm.crud.x-log.meta"
+  # CRUD - 分类字典
+  - "perm.crud.x-category.fetch"
+  - "perm.crud.x-category.write"
+  - "perm.crud.x-category.meta"
+  # CRUD - 附件管理
+  - "perm.crud.x-attachment.fetch"
+  - "perm.crud.x-attachment.write"
+  - "perm.crud.x-attachment.meta"
+  # CRUD - 活动日志
+  - "perm.crud.x-activity.fetch"
+  - "perm.crud.x-activity.write"
+  - "perm.crud.x-activity.meta"
+  # CRUD - 公告管理
+  - "perm.crud.x-notify.fetch"
+  - "perm.crud.x-notify.write"
+  - "perm.crud.x-notify.meta"
