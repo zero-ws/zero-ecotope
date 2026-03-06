@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.role.batch.import"
+  resource: "resource.security"

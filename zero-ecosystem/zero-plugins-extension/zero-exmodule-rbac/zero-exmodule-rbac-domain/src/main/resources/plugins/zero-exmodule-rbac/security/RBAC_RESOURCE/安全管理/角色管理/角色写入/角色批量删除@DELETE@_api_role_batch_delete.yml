@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.role.batch.delete"
+  resource: "resource.security"

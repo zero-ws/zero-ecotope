@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.user.if.missing"
+  resource: "resource.security"

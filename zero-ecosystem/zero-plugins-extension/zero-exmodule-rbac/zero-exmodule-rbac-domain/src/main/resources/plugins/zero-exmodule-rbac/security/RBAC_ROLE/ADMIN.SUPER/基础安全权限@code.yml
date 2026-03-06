@@ -13,3 +13,19 @@ data:
   - "perm.crud.group.fetch"
   - "perm.crud.group.write"
   - "perm.crud.group.meta"
+  # CRUD - 用户管理
+  - "perm.crud.user.fetch"
+  - "perm.crud.user.write"
+  - "perm.crud.user.meta"
+  # CRUD - 角色管理
+  - "perm.crud.role.fetch"
+  - "perm.crud.role.write"
+  - "perm.crud.role.meta"
+  # CRUD - 资源管理
+  - "perm.crud.resource.fetch"
+  - "perm.crud.resource.write"
+  - "perm.crud.resource.meta"
+  # CRUD - 权限管理
+  - "perm.crud.permission.fetch"
+  - "perm.crud.permission.write"
+  - "perm.crud.permission.meta"

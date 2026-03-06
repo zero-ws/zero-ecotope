@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.role.if.existing"
+  resource: "resource.security"
