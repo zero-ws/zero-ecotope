@@ -1,3 +1,10 @@
 data:
   keyword: "crud.user.by-key"
   resource: "resource.security"
+  virtual: true
+  seekSyntax:
+    phase: AFTER
+    data:
+      type: RECORD
+      viewId: "`${viewId}`"
+      identifier: "sec.user"

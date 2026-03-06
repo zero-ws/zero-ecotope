@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.view-p.delete.batch"
+  resource: "resource.security"

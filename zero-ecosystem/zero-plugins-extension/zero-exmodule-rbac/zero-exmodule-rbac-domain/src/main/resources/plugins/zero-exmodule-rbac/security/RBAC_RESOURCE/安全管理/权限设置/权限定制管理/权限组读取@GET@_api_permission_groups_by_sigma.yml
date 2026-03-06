@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.permission.group"
+  resource: "resource.security"

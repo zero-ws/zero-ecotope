@@ -5,6 +5,8 @@ data:
   - "perm.rbac.privacy.company"
   - "perm.rbac.privacy.user"
   - "perm.rbac.resource.fetch"
+  - "perm.rbac.view-p.admin"
+  - "perm.rbac.permission.admin"
   # CRUD - 操作管理
   - "perm.crud.action.fetch"
   - "perm.crud.action.write"
