@@ -48,7 +48,6 @@ class BuildPermPersister {
      * 返回 [新增数, 更新数]
      */
     Future<int[]> savePermissions(final Map<String, SPermission> permissions) {
-        log.info("[ INST ] 开始保存权限，共 {} 个", permissions.size());
 
         final AtomicInteger insertCount = new AtomicInteger(0);
         final AtomicInteger updateCount = new AtomicInteger(0);
@@ -67,7 +66,7 @@ class BuildPermPersister {
         }
 
         return Future.all(futures).map(v -> {
-            log.info("[ INST ] 权限保存完成: 新增 {} / 更新 {}", insertCount.get(), updateCount.get());
+            log.info("[ INST ] 权限保存完成: 新增 {} / 更新 {} / 总数 {}", insertCount.get(), updateCount.get(), permissions.size());
             return new int[]{insertCount.get(), updateCount.get()};
         });
     }
@@ -107,7 +106,6 @@ class BuildPermPersister {
      * 返回 [新增数, 更新数]
      */
     Future<int[]> saveResources(final Map<String, SResource> resources) {
-        log.info("[ INST ] 开始保存资源，共 {} 个", resources.size());
 
         final AtomicInteger insertCount = new AtomicInteger(0);
         final AtomicInteger updateCount = new AtomicInteger(0);
@@ -126,7 +124,7 @@ class BuildPermPersister {
         }
 
         return Future.all(futures).map(v -> {
-            log.info("[ INST ] 资源保存完成: 新增 {} / 更新 {}", insertCount.get(), updateCount.get());
+            log.info("[ INST ] 资源保存完成: 新增 {} / 更新 {} / 总数 {}", insertCount.get(), updateCount.get(), resources.size());
             return new int[]{insertCount.get(), updateCount.get()};
         });
     }
@@ -137,7 +135,6 @@ class BuildPermPersister {
      * 返回 [新增数, 更新数]
      */
     Future<int[]> saveRolePerms(final List<RRolePerm> rolePerms, final Map<String, String> roleCodeToIdMap) {
-        log.info("[ INST ] 开始保存角色权限关联，共 {} 个", rolePerms.size());
 
         final AtomicInteger insertCount = new AtomicInteger(0);
         final AtomicInteger updateCount = new AtomicInteger(0);
@@ -159,7 +156,7 @@ class BuildPermPersister {
         }
 
         return Future.all(futures).map(v -> {
-            log.info("[ INST ] 角色权限关联保存完成: 新增 {} / 更新 {}", insertCount.get(), updateCount.get());
+            log.info("[ INST ] 角色权限关联保存完成: 新增 {} / 更新 {} / 总数 {}", insertCount.get(), updateCount.get(), rolePerms.size());
             return new int[]{insertCount.get(), updateCount.get()};
         });
     }
