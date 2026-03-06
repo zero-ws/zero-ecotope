@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.lbs-region.meta"
+  resource: "resource.lbs"
+  identifier: "lbs.region"

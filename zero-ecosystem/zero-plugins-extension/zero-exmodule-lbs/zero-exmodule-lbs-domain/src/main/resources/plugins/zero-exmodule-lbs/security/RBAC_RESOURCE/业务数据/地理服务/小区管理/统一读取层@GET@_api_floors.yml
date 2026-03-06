@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.lbs-region.floors"
+  resource: "resource.lbs"
+  identifier: "lbs.floor"
