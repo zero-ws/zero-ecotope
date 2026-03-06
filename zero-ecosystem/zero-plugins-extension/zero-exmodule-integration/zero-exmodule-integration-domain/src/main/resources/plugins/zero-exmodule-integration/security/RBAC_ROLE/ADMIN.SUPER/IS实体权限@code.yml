@@ -1,0 +1,9 @@
+data:
+  # CRUD - 集成管理
+  - "perm.crud.i-integration.fetch"
+  - "perm.crud.i-integration.write"
+  - "perm.crud.i-integration.meta"
+  # CRUD - 目录管理
+  - "perm.crud.i-directory.fetch"
+  - "perm.crud.i-directory.write"
+  - "perm.crud.i-directory.meta"
