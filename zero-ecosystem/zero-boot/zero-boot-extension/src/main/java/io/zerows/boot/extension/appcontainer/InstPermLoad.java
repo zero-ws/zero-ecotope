@@ -50,6 +50,10 @@ class InstPermLoad implements InstPerm {
                         this.loadFromFile(url);
                     }
                 }
+
+                // 扫描 init/oob/RBAC_ROLE 目录
+                this.loadInitOobRoles(classLoader);
+
                 initialized = true;
 
                 log.info("[ INST ] 扫描完成: RBAC_RESOURCE {} 个, RBAC_ROLE {} 个",
@@ -110,6 +114,57 @@ class InstPermLoad implements InstPerm {
             }
         } catch (final Exception e) {
             log.error("[ INST ] 解析文件系统 URL 失败: {}", url, e);
+        }
+    }
+
+    /**
+     * 扫描 init/oob/RBAC_ROLE 目录（测试/补充输入目录）
+     */
+    private void loadInitOobRoles(final ClassLoader classLoader) {
+        try {
+            final Enumeration<URL> urls = classLoader.getResources("init/oob/RBAC_ROLE");
+            while (urls.hasMoreElements()) {
+                final URL url = urls.nextElement();
+                final String protocol = url.getProtocol();
+                if ("file".equals(protocol)) {
+                    this.loadInitOobRolesFromFile(url);
+                } else if ("jar".equals(protocol)) {
+                    this.loadInitOobRolesFromJar(url);
+                }
+            }
+        } catch (final Exception e) {
+            log.error("[ INST ] 扫描 init/oob/RBAC_ROLE 失败", e);
+        }
+    }
+
+    /**
+     * 解析本地文件系统的 init/oob/RBAC_ROLE
+     */
+    private void loadInitOobRolesFromFile(final URL url) {
+        try {
+            final File roleDir = new File(url.toURI());
+            if (!roleDir.exists() || !roleDir.isDirectory()) {
+                return;
+            }
+            ROLE_DIRS.put("init-oob", roleDir.toURI());
+            log.info("[ INST ] [File] 找到 init/oob/RBAC_ROLE: {}", roleDir.getAbsolutePath());
+        } catch (final Exception e) {
+            log.error("[ INST ] 解析 init/oob/RBAC_ROLE 文件系统 URL 失败: {}", url, e);
+        }
+    }
+
+    /**
+     * 解析 JAR 中的 init/oob/RBAC_ROLE
+     */
+    private void loadInitOobRolesFromJar(final URL url) {
+        try {
+            final JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
+            final URL jarBaseUrl = jarURLConnection.getJarFileURL();
+            final String uriStr = "jar:" + jarBaseUrl + "!/init/oob/RBAC_ROLE/";
+            ROLE_DIRS.put("init-oob", new URI(uriStr.replace(" ", "%20")));
+            log.info("[ INST ] [JAR] 找到 init/oob/RBAC_ROLE");
+        } catch (final Exception e) {
+            log.error("[ INST ] 解析 init/oob/RBAC_ROLE JAR URL 失败: {}", url, e);
         }
     }
 

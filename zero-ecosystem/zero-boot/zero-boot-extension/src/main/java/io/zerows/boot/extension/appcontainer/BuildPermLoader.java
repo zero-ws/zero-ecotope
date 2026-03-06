@@ -13,8 +13,10 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -42,6 +44,12 @@ class BuildPermLoader {
 
     // 缓存：RRolePerm 对应的 roleCode
     private final Map<RRolePerm, String> rolePermToRoleCode = new ConcurrentHashMap<>();
+
+    // 缓存：角色权限唯一键 roleId#permId（用于幂等去重）
+    private final Set<String> rolePermKeys = ConcurrentHashMap.newKeySet();
+
+    // 统计：每个角色的权限关联数量
+    private final Map<String, Integer> rolePermCounts = new ConcurrentHashMap<>();
 
     private BuildPermLoader(final JsonObject globalConfig) {
         this.globalConfig = globalConfig;
@@ -515,6 +523,7 @@ class BuildPermLoader {
         }
 
         // 创建 RRolePerm
+        int rolePermCount = 0;
         for (int i = 0; i < permArray.size(); i++) {
             final String permCode = permArray.getString(i);
             if (permCode == null || permCode.isEmpty()) {
@@ -527,14 +536,23 @@ class BuildPermLoader {
                 continue;
             }
 
-            // 创建 RRolePerm
+            // 创建 RRolePerm（幂等去重：同一 roleId + permId 只保留一次）
+            final String rolePermKey = roleId + "#" + perm.getId();
+            if (!this.rolePermKeys.add(rolePermKey)) {
+                continue;
+            }
+
             final RRolePerm rolePerm = new RRolePerm();
             rolePerm.setRoleId(roleId);
             rolePerm.setPermId(perm.getId());
 
             this.rolePerms.add(rolePerm);
             this.rolePermToRoleCode.put(rolePerm, roleCode);
+            rolePermCount++;
         }
+
+        // 统计每个角色的权限关联数量
+        this.rolePermCounts.merge(roleCode, rolePermCount, Integer::sum);
     }
 
     /**
@@ -542,6 +560,13 @@ class BuildPermLoader {
      */
     Map<RRolePerm, String> getRolePermToRoleCode() {
         return new HashMap<>(this.rolePermToRoleCode);
+    }
+
+    /**
+     * 获取每个角色的权限关联数量统计
+     */
+    Map<String, Integer> getRolePermCounts() {
+        return new HashMap<>(this.rolePermCounts);
     }
 
     // ==================== 辅助方法 ====================

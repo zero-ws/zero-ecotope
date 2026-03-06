@@ -103,6 +103,7 @@ public class BuildPerm {
                     final Map<String, SResource> resources = loader.getResources();
                     final List<RRolePerm> rolePerms = loader.getRolePerms();
                     final Map<RRolePerm, String> rolePermToRoleCode = loader.getRolePermToRoleCode();
+                    final Map<String, Integer> rolePermCounts = loader.getRolePermCounts();
 
                     if (permissions.isEmpty() && actions.isEmpty() && resources.isEmpty()) {
                         log.warn("[ INST ] 未加载到任何权限数据");
@@ -194,6 +195,18 @@ public class BuildPerm {
                                     log.info("[ INST ]   操作(SAction): 新增 {} / 更新 {}", actStats[0], actStats[1]);
                                     log.info("[ INST ]   资源(SResource): 新增 {} / 更新 {}", resStats[0], resStats[1]);
                                     log.info("[ INST ]   角色权限关联(RRolePerm): 新增 {} / 更新 {}", rpStats[0], rpStats[1]);
+
+                                    // 打印每个角色的权限关联数量
+                                    if (!rolePermCounts.isEmpty()) {
+                                        log.info("[ INST ] ----------------------------------------");
+                                        log.info("[ INST ] 各角色权限关联数量:");
+                                        rolePermCounts.entrySet().stream()
+                                            .sorted(Map.Entry.comparingByKey())
+                                            .forEach(entry ->
+                                                log.info("[ INST ]   {}: {} 个权限", entry.getKey(), entry.getValue())
+                                            );
+                                    }
+
                                     log.info("[ INST ] ========================================");
                                     return true;
                                 });
