@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.ticket.batch.import"
+  resource: "resource.workflow"

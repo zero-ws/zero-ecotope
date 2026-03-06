@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.todo.categories"
+  resource: "resource.workflow"
+  identifier: "w.toto"

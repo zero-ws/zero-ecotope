@@ -1,0 +1,10 @@
+data:
+  keyword: "crud.todo.by-key"
+  resource: "resource.workflow"
+  virtual: true
+  seekSyntax:
+    phase: AFTER
+    data:
+      type: RECORD
+      viewId: "`${viewId}`"
+      identifier: "w.todo"

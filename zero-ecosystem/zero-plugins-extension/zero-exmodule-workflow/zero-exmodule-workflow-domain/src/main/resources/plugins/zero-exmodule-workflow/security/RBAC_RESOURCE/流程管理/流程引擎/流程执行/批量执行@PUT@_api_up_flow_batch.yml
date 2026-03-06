@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.up.flow-run.batch"
+  resource: "resource.workflow"

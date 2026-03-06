@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.todo.add"
+  resource: "resource.workflow"

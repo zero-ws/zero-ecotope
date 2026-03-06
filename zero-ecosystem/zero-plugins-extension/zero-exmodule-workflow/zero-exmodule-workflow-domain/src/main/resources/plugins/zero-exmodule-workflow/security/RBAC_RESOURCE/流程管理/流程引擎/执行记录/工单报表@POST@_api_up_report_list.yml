@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.up.report.list"
+  resource: "resource.workflow"
+  identifier: "w.ticket"
