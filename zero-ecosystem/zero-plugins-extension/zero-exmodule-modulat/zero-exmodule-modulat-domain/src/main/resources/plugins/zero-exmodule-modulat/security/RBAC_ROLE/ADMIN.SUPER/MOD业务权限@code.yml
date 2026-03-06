@@ -1,0 +1,3 @@
+data:
+  - "perm.rbac.module.admin"
+  - "perm.rbac.module.system"

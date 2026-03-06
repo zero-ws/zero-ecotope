@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.app-module.block.process"
+  resource: "resource.modulat"
+  identifier: "b.block"
