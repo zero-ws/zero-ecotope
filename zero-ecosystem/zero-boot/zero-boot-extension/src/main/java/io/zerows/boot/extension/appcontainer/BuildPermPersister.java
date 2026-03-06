@@ -4,17 +4,16 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.store.jooq.DB;
+import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SActionDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SPermissionDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SResourceDao;
-import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
 import io.zerows.extension.module.rbac.domain.tables.daos.SRoleDao;
+import io.zerows.extension.module.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SAction;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SPermission;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
-import io.zerows.extension.module.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SRole;
-import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -79,7 +78,6 @@ class BuildPermPersister {
      * 返回 [新增数, 更新数]
      */
     Future<int[]> saveActions(final Map<String, SAction> actions) {
-        log.info("[ INST ] 开始保存操作，共 {} 个", actions.size());
 
         final AtomicInteger insertCount = new AtomicInteger(0);
         final AtomicInteger updateCount = new AtomicInteger(0);
@@ -98,7 +96,7 @@ class BuildPermPersister {
         }
 
         return Future.all(futures).map(v -> {
-            log.info("[ INST ] 操作保存完成: 新增 {} / 更新 {}", insertCount.get(), updateCount.get());
+            log.info("[ INST ] 操作保存完成: 新增 {} / 更新 {} / 总数 {}", insertCount.get(), updateCount.get(), actions.size());
             return new int[]{insertCount.get(), updateCount.get()};
         });
     }

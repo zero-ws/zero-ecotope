@@ -52,10 +52,10 @@ class InstPermLoad implements InstPerm {
                 }
                 initialized = true;
 
-                log.info("[ PERM ] 扫描完成: RBAC_RESOURCE {} 个, RBAC_ROLE {} 个",
+                log.info("[ INST ] 扫描完成: RBAC_RESOURCE {} 个, RBAC_ROLE {} 个",
                     RESOURCE_DIRS.size(), ROLE_DIRS.size());
             } catch (final Exception e) {
-                log.error("[ PERM ] 扫描 plugins 目录失败", e);
+                log.error("[ INST ] 扫描 plugins 目录失败", e);
             }
         }
     }
@@ -97,19 +97,19 @@ class InstPermLoad implements InstPerm {
                     final File resourceDir = new File(securityDir, "RBAC_RESOURCE");
                     if (resourceDir.exists() && resourceDir.isDirectory()) {
                         RESOURCE_DIRS.put(mid, resourceDir.toURI());
-                        log.info("[ PERM ] [File] 找到 RBAC_RESOURCE: plugins/{}/security/RBAC_RESOURCE", mid);
+                        log.info("[ INST ] [File] 找到 RBAC_RESOURCE: plugins/{}/security/RBAC_RESOURCE", mid);
                     }
 
                     // 检查 RBAC_ROLE 目录
                     final File roleDir = new File(securityDir, "RBAC_ROLE");
                     if (roleDir.exists() && roleDir.isDirectory()) {
                         ROLE_DIRS.put(mid, roleDir.toURI());
-                        log.info("[ PERM ] [File] 找到 RBAC_ROLE: plugins/{}/security/RBAC_ROLE", mid);
+                        log.info("[ INST ] [File] 找到 RBAC_ROLE: plugins/{}/security/RBAC_ROLE", mid);
                     }
                 }
             }
         } catch (final Exception e) {
-            log.error("[ PERM ] 解析文件系统 URL 失败: {}", url, e);
+            log.error("[ INST ] 解析文件系统 URL 失败: {}", url, e);
         }
     }
 
@@ -142,10 +142,10 @@ class InstPermLoad implements InstPerm {
 
                             if ("RBAC_RESOURCE".equals(type)) {
                                 RESOURCE_DIRS.put(mid, new URI(uriStr.replace(" ", "%20")));
-                                log.info("[ PERM ] [JAR] 找到 RBAC_RESOURCE: plugins/{}/security/RBAC_RESOURCE", mid);
+                                log.info("[ INST ] [JAR] 找到 RBAC_RESOURCE: plugins/{}/security/RBAC_RESOURCE", mid);
                             } else if ("RBAC_ROLE".equals(type)) {
                                 ROLE_DIRS.put(mid, new URI(uriStr.replace(" ", "%20")));
-                                log.info("[ PERM ] [JAR] 找到 RBAC_ROLE: plugins/{}/security/RBAC_ROLE", mid);
+                                log.info("[ INST ] [JAR] 找到 RBAC_ROLE: plugins/{}/security/RBAC_ROLE", mid);
                             }
                         }
                     }
