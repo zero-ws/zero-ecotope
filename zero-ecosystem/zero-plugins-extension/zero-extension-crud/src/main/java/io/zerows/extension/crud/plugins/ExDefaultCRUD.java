@@ -15,4 +15,11 @@ public class ExDefaultCRUD implements ExDefault {
             "/api/:actor/import"
         );
     }
+
+    @Override
+    public Set<String> ruleInclude() {
+        return Set.of(
+            "/api/:actor"
+        );
+    }
 }

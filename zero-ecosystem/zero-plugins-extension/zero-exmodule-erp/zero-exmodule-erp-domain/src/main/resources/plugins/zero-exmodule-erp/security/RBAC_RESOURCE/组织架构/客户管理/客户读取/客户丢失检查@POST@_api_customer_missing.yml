@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.customer.if.missing"
+  resource: "resource.organization"

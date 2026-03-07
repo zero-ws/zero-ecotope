@@ -7,8 +7,6 @@ package io.zerows.extension.module.rbac.domain;
 import io.zerows.extension.module.rbac.domain.tables.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
 import io.zerows.extension.module.rbac.domain.tables.RUserRole;
-import io.zerows.extension.module.rbac.domain.tables.SPacket;
-import io.zerows.extension.module.rbac.domain.tables.SPath;
 import io.zerows.extension.module.rbac.domain.tables.SUser;
 import io.zerows.extension.module.rbac.domain.tables.SVisitant;
 
@@ -31,8 +29,6 @@ public class Indexes {
     public static final Index R_ROLE_PERM_IDX_R_ROLE_PERM_ROLE_ID = Internal.createIndex(DSL.name("IDX_R_ROLE_PERM_ROLE_ID"), RRolePerm.R_ROLE_PERM, new OrderField[] { RRolePerm.R_ROLE_PERM.ROLE_ID }, false);
     public static final Index R_USER_GROUP_IDX_R_USER_GROUP_USER_ID = Internal.createIndex(DSL.name("IDX_R_USER_GROUP_USER_ID"), RUserGroup.R_USER_GROUP, new OrderField[] { RUserGroup.R_USER_GROUP.USER_ID }, false);
     public static final Index R_USER_ROLE_IDX_R_USER_ROLE_USER_ID = Internal.createIndex(DSL.name("IDX_R_USER_ROLE_USER_ID"), RUserRole.R_USER_ROLE, new OrderField[] { RUserRole.R_USER_ROLE.USER_ID }, false);
-    public static final Index S_PACKET_IDX_S_PACKET_PATH_CODE_SIGMA = Internal.createIndex(DSL.name("IDX_S_PACKET_PATH_CODE_SIGMA"), SPacket.S_PACKET, new OrderField[] { SPacket.S_PACKET.CODE, SPacket.S_PACKET.SIGMA }, false);
-    public static final Index S_PATH_IDX_S_PATH_RUN_TYPE_SIGMA = Internal.createIndex(DSL.name("IDX_S_PATH_RUN_TYPE_SIGMA"), SPath.S_PATH, new OrderField[] { SPath.S_PATH.RUN_TYPE, SPath.S_PATH.SIGMA }, false);
     public static final Index S_USER_IDX_S_USER_CODE = Internal.createIndex(DSL.name("IDX_S_USER_CODE"), SUser.S_USER, new OrderField[] { SUser.S_USER.CODE }, false);
     public static final Index S_USER_IDX_S_USER_MOBILE = Internal.createIndex(DSL.name("IDX_S_USER_MOBILE"), SUser.S_USER, new OrderField[] { SUser.S_USER.MOBILE }, false);
     public static final Index S_USER_IDX_S_USER_MODEL = Internal.createIndex(DSL.name("IDX_S_USER_MODEL"), SUser.S_USER, new OrderField[] { SUser.S_USER.MODEL_KEY, SUser.S_USER.MODEL_ID }, false);

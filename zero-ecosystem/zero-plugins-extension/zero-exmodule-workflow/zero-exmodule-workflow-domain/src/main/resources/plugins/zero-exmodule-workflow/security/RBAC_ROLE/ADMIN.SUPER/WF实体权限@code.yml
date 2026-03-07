@@ -1,0 +1,9 @@
+data:
+  # CRUD - 工单管理
+  - "perm.crud.ticket.fetch"
+  - "perm.crud.ticket.write"
+  - "perm.crud.ticket.meta"
+  # CRUD - 待办管理
+  - "perm.crud.todo.fetch"
+  - "perm.crud.todo.write"
+  - "perm.crud.todo.meta"

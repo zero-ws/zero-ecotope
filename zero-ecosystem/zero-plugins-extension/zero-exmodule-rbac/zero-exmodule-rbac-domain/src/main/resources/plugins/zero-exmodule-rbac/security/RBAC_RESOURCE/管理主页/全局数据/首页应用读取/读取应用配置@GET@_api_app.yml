@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.app.fetch"
+  resource: "resource.ambient"

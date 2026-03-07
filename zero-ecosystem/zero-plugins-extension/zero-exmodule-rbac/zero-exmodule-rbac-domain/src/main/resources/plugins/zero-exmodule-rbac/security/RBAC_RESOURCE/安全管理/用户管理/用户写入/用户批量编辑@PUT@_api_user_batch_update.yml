@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.user.batch.edit"
+  resource: "resource.security"

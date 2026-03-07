@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.ticket.batch.export"
+  resource: "resource.workflow"

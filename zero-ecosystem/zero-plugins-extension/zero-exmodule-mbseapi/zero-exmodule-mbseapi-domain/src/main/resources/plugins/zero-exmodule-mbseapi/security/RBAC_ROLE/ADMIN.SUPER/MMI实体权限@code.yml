@@ -1,0 +1,5 @@
+data:
+  # CRUD - 接口管理
+  - "perm.crud.x-api.fetch"
+  - "perm.crud.x-api.write"
+  - "perm.crud.x-api.meta"

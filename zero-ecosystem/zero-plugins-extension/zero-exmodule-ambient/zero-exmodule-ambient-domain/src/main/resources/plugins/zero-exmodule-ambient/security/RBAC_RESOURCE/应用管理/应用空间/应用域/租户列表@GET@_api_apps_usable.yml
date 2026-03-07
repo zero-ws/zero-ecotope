@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.app.env.running"
+  resource: "resource.ambient"

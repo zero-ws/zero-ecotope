@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.ticket.add"
+  resource: "resource.workflow"

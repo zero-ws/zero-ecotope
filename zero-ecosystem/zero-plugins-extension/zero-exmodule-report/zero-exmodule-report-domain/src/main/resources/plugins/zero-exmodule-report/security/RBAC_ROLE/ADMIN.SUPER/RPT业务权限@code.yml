@@ -1,0 +1,3 @@
+data:
+  - "perm.rbac.report.fetch"
+  - "perm.rbac.report.admin"

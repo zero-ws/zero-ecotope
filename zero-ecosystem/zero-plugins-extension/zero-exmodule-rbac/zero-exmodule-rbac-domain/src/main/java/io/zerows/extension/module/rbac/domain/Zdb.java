@@ -10,9 +10,6 @@ import io.zerows.extension.module.rbac.domain.tables.RUserGroup;
 import io.zerows.extension.module.rbac.domain.tables.RUserRole;
 import io.zerows.extension.module.rbac.domain.tables.SAction;
 import io.zerows.extension.module.rbac.domain.tables.SGroup;
-import io.zerows.extension.module.rbac.domain.tables.SPacket;
-import io.zerows.extension.module.rbac.domain.tables.SPath;
-import io.zerows.extension.module.rbac.domain.tables.SPermSet;
 import io.zerows.extension.module.rbac.domain.tables.SPermission;
 import io.zerows.extension.module.rbac.domain.tables.SResource;
 import io.zerows.extension.module.rbac.domain.tables.SRole;
@@ -74,21 +71,6 @@ public class Zdb extends SchemaImpl {
     public final SGroup S_GROUP = SGroup.S_GROUP;
 
     /**
-     * S_PACKET
-     */
-    public final SPacket S_PACKET = SPacket.S_PACKET;
-
-    /**
-     * S_PATH
-     */
-    public final SPath S_PATH = SPath.S_PATH;
-
-    /**
-     * S_PERM_SET
-     */
-    public final SPermSet S_PERM_SET = SPermSet.S_PERM_SET;
-
-    /**
      * S_PERMISSION
      */
     public final SPermission S_PERMISSION = SPermission.S_PERMISSION;
@@ -140,9 +122,6 @@ public class Zdb extends SchemaImpl {
             RUserRole.R_USER_ROLE,
             SAction.S_ACTION,
             SGroup.S_GROUP,
-            SPacket.S_PACKET,
-            SPath.S_PATH,
-            SPermSet.S_PERM_SET,
             SPermission.S_PERMISSION,
             SResource.S_RESOURCE,
             SRole.S_ROLE,

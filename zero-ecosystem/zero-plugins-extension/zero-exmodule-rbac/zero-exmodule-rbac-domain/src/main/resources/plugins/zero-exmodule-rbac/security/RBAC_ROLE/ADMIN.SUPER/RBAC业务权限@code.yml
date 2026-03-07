@@ -1,0 +1,9 @@
+data:
+  # 原 login.index 权限文件
+  - "perm.rbac.acl-view.admin"
+  - "perm.rbac.home.fetch"
+  - "perm.rbac.privacy.company"
+  - "perm.rbac.privacy.user"
+  - "perm.rbac.resource.fetch"
+  - "perm.rbac.view-p.admin"
+  - "perm.rbac.permission.admin"

@@ -1,0 +1,4 @@
+data:
+  - "perm.rbac.fms.trans"
+  - "perm.rbac.fms.settlement"
+  - "perm.rbac.fms.billing"

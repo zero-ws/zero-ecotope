@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.ui-ops.by-control"
+  resource: "resource.ui"
+  identifier: "ui.op"

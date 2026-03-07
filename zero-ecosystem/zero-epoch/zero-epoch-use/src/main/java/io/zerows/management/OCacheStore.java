@@ -2,8 +2,6 @@ package io.zerows.management;
 
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.json.JsonObject;
-import io.zerows.epoch.metadata.security.KPermit;
-import io.zerows.epoch.metadata.security.KSemi;
 import io.zerows.platform.annotations.meta.Memory;
 import io.zerows.specification.atomic.HCombiner;
 import io.zerows.specification.atomic.HCommand;
@@ -31,13 +29,4 @@ public interface OCacheStore {
     @SuppressWarnings("all")
     @Memory(HCommand.Async.class)
     Cc<String, HCommand.Async> CCT_EVENT = Cc.openThread();
-    /*
-     * 「环境级别处理」安全管理专用
-     * - CC_PERMIT  :  KPermit      权限定义对象
-     * - CC_SEMI    :  KSemi        权限执行双维对象（维度+数据）
-     */
-    @Memory(KPermit.class)
-    Cc<String, KPermit> CC_PERMIT = Cc.open();
-    @Memory(KSemi.class)
-    Cc<String, KSemi> CC_SEMI = Cc.open();
 }

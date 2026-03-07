@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.privacy.company.read"
+  resource: "resource.organization"

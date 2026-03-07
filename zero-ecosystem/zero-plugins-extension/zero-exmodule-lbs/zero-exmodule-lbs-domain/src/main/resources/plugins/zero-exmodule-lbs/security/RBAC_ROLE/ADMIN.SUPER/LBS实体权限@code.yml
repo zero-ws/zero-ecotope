@@ -1,0 +1,17 @@
+data:
+  # CRUD - 省会管理
+  - "perm.crud.state.fetch"
+  - "perm.crud.state.write"
+  - "perm.crud.state.meta"
+  # CRUD - 城市管理
+  - "perm.crud.city.fetch"
+  - "perm.crud.city.write"
+  - "perm.crud.city.meta"
+  # CRUD - 楼栋管理
+  - "perm.crud.tent.fetch"
+  - "perm.crud.tent.write"
+  - "perm.crud.tent.meta"
+  # CRUD - 楼层管理
+  - "perm.crud.floor.fetch"
+  - "perm.crud.floor.write"
+  - "perm.crud.floor.meta"

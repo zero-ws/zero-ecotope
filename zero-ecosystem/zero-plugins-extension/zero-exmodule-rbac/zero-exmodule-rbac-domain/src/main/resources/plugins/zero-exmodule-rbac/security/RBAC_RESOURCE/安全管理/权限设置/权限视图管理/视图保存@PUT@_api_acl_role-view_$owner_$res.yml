@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.acl.role-view.admin"
+  resource: "resource.security"

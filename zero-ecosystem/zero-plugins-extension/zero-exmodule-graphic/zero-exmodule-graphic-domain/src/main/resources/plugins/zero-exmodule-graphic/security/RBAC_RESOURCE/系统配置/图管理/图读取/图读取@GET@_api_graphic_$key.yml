@@ -1,0 +1,10 @@
+data:
+  keyword: "crud.graphic.by-key"
+  resource: "resource.engine"
+  virtual: true
+  seekSyntax:
+    phase: AFTER
+    data:
+      type: RECORD
+      viewId: "`${viewId}`"
+      identifier: "g.graphic"

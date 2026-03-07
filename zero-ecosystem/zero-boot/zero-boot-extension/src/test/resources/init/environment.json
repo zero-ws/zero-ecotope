@@ -1,0 +1,11 @@
+{
+  "global": {
+    "sigma": "ENhwBAJPZuSgIAE5EDakZT9UQY",
+    "appId": "test-app-id",
+    "language": "cn",
+    "active": true,
+    "tenantId": "test-tenant-id",
+    "createdBy": "system",
+    "updatedBy": "system"
+  }
+}

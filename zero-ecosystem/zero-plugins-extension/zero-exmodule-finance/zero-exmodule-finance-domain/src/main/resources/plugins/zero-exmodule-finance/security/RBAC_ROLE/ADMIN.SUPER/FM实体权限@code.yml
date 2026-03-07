@@ -1,0 +1,33 @@
+data:
+  # CRUD - 开户行管理
+  - "perm.crud.bank.fetch"
+  - "perm.crud.bank.write"
+  - "perm.crud.bank.meta"
+  # CRUD - 账本管理
+  - "perm.crud.fm-book.fetch"
+  - "perm.crud.fm-book.write"
+  - "perm.crud.fm-book.meta"
+  # CRUD - 币种管理
+  - "perm.crud.currency.fetch"
+  - "perm.crud.currency.write"
+  - "perm.crud.currency.meta"
+  # CRUD - 应收&退款
+  - "perm.crud.debt.fetch"
+  - "perm.crud.debt.write"
+  - "perm.crud.debt.meta"
+  # CRUD - 结算管理
+  - "perm.crud.settlement.fetch"
+  - "perm.crud.settlement.write"
+  - "perm.crud.settlement.meta"
+  # CRUD - 会计科目
+  - "perm.crud.fm-subject.fetch"
+  - "perm.crud.fm-subject.write"
+  - "perm.crud.fm-subject.meta"
+  # CRUD - 账单项
+  - "perm.crud.fm-term.fetch"
+  - "perm.crud.fm-term.write"
+  - "perm.crud.fm-term.meta"
+  # CRUD - 交易管理
+  - "perm.crud.trans.fetch"
+  - "perm.crud.trans.write"
+  - "perm.crud.trans.meta"

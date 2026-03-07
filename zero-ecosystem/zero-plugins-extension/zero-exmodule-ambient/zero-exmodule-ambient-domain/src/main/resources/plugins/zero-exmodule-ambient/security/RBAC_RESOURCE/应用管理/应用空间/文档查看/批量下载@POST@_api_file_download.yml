@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.app.file-download.batch"
+  resource: "resource.ambient"

@@ -1,0 +1,5 @@
+data:
+  # CRUD - 图管理
+  - "perm.crud.graphic.fetch"
+  - "perm.crud.graphic.write"
+  - "perm.crud.graphic.meta"

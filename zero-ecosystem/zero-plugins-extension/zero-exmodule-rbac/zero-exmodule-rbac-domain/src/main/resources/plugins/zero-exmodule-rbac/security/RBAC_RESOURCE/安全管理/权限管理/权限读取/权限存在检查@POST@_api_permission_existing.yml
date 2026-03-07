@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.permission.if.existing"
+  resource: "resource.security"

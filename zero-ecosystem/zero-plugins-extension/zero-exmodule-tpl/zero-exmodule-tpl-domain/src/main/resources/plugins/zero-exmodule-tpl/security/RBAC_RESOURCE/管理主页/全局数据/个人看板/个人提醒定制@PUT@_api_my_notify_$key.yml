@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.my.notify.save"
+  resource: "resource.ambient"
+  identifier: "i.message"

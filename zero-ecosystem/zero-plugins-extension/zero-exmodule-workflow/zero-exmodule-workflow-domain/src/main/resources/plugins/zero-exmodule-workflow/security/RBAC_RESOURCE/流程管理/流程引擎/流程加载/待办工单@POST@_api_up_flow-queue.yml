@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.up.flow.queue"
+  resource: "resource.workflow"
+  identifier: "w.toto"

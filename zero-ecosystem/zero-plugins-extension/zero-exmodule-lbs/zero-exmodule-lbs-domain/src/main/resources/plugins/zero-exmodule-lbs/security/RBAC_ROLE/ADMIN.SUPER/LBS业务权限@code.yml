@@ -1,0 +1,3 @@
+data:
+  - "perm.rbac.lbs-address.admin"
+  - "perm.rbac.lbs-region.admin"

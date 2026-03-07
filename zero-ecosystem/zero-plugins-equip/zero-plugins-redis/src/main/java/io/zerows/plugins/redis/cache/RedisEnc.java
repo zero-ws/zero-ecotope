@@ -6,10 +6,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.redis.client.Response;
 import io.zerows.support.Ut;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Redis 编码解码器 (极限精简修复版)
  */
+@Slf4j
 class RedisEnc {
     static final Buffer NULL_BUFFER = Buffer.buffer("__NULL__");
 
@@ -45,6 +47,7 @@ class RedisEnc {
 
         } catch (final Exception ex) {
             // 如果反序列化失败（比如遇到无法构造抽象类的旧数据），返回 null 触发重刷
+            log.error(ex.getMessage(), ex);
             return null;
         }
     }
@@ -72,6 +75,10 @@ class RedisEnc {
             container.put("data", ((JsonArray) value).encode());
             container.put("isObject", false);
             return container.toBuffer();
+        }
+
+        if (Ut.isCollection(value)) {
+            log.error("[ PLUG ] ( Redis ) 不支持直接缓存 Collection 类型，请转换成 JsonArray 后缓存。Value: {}", value);
         }
 
         // 3. 业务 POJO (如 UserAt) 的正确处理

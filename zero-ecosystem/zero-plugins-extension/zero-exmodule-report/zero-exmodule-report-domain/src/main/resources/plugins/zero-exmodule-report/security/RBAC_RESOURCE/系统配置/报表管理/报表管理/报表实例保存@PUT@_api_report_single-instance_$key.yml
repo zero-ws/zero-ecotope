@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.report.single-instance.save"
+  resource: "resource.ambient"

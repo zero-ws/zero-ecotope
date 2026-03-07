@@ -4,12 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
-import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.Envelop;
-import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.common.ScOwner;
-import io.zerows.extension.module.rbac.domain.tables.daos.SResourceDao;
-import io.zerows.extension.module.rbac.domain.tables.pojos.SPacket;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SResource;
 import io.zerows.program.Ux;
 import io.zerows.support.Fx;
@@ -18,87 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
 @Slf4j
 class QuestAcl implements Quest {
-    private final transient SyntaxRegion syntaxRegion;
     private final transient SyntaxAop syntaxAop;
 
     QuestAcl() {
-        this.syntaxRegion = new SyntaxRegion();
         this.syntaxAop = new SyntaxAop();
-    }
-
-    @Override
-    public Future<JsonObject> fetchAsync(final JsonObject input, final List<SPacket> packets,
-                                         final ScOwner owner) {
-        if (packets.isEmpty()) {
-            return Ux.futureJ();
-        }
-        /*
-         * 1. 提取 SPacket 中配置的资源编码：resource code, 属性名：resource
-         * 2. 根据列表提取完整的 sigma 数据
-         * 3. 构造最终的资源条件
-         *    SIGMA = ? AND RESOURCE IN (?, ?)
-         */
-        final List<SPacket> packetData = packets.stream()
-            .filter(Objects::nonNull)
-            .filter(item -> Ut.isNotNil(item.getResource()))
-            .toList();
-
-        final Set<String> restCodes = packetData.stream()
-            .map(SPacket::getResource)
-            .collect(Collectors.toSet());
-        final String sigma = Ut.valueString(input, KName.SIGMA);
-        final JsonObject condition = Ux.whereAnd()
-            .put(KName.SIGMA, sigma)
-            .put(KName.CODE + ",i", Ut.toJArray(restCodes));
-
-
-        return DB.on(SResourceDao.class).<SResource>fetchAsync(condition).compose(resources -> {
-            // 根据资源记录读取所需视图集
-            final ConcurrentMap<String, SResource> resourceMap =
-                Ut.elementMap(resources, SResource::getCode);
-            // resource -> json
-            final ConcurrentMap<String, Future<JsonObject>> futureMap =
-                new ConcurrentHashMap<>();
-            packetData.forEach(packet -> {
-                final SResource resource = resourceMap.get(packet.getResource());
-                futureMap.put(resource.getCode(), this.syntaxRegion.regionJ(resource, owner, packet));
-            });
-            return Fx.combineM(futureMap);
-        }).compose(map -> Ux.future(Ut.toJObject(map)));
-    }
-
-    @Override
-    public Future<JsonObject> syncAsync(final JsonObject resourceJ) {
-        final ConcurrentMap<String, Future<JsonArray>> futureM = new ConcurrentHashMap<>();
-        Ut.<JsonArray>itJObject(resourceJ, (resourceData, code) -> {
-            /*
-             * 1. 构造 SResource
-             * 2. 构造 ScOwner
-             * 3. 数据部分直接从 resourceData 中直接提取
-             */
-            final JsonObject condition = Ux.whereAnd();
-            condition.put(KName.CODE, code);
-            condition.put(KName.SIGMA, Ut.valueString(resourceData, KName.SIGMA));
-            futureM.put(code, DB.on(SResourceDao.class).<SResource>fetchOneAsync(condition).compose(resource -> {
-                if (Objects.isNull(resource)) {
-                    log.info("{} Acl 没有查找到和资源匹配的记录 / {}", ScConstant.K_PREFIX, code);
-                    return Ux.future();
-                }
-                return this.syncViews(resource, resourceData);
-            }));
-        });
-        return Fx.combineM(futureM).compose(map -> Ux.future(Ut.toJObject(map)));
     }
 
     private Future<JsonArray> syncViews(final SResource resource, final JsonArray viewData) {

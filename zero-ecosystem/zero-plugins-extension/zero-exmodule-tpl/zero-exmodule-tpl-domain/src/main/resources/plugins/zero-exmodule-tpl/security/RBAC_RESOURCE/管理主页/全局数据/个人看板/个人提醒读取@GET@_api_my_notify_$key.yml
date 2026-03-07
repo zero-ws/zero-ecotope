@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.my.notify.by-key"
+  resource: "resource.ambient"
+  identifier: "i.message"

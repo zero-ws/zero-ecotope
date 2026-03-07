@@ -1,0 +1,8 @@
+data:
+  - "perm.rbac.app.dashboard"
+  - "perm.rbac.app.scope"
+  - "perm.rbac.app.linkage"
+  - "perm.rbac.app.dict.tabular"
+  - "perm.rbac.app.dict.category"
+  - "perm.rbac.app.document.view"
+  - "perm.rbac.app.document.admin"

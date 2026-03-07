@@ -28,6 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 负责将 XApp 和 XMenu 数据保存到数据库
  */
 @Slf4j
+@SuppressWarnings("all")
 class BuildMenuPersister {
 
     private static final YAMLMapper YAML_MAPPER = new YAMLMapper();

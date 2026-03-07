@@ -99,6 +99,36 @@ public class SPermissionDao extends AbstractVertxDAO<SPermissionRecord, io.zerow
         }
 
         /**
+     * Find records that have <code>TYPE IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermission>> findManyByType(Collection<String> values) {
+                return findManyByCondition(SPermission.S_PERMISSION.TYPE.in(values));
+        }
+
+        /**
+     * Find records that have <code>TYPE IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermission>> findManyByType(Collection<String> values, int limit) {
+                return findManyByCondition(SPermission.S_PERMISSION.TYPE.in(values),limit);
+        }
+
+        /**
+     * Find records that have <code>DIRECTORY IN (values)</code> asynchronously
+     */
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermission>> findManyByDirectory(Collection<String> values) {
+                return findManyByCondition(SPermission.S_PERMISSION.DIRECTORY.in(values));
+        }
+
+        /**
+     * Find records that have <code>DIRECTORY IN (values)</code> asynchronously
+     * limited by the given limit
+     */
+        public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermission>> findManyByDirectory(Collection<String> values, int limit) {
+                return findManyByCondition(SPermission.S_PERMISSION.DIRECTORY.in(values),limit);
+        }
+
+        /**
      * Find records that have <code>SIGMA IN (values)</code> asynchronously
      */
         public Future<List<io.zerows.extension.module.rbac.domain.tables.pojos.SPermission>> findManyBySigma(Collection<String> values) {

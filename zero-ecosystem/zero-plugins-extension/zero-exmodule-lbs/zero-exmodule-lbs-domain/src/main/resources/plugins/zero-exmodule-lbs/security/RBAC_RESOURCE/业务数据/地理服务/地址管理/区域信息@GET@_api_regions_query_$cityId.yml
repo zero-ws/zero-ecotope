@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.lbs-address.region.by-city"
+  resource: "resource.lbs"
+  identifier: "lbs.region"

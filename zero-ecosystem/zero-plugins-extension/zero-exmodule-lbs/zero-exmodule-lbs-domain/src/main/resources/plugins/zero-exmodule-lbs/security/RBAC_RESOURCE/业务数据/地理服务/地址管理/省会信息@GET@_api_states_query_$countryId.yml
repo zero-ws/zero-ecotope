@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.lbs-address.state.by-country"
+  resource: "resource.lbs"
+  identifier: "lbs.state"

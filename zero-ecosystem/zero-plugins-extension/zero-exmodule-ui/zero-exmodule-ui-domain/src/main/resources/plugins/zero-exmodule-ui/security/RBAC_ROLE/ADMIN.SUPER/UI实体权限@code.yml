@@ -1,0 +1,5 @@
+data:
+  # CRUD - 表单管理
+  - "perm.crud.ui-form.fetch"
+  - "perm.crud.ui-form.write"
+  - "perm.crud.ui-form.meta"

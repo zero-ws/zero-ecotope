@@ -8,4 +8,8 @@ import java.util.Set;
 public interface ExDefault {
 
     Set<String> ruleExclude();
+
+    default Set<String> ruleInclude() {
+        return Set.of();
+    }
 }

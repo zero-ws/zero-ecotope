@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.ui-list.by-identifier"
+  resource: "resource.ui"
+  identifier: "ui.list"

@@ -1,0 +1,3 @@
+data:
+  keyword: "crud.todo.batch.import"
+  resource: "resource.workflow"

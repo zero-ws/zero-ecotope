@@ -74,8 +74,6 @@ public class AppService implements AppStub {
                 stub -> stub.extension(appJ, false),
                 () -> appJ
             ));
-        /* Document Platform Initialized */
-        // .compose(appJ -> AtPin.?nitDocument(id).compose(nil -> Ux.future(appJ)));
     }
 
     @Override

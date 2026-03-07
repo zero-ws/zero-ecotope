@@ -1,0 +1,5 @@
+data:
+  # 工作流权限
+  - "perm.rbac.workflow.metadata"
+  - "perm.rbac.workflow.execute"
+  - "perm.rbac.workflow.activity"

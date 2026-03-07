@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.ui-page.fetch"
+  resource: "resource.ui"
+  identifier: "ui.page"

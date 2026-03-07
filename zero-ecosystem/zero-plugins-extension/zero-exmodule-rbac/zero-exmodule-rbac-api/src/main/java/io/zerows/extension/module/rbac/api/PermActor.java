@@ -12,15 +12,12 @@ import io.zerows.epoch.store.jooq.DB;
 import io.zerows.epoch.web.Account;
 import io.zerows.extension.module.rbac.common.ScConstant;
 import io.zerows.extension.module.rbac.domain.tables.daos.RRolePermDao;
-import io.zerows.extension.module.rbac.domain.tables.pojos.SPermSet;
 import io.zerows.extension.module.rbac.servicespec.PermStub;
 import io.zerows.extension.module.rbac.servicespec.RightsStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-
-import java.time.LocalDateTime;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -105,18 +102,19 @@ public class PermActor {
         final String userKey = Account.userId(user);
 
         // SPermSet
-        final SPermSet permSet = new SPermSet();
-        permSet.setName(group);
-        permSet.setType(type);
-        permSet.setActive(Boolean.TRUE);
-        permSet.setSigma(sigma);
-        permSet.setLanguage(header.getLanguage());
-        permSet.setUpdatedAt(LocalDateTime.now());
-        permSet.setUpdatedBy(userKey);
+        return null;
+//        final SPermSet permSet = new SPermSet();
+//        permSet.setName(group);
+//        permSet.setType(type);
+//        permSet.setActive(Boolean.TRUE);
+//        permSet.setSigma(sigma);
+//        permSet.setLanguage(header.getLanguage());
+//        permSet.setUpdatedAt(LocalDateTime.now());
+//        permSet.setUpdatedBy(userKey);
 
-        return this.setStub.saveDefinition(permissions, permSet)                       // Permission Process
-            .compose(nil -> this.stub.syncAsync(removed, relation, userKey))       // Action Process
-            .compose(nil -> Ux.future(relation));
+//        return this.setStub.saveDefinition(permissions, permSet)                       // Permission Process
+//            .compose(nil -> this.stub.syncAsync(removed, relation, userKey))       // Action Process
+//            .compose(nil -> Ux.future(relation));
     }
 
     @Address(Addr.Authority.PERMISSION_BY_ROLE)

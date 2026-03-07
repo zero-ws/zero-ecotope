@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.fms.fm-book.finalize"
+  resource: "resource.finance"
+  identifier: "fm.book"

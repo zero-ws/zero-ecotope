@@ -69,6 +69,26 @@ public interface ISPermission extends VertxPojo, Serializable {
     public String getName();
 
     /**
+     * Setter for <code>ZDB.S_PERMISSION.TYPE</code>. 「type」- 权限类型
+     */
+    public ISPermission setType(String value);
+
+    /**
+     * Getter for <code>ZDB.S_PERMISSION.TYPE</code>. 「type」- 权限类型
+     */
+    public String getType();
+
+    /**
+     * Setter for <code>ZDB.S_PERMISSION.DIRECTORY</code>. 「directory」- 权限目录
+     */
+    public ISPermission setDirectory(String value);
+
+    /**
+     * Getter for <code>ZDB.S_PERMISSION.DIRECTORY</code>. 「directory」- 权限目录
+     */
+    public String getDirectory();
+
+    /**
      * Setter for <code>ZDB.S_PERMISSION.SIGMA</code>. 「sigma」- 统一标识
      */
     public ISPermission setSigma(String value);
@@ -99,42 +119,42 @@ public interface ISPermission extends VertxPojo, Serializable {
     public String getAppId();
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 启用
      */
     public ISPermission setActive(Boolean value);
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>ZDB.S_PERMISSION.ACTIVE</code>. 「active」- 启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言偏好
+     * Setter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言
      */
     public ISPermission setLanguage(String value);
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言偏好
+     * Getter for <code>ZDB.S_PERMISSION.LANGUAGE</code>. 「language」- 语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元配置
+     * Setter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元数据
      */
     public ISPermission setMetadata(JsonObject value);
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元配置
+     * Getter for <code>ZDB.S_PERMISSION.METADATA</code>. 「metadata」- 元数据
      */
     public JsonObject getMetadata();
 
     /**
-     * Setter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本号
+     * Setter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本
      */
     public ISPermission setVersion(String value);
 
     /**
-     * Getter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本号
+     * Getter for <code>ZDB.S_PERMISSION.VERSION</code>. 「version」- 版本
      */
     public String getVersion();
 
@@ -201,6 +221,8 @@ public interface ISPermission extends VertxPojo, Serializable {
                 setOrThrow(this::setComment,json::getString,"COMMENT","java.lang.String");
                 setOrThrow(this::setIdentifier,json::getString,"IDENTIFIER","java.lang.String");
                 setOrThrow(this::setName,json::getString,"NAME","java.lang.String");
+                setOrThrow(this::setType,json::getString,"TYPE","java.lang.String");
+                setOrThrow(this::setDirectory,json::getString,"DIRECTORY","java.lang.String");
                 setOrThrow(this::setSigma,json::getString,"SIGMA","java.lang.String");
                 setOrThrow(this::setTenantId,json::getString,"TENANT_ID","java.lang.String");
                 setOrThrow(this::setAppId,json::getString,"APP_ID","java.lang.String");
@@ -224,6 +246,8 @@ public interface ISPermission extends VertxPojo, Serializable {
                 json.put("COMMENT",getComment());
                 json.put("IDENTIFIER",getIdentifier());
                 json.put("NAME",getName());
+                json.put("TYPE",getType());
+                json.put("DIRECTORY",getDirectory());
                 json.put("SIGMA",getSigma());
                 json.put("TENANT_ID",getTenantId());
                 json.put("APP_ID",getAppId());

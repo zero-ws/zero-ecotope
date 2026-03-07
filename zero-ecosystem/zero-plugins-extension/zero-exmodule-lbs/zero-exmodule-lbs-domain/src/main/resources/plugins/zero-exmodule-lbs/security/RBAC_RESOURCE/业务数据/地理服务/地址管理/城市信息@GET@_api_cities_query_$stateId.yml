@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.lbs-address.city.by-state"
+  resource: "resource.lbs"
+  identifier: "lbs.city"

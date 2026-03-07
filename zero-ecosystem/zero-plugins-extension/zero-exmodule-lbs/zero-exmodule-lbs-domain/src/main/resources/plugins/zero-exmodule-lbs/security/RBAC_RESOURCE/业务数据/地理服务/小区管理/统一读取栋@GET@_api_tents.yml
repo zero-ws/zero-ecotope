@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.lbs-region.tents"
+  resource: "resource.lbs"
+  identifier: "lbs.tent"

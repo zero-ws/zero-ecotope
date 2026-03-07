@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.permission.role.get"
+  resource: "resource.security"

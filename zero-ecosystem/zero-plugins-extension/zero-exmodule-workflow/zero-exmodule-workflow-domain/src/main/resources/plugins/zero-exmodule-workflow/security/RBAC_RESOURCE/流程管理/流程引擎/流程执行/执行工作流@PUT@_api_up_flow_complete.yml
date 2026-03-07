@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.up.flow-run.complete"
+  resource: "resource.workflow"

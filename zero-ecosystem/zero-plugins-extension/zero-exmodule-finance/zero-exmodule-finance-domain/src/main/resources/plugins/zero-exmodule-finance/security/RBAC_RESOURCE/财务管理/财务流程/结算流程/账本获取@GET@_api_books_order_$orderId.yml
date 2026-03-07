@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.fms.fm-book.by-order"
+  resource: "resource.finance"
+  identifier: "fm.book"

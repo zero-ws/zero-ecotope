@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.up.flow-run.cancel"
+  resource: "resource.workflow"

@@ -46,7 +46,7 @@ public class BagService implements BagStub {
 
     private Future<JsonArray> output(final JsonArray response, final ConcurrentMap<String, JsonArray> blocks) {
         Ut.itJArray(response).forEach(json -> {
-            final String bagKey = json.getString(KName.KEY);
+            final String bagKey = Ut.vId(json);
             if (blocks.containsKey(bagKey)) {
                 json.put(KName.App.BLOCK, blocks.get(bagKey));
             } else {
@@ -65,7 +65,7 @@ public class BagService implements BagStub {
         return this.fetchBag(condition).compose(bagRef::future)
             // Block Fetching
             .compose(response -> {
-                final Set<String> bagIds = Ut.valueSetString(response, KName.KEY);
+                final Set<String> bagIds = Ut.valueSetString(response, KName.ID);
                 return this.blockStub.fetchByBag(bagIds);
             })
             // Response Build

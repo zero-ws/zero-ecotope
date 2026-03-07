@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.view-p.add"
+  resource: "resource.security"

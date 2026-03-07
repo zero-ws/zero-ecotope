@@ -88,6 +88,9 @@ interface Addr {
         String RESOURCE_UPDATE_CASCADE = EVENT + "X-RESOURCE/UPDATE-CASCADE";
         /* Resource delete with action */
         String RESOURCE_DELETE_CASCADE = EVENT + "X-RESOURCE/DELETE-CASCADE";
+
+        /* Resource 资源信息 */
+        String RESOURCE_BY_ACTION = EVENT + "X-RESOURCE/BY-ACTION";
     }
 
     interface View {
@@ -101,6 +104,9 @@ interface Addr {
         String VIEW_P_BY_ID = EVENT + "X-VIEW-P/GET/BY-ID";
         String VIEW_P_BATCH_DELETE = EVENT + "X-VIEW-P/BATCH/DELETE";
         String VIEW_P_EXISTING = EVENT + "X-VIEW-P/EXISTING";
+
+        String VIEW_R_SAVE = EVENT + "X-VIEW/ROLE/SAVE";
+        String VIEW_R_GET = EVENT + "X-VIEW/ROLE/GET";
     }
 
     interface Group {

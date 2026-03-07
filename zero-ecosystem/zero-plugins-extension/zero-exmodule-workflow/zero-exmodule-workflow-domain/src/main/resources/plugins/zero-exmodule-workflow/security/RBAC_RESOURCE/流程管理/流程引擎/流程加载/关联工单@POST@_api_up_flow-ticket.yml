@@ -1,0 +1,4 @@
+data:
+  keyword: "rbac.up.flow.ticket"
+  resource: "resource.workflow"
+  identifier: "w.toto"
