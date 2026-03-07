@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.acl-subject.menus"
+  resource: "resource.ambient"

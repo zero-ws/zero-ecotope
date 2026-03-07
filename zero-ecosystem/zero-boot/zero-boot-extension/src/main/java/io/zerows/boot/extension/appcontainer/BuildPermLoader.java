@@ -10,6 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.net.URI;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +56,9 @@ class BuildPermLoader {
     // 统计：每个角色的权限关联数量
     private final Map<String, Integer> rolePermCounts = new ConcurrentHashMap<>();
 
+    // 统计：缺少 PERM.yml 的目录（type/directory/permName）
+    private final Set<String> missingPermDirs = ConcurrentHashMap.newKeySet();
+
     private BuildPermLoader(final JsonObject globalConfig) {
         this.globalConfig = globalConfig;
     }
@@ -61,20 +69,39 @@ class BuildPermLoader {
 
     /**
      * 加载 RBAC_RESOURCE 目录下的所有权限数据
+     * 采用两阶段加载策略解决跨模块依赖问题：
+     * 1. 第一阶段：加载所有模块的 PERM.yml（填充 identifierToPermId）
+     * 2. 第二阶段：加载所有模块的 action yml（此时可正确关联 permissionId）
      *
      * @param resourceDirs Map&lt;MID, 资源目录URI&gt;
      */
     void loadResources(final Map<String, URI> resourceDirs) {
         log.info("[ INST ] 开始加载权限资源，共 {} 个模块", resourceDirs.size());
 
+        // 第一阶段：只加载 PERM.yml
+        log.info("[ INST ] 第一阶段：加载所有 PERM.yml");
         for (final Map.Entry<String, URI> entry : resourceDirs.entrySet()) {
             final String mid = entry.getKey();
             final URI uri = entry.getValue();
 
             try {
-                this.loadResourceFromUri(mid, uri);
+                this.loadPermissionsOnly(mid, uri);
             } catch (final Exception e) {
-                log.error("[ INST ] 加载模块 {} 权限资源失败", mid, e);
+                log.error("[ INST ] 加载模块 {} PERM.yml 失败", mid, e);
+            }
+        }
+        log.info("[ INST ] 第一阶段完成: SPermission {} 个", this.permissions.size());
+
+        // 第二阶段：加载 action yml 和 resource
+        log.info("[ INST ] 第二阶段：加载所有 action yml");
+        for (final Map.Entry<String, URI> entry : resourceDirs.entrySet()) {
+            final String mid = entry.getKey();
+            final URI uri = entry.getValue();
+
+            try {
+                this.loadActionsAndResources(mid, uri);
+            } catch (final Exception e) {
+                log.error("[ INST ] 加载模块 {} action yml 失败", mid, e);
             }
         }
 
@@ -125,8 +152,113 @@ class BuildPermLoader {
     // ==================== RBAC_RESOURCE 加载逻辑 ====================
 
     /**
-     * 从 URI 加载权限资源
+     * 第一阶段：只加载 PERM.yml
      */
+    private void loadPermissionsOnly(final String mid, final URI uri) throws Exception {
+        if ("jar".equals(uri.getScheme())) {
+            log.warn("[ INST ] 模块 {} 使用 JAR 协议，暂不支持两阶段加载: {}", mid, uri);
+            return;
+        }
+
+        final File resourceDir = new File(uri.getPath());
+        if (!resourceDir.exists() || !resourceDir.isDirectory()) {
+            log.warn("[ INST ] 模块 {} 资源目录不存在: {}", mid, uri);
+            return;
+        }
+
+        this.scanPermissionsRecursive(resourceDir, null, null, null);
+    }
+
+    /**
+     * 第二阶段：加载 action yml 和 resource
+     */
+    private void loadActionsAndResources(final String mid, final URI uri) throws Exception {
+        if ("jar".equals(uri.getScheme())) {
+            return;
+        }
+
+        final File resourceDir = new File(uri.getPath());
+        if (!resourceDir.exists() || !resourceDir.isDirectory()) {
+            return;
+        }
+
+        this.scanActionsRecursive(resourceDir, null, null, null);
+    }
+
+    /**
+     * 递归扫描并加载 PERM.yml（第一阶段）
+     */
+    private void scanPermissionsRecursive(final File dir, final String type, final String directory,
+                                          final String permName) throws Exception {
+        final File[] files = dir.listFiles();
+        if (files == null) {
+            return;
+        }
+
+        for (final File file : files) {
+            if (file.isDirectory()) {
+                String newType = type;
+                String newDirectory = directory;
+                String newPermName = permName;
+
+                if (type == null) {
+                    newType = file.getName();
+                } else if (directory == null) {
+                    newDirectory = file.getName();
+                } else if (permName == null) {
+                    newPermName = file.getName();
+
+                    // 加载 PERM.yml
+                    final File permFile = new File(file, "PERM.yml");
+                    if (permFile.exists() && permFile.isFile()) {
+                        this.loadPermission(permFile, newType, newDirectory, newPermName);
+                    }
+                }
+
+                this.scanPermissionsRecursive(file, newType, newDirectory, newPermName);
+            }
+        }
+    }
+
+    /**
+     * 递归扫描并加载 action yml（第二阶段）
+     */
+    private void scanActionsRecursive(final File dir, final String type, final String directory,
+                                      final String permName) throws Exception {
+        final File[] files = dir.listFiles();
+        if (files == null) {
+            return;
+        }
+
+        for (final File file : files) {
+            if (file.isDirectory()) {
+                String newType = type;
+                String newDirectory = directory;
+                String newPermName = permName;
+
+                if (type == null) {
+                    newType = file.getName();
+                } else if (directory == null) {
+                    newDirectory = file.getName();
+                } else if (permName == null) {
+                    newPermName = file.getName();
+                }
+
+                this.scanActionsRecursive(file, newType, newDirectory, newPermName);
+
+            } else if (file.getName().endsWith(".yml") && !file.getName().equals("PERM.yml")) {
+                if (type != null && directory != null && permName != null) {
+                    this.loadActionAndResource(file, type, directory, permName);
+                }
+            }
+        }
+    }
+
+    /**
+     * 从 URI 加载权限资源（已废弃，保留用于兼容）
+     * @deprecated 使用两阶段加载：loadPermissionsOnly + loadActionsAndResources
+     */
+    @Deprecated
     private void loadResourceFromUri(final String mid, final URI uri) throws Exception {
         final File resourceDir = new File(uri.getPath());
         if (!resourceDir.exists() || !resourceDir.isDirectory()) {
@@ -140,54 +272,15 @@ class BuildPermLoader {
     }
 
     /**
-     * 递归加载资源目录
-     *
-     * @param dir       当前目录
-     * @param type      一级目录名（权限类型）
-     * @param directory 二级目录名（权限目录）
-     * @param permName  三级目录名（权限名称）
+     * 递归加载资源目录（已废弃，保留用于兼容）
+     * @deprecated 使用 scanPermissionsRecursive + scanActionsRecursive
      */
+    @Deprecated
     private void loadResourceRecursive(final File dir, final String type, final String directory,
                                        final String permName) throws Exception {
-        final File[] files = dir.listFiles();
-        if (files == null) {
-            return;
-        }
-
-        for (final File file : files) {
-            if (file.isDirectory()) {
-                // 计算当前的层级
-                String newType = type;
-                String newDirectory = directory;
-                String newPermName = permName;
-
-                if (type == null) {
-                    // 一级目录：填充 type
-                    newType = file.getName();
-                } else if (directory == null) {
-                    // 二级目录：填充 directory
-                    newDirectory = file.getName();
-                } else if (permName == null) {
-                    // 三级目录：填充 name，先处理 PERM.yml
-                    newPermName = file.getName();
-
-                    // 先加载 PERM.yml，确保 identifier 可用
-                    final File permFile = new File(file, "PERM.yml");
-                    if (permFile.exists() && permFile.isFile()) {
-                        this.loadPermission(permFile, newType, newDirectory, newPermName);
-                    }
-                }
-
-                // 递归处理子目录
-                this.loadResourceRecursive(file, newType, newDirectory, newPermName);
-
-            } else if (file.getName().endsWith(".yml") && !file.getName().equals("PERM.yml")) {
-                // 处理 action yml 文件（PERM.yml 已在目录处理时加载）
-                if (type != null && directory != null && permName != null) {
-                    this.loadActionAndResource(file, type, directory, permName);
-                }
-            }
-        }
+        // 保留兼容方法，不再使用
+        this.scanPermissionsRecursive(dir, type, directory, permName);
+        this.scanActionsRecursive(dir, type, directory, permName);
     }
 
     /**
@@ -290,7 +383,7 @@ class BuildPermLoader {
         // 如果 action yml 中有 identifier，使用它；否则从 PERM.yml 中获取
         final String permIdentifier = overrideIdentifier != null ?
             overrideIdentifier : this.extractPermIdentifier(permName, directory, type);
-        final String permissionId = this.findPermissionIdByIdentifier(permIdentifier, directory, type);
+        final String permissionId = this.findPermissionIdByIdentifier(permIdentifier, type, directory, permName);
 
         // 生成 ID
         final String actionId = UUID.randomUUID().toString();
@@ -427,20 +520,23 @@ class BuildPermLoader {
     /**
      * 根据 identifier 查找 permissionId
      */
-    private String findPermissionIdByIdentifier(final String identifier, final String directory, final String type) {
+    private String findPermissionIdByIdentifier(final String identifier, final String type,
+                                                final String directory, final String permName) {
         // 先从缓存中查找
         final String permId = this.identifierToPermId.get(identifier);
         if (permId != null) {
             return permId;
         }
 
-        // 按 name/directory/type 查找
+        // 按 directory/type 查找（回退逻辑）
         for (final SPermission perm : this.permissions.values()) {
             if (directory.equals(perm.getDirectory()) && type.equals(perm.getType())) {
                 return perm.getId();
             }
         }
 
+        // 记录缺少 PERM.yml 的三级目录
+        this.missingPermDirs.add(type + "/" + directory + "/" + permName);
         return null;
     }
 
@@ -567,6 +663,13 @@ class BuildPermLoader {
      */
     Map<String, Integer> getRolePermCounts() {
         return new HashMap<>(this.rolePermCounts);
+    }
+
+    /**
+     * 获取缺少 PERM.yml 的目录统计
+     */
+    Set<String> getMissingPermDirs() {
+        return new HashSet<>(this.missingPermDirs);
     }
 
     // ==================== 辅助方法 ====================

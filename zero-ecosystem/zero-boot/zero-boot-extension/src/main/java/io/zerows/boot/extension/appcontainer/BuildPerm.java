@@ -104,10 +104,21 @@ public class BuildPerm {
                     final List<RRolePerm> rolePerms = loader.getRolePerms();
                     final Map<RRolePerm, String> rolePermToRoleCode = loader.getRolePermToRoleCode();
                     final Map<String, Integer> rolePermCounts = loader.getRolePermCounts();
+                    final java.util.Set<String> missingPermDirs = loader.getMissingPermDirs();
 
                     if (permissions.isEmpty() && actions.isEmpty() && resources.isEmpty()) {
                         log.warn("[ INST ] 未加载到任何权限数据");
                         return Future.succeededFuture(false);
+                    }
+
+                    // 打印缺少 PERM.yml 的目录统计
+                    if (!missingPermDirs.isEmpty()) {
+                        log.warn("[ INST ] ========================================");
+                        log.warn("[ INST ] 以下目录缺少 PERM.yml，共 {} 个:", missingPermDirs.size());
+                        missingPermDirs.stream().sorted().forEach(dir ->
+                            log.warn("[ INST ]   - {}", dir)
+                        );
+                        log.warn("[ INST ] ========================================");
                     }
 
                     // 4. 持久化到数据库
