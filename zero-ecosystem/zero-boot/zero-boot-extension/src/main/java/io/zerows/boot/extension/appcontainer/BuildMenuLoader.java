@@ -11,7 +11,9 @@ import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -202,8 +204,8 @@ class BuildMenuLoader {
      */
     private Future<XApp> loadAppFromUri(final URI uri) {
         try {
-            final String path = uri.getPath();
-            final String fileName = Paths.get(path).getFileName().toString();
+            final Path path = Paths.get(uri);
+            final String fileName = path.getFileName().toString();
 
             if (!fileName.endsWith(".yml")) {
                 return Future.succeededFuture(null);
@@ -213,7 +215,7 @@ class BuildMenuLoader {
             final String dirName = this.extractDirNameFromAppUri(uri);
 
             // 加载 YAML 文件
-            final JsonObject data = Ut.ioYaml(path);
+            final JsonObject data = Ut.ioYaml(path.toString());
             if (data == null || !data.containsKey("data")) {
                 log.warn("[ INST ] 应用文件格式错误: {}", path);
                 return Future.succeededFuture(null);
