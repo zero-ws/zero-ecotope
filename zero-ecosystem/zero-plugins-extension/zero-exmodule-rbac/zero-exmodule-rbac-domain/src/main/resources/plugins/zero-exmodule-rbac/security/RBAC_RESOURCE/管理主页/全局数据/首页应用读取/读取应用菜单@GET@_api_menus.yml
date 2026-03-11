@@ -2,3 +2,4 @@ data:
   keyword: "rbac.app.menu.fetch"
   resource: "resource.ambient"
   identifier: "x.menu"
+  resourceId: "91a78ce8-30c7-4894-b235-730eb3e61255"

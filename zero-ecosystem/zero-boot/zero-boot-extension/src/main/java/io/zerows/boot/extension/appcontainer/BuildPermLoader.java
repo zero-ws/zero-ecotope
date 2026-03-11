@@ -1,5 +1,6 @@
 package io.zerows.boot.extension.appcontainer;
 
+import cn.hutool.core.util.StrUtil;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.rbac.domain.tables.pojos.RRolePerm;
 import io.zerows.extension.module.rbac.domain.tables.pojos.SAction;
@@ -10,11 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.net.URI;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -208,10 +204,13 @@ class BuildPermLoader {
                 } else if (permName == null) {
                     newPermName = file.getName();
 
-                    // 加载 PERM.yml
+                    // 检查三级目录是否有 PERM.yml
                     final File permFile = new File(file, "PERM.yml");
                     if (permFile.exists() && permFile.isFile()) {
                         this.loadPermission(permFile, newType, newDirectory, newPermName);
+                    } else {
+                        // 记录缺少 PERM.yml 的三级目录
+                        this.missingPermDirs.add(newType + "/" + newDirectory + "/" + newPermName);
                     }
                 }
 
@@ -256,6 +255,7 @@ class BuildPermLoader {
 
     /**
      * 从 URI 加载权限资源（已废弃，保留用于兼容）
+     *
      * @deprecated 使用两阶段加载：loadPermissionsOnly + loadActionsAndResources
      */
     @Deprecated
@@ -273,6 +273,7 @@ class BuildPermLoader {
 
     /**
      * 递归加载资源目录（已废弃，保留用于兼容）
+     *
      * @deprecated 使用 scanPermissionsRecursive + scanActionsRecursive
      */
     @Deprecated
@@ -387,7 +388,6 @@ class BuildPermLoader {
 
         // 生成 ID
         final String actionId = UUID.randomUUID().toString();
-        final String resourceId = UUID.randomUUID().toString();
 
         // 使用反序列化创建 SAction（自动映射 YAML 中的所有字段）
         final SAction action = Ut.deserialize(actionData, SAction.class);
@@ -397,7 +397,16 @@ class BuildPermLoader {
         action.setMethod(method);
         action.setUri(uriPattern);
         action.setPermissionId(permissionId);
-        action.setResourceId(resourceId);
+
+        // 资源 ID 的生成需要考虑原始数据的固定导入信息
+        final String resourceId;
+        if (StrUtil.isEmpty(action.getResourceId())) {
+            resourceId = UUID.randomUUID().toString();
+            action.setResourceId(resourceId);
+        } else {
+            log.info("[ INST ] ( 首次生效 ) resourceId 已指定 / keyword = {}", action.getResourceId(), keyword);
+            resourceId = action.getResourceId();
+        }
 
         // 如果 YAML 中没有 level，设置默认值
         if (action.getLevel() == null) {
@@ -535,8 +544,6 @@ class BuildPermLoader {
             }
         }
 
-        // 记录缺少 PERM.yml 的三级目录
-        this.missingPermDirs.add(type + "/" + directory + "/" + permName);
         return null;
     }
 
