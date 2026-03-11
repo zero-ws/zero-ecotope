@@ -3,8 +3,11 @@ package io.zerows.epoch.metadata;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
+import io.zerows.platform.constant.VString;
 import io.zerows.platform.constant.VValue;
 import io.zerows.support.Ut;
+
+import java.util.Objects;
 
 /**
  * Vis means `View`, the spelling is Denmark language instead of English
@@ -142,5 +145,18 @@ public class KView extends JsonObject {
 
     public String position() {
         return this.getString(KName.POSITION, VValue.DFT.V_POSITION);
+    }
+
+    public static JsonObject whereJ(final KView view) {
+        // AND
+        final JsonObject criteria = new JsonObject().put(VString.EMPTY, Boolean.TRUE);
+        if (Objects.isNull(view)) {
+            criteria.put(KName.NAME, VValue.DFT.V_VIEW);
+            criteria.put(KName.POSITION, VValue.DFT.V_POSITION);
+        } else {
+            criteria.put(KName.NAME, view.view());
+            criteria.put(KName.POSITION, view.position());
+        }
+        return criteria;
     }
 }
