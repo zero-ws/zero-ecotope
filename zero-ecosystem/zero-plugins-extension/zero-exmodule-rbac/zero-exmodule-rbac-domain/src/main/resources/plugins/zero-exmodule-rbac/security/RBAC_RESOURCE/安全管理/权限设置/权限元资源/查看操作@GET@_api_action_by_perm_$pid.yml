@@ -1,0 +1,3 @@
+data:
+  keyword: "rbac.action.by.perm"
+  resource: "resource.security"

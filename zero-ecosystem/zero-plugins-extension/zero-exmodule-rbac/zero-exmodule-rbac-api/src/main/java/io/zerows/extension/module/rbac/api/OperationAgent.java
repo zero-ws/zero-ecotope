@@ -6,9 +6,11 @@ import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.EndPoint;
 import io.zerows.epoch.constant.KWeb;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.extension.BodyParam;
 
 /**
@@ -32,7 +34,7 @@ public interface OperationAgent {
      */
     @POST
     @Path("action/seek")
-    @Address(Addr.Authority.ACTION_SEEK)
+    @Address(Addr.Action.ACTION_SEEK)
     @OpenApi
     JsonArray searchAuthorized(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
                                @BodyParam JsonObject params);
@@ -52,8 +54,15 @@ public interface OperationAgent {
      */
     @POST
     @Path("action/ready")
-    @Address(Addr.Authority.ACTION_READY)
+    @Address(Addr.Action.ACTION_READY)
     @OpenApi
     JsonArray searchAll(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
                         @BodyParam JsonObject params);
+
+
+    @GET
+    @Path("action/by/perm/{pid}")
+    @Address(Addr.Action.BY_PERM)
+    @OpenApi
+    JsonArray searchByPerm(@PathParam("pid") String permId);
 }

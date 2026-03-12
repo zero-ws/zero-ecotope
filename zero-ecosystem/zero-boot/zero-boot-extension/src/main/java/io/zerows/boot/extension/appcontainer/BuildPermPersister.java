@@ -184,7 +184,7 @@ class BuildPermPersister {
                 }
 
                 if (existing == null) {
-                    // 不存在，插入
+                    // 不存在，插入（保持 perm 的 ID 不变，使用加载时生成的 UUID）
                     return DB.on(SPermissionDao.class)
                         .insertAsync(perm)
                         .map(v -> {
@@ -192,7 +192,7 @@ class BuildPermPersister {
                             return "insert";
                         });
                 } else {
-                    // 存在，更新 ID 并更新记录
+                    // 存在，使用数据库中的 ID 并更新记录
                     perm.setId(existing.getId());
                     return DB.on(SPermissionDao.class)
                         .updateAsync(perm)
@@ -281,7 +281,7 @@ class BuildPermPersister {
                 }
 
                 if (existing == null) {
-                    // 不存在，插入
+                    // 不存在，插入（保持 resource 的 ID 不变，使用加载时生成的 UUID）
                     return DB.on(SResourceDao.class)
                         .insertAsync(resource)
                         .map(v -> {
@@ -289,7 +289,7 @@ class BuildPermPersister {
                             return "insert";
                         });
                 } else {
-                    // 存在，更新 ID
+                    // 存在，使用数据库中的 ID 并更新记录
                     resource.setId(existing.getId());
                     return DB.on(SResourceDao.class)
                         .updateAsync(resource)

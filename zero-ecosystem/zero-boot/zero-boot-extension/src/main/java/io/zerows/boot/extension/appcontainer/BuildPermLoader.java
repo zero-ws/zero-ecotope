@@ -528,18 +528,34 @@ class BuildPermLoader {
 
     /**
      * 根据 identifier 查找 permissionId
+     * 优先按完整三级路径匹配（type + directory + permName），确保同一 identifier 下的不同 permission 能正确区分
      */
     private String findPermissionIdByIdentifier(final String identifier, final String type,
                                                 final String directory, final String permName) {
-        // 先从缓存中查找
-        final String permId = this.identifierToPermId.get(identifier);
-        if (permId != null) {
-            return permId;
+        // 优先按完整三级路径匹配（type + directory + permName）
+        for (final SPermission perm : this.permissions.values()) {
+            if (identifier.equals(perm.getIdentifier()) &&
+                type.equals(perm.getType()) &&
+                directory.equals(perm.getDirectory()) &&
+                permName.equals(perm.getName())) {
+                return perm.getId();
+            }
         }
 
-        // 按 directory/type 查找（回退逻辑）
+        // 回退：按 type + directory + permName 匹配（忽略 identifier）
+        for (final SPermission perm : this.permissions.values()) {
+            if (type.equals(perm.getType()) &&
+                directory.equals(perm.getDirectory()) &&
+                permName.equals(perm.getName())) {
+                return perm.getId();
+            }
+        }
+
+        // 最后回退：按 type + directory 匹配（兼容旧逻辑，但会记录警告）
         for (final SPermission perm : this.permissions.values()) {
             if (directory.equals(perm.getDirectory()) && type.equals(perm.getType())) {
+                log.warn("[ INST ] 权限匹配回退到 type+directory（缺少 permName 匹配）: identifier={}, type={}, directory={}, permName={}",
+                    identifier, type, directory, permName);
                 return perm.getId();
             }
         }
