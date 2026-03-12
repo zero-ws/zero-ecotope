@@ -60,12 +60,15 @@ interface Addr {
         String DELETE = EVENT + "X-PERMISSION/CRUD/DELETE";
     }
 
-    interface Authority {
+    interface Action {
+        String BY_PERM = EVENT + "X-ACTION/BY-PERM";
         /* Api Seeking（Action Only） */
         String ACTION_SEEK = EVENT + "X-ACTION/SEEK";
-
         /* Api Pre-Ready */
         String ACTION_READY = EVENT + "X-ACTION/READY";
+    }
+
+    interface Authority {
 
         /* Resource Search */
         String RESOURCE_SEARCH = EVENT + "X-RESOURCE/SEARCH";
