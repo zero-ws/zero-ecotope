@@ -3,7 +3,9 @@ package io.zerows.plugins.security;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authorization.Authorization;
 import io.vertx.ext.auth.authorization.AuthorizationContext;
+import io.vertx.ext.auth.authorization.OrAuthorization;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -63,5 +65,21 @@ class ProfileAuthorizationImpl implements ProfileAuthorization {
         }).collect(Collectors.toSet());
         // 任何一个合法就算通过
         return authorized.stream().anyMatch(item -> item);
+    }
+
+    /**
+     * 只是为了单纯解决 java.lang.IllegalArgumentException:
+     * Unsupported authorization class io.zerows.plugins.security.ProfileAuthorizationImpl
+     *
+     * @return 清单
+     */
+    @Override
+    public List<Authorization> getAuthorizations() {
+        return List.of();
+    }
+
+    @Override
+    public OrAuthorization addAuthorization(final Authorization authorization) {
+        return this;
     }
 }
