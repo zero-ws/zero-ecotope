@@ -6,3 +6,6 @@ data:
   - "perm.rbac.app.dict.category"
   - "perm.rbac.app.document.view"
   - "perm.rbac.app.document.admin"
+  # 订阅管理
+  - "perm.rbac.app.subscription.view"
+  - "perm.rbac.app.subscription.admin"

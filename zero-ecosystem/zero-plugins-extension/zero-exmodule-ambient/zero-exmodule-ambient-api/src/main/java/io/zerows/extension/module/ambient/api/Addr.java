@@ -173,5 +173,8 @@ interface Addr {
         // Subscription Special Operations
         String CANCEL = Prefix._EVENT + "X-SUBSCRIPTION/CANCEL";
         String RENEW = Prefix._EVENT + "X-SUBSCRIPTION/RENEW";
+
+        // My Subscriptions (for current user)
+        String MY_SUBSCRIPTIONS = Prefix._EVENT + "X-SUBSCRIPTION/MY";
     }
 }

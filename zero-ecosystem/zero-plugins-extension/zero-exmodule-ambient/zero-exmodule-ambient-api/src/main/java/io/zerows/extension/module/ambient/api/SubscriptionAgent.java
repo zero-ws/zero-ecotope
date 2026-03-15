@@ -34,6 +34,18 @@ public interface SubscriptionAgent {
     JsonObject getDashboard(@HeaderParam(KWeb.HEADER.X_SIGMA) String sigma);
 
     /**
+     * 获取当前用户的订阅列表（个人订阅）
+     * GET /api/subscription/my
+     *
+     * @return 订阅列表
+     */
+    @Path("/my")
+    @GET
+    @Address(Addr.Subscription.MY_SUBSCRIPTIONS)
+    @OpenApi
+    JsonObject getMySubscriptions();
+
+    /**
      * 取消订阅
      * POST /api/subscription/subscriptions/{id}/cancel
      *

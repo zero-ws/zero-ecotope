@@ -1,6 +1,7 @@
 package io.zerows.extension.module.ambient.servicespec;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /**
@@ -35,4 +36,12 @@ public interface SubscriptionStub {
      * @return 更新后的订阅信息
      */
     Future<JsonObject> renewSubscription(String subId);
+
+    /**
+     * 获取当前用户的订阅列表（个人订阅）
+     *
+     * @param userId 用户ID（SUser.ID）
+     * @return 订阅列表
+     */
+    Future<JsonArray> fetchMySubscriptions(String userId);
 }
