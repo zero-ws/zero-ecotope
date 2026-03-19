@@ -66,6 +66,47 @@ public class SubscriptionService implements SubscriptionStub {
     }
 
     @Override
+    public Future<JsonArray> fetchMySubscriptions(final String userId) {
+        if (Ut.isNil(userId)) {
+            return Ux.future(new JsonArray());
+        }
+
+        // 个人订阅：按 createdBy（用户ID）查询
+        final JsonObject criteria = Ux.whereAnd();
+        criteria.put("createdBy", userId);
+
+        return DB.on(XSubscriptionDao.class).<XSubscription>fetchAsync(criteria).compose(subscriptions -> {
+            final JsonArray result = new JsonArray();
+            final LocalDateTime now = LocalDateTime.now();
+
+            for (final XSubscription sub : subscriptions) {
+                final JsonObject item = Ux.toJson(sub);
+
+                // 计算订阅状态
+                String displayStatus = sub.getStatus();
+                if ("ACTIVE".equals(sub.getStatus()) && sub.getEndAt() != null) {
+                    if (sub.getEndAt().isBefore(now)) {
+                        displayStatus = "EXPIRED";
+                    } else if (sub.getEndAt().isBefore(now.plusDays(7))) {
+                        displayStatus = "EXPIRING_SOON";
+                    }
+                }
+                item.put("displayStatus", displayStatus);
+
+                // 计算剩余天数
+                if (sub.getEndAt() != null) {
+                    long daysRemaining = java.time.temporal.ChronoUnit.DAYS.between(now, sub.getEndAt());
+                    item.put("daysRemaining", Math.max(0, daysRemaining));
+                }
+
+                result.add(item);
+            }
+
+            return Ux.future(result);
+        });
+    }
+
+    @Override
     public Future<JsonObject> cancelSubscription(final String subId) {
         if (Ut.isNil(subId)) {
             return Ux.future(new JsonObject().put("error", "Subscription ID is required"));

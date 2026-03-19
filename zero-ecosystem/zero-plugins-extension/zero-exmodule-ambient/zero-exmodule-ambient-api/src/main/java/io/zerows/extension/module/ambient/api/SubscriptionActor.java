@@ -1,9 +1,11 @@
 package io.zerows.extension.module.ambient.api;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
+import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.ambient.servicespec.SubscriptionStub;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
@@ -32,6 +34,22 @@ public class SubscriptionActor {
             return Ux.future(new JsonObject());
         }
         return this.subscriptionStub.fetchDashboard(sigma);
+    }
+
+    /**
+     * 获取当前用户的订阅列表（个人订阅）
+     *
+     * @param envelop 请求上下文，包含 userId
+     * @return 订阅列表
+     */
+    @Address(Addr.Subscription.MY_SUBSCRIPTIONS)
+    public Future<JsonObject> getMySubscriptions(final Envelop envelop) {
+        final String userId = envelop.userId();
+        if (Ut.isNil(userId)) {
+            return Ux.future(new JsonObject().put("list", new JsonArray()));
+        }
+        return this.subscriptionStub.fetchMySubscriptions(userId)
+            .compose(array -> Ux.future(new JsonObject().put("list", array)));
     }
 
     /**

@@ -2,7 +2,7 @@ package io.zerows.plugins.security;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.authorization.Authorization;
+import io.vertx.ext.auth.authorization.OrAuthorization;
 import io.zerows.support.Ut;
 
 import java.util.Set;
@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
  */
-public interface ProfileAuthorization extends Authorization {
+public interface ProfileAuthorization extends OrAuthorization {
     static ProfileAuthorization create(final ConcurrentMap<String, Set<String>> permissions) {
         return new ProfileAuthorizationImpl(permissions);
     }

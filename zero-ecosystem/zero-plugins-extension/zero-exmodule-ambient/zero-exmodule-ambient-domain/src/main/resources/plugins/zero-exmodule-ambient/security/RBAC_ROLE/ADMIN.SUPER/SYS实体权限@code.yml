@@ -27,3 +27,7 @@ data:
   - "perm.crud.x-notify.fetch"
   - "perm.crud.x-notify.write"
   - "perm.crud.x-notify.meta"
+  # CRUD - 订阅管理
+  - "perm.crud.x-subscription.fetch"
+  - "perm.crud.x-subscription.write"
+  - "perm.crud.x-subscription.meta"
