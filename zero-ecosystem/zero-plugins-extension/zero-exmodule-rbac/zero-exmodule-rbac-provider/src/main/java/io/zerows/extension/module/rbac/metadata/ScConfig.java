@@ -146,12 +146,14 @@ public class ScConfig implements MDConfig {
             ", initialize=" + this.initialize +
             ", category=" + this.category +
             ", valueDefault=" + this.valueDefault +
+            ", valueResource=" + this.valueResource +
             '}';
     }
 
     @Data
+    @ToString
     public static class Resource implements Serializable {
-        private String menu = "91a78ce8-30c7-4894-b235-730eb3e61255";
+        private String menu;
     }
 
     @Data
