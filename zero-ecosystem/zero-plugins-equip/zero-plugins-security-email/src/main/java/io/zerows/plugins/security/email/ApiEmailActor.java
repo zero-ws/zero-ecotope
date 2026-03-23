@@ -11,7 +11,9 @@ import io.zerows.plugins.security.email.exception._80363Exception500EmailSending
 import io.zerows.plugins.security.service.AuthLoginStub;
 import io.zerows.plugins.security.service.CaptchaStub;
 import io.zerows.plugins.security.service.TokenDynamicResponse;
+import io.zerows.extension.skeleton.spi.ExAccountProvision;
 import io.zerows.program.Ux;
+import io.zerows.spi.HPI;
 import io.zerows.support.Fx;
 import jakarta.inject.Inject;
 
@@ -78,5 +80,23 @@ public class ApiEmailActor {
         return request.requestValidated()
             .compose(verified -> this.loginStub.login(request))
             .compose(userAt -> new TokenDynamicResponse(userAt).response());
+    }
+
+    @Address(ApiAddr.API_AUTH_EMAIL_VERIFY)
+    public Future<JsonObject> verify(final EmailLoginRequest request) {
+        return request.requestValidated()
+            .compose(verified -> this.provision(request))
+            .compose(verified -> this.loginStub.login(request))
+            .compose(userAt -> new TokenDynamicResponse(userAt).response());
+    }
+
+    private Future<JsonObject> provision(final EmailLoginRequest request) {
+        final JsonObject input = new JsonObject()
+            .put("identifier", request.getEmail())
+            .put("type", request.type().name());
+        return HPI.of(ExAccountProvision.class).waitOr(
+            provision -> provision.provision(input),
+            () -> Future.succeededFuture(new JsonObject())
+        );
     }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "tenant",
+  "name": "x-tenant",
   "daoCls": "X_TENANT",
   "field": {
     "unique": [

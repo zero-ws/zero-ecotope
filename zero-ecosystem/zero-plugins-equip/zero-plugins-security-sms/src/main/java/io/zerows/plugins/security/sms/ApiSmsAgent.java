@@ -79,4 +79,29 @@ public interface ApiSmsAgent {
         }
     )
     JsonObject login(@BodyParam JsonObject body);
+
+    @Path("/auth/sms-verify")
+    @POST
+    @Address(ApiAddr.API_AUTH_SMS_VERIFY)
+    @Operation(
+        summary = DescAuth._auth_sms_login_summary, description = DescAuth._auth_sms_login_desc,
+        requestBody = @RequestBody(
+            required = true, description = DescMeta.request_post,
+            content = @Content(
+                mediaType = MediaType.APPLICATION_JSON,
+                schema = @Schema(implementation = RequestSmsLogin.class)
+            )
+        ),
+        responses = {
+            @ApiResponse(
+                responseCode = DescMeta.response_code_200,
+                description = DescMeta.response_ok_json,
+                content = @Content(
+                    mediaType = MediaType.APPLICATION_JSON,
+                    schema = @Schema(name = "data", implementation = ResponseLoginDynamic.class)
+                )
+            )
+        }
+    )
+    JsonObject verify(@BodyParam JsonObject body);
 }

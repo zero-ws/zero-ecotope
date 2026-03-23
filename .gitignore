@@ -47,3 +47,4 @@ archive
 *.log
 .flattened-pom.xml
 dump.rdb
+.obsidian/workspace.json

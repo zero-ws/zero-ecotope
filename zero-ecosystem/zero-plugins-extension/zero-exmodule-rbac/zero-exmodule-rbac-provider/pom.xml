@@ -17,5 +17,10 @@
             <artifactId>zero-exmodule-rbac-domain</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-extension-skeleton</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>

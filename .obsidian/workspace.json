@@ -198,13 +198,14 @@
       "mermaid-tools:Open Mermaid Toolbar": false
     }
   },
-  "active": "ad17b47082cda379",
+  "active": "885f9e3759734ce4",
   "lastOpenFiles": [
+    "docs/dependency-r2mo-compile.md",
+    "docs/未命名.md",
     "docs/images/logo.jpeg.sb-b752e07b-XFqRoX",
     "docs/images/logo.jpeg",
     "docs/images",
     "docs/dependency-r2mo-source.md",
-    "docs/dependency-r2mo-compile.md",
     "docs/graph/design/App应用结构.md",
     "zero-ecosystem/zero-epoch/zero-overlay/target/classes/io/zerows/support/base/UInvoker.class",
     "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockCode.class",
@@ -214,7 +215,6 @@
     "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/metadata/logged/ScUser.class",
     "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/metadata/logged/ScRole.class",
     "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockBase.class",
-    "zero-ecosystem/zero-plugins-extension/zero-exmodule-rbac/zero-exmodule-rbac-provider/target/classes/io/zerows/extension/module/rbac/component/ScClockSMS.class",
     "docs/graph/design/App应用结构.excalidraw.md",
     "docs/graph/api/public/app_name_$name.md",
     "README.md",

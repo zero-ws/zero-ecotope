@@ -10,11 +10,13 @@ import io.zerows.extension.skeleton.spi.ExApp;
 import io.zerows.extension.skeleton.spi.ExArbor;
 import io.zerows.extension.skeleton.spi.ExAtom;
 import io.zerows.extension.skeleton.spi.ExAttachment;
+import io.zerows.extension.skeleton.spi.ExAccountProvision;
 import io.zerows.extension.skeleton.spi.ExIo;
 import io.zerows.extension.skeleton.spi.ExLinkage;
 import io.zerows.extension.skeleton.spi.ExModulat;
 import io.zerows.extension.skeleton.spi.ExOwner;
 import io.zerows.extension.skeleton.spi.ExSetting;
+import io.zerows.extension.skeleton.spi.ExTenantProvision;
 import io.zerows.extension.skeleton.spi.ExTransit;
 import io.zerows.extension.skeleton.spi.ExUser;
 import io.zerows.extension.skeleton.spi.ScCredential;
@@ -58,11 +60,13 @@ class ExBoot {
             this.add(ExArbor.class);              // 🌳 树形结构处理接口，用于处理树状数据结构
             this.add(ExAtom.class);               // ⚛️ 原子操作接口，定义系统中的原子级操作
             this.add(ExAttachment.class);         // 📎 附件处理接口，管理系统中的附件功能
+            this.add(ExAccountProvision.class);   // 🪪 账号预创建接口，处理注册流程中的账号补齐
             this.add(ExIo.class);                 // 💾 IO扩展接口，处理输入输出相关扩展
             this.add(ExLinkage.class);            // 🔗 联动处理接口，处理字段或模块间的联动关系
             this.add(ExModulat.class);            // 🧩 模块化处理接口，支持模块化的功能扩展
             this.add(ExOwner.class);              // 👤 所有者接口，处理资源所有权相关逻辑
             this.add(ExSetting.class);            // ⚙️ 设置接口，管理系统和用户的各种设置
+            this.add(ExTenantProvision.class);    // 🏢 租户预创建接口，处理注册流程中的租户补齐
             this.add(ExTransit.class);            // 📬 中转接口，处理消息和数据的中转
             this.add(ExUser.class);               // 👥 用户扩展接口，处理用户相关功能扩展
             this.add(ScCredential.class);         // 🪪 凭证接口，处理认证和授权凭证
