@@ -20,6 +20,7 @@ interface Addr {
 
     interface Auth {
         String LOGOUT = EVENT + "O-LOGOUT";
+        String REGISTER = EVENT + "O-REGISTER";
     }
 
     interface User {

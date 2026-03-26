@@ -5,7 +5,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Address;
 import io.zerows.epoch.annotations.Queue;
-import io.zerows.extension.skeleton.spi.ExAccountProvision;
 import io.zerows.plugins.security.service.AuthLoginStub;
 import io.zerows.plugins.security.service.CaptchaStub;
 import io.zerows.plugins.security.service.TokenDynamicResponse;
@@ -13,7 +12,6 @@ import io.zerows.plugins.security.sms.exception._80381Exception400MobileRequired
 import io.zerows.plugins.security.sms.exception._80382Exception400MobileFormat;
 import io.zerows.plugins.security.sms.exception._80383Exception500MobileSending;
 import io.zerows.program.Ux;
-import io.zerows.spi.HPI;
 import io.zerows.support.Fx;
 import jakarta.inject.Inject;
 
@@ -86,20 +84,8 @@ public class ApiSmsActor {
     }
 
     @Address(ApiAddr.API_AUTH_SMS_VERIFY)
-    public Future<JsonObject> verify(final SmsLoginRequest request) {
+    public Future<Boolean> verify(final SmsLoginRequest request) {
         return request.requestValidated()
-            .compose(verified -> this.provision(request))
-            .compose(verified -> this.loginStub.login(request))
-            .compose(userAt -> new TokenDynamicResponse(userAt).response());
-    }
-
-    private Future<JsonObject> provision(final SmsLoginRequest request) {
-        final JsonObject input = new JsonObject()
-            .put("identifier", request.getMobile())
-            .put("type", request.type().name());
-        return HPI.of(ExAccountProvision.class).waitOr(
-            provision -> provision.provision(input),
-            () -> Future.succeededFuture(new JsonObject())
-        );
+            .compose(verified -> this.smsStub.verifyRegistration(request));
     }
 }

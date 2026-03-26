@@ -16,4 +16,6 @@ public interface SmsStub {
     }
 
     Future<Boolean> sendCaptcha(final String to);
+
+    Future<Boolean> verifyRegistration(SmsLoginRequest request);
 }

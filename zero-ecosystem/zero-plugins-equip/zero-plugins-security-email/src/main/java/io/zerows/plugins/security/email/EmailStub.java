@@ -16,4 +16,6 @@ public interface EmailStub {
     }
 
     Future<Boolean> sendCaptcha(final String to);
+
+    Future<Boolean> verifyRegistration(EmailLoginRequest request);
 }

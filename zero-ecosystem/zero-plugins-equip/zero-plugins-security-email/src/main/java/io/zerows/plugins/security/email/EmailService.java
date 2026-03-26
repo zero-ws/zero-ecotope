@@ -1,5 +1,7 @@
 package io.zerows.plugins.security.email;
 
+import io.r2mo.jaas.auth.CaptchaArgs;
+import io.r2mo.jaas.session.UserCache;
 import io.r2mo.base.util.R2MO;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
@@ -9,6 +11,7 @@ import io.zerows.support.Ut;
 import jakarta.inject.Inject;
 
 import java.time.Duration;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +42,21 @@ public class EmailService implements EmailStub {
             return this.emailClient.sendAsync(template, params, Set.of(email))
                 .map(sent -> Ut.valueString(sent, "success"))
                 .map(Boolean::parseBoolean);
+        });
+    }
+
+    @Override
+    public Future<Boolean> verifyRegistration(final EmailLoginRequest request) {
+        return this.verifyCaptcha(request);
+    }
+
+    private Future<Boolean> verifyCaptcha(final EmailLoginRequest request) {
+        final CaptchaArgs captchaArgs = CaptchaArgs.of(request.type(), this.emailConfig.expiredAt());
+        return UserCache.of().authorize(request.getId(), captchaArgs).<Future<String>>compose().compose(codeStored -> {
+            if (Objects.isNull(codeStored)) {
+                return Future.succeededFuture(Boolean.FALSE);
+            }
+            return Future.succeededFuture(codeStored.equals(request.getCredential()));
         });
     }
 }

@@ -44,11 +44,7 @@ public interface ApiSmsAgent {
                 description = DescMeta.response_ok_json,
                 content = @Content(
                     mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(
-                        name = "data",
-                        type = "boolean",
-                        description = DescMeta.response_ok_boolean
-                    )
+                    schema = @Schema(name = "data", implementation = ResponseLoginDynamic.class)
                 )
             )
         }
@@ -73,7 +69,11 @@ public interface ApiSmsAgent {
                 description = DescMeta.response_ok_json,
                 content = @Content(
                     mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(name = "data", implementation = ResponseLoginDynamic.class)
+                    schema = @Schema(
+                        name = "data",
+                        type = "boolean",
+                        description = DescMeta.response_ok_boolean
+                    )
                 )
             )
         }
@@ -98,7 +98,11 @@ public interface ApiSmsAgent {
                 description = DescMeta.response_ok_json,
                 content = @Content(
                     mediaType = MediaType.APPLICATION_JSON,
-                    schema = @Schema(name = "data", implementation = ResponseLoginDynamic.class)
+                    schema = @Schema(
+                        name = "data",
+                        type = "boolean",
+                        description = DescMeta.response_ok_boolean
+                    )
                 )
             )
         }

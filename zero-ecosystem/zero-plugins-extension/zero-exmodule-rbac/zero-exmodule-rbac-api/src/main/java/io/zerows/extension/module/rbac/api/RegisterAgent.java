@@ -1,0 +1,19 @@
+package io.zerows.extension.module.rbac.api;
+
+import io.r2mo.openapi.annotations.OpenApi;
+import io.vertx.core.json.JsonObject;
+import io.zerows.epoch.annotations.Address;
+import io.zerows.epoch.annotations.EndPoint;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.extension.BodyParam;
+
+@EndPoint
+public interface RegisterAgent {
+
+    @POST
+    @Path("/auth/register")
+    @Address(Addr.Auth.REGISTER)
+    @OpenApi
+    JsonObject register(@BodyParam JsonObject params);
+}

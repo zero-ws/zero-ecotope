@@ -72,7 +72,7 @@ public class ExAccountProvisionRbac implements ExAccountProvision {
         user.setId(UUID.randomUUID().toString());
         user.setCode(this.userCode(identifier));
         user.setUsername(username);
-        user.setPassword(Sc.valuePassword());
+        user.setPassword(this.readPassword(input));
         user.setType("USER");
         user.setCategory("REGISTER");
         user.setActive(Boolean.TRUE);
@@ -81,6 +81,9 @@ public class ExAccountProvisionRbac implements ExAccountProvision {
         user.setTenantId(tenantId);
         user.setAppId(appId);
         user.setCreatedAt(LocalDateTime.now());
+        user.setRealname(input.getString("realname"));
+        user.setAlias(input.getString("alias"));
+        user.setDescription(input.getString("description"));
         user.setMetadata(new JsonObject()
             .put("registerType", input.getString("type"))
             .put("registerIdentifier", identifier));
@@ -184,6 +187,14 @@ public class ExAccountProvisionRbac implements ExAccountProvision {
         return identifier;
     }
 
+    private String readPassword(final JsonObject input) {
+        final String password = input.getString("password");
+        if (StrUtil.isBlank(password)) {
+            return Sc.valuePassword();
+        }
+        return Sc.valuePassword(password);
+    }
+
     private String userCode(final String identifier) {
         return "USER_" + this.normalize(identifier);
     }
@@ -197,4 +208,3 @@ public class ExAccountProvisionRbac implements ExAccountProvision {
             .replaceAll("^_+|_+$", "");
     }
 }
-

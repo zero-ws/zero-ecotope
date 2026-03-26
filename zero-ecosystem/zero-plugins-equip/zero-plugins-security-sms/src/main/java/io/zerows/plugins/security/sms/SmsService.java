@@ -1,11 +1,15 @@
 package io.zerows.plugins.security.sms;
 
+import io.r2mo.jaas.auth.CaptchaArgs;
+import io.r2mo.jaas.session.UserCache;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.zerows.plugins.security.service.AuthLoginStub;
 import io.zerows.plugins.sms.SmsClient;
 import io.zerows.support.Ut;
 import jakarta.inject.Inject;
+
+import java.util.Objects;
 
 public class SmsService implements SmsStub {
     private final SmsAuthConfig smsConfig = SmsAuthActor.configOf();
@@ -28,6 +32,21 @@ public class SmsService implements SmsStub {
             return this.smsClient.sendAsync(template, params, mobile)
                 .map(sent -> Ut.valueString(sent, "success"))
                 .map(Boolean::parseBoolean);
+        });
+    }
+
+    @Override
+    public Future<Boolean> verifyRegistration(final SmsLoginRequest request) {
+        return this.verifyCaptcha(request);
+    }
+
+    private Future<Boolean> verifyCaptcha(final SmsLoginRequest request) {
+        final CaptchaArgs captchaArgs = CaptchaArgs.of(request.type(), this.smsConfig.expiredAt());
+        return UserCache.of().authorize(request.getId(), captchaArgs).<Future<String>>compose().compose(codeStored -> {
+            if (Objects.isNull(codeStored)) {
+                return Future.succeededFuture(Boolean.FALSE);
+            }
+            return Future.succeededFuture(codeStored.equals(request.getCredential()));
         });
     }
 }

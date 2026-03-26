@@ -101,6 +101,12 @@
         </dependencies>
     </dependencyManagement>
     <properties>
+        <!-- 外部依赖版本（继承自 zero-ecotope） -->
+        <momo.version>1.0.49</momo.version>
+        <r2mo.version>1.0.49</r2mo.version>
+        <!-- 从 rachel-momo 继承的版本 -->
+        <database-flyway.version>11.20.3</database-flyway.version>
+        <cloud-nacos.version>3.1.1</cloud-nacos.version>
         <maven.main.class>WaitFor</maven.main.class>
         <!-- Flyway Location -->
         <db.slot.01>filesystem:${project.basedir}/src/main/resources</db.slot.01>
@@ -315,6 +321,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
+                <version>${database-flyway.version}</version>
                 <configuration>
                     <validateMigrationNaming>true</validateMigrationNaming>
                     <failOnMissingLocations>false</failOnMissingLocations>
