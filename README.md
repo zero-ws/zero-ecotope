@@ -1,7 +1,6 @@
 # Zero Ecotope Framework
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.zerows/rachel-momo.svg?label=Rachel%20Momo&style=for-the-badge&color=blue)](https://mvnrepository.com/artifact/io.zerows/rachel-momo)  [![Maven Central](https://img.shields.io/maven-central/v/io.zerows/r2mo-rapid.svg?label=R2MO%20Rapid&style=for-the-badge&color=green)](https://mvnrepository.com/artifact/io.zerows/r2mo-rapid)
-Zero Waiting
+[![Maven Central](https://img.shields.io/maven-central/v/io.zerows/rachel-momo.svg?label=Rachel%20Momo&style=for-the-badge&color=blue)](https://mvnrepository.com/artifact/io.zerows/rachel-momo)  [![Maven Central](https://img.shields.io/maven-central/v/io.zerows/r2mo-rapid.svg?label=R2MO%20Rapid&style=for-the-badge&color=green)](https://mvnrepository.com/artifact/io.zerows/r2mo-rapid) [![Maven Central](https://img.shields.io/maven-central/v/io.zerows/r2mo-rapid.svg?label=ZERO&style=for-the-badge&color=red)](https://mvnrepository.com/artifact/io.zerows/zero-ecotope)
 
 > For [Rachel Momo](https://www.weibo.com/maoxiaotong0216)
 
