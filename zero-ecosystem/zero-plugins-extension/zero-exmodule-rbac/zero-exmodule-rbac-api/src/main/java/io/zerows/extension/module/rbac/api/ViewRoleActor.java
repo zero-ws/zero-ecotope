@@ -34,8 +34,8 @@ public class ViewRoleActor {
                 if (Objects.isNull(stored)) {
                     return Ux.futureJ();
                 }
-                Ut.updateT(stored, Ut.serializeJson(myView));
-                return DB.on(SViewDao.class).updateAsync(stored).compose(Ux::futureJ);
+                final SView sView = Ut.updateT(stored, Ut.serializeJson(myView));
+                return DB.on(SViewDao.class).updateAsync(sView).compose(Ux::futureJ);
             });
     }
 

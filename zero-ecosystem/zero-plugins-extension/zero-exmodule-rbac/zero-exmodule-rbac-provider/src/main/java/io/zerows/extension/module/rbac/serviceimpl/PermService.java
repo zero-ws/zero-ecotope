@@ -96,11 +96,14 @@ public class PermService implements PermStub {
              * Build new relations that belong to the role
              */
             final List<RRolePerm> relations = new ArrayList<>();
-            Ut.itJArray(permissions, String.class, (permissionId, index) -> {
-                final RRolePerm item = new RRolePerm();
-                item.setRoleId(roleId);
-                item.setPermId(permissionId);
-                relations.add(item);
+            Ut.itJArray(permissions).forEach(permission -> {
+                final String permissionId = permission.getString(KName.Rbac.PERM_ID);
+                if (Ut.isNotNil(permissionId)) {
+                    final RRolePerm item = new RRolePerm();
+                    item.setRoleId(roleId);
+                    item.setPermId(permissionId);
+                    relations.add(item);
+                }
             });
             return dao.insertAsync(relations).compose(inserted -> {
                 /*

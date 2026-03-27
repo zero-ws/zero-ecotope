@@ -71,8 +71,13 @@ class CallUtil {
                 } else {
                     /*
                      * Serialization
+                     * Fix: 检查 value 是否已经是目标类型，避免不必要的 toString() 转换
                      */
-                    arguments[idx] = ZeroType.value(type, value.toString());
+                    if (type.isInstance(value)) {
+                        arguments[idx] = value;
+                    } else {
+                        arguments[idx] = ZeroType.value(type, value.toString());
+                    }
                 }
             } else {
                 /*

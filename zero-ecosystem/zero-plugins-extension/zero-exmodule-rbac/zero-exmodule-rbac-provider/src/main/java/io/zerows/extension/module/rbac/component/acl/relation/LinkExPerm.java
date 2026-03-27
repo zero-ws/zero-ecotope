@@ -86,9 +86,9 @@ public class LinkExPerm implements ScLink.Extension<String> {
                 return Ux.futureJ();
             }
             if (params.containsKey(KName.PASSWORD)) {
-                final String password = params.getString(KName.PASSWORD);
-                if (Objects.nonNull(password) && !password.isEmpty()) {
-                    final String valuePassword = Sc.valuePassword(password);
+                final SUser user = Ux.fromJson(params, SUser.class);
+                if (Objects.nonNull(user)) {
+                    final String valuePassword = Sc.valuePassword(user.getPassword());
                     params.put(KName.PASSWORD, valuePassword);
                 }
             }
