@@ -12,6 +12,11 @@
     <artifactId>zero-ecosystem</artifactId>
     <name>(POM) 📚️ - Zero::Ecosystem</name>
     <packaging>pom</packaging>
+    <!-- 版本属性：import BOM 时必须显式声明，因为 import scope 不传递 properties -->
+    <properties>
+        <r2mo.version>1.0.50</r2mo.version>
+        <momo.version>1.0.50</momo.version>
+    </properties>
     <modules>
         <module>zero-epoch</module>
         <module>zero-plugins-equip</module>

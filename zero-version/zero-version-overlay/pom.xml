@@ -12,6 +12,10 @@
     <artifactId>zero-version-overlay</artifactId>
     <name>(POM) 📣 - Zero::Version::Overlay / ${r2mo.version}</name>
     <packaging>pom</packaging>
+    <!-- 版本属性必须显式声明，因为 flatten 后子模块不继承父级 properties -->
+    <properties>
+        <r2mo.version>1.0.50</r2mo.version>
+    </properties>
     <dependencyManagement>
         <dependencies>
             <!-- R2MO 相关依赖 -->
