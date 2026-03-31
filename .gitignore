@@ -48,3 +48,4 @@ archive
 .flattened-pom.xml
 dump.rdb
 .obsidian/workspace.json
+.omc/
