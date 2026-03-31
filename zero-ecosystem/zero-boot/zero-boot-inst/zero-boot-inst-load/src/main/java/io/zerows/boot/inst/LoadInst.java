@@ -58,6 +58,7 @@ public class LoadInst {
                 return BuildPerm.run(vertx);
             }).onComplete(res -> {
                 log.info("[ ZERO ] ( LoadInst ) 权限设置完成！SUCCESS = {}", res.succeeded());
+                System.exit(res.succeeded() ? 0 : -1);
             });
         });
     }
