@@ -5,6 +5,12 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XApp;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XMenu;
+import io.zerows.platform.apps.KArk;
+import io.zerows.platform.apps.KPivot;
+import io.zerows.platform.management.StoreApp;
+import io.zerows.specification.app.HAmbient;
+import io.zerows.specification.app.HApp;
+import io.zerows.specification.app.HArk;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
@@ -99,6 +105,11 @@ public class BuildApp {
                                         log.info("[ INST ]   缓存: {}", cacheDir);
                                         log.info("[ INST ]   实例: {}/instance.yml", cacheDir);
                                         log.info("[ INST ] ========================================");
+                                        // Fix：解决菜单导入过程中后续应用部合理的问题（只能在此处加载）
+                                        final HApp app = StoreApp.of().value();
+                                        final HAmbient ambient = KPivot.of(vertx).running();
+                                        final HArk ark = KArk.of(app);
+                                        ambient.registry(ark);
                                         return true;
                                     })
                                 )

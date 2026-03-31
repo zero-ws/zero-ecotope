@@ -1,5 +1,6 @@
 package io.zerows.boot.inst;
 
+import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.boot.extension.appcontainer.BuildApp;
 import io.zerows.boot.extension.appcontainer.BuildPerm;
@@ -51,26 +52,28 @@ public class LoadInst {
             // 加载应用和菜单数据到数据库
             BuildApp.run(vertx).compose(done -> {
                 log.info("[ ZERO ] ( LoadInst ) 应用初始化完成！！");
+                return runLoad(vertx, oob, vPath, prefix);
+            }).compose(res -> {
+                log.info("[ ZERO ] ( LoadInst ) 数据导入完成！！开始设置权限...");
                 return BuildPerm.run(vertx);
             }).onComplete(res -> {
-                log.info("[ ZERO ] ( LoadInst ) 权限设置完成！！开始执行数据导入...");
-                runLoad(vertx, oob, vPath, prefix);
+                log.info("[ ZERO ] ( LoadInst ) 权限设置完成！SUCCESS = {}", res.succeeded());
             });
         });
     }
 
-    private static void runLoad(final Vertx vertx,
-                                final boolean oob,
-                                final String vPath,
-                                final String prefix) {
+    private static Future<Boolean> runLoad(final Vertx vertx,
+                                           final boolean oob,
+                                           final String vPath,
+                                           final String prefix) {
         // 构造数据导入器
         final DataImport importer = DataImport.of(vertx);
         if (oob) {
             // 开启 OOB      ---> loadWith
-            importer.loadWith(vPath, prefix);
+            return importer.loadWithAsync(vPath, prefix);
         } else {
             // 不开启 OOB   ---> load
-            importer.load(vPath, prefix);
+            return importer.loadAsync(vPath, prefix);
         }
     }
 }
