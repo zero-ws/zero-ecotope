@@ -10,6 +10,7 @@ import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.extension.BodyParam;
 
 /**
  * Subscription Special Operations REST API
@@ -19,6 +20,24 @@ import jakarta.ws.rs.PathParam;
 @EndPoint
 @Path("/api/subscription")
 public interface SubscriptionAgent {
+
+    /**
+     * 在线购买应用
+     * POST /api/subscription/purchase
+     *
+     * @param tenantId 租户ID
+     * @param sigma    统一标识
+     * @param body     购买参数
+     * @return 已购应用摘要
+     */
+    @Path("/purchase")
+    @POST
+    @Address(Addr.Subscription.PURCHASE)
+    @OpenApi
+    JsonObject purchaseApp(
+        @HeaderParam(KWeb.HEADER.X_TENANT_ID) String tenantId,
+        @HeaderParam(KWeb.HEADER.X_SIGMA) String sigma,
+        @BodyParam JsonObject body);
 
     /**
      * 获取订阅仪表板统计数据
@@ -44,6 +63,22 @@ public interface SubscriptionAgent {
     @Address(Addr.Subscription.MY_SUBSCRIPTIONS)
     @OpenApi
     JsonObject getMySubscriptions();
+
+    /**
+     * 查询当前租户已购应用列表
+     * POST /api/subscription/purchased/search
+     *
+     * @param tenantId 租户ID
+     * @param body     查询参数
+     * @return 已购应用列表
+     */
+    @Path("/purchased/search")
+    @POST
+    @Address(Addr.Subscription.PURCHASED_SEARCH)
+    @OpenApi
+    JsonObject searchPurchased(
+        @HeaderParam(KWeb.HEADER.X_TENANT_ID) String tenantId,
+        @BodyParam JsonObject body);
 
     /**
      * 取消订阅

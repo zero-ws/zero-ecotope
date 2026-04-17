@@ -23,6 +23,25 @@ public class SubscriptionActor {
     private SubscriptionStub subscriptionStub;
 
     /**
+     * 在线购买应用
+     *
+     * @param tenantId 租户ID
+     * @param sigma    统一标识
+     * @param body     购买参数
+     * @return 已购应用摘要
+     */
+    @Address(Addr.Subscription.PURCHASE)
+    public Future<JsonObject> purchaseApp(final String tenantId, final String sigma, final JsonObject body) {
+        if (Ut.isNil(tenantId)) {
+            return Ux.future(new JsonObject().put("error", "Tenant ID is required"));
+        }
+        if (body == null || Ut.isNil(body.getString("appId"))) {
+            return Ux.future(new JsonObject().put("error", "Application ID is required"));
+        }
+        return this.subscriptionStub.purchaseApp(tenantId, sigma, body);
+    }
+
+    /**
      * 获取订阅仪表板统计数据
      *
      * @param sigma 统一标识
@@ -50,6 +69,21 @@ public class SubscriptionActor {
         }
         return this.subscriptionStub.fetchMySubscriptions(userId)
             .compose(array -> Ux.future(new JsonObject().put("list", array)));
+    }
+
+    /**
+     * 查询当前租户已购应用列表
+     *
+     * @param tenantId 租户ID
+     * @param body     查询参数
+     * @return 已购应用列表
+     */
+    @Address(Addr.Subscription.PURCHASED_SEARCH)
+    public Future<JsonObject> searchPurchased(final String tenantId, final JsonObject body) {
+        if (Ut.isNil(tenantId)) {
+            return Ux.future(new JsonObject().put("list", new JsonArray()).put("count", 0));
+        }
+        return this.subscriptionStub.searchPurchased(tenantId, body);
     }
 
     /**

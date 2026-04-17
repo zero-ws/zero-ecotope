@@ -10,9 +10,13 @@ import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
+import java.io.InputStream;
+import java.net.JarURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +24,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * 权限数据加载器
@@ -152,7 +158,7 @@ class BuildPermLoader {
      */
     private void loadPermissionsOnly(final String mid, final URI uri) throws Exception {
         if ("jar".equals(uri.getScheme())) {
-            log.warn("[ INST ] 模块 {} 使用 JAR 协议，暂不支持两阶段加载: {}", mid, uri);
+            this.scanPermissionsInJar(mid, uri);
             return;
         }
 
@@ -170,6 +176,7 @@ class BuildPermLoader {
      */
     private void loadActionsAndResources(final String mid, final URI uri) throws Exception {
         if ("jar".equals(uri.getScheme())) {
+            this.scanActionsInJar(mid, uri);
             return;
         }
 
@@ -295,8 +302,21 @@ class BuildPermLoader {
     private void loadPermission(final File file, final String type, final String directory,
                                 final String permName) throws Exception {
         final JsonObject data = Ut.ioYaml(file.getAbsolutePath());
+        this.loadPermissionData(data, type, directory, permName, file.getAbsolutePath());
+    }
+
+    private void loadPermissionFromJar(final JarFile jarFile, final JarEntry entry, final String type,
+                                       final String directory, final String permName) throws Exception {
+        try (InputStream in = jarFile.getInputStream(entry)) {
+            final JsonObject data = Ut.ioYaml(in);
+            this.loadPermissionData(data, type, directory, permName, entry.getName());
+        }
+    }
+
+    private void loadPermissionData(final JsonObject data, final String type, final String directory,
+                                    final String permName, final String source) throws Exception {
         if (data == null || !data.containsKey("data")) {
-            log.warn("[ INST ] PERM.yml 格式错误: {}", file.getAbsolutePath());
+            log.warn("[ INST ] PERM.yml 格式错误: {}", source);
             return;
         }
 
@@ -305,7 +325,7 @@ class BuildPermLoader {
         final String identifier = permData.getString("identifier");
 
         if (code == null || identifier == null) {
-            log.warn("[ INST ] PERM.yml 缺少 code 或 identifier: {}", file.getAbsolutePath());
+            log.warn("[ INST ] PERM.yml 缺少 code 或 identifier: {}", source);
             return;
         }
 
@@ -353,6 +373,23 @@ class BuildPermLoader {
                                        final String permName) throws Exception {
         // 解析文件名
         final String fileName = file.getName();
+        final JsonObject data = Ut.ioYaml(file.getAbsolutePath());
+        this.loadActionAndResourceData(fileName, data, type, directory, permName, file.getAbsolutePath());
+    }
+
+    private void loadActionAndResourceFromJar(final JarFile jarFile, final JarEntry entry, final String type,
+                                              final String directory, final String permName) throws Exception {
+        final String fileName = new File(entry.getName()).getName();
+        try (InputStream in = jarFile.getInputStream(entry)) {
+            final JsonObject data = Ut.ioYaml(in);
+            this.loadActionAndResourceData(fileName, data, type, directory, permName, entry.getName());
+        }
+    }
+
+    private void loadActionAndResourceData(final String fileName, final JsonObject data, final String type,
+                                           final String directory, final String permName,
+                                           final String source) throws Exception {
+        // 解析文件名
         final String[] nameParts = this.parseActionFileName(fileName);
         if (nameParts == null) {
             log.warn("[ INST ] 无法解析文件名: {}", fileName);
@@ -363,10 +400,8 @@ class BuildPermLoader {
         final String method = nameParts[1];
         final String uriPattern = nameParts[2];
 
-        // 加载文件内容
-        final JsonObject data = Ut.ioYaml(file.getAbsolutePath());
         if (data == null || !data.containsKey("data")) {
-            log.warn("[ INST ] Action yml 格式错误: {}", file.getAbsolutePath());
+            log.warn("[ INST ] Action yml 格式错误: {}", source);
             return;
         }
 
@@ -376,7 +411,7 @@ class BuildPermLoader {
         final String overrideIdentifier = actionData.getString("identifier");
 
         if (keyword == null) {
-            log.warn("[ INST ] Action yml 缺少 keyword: {}", file.getAbsolutePath());
+            log.warn("[ INST ] Action yml 缺少 keyword: {}", source);
             return;
         }
 
@@ -573,6 +608,11 @@ class BuildPermLoader {
             return;
         }
 
+        if ("jar".equals(uri.getScheme())) {
+            this.loadRoleFromJar(mid, uri, roleIdMap);
+            return;
+        }
+
         final File roleDir = new File(uri.getPath());
         if (!roleDir.exists() || !roleDir.isDirectory()) {
             return;
@@ -629,8 +669,19 @@ class BuildPermLoader {
             return;
         }
 
-        // 加载文件内容
         final JsonObject data = Ut.ioYaml(ymlFile.getAbsolutePath());
+        this.loadRolePermData(roleCode, roleId, data);
+    }
+
+    private void loadRolePermFromJar(final String roleCode, final String roleId, final JarFile jarFile,
+                                     final JarEntry entry) throws Exception {
+        try (InputStream in = jarFile.getInputStream(entry)) {
+            final JsonObject data = Ut.ioYaml(in);
+            this.loadRolePermData(roleCode, roleId, data);
+        }
+    }
+
+    private void loadRolePermData(final String roleCode, final String roleId, final JsonObject data) throws Exception {
         if (data == null) {
             return;
         }
@@ -672,6 +723,106 @@ class BuildPermLoader {
 
         // 统计每个角色的权限关联数量
         this.rolePermCounts.merge(roleCode, rolePermCount, Integer::sum);
+    }
+
+    private void scanPermissionsInJar(final String mid, final URI uri) throws Exception {
+        try (JarFile jarFile = this.openJarFile(uri)) {
+            final String root = this.jarEntryRoot(uri);
+            final Set<String> permDirs = new HashSet<>();
+            final Set<String> permFiles = new HashSet<>();
+            final Enumeration<JarEntry> entries = jarFile.entries();
+            while (entries.hasMoreElements()) {
+                final JarEntry entry = entries.nextElement();
+                final String entryName = entry.getName();
+                if (!entryName.startsWith(root) || entry.isDirectory()) {
+                    continue;
+                }
+                final String relative = entryName.substring(root.length());
+                final String[] parts = relative.split("/");
+                if (parts.length >= 3) {
+                    permDirs.add(parts[0] + "/" + parts[1] + "/" + parts[2]);
+                }
+                if (parts.length == 4 && "PERM.yml".equals(parts[3])) {
+                    final String permKey = parts[0] + "/" + parts[1] + "/" + parts[2];
+                    permFiles.add(permKey);
+                    this.loadPermissionFromJar(jarFile, entry, parts[0], parts[1], parts[2]);
+                }
+            }
+            permDirs.stream()
+                .filter(permKey -> !permFiles.contains(permKey))
+                .forEach(this.missingPermDirs::add);
+            log.info("[ INST ] 模块 {} 使用 JAR 协议完成第一阶段 PERM 扫描: {} 个目录 / {} 个 PERM.yml",
+                mid, permDirs.size(), permFiles.size());
+        }
+    }
+
+    private void scanActionsInJar(final String mid, final URI uri) throws Exception {
+        try (JarFile jarFile = this.openJarFile(uri)) {
+            final String root = this.jarEntryRoot(uri);
+            final Enumeration<JarEntry> entries = jarFile.entries();
+            int count = 0;
+            while (entries.hasMoreElements()) {
+                final JarEntry entry = entries.nextElement();
+                final String entryName = entry.getName();
+                if (!entryName.startsWith(root) || entry.isDirectory()) {
+                    continue;
+                }
+                final String relative = entryName.substring(root.length());
+                final String[] parts = relative.split("/");
+                if (parts.length == 4 && parts[3].endsWith(".yml") && !"PERM.yml".equals(parts[3])) {
+                    this.loadActionAndResourceFromJar(jarFile, entry, parts[0], parts[1], parts[2]);
+                    count++;
+                }
+            }
+            log.info("[ INST ] 模块 {} 使用 JAR 协议完成第二阶段 Action 扫描: {} 个 action 文件", mid, count);
+        }
+    }
+
+    private void loadRoleFromJar(final String mid, final URI uri, final Map<String, String> roleIdMap) throws Exception {
+        try (JarFile jarFile = this.openJarFile(uri)) {
+            final String root = this.jarEntryRoot(uri);
+            final Enumeration<JarEntry> entries = jarFile.entries();
+            int count = 0;
+            while (entries.hasMoreElements()) {
+                final JarEntry entry = entries.nextElement();
+                final String entryName = entry.getName();
+                if (!entryName.startsWith(root) || entry.isDirectory()) {
+                    continue;
+                }
+                final String relative = entryName.substring(root.length());
+                final String[] parts = relative.split("/");
+                if (parts.length != 2 || !parts[1].endsWith(".yml")) {
+                    continue;
+                }
+                final String roleCode = parts[0];
+                final String roleId = roleIdMap.get(roleCode);
+                if (roleId == null) {
+                    continue;
+                }
+                this.loadRolePermFromJar(roleCode, roleId, jarFile, entry);
+                count++;
+            }
+            log.info("[ INST ] 模块 {} 使用 JAR 协议完成角色权限扫描: {} 个角色权限文件", mid, count);
+        }
+    }
+
+    private JarFile openJarFile(final URI uri) throws Exception {
+        final URL url = uri.toURL();
+        final JarURLConnection connection = (JarURLConnection) url.openConnection();
+        return connection.getJarFile();
+    }
+
+    private String jarEntryRoot(final URI uri) {
+        final String text = uri.toString();
+        final int idx = text.indexOf("!/");
+        if (idx < 0) {
+            return "";
+        }
+        String root = text.substring(idx + 2);
+        if (!root.endsWith("/")) {
+            root = root + "/";
+        }
+        return root;
     }
 
     /**

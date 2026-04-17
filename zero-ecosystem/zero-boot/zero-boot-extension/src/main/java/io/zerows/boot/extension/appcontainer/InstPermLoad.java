@@ -184,7 +184,7 @@ class InstPermLoad implements InstPerm {
                 if (entryName.startsWith("plugins/") && entry.isDirectory()) {
                     // 解析路径: plugins/{MID}/security/{TYPE}/
                     final String[] parts = entryName.split("/");
-                    if (parts.length >= 4) {
+                    if (parts.length == 4) {
                         final String mid = parts[1];
                         final String security = parts[2];
                         final String type = parts[3].endsWith("/")

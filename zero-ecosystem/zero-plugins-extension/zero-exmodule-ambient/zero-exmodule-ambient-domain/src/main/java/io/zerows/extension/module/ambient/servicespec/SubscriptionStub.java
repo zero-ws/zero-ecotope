@@ -12,6 +12,16 @@ import io.vertx.core.json.JsonObject;
 public interface SubscriptionStub {
 
     /**
+     * 购买应用，购买关系复用 X_SUBSCRIPTION 表承载
+     *
+     * @param tenantId 租户ID
+     * @param sigma    统一标识
+     * @param input    购买参数
+     * @return 已购应用摘要
+     */
+    Future<JsonObject> purchaseApp(String tenantId, String sigma, JsonObject input);
+
+    /**
      * 获取订阅仪表板统计数据
      *
      * @param sigma 统一标识
@@ -44,4 +54,13 @@ public interface SubscriptionStub {
      * @return 订阅列表
      */
     Future<JsonArray> fetchMySubscriptions(String userId);
+
+    /**
+     * 查询当前租户的已购应用列表
+     *
+     * @param tenantId 租户ID
+     * @param query    查询参数
+     * @return 已购应用列表与总数
+     */
+    Future<JsonObject> searchPurchased(String tenantId, JsonObject query);
 }

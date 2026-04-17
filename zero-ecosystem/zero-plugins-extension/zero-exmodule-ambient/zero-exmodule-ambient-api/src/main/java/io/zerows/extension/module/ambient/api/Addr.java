@@ -171,6 +171,8 @@ interface Addr {
         String DASHBOARD = Prefix._EVENT + "X-SUBSCRIPTION/DASHBOARD";
 
         // Subscription Special Operations
+        String PURCHASE = Prefix._EVENT + "X-SUBSCRIPTION/PURCHASE";
+        String PURCHASED_SEARCH = Prefix._EVENT + "X-SUBSCRIPTION/PURCHASED/SEARCH";
         String CANCEL = Prefix._EVENT + "X-SUBSCRIPTION/CANCEL";
         String RENEW = Prefix._EVENT + "X-SUBSCRIPTION/RENEW";
 
