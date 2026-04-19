@@ -1,10 +1,9 @@
 # Backend Development Guide
 
 ## Source Profile
-- Extracted from `app-r2mo/r2mo-apps-admin`
-- Active stack: Zero / Vert.x-first
-- Parent BOM: `io.zerows:zero-0216`
-- Evidence base: project `pom.xml`, backend MDC rules, generated module bootstrap classes
+- Framework-level Zero / Vert.x-first backend guidance
+- Applies to downstream projects that inherit or import `io.zerows:zero-0216`
+- Evidence base: Zero framework ownership, reusable backend layering, CRUD engine conventions, DBE/QQuery semantics, and verified downstream usage patterns
 
 ## 1. Backend Architecture Model
 

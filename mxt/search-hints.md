@@ -158,3 +158,31 @@ Decision mapping:
 - Shared extension contract → `zero-extension-skeleton`
 - Reusable business implementation → `zero-exmodule-*`
 - Project-specific customization → application layer
+
+## 8. Graph-Assisted MCP Navigation
+
+When source relationships matter more than a single text hit, use [`mcp-code-review-graph-rules.md`](mcp-code-review-graph-rules.md) after this file.
+
+Current registered graph identity:
+
+```text
+Alias: mxt-zero
+Repo:  /Users/lang/zero-cloud/app-zero/zero-ecotope
+```
+
+Recommended command checks:
+
+```bash
+code-review-graph repos
+code-review-graph status --repo /Users/lang/zero-cloud/app-zero/zero-ecotope
+```
+
+Graph search rules:
+- Always pass the explicit `repo_root` for MCP tool calls.
+- Filter backend framework analysis to `zero-ecosystem/` first.
+- Filter frontend extension analysis to `zero-ui/src/extension/` first.
+- Ignore `.obsidian/plugins` JavaScript graph communities unless the task is explicitly about repository documentation tooling.
+- Use graph results to find candidate relationships, then open source files to verify behavior.
+
+- For YAML / JSON / metadata-driven tasks, do not stop at graph results; continue into resource trees under `plugins/`, `model/`, `security/`, and `src/main/resources/`.
+- Rebuild or incrementally update the graph before trusting impact analysis on changed framework code.
