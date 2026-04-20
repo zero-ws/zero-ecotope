@@ -32,10 +32,10 @@ public class BuildApp {
      * <p>
      * 核心流程：
      * 1. 加载全局配置（environment.json 的 global 节点）
-     * 2. 扫描所有模块的 apps 目录（apps/{UUID}.yml 和 apps/{UUID}/nav/）
+     * 2. 扫描所有模块的 apps 目录（兼容旧版 flat 结构与新版 nested 结构）
      * 3. 使用 BuildAppMenuLoader 加载应用和菜单数据
      * 4. 使用 BuildAppMenuPersister 持久化到数据库（XApp 按 ID 判重，XMenu 按 NAME+APP_ID 判重）
-     * 5. 生成缓存文件（apps/{UUID}/menu.yml）
+     * 5. 生成缓存文件（apps/{Z_APP_ID}/{child-app-id}/menu.yml）
      * 6. 输出统计信息
      *
      * @param vertx Vert.x 实例
@@ -50,17 +50,18 @@ public class BuildApp {
             // 1. 加载全局配置（从 environment.json 的 global 节点）
             final JsonObject globalConfig = BuildShared.loadGlobalConfig();
 
-            // 2. 解析缓存目录
-            final String cacheDir = resolveCacheDir();
+            // 2. 解析 apps 根目录和当前实例缓存目录
+            final String appsRoot = resolveAppsRoot();
+            final String cacheDir = resolveCacheDir(globalConfig);
 
             // 3. 加载实例映射配置（从 apps/instance.yml 和缓存标识文件）
-            final Map<String, String> instanceMap = loadInstanceMap();
+            final Map<String, String> instanceMap = loadInstanceMap(appsRoot);
 
             // 3.1 加载 init 配置（从 apps/instance.yml 的 init 节点）
-            final JsonObject initConfig = loadInitConfig();
+            final JsonObject initConfig = loadInitConfig(appsRoot);
 
             // 4. 从缓存目录和数据库加载额外的映射
-            return loadCacheMappings(vertx, cacheDir, instanceMap)
+            return loadCacheMappings(vertx, appsRoot, cacheDir, instanceMap)
                 .compose(mergedMap -> {
                     // 5. 扫描应用和菜单目录
                     final List<URI> appUris = InstApps.of().ioApp();        // apps/{UUID}.yml
@@ -71,6 +72,7 @@ public class BuildApp {
                     // 6. 加载应用和菜单数据
                     final BuildMenuLoader loader = BuildMenuLoader.create(vertx, globalConfig, mergedMap, initConfig);
                     return loader.loadApps(appUris)
+                        .compose(v -> loader.preloadDirectoryMappings())
                         .compose(v -> loader.loadMenus(menuDirUris))
                         .compose(v -> {
 
@@ -92,10 +94,10 @@ public class BuildApp {
                             }
 
                             // 8. 持久化到数据库（XApp 按 ID 判重，XMenu 按 NAME+APP_ID 判重）
-                            final BuildMenuPersister persister = BuildMenuPersister.create(vertx, cacheDir);
+                            final BuildMenuPersister persister = BuildMenuPersister.create(vertx, appsRoot, cacheDir);
 
                             return persister.saveApps(apps)
-                                .compose(appStats -> persister.saveMenus(menus)
+                                .compose(appStats -> persister.saveMenus(menus, loader.getAppDirectoryMap())
                                     .map(menuStats -> {
                                         final int totalMenus = menus.values().stream().mapToInt(List::size).sum();
                                         log.info("[ INST ] ========================================");
@@ -139,7 +141,7 @@ public class BuildApp {
      * 格式: running: { UUID: code }
      * 返回: Map<code, UUID>
      */
-    private static Map<String, String> loadInstanceMap() {
+    private static Map<String, String> loadInstanceMap(final String appsRoot) {
         try {
             // 优先从 classpath 加载
             final Map<String, String> classpathMap = InstApps.of().ioInstance();
@@ -148,12 +150,7 @@ public class BuildApp {
             }
 
             // 如果 classpath 中没有，尝试从文件系统加载
-            final String r2moHome = System.getenv("R2MO_HOME");
-            final String basePath = (r2moHome != null && !r2moHome.trim().isEmpty())
-                ? r2moHome
-                : System.getProperty("user.dir");
-
-            final File instanceFile = new File(basePath + "/apps/instance.yml");
+            final File instanceFile = new File(appsRoot + "/instance.yml");
             if (!instanceFile.exists()) {
                 log.debug("[ INST ] 未找到 instance.yml，使用空映射");
                 return new java.util.HashMap<>();
@@ -190,7 +187,7 @@ public class BuildApp {
      * 格式: init: { menu: {...}, app: {...} }
      * 返回: JsonObject
      */
-    private static JsonObject loadInitConfig() {
+    private static JsonObject loadInitConfig(final String appsRoot) {
         try {
             // 优先从 classpath 加载
             final JsonObject classpathInit = InstApps.of().ioInit();
@@ -199,12 +196,7 @@ public class BuildApp {
             }
 
             // 如果 classpath 中没有，尝试从文件系统加载
-            final String r2moHome = System.getenv("R2MO_HOME");
-            final String basePath = (r2moHome != null && !r2moHome.trim().isEmpty())
-                ? r2moHome
-                : System.getProperty("user.dir");
-
-            final File instanceFile = new File(basePath + "/apps/instance.yml");
+            final File instanceFile = new File(appsRoot + "/instance.yml");
             if (!instanceFile.exists()) {
                 log.debug("[ INST ] 未找到 instance.yml，使用空 init 配置");
                 return new JsonObject();
@@ -232,45 +224,26 @@ public class BuildApp {
      */
     private static Future<Map<String, String>> loadCacheMappings(
         final Vertx vertx,
+        final String appsRoot,
         final String cacheDir,
         final Map<String, String> instanceMap
     ) {
         try {
-            final File cacheDirFile = new File(cacheDir);
-            if (!cacheDirFile.exists() || !cacheDirFile.isDirectory()) {
-                log.debug("[ INST ] 缓存目录不存在，使用 instance.yml 映射");
-                return Future.succeededFuture(instanceMap);
-            }
-
-            // 扫描缓存目录，查找 apps/{UUID}/{code} 标识文件
             final Map<String, String> cacheMap = new java.util.HashMap<>();
-            final File[] uuidDirs = cacheDirFile.listFiles(File::isDirectory);
-            if (uuidDirs == null || uuidDirs.length == 0) {
-                log.debug("[ INST ] 缓存目录为空，使用 instance.yml 映射");
-                return Future.succeededFuture(instanceMap);
-            }
+            final Map<String, String> nestedCacheMap = new java.util.HashMap<>();
 
-            for (final File uuidDir : uuidDirs) {
-                final String uuid = uuidDir.getName();
-                final File[] files = uuidDir.listFiles(File::isFile);
-                if (files != null) {
-                    for (final File file : files) {
-                        final String code = file.getName();
-                        // 跳过 menu.yml 等非标识文件
-                        if (!code.endsWith(".yml") && !code.endsWith(".yaml")) {
-                            cacheMap.put(code, uuid);
-                            log.debug("[ INST ] 从缓存加载映射: {} -> {}", code, uuid);
-                        }
-                    }
-                }
+            thisLoadCacheMappings(new File(appsRoot), cacheMap);
+            if (!appsRoot.equals(cacheDir)) {
+                thisLoadCacheMappings(new File(cacheDir), nestedCacheMap);
+                cacheMap.putAll(nestedCacheMap);
             }
 
             // 合并映射：instance.yml 优先级更高
             final Map<String, String> mergedMap = new java.util.HashMap<>(cacheMap);
             mergedMap.putAll(instanceMap);
 
-            log.info("[ INST ] 加载缓存映射: {} 条记录（instance.yml: {}, 缓存: {}）",
-                mergedMap.size(), instanceMap.size(), cacheMap.size());
+            log.info("[ INST ] 加载缓存映射: {} 条记录（instance.yml: {}, legacy: {}, nested: {}）",
+                mergedMap.size(), instanceMap.size(), cacheMap.size() - nestedCacheMap.size(), nestedCacheMap.size());
 
             return Future.succeededFuture(mergedMap);
         } catch (final Exception e) {
@@ -280,17 +253,57 @@ public class BuildApp {
     }
 
     /**
-     * 解析缓存目录
+     * 扫描缓存标识文件，兼容旧版 flat 结构和新版 nested 结构
+     */
+    private static void thisLoadCacheMappings(final File baseDir, final Map<String, String> cacheMap) {
+        if (!baseDir.exists() || !baseDir.isDirectory()) {
+            return;
+        }
+
+        final File[] uuidDirs = baseDir.listFiles(File::isDirectory);
+        if (uuidDirs == null || uuidDirs.length == 0) {
+            return;
+        }
+
+        for (final File uuidDir : uuidDirs) {
+            final String uuid = uuidDir.getName();
+            final File[] files = uuidDir.listFiles(File::isFile);
+            if (files == null) {
+                continue;
+            }
+            for (final File file : files) {
+                final String code = file.getName();
+                if (!code.endsWith(".yml") && !code.endsWith(".yaml")) {
+                    cacheMap.put(code, uuid);
+                    log.debug("[ INST ] 从缓存加载映射: {} -> {}", code, uuid);
+                }
+            }
+        }
+    }
+
+    /**
+     * 解析 apps 根目录
      * 优先使用 R2MO_HOME 环境变量，未配置则使用当前目录
      */
-    private static String resolveCacheDir() {
+    private static String resolveAppsRoot() {
         final String r2moHome = System.getenv("R2MO_HOME");
         if (r2moHome != null && !r2moHome.trim().isEmpty()) {
-            // 使用 R2MO_HOME/apps
             return r2moHome + "/apps";
         } else {
-            // 使用当前目录/apps
             return System.getProperty("user.dir") + "/apps";
         }
+    }
+
+    /**
+     * 解析当前入口应用实例的缓存目录
+     * 目录形态：apps/{Z_APP_ID}
+     */
+    private static String resolveCacheDir(final JsonObject globalConfig) {
+        final String appsRoot = resolveAppsRoot();
+        final String appId = globalConfig == null ? null : globalConfig.getString("appId");
+        if (appId == null || appId.trim().isEmpty()) {
+            return appsRoot;
+        }
+        return appsRoot + "/" + appId;
     }
 }

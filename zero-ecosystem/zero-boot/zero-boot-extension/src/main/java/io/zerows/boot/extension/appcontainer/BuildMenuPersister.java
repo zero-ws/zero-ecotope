@@ -34,15 +34,17 @@ class BuildMenuPersister {
     private static final YAMLMapper YAML_MAPPER = new YAMLMapper();
 
     private final Vertx vertx;
+    private final String appsRoot;
     private final String cacheDir;
 
-    private BuildMenuPersister(final Vertx vertx, final String cacheDir) {
+    private BuildMenuPersister(final Vertx vertx, final String appsRoot, final String cacheDir) {
         this.vertx = vertx;
+        this.appsRoot = appsRoot;
         this.cacheDir = cacheDir;
     }
 
-    static BuildMenuPersister create(final Vertx vertx, final String cacheDir) {
-        return new BuildMenuPersister(vertx, cacheDir);
+    static BuildMenuPersister create(final Vertx vertx, final String appsRoot, final String cacheDir) {
+        return new BuildMenuPersister(vertx, appsRoot, cacheDir);
     }
 
     /**
@@ -76,7 +78,7 @@ class BuildMenuPersister {
             // 生成 instance.yml
             this.generateInstanceYml(apps);
 
-            // 生成缓存标识文件 apps/{UUID}/{code}
+            // 生成缓存标识文件 apps/{Z_APP_ID}/{child-app-id}
             this.generateCacheMarkers(apps);
 
             return new int[]{inserted, updated};
@@ -93,7 +95,7 @@ class BuildMenuPersister {
      * 3. 第三轮：修正所有菜单的 PARENT_ID（使用第二轮建立的映射）
      * 4. 第四轮：执行 upsert 操作
      */
-    Future<int[]> saveMenus(final Map<String, List<XMenu>> menus) {
+    Future<int[]> saveMenus(final Map<String, List<XMenu>> menus, final Map<String, String> appDirectoryMap) {
         log.info("[ INST ] 开始保存菜单");
 
         final AtomicInteger insertCount = new AtomicInteger(0);
@@ -128,7 +130,7 @@ class BuildMenuPersister {
                     }
 
                     // 生成缓存文件
-                    this.generateMenuCache(appId, appMenus);
+                    this.generateMenuCache(appId, appMenus, appDirectoryMap.get(appId));
                 }
 
                 return Future.all(futures).map(v -> {
@@ -312,10 +314,10 @@ class BuildMenuPersister {
      * 使用 YAMLMapper 输出标准 YAML 格式
      * 匹配逻辑：只在缓存不存在或内容不匹配时才重新生成
      */
-    private void generateMenuCache(final String appId, final List<XMenu> menus) {
+    private void generateMenuCache(final String appId, final List<XMenu> menus, final String childAppDir) {
         try {
             // 创建缓存目录
-            final File appCacheDir = new File(this.cacheDir, appId);
+            final File appCacheDir = this.resolveMenuCacheDir(appId, childAppDir);
             if (!appCacheDir.exists()) {
                 appCacheDir.mkdirs();
             }
@@ -396,24 +398,18 @@ class BuildMenuPersister {
 
     /**
      * 生成缓存标识文件
-     * 在 apps/{UUID}/ 目录下创建 {code} 空白文件
-     * 用于重新导入时标识应用，防止缓存重新生成
+     * 在 apps/{Z_APP_ID}/ 目录下创建 {child-app-id} 空白文件
+     * 同时兼容旧版 apps/{UUID}/{code} 标识文件，避免存量缓存失效
      */
     private void generateCacheMarkers(final Map<String, XApp> apps) {
         try {
             for (final XApp app : apps.values()) {
                 if (app.getId() != null && app.getCode() != null) {
-                    // 创建 apps/{UUID}/ 目录
-                    final File appDir = new File(this.cacheDir, app.getId());
-                    if (!appDir.exists()) {
-                        appDir.mkdirs();
-                    }
+                    this.ensureMarker(new File(this.cacheDir), app.getCode());
 
-                    // 创建 apps/{UUID}/{code} 空白文件
-                    final File markerFile = new File(appDir, app.getCode());
-                    if (!markerFile.exists()) {
-                        markerFile.createNewFile();
-                        log.debug("[ INST ] 创建缓存标识: {}/{}", app.getId(), app.getCode());
+                    final File legacyDir = new File(this.appsRoot, app.getId());
+                    if (!legacyDir.getAbsolutePath().equals(new File(this.cacheDir).getAbsolutePath())) {
+                        this.ensureMarker(legacyDir, app.getCode());
                     }
                 }
             }
@@ -421,5 +417,23 @@ class BuildMenuPersister {
         } catch (final Exception e) {
             log.error("[ INST ] 生成缓存标识文件失败", e);
         }
+    }
+
+    private void ensureMarker(final File markerDir, final String markerName) throws Exception {
+        if (!markerDir.exists()) {
+            markerDir.mkdirs();
+        }
+        final File markerFile = new File(markerDir, markerName);
+        if (!markerFile.exists()) {
+            markerFile.createNewFile();
+            log.debug("[ INST ] 创建缓存标识: {}/{}", markerDir.getName(), markerName);
+        }
+    }
+
+    private File resolveMenuCacheDir(final String appId, final String childAppDir) {
+        if (childAppDir != null && !childAppDir.isEmpty()) {
+            return new File(this.cacheDir, childAppDir);
+        }
+        return new File(this.cacheDir, appId);
     }
 }

@@ -143,26 +143,7 @@ class InstAppsLoad implements InstApps {
         try {
             final File dir = new File(url.toURI());
             if (dir.exists() && dir.isDirectory()) {
-                final File[] children = dir.listFiles();
-                if (children != null) {
-                    for (final File child : children) {
-                        if (child.isFile() && child.getName().endsWith(".yml")) {
-                            // 检查是否是 instance.yml
-                            if ("instance.yml".equals(child.getName())) {
-                                instanceYmlUri = child.toURI();
-                                log.info("[ INST ] [File] 找到 instance.yml");
-                            } else {
-                                log.info("[ INST ] [File] 加载直属 yml 文件: `apps/{}`", child.getName());
-                                // 直接使用 toURI() 存入 Set
-                                APPS.get(Boolean.TRUE).add(child.toURI());
-                            }
-                        } else if (child.isDirectory()) {
-                            log.info("[ INST ] [File] 加载直属目录: `apps/{}`", child.getName());
-                            // 直接使用 toURI() 存入 Set
-                            APPS.get(Boolean.FALSE).add(child.toURI());
-                        }
-                    }
-                }
+                this.scanFileNode(dir, 0);
             }
         } catch (final Exception e) {
             log.error("[ INST ] 解析文件系统 URL 失败: {}", url, e);
@@ -188,32 +169,56 @@ class InstAppsLoad implements InstApps {
                 if (entryName.startsWith("apps/") && entryName.length() > 5) {
                     // 去掉 "apps/" 前缀，获取相对路径
                     final String relativePath = entryName.substring(5);
+                    final String normalized = relativePath.endsWith("/") ? relativePath.substring(0, relativePath.length() - 1) : relativePath;
+                    final String[] segments = normalized.split("/");
 
                     if (!entry.isDirectory()) {
-                        // 1. 获取直属 .yml 文件：相对路径中不能包含 '/' (不递归)
-                        if (!relativePath.contains("/") && relativePath.endsWith(".yml")) {
-                            // 检查是否是 instance.yml
-                            if ("instance.yml".equals(relativePath)) {
-                                final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
-                                instanceYmlUri = new URI(uriStr.replace(" ", "%20"));
-                                log.info("[ INST ] [JAR] 找到 instance.yml");
-                            } else {
-                                log.info("[ INST ] [JAR] 加载直属 yml 文件: {}", entryName);
-                                // 修复 JDK 20+ 警告：直接使用 URI 构造，并安全处理可能的空格
-                                final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
-                                APPS.get(Boolean.TRUE).add(new URI(uriStr.replace(" ", "%20")));
-                            }
-                        }
-                    } else {
-                        // 2. 获取直属目录：相对路径以 '/' 结尾，且去掉结尾的 '/' 后不再包含其他 '/' (不递归)
-                        final String pathWithoutTrailingSlash = relativePath.substring(0, relativePath.length() - 1);
-                        if (!pathWithoutTrailingSlash.contains("/")) {
-                            log.info("[ INST ] [JAR] 加载直属目录: {}", entryName);
-                            // 修复 JDK 20+ 警告：直接使用 URI 构造
+                        if ("instance.yml".equals(normalized)) {
                             final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
-                            APPS.get(Boolean.FALSE).add(new URI(uriStr.replace(" ", "%20")));
+                            instanceYmlUri = new URI(uriStr.replace(" ", "%20"));
+                            log.info("[ INST ] [JAR] 找到 instance.yml");
+                        } else if (segments.length == 1 && normalized.endsWith(".yml")) {
+                            final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
+                            log.info("[ INST ] [JAR] 加载直属 yml 文件: {}", entryName);
+                            APPS.get(Boolean.TRUE).add(new URI(uriStr.replace(" ", "%20")));
+                        } else if (segments.length == 2 && normalized.endsWith(".yml")) {
+                            final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
+                            log.info("[ INST ] [JAR] 加载嵌套 yml 文件: {}", entryName);
+                            APPS.get(Boolean.TRUE).add(new URI(uriStr.replace(" ", "%20")));
                         }
+                    } else if (segments.length == 1 || segments.length == 2) {
+                        final String uriStr = "jar:" + jarBaseUrl + "!/" + entryName;
+                        log.info("[ INST ] [JAR] 加载应用目录: {}", entryName);
+                        APPS.get(Boolean.FALSE).add(new URI(uriStr.replace(" ", "%20")));
                     }
+                }
+            }
+        }
+    }
+
+    private void scanFileNode(final File dir, final int depth) {
+        final File[] children = dir.listFiles();
+        if (children == null) {
+            return;
+        }
+
+        for (final File child : children) {
+            if (child.isFile() && child.getName().endsWith(".yml")) {
+                if ("instance.yml".equals(child.getName()) && depth == 0) {
+                    instanceYmlUri = child.toURI();
+                    log.info("[ INST ] [File] 找到 instance.yml");
+                } else if (depth <= 1) {
+                    log.info("[ INST ] [File] 加载应用 yml 文件: {}", child.getPath());
+                    APPS.get(Boolean.TRUE).add(child.toURI());
+                }
+            } else if (child.isDirectory()) {
+                final File navDir = new File(child, "nav");
+                if (navDir.exists() && navDir.isDirectory()) {
+                    log.info("[ INST ] [File] 加载应用目录: {}", child.getPath());
+                    APPS.get(Boolean.FALSE).add(child.toURI());
+                }
+                if (depth == 0) {
+                    this.scanFileNode(child, depth + 1);
                 }
             }
         }

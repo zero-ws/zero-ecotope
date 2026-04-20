@@ -37,6 +37,9 @@ class BuildMenuLoader {
     private final Map<String, String> dirPathToMenuId = new ConcurrentHashMap<>(); // 目录路径 -> 菜单ID
     private final Map<String, Integer> menuIdToLevel = new ConcurrentHashMap<>(); // 菜单ID -> Level
     private final Map<String, String> dirNameToAppId = new ConcurrentHashMap<>(); // 目录名 -> 应用UUID
+    private final Map<String, String> appIdToDirName = new ConcurrentHashMap<>(); // 应用UUID -> 目录名
+    private final Map<String, String> appNameToAppId = new ConcurrentHashMap<>(); // 应用名称 -> 应用UUID
+    private final Map<String, String> appCodeToAppId = new ConcurrentHashMap<>(); // 应用编码 -> 应用UUID
     private final Map<String, String> instanceMap; // code -> UUID 映射（来自 instance.yml）
     private final JsonObject globalConfig;
     private final JsonObject initConfig; // init 配置（来自 instance.yml 的 init 节点）
@@ -79,6 +82,26 @@ class BuildMenuLoader {
         });
     }
 
+    Future<Void> preloadDirectoryMappings() {
+        final String zAppId = this.globalConfig.getString("appId");
+        if (zAppId == null || zAppId.isEmpty()) {
+            return Future.succeededFuture();
+        }
+        return DB.on(XAppDao.class)
+            .<XApp>fetchAsync("APP_ID", zAppId)
+            .compose(existingApps -> {
+                for (final XApp app : existingApps) {
+                    this.rememberAppLookup(app);
+                }
+                log.info("[ INST ] 预加载应用目录映射完成，共 {} 个应用", existingApps.size());
+                return Future.<Void>succeededFuture();
+            })
+            .recover(err -> {
+                log.error("[ INST ] 预加载应用目录映射失败", err);
+                return Future.<Void>succeededFuture();
+            });
+    }
+
     /**
      * 从 URI 列表加载菜单数据
      * 返回 Future，支持异步操作
@@ -100,14 +123,9 @@ class BuildMenuLoader {
                     continue;
                 }
 
-                final String actualAppId;
-                if ("HOME".equals(dirName)) {
-                    actualAppId = this.globalConfig.getString("appId");
-                } else {
-                    actualAppId = this.dirNameToAppId.get(dirName);
-                    if (actualAppId == null) {
-                        continue;
-                    }
+                final String actualAppId = this.resolveActualAppId(dirName);
+                if (actualAppId == null) {
+                    continue;
                 }
 
                 // 第一阶段：只收集 ID 和目录映射
@@ -127,14 +145,9 @@ class BuildMenuLoader {
                     continue;
                 }
 
-                final String actualAppId;
-                if ("HOME".equals(dirName)) {
-                    actualAppId = this.globalConfig.getString("appId");
-                } else {
-                    actualAppId = this.dirNameToAppId.get(dirName);
-                    if (actualAppId == null) {
-                        continue;
-                    }
+                final String actualAppId = this.resolveActualAppId(dirName);
+                if (actualAppId == null) {
+                    continue;
                 }
 
                 // 第二阶段：计算 level
@@ -156,17 +169,10 @@ class BuildMenuLoader {
                 }
 
                 // 从目录名映射到应用UUID
-                final String actualAppId;
-                if ("HOME".equals(dirName)) {
-                    // HOME 目录使用全局配置的 appId
-                    actualAppId = this.globalConfig.getString("appId");
-                } else {
-                    // 其他目录从映射表中查找对应的应用UUID
-                    actualAppId = this.dirNameToAppId.get(dirName);
-                    if (actualAppId == null) {
-                        log.warn("[ INST ] 未找到目录 {} 对应的应用UUID，跳过", dirName);
-                        continue;
-                    }
+                final String actualAppId = this.resolveActualAppId(dirName);
+                if (actualAppId == null) {
+                    log.warn("[ INST ] 未找到目录 {} 对应的应用UUID，跳过", dirName);
+                    continue;
                 }
 
                 // 加载当前模块的菜单
@@ -193,6 +199,10 @@ class BuildMenuLoader {
 
     Map<String, List<XMenu>> getMenus() {
         return new HashMap<>(this.menus);
+    }
+
+    Map<String, String> getAppDirectoryMap() {
+        return new HashMap<>(this.appIdToDirName);
     }
 
     /**
@@ -248,12 +258,12 @@ class BuildMenuLoader {
 
                         // 建立目录名到应用UUID的映射（用于菜单加载）
                         if (dirName != null) {
-                            this.dirNameToAppId.put(dirName, app.getId());
-                            log.debug("[ INST ] 建立映射: 目录 {} -> 应用UUID {}", dirName, app.getId());
+                            this.rememberDirMapping(dirName, app.getId());
                         }
 
                         // 从 globalConfig 填充公共字段
                         this.fillGlobalFields(app);
+                        this.rememberAppLookup(app);
 
                         return Future.succeededFuture(app);
                     } else {
@@ -284,12 +294,12 @@ class BuildMenuLoader {
 
                         // 建立目录名到应用UUID的映射（用于菜单加载）
                         if (dirName != null) {
-                            this.dirNameToAppId.put(dirName, appId);
-                            log.debug("[ INST ] 建立映射: 目录 {} -> 应用UUID {}", dirName, appId);
+                            this.rememberDirMapping(dirName, appId);
                         }
 
                         // 从 globalConfig 填充公共字段
                         this.fillGlobalFields(app);
+                        this.rememberAppLookup(app);
 
                         return Future.succeededFuture(app);
                     }
@@ -310,6 +320,7 @@ class BuildMenuLoader {
                 // 过滤出匹配 CODE 的应用
                 for (final XApp app : apps) {
                     if (code.equals(app.getCode())) {
+                        this.rememberAppLookup(app);
                         return app;
                     }
                 }
@@ -445,15 +456,7 @@ class BuildMenuLoader {
         if (parts.length < 2) {
             return null;
         }
-
-        final String afterApps = parts[1];
-        final int slashIndex = afterApps.indexOf('/');
-        if (slashIndex > 0) {
-            // 返回目录名（可以是任意字符串，不限于 UUID）
-            return afterApps.substring(0, slashIndex);
-        }
-
-        return afterApps;
+        return this.extractLeafName(parts[1]);
     }
 
     /**
@@ -466,20 +469,7 @@ class BuildMenuLoader {
         if (parts.length < 2) {
             return null;
         }
-
-        final String afterApps = parts[1];
-        final int slashIndex = afterApps.indexOf('/');
-        if (slashIndex > 0) {
-            return afterApps.substring(0, slashIndex);
-        }
-
-        // 如果没有斜杠，说明是 apps/{name}.yml 格式
-        final String fileName = afterApps;
-        if (fileName.endsWith(".yml")) {
-            return fileName.substring(0, fileName.length() - 4);
-        }
-
-        return afterApps;
+        return this.extractLeafName(parts[1]);
     }
 
     /**
@@ -932,6 +922,80 @@ class BuildMenuLoader {
             if (file.isDirectory()) {
                 this.preScanRecursive(navRoot, file, appId, childParentId, childLevel);
             }
+        }
+    }
+
+    private String extractLeafName(final String pathAfterApps) {
+        if (pathAfterApps == null || pathAfterApps.isEmpty()) {
+            return null;
+        }
+        final String normalized = pathAfterApps.endsWith("/") || pathAfterApps.endsWith("\\")
+            ? pathAfterApps.substring(0, pathAfterApps.length() - 1)
+            : pathAfterApps;
+        final String[] segments = normalized.split("[/\\\\]");
+        if (segments.length == 0) {
+            return null;
+        }
+        String leaf = segments[segments.length - 1];
+        if (leaf.endsWith(".yml")) {
+            leaf = leaf.substring(0, leaf.length() - 4);
+        } else if (leaf.endsWith(".yaml")) {
+            leaf = leaf.substring(0, leaf.length() - 5);
+        }
+        return leaf;
+    }
+
+    private String resolveActualAppId(final String dirName) {
+        if (dirName == null || dirName.isEmpty()) {
+            return null;
+        }
+        if ("HOME".equals(dirName)) {
+            return this.globalConfig.getString("appId");
+        }
+        final String direct = this.dirNameToAppId.get(dirName);
+        if (direct != null) {
+            return direct;
+        }
+        final String suffix = this.extractAppIdentitySuffix(dirName);
+        final String byName = this.appNameToAppId.get(suffix);
+        if (byName != null) {
+            this.rememberDirMapping(dirName, byName);
+            return byName;
+        }
+        final String byCode = this.appCodeToAppId.get(suffix);
+        if (byCode != null) {
+            this.rememberDirMapping(dirName, byCode);
+            return byCode;
+        }
+        return null;
+    }
+
+    private String extractAppIdentitySuffix(final String dirName) {
+        final int atIndex = dirName.indexOf('@');
+        if (atIndex >= 0 && atIndex < dirName.length() - 1) {
+            return dirName.substring(atIndex + 1);
+        }
+        return dirName;
+    }
+
+    private void rememberDirMapping(final String dirName, final String appId) {
+        if (dirName == null || dirName.isEmpty() || appId == null || appId.isEmpty()) {
+            return;
+        }
+        this.dirNameToAppId.putIfAbsent(dirName, appId);
+        this.appIdToDirName.putIfAbsent(appId, dirName);
+        log.debug("[ INST ] 建立映射: 目录 {} -> 应用UUID {}", dirName, appId);
+    }
+
+    private void rememberAppLookup(final XApp app) {
+        if (app == null || app.getId() == null) {
+            return;
+        }
+        if (app.getName() != null && !app.getName().isEmpty()) {
+            this.appNameToAppId.putIfAbsent(app.getName(), app.getId());
+        }
+        if (app.getCode() != null && !app.getCode().isEmpty()) {
+            this.appCodeToAppId.putIfAbsent(app.getCode(), app.getId());
         }
     }
 }
