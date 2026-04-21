@@ -10,9 +10,11 @@ import io.zerows.extension.skeleton.boot.ExAbstractHActor;
 import io.zerows.specification.configuration.HConfig;
 import io.zerows.spi.HPI;
 import io.zerows.support.Fx;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -34,6 +36,7 @@ import java.util.Set;
  * @author lang : 2025-12-25
  */
 @Actor(value = "extension", sequence = Short.MAX_VALUE, configured = false)
+@Slf4j
 public class PrimedActor extends ExAbstractHActor {
 
     private static final Cc<Class<?>, List<Primed>> CC_PRIMED = Cc.open();
@@ -50,8 +53,24 @@ public class PrimedActor extends ExAbstractHActor {
         final Set<MDConfiguration> exmodule = OCacheConfiguration.of().valueSet();
         this.vLog("@ / 系统检测到 {} 个模块！", exmodule.size());
         executors.forEach(executor -> {
-            this.vLog("@ / 执行后期调度器：{}", executor.getClass().getName());
-            futures.add(executor.afterAsync(exmodule, vertxRef));
+            final String provider = executor.getClass().getName();
+            this.vLog("@ / 执行后期调度器：{}", provider);
+            try {
+                final Future<Boolean> future = executor.afterAsync(exmodule, vertxRef);
+                if (Objects.isNull(future)) {
+                    final NullPointerException error = new NullPointerException(
+                        "Primed provider returned null future: " + provider);
+                    log.error("[ XMOD ]        ❌ ---> 后期调度器返回空 Future：{}", provider, error);
+                    futures.add(Future.failedFuture(error));
+                    return;
+                }
+                futures.add(future
+                    .onSuccess(result -> this.vLog("@ / 后期调度器执行完成：{} / result = {}", provider, result))
+                    .onFailure(error -> log.error("[ XMOD ]        ❌ ---> 后期调度器执行失败：{}", provider, error)));
+            } catch (final Throwable ex) {
+                log.error("[ XMOD ]        ❌ ---> 后期调度器同步异常：{}", provider, ex);
+                futures.add(Future.failedFuture(ex));
+            }
         });
         return Fx.combineB(futures);
     }

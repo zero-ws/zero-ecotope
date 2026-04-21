@@ -28,9 +28,15 @@ project local rules/specs
 Add these only when needed:
 
 - `plugin-layer-map.md` -> plugin capability questions
-- `extension-points.md` -> SPI / Ex* / Sc* / Ui* questions
+- `spi-registry-map.md` -> SPI / Ex* / Sc* / Ui* family questions
+- `spi-implementation-rules.md` -> SPI implementation and discovery questions
 - `exmodule-boundary.md` -> plugin vs exmodule vs app placement
-- `backend-dev-guide.md` -> DPA / DBE / QQuery questions
+- `backend-dpa-guide.md` -> DPA and async backend questions
+- `dbe-query-rules.md` -> DBE / `QQuery` / `QTree` questions
+- `backend-model-tenant-rules.md` -> metadata and tenant questions
+- `backend-rbac-rules.md` -> RBAC resource questions
+- `crud-engine-guide.md` -> standard CRUD vs handwritten implementation decisions
+- `contract-source-rules.md` -> `.r2mo` contract authority questions
 - `project-rule-awareness.md` -> project MDC interaction
 
 ## 3. The Ownership Ladder

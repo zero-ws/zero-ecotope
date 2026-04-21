@@ -159,30 +159,45 @@ Decision mapping:
 - Reusable business implementation → `zero-exmodule-*`
 - Project-specific customization → application layer
 
-## 8. Graph-Assisted MCP Navigation
+## 8. High-Value Runtime Anchors
 
-When source relationships matter more than a single text hit, use [`mcp-code-review-graph-rules.md`](mcp-code-review-graph-rules.md) after this file.
+Use these anchors when the task is startup-heavy and a generic text search is still faster than graph traversal.
 
-Current registered graph identity:
+Startup and actor anchors:
+- `class ZeroLauncher`
+- `class ZeroModule`
+- `@Actor(`
+- `class PrimedActor`
+
+Flyway and migration anchors:
+- `class FlywayActor`
+- `class Flyway11Configurator`
+- `interface DBFlyway`
+- `META-INF/services/io.zerows.epoch.store.DBFlyway`
+
+App and permission bootstrap anchors:
+- `class BuildApp`
+- `class BuildPerm`
+- `class BuildMenuLoader`
+- `class BuildMenuPersister`
+- `RBAC_RESOURCE`
+- `RBAC_ROLE`
+
+OAuth2 anchors:
+- `class OAuth2Flyway`
+- `class OAuth2ServerActor`
+- `class OAuth2ClientActor`
+- `Oauth2RegisteredClient`
+
+Rule:
 
 ```text
-Alias: mxt-zero
-Repo:  /Users/lang/zero-cloud/app-zero/zero-ecotope
+Use text search to land on the owner quickly. Use graph rules only after the owner path is plausible.
 ```
 
-Recommended command checks:
+## 9. Next Document
 
-```bash
-code-review-graph repos
-code-review-graph status --repo /Users/lang/zero-cloud/app-zero/zero-ecotope
-```
+When ownership depends on structure rather than one text hit, continue with:
 
-Graph search rules:
-- Always pass the explicit `repo_root` for MCP tool calls.
-- Filter backend framework analysis to `zero-ecosystem/` first.
-- Filter frontend extension analysis to `zero-ui/src/extension/` first.
-- Ignore `.obsidian/plugins` JavaScript graph communities unless the task is explicitly about repository documentation tooling.
-- Use graph results to find candidate relationships, then open source files to verify behavior.
-
-- For YAML / JSON / metadata-driven tasks, do not stop at graph results; continue into resource trees under `plugins/`, `model/`, `security/`, and `src/main/resources/`.
-- Rebuild or incrementally update the graph before trusting impact analysis on changed framework code.
+- `graph-usage-rules.md`
+- `mcp-code-review-graph-rules.md`

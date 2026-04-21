@@ -133,41 +133,79 @@ public class ZeroModule<T> {
                      * * 这样既享受了多核 CPU 的准备速度，又享受了 Vert.x 的异步等待。
                      */
                     final List<Future<?>> futures = actorSet.parallelStream()
-                        .map(actor -> {
-                            // 1. (并行) 耗时的配置查找和反射
-                            final Actor actorAnnotation = actor.getClass().getDeclaredAnnotation(Actor.class);
-                            final HConfig config = this.findConfig(actor, actorAnnotation);
-
-                            // 2. (并行) 校验逻辑
-                            if (actorAnnotation.configured() && Objects.isNull(config)) {
-                                // 跳过应该是 info 而不是 warn
-                                log.info("[ PLUG ]    ⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
-                                    actor.getClass().getName(), actorAnnotation.value());
-                                return null;
-                            }
-
-                            // 3. (并行) 触发启动。注意：startAsync 内部通常是非阻塞的，
-                            // 但如果 startAsync 前半部分有同步代码，这里并行执行收益巨大。
-                            return executorFn.apply(config, actor);
-                        })
+                        .map(actor -> this.runSingleActor(sequence, phase, actor, executorFn))
                         .filter(Objects::nonNull)
                         .collect(Collectors.toList());
 
                     if (futures.isEmpty()) {
+                        log.info("[ PLUG ]    ✅ ---> {} sequence = `{}` 未产生异步任务，直接跳过",
+                            phase, String.format("%6d", sequence));
                         return Future.succeededFuture(Boolean.TRUE);
                     }
+                    log.info("[ PLUG ]    📦 ---> {} sequence = `{}` 已提交 {} 个异步 Actor 任务",
+                        phase, String.format("%6d", sequence), futures.size());
 
                     // Vert.x 5 Future.join 等待所有并行任务完成
                     return Future.join(futures)
-                        .map(Boolean.TRUE)
-                        .otherwise(error -> {
-                            log.error("[ PLUG ] 执行异常 --> ", error);
-                            return Boolean.FALSE;
+                        .map(joined -> {
+                            log.info("[ PLUG ]    ✅ ---> {} sequence = `{}` 执行完成",
+                                phase, String.format("%6d", sequence));
+                            return Boolean.TRUE;
+                        })
+                        .recover(error -> {
+                            log.error("[ PLUG ]    ❌ ---> {} sequence = `{}` 执行失败",
+                                phase, String.format("%6d", sequence), error);
+                            return Future.failedFuture(error);
                         });
                 });
             }
         }
         return future;
+    }
+
+    private Future<Boolean> runSingleActor(final Integer sequence,
+                                           final String phase,
+                                           final HActor actor,
+                                           final BiFunction<HConfig, HActor, Future<Boolean>> executorFn) {
+        final String actorName = actor.getClass().getName();
+        final Actor actorAnnotation = actor.getClass().getDeclaredAnnotation(Actor.class);
+        final HConfig config;
+        try {
+            config = this.findConfig(actor, actorAnnotation);
+        } catch (final Throwable ex) {
+            log.error("[ PLUG ]    ❌ ---> {} actor = `{}` / sequence = `{}` 读取配置失败",
+                phase, actorName, String.format("%6d", sequence), ex);
+            return Future.failedFuture(ex);
+        }
+
+        if (actorAnnotation.configured() && Objects.isNull(config)) {
+            log.info("[ PLUG ]    ⚪️ ---> 跳过 actor = `{}`, 检查配置项：`{}`",
+                actorName, actorAnnotation.value());
+            return null;
+        }
+
+        log.info("[ PLUG ]    🚀 ---> {} actor = `{}` / sequence = `{}` / configured = {} / hasConfig = {}",
+            phase, actorName, String.format("%6d", sequence),
+            actorAnnotation.configured(), Objects.nonNull(config));
+        try {
+            final Future<Boolean> future = executorFn.apply(config, actor);
+            if (Objects.isNull(future)) {
+                final NullPointerException error = new NullPointerException(
+                    "Actor future must not be null: " + actorName);
+                log.error("[ PLUG ]    ❌ ---> {} actor = `{}` 返回了 null Future",
+                    phase, actorName, error);
+                return Future.failedFuture(error);
+            }
+            return future
+                .onSuccess(result -> log.info("[ PLUG ]    ✅ ---> {} actor = `{}` / sequence = `{}` 完成，result = {}",
+                    phase, actorName, String.format("%6d", sequence), result))
+                .onFailure(error -> log.error("[ PLUG ]    ❌ ---> {} actor = `{}` / sequence = `{}` 执行异常",
+                    phase, actorName, String.format("%6d", sequence), error));
+        } catch (final Throwable ex) {
+            log.error("[ PLUG ]    ❌ ---> {} actor = `{}` / sequence = `{}` 同步执行异常",
+                phase, actorName, String.format("%6d", sequence), ex);
+            return Future.failedFuture(ex);
+        }
     }
 
     // 提取为独立方法，方便 lambda 调用，同时减少 lambda 捕获变量

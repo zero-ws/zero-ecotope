@@ -129,9 +129,14 @@ Then choose the relevant specialist document:
 | layer ownership | `framework-map.md` |
 | high-order objects / markers | `abstraction-rules.md` |
 | plugin capability boundary | `plugin-layer-map.md` |
-| SPI / extension contracts | `extension-points.md` |
+| SPI family map | `spi-registry-map.md` |
+| SPI implementation and registration rules | `spi-implementation-rules.md` |
 | exmodule vs plugin vs app boundary | `exmodule-boundary.md` |
-| backend DPA / DBE / async contract | `backend-dev-guide.md` |
+| backend DPA / async contract | `backend-dpa-guide.md` |
+| DBE / query syntax | `dbe-query-rules.md` |
+| metadata / tenant model rules | `backend-model-tenant-rules.md` |
+| backend RBAC rules | `backend-rbac-rules.md` |
+| standard CRUD decision model | `crud-engine-guide.md` |
 | project-local rule interaction | `project-rule-awareness.md` |
 | fast source anchors | `search-hints.md` |
 | graph-assisted reading | `mcp-code-review-graph-rules.md` |
@@ -258,9 +263,11 @@ Read in this minimum order:
 2. `mxt/framework-map.md`
 3. one or more of:
    - `plugin-layer-map.md`
-   - `extension-points.md`
+   - `spi-registry-map.md`
+   - `spi-implementation-rules.md`
    - `exmodule-boundary.md`
-   - `backend-dev-guide.md`
+   - `backend-dpa-guide.md`
+   - `dbe-query-rules.md`
    - `search-hints.md`
    - `project-rule-awareness.md`
 
@@ -759,3 +766,13 @@ This template forces framework answers to stay ownership-first, evidence-based, 
 > `mxt-zero` supplies the reusable framework reading model.
 > `code-review-graph` supplies structural acceleration.
 > Source files and resource trees still supply the final proof.
+
+---
+
+For graph operations and startup-adjacent topics, continue with:
+
+- `graph-usage-rules.md`
+- `flyway-loading-flow.md`
+- `actor-startup-matrix.md`
+- `buildapp-buildperm-flow.md`
+- `oauth2-init-flow.md`

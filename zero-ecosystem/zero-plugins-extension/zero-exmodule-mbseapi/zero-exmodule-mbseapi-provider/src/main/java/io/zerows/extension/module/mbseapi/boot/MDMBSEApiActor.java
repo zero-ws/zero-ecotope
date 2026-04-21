@@ -3,13 +3,16 @@ package io.zerows.extension.module.mbseapi.boot;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.zerows.epoch.annotations.Actor;
+import io.zerows.epoch.constant.KName;
 import io.zerows.extension.skeleton.common.KeConstant;
 import io.zerows.extension.skeleton.metadata.MDModuleActor;
+import io.zerows.specification.app.HApp;
 import io.zerows.specification.app.HAmbient;
 import io.zerows.specification.app.HArk;
 import io.zerows.support.Fx;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -48,12 +51,20 @@ public class MDMBSEApiActor extends MDModuleActor {
 
         final ConcurrentMap<String, Future<ServiceEnvironment>> futureMap = new ConcurrentHashMap<>();
         arkMap.forEach((appId, each) -> {
-            final ServiceEnvironment environment = new ServiceEnvironment(each);
-            if (environment.isOk()) {
-                // 没有 Ok 的场景下 environment 是不可以执行初始化的
-                futureMap.put(appId, environment.init(vertxRef));
-            } else {
-                log.warn("{} 应用 {} 的 ServiceEnvironment 配置不完整，跳过初始化！", KeConstant.K_PREFIX_BOOT, appId);
+            try {
+                final ServiceEnvironment environment = new ServiceEnvironment(each);
+                if (environment.isOk()) {
+                    // 没有 Ok 的场景下 environment 是不可以执行初始化的
+                    futureMap.put(appId, environment.init(vertxRef));
+                } else {
+                    log.warn("{} 应用 {} 的 ServiceEnvironment 配置不完整，跳过初始化！", KeConstant.K_PREFIX_BOOT, appId);
+                }
+            } catch (final Throwable ex) {
+                final HApp app = Objects.isNull(each) ? null : each.app();
+                final String sigma = Objects.isNull(app) ? null : app.option(KName.SIGMA);
+                log.error("{} 应用 {} 初始化 ServiceEnvironment 失败，SIGMA = {}",
+                    KeConstant.K_PREFIX_BOOT, appId, sigma, ex);
+                futureMap.put(appId, Future.failedFuture(ex));
             }
         });
         return Fx.combineM(futureMap).compose(processed -> {

@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,10 +76,10 @@ class BuildMenuPersister {
             final int updated = updateCount.get();
             log.info("[ INST ] 应用保存完成: 新增 {} / 更新 {}", inserted, updated);
 
-            // 生成 instance.yml
+            // 生成当前实例运行目录下的 instance.yml
             this.generateInstanceYml(apps);
 
-            // 生成缓存标识文件 apps/{Z_APP_ID}/{child-app-id}
+            // 生成缓存标识文件，优先写入 apps/{tenant-id}/{instance-app-id}
             this.generateCacheMarkers(apps);
 
             return new int[]{inserted, updated};
@@ -356,7 +357,7 @@ class BuildMenuPersister {
             }
 
             if (shouldWrite) {
-                Files.write(Paths.get(cacheFilePath), yamlContent.getBytes());
+                this.writeIfChanged(Paths.get(cacheFilePath), yamlContent);
                 log.debug("[ INST ] 生成缓存: {} ({} 个菜单)", appId, menus.size());
             }
         } catch (final Exception e) {
@@ -388,7 +389,7 @@ class BuildMenuPersister {
 
             // 写入文件
             final String instanceFilePath = this.cacheDir + "/instance.yml";
-            Files.write(Paths.get(instanceFilePath), yamlContent.toString().getBytes());
+            this.writeIfChanged(Paths.get(instanceFilePath), yamlContent.toString());
 
             log.info("[ INST ] 生成 instance.yml: {} 个应用实例", apps.size());
         } catch (final Exception e) {
@@ -398,17 +399,18 @@ class BuildMenuPersister {
 
     /**
      * 生成缓存标识文件
-     * 在 apps/{Z_APP_ID}/ 目录下创建 {child-app-id} 空白文件
-     * 同时兼容旧版 apps/{UUID}/{code} 标识文件，避免存量缓存失效
+     * 在当前实例运行目录下创建 {child-app-id} 空白文件
+     * 同时兼容旧版 apps/{instance-app-id}/{child-app-id} 标识文件，避免存量缓存失效
      */
     private void generateCacheMarkers(final Map<String, XApp> apps) {
         try {
+            final File runtimeDir = new File(this.cacheDir);
             for (final XApp app : apps.values()) {
                 if (app.getId() != null && app.getCode() != null) {
-                    this.ensureMarker(new File(this.cacheDir), app.getCode());
+                    this.ensureMarker(runtimeDir, app.getCode());
 
                     final File legacyDir = new File(this.appsRoot, app.getId());
-                    if (!legacyDir.getAbsolutePath().equals(new File(this.cacheDir).getAbsolutePath())) {
+                    if (!legacyDir.getAbsolutePath().equals(runtimeDir.getAbsolutePath())) {
                         this.ensureMarker(legacyDir, app.getCode());
                     }
                 }
@@ -424,8 +426,7 @@ class BuildMenuPersister {
             markerDir.mkdirs();
         }
         final File markerFile = new File(markerDir, markerName);
-        if (!markerFile.exists()) {
-            markerFile.createNewFile();
+        if (!markerFile.exists() && markerFile.createNewFile()) {
             log.debug("[ INST ] 创建缓存标识: {}/{}", markerDir.getName(), markerName);
         }
     }
@@ -435,5 +436,21 @@ class BuildMenuPersister {
             return new File(this.cacheDir, childAppDir);
         }
         return new File(this.cacheDir, appId);
+    }
+
+    private void writeIfChanged(final Path target, final String content) throws Exception {
+        final File targetFile = target.toFile();
+        if (targetFile.exists()) {
+            final String existing = Files.readString(target);
+            if (existing.equals(content)) {
+                return;
+            }
+        } else {
+            final File parent = targetFile.getParentFile();
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
+        }
+        Files.writeString(target, content);
     }
 }

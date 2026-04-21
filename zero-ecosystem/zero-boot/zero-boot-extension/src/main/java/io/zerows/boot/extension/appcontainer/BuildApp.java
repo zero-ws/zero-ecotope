@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +37,8 @@ public class BuildApp {
      * 2. 扫描所有模块的 apps 目录（兼容旧版 flat 结构与新版 nested 结构）
      * 3. 使用 BuildAppMenuLoader 加载应用和菜单数据
      * 4. 使用 BuildAppMenuPersister 持久化到数据库（XApp 按 ID 判重，XMenu 按 NAME+APP_ID 判重）
-     * 5. 生成缓存文件（apps/{Z_APP_ID}/{child-app-id}/menu.yml）
+     * 5. 生成缓存文件（优先 apps/{tenant-id}/{instance-app-id}/{child-app-id}/menu.yml，
+     *    兼容旧版 apps/{instance-app-id}/{child-app-id}/menu.yml）
      * 6. 输出统计信息
      *
      * @param vertx Vert.x 实例
@@ -55,17 +58,17 @@ public class BuildApp {
             final String cacheDir = resolveCacheDir(globalConfig);
 
             // 3. 加载实例映射配置（从 apps/instance.yml 和缓存标识文件）
-            final Map<String, String> instanceMap = loadInstanceMap(appsRoot);
+            final Map<String, String> instanceMap = loadInstanceMap(appsRoot, cacheDir);
 
-            // 3.1 加载 init 配置（从 apps/instance.yml 的 init 节点）
-            final JsonObject initConfig = loadInitConfig(appsRoot);
+            // 3.1 加载 init 配置（优先当前实例目录下的 instance.yml）
+            final JsonObject initConfig = loadInitConfig(appsRoot, cacheDir);
 
             // 4. 从缓存目录和数据库加载额外的映射
             return loadCacheMappings(vertx, appsRoot, cacheDir, instanceMap)
                 .compose(mergedMap -> {
                     // 5. 扫描应用和菜单目录
-                    final List<URI> appUris = InstApps.of().ioApp();        // apps/{UUID}.yml
-                    final List<URI> menuDirUris = InstApps.of().ioRunning(); // apps/{UUID}/nav/
+                    final List<URI> appUris = InstApps.of().ioApp();        // apps/{child-app-id}.yml
+                    final List<URI> menuDirUris = InstApps.of().ioRunning(); // apps/{child-app-id}/nav/
 
                     log.info("[ INST ] 扫描到 {} 个应用文件，{} 个菜单目录", appUris.size(), menuDirUris.size());
 
@@ -84,7 +87,7 @@ public class BuildApp {
                                 return Future.succeededFuture(false);
                             }
 
-                            // 7. 创建缓存目录（apps/{UUID}/menu.yml）
+                            // 7. 创建缓存目录（优先 apps/{tenant-id}/{instance-app-id}）
                             final File cacheDirFile = new File(cacheDir);
                             if (!cacheDirFile.exists()) {
                                 final boolean created = cacheDirFile.mkdirs();
@@ -137,80 +140,77 @@ public class BuildApp {
 
     /**
      * 加载实例映射配置
-     * 从 apps/instance.yml 加载 code 到 UUID 的映射
+     * 从 instance.yml 加载 code 到 UUID 的映射
      * 格式: running: { UUID: code }
      * 返回: Map<code, UUID>
      */
-    private static Map<String, String> loadInstanceMap(final String appsRoot) {
+    private static Map<String, String> loadInstanceMap(final String appsRoot, final String cacheDir) {
         try {
-            // 优先从 classpath 加载
+            for (final File instanceFile : resolveInstanceFiles(appsRoot, cacheDir)) {
+                if (!instanceFile.exists()) {
+                    continue;
+                }
+                final JsonObject instanceJ = Ut.ioYaml(instanceFile.getAbsolutePath());
+                if (instanceJ == null || !instanceJ.containsKey("running")) {
+                    log.warn("[ INST ] instance.yml 格式错误，缺少 running 节点: {}", instanceFile.getAbsolutePath());
+                    continue;
+                }
+
+                final JsonObject running = instanceJ.getJsonObject("running");
+                final Map<String, String> instanceMap = new HashMap<>();
+
+                for (final String uuid : running.fieldNames()) {
+                    final String code = running.getString(uuid);
+                    if (code != null && !code.isEmpty()) {
+                        instanceMap.put(code, uuid);
+                        log.debug("[ INST ] 加载实例映射: {} -> {}", code, uuid);
+                    }
+                }
+                log.info("[ INST ] 从 {} 加载实例映射: {} 条记录", instanceFile.getAbsolutePath(), instanceMap.size());
+                return instanceMap;
+            }
+
             final Map<String, String> classpathMap = InstApps.of().ioInstance();
             if (!classpathMap.isEmpty()) {
                 return classpathMap;
             }
 
-            // 如果 classpath 中没有，尝试从文件系统加载
-            final File instanceFile = new File(appsRoot + "/instance.yml");
-            if (!instanceFile.exists()) {
-                log.debug("[ INST ] 未找到 instance.yml，使用空映射");
-                return new java.util.HashMap<>();
-            }
-
-            final JsonObject instanceJ = Ut.ioYaml(instanceFile.getAbsolutePath());
-            if (instanceJ == null || !instanceJ.containsKey("running")) {
-                log.warn("[ INST ] instance.yml 格式错误，缺少 running 节点");
-                return new java.util.HashMap<>();
-            }
-
-            final JsonObject running = instanceJ.getJsonObject("running");
-            final Map<String, String> instanceMap = new java.util.HashMap<>();
-
-            // 遍历 running 节点，格式：UUID=code，构造 code -> UUID 映射
-            for (final String uuid : running.fieldNames()) {
-                final String code = running.getString(uuid);
-                if (code != null && !code.isEmpty()) {
-                    instanceMap.put(code, uuid);
-                    log.debug("[ INST ] 加载实例映射: {} -> {}", code, uuid);
-                }
-            }
-
-            log.info("[ INST ] 加载实例映射: {} 条记录", instanceMap.size());
-            return instanceMap;
+            log.debug("[ INST ] 未找到可用的 instance.yml，使用空映射");
+            return new HashMap<>();
         } catch (final Exception e) {
             log.error("[ INST ] 加载实例映射失败", e);
-            return new java.util.HashMap<>();
+            return new HashMap<>();
         }
     }
 
     /**
-     * 从 apps/instance.yml 加载 init 配置
+     * 从 instance.yml 加载 init 配置
      * 格式: init: { menu: {...}, app: {...} }
      * 返回: JsonObject
      */
-    private static JsonObject loadInitConfig(final String appsRoot) {
+    private static JsonObject loadInitConfig(final String appsRoot, final String cacheDir) {
         try {
-            // 优先从 classpath 加载
+            for (final File instanceFile : resolveInstanceFiles(appsRoot, cacheDir)) {
+                if (!instanceFile.exists()) {
+                    continue;
+                }
+                final JsonObject instanceJ = Ut.ioYaml(instanceFile.getAbsolutePath());
+                if (instanceJ == null || !instanceJ.containsKey("init")) {
+                    log.debug("[ INST ] instance.yml 中未找到 init 节点: {}", instanceFile.getAbsolutePath());
+                    continue;
+                }
+                final JsonObject init = instanceJ.getJsonObject("init");
+                log.info("[ INST ] 从 {} 加载 init 配置完成", instanceFile.getAbsolutePath());
+                return init;
+            }
+
             final JsonObject classpathInit = InstApps.of().ioInit();
             if (classpathInit != null && !classpathInit.isEmpty()) {
                 return classpathInit;
             }
 
-            // 如果 classpath 中没有，尝试从文件系统加载
-            final File instanceFile = new File(appsRoot + "/instance.yml");
-            if (!instanceFile.exists()) {
-                log.debug("[ INST ] 未找到 instance.yml，使用空 init 配置");
-                return new JsonObject();
-            }
-
-            final JsonObject instanceJ = Ut.ioYaml(instanceFile.getAbsolutePath());
-            if (instanceJ == null || !instanceJ.containsKey("init")) {
-                log.debug("[ INST ] instance.yml 中未找到 init 节点");
-                return new JsonObject();
-            }
-
-            final JsonObject init = instanceJ.getJsonObject("init");
-            log.info("[ INST ] 加载 init 配置完成");
-            return init;
+            log.debug("[ INST ] 未找到可用的 init 配置，使用空配置");
+            return new JsonObject();
         } catch (final Exception e) {
             log.error("[ INST ] 加载 init 配置失败", e);
             return new JsonObject();
@@ -229,21 +229,16 @@ public class BuildApp {
         final Map<String, String> instanceMap
     ) {
         try {
-            final Map<String, String> cacheMap = new java.util.HashMap<>();
-            final Map<String, String> nestedCacheMap = new java.util.HashMap<>();
-
-            thisLoadCacheMappings(new File(appsRoot), cacheMap);
-            if (!appsRoot.equals(cacheDir)) {
-                thisLoadCacheMappings(new File(cacheDir), nestedCacheMap);
-                cacheMap.putAll(nestedCacheMap);
-            }
+            final Map<String, String> cacheMap = new HashMap<>();
+            final int[] cacheStats = thisLoadCacheMappings(new File(appsRoot), cacheMap);
 
             // 合并映射：instance.yml 优先级更高
-            final Map<String, String> mergedMap = new java.util.HashMap<>(cacheMap);
+            final Map<String, String> mergedMap = new HashMap<>(cacheMap);
             mergedMap.putAll(instanceMap);
 
-            log.info("[ INST ] 加载缓存映射: {} 条记录（instance.yml: {}, legacy: {}, nested: {}）",
-                mergedMap.size(), instanceMap.size(), cacheMap.size() - nestedCacheMap.size(), nestedCacheMap.size());
+            final int currentMarkers = thisLoadDirectMarkers(new File(cacheDir), cacheDir == null ? null : new File(cacheDir).getName(), new HashMap<>());
+            log.info("[ INST ] 加载缓存映射: {} 条记录（instance.yml: {}, legacy: {}, nested: {}, current: {}）",
+                mergedMap.size(), instanceMap.size(), cacheStats[0], cacheStats[1], currentMarkers);
 
             return Future.succeededFuture(mergedMap);
         } catch (final Exception e) {
@@ -255,30 +250,65 @@ public class BuildApp {
     /**
      * 扫描缓存标识文件，兼容旧版 flat 结构和新版 nested 结构
      */
-    private static void thisLoadCacheMappings(final File baseDir, final Map<String, String> cacheMap) {
+    private static int[] thisLoadCacheMappings(final File baseDir, final Map<String, String> cacheMap) {
         if (!baseDir.exists() || !baseDir.isDirectory()) {
-            return;
+            return new int[]{0, 0};
         }
 
-        final File[] uuidDirs = baseDir.listFiles(File::isDirectory);
-        if (uuidDirs == null || uuidDirs.length == 0) {
-            return;
+        int legacyCount = 0;
+        int nestedCount = 0;
+        final File[] firstLevelDirs = baseDir.listFiles(File::isDirectory);
+        if (firstLevelDirs == null || firstLevelDirs.length == 0) {
+            return new int[]{0, 0};
         }
 
-        for (final File uuidDir : uuidDirs) {
-            final String uuid = uuidDir.getName();
-            final File[] files = uuidDir.listFiles(File::isFile);
-            if (files == null) {
+        for (final File firstLevelDir : firstLevelDirs) {
+            legacyCount += thisLoadDirectMarkers(firstLevelDir, firstLevelDir.getName(), cacheMap);
+            final File[] secondLevelDirs = firstLevelDir.listFiles(File::isDirectory);
+            if (secondLevelDirs == null) {
                 continue;
             }
-            for (final File file : files) {
-                final String code = file.getName();
-                if (!code.endsWith(".yml") && !code.endsWith(".yaml")) {
-                    cacheMap.put(code, uuid);
-                    log.debug("[ INST ] 从缓存加载映射: {} -> {}", code, uuid);
-                }
+            for (final File secondLevelDir : secondLevelDirs) {
+                nestedCount += thisLoadDirectMarkers(secondLevelDir, secondLevelDir.getName(), cacheMap);
             }
         }
+        return new int[]{legacyCount, nestedCount};
+    }
+
+    private static int thisLoadDirectMarkers(final File runtimeDir, final String runtimeAppId,
+                                             final Map<String, String> cacheMap) {
+        if (runtimeDir == null || !runtimeDir.exists() || !runtimeDir.isDirectory()
+            || runtimeAppId == null || runtimeAppId.isEmpty()) {
+            return 0;
+        }
+
+        int markerCount = 0;
+        final File[] files = runtimeDir.listFiles(File::isFile);
+        if (files == null) {
+            return 0;
+        }
+        for (final File file : files) {
+            if (isMarkerFile(file)) {
+                final String code = file.getName();
+                if (!cacheMap.containsKey(code)) {
+                    cacheMap.put(code, runtimeAppId);
+                    log.debug("[ INST ] 从缓存加载映射: {} -> {}", code, runtimeAppId);
+                }
+                markerCount++;
+            }
+        }
+        return markerCount;
+    }
+
+    private static boolean isMarkerFile(final File file) {
+        final String name = file.getName();
+        if (name.endsWith(".yml") || name.endsWith(".yaml") || name.endsWith(".env")) {
+            return false;
+        }
+        if ("instance".equalsIgnoreCase(name) || "Dockerfile".equalsIgnoreCase(name)) {
+            return false;
+        }
+        return 0L == file.length();
     }
 
     /**
@@ -296,7 +326,9 @@ public class BuildApp {
 
     /**
      * 解析当前入口应用实例的缓存目录
-     * 目录形态：apps/{Z_APP_ID}
+     * 目录形态：
+     * 1. 新版优先：apps/{tenant-id}/{instance-app-id}
+     * 2. 兼容旧版：apps/{instance-app-id}
      */
     private static String resolveCacheDir(final JsonObject globalConfig) {
         final String appsRoot = resolveAppsRoot();
@@ -304,6 +336,26 @@ public class BuildApp {
         if (appId == null || appId.trim().isEmpty()) {
             return appsRoot;
         }
-        return appsRoot + "/" + appId;
+        final String tenantId = globalConfig.getString("tenantId");
+        if (tenantId != null && !tenantId.trim().isEmpty()) {
+            return appsRoot + "/" + tenantId.trim() + "/" + appId.trim();
+        }
+        return appsRoot + "/" + appId.trim();
+    }
+
+    private static List<File> resolveInstanceFiles(final String appsRoot, final String cacheDir) {
+        final List<File> candidates = new ArrayList<>();
+        if (cacheDir != null && !cacheDir.trim().isEmpty()) {
+            candidates.add(new File(cacheDir, "instance.yml"));
+        }
+        if (appsRoot != null && !appsRoot.trim().isEmpty()) {
+            final File rootInstance = new File(appsRoot, "instance.yml");
+            final boolean duplicated = candidates.stream()
+                .anyMatch(file -> file.getAbsolutePath().equals(rootInstance.getAbsolutePath()));
+            if (!duplicated) {
+                candidates.add(rootInstance);
+            }
+        }
+        return candidates;
     }
 }

@@ -80,7 +80,7 @@ When they conflict, prefer framework rules unless the MDC explicitly overrides a
 
 ```text
 1. Detect stack      → Zero / Vert.x-first (from root pom.xml, zero-0216 parent)
-2. Read mxt/         → framework-map, abstraction-rules, extension-points, backend-dev-guide
+2. Read mxt/         → framework-map, abstraction-rules, spi-registry-map, spi-implementation-rules, backend-dpa-guide, dbe-query-rules
 3. Check MDC layer   → if exists: inspect devapi.mdc first, then other backend/frontend/integration mdc files
 4. Extract project constraints from MDC (if present)
 5. Check CRUD engine → does this requirement fit zero-extension-crud + entity.json?

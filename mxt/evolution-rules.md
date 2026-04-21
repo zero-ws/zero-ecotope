@@ -51,7 +51,8 @@ If any of the following changes:
 - the `api/domain/provider` structure changes
 
 Then update at least:
-- `extension-points.md`
+- `spi-registry-map.md`
+- `spi-implementation-rules.md`
 - `exmodule-boundary.md`
 - `framework-map.md`
 - `search-hints.md`
@@ -127,7 +128,7 @@ After a framework upgrade, the minimum agent verification set is:
 - confirm `zero-version-extension/pom.xml` still matches the exmodule list
 
 ### 6.3 SPI verification
-- confirm `ExBoot.SPI_SET` still matches `extension-points.md`
+- confirm `ExBoot.SPI_SET` still matches `spi-registry-map.md`
 - confirm `HPI.findMany`, `interface Ex`, `interface Sc`, and `interface Ui` remain useful search anchors
 
 ### 6.4 Boundary verification
@@ -152,7 +153,7 @@ After each framework upgrade:
 
 1. verify real module structure from POMs and directories
 2. update `framework-map.md`
-3. update `plugin-layer-map.md`, `extension-points.md`, and `exmodule-boundary.md`
+3. update `plugin-layer-map.md`, `spi-registry-map.md`, `spi-implementation-rules.md`, and `exmodule-boundary.md`
 4. update `abstraction-rules.md` and `search-hints.md`
 5. finally update `README.md`
 
@@ -161,7 +162,8 @@ After each framework upgrade:
 - `README.md` owns entry and reading order
 - `framework-map.md` owns structure
 - `plugin-layer-map.md` owns capability plugins
-- `extension-points.md` owns SPI contracts
+- `spi-registry-map.md` owns SPI family mapping
+- `spi-implementation-rules.md` owns SPI implementation rules
 - `exmodule-boundary.md` owns layer boundaries
 - `search-hints.md` owns navigation
 - `evolution-rules.md` owns long-term maintenance of the pack
