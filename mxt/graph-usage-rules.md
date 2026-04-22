@@ -8,6 +8,7 @@
 This file defines how to use `code-review-graph` against `zero-ecotope` without over-trusting graph output.
 
 Use `mcp-integration-map.md` first when the task starts from a broad topic such as `security`, `workflow`, `excel`, `job`, or `zero-overlay`.
+Use `graph-noise-rules.md` when top graph results are dominated by generated assets, bundled JavaScript, Obsidian plugin data, or test fixtures.
 
 ## 2. Core Contract
 
@@ -124,6 +125,7 @@ Use `build` after topology changes, broad merges, or when impact analysis depend
 - Do not bundle multiple unrelated names into one graph query and expect stable ranking.
 - `callers_of` and `callees_of` can be polluted by repository JavaScript bundles when the target name is overly generic such as `run`.
 - Prefer fully qualified targets or file-scoped verification for common method names.
+- Apply `graph-noise-rules.md` before treating large communities as framework architecture.
 
 Rule:
 

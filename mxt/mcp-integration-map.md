@@ -28,6 +28,7 @@ Use this file together with:
 | shortest MCP retrieval and token saving | `mcp-fast-retrieval-rules.md` |
 | document distillation | `distillation-rules.md` |
 | duplicate rule purification | `purification-rules.md` |
+| graph noise filtering | `graph-noise-rules.md` |
 | graph operation discipline | `graph-usage-rules.md` |
 | graph-assisted query playbooks | `mcp-code-review-graph-rules.md` |
 | text-search entry anchors | `search-hints.md` |

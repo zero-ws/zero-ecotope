@@ -22,6 +22,7 @@
 | `mcp-fast-retrieval-rules.md` | Pass | shortest MCP retrieval discipline | dedicated token-saving retrieval document |
 | `distillation-rules.md` | Pass | document distillation rules | dedicated compression and anchor-retention document |
 | `purification-rules.md` | Pass | duplicate rule purification | dedicated rule ownership cleanup document |
+| `graph-noise-rules.md` | Pass | graph noise filtering | dedicated graph-noise document |
 | `zero-version-guide.md` | Pass | BOM and managed dependency ownership | dedicated version-surface document |
 | `abstraction-rules.md` | Pass | naming and code abstraction conventions | single concern |
 | `spi-core-plugin-guide.md` | Pass | core SPI architecture across plugin and extension layers | dedicated SPI-architecture document |

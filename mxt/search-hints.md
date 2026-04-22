@@ -24,6 +24,7 @@ Use these owner documents before broad searches:
 - `mcp-integration-map.md` — topic-to-owner routing
 - `distillation-rules.md` — document compression rules
 - `purification-rules.md` — duplicate rule cleanup rules
+- `graph-noise-rules.md` — generated and tooling graph-noise filters
 
 Rule:
 

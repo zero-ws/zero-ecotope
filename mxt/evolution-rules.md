@@ -126,6 +126,16 @@ Always keep `mcp-fast-retrieval-rules.md` valid for token-saving AI Agent consum
 - open only the owner document and proof anchor by default
 - escalate to graph playbooks only when owner evidence is insufficient
 
+### Coverage audit script
+
+Run this after module or MXT document changes:
+
+```bash
+python3 .r2mo/task/audit_mxt_coverage.py
+```
+
+The script checks owner documents, MCP route coverage, internal Markdown references, English-only MXT content, and graph-noise governance anchors.
+
 ## 6. Agent Verification After Upgrade
 
 After a framework upgrade, the minimum agent verification set is:
@@ -178,6 +188,7 @@ After each framework upgrade:
 - `mcp-fast-retrieval-rules.md` owns shortest-path MCP retrieval and token-saving stop rules
 - `distillation-rules.md` owns document compression and evidence retention rules
 - `purification-rules.md` owns duplicate-rule cleanup and owner precedence
+- `graph-noise-rules.md` owns graph-noise filtering and known noisy path rules
 - `plugin-layer-map.md` owns capability plugins
 - `spi-registry-map.md` owns SPI family mapping
 - `spi-implementation-rules.md` owns SPI implementation rules

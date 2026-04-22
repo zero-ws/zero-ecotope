@@ -34,6 +34,7 @@ Add these only when needed:
 - `mcp-fast-retrieval-rules.md` -> shortest MCP retrieval path and token-saving stop conditions
 - `distillation-rules.md` -> compressing verbose docs into anchors and decisions
 - `purification-rules.md` -> deduplicating overlapping rules and finding the true owner
+- `graph-noise-rules.md` -> filtering generated, bundled, and tooling graph noise
 - `plugin-layer-map.md` -> plugin capability questions
 - `extension-skeleton-guide.md` -> `zero-extension-skeleton` ownership questions
 - `spi-registry-map.md` -> SPI / Ex* / Sc* / Ui* family questions

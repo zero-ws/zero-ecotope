@@ -93,3 +93,6 @@ author:
 - Ran another `code-review-graph` and POM/module coverage audit after the MCP documentation update.
 - Found framework capabilities outside the original task list that had stable modules but no dedicated owner document: `zero-boot`, `zero-plugins-swagger`, `zero-plugins-elasticsearch`, `zero-plugins-session`, `zero-plugins-oauth2`, and `zero-plugins-trash`.
 - Added dedicated SRP owner documents for those capabilities and synced the MCP routing map, README, search hints, plugin layer map, boundary audit, and evolution rules.
+- 2026-04-22 Team Leader
+- Added persistent coverage audit script `.r2mo/task/audit_mxt_coverage.py` so future agents can verify owner documents, MCP routes, links, English-only MXT content, and governance anchors without recreating temporary tests.
+- Added `mxt/graph-noise-rules.md` to make graph-noise filtering explicit for generated assets, bundled JavaScript, Obsidian plugin data, test fixtures, `target/`, and flattened POM output.

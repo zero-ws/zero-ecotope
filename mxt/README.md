@@ -15,6 +15,7 @@
 | [mcp-fast-retrieval-rules.md](mcp-fast-retrieval-rules.md) | Shortest-path MCP retrieval discipline for AI Agents |
 | [distillation-rules.md](distillation-rules.md) | Rules for compressing MXT documents into agent-readable anchors and decisions |
 | [purification-rules.md](purification-rules.md) | Rules for deduplicating and assigning one authoritative owner per rule |
+| [graph-noise-rules.md](graph-noise-rules.md) | Rules for filtering generated, bundled, and tooling noise from graph output |
 | [zero-version-guide.md](zero-version-guide.md) | BOM split, managed dependency exposure, and version-surface ownership |
 | [abstraction-rules.md](abstraction-rules.md) | Three-letter objects, `Fx`/`Ux`/`Ut`, and code marker conventions |
 | [spi-core-plugin-guide.md](spi-core-plugin-guide.md) | Core SPI-driven extension model across plugins, skeleton, and exmodules |
@@ -99,6 +100,7 @@ Do not start with the largest file unless the task is already known to be broad.
 | consume the pack with minimum MCP tokens | `mcp-fast-retrieval-rules.md` | `mcp-integration-map.md` |
 | compress or rewrite verbose docs | `distillation-rules.md` | owner document |
 | remove duplicate or mixed rules | `purification-rules.md` | true owner document |
+| filter noisy graph output | `graph-noise-rules.md` | `graph-usage-rules.md` |
 | inspect BOM and managed dependency exposure | `zero-version-guide.md` | `framework-map.md` |
 | inspect local plus Nacos config loading | `config-center-local-nacos.md` | `environment-contracts.md` |
 | inspect multi-datasource registration | `dbs-multi-datasource.md` | `dbe-query-rules.md` |
