@@ -124,7 +124,18 @@ Search patterns:
 - `zero-plugins-cache-`
 - `zero-plugins-redis`
 - `zero-plugins-elasticsearch`
+- `zero-plugins-swagger`
+- `zero-plugins-session`
+- `zero-plugins-oauth2`
+- `zero-plugins-trash`
 - `zero-plugins-websocket`
+
+Capability owner documents:
+- `elasticsearch-guide.md`
+- `swagger-openapi-guide.md`
+- `session-guide.md`
+- `oauth2-capability-guide.md`
+- `trash-capability-guide.md`
 
 Judgment rule: if it looks like a third-party adapter, it belongs in the plugin layer. If it expresses a business rule, it belongs in an exmodule or the app layer.
 

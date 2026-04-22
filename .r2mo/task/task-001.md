@@ -89,3 +89,7 @@ author:
 - 2026-04-22 Team Leader
 - Ran a temporary 200-case MXT regression suite covering internal Markdown references, 43 task-list route mappings, English-only MXT documents, and fast-retrieval/distillation/purification rule anchors.
 - Removed the temporary regression test file after the test passed, so no regression-only test artifact remains in the final commit.
+- 2026-04-22 Team Leader
+- Ran another `code-review-graph` and POM/module coverage audit after the MCP documentation update.
+- Found framework capabilities outside the original task list that had stable modules but no dedicated owner document: `zero-boot`, `zero-plugins-swagger`, `zero-plugins-elasticsearch`, `zero-plugins-session`, `zero-plugins-oauth2`, and `zero-plugins-trash`.
+- Added dedicated SRP owner documents for those capabilities and synced the MCP routing map, README, search hints, plugin layer map, boundary audit, and evolution rules.

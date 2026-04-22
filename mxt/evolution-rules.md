@@ -21,6 +21,7 @@ If any of the following changes:
 - the relationship between `zero-boot` and `zero-epoch` changes
 
 Then update at least:
+- `zero-boot-wiring-guide.md`
 - `framework-map.md`
 - `abstraction-rules.md`
 - `search-hints.md`
@@ -172,6 +173,7 @@ After each framework upgrade:
 
 - `README.md` owns entry and reading order
 - `framework-map.md` owns structure
+- `zero-boot-wiring-guide.md` owns `zero-boot` launch and boot wiring
 - `mcp-integration-map.md` owns topic routing from framework concern to owner modules and graph targets
 - `mcp-fast-retrieval-rules.md` owns shortest-path MCP retrieval and token-saving stop rules
 - `distillation-rules.md` owns document compression and evidence retention rules

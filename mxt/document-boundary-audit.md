@@ -17,6 +17,7 @@
 | `agent-quick-start.md` | Pass | first-pass reading protocol | concise entrypoint |
 | `framework-map.md` | Pass | framework layer topology | broad but still one owner concern |
 | `zero-epoch-runtime-guide.md` | Pass | dedicated runtime-layer ownership | dedicated core-runtime document |
+| `zero-boot-wiring-guide.md` | Pass | dedicated boot-wiring ownership | dedicated zero-boot document |
 | `mcp-integration-map.md` | Pass | topic-to-module and topic-to-query routing | new MCP-facing routing layer without taking over graph discipline |
 | `mcp-fast-retrieval-rules.md` | Pass | shortest MCP retrieval discipline | dedicated token-saving retrieval document |
 | `distillation-rules.md` | Pass | document distillation rules | dedicated compression and anchor-retention document |
@@ -30,10 +31,15 @@
 | `job-model-guide.md` | Pass | framework job model and mission extraction | dedicated job document |
 | `plugin-layer-map.md` | Pass | plugin capability boundary | single concern |
 | `cache-redis-guide.md` | Pass | cache family and Redis capability ownership | dedicated cache document |
+| `elasticsearch-guide.md` | Pass | Elasticsearch capability ownership | dedicated Elasticsearch document |
 | `excel-import-export-guide.md` | Pass | Excel plugin startup and import/export anchors | dedicated Excel document |
 | `monitor-center-guide.md` | Pass | monitor plugin family ownership | dedicated monitor document |
 | `security-plugin-flow.md` | Pass | security plugin family and provider flow | dedicated security plugin document |
+| `session-guide.md` | Pass | session capability ownership | dedicated session document |
+| `oauth2-capability-guide.md` | Pass | OAuth2 capability ownership | dedicated OAuth2 capability document |
 | `neo4j-guide.md` | Pass | Neo4j capability ownership | dedicated Neo4j document |
+| `swagger-openapi-guide.md` | Pass | Swagger/OpenAPI capability ownership | dedicated Swagger document |
+| `trash-capability-guide.md` | Pass | trash capability ownership | dedicated trash document |
 | `email-capability-guide.md` | Pass | email capability vs email-auth boundary | dedicated email document |
 | `sms-capability-guide.md` | Pass | SMS capability vs SMS-auth boundary | dedicated SMS document |
 | `weco-capability-guide.md` | Pass | Weco capability vs Weco security boundary | dedicated Weco document |

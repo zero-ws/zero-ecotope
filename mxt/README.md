@@ -9,6 +9,7 @@
 |---|---|
 | [framework-map.md](framework-map.md) | Full layer hierarchy, module tree, and runtime topology |
 | [zero-epoch-runtime-guide.md](zero-epoch-runtime-guide.md) | Dedicated owner map for the Zero core runtime layer and its sub-modules |
+| [zero-boot-wiring-guide.md](zero-boot-wiring-guide.md) | Dedicated owner map for `zero-boot` launch, cloud, extension, and installation wiring |
 | [agent-quick-start.md](agent-quick-start.md) | One-page quick start for downstream AI agents reading Zero before loading the full framework rules |
 | [mcp-integration-map.md](mcp-integration-map.md) | Topic-to-module routing map for MCP-assisted framework reading across Zero core, plugins, and exmodules |
 | [mcp-fast-retrieval-rules.md](mcp-fast-retrieval-rules.md) | Shortest-path MCP retrieval discipline for AI Agents |
@@ -23,10 +24,15 @@
 | [job-model-guide.md](job-model-guide.md) | `@Job`, mission extraction, and MBSE job-facing surfaces |
 | [plugin-layer-map.md](plugin-layer-map.md) | Capability plugins under `zero-plugins-equip` |
 | [cache-redis-guide.md](cache-redis-guide.md) | Cache capability split and Redis startup ownership |
+| [elasticsearch-guide.md](elasticsearch-guide.md) | Elasticsearch plugin capability, client, and indexer ownership |
 | [excel-import-export-guide.md](excel-import-export-guide.md) | Excel plugin startup, import/export anchors, and environment config |
 | [monitor-center-guide.md](monitor-center-guide.md) | Monitor plugin family and monitor startup ownership |
 | [security-plugin-flow.md](security-plugin-flow.md) | Security plugin family, provider composition, and protocol actor anchors |
+| [session-guide.md](session-guide.md) | Session plugin startup, session store, and handler capability ownership |
+| [oauth2-capability-guide.md](oauth2-capability-guide.md) | OAuth2 plugin capability and registered-client ownership |
 | [neo4j-guide.md](neo4j-guide.md) | Neo4j plugin capability and client ownership |
+| [swagger-openapi-guide.md](swagger-openapi-guide.md) | Swagger/OpenAPI documentation plugin capability ownership |
+| [trash-capability-guide.md](trash-capability-guide.md) | Trash/recycle-bin plugin capability ownership |
 | [email-capability-guide.md](email-capability-guide.md) | Email delivery capability vs email-auth boundary |
 | [sms-capability-guide.md](sms-capability-guide.md) | SMS delivery capability vs SMS-auth boundary |
 | [weco-capability-guide.md](weco-capability-guide.md) | Weco platform capability vs Weco security boundary |
@@ -88,6 +94,7 @@ Do not start with the largest file unless the task is already known to be broad.
 |---|---|---|
 | quickly decide where a problem belongs | `agent-quick-start.md` | `framework-map.md` |
 | inspect the Zero runtime layer itself | `zero-epoch-runtime-guide.md` | `framework-map.md` |
+| inspect boot wiring and launch integration | `zero-boot-wiring-guide.md` | `actor-startup-matrix.md` |
 | route a broad framework topic into modules and graph targets | `mcp-integration-map.md` | `graph-usage-rules.md` |
 | consume the pack with minimum MCP tokens | `mcp-fast-retrieval-rules.md` | `mcp-integration-map.md` |
 | compress or rewrite verbose docs | `distillation-rules.md` | owner document |
@@ -101,11 +108,16 @@ Do not start with the largest file unless the task is already known to be broad.
 | navigate framework code relationships | `agent-quick-start.md` | `mcp-code-review-graph-rules.md` |
 | use graph tooling safely | `graph-usage-rules.md` | `mcp-code-review-graph-rules.md` |
 | inspect cache and Redis capability | `cache-redis-guide.md` | `plugin-layer-map.md` |
+| inspect Elasticsearch capability | `elasticsearch-guide.md` | `plugin-layer-map.md` |
 | inspect Excel import and export | `excel-import-export-guide.md` | `plugin-layer-map.md` |
 | inspect Flyway or migration loading | `flyway-loading-flow.md` | `graph-usage-rules.md` |
 | inspect monitor plugin ownership | `monitor-center-guide.md` | `plugin-layer-map.md` |
 | inspect security plugin flow | `security-plugin-flow.md` | `backend-rbac-rules.md` |
+| inspect session capability | `session-guide.md` | `security-plugin-flow.md` |
+| inspect OAuth2 plugin capability | `oauth2-capability-guide.md` | `oauth2-init-flow.md` |
 | inspect Neo4j capability | `neo4j-guide.md` | `plugin-layer-map.md` |
+| inspect Swagger/OpenAPI documentation | `swagger-openapi-guide.md` | `plugin-layer-map.md` |
+| inspect trash/recycle-bin capability | `trash-capability-guide.md` | `plugin-layer-map.md` |
 | inspect email delivery capability | `email-capability-guide.md` | `security-plugin-flow.md` |
 | inspect SMS delivery capability | `sms-capability-guide.md` | `security-plugin-flow.md` |
 | inspect Weco capability | `weco-capability-guide.md` | `security-plugin-flow.md` |

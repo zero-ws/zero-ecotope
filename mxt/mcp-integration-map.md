@@ -38,6 +38,7 @@ Use this file together with:
 |---|---|---|---|---|
 | `zero-version` version management | `zero-version-guide.md` | `zero-version/`, `zero-version-epoch`, `zero-version-plugins`, `zero-version-extension` | `zero-version/pom.xml`, `zero-version-epoch/pom.xml`, `zero-version-plugins/pom.xml`, `zero-version-extension/pom.xml` | open the version POMs directly |
 | `zero-epoch` runtime architecture | `zero-epoch-runtime-guide.md` | `zero-ecosystem/zero-epoch/` | `zero-epoch/pom.xml`, `zero-epoch-cosmic`, `zero-epoch-store`, `zero-epoch-setting`, `zero-epoch-focus` | `semantic_search_nodes('zero-epoch')` with path filter |
+| `zero-boot` boot wiring | `zero-boot-wiring-guide.md` | `zero-ecosystem/zero-boot/` | `VertxApplication`, `LauncherApp`, `CloudActor`, `BuildApp`, `BuildPerm` | `semantic_search_nodes('VertxApplication')`, `semantic_search_nodes('BuildApp')` |
 | SPI-driven core plugin and extension model | `spi-core-plugin-guide.md` | `zero-extension-skeleton`, `zero-plugins-equip`, `zero-exmodule-*` | `ExBoot`, `SPI_SET`, `META-INF/services`, `HPI.findMany` | `semantic_search_nodes('ExBoot')` |
 | local plus Nacos configuration center | `config-center-local-nacos.md` | `zero-epoch-setting`, `zero-epoch-spec`, `zero-epoch-spec-nacos`, `zero-boot-cloud-actor` | `ConfigMod`, `ZeroPower`, `ZeroSource`, `ConfigLoadCloud`, `YmSpec`, `NacosRule` | search `ConfigMod` and `nacos` |
 | jOOQ-centered DBE path | `dbe-query-rules.md` | `zero-epoch-store`, exmodule `*-provider` persistence code | `DBE`, `DB`, `DBSActor`, `dslContext`, `DAO`, `serviceimpl` | `semantic_search_nodes('DBE')`, `semantic_search_nodes('DBSActor')` |
@@ -52,11 +53,16 @@ Use this file together with:
 | Topic | Read First | Owning Modules | Source Anchors | First MCP / Graph Hint |
 |---|---|---|---|---|
 | cache, including Redis | `cache-redis-guide.md` | `zero-plugins-cache*`, `zero-plugins-redis` | plugin POMs, cache providers, Redis integration classes | search `zero-plugins-cache`, `zero-plugins-redis` |
+| Elasticsearch capability | `elasticsearch-guide.md` | `zero-plugins-elasticsearch` | `ElasticSearchActor`, `ElasticSearchClient`, `ElasticIndexer`, `ElasticQr` | `semantic_search_nodes('ElasticSearchActor')` |
 | Excel import and export model | `excel-import-export-guide.md` | `zero-plugins-excel` | `ExcelActor`, `ExcelClient`, `ExcelImport`, `ExcelExport`, `ExcelAnalyzer`, `ExcelEnvConnect` | `semantic_search_nodes('ExcelActor')`, `semantic_search_nodes('ExcelClient')` |
 | Flyway bootstrap and migration loading | `flyway-loading-flow.md` | `zero-plugins-flyway`, `zero-epoch-store`, extension SPI providers | `FlywayActor`, `Flyway11Configurator`, `DBFlyway` | `semantic_search_nodes('FlywayActor')` |
 | monitoring | `monitor-center-guide.md` | `zero-plugins-monitor*` | monitor module trees and plugin boot classes | search `zero-plugins-monitor` |
 | security processing | `security-plugin-flow.md` | `zero-plugins-security*`, `zero-plugins-oauth2`, `zero-exmodule-rbac` | security plugin modules, `PERM.yml`, `RBAC_RESOURCE`, OAuth2 startup classes | search `zero-plugins-security`, `RBAC_RESOURCE`, `OAuth2ServerActor` |
+| session capability | `session-guide.md` | `zero-plugins-session` | `SessionActor`, `SessionClient`, `SessionManager`, `SessionProvider` | `semantic_search_nodes('SessionActor')` |
+| OAuth2 capability | `oauth2-capability-guide.md` | `zero-plugins-oauth2` | `OAuth2ServerActor`, `OAuth2ClientActor`, `OAuth2Manager`, `Oauth2RegisteredClientDao` | `semantic_search_nodes('OAuth2ServerActor')` |
 | Neo4j integration | `neo4j-guide.md` | `zero-plugins-neo4j` | plugin module classes and config nodes | search `zero-plugins-neo4j` |
+| Swagger and OpenAPI docs | `swagger-openapi-guide.md` | `zero-plugins-swagger` | `SwaggerActor`, `SwaggerAnalyzer`, `SwaggerAxis`, `SwaggerManager` | `semantic_search_nodes('SwaggerActor')` |
+| trash and recycle-bin capability | `trash-capability-guide.md` | `zero-plugins-trash` | `TrashActor`, `TrashClient`, `TrashProvider`, `TrashManager` | `semantic_search_nodes('TrashActor')` |
 | email capability | `email-capability-guide.md` | `zero-plugins-email`, `zero-plugins-security-email` | plugin module classes and security-email hooks | search `zero-plugins-email` |
 | SMS capability | `sms-capability-guide.md` | `zero-plugins-sms`, `zero-plugins-security-sms` | plugin module classes and security-sms hooks | search `zero-plugins-sms` |
 | Weco capability | `weco-capability-guide.md` | `zero-plugins-weco`, `zero-plugins-security-weco` | plugin module classes and security-weco hooks | search `zero-plugins-weco` |
