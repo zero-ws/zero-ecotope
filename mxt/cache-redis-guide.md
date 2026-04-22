@@ -1,0 +1,44 @@
+# Cache And Redis Guide
+
+> Load this file when the task is about framework cache topology, abstract cache ownership, Redis startup, or the boundary between capability cache and business cache policy.
+
+## 1. Scope
+
+This file owns:
+
+- cache capability ownership
+- Redis capability ownership
+- cache provider split
+- cache vs business rule boundary
+
+It does not own domain cache-key design.
+
+## 2. Owning Modules
+
+- `zero-plugins-cache`
+- `zero-plugins-cache-caffeine`
+- `zero-plugins-cache-ehcache`
+- `zero-plugins-redis`
+
+## 3. Key Anchors
+
+- `RedisActor`
+- `RedisAddOn`
+- `RedisProvider`
+- cache plugin module roots
+
+## 4. Capability Model
+
+The cache family is split into:
+
+- abstract cache capability
+- concrete cache backend plugins
+- Redis capability as a standalone add-on and startup actor
+
+This layer owns connection management, backend registration, and shared cache capability exposure.
+
+## 5. AI Agent Rules
+
+- Put provider behavior here only when it is backend capability.
+- Keep domain cache semantics in exmodules or apps.
+- When Redis startup or registration is wrong, inspect `RedisActor` before changing business consumers.

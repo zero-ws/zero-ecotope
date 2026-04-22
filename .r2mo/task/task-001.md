@@ -63,3 +63,29 @@ author:
 	- 可配置的报表中心（-report）
 	- 授权数据域部分，ACL部分，强化的授权模型（-rbac）
 	- 模块化配置服务（-modulat），统一模块化处理，统一界面处理
+
+## Changes
+
+- 2026-04-22 Team Leader
+- Added `mxt/mcp-integration-map.md` as the topic-routing layer for MCP-assisted Zero framework reading.
+- Refocused `mxt/mcp-code-review-graph-rules.md` into graph playbooks only, so it no longer duplicates entry rules or graph discipline.
+- Expanded `mxt/graph-usage-rules.md` to own repository anchor, graph baseline, and refresh guidance.
+- Updated `mxt/README.md` and `mxt/agent-quick-start.md` so the reading path is now topic routing -> graph discipline -> graph playbooks.
+- Updated `mxt/document-boundary-audit.md` and `mxt/evolution-rules.md` so the new document boundary is explicit and maintainable.
+- Team mode was not explicitly configured in this repository, so the task was executed with a lightweight leader plus audit workers model only.
+- 2026-04-22 Team Leader
+- Added dedicated SRP documents for version, config center, DBS, overlay bridge, job model, cache/Redis, Excel, monitor, security plugins, Neo4j, email, SMS, Weco, WebSocket, and `zero-extension-api`.
+- Added dedicated SRP documents for each exmodule named in the task list: ambient, ERP, finance, graphic, integration, LBS, MBSE API, MBSE core, modulat, report, TPL, UI, and workflow.
+- Updated `mxt/mcp-integration-map.md` and `mxt/README.md` so each task-list item now has an explicit document owner instead of relying on framework overviews alone.
+- 2026-04-22 Team Leader
+- Used `code-review-graph` plus source anchors to re-verify the remaining boundary gaps and confirmed `ExBoot` / `SPI_SET` belong to `zero-extension-skeleton`, while `seekSyntax` / `SResourceDao` / `ScDetent` belong to `zero-exmodule-rbac`.
+- Added `mxt/extension-skeleton-guide.md` and `mxt/exmodule-rbac-guide.md` so the last two rule-list topics also have single-responsibility owner documents instead of borrowing SPI or RBAC rule pages.
+- Synced `mxt/README.md`, `mxt/mcp-integration-map.md`, `mxt/agent-quick-start.md`, `mxt/document-boundary-audit.md`, and `mxt/evolution-rules.md` so the index, routing, audit, and maintenance policy all agree on the final ownership model.
+- Synced `mxt/search-hints.md` with the new `extension-skeleton-guide.md` and `exmodule-rbac-guide.md` owner documents, matching the pack evolution rule for newly created files.
+- Final coverage result: every item in the task rule list now maps to an explicit owner document under `mxt/`, while overview and playbook files remain routing-only or rules-only.
+- 2026-04-22 Team Leader
+- Added `mxt/distillation-rules.md`, `mxt/purification-rules.md`, and `mxt/mcp-fast-retrieval-rules.md` to make document compression, duplicate-rule cleanup, and shortest-path MCP retrieval explicit single-responsibility rule sets.
+- Updated `mxt/README.md`, `mxt/agent-quick-start.md`, `mxt/mcp-integration-map.md`, `mxt/search-hints.md`, `mxt/document-boundary-audit.md`, and `mxt/evolution-rules.md` so AI Agents can route from topic to owner to source proof with fewer loaded files and fewer tokens.
+- 2026-04-22 Team Leader
+- Ran a temporary 200-case MXT regression suite covering internal Markdown references, 43 task-list route mappings, English-only MXT documents, and fast-retrieval/distillation/purification rule anchors.
+- Removed the temporary regression test file after the test passed, so no regression-only test artifact remains in the final commit.

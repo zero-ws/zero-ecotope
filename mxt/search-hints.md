@@ -16,6 +16,21 @@ Search patterns:
 - `<module>zero-plugins-extension</module>`
 - `<artifactId>zero-exmodule-`
 
+## 1.5 Find the Shortest Agent Route
+
+Use these owner documents before broad searches:
+
+- `mcp-fast-retrieval-rules.md` — shortest MCP retrieval path
+- `mcp-integration-map.md` — topic-to-owner routing
+- `distillation-rules.md` — document compression rules
+- `purification-rules.md` — duplicate rule cleanup rules
+
+Rule:
+
+```text
+Do not search the full repository until the owner document is known.
+```
+
 ## 2. Find Core Framework Code
 
 Code markers:
@@ -64,6 +79,9 @@ Key files:
 - `zero-extension-skeleton/.../boot/ExBoot.java`
 - `zero-extension-skeleton/.../spi/`
 
+Owner document:
+- `extension-skeleton-guide.md`
+
 Search patterns:
 - `SPI_SET`
 - `HPI.findMany`
@@ -82,6 +100,9 @@ Search patterns:
 - `zero-exmodule-*/zero-exmodule-*-api`
 - `zero-exmodule-*/zero-exmodule-*-domain`
 - `zero-exmodule-*/zero-exmodule-*-provider`
+- `zero-exmodule-rbac`
+- `SResourceDao`
+- `ScDetent`
 - `class Addr`
 - `interface .*Stub`
 - `serviceimpl`
@@ -91,6 +112,7 @@ Rule:
 - `domain` layer holds `Stub` / model / spec.
 - `provider` layer holds implementations.
 - Only depend on `*-api`, never on `*-provider` from outside the exmodule.
+- Use `exmodule-rbac-guide.md` when the task is specifically about `zero-exmodule-rbac` ownership.
 
 ## 5. Find Plugin Capability
 

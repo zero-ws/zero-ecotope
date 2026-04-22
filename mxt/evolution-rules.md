@@ -51,6 +51,7 @@ If any of the following changes:
 - the `api/domain/provider` structure changes
 
 Then update at least:
+- `extension-skeleton-guide.md`
 - `spi-registry-map.md`
 - `spi-implementation-rules.md`
 - `exmodule-boundary.md`
@@ -75,6 +76,8 @@ Examples:
 If a new markdown file is created:
 - add it to `README.md`
 - add search guidance for it in `search-hints.md`
+- decide whether it owns topic routing, graph discipline, or source semantics, and keep only one of those
+- run the new file through `distillation-rules.md` and `purification-rules.md`
 
 ## 4. When to Update an Existing File Instead
 
@@ -113,6 +116,14 @@ Always keep it valid as the shortest-path navigation doc:
 - layer placement hints must still reflect the real codebase
 
 If search keywords stop working, this file must be updated immediately.
+
+### MCP fast retrieval rules
+
+Always keep `mcp-fast-retrieval-rules.md` valid for token-saving AI Agent consumption:
+
+- route once from topic to owner
+- open only the owner document and proof anchor by default
+- escalate to graph playbooks only when owner evidence is insufficient
 
 ## 6. Agent Verification After Upgrade
 
@@ -161,11 +172,19 @@ After each framework upgrade:
 
 - `README.md` owns entry and reading order
 - `framework-map.md` owns structure
+- `mcp-integration-map.md` owns topic routing from framework concern to owner modules and graph targets
+- `mcp-fast-retrieval-rules.md` owns shortest-path MCP retrieval and token-saving stop rules
+- `distillation-rules.md` owns document compression and evidence retention rules
+- `purification-rules.md` owns duplicate-rule cleanup and owner precedence
 - `plugin-layer-map.md` owns capability plugins
 - `spi-registry-map.md` owns SPI family mapping
 - `spi-implementation-rules.md` owns SPI implementation rules
+- `extension-skeleton-guide.md` owns `zero-extension-skeleton`
 - `exmodule-boundary.md` owns layer boundaries
+- `exmodule-rbac-guide.md` owns `zero-exmodule-rbac`
 - `search-hints.md` owns navigation
+- `graph-usage-rules.md` owns graph discipline
+- `mcp-code-review-graph-rules.md` owns graph playbooks
 - `evolution-rules.md` owns long-term maintenance of the pack
 
 The pack is healthy only if a new AI agent can still answer, quickly and correctly, where code belongs and where to search first.

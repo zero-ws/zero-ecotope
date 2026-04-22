@@ -20,20 +20,29 @@ Use this order:
 ```text
 project local rules/specs
 -> mxt/framework-map.md
+-> mxt/mcp-integration-map.md
+-> mxt/mcp-fast-retrieval-rules.md
 -> mxt/search-hints.md
+-> mxt/graph-usage-rules.md
 -> mxt/mcp-code-review-graph-rules.md
 -> framework source
 ```
 
 Add these only when needed:
 
+- `mcp-integration-map.md` -> broad framework topic routing before symbol-level search
+- `mcp-fast-retrieval-rules.md` -> shortest MCP retrieval path and token-saving stop conditions
+- `distillation-rules.md` -> compressing verbose docs into anchors and decisions
+- `purification-rules.md` -> deduplicating overlapping rules and finding the true owner
 - `plugin-layer-map.md` -> plugin capability questions
+- `extension-skeleton-guide.md` -> `zero-extension-skeleton` ownership questions
 - `spi-registry-map.md` -> SPI / Ex* / Sc* / Ui* family questions
 - `spi-implementation-rules.md` -> SPI implementation and discovery questions
 - `exmodule-boundary.md` -> plugin vs exmodule vs app placement
 - `backend-dpa-guide.md` -> DPA and async backend questions
 - `dbe-query-rules.md` -> DBE / `QQuery` / `QTree` questions
 - `backend-model-tenant-rules.md` -> metadata and tenant questions
+- `exmodule-rbac-guide.md` -> reusable RBAC module questions
 - `backend-rbac-rules.md` -> RBAC resource questions
 - `crud-engine-guide.md` -> standard CRUD vs handwritten implementation decisions
 - `contract-source-rules.md` -> `.r2mo` contract authority questions
@@ -88,6 +97,7 @@ Always:
 
 Use graph for:
 
+- topic-to-symbol translation after `mcp-integration-map.md`
 - symbol ownership
 - callers/callees/imports
 - impact radius
@@ -143,6 +153,9 @@ Answer these before you conclude:
 
 After this quick start, the normal next file is:
 
+- `mxt/mcp-integration-map.md`
+- `mxt/mcp-fast-retrieval-rules.md`
+- `mxt/graph-usage-rules.md`
 - `mxt/mcp-code-review-graph-rules.md`
 
-Use that file as the full protocol.
+Use them in that order: topic routing, fast retrieval discipline, graph discipline, then graph playbooks.

@@ -1,11 +1,13 @@
 # Graph Usage Rules
 
 > Load this file when the task needs operational rules for `code-review-graph` in Zero framework work.
-> This file owns graph discipline only. It does not own Flyway, actor startup, or data bootstrap behavior.
+> This file owns graph discipline only. It does not own framework topic routing, topology mapping, Flyway behavior, actor startup, or data bootstrap behavior.
 
 ## 1. Scope
 
 This file defines how to use `code-review-graph` against `zero-ecotope` without over-trusting graph output.
+
+Use `mcp-integration-map.md` first when the task starts from a broad topic such as `security`, `workflow`, `excel`, `job`, or `zero-overlay`.
 
 ## 2. Core Contract
 
@@ -85,13 +87,16 @@ Resource evidence:
 - verified resource path
 ```
 
-## 7. Practical Caveats
+## 7. Baseline and Refresh
 
-- `semantic_search_nodes` works best with one symbol or class name per query.
-- Do not bundle multiple unrelated names into one graph query and expect stable ranking.
-- `callers_of` and `callees_of` can be polluted by repository JavaScript bundles when the target name is overly generic such as `run`.
-- Prefer fully qualified targets or file-scoped verification for common method names.
-- Current graph status was verified against:
+Current target repository:
+
+```text
+Alias: mxt-zero
+Repo:  /Users/lang/zero-cloud/app-zero/zero-ecotope
+```
+
+Current graph status was verified against:
 
 ```text
 Files:   3932
@@ -102,17 +107,26 @@ Built at commit: 28f4a7a4c078
 Workspace HEAD:  9775e79896c5f5cdc22b305dcb067f43ef14c64f
 ```
 
+Refresh commands:
+
+```bash
+code-review-graph status --repo /Users/lang/zero-cloud/app-zero/zero-ecotope
+code-review-graph update --repo /Users/lang/zero-cloud/app-zero/zero-ecotope
+code-review-graph build --repo /Users/lang/zero-cloud/app-zero/zero-ecotope
+```
+
+Use `update` for ordinary same-branch edits.
+Use `build` after topology changes, broad merges, or when impact analysis depends on stale metadata.
+
+## 8. Practical Caveats
+
+- `semantic_search_nodes` works best with one symbol or class name per query.
+- Do not bundle multiple unrelated names into one graph query and expect stable ranking.
+- `callers_of` and `callees_of` can be polluted by repository JavaScript bundles when the target name is overly generic such as `run`.
+- Prefer fully qualified targets or file-scoped verification for common method names.
+
 Rule:
 
 ```text
 If graph baseline and workspace HEAD differ, use the graph for orientation only and rely on direct source reads for final proof.
-```
-
-## 8. Repository Anchor
-
-Current target repository:
-
-```text
-Alias: mxt-zero
-Repo:  /Users/lang/zero-cloud/app-zero/zero-ecotope
 ```
