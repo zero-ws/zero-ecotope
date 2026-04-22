@@ -193,9 +193,7 @@
       "audio-recorder:开始/结束录音": false,
       "workspaces:管理工作区布局": false,
       "zk-prefixer:创建时间戳笔记": false,
-      "random-note:开始漫游笔记": false,
-      "obsidian-excalidraw-plugin:新建绘图文件": false,
-      "mermaid-tools:Open Mermaid Toolbar": false
+      "random-note:开始漫游笔记": false
     }
   },
   "active": "885f9e3759734ce4",

@@ -1,2 +1,11 @@
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+disable_response_storage = true
+
+[model_providers.codex]
+name = "codex"
+base_url = "https://code.ppchat.vip/v1"
+wire_api = "responses"
+env_key = "OPEN_CX_MY_KEY"
