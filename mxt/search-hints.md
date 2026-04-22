@@ -20,6 +20,8 @@ Search patterns:
 
 Use these owner documents before broad searches:
 
+- `ai-decision-tree.md` — one-question-one-answer decision routing (read this FIRST)
+- `ai-anti-patterns.md` — common AI mistakes and correct paths
 - `mcp-fast-retrieval-rules.md` — shortest MCP retrieval path
 - `mcp-integration-map.md` — topic-to-owner routing
 - `distillation-rules.md` — document compression rules
@@ -233,5 +235,7 @@ Use text search to land on the owner quickly. Use graph rules only after the own
 
 When ownership depends on structure rather than one text hit, continue with:
 
+- `ai-decision-tree.md` — decision routing before deep search
+- `ai-anti-patterns.md` — avoid common mistakes
 - `graph-usage-rules.md`
 - `mcp-code-review-graph-rules.md`

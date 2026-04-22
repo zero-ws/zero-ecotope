@@ -76,6 +76,8 @@
 | [environment-contracts.md](environment-contracts.md) | Environment variables as runtime and integration contracts |
 | [search-hints.md](search-hints.md) | Search patterns for fast codebase navigation |
 | [graph-usage-rules.md](graph-usage-rules.md) | Operational rules for using `code-review-graph` safely in Zero framework work |
+| [ai-decision-tree.md](ai-decision-tree.md) | Top-level AI agent decision logic: one-question-one-answer routing to the correct owner document |
+| [ai-anti-patterns.md](ai-anti-patterns.md) | Common AI agent mistakes when consuming Zero framework and their correct paths |
 | [flyway-loading-flow.md](flyway-loading-flow.md) | Flyway actor startup, config assembly, and `DBFlyway` loading flow |
 | [actor-startup-matrix.md](actor-startup-matrix.md) | `@Actor` startup matrix, sequencing, and config-gated boot semantics |
 | [buildapp-buildperm-flow.md](buildapp-buildperm-flow.md) | Installation-time app/menu bootstrap and RBAC import flow |
@@ -93,6 +95,7 @@ Do not start with the largest file unless the task is already known to be broad.
 
 | If the agent needs to... | Read this first | Then continue with |
 |---|---|---|
+| decide where to look with minimum tokens | `ai-decision-tree.md` | one owner document |
 | quickly decide where a problem belongs | `agent-quick-start.md` | `framework-map.md` |
 | inspect the Zero runtime layer itself | `zero-epoch-runtime-guide.md` | `framework-map.md` |
 | inspect boot wiring and launch integration | `zero-boot-wiring-guide.md` | `actor-startup-matrix.md` |
@@ -108,6 +111,7 @@ Do not start with the largest file unless the task is already known to be broad.
 | inspect core SPI-driven plugin architecture | `spi-core-plugin-guide.md` | `spi-registry-map.md` |
 | inspect scheduled job model | `job-model-guide.md` | `mcp-code-review-graph-rules.md` |
 | navigate framework code relationships | `agent-quick-start.md` | `mcp-code-review-graph-rules.md` |
+| avoid common AI agent mistakes | `ai-anti-patterns.md` | matching owner document |
 | use graph tooling safely | `graph-usage-rules.md` | `mcp-code-review-graph-rules.md` |
 | inspect cache and Redis capability | `cache-redis-guide.md` | `plugin-layer-map.md` |
 | inspect Elasticsearch capability | `elasticsearch-guide.md` | `plugin-layer-map.md` |
@@ -166,7 +170,7 @@ Do not start with the largest file unless the task is already known to be broad.
 Default rule:
 
 ```text
-Quick Start first, Full Protocol second, source verification last.
+Decision Tree first, Owner Document second, source verification last.
 ```
 
 Final structure rule:
@@ -201,7 +205,8 @@ Key facts:
 
 ## Baseline Order
 
-1. `agent-quick-start.md`
+1. `ai-decision-tree.md`
+2. `agent-quick-start.md`
 2. `framework-map.md`
 3. `mcp-integration-map.md`
 4. `mcp-fast-retrieval-rules.md`

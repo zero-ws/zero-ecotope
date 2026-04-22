@@ -24,6 +24,8 @@ Use this file together with:
 
 | Need | Document |
 |---|---|
+| one-question-one-answer decision routing | `ai-decision-tree.md` |
+| common AI agent mistakes and correct paths | `ai-anti-patterns.md` |
 | framework topology and layer ownership | `framework-map.md` |
 | shortest MCP retrieval and token saving | `mcp-fast-retrieval-rules.md` |
 | document distillation | `distillation-rules.md` |

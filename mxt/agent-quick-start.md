@@ -19,6 +19,7 @@ Use this order:
 
 ```text
 project local rules/specs
+-> mxt/ai-decision-tree.md
 -> mxt/framework-map.md
 -> mxt/mcp-integration-map.md
 -> mxt/mcp-fast-retrieval-rules.md
@@ -154,9 +155,11 @@ Answer these before you conclude:
 
 After this quick start, the normal next file is:
 
+- `mxt/ai-decision-tree.md` — one-question-one-answer decision routing
+- `mxt/ai-anti-patterns.md` — common mistakes and correct paths
 - `mxt/mcp-integration-map.md`
 - `mxt/mcp-fast-retrieval-rules.md`
 - `mxt/graph-usage-rules.md`
 - `mxt/mcp-code-review-graph-rules.md`
 
-Use them in that order: topic routing, fast retrieval discipline, graph discipline, then graph playbooks.
+Use decision tree first, then topic routing, fast retrieval discipline, graph discipline, then graph playbooks.

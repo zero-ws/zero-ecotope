@@ -40,17 +40,17 @@ Verified graph/source anchors:
 - `LoadApp`
 - `MenuApp`
 
-## 3. Responsibility Model
+## 3. Sub-Module Responsibilities
 
-`zero-boot` is the wiring layer between core runtime, boot actors, and extension installation helpers.
-
-It connects:
-
-- runtime launch entrypoints
-- cloud configuration boot
-- extension channel and component wiring
-- installation-time app/menu/RBAC loading
-- optional boot actor families for Elasticsearch and graph behavior
+| Module | Responsibility | When AI Agent Should Inspect |
+|---|---|---|
+| `zero-boot` | Parent POM and shared boot infrastructure | Boot module inclusion or version issues |
+| `zero-boot-actor` | Generic actor boot utilities and shared actor lifecycle helpers | Actor lifecycle wiring issues that are not specific to epoch or cloud |
+| `zero-boot-epoch-actor` | Zero runtime actor boot: wires `@Actor`-annotated classes into the Vertx container during startup | `@Actor` not registering, startup ordering, actor missing from container |
+| `zero-boot-cloud-actor` | Cloud/Nacos actor boot: wires cloud config source actors (`ConfigLoadCloud`, `NacosRule`) | Cloud config not loading, Nacos connection failures, config source priority |
+| `zero-boot-extension` | Extension channel and component wiring: connects `zero-extension-skeleton` SPI boot to runtime | Extension SPI not discovered, `ExBoot` not firing, `SPI_SET` incomplete |
+| `zero-boot-inst` | Installation boot: `BuildApp`, `BuildPerm`, app/menu/RBAC data import at first launch | App/menu missing after fresh install, RBAC resource import failures |
+| `zero-boot-import` | Import boot helpers: shared import utilities for bulk data loading during installation | Bulk import errors, data seeding failures |
 
 One-line rule:
 

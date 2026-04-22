@@ -88,6 +88,8 @@
 | `backend-dev-guide.md` | Pass | legacy backend navigation page | retained only as an index page |
 | `integration-guide.md` | Pass | legacy integration navigation page | retained only as an index page |
 | `graph-usage-rules.md` | Pass | operational graph usage rules | new dedicated file |
+| `ai-decision-tree.md` | Pass | top-level AI agent decision logic and one-question-one-answer routing | new dedicated file |
+| `ai-anti-patterns.md` | Pass | common AI agent mistakes and their correct paths | new dedicated file |
 | `flyway-loading-flow.md` | Pass | Flyway loading and migration extension flow | new dedicated file |
 | `actor-startup-matrix.md` | Pass | `@Actor` startup matrix semantics | new dedicated file |
 | `buildapp-buildperm-flow.md` | Pass | installation-time app/RBAC bootstrap flow | new dedicated file |

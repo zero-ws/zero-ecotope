@@ -23,7 +23,20 @@ It does not own application metrics semantics.
 - `MonitorActor`
 - `YmMonitor`
 
-## 4. Capability Model
+## 4. Sub-Module Responsibilities
+
+| Module | Responsibility | When AI Agent Should Inspect |
+|---|---|---|
+| `zero-plugins-monitor` | Base monitor plugin: `MonitorActor` startup, shared metrics infrastructure, configuration entry | Monitor boot failure, metrics not appearing, plugin inclusion issues |
+| `zero-plugins-monitor-prometheus` | Prometheus endpoint exposure and scrape-compatible metrics export | Prometheus scrape errors, metrics format issues, endpoint missing |
+| `zero-plugins-monitor-hawtio` | Hawtio web console integration for JVM and Vert.x runtime inspection | Hawtio console unreachable, JMX/Vert.x bean visibility issues |
+
+Selection rule:
+
+- `zero-plugins-monitor` is always required; `prometheus` and `hawtio` are independent add-ons.
+- Choose `prometheus` for external metrics collection; choose `hawtio` for interactive runtime diagnostics.
+
+## 5. Capability Model
 
 The monitor family provides framework-level observability capability and optional backend-specific integrations such as Prometheus and Hawtio.
 

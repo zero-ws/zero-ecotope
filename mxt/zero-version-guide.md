@@ -15,13 +15,13 @@ It does not own runtime behavior or plugin semantics.
 
 ## 2. Owning Modules
 
-Primary roots:
-
-- `zero-version/pom.xml`
-- `zero-version/zero-version-epoch/pom.xml`
-- `zero-version/zero-version-plugins/pom.xml`
-- `zero-version/zero-version-extension/pom.xml`
-- `zero-0216/pom.xml`
+| Module | Responsibility | When AI Agent Should Inspect |
+|---|---|---|
+| `zero-version` | Parent BOM POM: top-level version alignment and module aggregation | Version conflict across layers, new module not in BOM |
+| `zero-version-epoch` | Managed dependencies for `zero-epoch-*`, `zero-overlay`, core runtime | Core runtime dependency version mismatch |
+| `zero-version-plugins` | Managed dependencies for `zero-plugins-*` capability plugins | Plugin dependency version mismatch, new plugin not exposed |
+| `zero-version-extension` | Managed dependencies for `zero-extension-*` and `zero-exmodule-*` | Extension/exmodule dependency version mismatch, new exmodule not exposed |
+| `zero-version-overlay` | Managed dependencies for `zero-overlay` bridge contracts | R2MO bridge dependency version issues |
 
 ## 3. Reading Rule
 

@@ -136,6 +136,16 @@ python3 .r2mo/task/audit_mxt_coverage.py
 
 The script checks owner documents, MCP route coverage, internal Markdown references, English-only MXT content, and graph-noise governance anchors.
 
+### Audit trigger rule
+
+Any commit that modifies files under `mxt/` or `zero-ecosystem/pom.xml` should trigger the coverage audit. Implementation options:
+
+- **Git pre-commit hook**: add `audit_mxt_coverage.py` to `.git/hooks/pre-commit` with path filtering on `mxt/` and `zero-ecosystem/pom.xml`.
+- **CI step**: add the audit as a CI job triggered on `mxt/**` and `zero-ecosystem/pom.xml` path changes.
+- **Manual fallback**: if neither hook nor CI is configured, the agent making the change must run the audit and report the result in the commit message.
+
+Minimum requirement: the audit must pass before any MXT or module-structure change is merged.
+
 ## 6. Agent Verification After Upgrade
 
 After a framework upgrade, the minimum agent verification set is:
@@ -198,6 +208,8 @@ After each framework upgrade:
 - `search-hints.md` owns navigation
 - `graph-usage-rules.md` owns graph discipline
 - `mcp-code-review-graph-rules.md` owns graph playbooks
+- `ai-decision-tree.md` owns top-level AI agent decision logic and one-question-one-answer routing
+- `ai-anti-patterns.md` owns common AI agent mistakes and their correct paths
 - `evolution-rules.md` owns long-term maintenance of the pack
 
 The pack is healthy only if a new AI agent can still answer, quickly and correctly, where code belongs and where to search first.

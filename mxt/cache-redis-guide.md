@@ -27,7 +27,22 @@ It does not own domain cache-key design.
 - `RedisProvider`
 - cache plugin module roots
 
-## 4. Capability Model
+## 4. Sub-Module Responsibilities
+
+| Module | Responsibility | When AI Agent Should Inspect |
+|---|---|---|
+| `zero-plugins-cache` | Abstract cache capability: SPI-driven cache provider interface, shared cache abstraction | Cache SPI registration failures, provider not found, cache abstraction issues |
+| `zero-plugins-cache-caffeine` | Caffeine in-process cache backend: high-performance local cache with size-based eviction | Local cache eviction, TTL, or hit-ratio issues; when no distributed cache is needed |
+| `zero-plugins-cache-ehcache` | Ehcache backend: disk-persistent or distributed cache via Terracotta | Cache persistence failures, Terracotta clustering issues, disk overflow behavior |
+| `zero-plugins-redis` | Redis distributed cache and data-store capability: `RedisActor` startup, connection pool, `RedisAddOn` registration | Redis connection failures, distributed cache misses, pub/sub issues, standalone Redis outside cache SPI |
+
+Selection rule:
+
+- For pure local caching → `caffeine` (preferred) or `ehcache`.
+- For distributed caching → `redis`.
+- `zero-plugins-cache` is the SPI contract; backends implement it except `redis` which also provides its own `RedisActor`.
+
+## 5. Capability Model
 
 The cache family is split into:
 
