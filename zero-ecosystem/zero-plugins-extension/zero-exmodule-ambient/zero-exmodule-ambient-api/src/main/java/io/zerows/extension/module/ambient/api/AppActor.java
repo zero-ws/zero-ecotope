@@ -1,5 +1,7 @@
 package io.zerows.extension.module.ambient.api;
 
+import io.r2mo.base.dbe.DBMany;
+import io.r2mo.base.dbe.DBS;
 import io.r2mo.base.dbe.Database;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -56,28 +58,51 @@ public class AppActor {
      */
     @Address(Addr.Init.SOURCE)
     public Future<JsonObject> database(final String appId) {
-        return this.appStub.fetchSource(appId).compose(atom -> {
-            /*
-             * 一个动态库
-             */
-            final Function<JsonObject, JsonObject> consumer = json -> {
-                json.remove(KName.PASSWORD);
-                json.remove(KName.USERNAME);
-                return json;
-            };
-            /*
-             * 三个静态库
-             */
-            final Database current = KDS.findCurrent();
-            final Database history = KDS.findHistory();
-            final Database workflow = KDS.findCamunda();
-            final JsonObject response = new JsonObject();
-            response.put("database", consumer.apply(current.toJson()));
-            response.put("history", consumer.apply(history.toJson()));
-            response.put("workflow", consumer.apply(workflow.toJson()));
-            response.put("argument", consumer.apply(atom));
-            return Ux.future(response);
-        });
+        return this.appStub.fetchSource(appId)
+            .compose(atom -> Ux.future(toDatabaseResponse(KDS.of(), atom)));
+    }
+
+    static JsonObject toDatabaseResponse(final KDS kds, final JsonObject atom) {
+        final JsonObject response = new JsonObject();
+        response.put("database", sanitizeDbs(kds.findRunning(DBMany.DEFAULT_DBS)));
+        response.put("history", sanitizeDbs(kds.findRunning(KDS.DEFAULT_DBS_HISTORY)));
+        response.put("workflow", sanitizeDbs(kds.findRunning(KDS.DEFAULT_DBS_WORKFLOW)));
+        response.put("argument", sanitizeJson(atom));
+        return response;
+    }
+
+    static JsonObject sanitizeDbs(final DBS dbs) {
+        if (null == dbs) {
+            return null;
+        }
+        final Database database = dbs.getDatabase();
+        if (null == database) {
+            return null;
+        }
+        final JsonObject json = new JsonObject();
+        if (null != database.getType()) {
+            json.put("category", database.getType().name());
+        }
+        json.put("hostname", database.getHostname());
+        json.put("port", database.getPort());
+        json.put("instance", database.getInstance());
+        json.put("url", database.getUrl());
+        json.put("driver-class-name", database.getDriverClassName());
+        json.put("driverClassName", database.getDriverClassName());
+        if (null != database.getOptions()) {
+            json.put("options", new JsonObject(database.getOptions().encode()));
+        }
+        return sanitizeJson(json);
+    }
+
+    static JsonObject sanitizeJson(final JsonObject json) {
+        if (null == json) {
+            return null;
+        }
+        final JsonObject copied = json.copy();
+        copied.remove(KName.PASSWORD);
+        copied.remove(KName.USERNAME);
+        return copied;
     }
 
     /*

@@ -48,7 +48,7 @@ public class ExInitApp implements ExInit {
             result.mergeIn(appJson);
         }
         /* Data Source Input */
-        if (!Ut.isNil(input)) {
+        if (!Ut.isNil(input) && null != input.getValue(KName.SOURCE)) {
             result.put(KName.SOURCE, input.getValue(KName.SOURCE));
         }
         return result;
