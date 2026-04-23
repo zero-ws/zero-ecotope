@@ -11,6 +11,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.authentication.AuthenticationProvider;
+import io.vertx.ext.auth.authentication.Credentials;
+import io.vertx.ext.auth.authentication.UsernamePasswordCredentials;
 import io.vertx.ext.stomp.Acknowledgement;
 import io.vertx.ext.stomp.BridgeOptions;
 import io.vertx.ext.stomp.DefaultAbortHandler;
@@ -36,6 +38,9 @@ import io.vertx.ext.stomp.impl.RemindDestination;
 import io.vertx.ext.stomp.impl.ServerFrameImpl;
 import io.vertx.ext.stomp.impl.Transactions;
 import io.zerows.component.log.LogOf;
+import io.zerows.epoch.constant.KName;
+import io.zerows.plugins.security.service.AsyncSession;
+import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -49,6 +54,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class ServerStompHandler implements ServerWsHandler {
 
+    private static final String FIELD_AUTHORIZATION = "authorization";
     private static final LogOf LOGGER = LogOf.get(ServerStompHandler.class);
     private final Vertx vertx;
     private final Context context;
@@ -380,7 +386,13 @@ public class ServerStompHandler implements ServerWsHandler {
     @Override
     public Future<Boolean> onAuthenticationRequest(final StompServerConnection connection, final String login, final String passcode) {
         final PromiseInternal<Boolean> promise = ((ContextInternal) this.context).promise();
-        // this.onAuthenticationRequest(connection, login, passcode, promise);
+        this.onAuthenticationRequest(connection, login, passcode, ar -> {
+            if (ar.succeeded()) {
+                promise.complete(ar.result());
+            } else {
+                promise.fail(ar.cause());
+            }
+        });
         return promise.future();
     }
 
@@ -408,12 +420,9 @@ public class ServerStompHandler implements ServerWsHandler {
             return this;
         }
 
-
-        //        this.configure.runOnContext(v -> auth.authenticate(
-        //            new JsonObject().put("username", login).put("password", passcode),
-        //            this.onAuthenticationOut(connection, handler))
-        //        );
-        return this;
+        final Credentials credentials = AsyncSession.bindAsync(
+            new UsernamePasswordCredentials(login, passcode), connection.session());
+        return this.authenticate(auth, credentials, connection, handler);
     }
 
     /**
@@ -549,28 +558,110 @@ public class ServerStompHandler implements ServerWsHandler {
 
         /* secured = false, the provider is not null        ( Warning ),    return : true. */
         final StompServer server = connection.server();
+        final AuthenticationProvider auth;
+        synchronized (this) {
+            auth = this.authProvider;
+        }
         if (!server.options().isSecured()) {
-            if (Objects.nonNull(this.authProvider)) {
+            if (Objects.nonNull(auth)) {
                 LOGGER.warn("Authentication handler set while the server is not secured");
             }
             this.context.runOnContext(v -> handler.handle(Future.succeededFuture(true)));
+            return this;
         }
 
 
         /* secured = true, the provider must not be null    ( Error ),      return : false. */
-        if (server.options().isSecured() && Objects.isNull(this.authProvider)) {
+        if (Objects.isNull(auth)) {
             LOGGER.error("Cannot authenticate connection - no authentication provider");
             this.context.runOnContext(v -> handler.handle(Future.succeededFuture(false)));
+            return this;
         }
 
-        //        this.configure.runOnContext(v -> this.authProvider.authenticate(
-        //            principal,
-        //            this.onAuthenticationOut(connection, handler)
-        //        ));
-        return this;
+        final Credentials credentials = this.credentials(connection, principal);
+        if (Objects.isNull(credentials)) {
+            LOGGER.error("Cannot authenticate connection - invalid authorization principal");
+            this.context.runOnContext(v -> handler.handle(Future.succeededFuture(false)));
+            return this;
+        }
+        return this.authenticate(auth, credentials, connection, handler);
     }
 
     // ---------------------- Extension Code ------------------------
+
+    private StompServerHandler authenticate(final AuthenticationProvider auth,
+                                            final Credentials credentials,
+                                            final StompServerConnection connection,
+                                            final Handler<AsyncResult<Boolean>> handler) {
+        this.context.runOnContext(v -> {
+            final Handler<AsyncResult<User>> authenticated = this.onAuthenticationOut(connection, handler);
+            try {
+                auth.authenticate(credentials).onComplete(authenticated);
+            } catch (final Throwable ex) {
+                authenticated.handle(Future.failedFuture(ex));
+            }
+        });
+        return this;
+    }
+
+    private Credentials credentials(final StompServerConnection connection, final JsonObject principal) {
+        if (Ut.isNil(principal)) {
+            return null;
+        }
+        String authorization = Ut.valueString(principal, FIELD_AUTHORIZATION);
+        String token = Ut.valueString(principal, KName.ACCESS_TOKEN);
+        if (Ut.isNil(token)) {
+            token = Ut.valueString(principal, KName.TOKEN);
+        }
+        if (Ut.isNil(authorization) && Ut.isNotNil(token)) {
+            authorization = "Bearer " + token;
+        }
+        if (Ut.isNil(authorization)) {
+            return null;
+        }
+        final String sessionId = this.sessionId(connection, principal);
+        final Credentials credentials = new AuthorizationCredentials(principal, authorization);
+        return AsyncSession.bindAsync(credentials, sessionId);
+    }
+
+    private String sessionId(final StompServerConnection connection, final JsonObject principal) {
+        String sessionId = Ut.valueString(principal, KName.SESSION);
+        if (Ut.isNil(sessionId)) {
+            sessionId = Ut.valueString(principal, KName.ID);
+        }
+        if (Ut.isNil(sessionId)) {
+            sessionId = Ut.valueString(principal, KName.SUBJECT);
+        }
+        if (Ut.isNil(sessionId)) {
+            sessionId = Ut.valueString(principal, KName.HABITUS);
+        }
+        if (Ut.isNil(sessionId)) {
+            sessionId = connection.session();
+        }
+        return sessionId;
+    }
+
+    private static class AuthorizationCredentials implements Credentials {
+        private final JsonObject principal;
+        private final String authorization;
+
+        private AuthorizationCredentials(final JsonObject principal, final String authorization) {
+            this.principal = principal.copy();
+            this.authorization = authorization;
+        }
+
+        @Override
+        public JsonObject toJson() {
+            final JsonObject data = this.principal.copy();
+            data.remove(FIELD_AUTHORIZATION);
+            return data;
+        }
+
+        @Override
+        public String toHttpAuthorization() {
+            return this.authorization;
+        }
+    }
 
     private Handler<AsyncResult<User>> onAuthenticationOut(final StompServerConnection connection,
                                                            final Handler<AsyncResult<Boolean>> handler) {
