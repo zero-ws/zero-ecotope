@@ -16,6 +16,24 @@ Search patterns:
 - `<module>zero-plugins-extension</module>`
 - `<artifactId>zero-exmodule-`
 
+## 1.5 Find the Shortest Agent Route
+
+Use these owner documents before broad searches:
+
+- `ai-decision-tree.md` — one-question-one-answer decision routing (read this FIRST)
+- `ai-anti-patterns.md` — common AI mistakes and correct paths
+- `mcp-fast-retrieval-rules.md` — shortest MCP retrieval path
+- `mcp-integration-map.md` — topic-to-owner routing
+- `distillation-rules.md` — document compression rules
+- `purification-rules.md` — duplicate rule cleanup rules
+- `graph-noise-rules.md` — generated and tooling graph-noise filters
+
+Rule:
+
+```text
+Do not search the full repository until the owner document is known.
+```
+
 ## 2. Find Core Framework Code
 
 Code markers:
@@ -64,6 +82,9 @@ Key files:
 - `zero-extension-skeleton/.../boot/ExBoot.java`
 - `zero-extension-skeleton/.../spi/`
 
+Owner document:
+- `extension-skeleton-guide.md`
+
 Search patterns:
 - `SPI_SET`
 - `HPI.findMany`
@@ -82,6 +103,9 @@ Search patterns:
 - `zero-exmodule-*/zero-exmodule-*-api`
 - `zero-exmodule-*/zero-exmodule-*-domain`
 - `zero-exmodule-*/zero-exmodule-*-provider`
+- `zero-exmodule-rbac`
+- `SResourceDao`
+- `ScDetent`
 - `class Addr`
 - `interface .*Stub`
 - `serviceimpl`
@@ -91,6 +115,7 @@ Rule:
 - `domain` layer holds `Stub` / model / spec.
 - `provider` layer holds implementations.
 - Only depend on `*-api`, never on `*-provider` from outside the exmodule.
+- Use `exmodule-rbac-guide.md` when the task is specifically about `zero-exmodule-rbac` ownership.
 
 ## 5. Find Plugin Capability
 
@@ -102,7 +127,18 @@ Search patterns:
 - `zero-plugins-cache-`
 - `zero-plugins-redis`
 - `zero-plugins-elasticsearch`
+- `zero-plugins-swagger`
+- `zero-plugins-session`
+- `zero-plugins-oauth2`
+- `zero-plugins-trash`
 - `zero-plugins-websocket`
+
+Capability owner documents:
+- `elasticsearch-guide.md`
+- `swagger-openapi-guide.md`
+- `session-guide.md`
+- `oauth2-capability-guide.md`
+- `trash-capability-guide.md`
 
 Judgment rule: if it looks like a third-party adapter, it belongs in the plugin layer. If it expresses a business rule, it belongs in an exmodule or the app layer.
 
@@ -158,3 +194,48 @@ Decision mapping:
 - Shared extension contract → `zero-extension-skeleton`
 - Reusable business implementation → `zero-exmodule-*`
 - Project-specific customization → application layer
+
+## 8. High-Value Runtime Anchors
+
+Use these anchors when the task is startup-heavy and a generic text search is still faster than graph traversal.
+
+Startup and actor anchors:
+- `class ZeroLauncher`
+- `class ZeroModule`
+- `@Actor(`
+- `class PrimedActor`
+
+Flyway and migration anchors:
+- `class FlywayActor`
+- `class Flyway11Configurator`
+- `interface DBFlyway`
+- `META-INF/services/io.zerows.epoch.store.DBFlyway`
+
+App and permission bootstrap anchors:
+- `class BuildApp`
+- `class BuildPerm`
+- `class BuildMenuLoader`
+- `class BuildMenuPersister`
+- `RBAC_RESOURCE`
+- `RBAC_ROLE`
+
+OAuth2 anchors:
+- `class OAuth2Flyway`
+- `class OAuth2ServerActor`
+- `class OAuth2ClientActor`
+- `Oauth2RegisteredClient`
+
+Rule:
+
+```text
+Use text search to land on the owner quickly. Use graph rules only after the owner path is plausible.
+```
+
+## 9. Next Document
+
+When ownership depends on structure rather than one text hit, continue with:
+
+- `ai-decision-tree.md` — decision routing before deep search
+- `ai-anti-patterns.md` — avoid common mistakes
+- `graph-usage-rules.md`
+- `mcp-code-review-graph-rules.md`

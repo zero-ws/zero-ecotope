@@ -5,6 +5,7 @@ import io.r2mo.typed.cc.Cc;
 import io.r2mo.typed.exception.web._500ServerInternalException;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.annotations.Up;
 import io.zerows.epoch.spec.exception._40002Exception500UpClassInvalid;
@@ -162,21 +163,20 @@ public class ZeroLauncher<T> {
             /*
              * 🟤BOOT-011: 启动完成之后的基础回调，此时 Vertx 实例已创建
              */
-            vertx -> this.startPreAsync(vertx).compose(started -> {
-                if (!started) {
-                    before.fail("[ ZERO ] 插件启动失败！");
-                }
-                return this.startModAsync(vertx);
-            }).onSuccess(started -> {
-                if (!started) {
-                    before.fail("[ ZERO ] 扩展模块启动失败！");
-                }
-                before.complete(vertx);
-            }).otherwise(error -> {
-                log.error(error.getMessage(), error);
-                before.fail(error);
-                return null;
-            })
+            vertx -> this.startPreAsync(vertx)
+                .compose(started -> started
+                    ? Future.succeededFuture(vertx)
+                    : Future.failedFuture(new _500ServerInternalException("[ ZERO ] 插件启动失败！")))
+                .compose(container -> this.startModAsync(container)
+                    .compose(started -> started
+                        ? Future.succeededFuture(container)
+                        : Future.failedFuture(new _500ServerInternalException("[ ZERO ] 扩展模块启动失败！"))))
+                .onSuccess(before::tryComplete)
+                .onFailure(error -> {
+                    log.error("[ ZERO ] 启动链执行失败，入口 = {}", this.boot.mainClass().getName(), error);
+                    this.cleanupContainer(vertx);
+                    before.tryFail(error);
+                })
         );
 
 
@@ -192,6 +192,9 @@ public class ZeroLauncher<T> {
                 log.error(ex.getMessage(), ex);
             }
         });
+        before.future().onFailure(error ->
+            log.error("[ ZERO ] 启动流程失败，consumer 未执行，入口 = {}", this.boot.mainClass().getName(), error)
+        );
     }
 
     private boolean verifyContainer(final T container) {
@@ -227,6 +230,18 @@ public class ZeroLauncher<T> {
         final String cacheKey = container.hashCode() + "@" + ZeroLauncher.class.getName();
         final HLauncher.Pre<T> launcherMod = (HLauncher.Pre<T>) CC_MOD.pick(Mod::new, cacheKey);
         return launcherMod.waitAsync(container, null);
+    }
+
+    private void cleanupContainer(final T container) {
+        if (container instanceof final Vertx vertx) {
+            vertx.close().onComplete(closed -> {
+                if (closed.succeeded()) {
+                    log.info("[ ZERO ] 启动失败后已关闭 Vert.x 容器");
+                } else {
+                    log.error("[ ZERO ] 启动失败后关闭 Vert.x 容器异常", closed.cause());
+                }
+            });
+        }
     }
 
     private static class Pre<T> implements HLauncher.Pre<T> {

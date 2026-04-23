@@ -57,6 +57,7 @@
 | Module | Responsibility |
 |---|---|
 | `zero-plugins-weco` | Weco platform integration |
+| `zero-plugins-swagger` | Swagger/OpenAPI documentation |
 | `zero-plugins-trash` | Soft-delete / recycle-bin support |
 
 ## 2. Layer Rule

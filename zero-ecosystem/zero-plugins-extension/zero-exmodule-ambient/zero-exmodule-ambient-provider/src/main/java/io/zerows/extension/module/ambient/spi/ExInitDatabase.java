@@ -28,7 +28,7 @@ public class ExInitDatabase implements ExInit {
              */
             return HMM.<String, Database>of(KWeb.CACHE.DATABASE)
                 .put(appJson.getString(KName.KEY), database)
-                .compose(item -> Ux.future((JsonObject) item.toJson()))
+                .compose(item -> Ux.future(toDatabaseJson(item)))
                 .compose(item -> Ux.future(this.result(appJson, item)));
         };
     }
@@ -36,7 +36,28 @@ public class ExInitDatabase implements ExInit {
     @Override
     public JsonObject result(final JsonObject input,
                              final JsonObject database) {
-        log.info("[ XMOD ] ( App ) 工作流数据库初始化：{}", database.encode());
+        log.info("[ XMOD ] ( App ) 工作流数据库初始化：{}", database == null ? "null" : database.encode());
         return input;
+    }
+
+    static JsonObject toDatabaseJson(final Database database) {
+        if (null == database) {
+            return null;
+        }
+        final JsonObject json = new JsonObject();
+        if (null != database.getType()) {
+            json.put("category", database.getType().name());
+        }
+        json.put("hostname", database.getHostname());
+        json.put("instance", database.getInstance());
+        json.put("port", database.getPort());
+        json.put("url", database.getUrl());
+        json.put("username", database.getUsername());
+        json.put("password", database.getPassword());
+        json.put("driver-class-name", database.getDriverClassName());
+        if (null != database.getOptions()) {
+            json.put("options", new JsonObject(database.getOptions().encode()));
+        }
+        return json;
     }
 }

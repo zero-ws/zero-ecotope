@@ -64,7 +64,11 @@ public class CoreArk {
         }
         arkSet.forEach(ark -> {
             final HApp app = ark.app();
-            final XTenant tenant = tenantMap.getOrDefault(app.tenant(), null);
+            final String tenantId = Objects.isNull(app) ? null : app.tenant();
+            if (Ut.isNil(tenantId)) {
+                return;
+            }
+            final XTenant tenant = tenantMap.get(tenantId);
             if (Objects.nonNull(tenant)) {
                 // HLot 构造
                 final JsonObject tenantJ = Ut.serializeJson(tenant);
