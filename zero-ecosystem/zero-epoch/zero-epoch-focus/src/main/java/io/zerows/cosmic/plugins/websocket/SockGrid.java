@@ -21,13 +21,12 @@ import java.util.stream.Collectors;
  */
 public class SockGrid {
 
-    private static final Set<Remind> SOCKS = OCacheSock.entireValue();
     private static final ConcurrentMap<String, EmService.NotifyType> TOPIC_MAP = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, String> W2E = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, String> E2W = new ConcurrentHashMap<>();
 
     public synchronized static Set<Remind> wsAll() {
-        return SOCKS;
+        return OCacheSock.entireValue();
     }
 
     public synchronized static Set<Remind> wsSecure() {
@@ -47,7 +46,7 @@ public class SockGrid {
     public static <O> void wsInvoke(final String subscribe,
                                     final Object body,
                                     final Handler<AsyncResult<O>> handler) {
-        final Remind remind = SOCKS.stream()
+        final Remind remind = wsAll().stream()
             .filter(item -> subscribe.equals(item.getSubscribe()))
             .findFirst().orElse(null);
         if (Objects.isNull(remind)) {
@@ -61,7 +60,7 @@ public class SockGrid {
 
     public synchronized static ConcurrentMap<String, EmService.NotifyType> configTopic() {
         if (TOPIC_MAP.isEmpty()) {
-            SOCKS.forEach(remind -> {
+            wsAll().forEach(remind -> {
                 final String subscribe = remind.getSubscribe();
                 if (Ut.isNotNil(subscribe)) {
                     TOPIC_MAP.put(subscribe, Objects.isNull(remind.getType()) ? EmService.NotifyType.TOPIC : remind.getType());
@@ -85,7 +84,7 @@ public class SockGrid {
 
     private synchronized static void initializeAddress() {
         if (W2E.isEmpty() || E2W.isEmpty() || W2E.size() != E2W.size()) {
-            SOCKS.forEach(remind -> {
+            wsAll().forEach(remind -> {
                 final String wAddress = remind.getSubscribe();
                 final String eAddress = remind.getAddress();
                 if (Ut.isNotNil(wAddress) && Ut.isNotNil(eAddress)) {
