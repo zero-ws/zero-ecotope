@@ -1,5 +1,6 @@
 package io.zerows.extension.skeleton.spi;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
@@ -71,6 +72,8 @@ public interface ExIo {
     Future<Buffer> fsDownload(String directoryId, ConcurrentMap<String, String> fileMap);
 
     Future<Buffer> fsDownload(String directoryId, String storePath);
+
+    Future<Buffer> fsDownload(String directoryId, String storePath, FileRange range);
 
     // ----------------- Mix Interface ----------------------
 

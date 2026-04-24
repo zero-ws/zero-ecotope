@@ -1,6 +1,11 @@
 package io.zerows.extension.module.integration.component;
 
+import cn.hutool.core.io.IoUtil;
+import io.r2mo.base.io.HStore;
+import io.r2mo.base.io.modeling.FileRange;
 import io.r2mo.io.common.HFS;
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.common.Binary;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
@@ -17,6 +22,7 @@ import io.zerows.support.Ut;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
@@ -28,6 +34,7 @@ import static io.zerows.extension.module.integration.util.Is.LOG;
  */
 public class FsDefault extends FsBase {
     private static final MDIntegrationManager MANAGER = MDIntegrationManager.of();
+    private static final HStore STORE = SPI.V_STORE;
 
     @Override
     public IDirectory initTree(final JsonObject directoryJ) {
@@ -133,6 +140,24 @@ public class FsDefault extends FsBase {
         Buffer buffer = Buffer.buffer();
         if (Ut.ioExist(toPath)) {
             buffer = Ut.ioBuffer(toPath);
+        }
+        return Ux.future(buffer);
+    }
+
+    @Override
+    public Future<Buffer> download(final String storePath, final FileRange range) {
+        if (Objects.isNull(range)) {
+            return this.download(storePath);
+        }
+        final String root = this.configRoot();
+        final String toPath = Ut.ioPath(root, storePath);
+        Buffer buffer = Buffer.buffer();
+        if (Ut.ioExist(toPath)) {
+            final Binary binary = STORE.inBinary(toPath, range, null);
+            if (Objects.nonNull(binary) && Objects.nonNull(binary.stream())) {
+                final byte[] bytes = IoUtil.readBytes(binary.stream());
+                buffer = Buffer.buffer(bytes);
+            }
         }
         return Ux.future(buffer);
     }

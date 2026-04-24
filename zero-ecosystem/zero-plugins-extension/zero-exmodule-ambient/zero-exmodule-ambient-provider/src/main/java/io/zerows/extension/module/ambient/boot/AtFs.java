@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.boot;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.r2mo.io.common.HFS;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
@@ -67,16 +68,25 @@ class AtFs {
     }
 
     static Future<Buffer> fileDownload(final JsonObject attachment) {
+        return fileDownload(attachment, null);
+    }
+
+    static Future<Buffer> fileDownload(final JsonObject attachment, final FileRange range) {
         final String directoryId = attachment.getString(KName.DIRECTORY_ID);
         final String filePath = attachment.getString(KName.Attachment.FILE_PATH);
         if (Ut.ioExist(filePath)) {
-            // Existing temp file here, it means that you can download faster
             return Ux.future(Ut.ioBuffer(filePath));
         }
         if (Ut.isNil(directoryId)) {
             return Ux.future(Buffer.buffer());
         } else {
             final String storePath = attachment.getString(KName.STORE_PATH);
+            if (Objects.nonNull(range)) {
+                return HPI.of(ExIo.class).waitAsync(
+                    io -> io.fsDownload(directoryId, storePath, range),
+                    Buffer::buffer
+                );
+            }
             return HPI.of(ExIo.class).waitAsync(
                 io -> io.fsDownload(directoryId, storePath),
                 Buffer::buffer

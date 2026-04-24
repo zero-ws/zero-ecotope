@@ -78,4 +78,34 @@ public interface InitStub {
      * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}>
      */
     Future<JsonObject> prerequisite(String appName);
+
+    /**
+     * 「Async」Deploy an application instance.
+     * <p>
+     * Related Interface: {@link io.zerows.extension.skeleton.spi.ExDeploy}
+     *
+     * @param request {@link io.vertx.core.json.JsonObject} The deployment request containing appId, instanceName, manifest, source.
+     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}> Deployment result.
+     */
+    Future<JsonObject> deploy(JsonObject request);
+
+    /**
+     * 「Async」Health check for a deployed application instance.
+     * <p>
+     * Related Interface: {@link io.zerows.extension.skeleton.spi.ExDeploy#healthCheck(String)}
+     *
+     * @param instanceKey {@link java.lang.String} The instance key (container name or appId).
+     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}> Health check result.
+     */
+    Future<JsonObject> healthCheck(String instanceKey);
+
+    /**
+     * 「Async」Undeploy (tear down) an application instance.
+     * <p>
+     * Related Interface: {@link io.zerows.extension.skeleton.spi.ExDeploy#undeploy(String)}
+     *
+     * @param instanceKey {@link java.lang.String} The instance key to undeploy.
+     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}> Undeploy result.
+     */
+    Future<JsonObject> undeploy(String instanceKey);
 }

@@ -1,5 +1,6 @@
 package io.zerows.extension.module.integration.component;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
@@ -67,6 +68,8 @@ public interface Fs {
     Future<Boolean> upload(ConcurrentMap<String, String> transfer);
 
     Future<Buffer> download(String storePath);
+
+    Future<Buffer> download(String storePath, FileRange range);
 
     Future<Buffer> download(Set<String> storeSet);
 

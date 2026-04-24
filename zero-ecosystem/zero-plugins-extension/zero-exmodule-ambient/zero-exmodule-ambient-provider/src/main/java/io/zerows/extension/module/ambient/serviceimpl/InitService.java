@@ -11,6 +11,7 @@ import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.module.ambient.domain.tables.daos.XAppDao;
 import io.zerows.extension.module.ambient.servicespec.AppStub;
 import io.zerows.extension.module.ambient.servicespec.InitStub;
+import io.zerows.extension.skeleton.spi.ExDeploy;
 import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.extension.skeleton.spi.ExPrerequisite;
 import io.zerows.program.Ux;
@@ -73,6 +74,36 @@ public class InitService implements InitStub {
         }
 
         return prerequisite.prepare(appName);
+    }
+
+    @Override
+    public Future<JsonObject> deploy(final JsonObject request) {
+        final ExDeploy deployer = Objects.requireNonNull(MANAGER.config()).ofDeploy();
+        if (Objects.isNull(deployer)) {
+            log.warn("{} `ExDeploy` 组件未配置：null", AtConstant.K_PREFIX);
+            return Future.failedFuture("Deploy SPI not configured in configuration.json");
+        }
+        return deployer.deploy(request);
+    }
+
+    @Override
+    public Future<JsonObject> healthCheck(final String instanceKey) {
+        final ExDeploy deployer = Objects.requireNonNull(MANAGER.config()).ofDeploy();
+        if (Objects.isNull(deployer)) {
+            log.warn("{} `ExDeploy` 组件未配置：null", AtConstant.K_PREFIX);
+            return Future.failedFuture("Deploy SPI not configured in configuration.json");
+        }
+        return deployer.healthCheck(instanceKey);
+    }
+
+    @Override
+    public Future<JsonObject> undeploy(final String instanceKey) {
+        final ExDeploy deployer = Objects.requireNonNull(MANAGER.config()).ofDeploy();
+        if (Objects.isNull(deployer)) {
+            log.warn("{} `ExDeploy` 组件未配置：null", AtConstant.K_PREFIX);
+            return Future.failedFuture("Deploy SPI not configured in configuration.json");
+        }
+        return deployer.undeploy(instanceKey);
     }
 
     @Override

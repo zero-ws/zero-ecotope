@@ -2,6 +2,7 @@
   "supportSource": true,
   "initializer": null,
   "prerequisite": null,
+  "deployer": null,
   "loader": null,
   "dataFolder": "init/oob/",
   "fileStorage": "FILE",

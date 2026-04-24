@@ -108,6 +108,25 @@ class IdcService extends AbstractIdc {
     private Future<List<SUser>> updateAsync(final JsonArray userJson) {
         final List<SUser> users = Ux.fromJson(userJson, SUser.class);
         users.forEach(user -> user.setActive(Boolean.TRUE));
-        return DB.on(SUserDao.class).updateAsync(users);
+        return Fx.combineT(users.stream()
+                .map(this::normalizePassword)
+                .toList())
+            .compose(DB.on(SUserDao.class)::updateAsync);
+    }
+
+    private Future<SUser> normalizePassword(final SUser user) {
+        return DB.on(SUserDao.class).<SUser>fetchByIdAsync(user.getId()).compose(existing -> {
+            if (Ut.isNil(user.getPassword()) || this.isLegacyPassword(user.getPassword(), existing)) {
+                user.setPassword(existing.getPassword());
+            }
+            return Ux.future(user);
+        });
+    }
+
+    private boolean isLegacyPassword(final String password, final SUser existing) {
+        return Ut.isNotNil(password)
+            && !password.startsWith("$")
+            && Ut.isNotNil(existing.getPassword())
+            && existing.getPassword().startsWith("$");
     }
 }

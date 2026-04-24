@@ -127,4 +127,19 @@ public class AppActor {
             return jq.fetchJAsync(dashboardQr);
         });
     }
+
+    @Address(Addr.Init.DEPLOY)
+    public Future<JsonObject> deploy(final JsonObject request) {
+        return this.stub.deploy(request);
+    }
+
+    @Address(Addr.Init.HEALTH_CHECK)
+    public Future<JsonObject> healthCheck(final String instanceKey) {
+        return this.stub.healthCheck(instanceKey);
+    }
+
+    @Address(Addr.Init.UNDEPLOY)
+    public Future<JsonObject> undeploy(final String instanceKey) {
+        return this.stub.undeploy(instanceKey);
+    }
 }

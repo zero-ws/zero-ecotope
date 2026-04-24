@@ -116,9 +116,7 @@ class ExcelHelper {
 
         /* dictionary for static part */
         return DataTaker.ofStatic(this.tenant).extract(dataArray, tableName)
-            /* dictionary for dynamic part */
             .compose(extracted -> DataTaker.ofDynamic(this.tenant).extract(extracted, tableName))
-            /* forbidden record filter */
             .compose(extracted -> DataTaker.ofForbidden(this.tenant).extract(extracted, tableName));
     }
 

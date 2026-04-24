@@ -8,6 +8,7 @@ import io.r2mo.typed.json.jackson.ClassSerializer;
 import io.zerows.extension.module.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.module.ambient.exception._80302Exception500InitSpecification;
 import io.zerows.extension.module.ambient.exception._80303Exception500PrerequisiteSpec;
+import io.zerows.extension.skeleton.spi.ExDeploy;
 import io.zerows.extension.skeleton.spi.ExInit;
 import io.zerows.extension.skeleton.spi.ExPrerequisite;
 import io.zerows.plugins.excel.ExcelClient;
@@ -38,6 +39,10 @@ public class AtConfig implements Serializable {
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
     private Class<?> prerequisite;
+
+    @JsonSerialize(using = ClassSerializer.class)
+    @JsonDeserialize(using = ClassDeserializer.class)
+    private Class<?> deployer;
 
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -89,5 +94,13 @@ public class AtConfig implements Serializable {
         }
         Fn.jvmKo(!Ut.isImplement(this.prerequisite, ExPrerequisite.class), _80303Exception500PrerequisiteSpec.class, this.prerequisite.getName());
         return ExPrerequisite.of(this.prerequisite);
+    }
+
+    public ExDeploy ofDeploy() {
+        if (Objects.isNull(this.deployer)) {
+            return null;
+        }
+        Fn.jvmKo(!Ut.isImplement(this.deployer, ExDeploy.class), _80303Exception500PrerequisiteSpec.class, this.deployer.getName());
+        return ExDeploy.of(this.deployer);
     }
 }

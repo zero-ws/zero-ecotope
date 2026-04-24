@@ -1,5 +1,7 @@
 package io.zerows.extension.module.ambient.serviceimpl;
 
+import io.r2mo.typed.exception.web._400BadRequestException;
+import io.r2mo.vertx.function.FnVertx;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -17,6 +19,8 @@ import io.zerows.platform.constant.VString;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
 import io.zerows.support.Ut;
+
+import java.util.Locale;
 
 public class AppService implements AppStub {
 
@@ -89,10 +93,33 @@ public class AppService implements AppStub {
 
     @Override
     public Future<JsonObject> updateBy(final String appId, final JsonObject data) {
-        return this.updateLogo(appId, data)
+        return this.ensurePublishConstraint(appId, data)
+            .compose(validated -> this.updateLogo(appId, validated))
             .compose(updated -> DB.on(XAppDao.class).updateJAsync(appId, updated)
                 /* Image field: logo */
                 .map(item -> Ut.valueToJObject(item, KName.App.LOGO)));
+    }
+
+    private Future<JsonObject> ensurePublishConstraint(final String appId, final JsonObject data) {
+        if (!Boolean.TRUE.equals(data.getBoolean(KName.ACTIVE))) {
+            return Ux.future(data);
+        }
+        final String effectiveStatus = this.resolveEffectiveStatus(data);
+        if (isPublishableStatus(effectiveStatus)) {
+            return Ux.future(data);
+        }
+        return DB.on(XAppDao.class).<XApp>fetchByIdAsync(appId)
+            .compose(current -> {
+                final String currentStatus = null == current ? null : current.getStatus();
+                if (isPublishableStatus(currentStatus)) {
+                    return Ux.future(data);
+                }
+                return FnVertx.failOut(
+                    _400BadRequestException.class,
+                    "[ Ambient ] `active=true` requires effective status in [DEPLOYED, RUNNING, APP.DEPLOYED, APP.RUNNING], actual = "
+                        + (Ut.isNil(effectiveStatus) ? currentStatus : effectiveStatus)
+                );
+            });
     }
 
     private Future<JsonObject> updateLogo(final String appId, final JsonObject data) {
@@ -111,5 +138,27 @@ public class AppService implements AppStub {
             }),
             () -> data
         );
+    }
+
+    private String resolveEffectiveStatus(final JsonObject data) {
+        String status = data.getString("effectiveStatus");
+        if (Ut.isNil(status)) {
+            status = data.getString("statusEffective");
+        }
+        if (Ut.isNil(status)) {
+            status = data.getString(KName.STATUS);
+        }
+        return status;
+    }
+
+    static boolean isPublishableStatus(final String status) {
+        if (Ut.isNil(status)) {
+            return false;
+        }
+        final String normalized = status.trim().toUpperCase(Locale.ROOT);
+        return "DEPLOYED".equals(normalized) ||
+            "RUNNING".equals(normalized) ||
+            "APP.DEPLOYED".equals(normalized) ||
+            "APP.RUNNING".equals(normalized);
     }
 }

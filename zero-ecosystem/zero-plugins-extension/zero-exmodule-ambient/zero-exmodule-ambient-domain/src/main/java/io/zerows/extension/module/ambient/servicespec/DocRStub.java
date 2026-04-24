@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.servicespec;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
@@ -29,6 +30,8 @@ public interface DocRStub {
      * Document Download
      */
     Future<Buffer> downloadDoc(String key);
+
+    Future<Buffer> downloadDoc(String key, FileRange range);
 
     Future<Buffer> downloadDoc(Set<String> keys);
 }

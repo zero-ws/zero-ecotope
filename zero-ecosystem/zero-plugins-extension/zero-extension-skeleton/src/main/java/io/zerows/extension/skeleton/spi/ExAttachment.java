@@ -1,5 +1,6 @@
 package io.zerows.extension.skeleton.spi;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
@@ -87,6 +88,8 @@ public interface ExAttachment {
     Future<Buffer> downloadAsync(Set<String> keys);
 
     Future<Buffer> downloadAsync(String key);
+
+    Future<Buffer> downloadAsync(String key, FileRange range);
 
     // ----------------- Remove Condition ----------------------
 }

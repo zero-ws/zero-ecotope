@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.serviceimpl;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
@@ -104,6 +105,11 @@ public class DocReader implements DocRStub {
     @Override
     public Future<Buffer> downloadDoc(final String key) {
         return this.attachment.downloadAsync(key);
+    }
+
+    @Override
+    public Future<Buffer> downloadDoc(final String key, final FileRange range) {
+        return this.attachment.downloadAsync(key, range);
     }
 
     @Override

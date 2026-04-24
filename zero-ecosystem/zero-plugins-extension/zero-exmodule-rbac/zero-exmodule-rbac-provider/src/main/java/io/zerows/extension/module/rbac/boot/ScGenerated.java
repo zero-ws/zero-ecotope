@@ -42,12 +42,15 @@ class ScGenerated {
         if (Ut.isNil(valuePassword)) {
             return valuePassword(DEFAULT_PASSWORD);
         }
-        return valuePassword;
+        return valuePassword(valuePassword);
     }
 
     static String valuePassword(final String password) {
         if (Ut.isNil(password)) {
             return null;
+        }
+        if (password.startsWith("$")) {
+            return password;
         }
         return STRATEGY.hash(DEFAULT_ALG, null, null, password);
     }
@@ -81,9 +84,9 @@ class ScGenerated {
         users.forEach(user -> {
             user.setId(UUID.randomUUID().toString());
             user.setActive(Boolean.TRUE);
-            /* 12345678 */
-            final String initPwd = valuePassword();
-            user.setPassword(initPwd);
+            if (Ut.isNil(user.getPassword())) {
+                user.setPassword(valuePassword());
+            }
             user.setSigma(sigma);
             if (Objects.isNull(user.getLanguage())) {
                 user.setLanguage(KWeb.ARGS.V_LANGUAGE);

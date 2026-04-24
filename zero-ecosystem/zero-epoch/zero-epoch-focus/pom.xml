@@ -30,5 +30,21 @@
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-typed-vertx</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>r2mo-io-local</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

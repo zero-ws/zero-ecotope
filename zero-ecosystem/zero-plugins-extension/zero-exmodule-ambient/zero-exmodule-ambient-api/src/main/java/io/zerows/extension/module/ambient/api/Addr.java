@@ -40,11 +40,27 @@ interface Addr {
         String SOURCE = Prefix._EVENT + "X-SOURCE";
 
         String NOTICE = Prefix._EVENT + "X-NOTICE";
+
+        String DEPLOY = Prefix._EVENT + "X-DEPLOY";
+
+        String HEALTH_CHECK = Prefix._EVENT + "X-HEALTH-CHECK";
+
+        String UNDEPLOY = Prefix._EVENT + "X-UNDEPLOY";
     }
 
     interface File {
 
         String UPLOAD = Prefix._EVENT + "X-UPLOAD";
+
+        String UPLOAD_SESSION_INIT = Prefix._EVENT + "X-UPLOAD/SESSION/INIT";
+
+        String UPLOAD_SESSION_STATUS = Prefix._EVENT + "X-UPLOAD/SESSION/STATUS";
+
+        String UPLOAD_SESSION_CHUNK = Prefix._EVENT + "X-UPLOAD/SESSION/CHUNK";
+
+        String UPLOAD_SESSION_COMPLETE = Prefix._EVENT + "X-UPLOAD/SESSION/COMPLETE";
+
+        String UPLOAD_SESSION_CANCEL = Prefix._EVENT + "X-UPLOAD/SESSION/CANCEL";
 
         String UPLOAD_CREATION = Prefix._EVENT + "X-ATTACHMENT/UPLOAD-CREATION";
 

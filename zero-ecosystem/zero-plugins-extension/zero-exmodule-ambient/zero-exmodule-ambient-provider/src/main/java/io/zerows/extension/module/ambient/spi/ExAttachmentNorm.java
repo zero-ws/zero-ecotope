@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.spi;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
@@ -20,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
@@ -106,6 +108,19 @@ public class ExAttachmentNorm implements ExAttachment {
         });
     }
 
+    public Future<JsonArray> uploadCompletedAsync(final JsonArray data) {
+        if (Ut.isNil(data)) {
+            return Ux.futureA();
+        }
+        final JsonObject params = this.uploadParams(data);
+        return At.fileDir(data, params).compose(normalized -> {
+            Ut.valueToString(normalized, KName.METADATA);
+            final List<XAttachment> attachments = Ux.fromJson(normalized, XAttachment.class);
+            return DB.on(XAttachmentDao.class).insertJAsync(attachments)
+                .compose(this::outAsync);
+        });
+    }
+
     @Override
     public Future<JsonArray> updateAsync(final JsonArray attachmentJ, final boolean active) {
         Ut.valueToString(attachmentJ, KName.METADATA);
@@ -152,12 +167,11 @@ public class ExAttachmentNorm implements ExAttachment {
 
     @Override
     public Future<Buffer> downloadAsync(final String key) {
-        /*
-         * 此处使用双条件，key 只会有两种格式
-         * 1）主键，KEY = key
-         * 2）文件唯一键，FILE_KEY = key
-         * 所以使用双条件查询以保证附件下载的完备性，此处依赖 UUID 的判断条件
-         */
+        return this.downloadAsync(key, null);
+    }
+
+    @Override
+    public Future<Buffer> downloadAsync(final String key, final FileRange range) {
         final JsonObject condition = new JsonObject();
         if (Ut.isUUID(key)) {
             condition.put(KName.KEY, key);
@@ -166,9 +180,12 @@ public class ExAttachmentNorm implements ExAttachment {
         }
         log.info("[ XMOD ] ( File ) 下载条件：{}", condition);
         return DB.on(XAttachmentDao.class).fetchJOneAsync(condition)
-
-            // ExIo -> Call ExIo to impact actual file system ( Store )
-            .compose(At::fileDownload);
+            .compose(attachment -> {
+                if (Objects.nonNull(range)) {
+                    return At.fileDownload(attachment, range);
+                }
+                return At.fileDownload(attachment);
+            });
     }
 
     // ----------------- Private Method Interface ----------------------

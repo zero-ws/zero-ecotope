@@ -1,5 +1,6 @@
 package io.zerows.extension.module.ambient.boot;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.r2mo.typed.cc.Cc;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
@@ -65,6 +66,10 @@ public class At {
 
     public static Future<Buffer> fileDownload(final JsonObject attachment) {
         return AtFs.fileDownload(attachment);
+    }
+
+    public static Future<Buffer> fileDownload(final JsonObject attachment, final FileRange range) {
+        return AtFs.fileDownload(attachment, range);
     }
 
     public static Future<JsonArray> fileUpload(final JsonArray attachment) {

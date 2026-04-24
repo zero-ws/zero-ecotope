@@ -1,5 +1,6 @@
 package io.zerows.extension.module.integration.spi;
 
+import io.r2mo.base.io.modeling.FileRange;
 import io.r2mo.typed.common.Kv;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
@@ -126,6 +127,11 @@ public class ExIoPath implements ExIo {
     @Override
     public Future<Buffer> fsDownload(final String directoryId, final String storePath) {
         return Is.fsComponent(directoryId).compose(fs -> fs.download(storePath));
+    }
+
+    @Override
+    public Future<Buffer> fsDownload(final String directoryId, final String storePath, final FileRange range) {
+        return Is.fsComponent(directoryId).compose(fs -> fs.download(storePath, range));
     }
 
     // ----------------- Mix Interface ----------------------
