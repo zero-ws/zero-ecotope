@@ -3,6 +3,7 @@ package io.zerows.plugins.security.service;
 import cn.hutool.captcha.generator.CodeGenerator;
 import cn.hutool.captcha.generator.MathGenerator;
 import cn.hutool.captcha.generator.RandomGenerator;
+import cn.hutool.core.util.StrUtil;
 import io.r2mo.typed.cc.Cc;
 import io.zerows.plugins.security.metadata.YmSecurityCaptcha;
 
@@ -47,7 +48,8 @@ public class CaptchaConfig {
             }
             if ("RANDOM".equalsIgnoreCase(codeType)) {
                 // 随机字符串验证码
-                return new RandomGenerator(codeLength);
+                final String base = this.captchaConfig.getCode().getBase();
+                return StrUtil.isBlank(base) ? new RandomGenerator(codeLength) : new RandomGenerator(base, codeLength);
             }
             throw new IllegalArgumentException("[ XMOD ] ( RBAC ) 非法的验证码类型配置：" + codeType);
         });

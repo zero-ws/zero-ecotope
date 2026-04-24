@@ -13,6 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -213,8 +217,10 @@ class BuildMenuLoader {
      * 3. 查不到才执行纯添加流程（yml id → instance.yml 映射 → 生成新 UUID）
      */
     private Future<XApp> loadAppFromUri(final URI uri) {
+        FileSystem fileSystem = null;
         try {
-            final Path path = Paths.get(uri);
+            fileSystem = this.openFileSystem(uri);
+            final Path path = fileSystem == null ? Paths.get(uri) : fileSystem.provider().getPath(uri);
             final String fileName = path.getFileName().toString();
 
             if (!fileName.endsWith(".yml")) {
@@ -225,7 +231,10 @@ class BuildMenuLoader {
             final String dirName = this.extractDirNameFromAppUri(uri);
 
             // 加载 YAML 文件
-            final JsonObject data = Ut.ioYaml(path.toString());
+            final JsonObject data;
+            try (final InputStream in = Files.newInputStream(path)) {
+                data = Ut.ioYaml(in);
+            }
             if (data == null || !data.containsKey("data")) {
                 log.warn("[ INST ] 应用文件格式错误: {}", path);
                 return Future.succeededFuture(null);
@@ -307,6 +316,31 @@ class BuildMenuLoader {
         } catch (final Exception e) {
             log.error("[ INST ] 加载应用失败", e);
             return Future.failedFuture(e);
+        } finally {
+            this.closeFileSystem(fileSystem);
+        }
+    }
+
+    private FileSystem openFileSystem(final URI uri) throws Exception {
+        if (!"jar".equals(uri.getScheme())) {
+            return null;
+        }
+        try {
+            Paths.get(uri);
+            return null;
+        } catch (final FileSystemNotFoundException ignored) {
+            return FileSystems.newFileSystem(uri, new HashMap<>());
+        }
+    }
+
+    private void closeFileSystem(final FileSystem fileSystem) {
+        if (fileSystem == null) {
+            return;
+        }
+        try {
+            fileSystem.close();
+        } catch (final Exception e) {
+            log.warn("[ INST ] 关闭 JAR 文件系统失败", e);
         }
     }
 

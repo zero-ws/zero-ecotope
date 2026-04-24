@@ -23,6 +23,7 @@ import java.time.Duration;
  *         code:
  *           type: RANDOM           # 验证码字符串类型 MATH-算术 | RANDOM-随机字符
  *           length: 5              # 验证码字符串长度，type = 算术时表示运算位数
+ *           base: 23456789ABCDEFGHJKMNPQRSTUVWXYZ # RANDOM 字符池，默认排除 0/O/1/I/L 等易混淆字符
  *         font:
  *           name: PingFang SC      # 字体名称
  *           weight: 1              # 字体样式：0-正常 | 1-粗体 | 2-斜体 | 3-粗斜体
@@ -76,6 +77,10 @@ public class YmSecurityCaptcha implements Serializable {
          * 验证码字符串长度，type = 算术时表示运算位数
          */
         private int length = 5;
+        /**
+         * 随机验证码字符池，默认排除 0/O/1/I/L 等易混淆字符。
+         */
+        private String base = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
     }
 
     @Data

@@ -1,7 +1,11 @@
 package io.zerows.extension.module.ambient.boot;
 
+import cn.hutool.core.io.IoUtil;
+import io.r2mo.base.io.HStore;
 import io.r2mo.base.io.modeling.FileRange;
 import io.r2mo.io.common.HFS;
+import io.r2mo.spi.SPI;
+import io.r2mo.typed.common.Binary;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
@@ -74,12 +78,7 @@ class AtFs {
     static Future<Buffer> fileDownload(final JsonObject attachment, final FileRange range) {
         final String directoryId = attachment.getString(KName.DIRECTORY_ID);
         final String filePath = attachment.getString(KName.Attachment.FILE_PATH);
-        if (Ut.ioExist(filePath)) {
-            return Ux.future(Ut.ioBuffer(filePath));
-        }
-        if (Ut.isNil(directoryId)) {
-            return Ux.future(Buffer.buffer());
-        } else {
+        if (Ut.isNotNil(directoryId)) {
             final String storePath = attachment.getString(KName.STORE_PATH);
             if (Objects.nonNull(range)) {
                 return HPI.of(ExIo.class).waitAsync(
@@ -92,6 +91,16 @@ class AtFs {
                 Buffer::buffer
             );
         }
+        if (Ut.isNil(filePath)) {
+            return Ux.future(Buffer.buffer());
+        }
+        // TODO: 当前为历史本地文件兼容路径，后续统一迁移到 HFS/HStore，避免 Ut.ioXxx 与存储抽象重复。
+        final HStore store = SPI.V_STORE;
+        final Binary binary = Objects.nonNull(range) ? store.inBinary(filePath, range, null) : store.inBinary(filePath);
+        if (Objects.nonNull(binary) && Objects.nonNull(binary.stream())) {
+            return Ux.future(Buffer.buffer(IoUtil.readBytes(binary.stream())));
+        }
+        return Ux.future(Buffer.buffer());
     }
 
     /*

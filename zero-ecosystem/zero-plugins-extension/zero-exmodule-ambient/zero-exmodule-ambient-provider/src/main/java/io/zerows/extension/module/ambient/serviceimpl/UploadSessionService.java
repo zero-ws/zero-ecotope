@@ -18,14 +18,18 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.epoch.constant.KName;
 import io.zerows.epoch.metadata.XHeader;
+import io.zerows.extension.module.ambient.boot.At;
 import io.zerows.extension.module.ambient.boot.AtConfig;
 import io.zerows.extension.module.ambient.boot.MDAmbientManager;
 import io.zerows.extension.module.ambient.common.AtConstant;
+import io.zerows.extension.module.ambient.domain.tables.daos.XAttachmentDao;
+import io.zerows.extension.module.ambient.domain.tables.pojos.XAttachment;
 import io.zerows.extension.module.ambient.servicespec.UploadStub;
 import io.zerows.platform.constant.VString;
 import io.zerows.plugins.cache.HMM;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
+import io.zerows.epoch.store.jooq.DB;
 
 import java.io.ByteArrayInputStream;
 import java.nio.file.Files;
@@ -327,13 +331,21 @@ public class UploadSessionService implements UploadStub {
 
     private static class UploadAttachmentBridge {
         Future<JsonObject> createAttachment(final JsonObject context) {
+            final JsonObject document = this.buildDraft(context);
+            final JsonArray documents = new JsonArray().add(document);
+            final JsonObject params = this.buildDirectoryParams(context);
+            return At.fileDir(documents, params)
+                .compose(At::fileUpload)
+                .compose(stored -> this.persistCompleted(stored.getJsonObject(0)));
+        }
+
+        private JsonObject buildDraft(final JsonObject context) {
             final String fileName = context.getString(META_FILE_NAME);
             final String finalPath = context.getString(META_FINAL_PATH);
             final String mime = context.getString(META_MIME, "application/octet-stream");
             final String identifier = context.getString(META_IDENTIFIER);
             final String category = context.getString(META_CATEGORY);
             final String directory = context.getString(META_DIRECTORY);
-            final JsonArray documents = new JsonArray();
             final JsonObject document = new JsonObject();
             final String fileKey = Ut.randomString(64);
             final String key = UUID.randomUUID().toString();
@@ -359,9 +371,23 @@ public class UploadSessionService implements UploadStub {
             document.put(KName.TENANT_ID, context.getString(META_TENANT_ID));
             document.put(KName.UPDATED_BY, context.getString(META_UPDATED_BY));
             document.put(KName.ACTIVE, Boolean.TRUE);
-            documents.add(document);
-            return new io.zerows.extension.module.ambient.spi.ExAttachmentNorm().uploadCompletedAsync(documents)
-                .compose(saved -> Ux.future(saved.getJsonObject(0)));
+            return document;
+        }
+
+        private JsonObject buildDirectoryParams(final JsonObject context) {
+            return new JsonObject()
+                .put(KName.SIGMA, context.getString(META_SIGMA))
+                .put(KName.DIRECTORY, context.getString(META_DIRECTORY))
+                .put(KName.UPDATED_BY, context.getString(META_UPDATED_BY))
+                .put(KName.APP_ID, context.getString(META_APP_ID));
+        }
+
+        private Future<JsonObject> persistCompleted(final JsonObject document) {
+            // TODO: complete 重试时应基于 token/context 做幂等保存，避免重复 X_ATTACHMENT。
+            Ut.valueToString(document, KName.METADATA);
+            final XAttachment attachment = Ux.fromJson(document, XAttachment.class);
+            return DB.on(XAttachmentDao.class).insertAsync(attachment)
+                .compose(saved -> Ux.future(Ux.toJson(saved)));
         }
 
         private static String stripExtension(final String fileName) {
