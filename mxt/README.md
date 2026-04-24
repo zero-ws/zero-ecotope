@@ -13,6 +13,12 @@
 | [agent-quick-start.md](agent-quick-start.md) | One-page quick start for downstream AI agents reading Zero before loading the full framework rules |
 | [mcp-integration-map.md](mcp-integration-map.md) | Topic-to-module routing map for MCP-assisted framework reading across Zero core, plugins, and exmodules |
 | [mcp-fast-retrieval-rules.md](mcp-fast-retrieval-rules.md) | Shortest-path MCP retrieval discipline for AI Agents |
+| [biological-network-overview.md](biological-network-overview.md) | Cross-repository MD-driven thinking network for AI agents across Momo, Spec, R2MO, and Zero |
+| [biological-network-node-map.md](biological-network-node-map.md) | Node taxonomy for signals, route docs, owner docs, graph probes, and proof anchors |
+| [biological-network-static-lookup.md](biological-network-static-lookup.md) | Static shortest-path routing from wording to repository owner and proof |
+| [biological-network-dynamic-lookup.md](biological-network-dynamic-lookup.md) | Dynamic graph-backed and direct deep retrieval rules for structural lookup |
+| [biological-network-cross-repo-handoff.md](biological-network-cross-repo-handoff.md) | Cross-repository handoff contract between governance, semantics, runtime, and delivery layers |
+| [biological-network-pairwise-matrix.md](biological-network-pairwise-matrix.md) | Six pairwise processing templates so any two repositories can close one reasoning chain |
 | [distillation-rules.md](distillation-rules.md) | Rules for compressing MXT documents into agent-readable anchors and decisions |
 | [purification-rules.md](purification-rules.md) | Rules for deduplicating and assigning one authoritative owner per rule |
 | [graph-noise-rules.md](graph-noise-rules.md) | Rules for filtering generated, bundled, and tooling noise from graph output |
@@ -40,6 +46,8 @@
 | [websocket-guide.md](websocket-guide.md) | WebSocket and active-push capability ownership |
 | [extension-points.md](extension-points.md) | Legacy SPI navigation page retained for stable references |
 | [extension-skeleton-guide.md](extension-skeleton-guide.md) | Dedicated owner map for `zero-extension-skeleton` and its shared SPI contracts |
+| [extension-crud-guide.md](extension-crud-guide.md) | Dedicated owner map for `zero-extension-crud` and its reusable CRUD delivery pipeline |
+| [extension-aop-guide.md](extension-aop-guide.md) | Owner map for Zero overlay AOP, CRUD AOP, and exmodule-local before/after hook layers |
 | [spi-registry-map.md](spi-registry-map.md) | Canonical SPI family map centered on `ExBoot.SPI_SET` |
 | [spi-implementation-rules.md](spi-implementation-rules.md) | SPI implementation, registration, discovery, and stability rules |
 | [exmodule-boundary.md](exmodule-boundary.md) | Exact boundary between plugin capability and business customization |
@@ -59,6 +67,11 @@
 | [exmodule-ui-guide.md](exmodule-ui-guide.md) | UI configuration center ownership |
 | [exmodule-workflow-guide.md](exmodule-workflow-guide.md) | Workflow engine business ownership |
 | [attachment-storage-integration-guide.md](attachment-storage-integration-guide.md) | Attachment upload plus storage/integration ownership |
+| [attachment-storage-configurable-storage.md](attachment-storage-configurable-storage.md) | MDC rules for Ambient/Integration upload, download, upload sessions, and configurable storage |
+| [io-utility-hfs-hstore-rules.md](io-utility-hfs-hstore-rules.md) | MDC rules for `Ut.ioXxx`, `HFS`, `HStore`, `RFS`, and Integration `Fs` selection |
+| [ambient-activity-expression-rules.md](ambient-activity-expression-rules.md) | MDC rules for Ambient activity logs, tracked-field diffs, activity rules, and expression-backed metadata |
+| [modulat-dynamic-operation-rules.md](modulat-dynamic-operation-rules.md) | MDC rules for dynamic modular operation with `B_BAG`, `B_BLOCK`, `ExModulat`, open/full config, and cache refresh |
+| [mcp-client-connection-rules.md](mcp-client-connection-rules.md) | MCP client-facing routing rules for external projects consuming Zero/R2MO framework packs |
 | [static-modeling-guide.md](static-modeling-guide.md) | Static modeling chain across CRUD, UI, and MBSE core |
 | [activity-log-guide.md](activity-log-guide.md) | Ambient-owned activity logging and activity-rule ownership |
 | [report-center-guide.md](report-center-guide.md) | Configurable report-center ownership |
@@ -96,6 +109,12 @@ Do not start with the largest file unless the task is already known to be broad.
 | If the agent needs to... | Read this first | Then continue with |
 |---|---|---|
 | decide where to look with minimum tokens | `ai-decision-tree.md` | one owner document |
+| decide which repository owns a mixed cross-stack question | `biological-network-overview.md` | `biological-network-static-lookup.md` |
+| classify signal, route node, owner node, and proof node | `biological-network-node-map.md` | matching repository owner document |
+| route broad wording across the four repositories | `biological-network-static-lookup.md` | matching repository relay document |
+| run graph-backed or direct deep retrieval across repositories | `biological-network-dynamic-lookup.md` | repository-local graph rules |
+| hand off from Momo/Spec/R2MO/Zero to the next repository cleanly | `biological-network-cross-repo-handoff.md` | next repository owner document |
+| close a task with the smallest repository pair | `biological-network-pairwise-matrix.md` | matching pair owner documents |
 | quickly decide where a problem belongs | `agent-quick-start.md` | `framework-map.md` |
 | inspect the Zero runtime layer itself | `zero-epoch-runtime-guide.md` | `framework-map.md` |
 | inspect boot wiring and launch integration | `zero-boot-wiring-guide.md` | `actor-startup-matrix.md` |
@@ -133,6 +152,8 @@ Do not start with the largest file unless the task is already known to be broad.
 | inspect OAuth2 startup dependencies | `oauth2-init-flow.md` | `flyway-loading-flow.md` |
 | decide plugin vs exmodule vs app ownership | `framework-map.md` | `exmodule-boundary.md` |
 | inspect `zero-extension-skeleton` ownership | `extension-skeleton-guide.md` | `spi-registry-map.md` |
+| inspect `zero-extension-crud` ownership | `extension-crud-guide.md` | `crud-engine-guide.md` |
+| inspect Zero AOP / before-after hook ownership | `extension-aop-guide.md` | `extension-crud-guide.md` |
 | inspect available SPI families | `spi-registry-map.md` | `spi-implementation-rules.md` |
 | inspect SPI / extension implementation hooks | `spi-implementation-rules.md` | `mcp-code-review-graph-rules.md` |
 | inspect `zero-extension-api` ownership | `extension-api-guide.md` | `exmodule-boundary.md` |
@@ -151,6 +172,11 @@ Do not start with the largest file unless the task is already known to be broad.
 | inspect UI config-center behavior | `exmodule-ui-guide.md` | `dual-side-development.md` |
 | inspect workflow-engine behavior | `exmodule-workflow-guide.md` | `backend-rbac-rules.md` |
 | inspect attachment upload plus storage integration | `attachment-storage-integration-guide.md` | `exmodule-ambient-guide.md` |
+| inspect upload/download, upload-session, or configurable storage implementation | `attachment-storage-configurable-storage.md` | `io-utility-hfs-hstore-rules.md` |
+| inspect `Ut.ioXxx`, `HFS`, `HStore`, `RFS`, or storage-provider boundaries | `io-utility-hfs-hstore-rules.md` | `../r2mo-rapid/mxt/hfs-hstore-usage.md` |
+| inspect activity logs, change history, activity rules, or expression-backed audit behavior | `ambient-activity-expression-rules.md` | `exmodule-ambient-guide.md` |
+| inspect dynamic module operation, bag/block config, or runtime modular app config | `modulat-dynamic-operation-rules.md` | `exmodule-modulat-guide.md` |
+| serve another project through MCP and route framework topics | `mcp-client-connection-rules.md` | `mcp-integration-map.md` |
 | inspect static modeling chain | `static-modeling-guide.md` | `crud-engine-guide.md` |
 | inspect ambient activity logging | `activity-log-guide.md` | `exmodule-ambient-guide.md` |
 | inspect configurable report center | `report-center-guide.md` | `exmodule-report-guide.md` |
@@ -165,7 +191,7 @@ Do not start with the largest file unless the task is already known to be broad.
 | inspect backend integration from contract to runtime | `backend-api-integration.md` | `dbe-query-rules.md` |
 | inspect frontend client integration | `frontend-client-integration.md` | `contract-source-rules.md` |
 | inspect environment-level contracts | `environment-contracts.md` | `framework-map.md` |
-| understand project-local rule interaction | `project-rule-awareness.md` | project-local MDC / `CLAUDE.md` / `AGENTS.md` |
+| understand project-local rule interaction | `project-rule-awareness.md` | project-local rule files when present plus `.r2mo/` |
 
 Default rule:
 

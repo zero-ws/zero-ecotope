@@ -1,132 +1,212 @@
 # ExModule Boundary
 
-> This document defines the most important boundary in Zero Ecotope: the boundary between **plugin capability** and **business customization**.
+> Use this file when the question is "should this live in plugin, extension, exmodule, or the current app?"
 
-## 1. Boundary Definition
+## 1. Core Boundary
 
-| Layer | What it solves | What should not live here |
+Zero Ecotope has five different ownership layers. They are not interchangeable.
+
+| Layer | Owns | Does not own |
 |---|---|---|
-| `zero-plugins-equip` | Reusable infrastructure capability | Business rules, domain models, project tables |
-| `zero-extension-skeleton` | Shared extension contracts | Concrete domain implementation |
-| `zero-extension-crud` | Reusable CRUD scaffolding | Domain-specific behavior |
-| `zero-extension-api` | External API conventions and routing base | Concrete business handling |
-| `zero-exmodule-*` | Reusable domain modules such as RBAC/Finance/Workflow | Single-project one-off customization |
-| Application layer | Project-specific business customization | Re-implementation of standard exmodule capability |
+| `zero-epoch`, `zero-boot` | runtime execution, boot assembly, request/event pipeline | business semantics, project-specific rules |
+| `zero-plugins-equip` | reusable infrastructure capability, protocol adapters, runtime integrations | domain policy, reusable business meaning |
+| `zero-extension-skeleton` | extension contracts, SPI vocabulary, shared discovery surface | module-specific implementation |
+| `zero-extension-crud`, `zero-extension-api` | reusable delivery pipeline and API-side extension conventions | one domain's service logic |
+| `zero-exmodule-*` | reusable business modules and module-owned resources | one project's private customization |
 
-## 2. Runtime Boundary Summary
+One-line rule:
 
-Use this one-line runtime split when placing code:
-- **core** (`zero-epoch`, `zero-boot`) owns runtime execution
-- **plugin** (`zero-plugins-equip`) owns reusable capability
-- **extension** (`zero-extension-skeleton`, `zero-extension-crud`, `zero-extension-api`) owns reusable contracts and scaffolding
-- **exmodule** (`zero-exmodule-*`) owns reusable domain meaning
-- **application** owns final project-specific behavior
+```text
+Plugins provide capability, extensions define and route reusable seams, exmodules carry reusable business meaning, applications finish local customization.
+```
 
-This is the shortest correct mental model for agents.
+## 2. Verified Runtime Split
 
-## 3. What Belongs in Each Place
+This repository shows the split directly in source:
 
-### Put it in `zero-plugins-equip` when it is:
-- a third-party adapter
-- protocol integration
-- infrastructure capability with no business meaning
-- reusable across unrelated domains
+- extension contracts are centralized in `zero-extension-skeleton/src/main/java/.../spi/*`
+- CRUD delivery is centralized in `zero-extension-crud` through `MDCRUDManager`, `Ix*`, `Pre*`, `Agonic*`
+- exmodules follow the repeated shape:
+  - `*-api`
+  - `*-domain`
+  - `*-provider`
+  - optional `*-ui`
+- module boot is owned by `MD*Actor` and `Extension*Source`
+
+That means ownership is structural, not just naming preference.
+
+## 3. Placement Rules
+
+### Put code in `zero-plugins-equip` when it is:
+
+- a third-party integration
+- a protocol adapter
+- storage / cache / monitor / websocket / OAuth2 capability
+- reusable with no domain meaning of its own
 
 Examples:
-- Redis integration
-- Elasticsearch integration
+
+- Redis-backed cache
+- Flyway runtime execution
+- Excel file parsing engine
 - WebSocket transport
-- LDAP or OAuth2 authentication protocol support
 
-### Put it in `zero-extension-skeleton` when it is:
-- a reusable extension contract
-- a cross-domain SPI definition
-- boot-time extension discovery logic
+### Put code in `zero-extension-skeleton` when it is:
 
-Examples:
-- `ExTenantProvision`
+- a new SPI contract
+- shared extension vocabulary
+- discovery / registry behavior needed by many modules
+- `HPI.findMany(...)`-facing contract ownership
+
+Examples verified in source:
+
+- `ExAttachment`
+- `ExModulat`
+- `ExActivity`
 - `ScPermit`
+- `ScCredential`
 - `UiForm`
+- `UiValve`
 
-### Put it in `zero-exmodule-*` when it is:
-- a reusable domain implementation
-- a domain-specific SPI implementation
-- a standard business capability used by multiple projects
+### Put code in `zero-extension-crud` when it is:
+
+- metadata-driven CRUD transport
+- reusable request preprocessing
+- reusable create / update / delete / import / view pipeline behavior
+- UCA chain behavior that multiple modules share
+
+Examples verified in source:
+
+- `MDCRUDManager`
+- `IxSetupModule`
+- `PreAudit*`, `PreFile*`, `PreExcel`
+- `AgonicADBCreate`, `AgonicADBUpdate`, `AgonicADBDelete`, `AgonicADBImport`
+- `DocExtensionActor`
+
+### Put code in `zero-extension-api` when it is:
+
+- reusable API-side convention
+- common transport-facing helper surface
+- shared extension API support, not one module's actor logic
+
+### Put code in `zero-exmodule-*` when it is:
+
+- reusable business module logic
+- domain-specific SPI implementation
+- module-owned Flyway / model / RBAC / logging / modulat resources
+- business behavior shared by more than one application
 
 Examples:
-- RBAC role/permission logic
-- workflow state rules
-- finance domain APIs
 
-### Put it in the application layer when it is:
-- unique to one project
-- tied to one customer's process
-- an override of a standard exmodule behavior for local needs
+- `zero-exmodule-rbac` authorization semantics
+- `zero-exmodule-workflow` workflow/todo/business process coordination
+- `zero-exmodule-ambient` app registry, attachment metadata, activity history
+- `zero-exmodule-modulat` bag/block modular configuration
 
-## 4. When Business Rules Do *Not* Belong in the Plugin Layer
+### Put code in the current app when it is:
 
-Do **not** put logic in `zero-plugins-equip` if it answers any of these questions:
-- which role can access this action?
-- when should a notification be sent?
-- how should a workflow transition be validated?
-- which cache key semantics belong to a specific domain?
-- how should a project-specific import/export rule work?
+- customer-specific
+- tenant-local and not intended for reuse
+- an override of reusable exmodule behavior for one deployment
 
-These are business or domain concerns. They belong in exmodules or the application layer.
+## 4. Internal Exmodule Shape
 
-Plugin layer code should stay at the level of:
-- protocol support
-- connection and client handling
-- capability exposure
-- transport or storage adapters
-
-## 5. Common Mistakes
-
-### Mistake 1: writing business rules in a plugin
-Wrong:
-- defining business cache-key semantics inside a Redis plugin
-
-Correct:
-- define the business rule in an exmodule or app layer, then call the plugin through framework abstractions
-
-### Mistake 2: bypassing plugin abstractions
-Wrong:
-- exmodule code depending directly on a plugin implementation class
-
-Correct:
-- exmodule code uses `Fx`, `Ux`, or SPI discovery through `HPI`
-
-### Mistake 3: mutating a skeleton SPI for one exmodule
-Wrong:
-- changing `ExTenantProvision` only because one exmodule wants a custom field
-
-Correct:
-- keep the shared contract stable and handle extra semantics inside the exmodule itself
-
-### Mistake 4: re-implementing exmodule capability in the app layer
-Wrong:
-- app code rebuilding RBAC permission logic from scratch
-
-Correct:
-- reuse `zero-exmodule-rbac` and extend it where needed
-
-## 6. Internal ExModule Structure
-
-Most exmodules follow this structure:
+Most exmodules use the same four-way split:
 
 ```text
 zero-exmodule-{name}/
 ├── zero-exmodule-{name}-api/
 ├── zero-exmodule-{name}-domain/
-└── zero-exmodule-{name}-provider/
+├── zero-exmodule-{name}-provider/
+└── zero-exmodule-{name}-ui/    # optional
 ```
 
 Rules:
-- `*-api` is the outward-facing dependency surface.
-- `*-domain` contains shared domain language, models, or stubs.
-- `*-provider` contains internal implementation and SPI wiring.
-- Other modules should depend on `*-api`, not `*-provider`.
 
-## 7. One-Line Rule
+- `*-api` exposes `Actor` / `Agent` / `Addr`
+- `*-domain` owns tables, generated assets, `servicespec`, and resource truth
+- `*-provider` owns `Service`, `MD*Actor`, `Extension*Source`, SPI implementations
+- `*-ui` may own backend-fed UI resources, but not provider/service logic
 
-**Plugins provide capability. Extensions provide contracts. Exmodules provide reusable business meaning. Applications provide project-specific customization.**
+## 5. Resource Ownership Is Part Of The Module
+
+For Zero exmodules, behavior is often controlled by both Java and resources. Treat these as implementation, not decoration:
+
+- `plugins/{MID}.yml`
+- `plugins/{MID}/flyway/**`
+- `plugins/{MID}/model/**`
+- `plugins/{MID}/security/RBAC_RESOURCE/**`
+- `plugins/{MID}/security/RBAC_ROLE/**`
+- `plugins/{MID}/logging/logback-segment.xml`
+- `modulat/**`
+- `META-INF/services/*`
+
+If a task changes module behavior, inspect these before writing controller/service workarounds.
+
+## 6. AOP Boundary
+
+Zero has more than one "AOP-like" mechanism. Do not collapse them.
+
+| Mechanism | Owner |
+|---|---|
+| generic framework AOP pipeline | `zero-overlay/src/main/java/io/zerows/component/aop/*` |
+| CRUD before/after execution around standard mutations | `zero-extension-crud` |
+| module-local business before/after hooks | the matching exmodule provider |
+| modeling plugin before/after routing | `zero-exmodule-mbsecore` |
+
+Use `extension-aop-guide.md` when the task explicitly mentions AOP, before/after plugins, `Around`, `Aspect`, or module-local hook chains.
+
+## 7. Common Mistakes
+
+### Mistake 1: business rules in plugin modules
+
+Wrong:
+
+- role/resource semantics inside Redis/OAuth2/email plugins
+
+Correct:
+
+- keep protocol/storage in plugin, move business authorization/notification semantics to the exmodule
+
+### Mistake 2: inventing a new app-local seam before checking SPI
+
+Wrong:
+
+- hardcoding a custom service switch in one application
+
+Correct:
+
+- inspect `zero-extension-skeleton` SPI and existing `META-INF/services`
+
+### Mistake 3: patching one actor when the rule belongs to CRUD pipeline
+
+Wrong:
+
+- duplicating validation/pre-audit/file handling in a single actor
+
+Correct:
+
+- change `zero-extension-crud` when the behavior is standard and reusable
+
+### Mistake 4: changing skeleton contracts for one module's local need
+
+Wrong:
+
+- mutating shared SPI because one exmodule wants a private field
+
+Correct:
+
+- keep the SPI stable and encode module-specific semantics in the provider/resource layer
+
+## 8. Fast Decision Sequence
+
+1. Is the behavior generic infrastructure?
+   Then start in `zero-plugins-equip`.
+2. Is it a reusable contract or discovery surface?
+   Then start in `zero-extension-skeleton`.
+3. Is it standard CRUD delivery or metadata-driven transport?
+   Then start in `zero-extension-crud`.
+4. Is it reusable domain/business meaning?
+   Then start in the matching `zero-exmodule-*`.
+5. Is it truly local?
+   Then keep it in the current application.

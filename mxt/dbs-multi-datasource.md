@@ -39,7 +39,40 @@ Supported modes:
 
 The actor also prepares the underlying `DBContext` bridge used by higher-level database helpers and async jOOQ integration.
 
-## 5. AI Agent Rules
+## 5. Source and Resource Path
+
+Read in this order:
+
+```text
+dbs-multi-datasource.md
+-> zero-epoch-runtime-guide.md
+-> dbe-query-rules.md when query shape matters
+-> flyway-loading-flow.md when migration selection is involved
+-> exact config/source
+```
+
+High-value proof targets:
+
+- `DBSActor`
+- `DBMany`
+- `DBContext`
+- datasource-related config in `vertx.yml` or cloud config
+
+## 6. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for datasource registration and lookup
+- `zero-ecotope` + `r2mo-rapid` when the unresolved point crosses into shared DBE/jOOQ/runtime abstractions
+
+## 7. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- `DBSActor` or `DBContext` is already known
+- the unresolved point is structural spread between config loading, registration, and higher-level consumers
+
+## 8. AI Agent Rules
 
 - If a task mentions multiple databases, inspect `DBSActor` first.
 - Distinguish “default database selection” from “named database lookup”.

@@ -52,6 +52,7 @@ Never run framework graph queries without an explicit repo_root for zero-ecotope
 | RBAC and permission resources | section 10 |
 | startup or configuration wiring | section 11 |
 | exmodule blast radius | section 12 |
+| external MCP client topic routing | section 13 |
 
 ## 5. Symbol Ownership Playbook
 
@@ -172,7 +173,24 @@ Use when the change touches one exmodule and the task asks what else moves with 
 4. constrain review to the exmodule subtree plus the directly referenced shared contracts
 5. verify real callers and resource owners in source
 
-## 13. Resource-Heavy Fallback Table
+## 13. External MCP Client Routing Playbook
+
+Use when another project connects to this framework as an MCP endpoint and asks a broad framework-analysis question.
+
+1. open `mcp-client-connection-rules.md`
+2. translate business wording through `mcp-integration-map.md`
+3. pick one `.md` owner rule when available
+4. only then use graph search for exact source anchors
+5. if the topic crosses into R2MO core abstractions, continue into the matching `../r2mo-rapid/mxt/*.md` route
+
+High-value external triggers:
+
+- upload/download/storage -> `attachment-storage-configurable-storage.md`
+- activity/change/audit/EXPR -> `ambient-activity-expression-rules.md`
+- dynamic module/bag/block -> `modulat-dynamic-operation-rules.md`
+- `HFS`/`HStore`/`RFS` -> `io-utility-hfs-hstore-rules.md`
+
+## 14. Resource-Heavy Fallback Table
 
 | Resource Type | Do This After Graph Search |
 |---|---|

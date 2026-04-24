@@ -97,7 +97,10 @@ Use this file together with:
 
 | Topic | Read First | Owning Modules | Source Anchors | First MCP / Graph Hint |
 |---|---|---|---|---|
-| attachment upload and FTP-style integration | `attachment-storage-integration-guide.md` | `zero-exmodule-ambient`, `zero-exmodule-integration` | `ExAttachment`, integration provider adapters, ambient resources | search `ExAttachment`, `zero-exmodule-integration` |
+| attachment upload and FTP-style integration | `attachment-storage-configurable-storage.md` | `zero-exmodule-ambient`, `zero-exmodule-integration`, `../r2mo-rapid/r2mo-io*` | `AttachAgent`, `AttachActor`, `ExAttachmentNorm`, `AtFs`, `ExIoPath`, `FsDefault`, `HFS`, `HStore`, `RFS` | search `ExAttachment`, `AtFs`, `ExIoPath`, `HFS`, `HStore` |
+| `Ut.ioXxx`, `HFS`, `HStore`, `RFS`, configurable storage provider | `io-utility-hfs-hstore-rules.md` | `zero-exmodule-ambient`, `zero-exmodule-integration`, `../r2mo-rapid/r2mo-io`, `../r2mo-rapid/r2mo-io-local`, `../r2mo-rapid/r2mo-ams` | `Ut.ioPath`, `Ut.ioBuffer`, `HFS.of`, `HStore`, `HStoreLocal`, `RFS`, `TransferToken`, `FileRange` | cross-repo search `HFS`, `HStore`, `RFS`, `Ut.io` |
+| activity log, change log, activity rule, EXPR / expression-backed audit | `ambient-activity-expression-rules.md` | `zero-exmodule-ambient`, `zero-extension-skeleton` | `ExActivity`, `ActivityService`, `ExActivityTracker`, `SchismJ`, `AtDiffer`, `XActivityRule`, `KeEnv.daoJ`, `Ut.fromExpression` | search `Schism`, `AtDiffer`, `XActivityRule`, `ruleExpression` |
+| dynamic module operation, bag/block runtime config, modular app config | `modulat-dynamic-operation-rules.md` | `zero-exmodule-modulat`, `zero-extension-skeleton` | `ExModulat`, `ExModulatCommon`, `EquipForBase`, `EquipForData`, `EquipForOpen`, `BagArgService`, `BlockService`, `PowerApp` | search `ExModulat`, `B_BAG`, `B_BLOCK`, `PowerApp` |
 | static modeling chain | `static-modeling-guide.md` | `zero-extension-crud`, `zero-exmodule-ui`, `zero-exmodule-mbsecore` | CRUD metadata, UI form adapters, modeling metadata components | search `entity.json`, `UiForm`, `zero-exmodule-mbsecore` |
 | logging and activity rules | `activity-log-guide.md` | `zero-exmodule-ambient`, shared activity SPI owners | `ExActivity`, ambient provider classes, audit/resource trees | search `ExActivity`, `zero-exmodule-ambient` |
 | configurable report center | `report-center-guide.md` | `zero-exmodule-report` | report provider classes, dataset and join components | search `zero-exmodule-report` |
@@ -118,6 +121,9 @@ When a user starts with business words, translate them before using MCP graph to
 | permission and ACL | `RBAC_RESOURCE`, `ScPermit`, `ScSeeker`, `PERM.yml` |
 | plugin extension | `ExBoot`, `SPI_SET`, `META-INF/services` |
 | dynamic form or visibility | `UiForm`, `UiValve`, `zero-ui/src/extension/` |
+| activity log or change history | `X_ACTIVITY`, `X_ACTIVITY_CHANGE`, `ExActivity`, `Schism`, `AtDiffer` |
+| activity rule or EXPR audit rule | `X_ACTIVITY_RULE`, `ruleExpression`, `hookConfig`, `ruleConfig`, `Ut.fromExpression` |
+| dynamic module or modular operation | `B_BAG`, `B_BLOCK`, `ExModulat`, `PowerApp`, `EquipFor` |
 
 ## 8. Evidence Rule
 

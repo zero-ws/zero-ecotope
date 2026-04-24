@@ -38,7 +38,43 @@ Use `zero-version` to answer:
 - `zero-version-plugins` owns managed exposure of capability plugins such as Redis, Excel, Flyway, monitor, security, Neo4j, email, SMS, and WebSocket.
 - `zero-version-extension` owns managed exposure of `zero-extension-*` and `zero-exmodule-*`.
 
-## 5. AI Agent Rules
+## 5. Source and Resource Path
+
+Read in this order:
+
+```text
+zero-version-guide.md
+-> zero-version/pom.xml
+-> zero-version-epoch/pom.xml | zero-version-plugins/pom.xml | zero-version-extension/pom.xml | zero-version-overlay/pom.xml
+-> exact module pom.xml only after the managed-exposure question is clear
+```
+
+High-value proof targets:
+
+- parent `dependencyManagement`
+- managed module declarations in each version family
+- cross-family exposure of `zero-overlay`
+- whether a new plugin/exmodule exists in source but is absent from version POMs
+
+## 6. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for Zero-side managed dependency exposure
+- `zero-ecotope` + `rachel-momo` when the unresolved point is parent/BOM interaction or shared version-governance layering above Zero
+- `zero-ecotope` + `r2mo-rapid` only when a shared framework artifact must be proven on both runtime lines
+
+## 7. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is usually not the default entry here because version ownership is POM-first.
+
+Use direct graph retrieval only when:
+
+- a module is already known,
+- the unresolved point is which runtime or extension surfaces consume that module structurally,
+- POM/resource proof still remains primary for exposure decisions.
+
+## 8. AI Agent Rules
 
 - Verify module exposure from the version POMs before assuming a module is part of the public framework surface.
 - Do not infer dependency ownership only from directory names.

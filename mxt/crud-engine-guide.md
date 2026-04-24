@@ -1,104 +1,128 @@
 # CRUD Engine Guide
 
-> Load this file when the task is about standard Zero module interfaces, metadata-driven CRUD, or deciding whether handwritten DPA is necessary.
+> Load this file when the task is about standard Zero module interfaces, metadata-driven CRUD, or deciding whether handwritten DPA is actually necessary.
 
 ## 1. Scope
 
 This file owns:
 
 - CRUD-engine-first decision rules
-- standard CRUD transport coverage
+- metadata-driven transport coverage
 - `entity.json` as backend metadata entrypoint
-- zero-code and low-code decision boundaries
+- the boundary between standard CRUD delivery and handwritten DPA
 
 It does not own:
 
-- generic DPA boundaries
-- raw DBE syntax
-- RBAC resource semantics
+- generic SPI contract ownership
+- raw DBE syntax details
+- one exmodule's domain semantics
 
-## 2. Core Rule
+## 2. The Real Entry Layer
 
-For standard interface scenarios, choose CRUD engine first.
+The CRUD engine is not just "some generated endpoints". It is a reusable execution pipeline centered around:
 
-Do not choose handwritten DPA first unless the requirement exceeds standardized CRUD semantics.
+- `MDCRUDManager`
+- `IxSetup*`
+- `Ix*`
+- `Pre*`
+- `Agonic*`
+- `Operate*`
 
-## 3. Coverage
+That means the first question is not "which actor should I edit?"
+The first question is:
 
-The CRUD engine already covers standardized transport paths such as:
+```text
+Can the existing CRUD pipeline or module metadata already express this behavior?
+```
+
+## 3. Coverage Surface
+
+The current engine already covers standardized transport such as:
 
 - create
-- search
-- existing / missing validation
+- search/list
 - fetch by id
-- fetch by tenant scope
+- existing/missing validation
 - update by id
 - batch update
 - delete by id
 - batch delete
-- import / export
-- view and column metadata endpoints
+- import/export
+- view and column metadata
+- standard audit/file preprocessing
 
-Practical implication:
+Practical rule:
 
 ```text
-Standard data-management modules do not need handwritten transport code by default.
+Standard data-management modules should not start from handwritten DPA.
 ```
 
-## 4. Metadata Entry Point
+## 4. Metadata First
 
-For CRUD-engine modules, the main backend entrypoint is:
+For CRUD-engine modules, the main backend metadata surface is still:
 
 ```text
 plugins/{module}/model/{identifier}/entity.json
 ```
 
-It commonly defines:
+Common responsibilities:
 
-- model name
-- DAO binding
-- unique-key strategy
-- default field initialization
-- business tags and categorization
+- entity binding
+- key strategy
+- field defaults
+- metadata-driven route behavior
+- standardized CRUD module description
 
-Rule:
+If the requirement fits standard data management, inspect metadata and CRUD boot first.
 
-```text
-If the module fits CRUD shape, start from metadata before designing services.
-```
+## 5. Verified Extension-Crud Anchors
 
-## 5. Decision Order
+Confirmed source anchors:
 
-Evaluate in this order:
+- `zero-extension-crud/.../boot/MDCRUDManager.java`
+- `zero-extension-crud/.../boot/MDCRUDActor.java`
+- `zero-extension-crud/.../boot/IxSetupModule.java`
+- `zero-extension-crud/.../common/Ix.java`
+- `zero-extension-crud/.../uca/AgonicADBCreate.java`
+- `zero-extension-crud/.../uca/AgonicADBUpdate.java`
+- `zero-extension-crud/.../uca/AgonicADBDelete.java`
+- `zero-extension-crud/.../uca/AgonicADBImport.java`
+- `zero-extension-crud/.../uca/input/PreAudit*.java`
+- `zero-extension-crud/.../uca/input/PreFile*.java`
+- `zero-extension-crud/.../uca/input/PreExcel.java`
+- `zero-extension-crud/.../plugins/DocExtensionActor.java`
 
-1. Can CRUD engine cover the requirement with standard routes?
-2. Can the requirement be expressed by metadata, resources, or SPI hooks?
-3. Only then fall back to handwritten DPA.
+## 6. Decision Order
 
-## 6. Good CRUD-Engine Cases
+1. Can CRUD engine already cover the route?
+2. Can metadata or reusable preprocessors express the new rule?
+3. Can an SPI or before/after hook express it?
+4. Only then fall back to handwritten DPA.
 
-Prefer CRUD engine when the module is mainly:
+## 7. Good CRUD-Engine Cases
+
+Prefer CRUD engine when the module mainly needs:
 
 - standard single-entity CRUD
 - tenant-safe search/list/detail
-- batch update or batch delete
 - uniqueness validation
-- import/export around tabular data
-- dynamic column/view metadata delivery
-- standard default/audit preprocessing
+- standard pre-audit/default/user/file handling
+- table-like import/export
+- dynamic list/view metadata
 
-## 7. Must-Handwrite Cases
+## 8. Handwritten DPA Cases
 
 Use handwritten DPA when the requirement needs:
 
 - cross-aggregate orchestration
-- custom transactions not representable by engine hooks
-- bespoke event choreography
-- domain-specific state machines beyond resource configuration
-- imperative algorithms or external integrations as the core value
+- custom event choreography
+- non-standard long business transactions
+- imperative algorithms as the main value
+- workflow/report/ACL-style orchestration beyond CRUD metadata
 
-## 8. Agent Rules
+## 9. Common Mistakes
 
-- Do not build a custom transport layer for ordinary CRUD first.
-- Do not ignore `entity.json` when the requirement is standard data management.
-- If metadata already expresses the behavior, keep the solution metadata-driven.
+- writing one-off actors for standard CRUD routes
+- duplicating `PreAudit*`/`PreFile*` logic inside an actor
+- ignoring module metadata and hardcoding behavior
+- editing exmodule services when the reusable rule belongs in `zero-extension-crud`

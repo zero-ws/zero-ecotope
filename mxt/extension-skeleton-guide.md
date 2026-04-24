@@ -1,110 +1,127 @@
 # Zero Extension Skeleton Guide
 
-> Load this file when the task is about `zero-extension-skeleton`, shared extension contracts, SPI boot registration, or the boundary between skeleton contracts and concrete exmodule implementations.
+> Load this file when the task is about `zero-extension-skeleton`, shared SPI contracts, `ExBoot`, or deciding whether a reusable seam should be introduced at the contract layer.
 
 ## 1. Scope
 
-This file owns `zero-extension-skeleton`.
+`zero-extension-skeleton` owns the shared extension contract layer.
 
 It owns:
 
-- shared extension SPI contracts
-- `ExBoot` registration responsibility
-- `SPI_SET` as the skeleton-level SPI registry entry
-- the boundary between skeleton contracts and concrete exmodule implementations
+- SPI contracts under `.../spi/*`
+- extension boot registration through `ExBoot`
+- framework-visible SPI registry assembly through `SPI_SET`
+- shared extension vocabulary reused by exmodules and plugins
 
 It does not own:
 
-- one SPI family's detailed implementation rules
-- one exmodule's business behavior
-- generic plugin capability behavior
-
-## 2. Owning Module
-
-- `zero-plugins-extension/zero-extension-skeleton`
-
-Verified source anchors:
-
-- `zero-extension-skeleton/.../boot/ExBoot.java`
-- `zero-extension-skeleton/.../spi/`
-- `io.zerows.extension.skeleton.boot.ExBoot`
-- `io.zerows.extension.skeleton.spi.*`
-
-## 3. Responsibility Model
-
-`zero-extension-skeleton` is the contract layer between Zero core extensibility and reusable business modules.
-
-It defines:
-
-- the SPI interfaces exmodules and plugins implement
-- the shared discovery surface consumed by `HPI.findMany(...)`
-- the stable extension vocabulary used across `Ex*`, `Sc*`, and `Ui*`
-
-It should not hold:
-
-- module-specific provider logic
-- concrete business workflows
+- one exmodule's provider logic
+- module-specific resource trees
+- CRUD execution behavior
 - app-level customization
 
-One-line rule:
+## 2. Verified Anchors
 
-```text
-`zero-extension-skeleton` defines extension contracts; exmodules realize them.
-```
+Confirmed source anchors:
 
-## 4. `ExBoot` and `SPI_SET`
+- `zero-extension-skeleton/.../boot/ExBoot.java`
+- `zero-extension-skeleton/.../boot/ExID.java`
+- `zero-extension-skeleton/.../underway/PrimedActor.java`
+- `zero-extension-skeleton/.../common/KeIpc.java`
+- `zero-extension-skeleton/.../spi/ExActivity.java`
+- `zero-extension-skeleton/.../spi/ExAttachment.java`
+- `zero-extension-skeleton/.../spi/ExApp.java`
+- `zero-extension-skeleton/.../spi/ExAtom.java`
+- `zero-extension-skeleton/.../spi/ExIo.java`
+- `zero-extension-skeleton/.../spi/ExModulat.java`
+- `zero-extension-skeleton/.../spi/ExTodo.java`
+- `zero-extension-skeleton/.../spi/ScCredential.java`
+- `zero-extension-skeleton/.../spi/ScPermit.java`
+- `zero-extension-skeleton/.../spi/ScRoutine.java`
+- `zero-extension-skeleton/.../spi/ScSeeker.java`
+- `zero-extension-skeleton/.../spi/UiApeak.java`
+- `zero-extension-skeleton/.../spi/UiApeakMy.java`
+- `zero-extension-skeleton/.../spi/UiForm.java`
+- `zero-extension-skeleton/.../spi/UiValve.java`
 
-`ExBoot` is the skeleton boot entry that assembles the extension-side SPI registry.
+## 3. What `ExBoot` Really Owns
 
-Verified behavior from `ExBoot.java`:
+`ExBoot` is not business logic. It is the extension registry surface.
 
-- `SPI_SET` explicitly registers the shared SPI families
-- boot logging verifies discovered implementations through `HPI.findMany(...)`
-- module logging inspects `HMaven` implementors and collects bundle IDs
+Verified behavior:
 
-High-value registered SPI families include:
+- `SPI_SET` enumerates the shared SPI families
+- boot scans implementations through `HPI.findMany(...)`
+- extension bundles are collected through framework boot/runtime metadata
+
+Interpretation:
+
+- if a new reusable seam must be visible across modules, the contract should appear here first
+- the implementation should still live in plugin or exmodule code
+
+## 4. SPI Family Groups
+
+### Business/module-side contracts
 
 - `ExActivity`
 - `ExApp`
 - `ExAttachment`
+- `ExInit`
+- `ExLinkage`
 - `ExModulat`
 - `ExSetting`
+- `ExTodo`
 - `ExTransit`
 - `ExUser`
+
+### Security/authorization-side contracts
+
 - `ScCredential`
+- `ScConfine`
+- `ScModeling`
+- `ScOrbit`
 - `ScPermit`
 - `ScRoutine`
 - `ScSeeker`
-- `UiForm`
+
+### UI-side contracts
+
 - `UiApeak`
 - `UiApeakMy`
+- `UiAnchoret`
+- `UiForm`
 - `UiValve`
-
-Interpretation:
-
-- `SPI_SET` is not business metadata; it is the skeleton-owned registry surface
-- if a reusable SPI must be visible framework-wide, its contract belongs here first
-- the implementation still belongs in the matching plugin or exmodule
 
 ## 5. Boundary Rules
 
 Put behavior in `zero-extension-skeleton` when it is:
 
 - a reusable SPI contract
-- a shared extension-side vocabulary
-- a framework-level boot registration concern
-- required by multiple exmodules or plugins
+- shared extension vocabulary
+- framework boot/discovery logic
+- a seam required by multiple exmodules or plugins
 
 Do not put behavior here when it is:
 
-- one domain module's provider implementation
-- RBAC resource content
-- CRUD metadata behavior
-- UI/business module logic specific to one exmodule
+- module-specific service logic
+- one exmodule's rules/resources
+- CRUD engine behavior
+- AOP execution details of one pipeline
 
-## 6. AI Agent Rules
+## 6. Working Rule
 
-- Read this file first when the user names `zero-extension-skeleton` explicitly.
-- Switch to `spi-registry-map.md` when the task is about SPI family classification.
-- Switch to `spi-implementation-rules.md` when the task is about registration files or implementation mechanics.
-- Switch to a concrete exmodule guide when the question becomes business-domain specific.
+Before inventing a new hook:
+
+1. inspect existing `Ex*`, `Sc*`, `Ui*`
+2. inspect `ExBoot.SPI_SET`
+3. inspect existing `META-INF/services`
+4. only then add a new shared contract
+
+That order avoids contract sprawl.
+
+## 7. Companion Documents
+
+- `extension-crud-guide.md` for CRUD delivery hooks
+- `extension-aop-guide.md` for AOP/before-after routing
+- `spi-registry-map.md` for the canonical SPI inventory
+- `spi-implementation-rules.md` for implementation and registration mechanics

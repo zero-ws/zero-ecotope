@@ -31,3 +31,65 @@ It does not own plugin capability or exmodule business logic.
 
 - Start here for container and execution questions before dropping to one sub-module.
 - Use this file to classify whether the task belongs to runtime substrate, configuration, scheduling, storage, or shared platform contracts.
+
+## 4. Runtime Reading Paths
+
+### Container and execution flow
+
+```text
+zero-epoch-runtime-guide.md
+-> zero-epoch-cosmic or zero-epoch-execution
+-> exact source
+```
+
+### DBE or store path
+
+```text
+zero-epoch-runtime-guide.md
+-> zero-epoch-store
+-> dbe-query-rules.md if query shape matters
+-> exact source/resources
+```
+
+### Config and environment path
+
+```text
+zero-epoch-runtime-guide.md
+-> zero-epoch-setting or zero-epoch-spec-nacos
+-> config-center-local-nacos.md
+-> environment-contracts.md
+-> exact config/source
+```
+
+### Job path
+
+```text
+zero-epoch-runtime-guide.md
+-> zero-epoch-focus
+-> job-model-guide.md
+-> exact source
+```
+
+## 5. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for pure container/runtime questions
+- `zero-ecotope` + `r2mo-rapid` when the issue is really in shared DBE/IO/contracts reused by the runtime
+- `zero-ecotope` + `r2mo-spec` only when shared config/spec meaning is the unresolved point
+
+## 6. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- a sub-module, class, or runtime seam is already known
+- the unresolved point is structural spread inside `zero-epoch`
+- a single graph query is cheaper than opening multiple sub-module trees
+
+High-value targets:
+
+- `ConfigMod`
+- `DBSActor`
+- `JobExtractor`
+- `ZeroModule`
+- EventBus or execution-chain anchors

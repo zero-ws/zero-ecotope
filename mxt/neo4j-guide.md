@@ -24,7 +24,38 @@ This file owns:
 Neo4j support belongs to the capability plugin layer.
 It provides framework-level client integration for graph-database access and should be consumed through extension or application layers rather than reimplemented there.
 
-## 5. AI Agent Rules
+## 5. Source and Resource Path
+
+Read in this order:
+
+```text
+neo4j-guide.md
+-> plugin-layer-map.md
+-> zero-plugins-neo4j source
+-> consuming exmodule only if domain semantics are the unresolved point
+```
+
+High-value proof targets:
+
+- `Neo4jClient`
+- `Neo4jClientImpl`
+- plugin configuration and client bootstrap classes
+
+## 6. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for client/plugin ownership
+- `zero-ecotope` + `r2mo-spec` when graph/topology models need semantic confirmation
+
+## 7. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- `Neo4jClient` or one consuming graph service is already known
+- the unresolved point is whether the behavior belongs in plugin capability or exmodule business semantics
+
+## 8. AI Agent Rules
 
 - Keep graph-database capability in the plugin layer.
 - Put domain graph semantics in exmodules or apps, not in the Neo4j plugin.

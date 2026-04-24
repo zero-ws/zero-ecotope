@@ -23,6 +23,8 @@ Use this path for most tasks:
 
 Do not read README, framework map, graph playbooks, and multiple owner documents by default.
 
+If the task is explicitly cross-repository across Momo, Spec, R2MO, and Zero, start with `biological-network-overview.md` and then continue into `biological-network-static-lookup.md`.
+
 ## 3. Stop Conditions
 
 Stop retrieving when all are true:
@@ -38,6 +40,7 @@ Continue only when:
 - source evidence crosses module boundaries
 - resource semantics are required
 - the task asks for impact or flow analysis
+- the cross-repository handoff itself must be made explicit
 
 ## 4. Fast Path Table
 
@@ -70,6 +73,12 @@ Escalate in this order:
 4. `graph-usage-rules.md`
 5. one playbook section in `mcp-code-review-graph-rules.md`
 6. impact or flow graph tools
+
+Exception:
+
+```text
+When one repository/layer is already plausible and the remaining uncertainty is structural, a direct code-review-graph deep query is allowed before opening more route docs.
+```
 
 Rule:
 
@@ -106,7 +115,7 @@ Stop reading MXT when any threshold is reached:
 
 When working in a downstream project that references Zero:
 
-1. Read project-local rules first (`CLAUDE.md`, `.r2mo/`, project MDC files).
+1. Read project-local rules first (`CLAUDE.md` / `AGENTS.md` / `CODEX.md` when present, `.r2mo/`, project rule files).
 2. Use `ai-decision-tree.md` as the only MXT entry point.
 3. Load at most one owner document per framework concern.
 4. Verify with direct source reads, not graph traversal.

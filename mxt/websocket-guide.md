@@ -21,7 +21,38 @@ It is the framework owner for reusable active-push transport capability.
 
 Business subscription rules or domain event semantics belong above this layer.
 
-## 4. AI Agent Rules
+## 4. Source and Resource Path
+
+Read in this order:
+
+```text
+websocket-guide.md
+-> plugin-layer-map.md
+-> zero-plugins-websocket source
+-> consuming exmodule or app only if domain push semantics are unresolved
+```
+
+High-value proof targets:
+
+- WebSocket plugin bootstrap classes
+- active-push transport adapters
+- plugin configuration resources
+
+## 5. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for transport capability ownership
+- `zero-ecotope` + `r2mo-rapid` only when shared delivery/provider split must also be compared
+
+## 6. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- one socket or push symbol is already known
+- the unresolved point is plugin transport ownership versus domain push policy
+
+## 7. AI Agent Rules
 
 - Keep transport integration in the plugin.
 - Keep domain push policy in exmodules or apps.

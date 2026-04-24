@@ -52,7 +52,40 @@ The cache family is split into:
 
 This layer owns connection management, backend registration, and shared cache capability exposure.
 
-## 5. AI Agent Rules
+## 6. Source and Resource Path
+
+Read in this order:
+
+```text
+cache-redis-guide.md
+-> plugin-layer-map.md
+-> zero-plugins-cache source
+-> concrete backend source such as caffeine/ehcache/redis
+```
+
+High-value proof targets:
+
+- `RedisActor`
+- `RedisAddOn`
+- `RedisProvider`
+- cache SPI/provider classes
+- backend configuration resources
+
+## 7. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for cache/backend capability ownership
+- `zero-ecotope` + `r2mo-rapid` when cache or Redis behavior must be compared with shared Spring-side provider selection
+
+## 8. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- one cache or Redis symbol is already known
+- the unresolved point is structural spread between abstract cache SPI, backend registration, and Redis standalone startup
+
+## 9. AI Agent Rules
 
 - Put provider behavior here only when it is backend capability.
 - Keep domain cache semantics in exmodules or apps.

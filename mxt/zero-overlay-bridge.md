@@ -36,7 +36,46 @@ It exposes shared platform contracts used by:
 
 It should be read as a reusable contract layer between Zero runtime internals and upper consumers, including integration with `r2mo-rapid`.
 
-## 5. AI Agent Rules
+## 5. Source and Resource Path
+
+Read in this order:
+
+```text
+zero-overlay-bridge.md
+-> zero-overlay source for shared constants/utilities/enums
+-> zero-epoch-setting only if boot-side bridge consumption is unresolved
+-> zero-version-overlay only if managed dependency exposure is the question
+-> r2mo-rapid only when a real cross-runtime bridge seam must be compared
+```
+
+High-value proof targets:
+
+- `EnvironmentVariable`
+- `EmService`
+- `VName`
+- `io.zerows.component.aop.*`
+- `io.zerows.spi.*`
+- `io.zerows.support.base.*`
+
+## 6. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for Zero-side bridge contracts
+- `zero-ecotope` + `r2mo-rapid` when the unresolved point is a shared constant, enum, or bridge-facing contract consumed by Spring-side framework code
+- `zero-ecotope` + `rachel-momo` only when dependency exposure of the bridge layer is the real issue
+
+Do not escalate past one pair unless the first pair cannot prove ownership.
+
+## 7. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- one bridge symbol is already known,
+- the unresolved point is structural spread between overlay contracts and their runtime consumers,
+- graph output is used only to narrow the read set before source inspection.
+
+## 8. AI Agent Rules
 
 - Do not treat `zero-overlay` as an application module.
 - When a task touches shared environment names, service enums, or bridge constants, inspect `zero-overlay` before editing higher layers.

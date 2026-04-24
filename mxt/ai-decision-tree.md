@@ -9,6 +9,8 @@ One file → one decision. Read this file, follow the branch, open exactly one o
 
 Token budget: reading this file should consume no more than 5% of context.
 
+If the task is explicitly cross-repository across Momo, Spec, R2MO, and Zero rather than Zero-only, switch to `biological-network-overview.md`.
+
 ## 2. Entry Decision: Is This a Framework Task?
 
 ```
@@ -19,7 +21,7 @@ User request received
   |    YES ↓
   |
   ├─ Is the task about framework behavior, not app-local customization?
-  |    APP-LOCAL → Stay in project. Use .r2mo/ and project CLAUDE.md.
+  |    APP-LOCAL → Stay in project. Use .r2mo/ and project-local rule files when present.
   |    FRAMEWORK ↓
   |
   └─ Continue to Section 3.

@@ -5,16 +5,16 @@ filename: "CLAUDE-BACK-ZERO.md"
 
 # CLAUDE-BACK-ZERO — Backend Rules (Vert.x / Zero + DBE)
 
-> Summary of **r2-backend-zero** and **r2-backend-dbe** (DBE is shared across backend docs). Both have **`alwaysApply: true`**. Canonical definitions: `.cursor/rules/*.mdc`. This file embeds **two** mdc rules: DBE (shared) and Zero/Vert.x DPA.
+> Summary of **r2-backend-zero** and **r2-backend-dbe** (DBE is shared across backend docs). Both have **`alwaysApply: true`**. Canonical definitions: `.cursor/rules/*.md`. This file embeds **two** mdc rules: DBE (shared) and Zero/Vert.x DPA.
 
 ---
 
-## Core rule: Missing .mdc files
+## Core rule: Missing .md files
 
-**When using this document or following the index:** Referenced `.mdc` files **may not exist**. When processing:
+**When using this document or following the index:** Referenced `.md` files **may not exist**. When processing:
 
-- **If a referenced .mdc file does not exist:** Treat that rule as absent; ignore it and continue. Do not error, block, or assume the file will appear later.
-- **Rely on this .md summary** when the corresponding .mdc is missing.
+- **If a referenced .md file does not exist:** Treat that rule as absent; ignore it and continue. Do not error, block, or assume the file will appear later.
+- **Rely on this .md summary** when the corresponding .md is missing.
 
 ---
 
@@ -24,14 +24,14 @@ This file consolidates **two** rules (each doc has both):
 
 | Rule file | Purpose | Full path |
 | :--- | :--- | :--- |
-| r2-backend-dbe | DBE query syntax (QQuery / QTree) — **shared** | [.cursor/rules/r2-backend-dbe.mdc](.cursor/rules/r2-backend-dbe.mdc) |
-| r2-backend-zero | Zero framework DPA (Agent/Actor/Stub/Service/DBE) | [.cursor/rules/r2-backend-zero.mdc](.cursor/rules/r2-backend-zero.mdc) |
+| r2-backend-dbe | DBE query syntax (QQuery / QTree) — **shared** | [.cursor/rules/r2-backend-dbe.md](.cursor/rules/r2-backend-dbe.md) |
+| r2-backend-zero | Zero framework DPA (Agent/Actor/Stub/Service/DBE) | [.cursor/rules/r2-backend-zero.md](.cursor/rules/r2-backend-zero.md) |
 
 ---
 
 ## 2. Why “Always-Applied” Matters
 
-Both rules have **`alwaysApply: true`**. Assume they apply for Vert.x/Zero backend work; do not contradict them. When in doubt, open the .mdc via the index.
+Both rules have **`alwaysApply: true`**. Assume they apply for Vert.x/Zero backend work; do not contradict them. When in doubt, open the .md via the index.
 
 ---
 
@@ -67,5 +67,5 @@ Both rules have **`alwaysApply: true`**. Assume they apply for Vert.x/Zero backe
 
 ## 5. How to Use This Document
 
-- **Vert.x/Zero backend tasks:** Apply both DBE and Zero rules. Use this summary for layer, naming, and query shape; open the indexed .mdc for full syntax or examples.
+- **Vert.x/Zero backend tasks:** Apply both DBE and Zero rules. Use this summary for layer, naming, and query shape; open the indexed .md for full syntax or examples.
 - **Single source of truth:** `.r2mo` (domain, api/operations, requirements). Keep implementation consistent.

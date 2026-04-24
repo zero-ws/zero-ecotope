@@ -44,7 +44,50 @@ Nacos imports are not raw strings. They are parsed through a dedicated DSL parse
 - data ID
 - query parameters such as refresh switches and groups
 
-## 5. AI Agent Rules
+## 5. Source and Resource Path
+
+Read in this order:
+
+```text
+config-center-local-nacos.md
+-> zero-epoch-spec for config interfaces and base loaders
+-> zero-epoch-spec-nacos for provider and Nacos parsing
+-> zero-epoch-setting for local/cloud load orchestration
+-> zero-overlay only when environment-variable exposure is the unresolved point
+```
+
+High-value proof targets:
+
+- `ConfigMod`
+- `ConfigLoadBase`
+- `ConfigProvider`
+- `NacosRule`
+- `ConfigLoadCloud`
+- `ZeroSource`
+- `ZeroPower`
+- `META-INF/services/io.zerows.epoch.configuration.ConfigMod`
+- `META-INF/services/io.zerows.epoch.configuration.ConfigProvider`
+- `vertx.yml` / `vertx-boot.yml` specs
+
+## 6. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for config loading and Nacos import behavior
+- `zero-ecotope` + `r2mo-rapid` only when the unresolved point is how shared runtime or Spring-side consumption interprets the loaded config
+- `zero-ecotope` + `rachel-momo` only when the issue is actually dependency/BOM governance for Nacos-related libraries
+
+External repository dependency is optional, not the default.
+
+## 7. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- one config-loading symbol is already known,
+- the unresolved point is structural spread between spec, provider registration, and setting-side boot orchestration,
+- final proof still comes from source and resource files.
+
+## 8. AI Agent Rules
 
 - When a task mentions config center behavior, inspect `ConfigMod`, `ZeroSource`, and `NacosRule` before touching business code.
 - Treat environment variables such as `R2MO_NACOS_ADDR`, `R2MO_NS_CLOUD`, and `R2MO_NS_APP` as part of the framework contract.

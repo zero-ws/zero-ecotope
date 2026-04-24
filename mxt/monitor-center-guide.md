@@ -42,7 +42,39 @@ The monitor family provides framework-level observability capability and optiona
 
 The core monitor plugin owns startup and configuration entry, while integrations extend the exposure surface.
 
-## 5. AI Agent Rules
+## 6. Source and Resource Path
+
+Read in this order:
+
+```text
+monitor-center-guide.md
+-> plugin-layer-map.md
+-> zero-plugins-monitor source
+-> prometheus or hawtio add-on source if integration-specific
+```
+
+High-value proof targets:
+
+- `MonitorActor`
+- `YmMonitor`
+- Prometheus endpoint classes/resources
+- Hawtio integration classes/resources
+
+## 7. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for monitor capability ownership
+- `zero-ecotope` + `r2mo-rapid` only when observability or export behavior must be compared across runtime lines
+
+## 8. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- `MonitorActor` or one monitor integration symbol is already known
+- the unresolved point is structural spread between base monitor startup and add-on exposure modules
+
+## 9. AI Agent Rules
 
 - Treat monitor plugins as infrastructure capability.
 - Do not move app-specific reporting rules into monitor plugins.

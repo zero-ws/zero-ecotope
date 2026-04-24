@@ -39,7 +39,42 @@ The plugin exposes:
 - export handling
 - environment-driven Excel template and tenant config
 
-## 5. AI Agent Rules
+## 5. Source and Resource Path
+
+Read in this order:
+
+```text
+excel-import-export-guide.md
+-> plugin-layer-map.md
+-> zero-plugins-excel source
+-> exmodule-report or business module only if spreadsheet semantics are the unresolved point
+```
+
+High-value proof targets:
+
+- `ExcelActor`
+- `ExcelClient`
+- `ExcelClientImpl`
+- `ExcelImport`
+- `ExcelExport`
+- `ExcelAnalyzer`
+- `ExcelEnvConnect`
+
+## 6. Pairwise Handling
+
+Preferred pairs:
+
+- `zero-ecotope` alone for Excel plugin capability ownership
+- `zero-ecotope` + `r2mo-rapid` when the unresolved point crosses into Spring-side Excel integration or shared delivery boundaries
+
+## 7. Direct Deep Retrieval Rule
+
+Direct `code-review-graph` lookup is valid when:
+
+- one Excel symbol is already known
+- the unresolved point is structural spread between startup, DI registration, import/export flow, and consuming modules
+
+## 8. AI Agent Rules
 
 - When Excel startup fails, inspect `ExcelActor` and DI registration first.
 - When import/export shape is wrong, inspect `ExcelImport`, `ExcelExport`, and `ExcelAnalyzer`.
