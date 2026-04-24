@@ -13,8 +13,8 @@
     "sorter": true
   },
   "modelKey,房间号",
-  "xiaofeiAmount,消费金额,CURRENCY",
-  "fukuanAmount,付款金额,CURRENCY",
+  "consumptionAmount,消费金额,CURRENCY",
+  "paymentAmount,付款金额,CURRENCY",
   "balance,余额,CURRENCY",
   "amount,总金额,CURRENCY",
 

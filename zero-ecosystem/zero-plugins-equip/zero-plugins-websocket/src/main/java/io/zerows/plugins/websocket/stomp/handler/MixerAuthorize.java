@@ -13,9 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author <a href="http://www.origin-x.cn">Lang</a>
@@ -36,7 +36,7 @@ public class MixerAuthorize extends AbstractMixer {
     public <T> T mount(final StompServerHandler handler, final StompServerOptions option) {
         // Stomp Path Find
         final String stomp = option.getWebsocketPath();
-        final AtomicReference<SecurityMeta> reference = new AtomicReference<>();
+        final Set<SecurityMeta> matched = new TreeSet<>();
 
         final ConcurrentMap<String, Set<SecurityMeta>> walls = OCacheSecurity.entireWall();
         walls.forEach((path, aegisSet) -> {
@@ -46,20 +46,21 @@ public class MixerAuthorize extends AbstractMixer {
              */
             if (!aegisSet.isEmpty() && Ut.uriMatch(stomp, path)) {
                 if (LOG_FOUND.getAndSet(Boolean.FALSE)) {
-                    log.info("[ PLUG ] ( Stomp ) Zero 查找到安全配置：( stomp = {}, path = {}, size = {} )",
+                    log.info("[ PLUG ] ( Stomp ) Zero found security config: ( stomp = {}, path = {}, size = {} )",
                         stomp, path, aegisSet.size());
                 }
-                reference.set(aegisSet.iterator().next());
+                matched.addAll(aegisSet);
             }
         });
-        final SecurityMeta config = reference.get();
-        if (Objects.nonNull(config)) {
-            final AuthenticationProvider provider = this.provider.providerOfAuthentication(this.vertx, Set.of(config));
+        final Set<SecurityMeta> configSet = matched.isEmpty() ? null : Set.copyOf(matched);
+        if (Objects.nonNull(configSet)) {
+            final AuthenticationProvider provider = this.provider.providerOfAuthentication(this.vertx, configSet);
             if (LOG_PROVIDER.getAndSet(Boolean.FALSE)) {
-                log.info("[ PLUG ] ( Stomp ) 安全认证器：{}", provider.getClass());
+                log.info("[ PLUG ] ( Stomp ) security authentication provider: {}", provider.getClass());
             }
             handler.authProvider(provider);
         }
+        final SecurityMeta config = matched.isEmpty() ? null : matched.iterator().next();
         return this.finished(config);
     }
 }
