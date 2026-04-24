@@ -7,9 +7,13 @@ import io.vertx.ext.stomp.StompServer;
 import io.vertx.ext.stomp.StompServerOptions;
 import io.zerows.cortex.metadata.RunServer;
 import io.zerows.cortex.sdk.Axis;
+import io.zerows.cosmic.plugins.websocket.management.ORepositorySock;
+import io.zerows.epoch.jigsaw.NodeStore;
+import io.zerows.epoch.management.ORepository;
 import io.zerows.epoch.metadata.security.SecurityMeta;
 import io.zerows.epoch.spec.options.SockOptions;
 import io.zerows.plugins.websocket.stomp.socket.ServerWsHandler;
+import io.zerows.specification.configuration.HSetting;
 import io.zerows.specification.development.compiled.HBundle;
 import io.zerows.support.Ut;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +30,9 @@ public class AxisStomp implements Axis {
 
     @Override
     public void mount(final RunServer server, final HBundle bundle) {
+        final Vertx vertx = server.refVertx();
+        final HSetting setting = NodeStore.ofSetting(vertx);
+        ORepository.ofOr(ORepositorySock.class).whenStart(setting);
 
         // 挂载 AxisStomp 相关内容
         final SockOptions sockOptions = server.configSock();
@@ -34,7 +41,6 @@ public class AxisStomp implements Axis {
         final StompServerOptions stompOptions = new StompServerOptions(stompJ);
 
 
-        final Vertx vertx = server.refVertx();
         final StompServer stompServer = StompServer.create(vertx, stompOptions);
         // Iterator the SOCKS
         final ServerWsHandler handler = ServerWsHandler.create(vertx);

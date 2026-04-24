@@ -13,7 +13,11 @@
     "sorter": true
   },
   "modelKey,房间号",
+  "consumptionAmount,消费金额,CURRENCY",
+  "paymentAmount,付款金额,CURRENCY",
+  "balance,余额,CURRENCY",
   "amount,总金额,CURRENCY",
+
   {
     "title": "是否启用",
     "dataIndex": "active",

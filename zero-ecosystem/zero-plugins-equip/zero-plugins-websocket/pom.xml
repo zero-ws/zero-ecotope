@@ -16,6 +16,10 @@
             <artifactId>zero-epoch-cosmic</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.zerows</groupId>
+            <artifactId>zero-plugins-security</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-stomp</artifactId>
             <exclusions>

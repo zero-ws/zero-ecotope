@@ -177,11 +177,19 @@ class ExtensionGenerate {
             // 获取类的资源路径
             final String resourceName = clazz.getName().replace('.', '/') + ".class";
             final String classPath = Objects.requireNonNull(clazz.getClassLoader().getResource(resourceName)).getPath();
+            // Windows 下 URL#getPath() 可能返回 "/H:/xxx"，导致 Paths.get(...) 报错 Illegal char <:> at index 2
+            final String normalizedPath = (classPath != null && classPath.length() > 2 &&
+                classPath.charAt(0) == '/' &&
+                Character.isLetter(classPath.charAt(1)) &&
+                classPath.charAt(2) == ':') ? classPath.substring(1) : classPath;
 
             // 获取类文件所在目录
 
             // 向上查找直到找到 pom.xml
-            Path current = Paths.get(classPath).getParent();
+            Path current = null;
+            if (normalizedPath != null) {
+                current = Paths.get(normalizedPath).getParent();
+            }
             while (current != null) {
                 final File pomFile = current.resolve("pom.xml").toFile();
                 if (pomFile.exists()) {
