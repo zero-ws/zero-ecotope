@@ -19,12 +19,15 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
 
 /**
  * 应用和菜单加载器
@@ -344,6 +347,61 @@ class BuildMenuLoader {
         }
     }
 
+    private <T> T withAppDir(final URI uri, final AppDirFn<T> fn) throws Exception {
+        if (!"jar".equals(uri.getScheme())) {
+            return fn.apply(new File(uri.getPath()));
+        }
+        FileSystem fileSystem = null;
+        Path tempRoot = null;
+        try {
+            fileSystem = this.openFileSystem(uri);
+            final Path source = fileSystem == null ? Paths.get(uri) : fileSystem.provider().getPath(uri);
+            tempRoot = Files.createTempDirectory("zero-apps-");
+            final Path target = tempRoot.resolve(source.getFileName().toString());
+            this.copyTree(source, target);
+            return fn.apply(target.toFile());
+        } finally {
+            if (tempRoot != null) {
+                this.deleteTree(tempRoot);
+            }
+            this.closeFileSystem(fileSystem);
+        }
+    }
+
+    private void copyTree(final Path source, final Path target) throws Exception {
+        try (final Stream<Path> stream = Files.walk(source)) {
+            for (final Path current : stream.toList()) {
+                final Path relative = source.relativize(current);
+                final Path destination = target.resolve(relative.toString());
+                if (Files.isDirectory(current)) {
+                    Files.createDirectories(destination);
+                } else {
+                    Files.createDirectories(destination.getParent());
+                    Files.copy(current, destination, StandardCopyOption.REPLACE_EXISTING);
+                }
+            }
+        }
+    }
+
+    private void deleteTree(final Path root) {
+        try (final Stream<Path> stream = Files.walk(root)) {
+            stream.sorted(Comparator.reverseOrder()).forEach(path -> {
+                try {
+                    Files.deleteIfExists(path);
+                } catch (final Exception e) {
+                    log.debug("[ INST ] 删除临时应用目录失败: {}", path, e);
+                }
+            });
+        } catch (final Exception e) {
+            log.debug("[ INST ] 清理临时应用目录失败: {}", root, e);
+        }
+    }
+
+    @FunctionalInterface
+    private interface AppDirFn<T> {
+        T apply(File appDir) throws Exception;
+    }
+
     /**
      * 从数据库查询应用（WHERE APP_ID=? AND CODE=?）
      */
@@ -485,7 +543,10 @@ class BuildMenuLoader {
      * 例如：apps/desktop/nav → desktop
      */
     private String extractAppIdFromUri(final URI uri) {
-        final String path = uri.getPath();
+        final String path = this.uriPath(uri);
+        if (path == null) {
+            return null;
+        }
         final String[] parts = path.split("/apps/");
         if (parts.length < 2) {
             return null;
@@ -498,12 +559,31 @@ class BuildMenuLoader {
      * 例如：apps/desktop/desktop.yml → desktop
      */
     private String extractDirNameFromAppUri(final URI uri) {
-        final String path = uri.getPath();
+        final String path = this.uriPath(uri);
+        if (path == null) {
+            return null;
+        }
         final String[] parts = path.split("/apps/");
         if (parts.length < 2) {
             return null;
         }
         return this.extractLeafName(parts[1]);
+    }
+
+    private String uriPath(final URI uri) {
+        final String path = uri.getPath();
+        if (path != null) {
+            return path;
+        }
+        if (!"jar".equals(uri.getScheme())) {
+            return null;
+        }
+        final String ssp = uri.getSchemeSpecificPart();
+        final int separator = ssp == null ? -1 : ssp.indexOf("!/");
+        if (separator < 0 || separator + 1 >= ssp.length()) {
+            return null;
+        }
+        return ssp.substring(separator + 1);
     }
 
     /**
@@ -512,19 +592,19 @@ class BuildMenuLoader {
     private List<XMenu> loadMenusFromDirectory(final URI uri, final String appId) throws Exception {
         final List<XMenu> result = new ArrayList<>();
 
-        // 从 URI 获取 File 对象
-        final File appDir = new File(uri.getPath());
-        final File navDir = new File(appDir, "nav");
+        return this.withAppDir(uri, appDir -> {
+            final File navDir = new File(appDir, "nav");
 
-        if (!navDir.exists() || !navDir.isDirectory()) {
-            log.debug("[ INST ] nav 目录不存在");
+            if (!navDir.exists() || !navDir.isDirectory()) {
+                log.debug("[ INST ] nav 目录不存在");
+                return result;
+            }
+
+            // 递归加载菜单，传递 navDir 作为根目录
+            this.loadMenusRecursive(navDir, navDir, appId, null, 1, result);
+
             return result;
-        }
-
-        // 递归加载菜单，传递 navDir 作为根目录
-        this.loadMenusRecursive(navDir, navDir, appId, null, 1, result);
-
-        return result;
+        });
     }
 
     /**
@@ -740,15 +820,17 @@ class BuildMenuLoader {
      * 只收集 ID，不计算 level（因为父菜单可能还未扫描）
      */
     private void collectMenuIds(final URI uri, final String appId) throws Exception {
-        final File appDir = new File(uri.getPath());
-        final File navDir = new File(appDir, "nav");
+        this.withAppDir(uri, appDir -> {
+            final File navDir = new File(appDir, "nav");
 
-        if (!navDir.exists() || !navDir.isDirectory()) {
-            return;
-        }
+            if (!navDir.exists() || !navDir.isDirectory()) {
+                return null;
+            }
 
-        // 递归收集所有 MENU.yml 的 ID
-        this.collectMenuIdsRecursive(navDir, navDir, appId);
+            // 递归收集所有 MENU.yml 的 ID
+            this.collectMenuIdsRecursive(navDir, navDir, appId);
+            return null;
+        });
     }
 
     /**
@@ -802,15 +884,17 @@ class BuildMenuLoader {
      * 此时所有菜单 ID 已知，可以正确计算跨模块的层级关系
      */
     private void calculateMenuLevels(final URI uri, final String appId) throws Exception {
-        final File appDir = new File(uri.getPath());
-        final File navDir = new File(appDir, "nav");
+        this.withAppDir(uri, appDir -> {
+            final File navDir = new File(appDir, "nav");
 
-        if (!navDir.exists() || !navDir.isDirectory()) {
-            return;
-        }
+            if (!navDir.exists() || !navDir.isDirectory()) {
+                return null;
+            }
 
-        // 递归计算所有菜单的 level
-        this.calculateMenuLevelsRecursive(navDir, navDir, appId, null);
+            // 递归计算所有菜单的 level
+            this.calculateMenuLevelsRecursive(navDir, navDir, appId, null);
+            return null;
+        });
     }
 
     /**
