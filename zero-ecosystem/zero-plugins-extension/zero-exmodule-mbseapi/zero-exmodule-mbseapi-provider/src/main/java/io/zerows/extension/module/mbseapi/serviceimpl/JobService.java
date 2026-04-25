@@ -1,6 +1,7 @@
 package io.zerows.extension.module.mbseapi.serviceimpl;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zerows.component.qr.Ir;
 import io.zerows.epoch.constant.KName;
@@ -48,8 +49,10 @@ public class JobService implements JobStub {
                     .map(Jt::jobCode)
                     .collect(Collectors.toSet());
                 log.info("[ ZERO ] ( Job ) 任务编码：{}, 输入 Sigma：{}", codes.size(), sigma);
-                return JobKit.fetchMission(codes).compose(normalized -> {
-                    jobs.put("list", normalized);
+                return JobKit.fetchMission(codes).compose(stored -> JobKit.fetchMission().compose(runtime -> {
+                    final JsonArray normalized = JobKit.merge(stored, runtime);
+                    jobs.put(KName.LIST, normalized);
+                    jobs.put(KName.COUNT, Math.max(jobs.getLong(KName.COUNT, 0L), normalized.size()));
                     /*
                      * count group
                      * */
@@ -65,7 +68,7 @@ public class JobService implements JobStub {
                     } else {
                         return Ux.future(jobs);
                     }
-                });
+                }));
             });
     }
 

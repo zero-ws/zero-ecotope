@@ -79,6 +79,7 @@ Use this file together with:
 | extension skeleton | `extension-skeleton-guide.md` | `zero-extension-skeleton` | `ExBoot`, `SPI_SET`, `spi/`, `META-INF/services` | `semantic_search_nodes('ExBoot')` |
 | extension API | `extension-api-guide.md` | `zero-extension-api` | API-side extension contracts and routing base | search `zero-extension-api` |
 | ambient | `exmodule-ambient-guide.md` | `zero-exmodule-ambient` | `-api`, `-domain`, `-provider`, `-ui` | search `zero-exmodule-ambient` |
+| Ambient APP runtime, app package install, instance layout, `R2MO_HOME/apps/**` | `ambient-app-runtime-spec.md` | `zero-exmodule-ambient`, downstream Admin app | `AppActor`, `InitStub`, `X_APP`, `X_SOURCE`, app deploy SPI | search `AppActor`, `InitStub`, `ExDeploy`, `X_APP` |
 | ERP | `exmodule-erp-guide.md` | `zero-exmodule-erp` | `-api`, `-domain`, `-provider`, `-ui` | search `zero-exmodule-erp` |
 | finance | `exmodule-finance-guide.md` | `zero-exmodule-finance` | `-api`, `-domain`, `-provider`, `-ui` | search `zero-exmodule-finance` |
 | graphic | `exmodule-graphic-guide.md` | `zero-exmodule-graphic` | `-api`, `-domain`, `-provider`, `-ui` | search `zero-exmodule-graphic` |
@@ -124,6 +125,7 @@ When a user starts with business words, translate them before using MCP graph to
 | activity log or change history | `X_ACTIVITY`, `X_ACTIVITY_CHANGE`, `ExActivity`, `Schism`, `AtDiffer` |
 | activity rule or EXPR audit rule | `X_ACTIVITY_RULE`, `ruleExpression`, `hookConfig`, `ruleConfig`, `Ut.fromExpression` |
 | dynamic module or modular operation | `B_BAG`, `B_BLOCK`, `ExModulat`, `PowerApp`, `EquipFor` |
+| app install, instance runtime, `R2MO_HOME/apps` | `X_APP.ID`, `APP_ID`, `instanceId`, `R2MO_HOME/apps/{tenant}/{instanceId}/{appId}` |
 
 ## 8. Evidence Rule
 

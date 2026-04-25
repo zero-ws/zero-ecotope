@@ -1,8 +1,8 @@
 package io.zerows.plugins.security.service;
 
-import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.util.StrUtil;
 import io.r2mo.function.Fn;
 import io.r2mo.jaas.auth.CaptchaArgs;
@@ -23,9 +23,13 @@ import io.zerows.program.Ux;
 import io.zerows.support.Fx;
 import lombok.extern.slf4j.Slf4j;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.UUID;
 
 @Slf4j
@@ -112,12 +116,17 @@ public class CaptchaService implements CaptchaStub {
         final String captchaId = UUID.randomUUID().toString().replace("-", "");
 
         // B. 绘制图形 (耗时)
-        final LineCaptcha captcha = CaptchaUtil.createLineCaptcha(
+        final LineCaptcha captcha = new ClearLineCaptcha(
             config.getWidth(),
-            config.getHeight()
+            config.getHeight(),
+            captchaConfig,
+            Math.max(0, config.getInterfereCount())
         );
         captcha.setGenerator(captchaConfig.captchaGenerator());
         captcha.setFont(captchaConfig.captchaFont());
+        if (Objects.nonNull(config.getTextAlpha())) {
+            captcha.setTextAlpha(config.getTextAlpha());
+        }
 
         // C. 转换输出 (耗时)
         try (final ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -163,5 +172,75 @@ public class CaptchaService implements CaptchaStub {
             return Future.succeededFuture(Boolean.TRUE);
         });
 
+    }
+
+    private static class ClearLineCaptcha extends LineCaptcha {
+        private final CaptchaConfig visual;
+        private final int configuredInterfereCount;
+
+        ClearLineCaptcha(final int width, final int height, final CaptchaConfig visual, final int interfereCount) {
+            super(width, height, visual.captchaGenerator(), interfereCount);
+            this.visual = visual;
+            this.configuredInterfereCount = interfereCount;
+        }
+
+        @Override
+        public Image createImage(final String code) {
+            final BufferedImage image = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_RGB);
+            final Graphics2D g = ImgUtil.createGraphics(image, this.visual.backgroundColor());
+            try {
+                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                this.drawInterfere(g);
+                this.drawString(g, code);
+            } finally {
+                g.dispose();
+            }
+            return image;
+        }
+
+        private void drawInterfere(final Graphics2D g) {
+            if (0 >= this.configuredInterfereCount) {
+                return;
+            }
+            final Composite previous = g.getComposite();
+            final Float alpha = this.visual.interfereAlpha();
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+                Math.max(0f, Math.min(1f, alpha))));
+            final List<Color> palette = this.visual.interferePalette();
+            final ThreadLocalRandom random = ThreadLocalRandom.current();
+            for (int i = 0; i < this.configuredInterfereCount; i++) {
+                final int xs = random.nextInt(this.width);
+                final int ys = random.nextInt(this.height);
+                final int xe = Math.max(0, Math.min(this.width, xs + random.nextInt(-this.width / 3, this.width / 3 + 1)));
+                final int ye = Math.max(0, Math.min(this.height, ys + random.nextInt(-this.height / 2, this.height / 2 + 1)));
+                g.setColor(palette.isEmpty() ? this.visual.interfereColor() : palette.get(random.nextInt(palette.size())));
+                g.drawLine(xs, ys, xe, ye);
+            }
+            g.setComposite(previous);
+        }
+
+        private void drawString(final Graphics2D g, final String code) {
+            if (StrUtil.isBlank(code)) {
+                return;
+            }
+            if (Objects.nonNull(this.textAlpha)) {
+                g.setComposite(this.textAlpha);
+            }
+            g.setFont(this.font);
+            final FontMetrics metrics = g.getFontMetrics();
+            final int length = code.length();
+            final int charWidth = this.width / length;
+            final int baseline = (this.height - metrics.getHeight()) / 2 + metrics.getAscent() - 1;
+            final List<Color> palette = this.visual.textPalette();
+            final ThreadLocalRandom random = ThreadLocalRandom.current();
+            for (int i = 0; i < length; i++) {
+                final String current = String.valueOf(code.charAt(i));
+                final int textWidth = metrics.stringWidth(current);
+                final int x = i * charWidth + Math.max(2, (charWidth - textWidth) / 2);
+                final int y = baseline + random.nextInt(-1, 2);
+                g.setColor(palette.isEmpty() ? this.visual.textColor() : palette.get(random.nextInt(palette.size())));
+                g.drawString(current, x, y);
+            }
+        }
     }
 }

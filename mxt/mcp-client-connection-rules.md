@@ -36,6 +36,7 @@ An external project connecting through MCP is not asking to modify this framewor
 | upload, download, attachment, storage, FTP/SFTP storage | `attachment-storage-configurable-storage.md` | `io-utility-hfs-hstore-rules.md`, `../r2mo-rapid/mxt/hfs-hstore-usage.md` |
 | audit log, activity log, change log, activity rule, EXPR rule | `ambient-activity-expression-rules.md` | `exmodule-ambient-guide.md` |
 | dynamic module, modular operation, bag/block config, runtime app config | `modulat-dynamic-operation-rules.md` | `exmodule-modulat-guide.md` |
+| app package, app install, instance runtime, `R2MO_HOME/apps`, main app with child apps | `ambient-app-runtime-spec.md` | `app-package-spec.md`, `environment-contracts.md` |
 | `Ut.ioXxx`, `HFS`, `HStore`, `RFS`, range download | `io-utility-hfs-hstore-rules.md` | `../r2mo-rapid/mxt/hfs-hstore-usage.md` |
 
 ## Script Boundary

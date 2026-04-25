@@ -53,6 +53,7 @@
 | [exmodule-boundary.md](exmodule-boundary.md) | Exact boundary between plugin capability and business customization |
 | [extension-api-guide.md](extension-api-guide.md) | `zero-extension-api` positioning and reusable API-side extension responsibility |
 | [exmodule-ambient-guide.md](exmodule-ambient-guide.md) | Ambient reusable business ownership for app registry, activity, attachment, and init logic |
+| [ambient-app-runtime-spec.md](ambient-app-runtime-spec.md) | Ambient APP identity, instance grouping, and `R2MO_HOME/apps/{tenant}/{instanceId}/{appId}` runtime placement |
 | [exmodule-erp-guide.md](exmodule-erp-guide.md) | ERP reusable organization and employee module ownership |
 | [exmodule-finance-guide.md](exmodule-finance-guide.md) | Finance reusable processing and settlement module ownership |
 | [exmodule-graphic-guide.md](exmodule-graphic-guide.md) | Graphic engine business module ownership |
@@ -158,6 +159,7 @@ Do not start with the largest file unless the task is already known to be broad.
 | inspect SPI / extension implementation hooks | `spi-implementation-rules.md` | `mcp-code-review-graph-rules.md` |
 | inspect `zero-extension-api` ownership | `extension-api-guide.md` | `exmodule-boundary.md` |
 | inspect ambient reusable business behavior | `exmodule-ambient-guide.md` | `backend-rbac-rules.md` |
+| inspect Ambient APP runtime layout, app identity, or instance grouping | `ambient-app-runtime-spec.md` | `app-package-spec.md`, `environment-contracts.md` |
 | inspect ERP reusable business behavior | `exmodule-erp-guide.md` | `backend-dpa-guide.md` |
 | inspect finance reusable business behavior | `exmodule-finance-guide.md` | `backend-dpa-guide.md` |
 | inspect graphic reusable business behavior | `exmodule-graphic-guide.md` | `neo4j-guide.md` |
