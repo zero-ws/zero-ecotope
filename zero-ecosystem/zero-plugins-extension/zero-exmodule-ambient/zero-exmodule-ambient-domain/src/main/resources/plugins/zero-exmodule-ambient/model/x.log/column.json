@@ -17,7 +17,12 @@
     "metadata": "logAgent,记录组件"
   },
   {
-    "metadata": "logUser,记录人"
+    "metadata": "logUser,记录人,USER",
+    "$config": {
+      "uri": "/api/user/:key",
+      "field": "realname"
+    },
+    "$empty": "（系统）"
   },
   {
     "metadata": "logIp,来源IP"
