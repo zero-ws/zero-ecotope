@@ -10,6 +10,7 @@ import io.zerows.epoch.web.Envelop;
 import io.zerows.extension.module.rbac.component.acl.relation.LinkManager;
 import io.zerows.extension.module.rbac.metadata.logged.ScUser;
 import io.zerows.extension.module.rbac.servicespec.UserStub;
+import io.zerows.extension.skeleton.spi.ExLog;
 import io.zerows.extension.skeleton.spi.ExTrash;
 import io.zerows.program.Ux;
 import io.zerows.spi.HPI;
@@ -44,6 +45,7 @@ public class UserActor {
     public Future<Boolean> logout(final Envelop envelop) {
         final String token = envelop.token();
         final String habitus = envelop.habitus();
+        final String userId = envelop.userId();
         return ScUser.logout(habitus).compose(result -> {
             /*
              * Here we should do
@@ -59,8 +61,21 @@ public class UserActor {
             if (Objects.nonNull(session) && !session.isDestroyed()) {
                 session.destroy();
             }
-            return Ux.future(Boolean.TRUE);
+            return this.loggedOut(userId);
         });
+    }
+
+    private Future<Boolean> loggedOut(final String userId) {
+        final JsonObject data = new JsonObject()
+            .put("logAgent", "rbac.logout")
+            .put("logUser", userId)
+            .put("infoReadable", "用户注销：" + userId)
+            .put("infoSystem", "User logout succeeded: " + userId)
+            .put("metadata", new JsonObject().put("userId", userId));
+        return HPI.of(ExLog.class).waitAsync(
+                logger -> logger.system(data).otherwise(nil -> null)
+            )
+            .map(nil -> Boolean.TRUE);
     }
 
     @Address(Addr.User.GET)

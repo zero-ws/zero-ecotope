@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "metadata": "type,日志分类"
+  },
+  {
+    "metadata": "level,日志级别"
+  },
+  {
+    "title": "记录时间",
+    "dataIndex": "infoAt",
+    "sorter": true,
+    "$render": "DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss",
+    "$filter.type": "DATE"
+  },
+  {
+    "metadata": "logAgent,记录组件"
+  },
+  {
+    "metadata": "logUser,记录人"
+  },
+  {
+    "metadata": "logIp,来源IP"
+  },
+  {
+    "title": "日志内容",
+    "dataIndex": "infoReadable",
+    "width": 320
+  },
+  {
+    "title": "系统信息",
+    "dataIndex": "infoSystem",
+    "width": 320
+  },
+  {
+    "title": "创建时间",
+    "dataIndex": "createdAt",
+    "$render": "DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss"
+  },
+  {
+    "title": "更新时间",
+    "dataIndex": "updatedAt",
+    "$render": "DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss"
+  }
+]

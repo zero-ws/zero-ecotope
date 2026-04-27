@@ -57,7 +57,7 @@ public class XHeader implements Serializable, HJson {
             this.session = headers.get(KWeb.HEADER.X_SESSION_ID);
             this.tenantId = headers.get(KWeb.HEADER.X_TENANT_ID);
             headers.names().stream()
-                .filter(name -> name.startsWith("X-"))
+                .filter(name -> name.regionMatches(true, 0, "X-", 0, 2))
                 .forEach(name -> this.extension.put(name, headers.get(name)));
         }
     }
@@ -70,7 +70,18 @@ public class XHeader implements Serializable, HJson {
 
     @SuppressWarnings("unchecked")
     public <T> T getExtension(final String key) {
-        return (T) this.extension.getOrDefault(key, null);
+        if (Objects.isNull(key)) {
+            return null;
+        }
+        final Object value = this.extension.getOrDefault(key, null);
+        if (Objects.nonNull(value)) {
+            return (T) value;
+        }
+        return (T) this.extension.entrySet().stream()
+            .filter(entry -> key.equalsIgnoreCase(entry.getKey()))
+            .map(Map.Entry::getValue)
+            .findFirst()
+            .orElse(null);
     }
 
     @JsonAnySetter
