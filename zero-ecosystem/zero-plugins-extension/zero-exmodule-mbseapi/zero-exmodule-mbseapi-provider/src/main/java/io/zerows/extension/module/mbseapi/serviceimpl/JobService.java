@@ -50,7 +50,7 @@ public class JobService implements JobStub {
                     .collect(Collectors.toSet());
                 log.info("[ ZERO ] ( Job ) 任务编码：{}, 输入 Sigma：{}", codes.size(), sigma);
                 return JobKit.fetchMission(codes).compose(stored -> JobKit.fetchMission().compose(runtime -> {
-                    final JsonArray normalized = JobKit.merge(stored, runtime);
+                    final JsonArray normalized = JobKit.merge(stored, JobKit.filter(runtime, qr.getCriteria().toJson()));
                     jobs.put(KName.LIST, normalized);
                     jobs.put(KName.COUNT, Math.max(jobs.getLong(KName.COUNT, 0L), normalized.size()));
                     /*

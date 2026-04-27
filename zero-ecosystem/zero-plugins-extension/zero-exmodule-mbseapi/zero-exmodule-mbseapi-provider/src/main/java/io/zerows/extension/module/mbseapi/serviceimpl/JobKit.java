@@ -7,11 +7,13 @@ import io.zerows.cosmic.plugins.job.JobClient;
 import io.zerows.cosmic.plugins.job.JobClientActor;
 import io.zerows.cosmic.plugins.job.metadata.Mission;
 import io.zerows.epoch.constant.KName;
+import io.zerows.platform.constant.VString;
 import io.zerows.extension.module.mbseapi.common.JtKey;
 import io.zerows.extension.module.mbseapi.domain.tables.pojos.IService;
 import io.zerows.program.Ux;
 import io.zerows.support.Ut;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -59,6 +61,20 @@ public class JobKit {
         }
     }
 
+    static JsonArray filter(final JsonArray missions, final JsonObject criteria) {
+        if (Objects.isNull(missions) || Ut.isNil(criteria)) {
+            return Objects.isNull(missions) ? new JsonArray() : missions;
+        }
+
+        final JsonArray filtered = new JsonArray();
+        Ut.itJArray(missions).forEach(item -> {
+            if (matches(item, criteria)) {
+                filtered.add(item);
+            }
+        });
+        return filtered;
+    }
+
     static JsonArray merge(final JsonArray... arrays) {
         final JsonArray merged = new JsonArray();
         final Set<String> codes = new LinkedHashSet<>();
@@ -74,6 +90,44 @@ public class JobKit {
             });
         }
         return merged;
+    }
+
+    private static boolean matches(final JsonObject item, final JsonObject criteria) {
+        final Set<Boolean> matched = new HashSet<>();
+        Ut.<Object>itJObject(criteria, (value, fieldExpr) -> {
+            if (Ut.isNil(fieldExpr) || Objects.equals(KName.SIGMA, fieldExpr)) {
+                return;
+            }
+            if (fieldExpr.startsWith(VString.DOLLAR)) {
+                if (value instanceof final JsonObject child) {
+                    matched.add(matches(item, child));
+                }
+                return;
+            }
+            matched.add(matchesField(item, fieldExpr, value));
+        });
+        return matched.stream().allMatch(Boolean::booleanValue);
+    }
+
+    private static boolean matchesField(final JsonObject item, final String fieldExpr, final Object expected) {
+        final String[] segments = fieldExpr.split(VString.COMMA, 2);
+        final String field = segments[0];
+        if (Ut.isNil(field)) {
+            return true;
+        }
+        final Object actual = item.getValue(field);
+        if (Objects.isNull(actual)) {
+            return false;
+        }
+
+        final String operator = segments.length > 1 ? segments[1] : "=";
+        if ("i".equals(operator) && expected instanceof final JsonArray expectedArray) {
+            return expectedArray.contains(actual);
+        }
+        if ("=".equals(operator)) {
+            return Objects.equals(actual, expected);
+        }
+        return Objects.equals(actual, expected);
     }
 
     static Future<JsonObject> fetchMission(final String code) {
