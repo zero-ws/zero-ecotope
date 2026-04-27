@@ -44,7 +44,12 @@ public class ExRecord implements Serializable, HJson {
 
     // 内部调用 put(String,Object)
     public void putOr(final JsonObject data) {
-        data.fieldNames().forEach(field -> this.put(field, data.getValue(field)));
+        data.fieldNames().forEach(field -> {
+            final Object existing = this.data.get(field);
+            if (Objects.isNull(existing) || Ut.isNil(existing.toString())) {
+                this.put(field, data.getValue(field));
+            }
+        });
     }
 
     public Set<String> keySet() {
