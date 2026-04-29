@@ -59,6 +59,16 @@ public class SecurityMeta implements Serializable, Comparable<SecurityMeta>, HCo
             // 2. Compare Order
             result = Integer.compare(this.getOrder(), target.getOrder());
         }
+        if (0 == result) {
+            // 3. Compare Type
+            result = Objects.compare(this.getType(), target.getType(), String::compareTo);
+        }
+        if (0 == result) {
+            // 4. Compare Handler
+            final String currentHandler = Objects.isNull(this.getHandler()) ? null : this.getHandler().getName();
+            final String targetHandler = Objects.isNull(target.getHandler()) ? null : target.getHandler().getName();
+            result = Objects.compare(currentHandler, targetHandler, String::compareTo);
+        }
         return result;
     }
 

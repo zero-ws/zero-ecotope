@@ -671,6 +671,14 @@ public class ServerStompHandler implements ServerWsHandler {
                 this.users.put(connection.session(), ar.result());
                 this.context.runOnContext(v2 -> handler.handle(Future.succeededFuture(true)));
             } else {
+                final Throwable cause = ar.cause();
+                if (Objects.isNull(cause)) {
+                    LOGGER.warn("[ PLUG ] ( Stomp ) authentication provider failed without cause: session = {}",
+                        connection.session());
+                } else {
+                    LOGGER.warn("[ PLUG ] ( Stomp ) authentication provider failed: session = {}, cause = {}: {}",
+                        connection.session(), cause.getClass().getName(), cause.getMessage());
+                }
                 this.context.runOnContext(v2 -> handler.handle(Future.succeededFuture(false)));
             }
         };

@@ -52,7 +52,25 @@ public abstract class BackendProviderBase implements BackendProvider {
         // 已经包含了会话基本信息，所以此处可直接提取
         final String token = credentials.toHttpAuthorization().split(" ")[1];
         final HMM<String, JsonObject> mmSession = HMM.of(token);
+        this.log().info("[ PLUG ] ( Secure ) 401 cache lookup: provider = {}, session = {}, cache = {}, credential.id = {}, credential.session = {}, credential.subject = {}, credential.habitus = {}",
+            this.getClass().getName(), sessionId, mmSession.name(),
+            Ut.valueString(credentialJ, KName.ID),
+            Ut.valueString(credentialJ, KName.SESSION),
+            Ut.valueString(credentialJ, KName.SUBJECT),
+            Ut.valueString(credentialJ, KName.HABITUS));
         return mmSession.find(KWeb.SESSION.AUTHENTICATE)
+            .onSuccess(cached -> {
+                if (Ut.isNil(cached)) {
+                    this.log().warn("[ PLUG ] ( Secure ) 401 cache miss: provider = {}, session = {}, cache = {}, key = {}",
+                        this.getClass().getName(), sessionId, mmSession.name(), KWeb.SESSION.AUTHENTICATE);
+                } else {
+                    this.log().info("[ PLUG ] ( Secure ) 401 cache hit: provider = {}, session = {}, cache = {}, user.id = {}, user.session = {}, user.username = {}",
+                        this.getClass().getName(), sessionId, mmSession.name(),
+                        Ut.valueString(cached, KName.ID),
+                        Ut.valueString(cached, KName.SESSION),
+                        Ut.valueString(cached, KName.USERNAME));
+                }
+            })
             .compose(cached -> this.authenticate(authJ, cached))
             .compose(authorized -> {
                 if (Objects.isNull(authorized)) {
@@ -60,7 +78,9 @@ public abstract class BackendProviderBase implements BackendProvider {
                 } else {
                     return Future.succeededFuture(authorized);
                 }
-            });
+            })
+            .onFailure(cause -> this.log().warn("[ PLUG ] ( Secure ) backend provider failed: provider = {}, session = {}, cause = {}: {}",
+                this.getClass().getName(), sessionId, cause.getClass().getName(), cause.getMessage()));
     }
 
     protected Logger log() {
