@@ -21,21 +21,12 @@ import java.util.Set;
  */
 public class ExArborCatalog extends ExArborBase {
     @Override
-    public Future<JsonArray> generate(final JsonObject categoryJ, final JsonObject configuration) {
+    public Future<JsonArray> generate(final JsonObject category, final JsonObject configuration) {
         final JsonObject condition = Ux.whereAnd();
-        condition.put(KName.SIGMA, categoryJ.getValue(KName.SIGMA));
+        condition.put(KName.SIGMA, category.getValue(KName.SIGMA));
         final JsonObject query = configuration.getJsonObject(KName.QUERY, new JsonObject());
         condition.mergeIn(query, true);
-        return fetchCategories(condition)
-            .compose(children -> this.combineArbor(categoryJ, children, configuration));
-    }
-
-    /**
-     * Fetch child categories by condition with duplicate-name dedup,
-     * projected to JsonArray with metadata/treeConfig/runConfig fields.
-     */
-    static Future<JsonArray> fetchCategories(final JsonObject condition) {
-        return DB.on(XCategoryDao.class)
+        final Future<JsonArray> fetched = DB.on(XCategoryDao.class)
             .<XCategory>fetchAsync(condition)
             .compose(categories -> {
                 /*
@@ -45,10 +36,10 @@ public class ExArborCatalog extends ExArborBase {
                  */
                 final Set<String> names = new HashSet<>();
                 final List<XCategory> compress = new ArrayList<>();
-                categories.forEach(category -> {
-                    if (!names.contains(category.getName())) {
-                        compress.add(category);
-                        names.add(category.getName());
+                categories.forEach(cat -> {
+                    if (!names.contains(cat.getName())) {
+                        compress.add(cat);
+                        names.add(cat.getName());
                     }
                 });
                 return Ux.futureA(compress);
@@ -58,5 +49,6 @@ public class ExArborCatalog extends ExArborBase {
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG
             ));
+        return fetched.compose(children -> this.combineArbor(category, children, configuration));
     }
 }
