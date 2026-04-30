@@ -39,6 +39,13 @@ public abstract class FsBase implements Fs {
             if (!json.containsKey(KName.KEY)) {
                 json.put(KName.KEY, UUID.randomUUID().toString());
             }
+            /*
+             * Ensure "id" field mirrors "key" so that Ux.fromJson(directoryJ, IDirectory.class)
+             * maps the value into IDirectory.id correctly. Without this, Jackson leaves id=null
+             * because "key" does not match the Java field name "id", causing PARENT_ID references
+             * from children to point to ghost records instead of the actual I_DIRECTORY primary key.
+             */
+            json.put("id", json.getValue(KName.KEY));
         });
 
 
@@ -101,6 +108,15 @@ public abstract class FsBase implements Fs {
             // runComponent
             KName.Component.RUN_COMPONENT
         );
+        /*
+         * Mirror "key" into "id" so Ux.fromJson(directoryJ, IDirectory.class) maps the
+         * primary key into IDirectory.id. Without this, Jackson sets id=null because the
+         * JSON field "key" does not match the Java field "id", and the database generates
+         * a different id — breaking PARENT_ID references from child directories.
+         */
+        if (data.containsKey(KName.KEY)) {
+            directoryJ.put("id", data.getValue(KName.KEY));
+        }
         final String USER_SYSTEM = "zero-environment";
         // updatedAt, updatedBy, createdAt, createdBy, owner
         directoryJ.put(KName.UPDATED_AT, Instant.now());

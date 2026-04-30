@@ -26,11 +26,20 @@ public class ExArborCatalog extends ExArborBase {
         condition.put(KName.SIGMA, categoryJ.getValue(KName.SIGMA));
         final JsonObject query = configuration.getJsonObject(KName.QUERY, new JsonObject());
         condition.mergeIn(query, true);
+        return fetchCategories(condition)
+            .compose(children -> this.combineArbor(categoryJ, children, configuration));
+    }
+
+    /**
+     * Fetch child categories by condition with duplicate-name dedup,
+     * projected to JsonArray with metadata/treeConfig/runConfig fields.
+     */
+    static Future<JsonArray> fetchCategories(final JsonObject condition) {
         return DB.on(XCategoryDao.class)
             .<XCategory>fetchAsync(condition)
             .compose(categories -> {
                 /*
-                 * Duplicate entry '0E09A18725E9E7A2B1B9A693D06542A0-Qxw5HDkluJFnAPmcQCtu9uhGdXEiGNt' for key 'CODE'
+                 * Duplicate entry for key 'CODE'
                  * For service catalog, the name will be of the directory instead,
                  * Here provide duplicated issue fix
                  */
@@ -48,7 +57,6 @@ public class ExArborCatalog extends ExArborBase {
                 KName.METADATA,
                 KName.Component.TREE_CONFIG,
                 KName.Component.RUN_CONFIG
-            ))
-            .compose(children -> this.combineArbor(categoryJ, children, configuration));
+            ));
     }
 }
