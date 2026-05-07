@@ -82,7 +82,7 @@ public interface AppAgent {
 
     @Path("/instance/{key}/start")
     @POST
-    @Address(Addr.Init.START)
+    @Address(Addr.Init.START_BY_KEY)
     @OpenApi
     JsonObject startByKey(@PathParam("key") String instanceKey,
                           @BodyParam JsonObject body);

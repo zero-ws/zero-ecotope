@@ -138,7 +138,7 @@ public class AppActor {
         return this.stub.start(request);
     }
 
-    @Address(Addr.Init.START)
+    @Address(Addr.Init.START_BY_KEY)
     public Future<JsonObject> startByKey(final String instanceKey, final JsonObject request) {
         final JsonObject normalized = request == null ? new JsonObject() : request.copy();
         normalized.put("instanceKey", instanceKey);

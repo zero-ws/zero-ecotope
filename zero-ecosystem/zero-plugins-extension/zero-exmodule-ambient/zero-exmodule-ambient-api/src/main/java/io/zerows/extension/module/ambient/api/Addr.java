@@ -45,6 +45,8 @@ interface Addr {
 
         String START = Prefix._EVENT + "X-START";
 
+        String START_BY_KEY = Prefix._EVENT + "X-START/KEY";
+
         String HEALTH_CHECK = Prefix._EVENT + "X-HEALTH-CHECK";
 
         String UNDEPLOY = Prefix._EVENT + "X-UNDEPLOY";
