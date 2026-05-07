@@ -43,6 +43,8 @@ interface Addr {
 
         String DEPLOY = Prefix._EVENT + "X-DEPLOY";
 
+        String START = Prefix._EVENT + "X-START";
+
         String HEALTH_CHECK = Prefix._EVENT + "X-HEALTH-CHECK";
 
         String UNDEPLOY = Prefix._EVENT + "X-UNDEPLOY";

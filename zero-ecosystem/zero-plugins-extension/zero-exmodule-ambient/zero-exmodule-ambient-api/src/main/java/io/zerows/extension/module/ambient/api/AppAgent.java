@@ -68,6 +68,25 @@ public interface AppAgent {
     @OpenApi
     JsonObject deployCompat(@BodyParam JsonObject body);
 
+    @Path("/app/start")
+    @POST
+    @Address(Addr.Init.START)
+    @OpenApi
+    JsonObject start(@BodyParam JsonObject body);
+
+    @Path("/instance/start")
+    @POST
+    @Address(Addr.Init.START)
+    @OpenApi
+    JsonObject startCompat(@BodyParam JsonObject body);
+
+    @Path("/instance/{key}/start")
+    @POST
+    @Address(Addr.Init.START)
+    @OpenApi
+    JsonObject startByKey(@PathParam("key") String instanceKey,
+                          @BodyParam JsonObject body);
+
     @Path("/app/health-check/{key}")
     @GET
     @Address(Addr.Init.HEALTH_CHECK)

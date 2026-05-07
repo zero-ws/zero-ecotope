@@ -90,6 +90,16 @@ public interface InitStub {
     Future<JsonObject> deploy(JsonObject request);
 
     /**
+     * 「Async」Start a prepared application instance.
+     * <p>
+     * Related Interface: {@link io.zerows.extension.skeleton.spi.ExDeploy#start(JsonObject)}
+     *
+     * @param request {@link io.vertx.core.json.JsonObject} The start request containing appId, instanceName and manifest.
+     * @return {@link io.vertx.core.Future}<{@link io.vertx.core.json.JsonObject}> Start result.
+     */
+    Future<JsonObject> start(JsonObject request);
+
+    /**
      * 「Async」Health check for a deployed application instance.
      * <p>
      * Related Interface: {@link io.zerows.extension.skeleton.spi.ExDeploy#healthCheck(String)}

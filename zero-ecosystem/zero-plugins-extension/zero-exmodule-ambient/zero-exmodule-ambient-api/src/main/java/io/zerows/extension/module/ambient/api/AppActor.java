@@ -133,6 +133,18 @@ public class AppActor {
         return this.stub.deploy(request);
     }
 
+    @Address(Addr.Init.START)
+    public Future<JsonObject> start(final JsonObject request) {
+        return this.stub.start(request);
+    }
+
+    @Address(Addr.Init.START)
+    public Future<JsonObject> startByKey(final String instanceKey, final JsonObject request) {
+        final JsonObject normalized = request == null ? new JsonObject() : request.copy();
+        normalized.put("instanceKey", instanceKey);
+        return this.stub.start(normalized);
+    }
+
     @Address(Addr.Init.HEALTH_CHECK)
     public Future<JsonObject> healthCheck(final String instanceKey) {
         return this.stub.healthCheck(instanceKey);

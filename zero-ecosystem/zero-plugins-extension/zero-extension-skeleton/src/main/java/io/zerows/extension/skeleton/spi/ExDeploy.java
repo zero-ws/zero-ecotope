@@ -18,7 +18,7 @@ import io.zerows.support.Ut;
  *   <li>Validate deployment parameters (manifest, source)</li>
  *   <li>Provision database instance</li>
  *   <li>Create runtime directory structure under R2MO_HOME</li>
- *   <li>Load Docker image and start container</li>
+ *   <li>Load Docker image and prepare runtime metadata</li>
  *   <li>Return deployment result with container/runtime metadata</li>
  * </ol>
  */
@@ -41,13 +41,25 @@ public interface ExDeploy {
      *                - source: database source configuration
      * @return Deployment result containing:
      *         - dockerImage: the deployed Docker image tag
-     *         - dockerContainer: the running container ID or name
+     *         - dockerContainer: the prepared container name
      *         - databaseInstance: the provisioned database instance name
      *         - runtimeRoot: the runtime directory path
      *         - deploySteps: steps that were executed
-     *         - status: DEPLOYED on success, FAILED on error
+     *         - status: READY on success, FAILED on error
      */
     Future<JsonObject> deploy(JsonObject request);
+
+    /**
+     * Start a prepared application instance.
+     *
+     * @param request Start request containing appId, instanceName, manifest and optional source.
+     * @return Start result with running container metadata.
+     */
+    default Future<JsonObject> start(final JsonObject request) {
+        return Future.succeededFuture(new JsonObject()
+            .put("status", "UNKNOWN")
+            .put("message", "Start not implemented"));
+    }
 
     /**
      * Check whether the deployed instance is healthy.

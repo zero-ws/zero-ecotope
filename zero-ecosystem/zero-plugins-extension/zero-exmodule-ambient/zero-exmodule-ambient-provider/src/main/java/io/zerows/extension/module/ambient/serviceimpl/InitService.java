@@ -87,6 +87,16 @@ public class InitService implements InitStub {
     }
 
     @Override
+    public Future<JsonObject> start(final JsonObject request) {
+        final ExDeploy deployer = Objects.requireNonNull(MANAGER.config()).ofDeploy();
+        if (Objects.isNull(deployer)) {
+            log.warn("{} `ExDeploy` 组件未配置：null", AtConstant.K_PREFIX);
+            return Future.failedFuture("Deploy SPI not configured in configuration.json");
+        }
+        return deployer.start(request);
+    }
+
+    @Override
     public Future<JsonObject> healthCheck(final String instanceKey) {
         final ExDeploy deployer = Objects.requireNonNull(MANAGER.config()).ofDeploy();
         if (Objects.isNull(deployer)) {
