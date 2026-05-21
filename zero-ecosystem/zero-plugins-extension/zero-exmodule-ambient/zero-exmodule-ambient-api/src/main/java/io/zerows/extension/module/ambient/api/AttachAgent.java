@@ -89,19 +89,19 @@ public class AttachAgent {
     @GET
     @Address(Addr.File.UPLOAD_SESSION_STATUS)
     @OpenApi
-    public String sessionStatus(@PathParam("token") final String token) {
-        return token;
+    public JsonObject sessionStatus(@PathParam("token") final String token) {
+        return new JsonObject().put("token", token);
     }
 
-    @Path("/file/upload/session/{token}/chunk/{index}")
-    @PUT
+    @Path("/file/upload/session/{token}/chunk")
+    @POST
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     @Address(Addr.File.UPLOAD_SESSION_CHUNK)
     @OpenApi
     public JsonObject uploadChunk(@PathParam("token") final String token,
-                                  @PathParam("index") final Integer index,
+                                  @QueryParam("index") final Integer index,
                                   @BodyParam final Buffer body) {
-        return new JsonObject().put("token", token).put("index", index).put("size", body.length());
+        return new JsonObject().put("token", token).put("index", index).put("data", body.getBytes());
     }
 
     @Path("/file/upload/session/{token}/complete")
@@ -109,17 +109,17 @@ public class AttachAgent {
     @Consumes(MediaType.APPLICATION_JSON)
     @Address(Addr.File.UPLOAD_SESSION_COMPLETE)
     @OpenApi
-    public String completeSession(@PathParam("token") final String token,
-                                  @BodyParam final JsonObject body) {
-        return token;
+    public JsonObject completeSession(@PathParam("token") final String token,
+                                     @BodyParam final JsonObject body) {
+        return new JsonObject().put("token", token);
     }
 
     @Path("/file/upload/session/{token}")
     @DELETE
     @Address(Addr.File.UPLOAD_SESSION_CANCEL)
     @OpenApi
-    public String cancelSession(@PathParam("token") final String token) {
-        return token;
+    public JsonObject cancelSession(@PathParam("token") final String token) {
+        return new JsonObject().put("token", token);
     }
 
     @Path("/file/download/{fileKey}")

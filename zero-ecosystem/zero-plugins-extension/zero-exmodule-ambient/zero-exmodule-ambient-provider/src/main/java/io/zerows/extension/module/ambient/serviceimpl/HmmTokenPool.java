@@ -11,6 +11,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -25,7 +27,8 @@ class HmmTokenPool implements TransferTokenPool {
     private static final String CACHE_NAME = "ambient.upload.transfer.token";
     private static final long DEFAULT_EXPIRE_MS = 60 * 60 * 1000L;
 
-    private final HMM<String, TransferToken> cache = HMM.of(CACHE_NAME);
+    private static final HMM<String, TransferToken> CACHE = HMM.of(CACHE_NAME);
+    private static final ConcurrentMap<String, TransferToken> LOCAL = new ConcurrentHashMap<>();
 
     @Override
     public boolean runSave(final TransferToken token, final long expiredAt) {
@@ -34,7 +37,12 @@ class HmmTokenPool implements TransferTokenPool {
         }
         final long ttlMs = this.ttlMs(expiredAt);
         token.setExpiredAt(LocalDateTime.now().plusNanos(ttlMs * 1_000_000));
-        return Objects.nonNull(this.await(this.cache.put(token.getToken(), token, Duration.ofMillis(ttlMs))));
+        LOCAL.put(token.getToken(), token);
+        final TransferToken cached = this.await(CACHE.put(token.getToken(), token, Duration.ofMillis(ttlMs)));
+        if (Objects.isNull(cached)) {
+            log.warn("[ XMOD ] HMM token pool 缓存写入失败，使用本地内存令牌兜底: tokenId={}", token.getToken());
+        }
+        return true;
     }
 
     @Override
@@ -51,14 +59,16 @@ class HmmTokenPool implements TransferTokenPool {
         if (Ut.isNil(token)) {
             return false;
         }
-        return null != this.await(this.cache.remove(token));
+        final TransferToken removed = LOCAL.remove(token);
+        final TransferToken cached = this.await(CACHE.remove(token));
+        return Objects.nonNull(removed) || Objects.nonNull(cached);
     }
 
     @Override
     public int runClean(final boolean expiredOnly) {
         if (expiredOnly) {
             int cleaned = 0;
-            final Set<String> keys = this.await(this.cache.keySet());
+            final Set<String> keys = this.await(CACHE.keySet());
             if (Objects.isNull(keys)) {
                 return 0;
             }
@@ -70,8 +80,8 @@ class HmmTokenPool implements TransferTokenPool {
             }
             return cleaned;
         }
-        final Integer size = this.await(this.cache.size());
-        this.await(this.cache.clear());
+        final Integer size = this.await(CACHE.size());
+        this.await(CACHE.clear());
         return Objects.isNull(size) ? 0 : size;
     }
 
@@ -80,7 +90,15 @@ class HmmTokenPool implements TransferTokenPool {
         if (Ut.isNil(token)) {
             return null;
         }
-        final TransferToken found = this.await(this.cache.find(token));
+        final TransferToken localFound = LOCAL.get(token);
+        if (Objects.nonNull(localFound)) {
+            if (Objects.nonNull(localFound.getExpiredAt()) && localFound.getExpiredAt().isBefore(LocalDateTime.now())) {
+                this.runDelete(token);
+                return null;
+            }
+            return localFound;
+        }
+        final TransferToken found = this.await(CACHE.find(token));
         if (Objects.isNull(found)) {
             return null;
         }

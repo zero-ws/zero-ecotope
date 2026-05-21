@@ -47,22 +47,28 @@ public class AttachActor {
     }
 
     @Address(Addr.File.UPLOAD_SESSION_STATUS)
-    public Future<JsonObject> sessionStatus(final String token, final XHeader header) {
+    public Future<JsonObject> sessionStatus(final JsonObject content, final XHeader header) {
+        final String token = content.getString("token");
         return this.uploadStub.sessionStatus(token, header);
     }
 
     @Address(Addr.File.UPLOAD_SESSION_CHUNK)
-    public Future<JsonObject> uploadChunk(final String token, final Integer index, final Buffer buffer, final XHeader header) {
+    public Future<JsonObject> uploadChunk(final JsonObject content, final XHeader header) {
+        final String token = content.getString("token");
+        final Integer index = content.getInteger("index");
+        final Buffer buffer = Buffer.buffer(content.getBinary("data"));
         return this.uploadStub.uploadChunk(token, index, buffer, header);
     }
 
     @Address(Addr.File.UPLOAD_SESSION_COMPLETE)
-    public Future<JsonObject> completeSession(final String token, final XHeader header) {
+    public Future<JsonObject> completeSession(final JsonObject content, final XHeader header) {
+        final String token = content.getString("token");
         return this.uploadStub.completeSession(token, header);
     }
 
     @Address(Addr.File.UPLOAD_SESSION_CANCEL)
-    public Future<JsonObject> cancelSession(final String token, final XHeader header) {
+    public Future<JsonObject> cancelSession(final JsonObject content, final XHeader header) {
+        final String token = content.getString("token");
         return this.uploadStub.cancelSession(token, header);
     }
 
