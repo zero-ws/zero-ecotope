@@ -177,8 +177,8 @@ public class UploadSessionService implements UploadStub {
     public Future<JsonObject> uploadChunk(final String token, final Integer index, final Buffer buffer, final XHeader header) {
         return this.context(token).compose(context -> Ux.waitVirtual(() -> {
             final long chunkSize = context.getLong(META_CHUNK_SIZE, 0L);
-            log.info("[ Upload ] chunk upload: token={}, index={}, buffer.length={}, sessionChunkSize={}, totalUploaded={}",
-                token, index, buffer.length(), chunkSize, this.rfs.getUploadedChunks(token).size());
+            log.info("[ Upload ] chunk upload: token={}, index={}, buffer.length={}, sessionChunkSize={}",
+                token, index, buffer.length(), chunkSize);
             final TransferResult result = this.rfs.ioUploadChunk(this.chunkRequest(token), new ByteArrayInputStream(buffer.getBytes()), index);
             final JsonObject response = new JsonObject();
             response.put("token", token);
@@ -187,9 +187,6 @@ public class UploadSessionService implements UploadStub {
             if (TransferResult.SUCCESS != result) {
                 response.put("message", "分片写入失败: index=" + index);
             }
-            response.put("progress", this.rfs.getUploadProgress(token));
-            response.put("uploadedChunks", indexes(this.rfs.getUploadedChunks(token)));
-            response.put("waitingChunks", indexes(this.rfs.getWaitingChunks(token)));
             return response;
         }));
     }
@@ -197,12 +194,10 @@ public class UploadSessionService implements UploadStub {
     @Override
     public Future<JsonObject> completeSession(final String token, final XHeader header) {
         return this.context(token).compose(context -> Ux.waitVirtual(() -> {
-            log.info("[ Upload ] complete: token={}, uploadedChunks={}, waitingChunks={}, progress={}",
-                token, this.rfs.getUploadedChunks(token).size(), this.rfs.getWaitingChunks(token).size(), this.rfs.getUploadProgress(token));
+            log.info("[ Upload ] complete: token={}", token);
             final TransferResult result = this.rfs.completeUpload(token);
             if (TransferResult.SUCCESS != result) {
-                return this.error("上传会话合并失败: uploaded=" + this.rfs.getUploadedChunks(token).size()
-                    + " waiting=" + this.rfs.getWaitingChunks(token).size(), token);
+                return this.error("上传会话合并失败: token=" + token, token);
             }
             final JsonObject attachment = io.vertx.core.Future.await(this.bridge.createAttachment(context));
             io.vertx.core.Future.await(this.cache.remove(token));
