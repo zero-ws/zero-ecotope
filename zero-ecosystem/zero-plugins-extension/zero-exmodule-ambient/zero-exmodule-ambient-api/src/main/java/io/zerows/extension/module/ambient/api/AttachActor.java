@@ -56,7 +56,14 @@ public class AttachActor {
     public Future<JsonObject> uploadChunk(final JsonObject content, final XHeader header) {
         final String token = content.getString("token");
         final Integer index = content.getInteger("index");
-        final Buffer buffer = Buffer.buffer(content.getBinary("data"));
+        final String chunkPath = content.getString("chunkPath");
+        final Buffer buffer;
+        try {
+            buffer = Buffer.buffer(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(chunkPath)));
+            java.nio.file.Files.deleteIfExists(java.nio.file.Paths.get(chunkPath));
+        } catch (final java.io.IOException ex) {
+            return Future.failedFuture(ex);
+        }
         return this.uploadStub.uploadChunk(token, index, buffer, header);
     }
 

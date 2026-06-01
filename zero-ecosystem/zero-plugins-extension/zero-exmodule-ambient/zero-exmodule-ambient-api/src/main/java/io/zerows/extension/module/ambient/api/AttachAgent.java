@@ -12,6 +12,7 @@ import io.zerows.extension.module.ambient.boot.MDAmbientManager;
 import io.zerows.extension.module.ambient.common.AtConstant;
 import io.zerows.extension.skeleton.common.enums.FileStatus;
 import io.zerows.support.Ut;
+import io.zerows.cortex.webflow.ResolverBuffer;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -100,8 +101,14 @@ public class AttachAgent {
     @OpenApi
     public JsonObject uploadChunk(@PathParam("token") final String token,
                                   @QueryParam("index") final Integer index,
-                                  @BodyParam final Buffer body) {
-        return new JsonObject().put("token", token).put("index", index).put("data", body.getBytes());
+                                  @BodyParam(resolver = ResolverBuffer.class) final Buffer body) {
+        try {
+            final java.nio.file.Path tmpFile = java.nio.file.Files.createTempFile("upload-chunk-", ".bin");
+            java.nio.file.Files.write(tmpFile, body.getBytes());
+            return new JsonObject().put("token", token).put("index", index).put("chunkPath", tmpFile.toString());
+        } catch (final java.io.IOException ex) {
+            throw new RuntimeException("Failed to write chunk temp file", ex);
+        }
     }
 
     @Path("/file/upload/session/{token}/complete")

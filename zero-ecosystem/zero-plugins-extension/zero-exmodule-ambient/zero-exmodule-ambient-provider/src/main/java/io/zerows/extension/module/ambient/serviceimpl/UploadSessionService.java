@@ -150,8 +150,25 @@ public class UploadSessionService implements UploadStub {
             context.put(META_UPDATED_BY, header.session());
             context.put(META_CREATED_AT, Instant.now().toString());
             this.persistContext(token, context);
-            return io.vertx.core.Future.await(this.cache.put(token, context, CACHE_TTL_SECONDS));
-        }).compose(saved -> this.sessionStatus(saved.getString(META_TOKEN), header));
+            try {
+                io.vertx.core.Future.await(this.cache.put(token, context, CACHE_TTL_SECONDS));
+            } catch (final Exception ex) {
+                log.warn("[ Upload ] cache.put failed for token={}, degraded to persistContext only", token, ex);
+            }
+            return context;
+        }).map(ctx -> {
+            final JsonObject result = new JsonObject();
+            result.put("token", ctx.getString(META_TOKEN));
+            result.put("fileName", ctx.getString(META_FILE_NAME));
+            result.put("chunkSize", ctx.getLong(META_CHUNK_SIZE, 0L));
+            result.put("chunkCount", ctx.getLong(META_CHUNK_COUNT, 0L));
+            result.put("totalSize", ctx.getLong(META_TOTAL_SIZE, 0L));
+            result.put("uploadedChunks", new JsonArray());
+            result.put("waitingChunks", this.buildWaitingIndexes(ctx.getLong(META_CHUNK_COUNT, 0L)));
+            result.put("progress", 0.0);
+            result.put("status", "UPLOADING");
+            return result;
+        });
     }
 
     @Override
@@ -200,7 +217,11 @@ public class UploadSessionService implements UploadStub {
                 return this.error("上传会话合并失败: token=" + token, token);
             }
             final JsonObject attachment = io.vertx.core.Future.await(this.bridge.createAttachment(context));
-            io.vertx.core.Future.await(this.cache.remove(token));
+            try {
+                io.vertx.core.Future.await(this.cache.remove(token));
+            } catch (final Exception ex) {
+                log.warn("[ Upload ] cache.remove failed for token={}, session already completed", token, ex);
+            }
             return this.completeResponse(token, attachment);
         }));
     }
@@ -217,7 +238,11 @@ public class UploadSessionService implements UploadStub {
                     // Ignore cleanup failure here
                 }
             }
-            io.vertx.core.Future.await(this.cache.remove(token));
+            try {
+                io.vertx.core.Future.await(this.cache.remove(token));
+            } catch (final Exception ex) {
+                log.warn("[ Upload ] cache.remove failed for token={} during cancel", token, ex);
+            }
             return new JsonObject()
                 .put("token", token)
                 .put("status", "CANCELLED")
@@ -226,16 +251,34 @@ public class UploadSessionService implements UploadStub {
     }
 
     private Future<JsonObject> context(final String token) {
-        return this.cache.find(token).compose(found -> {
-            if (Objects.nonNull(found)) {
-                return Ux.future(found);
-            }
-            final JsonObject recovered = this.recoverContext(token);
-            if (Objects.nonNull(recovered)) {
-                return this.cache.put(token, recovered, CACHE_TTL_SECONDS).compose(ignored -> Ux.future(recovered));
-            }
-            return Future.failedFuture("Upload session not found: " + token);
-        });
+        return this.cache.find(token)
+            .recover(err -> {
+                log.warn("[ Upload ] cache.find failed for token={}, falling back to recoverContext", token, err);
+                return Ux.future(null);
+            })
+            .compose(found -> {
+                if (Objects.nonNull(found)) {
+                    return Ux.future(found);
+                }
+                final JsonObject recovered = this.recoverContext(token);
+                if (Objects.nonNull(recovered)) {
+                    return this.cache.put(token, recovered, CACHE_TTL_SECONDS)
+                        .recover(putErr -> {
+                            log.warn("[ Upload ] cache.put (re-key) failed for token={}", token, putErr);
+                            return Ux.future(null);
+                        })
+                        .compose(ignored -> Ux.future(recovered));
+                }
+                return Future.failedFuture("Upload session not found: " + token);
+            });
+    }
+
+    private JsonArray buildWaitingIndexes(final Long chunkCount) {
+        final JsonArray arr = new JsonArray();
+        for (int i = 0; i < chunkCount; i++) {
+            arr.add(i);
+        }
+        return arr;
     }
 
     private TransferRequest chunkRequest(final String token) {
@@ -296,12 +339,14 @@ public class UploadSessionService implements UploadStub {
     }
 
     static JsonObject completeResponse(final String token, final JsonObject attachment) {
+        final String key = Objects.nonNull(attachment.getString(KName.KEY))
+            ? attachment.getString(KName.KEY) : attachment.getString("id");
         return new JsonObject()
             .put("token", token)
             .put("status", "DONE")
-            .put("key", attachment.getString(KName.KEY))
+            .put("key", key)
             .put("fileKey", attachment.getString(KName.FILE_KEY))
-            .put("attachmentId", attachment.getString(KName.KEY))
+            .put("attachmentId", key)
             .put("fileName", attachment.getString(KName.NAME))
             .put("name", attachment.getString(KName.NAME))
             .put("filePath", attachment.getString(KName.Attachment.FILE_PATH))
