@@ -49,6 +49,10 @@ public class UploadSessionService implements UploadStub {
 
     private static final String CACHE_NAME = "ambient.upload.session";
     private static final long CACHE_TTL_SECONDS = 24 * 60 * 60;
+    // Server-side chunk size bounds — init is a handshake, server has final authority
+    private static final long CHUNK_SIZE_MIN = 512 * 1024;       // 512 KB
+    private static final long CHUNK_SIZE_MAX = 64 * 1024 * 1024; // 64 MB
+    private static final long CHUNK_SIZE_DEFAULT = 8 * 1024 * 1024; // 8 MB
     private static final String META_TOKEN = "transferToken";
     private static final String META_FINAL_PATH = "finalPath";
     private static final String META_FILE_NAME = "fileName";
@@ -86,7 +90,10 @@ public class UploadSessionService implements UploadStub {
             final JsonObject normalized = request == null ? new JsonObject() : request.copy();
             final String fileName = normalized.getString("fileName", normalized.getString(KName.NAME, VString.EMPTY));
             final Long totalSize = normalized.getLong("totalSize", 0L);
-            final Long chunkSize = normalized.getLong("chunkSize", 2L * 1024 * 1024);
+            // Handshake: client proposes chunkSize, server clamps to [MIN, MAX] and decides final value.
+            // The returned chunkSize is the contract — frontend MUST use it for slicing.
+            final long proposedChunkSize = normalized.getLong("chunkSize", CHUNK_SIZE_DEFAULT);
+            final Long chunkSize = Math.max(CHUNK_SIZE_MIN, Math.min(CHUNK_SIZE_MAX, proposedChunkSize));
             final Long chunkCount = 0 == totalSize ? 0L : (long) Math.ceil((double) totalSize / chunkSize);
             final String identifier = normalized.getString(META_IDENTIFIER, VString.EMPTY);
             final String category = normalized.getString(META_CATEGORY, VString.EMPTY);
