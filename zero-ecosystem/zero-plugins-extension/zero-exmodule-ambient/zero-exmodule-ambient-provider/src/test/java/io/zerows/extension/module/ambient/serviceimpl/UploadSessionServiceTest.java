@@ -34,4 +34,27 @@ class UploadSessionServiceTest {
         token.setConfiguration(JBase.parse("{}"));
         Assertions.assertNull(UploadSessionService.readContext(token));
     }
+
+    @Test
+    void shouldReturnPackageMetadataAfterComplete() {
+        final JsonObject attachment = new JsonObject()
+            .put("key", "attachment-001")
+            .put("fileKey", "file-key-001")
+            .put("name", "app-aisz-upload.tar.gz")
+            .put("filePath", "/tmp/app-aisz-upload.tar.gz");
+
+        final JsonObject response = UploadSessionService.completeResponse("token-001", attachment);
+
+        Assertions.assertEquals("app-aisz-upload.tar.gz", response.getString("fileName"));
+        Assertions.assertEquals("app-aisz-upload.tar.gz", response.getString("name"));
+        Assertions.assertEquals("/tmp/app-aisz-upload.tar.gz", response.getString("filePath"));
+        Assertions.assertEquals("/tmp/app-aisz-upload.tar.gz", response.getString("packagePath"));
+    }
+
+    @Test
+    void shouldTreatBlankSessionAsAnonymousUpload() {
+        Assertions.assertNull(UploadSessionService.uuid(null));
+        Assertions.assertNull(UploadSessionService.uuid(""));
+    }
+
 }

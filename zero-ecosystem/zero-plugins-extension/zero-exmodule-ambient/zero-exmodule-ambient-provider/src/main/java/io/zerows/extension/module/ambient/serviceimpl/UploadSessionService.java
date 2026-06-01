@@ -1,5 +1,7 @@
 package io.zerows.extension.module.ambient.serviceimpl;
 
+import lombok.extern.slf4j.Slf4j;
+
 import io.r2mo.base.io.HTransfer;
 import io.r2mo.base.io.modeling.StoreChunk;
 import io.r2mo.base.io.transfer.HTransferParam;
@@ -42,6 +44,7 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class UploadSessionService implements UploadStub {
 
     private static final String CACHE_NAME = "ambient.upload.session";
@@ -173,11 +176,17 @@ public class UploadSessionService implements UploadStub {
     @Override
     public Future<JsonObject> uploadChunk(final String token, final Integer index, final Buffer buffer, final XHeader header) {
         return this.context(token).compose(context -> Ux.waitVirtual(() -> {
+            final long chunkSize = context.getLong(META_CHUNK_SIZE, 0L);
+            log.info("[ Upload ] chunk upload: token={}, index={}, buffer.length={}, sessionChunkSize={}, totalUploaded={}",
+                token, index, buffer.length(), chunkSize, this.rfs.getUploadedChunks(token).size());
             final TransferResult result = this.rfs.ioUploadChunk(this.chunkRequest(token), new ByteArrayInputStream(buffer.getBytes()), index);
             final JsonObject response = new JsonObject();
             response.put("token", token);
             response.put("index", index);
             response.put("success", TransferResult.SUCCESS == result);
+            if (TransferResult.SUCCESS != result) {
+                response.put("message", "分片写入失败: index=" + index);
+            }
             response.put("progress", this.rfs.getUploadProgress(token));
             response.put("uploadedChunks", indexes(this.rfs.getUploadedChunks(token)));
             response.put("waitingChunks", indexes(this.rfs.getWaitingChunks(token)));
@@ -188,9 +197,12 @@ public class UploadSessionService implements UploadStub {
     @Override
     public Future<JsonObject> completeSession(final String token, final XHeader header) {
         return this.context(token).compose(context -> Ux.waitVirtual(() -> {
+            log.info("[ Upload ] complete: token={}, uploadedChunks={}, waitingChunks={}, progress={}",
+                token, this.rfs.getUploadedChunks(token).size(), this.rfs.getWaitingChunks(token).size(), this.rfs.getUploadProgress(token));
             final TransferResult result = this.rfs.completeUpload(token);
             if (TransferResult.SUCCESS != result) {
-                return this.error("上传会话合并失败", token);
+                return this.error("上传会话合并失败: uploaded=" + this.rfs.getUploadedChunks(token).size()
+                    + " waiting=" + this.rfs.getWaitingChunks(token).size(), token);
             }
             final JsonObject attachment = io.vertx.core.Future.await(this.bridge.createAttachment(context));
             io.vertx.core.Future.await(this.cache.remove(token));
@@ -288,13 +300,17 @@ public class UploadSessionService implements UploadStub {
         return null;
     }
 
-    private JsonObject completeResponse(final String token, final JsonObject attachment) {
+    static JsonObject completeResponse(final String token, final JsonObject attachment) {
         return new JsonObject()
             .put("token", token)
             .put("status", "DONE")
             .put("key", attachment.getString(KName.KEY))
             .put("fileKey", attachment.getString(KName.FILE_KEY))
-            .put("attachmentId", attachment.getString(KName.KEY));
+            .put("attachmentId", attachment.getString(KName.KEY))
+            .put("fileName", attachment.getString(KName.NAME))
+            .put("name", attachment.getString(KName.NAME))
+            .put("filePath", attachment.getString(KName.Attachment.FILE_PATH))
+            .put("packagePath", attachment.getString(KName.Attachment.FILE_PATH));
     }
 
     private JsonObject error(final String message, final String token) {
@@ -318,7 +334,10 @@ public class UploadSessionService implements UploadStub {
         return fileName.substring(fileName.lastIndexOf('.') + 1);
     }
 
-    private UUID uuid(final String input) {
+    static UUID uuid(final String input) {
+        if (Ut.isNil(input)) {
+            return null;
+        }
         if (Ut.isUUID(input)) {
             return UUID.fromString(input);
         }
