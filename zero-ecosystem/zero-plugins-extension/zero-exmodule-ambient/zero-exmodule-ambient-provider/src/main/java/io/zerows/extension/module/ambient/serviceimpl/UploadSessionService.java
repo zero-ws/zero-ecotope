@@ -49,6 +49,7 @@ public class UploadSessionService implements UploadStub {
 
     private static final String CACHE_NAME = "ambient.upload.session";
     private static final long CACHE_TTL_SECONDS = 24 * 60 * 60;
+    private static final long CACHE_COMPLETED_TTL_SECONDS = 60;
     // Server-side chunk size bounds — init is a handshake, server has final authority
     private static final long CHUNK_SIZE_MIN = 512 * 1024;       // 512 KB
     private static final long CHUNK_SIZE_MAX = 64 * 1024 * 1024; // 64 MB
@@ -102,12 +103,42 @@ public class UploadSessionService implements UploadStub {
             final String checksum = normalized.getString(META_CHECKSUM);
 
             final Path sessionDir = this.sessionDirectory(header, identifier, fileName);
+
+            // Checksum dedup: query stable storage (X_ATTACHMENT) for an already-completed
+            // upload with the same identifier + fileName. If found, reject with 409 before
+            // creating a session — no bytes uploaded, no queue entry needed.
+            final String sigma = Ut.isNil(header.getSigma()) ? "default" : header.getSigma();
+            final String appId = Ut.isNil(header.getAppId()) ? "default" : header.getAppId();
+            if (Ut.isNotNil(checksum) && Ut.isNotNil(fileName)) {
+                final JsonObject condition = Ux.whereAnd();
+                condition.put(KName.MODEL_ID, identifier);
+                condition.put(KName.NAME, fileName);
+                condition.put(KName.ACTIVE, Boolean.TRUE);
+                condition.put(KName.SIGMA, sigma);
+                condition.put(KName.APP_ID, appId);
+                try {
+                    final JsonArray existing = io.vertx.core.Future.await(
+                        DB.on(XAttachmentDao.class).fetchJAsync(condition));
+                    if (Objects.nonNull(existing) && !existing.isEmpty()) {
+                        throw new io.r2mo.vertx.common.exception.VertxWebException(
+                            io.r2mo.vertx.common.exception.VertxE.of(
+                                -80002, "文件已存在，相同校验和的文件已上传"
+                            ).state(io.netty.handler.codec.http.HttpResponseStatus.CONFLICT),
+                            checksum, fileName);
+                    }
+                } catch (final io.r2mo.vertx.common.exception.VertxWebException vwe) {
+                    throw vwe;
+                } catch (final Exception ex) {
+                    log.warn("[ Upload ] checksum dedup query failed, allowing upload: {}", ex.getMessage());
+                }
+            }
+
+            final Path finalPath = sessionDir.resolve(fileName);
             try {
                 Files.createDirectories(sessionDir);
             } catch (final Exception ex) {
                 throw new RuntimeException(ex);
             }
-            final Path finalPath = sessionDir.resolve(fileName);
 
             final TransferRequest transferRequest = new TransferRequest();
             transferRequest.setId(UUID.randomUUID());
@@ -182,13 +213,20 @@ public class UploadSessionService implements UploadStub {
     public Future<JsonObject> sessionStatus(final String token, final XHeader header) {
         return this.context(token).compose(context -> {
             final JsonObject result = new JsonObject();
-            final List<StoreChunk> uploaded = this.rfs.getUploadedChunks(token);
-            final List<StoreChunk> waiting = this.rfs.getWaitingChunks(token);
             result.put("token", token);
             result.put("fileName", context.getString(META_FILE_NAME));
             result.put("chunkSize", context.getLong(META_CHUNK_SIZE, 0L));
             result.put("chunkCount", context.getLong(META_CHUNK_COUNT, 0L));
             result.put("totalSize", context.getLong(META_TOTAL_SIZE, 0L));
+            if ("COMPLETED".equals(context.getString("status"))) {
+                result.put("uploadedChunks", new JsonArray());
+                result.put("waitingChunks", new JsonArray());
+                result.put("progress", 1.0);
+                result.put("status", "COMPLETED");
+                return Ux.future(result);
+            }
+            final List<StoreChunk> uploaded = this.rfs.getUploadedChunks(token);
+            final List<StoreChunk> waiting = this.rfs.getWaitingChunks(token);
             result.put("uploadedChunks", indexes(uploaded));
             result.put("waitingChunks", indexes(waiting));
             result.put("progress", this.rfs.getUploadProgress(token));
@@ -224,10 +262,11 @@ public class UploadSessionService implements UploadStub {
                 return this.error("上传会话合并失败: token=" + token, token);
             }
             final JsonObject attachment = io.vertx.core.Future.await(this.bridge.createAttachment(context));
+            context.put("status", "COMPLETED");
             try {
-                io.vertx.core.Future.await(this.cache.remove(token));
+                io.vertx.core.Future.await(this.cache.put(token, context, CACHE_COMPLETED_TTL_SECONDS));
             } catch (final Exception ex) {
-                log.warn("[ Upload ] cache.remove failed for token={}, session already completed", token, ex);
+                log.warn("[ Upload ] cache.put(COMPLETED) failed for token={}", token, ex);
             }
             return this.completeResponse(token, attachment);
         }));
@@ -242,13 +281,13 @@ public class UploadSessionService implements UploadStub {
                 try {
                     Files.deleteIfExists(Paths.get(finalPath));
                 } catch (final Exception ignore) {
-                    // Ignore cleanup failure here
                 }
             }
+            context.put("status", "CANCELLED");
             try {
-                io.vertx.core.Future.await(this.cache.remove(token));
+                io.vertx.core.Future.await(this.cache.put(token, context, CACHE_COMPLETED_TTL_SECONDS));
             } catch (final Exception ex) {
-                log.warn("[ Upload ] cache.remove failed for token={} during cancel", token, ex);
+                log.warn("[ Upload ] cache.put(CANCELLED) failed for token={}", token, ex);
             }
             return new JsonObject()
                 .put("token", token)
@@ -260,6 +299,16 @@ public class UploadSessionService implements UploadStub {
     private Future<JsonObject> context(final String token) {
         return this.cache.find(token)
             .recover(err -> {
+                final String errMsg = String.valueOf(err);
+                if (errMsg.contains("Connection") || errMsg.contains("closed") || errMsg.contains("refused") || errMsg.contains("timeout")) {
+                    log.warn("[ Upload ] Redis connection error for token={}, attempting recoverContext", token, err);
+                    final JsonObject recovered = this.recoverContext(token);
+                    if (Objects.nonNull(recovered)) {
+                        return Ux.future(recovered);
+                    }
+                    return Future.failedFuture(new io.r2mo.typed.exception.web._503ServiceUnavailableException(
+                        "缓存服务暂不可用，请稍后重试: token=" + token));
+                }
                 log.warn("[ Upload ] cache.find failed for token={}, falling back to recoverContext", token, err);
                 return Ux.future(null);
             })
@@ -429,7 +478,12 @@ public class UploadSessionService implements UploadStub {
             document.put(KName.MODEL_ID, identifier);
             document.put(KName.MODEL_CATEGORY, category);
             document.put(KName.LANGUAGE, "cn");
-            document.put(KName.METADATA, new JsonObject().put("uploadSession", Boolean.TRUE).encode());
+            final JsonObject meta = new JsonObject().put("uploadSession", Boolean.TRUE);
+            final String cksum = context.getString(META_CHECKSUM);
+            if (Ut.isNotNil(cksum)) {
+                meta.put("checksum", cksum);
+            }
+            document.put(KName.METADATA, meta.encode());
             document.put(KName.Attachment.STORE_WAY, "FILE");
             document.put(KName.DIRECTORY, directory);
             document.put(KName.SIGMA, context.getString(META_SIGMA));
