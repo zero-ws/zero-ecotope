@@ -1,0 +1,152 @@
+[
+  {
+    "metadata": "instanceName,实例名称",
+    "sorter": true,
+    "$filter.type": "SEARCH",
+    "$filter.config": {
+      "placeholder": "输入实例名称",
+      "button": {
+        "search": "搜索",
+        "reset": "重置"
+      }
+    }
+  },
+  {
+    "metadata": "status,实例状态,MAPPING",
+    "sorter": true,
+    "$mapping": {
+      "PENDING_INSTALL": "待安装,clock-circle,16,#8c8c8c",
+      "READY": "就绪,check-circle,16,#52c41a",
+      "DEPLOYING": "部署中,loading,16,#1677ff",
+      "DEPLOYED": "已部署,cloud,16,#3053EB",
+      "RUNNING": "运行中,play-circle,16,#58c623",
+      "STOPPED": "已停止,pause-circle,16,#8c8c8c",
+      "FAILED": "失败,close-circle,16,#ff4d4f",
+      "UNDEPLOYED": "未部署,disconnect,16,#faad14"
+    },
+    "$filter.config.dataType": "STRING",
+    "$filter.config.items": [
+      "PENDING_INSTALL,待安装",
+      "READY,就绪",
+      "DEPLOYING,部署中",
+      "DEPLOYED,已部署",
+      "RUNNING,运行中",
+      "STOPPED,已停止",
+      "FAILED,失败",
+      "UNDEPLOYED,未部署"
+    ]
+  },
+  {
+    "metadata": "tenantId,租户",
+    "sorter": true,
+    "$filter.config.dataType": "STRING",
+    "$filter.config.items": []
+  },
+  {
+    "metadata": "healthStatus,健康状态,MAPPING",
+    "$mapping": {
+      "UP": "健康,heart,16,#52c41a",
+      "DOWN": "异常,warning,16,#ff4d4f",
+      "UNKNOWN": "未知,question-circle,16,#8c8c8c"
+    },
+    "$filter.config.dataType": "STRING",
+    "$filter.config.items": [
+      "UP,健康",
+      "DOWN,异常",
+      "UNKNOWN,未知"
+    ]
+  },
+  {
+    "metadata": "deployMode,部署模式",
+    "$filter.config.dataType": "STRING",
+    "$filter.config.items": [
+      "docker,Docker",
+      "compose,Compose",
+      "local,本地",
+      "k8s,Kubernetes"
+    ]
+  },
+  {
+    "metadata": "version,版本"
+  },
+  {
+    "metadata": "dockerImage,镜像"
+  },
+  {
+    "metadata": "dockerContainer,容器"
+  },
+  {
+    "metadata": "databaseInstance,数据库实例"
+  },
+  {
+    "metadata": "installRoot,安装路径"
+  },
+  {
+    "metadata": "runtimeRoot,运行目录"
+  },
+  {
+    "metadata": "domain,域名"
+  },
+  {
+    "metadata": "port,端口"
+  },
+  {
+    "metadata": "context,上下文路径"
+  },
+  {
+    "metadata": "instanceUrl,访问地址,LINK"
+  },
+  {
+    "metadata": "releaseId,发布记录"
+  },
+  {
+    "metadata": "packageId,包记录"
+  },
+  {
+    "metadata": "packageChecksum,包校验和"
+  },
+  {
+    "metadata": "configHash,配置摘要"
+  },
+  {
+    "metadata": "compositeApp,组合应用,LOGICAL",
+    "$mapping": {
+      "true": "是",
+      "false": "否"
+    }
+  },
+  {
+    "metadata": "active,启用,LOGICAL",
+    "$mapping": {
+      "true": "启用",
+      "false": "停用"
+    },
+    "$filter.config.dataType": "BOOLEAN",
+    "$filter.config.items": [
+      "true,启用",
+      "false,停用"
+    ]
+  },
+  {
+    "metadata": "deployedAt,部署时间,DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss"
+  },
+  {
+    "metadata": "startedAt,启动时间,DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss"
+  },
+  {
+    "metadata": "stoppedAt,停止时间,DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss"
+  },
+  {
+    "metadata": "healthAt,健康检查时间,DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss"
+  },
+  {
+    "title": "更新时间",
+    "dataIndex": "updatedAt",
+    "$render": "DATE",
+    "$format": "YYYY-MM-DD HH:mm:ss"
+  }
+]

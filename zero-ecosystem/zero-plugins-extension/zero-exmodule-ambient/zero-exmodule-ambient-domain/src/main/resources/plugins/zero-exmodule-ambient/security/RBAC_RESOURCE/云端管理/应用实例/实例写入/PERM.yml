@@ -1,0 +1,3 @@
+data:
+  code: "perm.crud.x-app-instance.write"
+  identifier: "x.app.instance"

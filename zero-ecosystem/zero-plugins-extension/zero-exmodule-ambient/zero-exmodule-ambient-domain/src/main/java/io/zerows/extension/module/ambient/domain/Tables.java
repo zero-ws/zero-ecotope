@@ -4,11 +4,16 @@
 package io.zerows.extension.module.ambient.domain;
 
 
+import io.zerows.extension.module.ambient.domain.tables.RGroupRole;
+import io.zerows.extension.module.ambient.domain.tables.RRolePerm;
 import io.zerows.extension.module.ambient.domain.tables.RTagEntity;
+import io.zerows.extension.module.ambient.domain.tables.RUserGroup;
+import io.zerows.extension.module.ambient.domain.tables.RUserRole;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.XApp;
+import io.zerows.extension.module.ambient.domain.tables.XAppInstance;
 import io.zerows.extension.module.ambient.domain.tables.XAttachment;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
 import io.zerows.extension.module.ambient.domain.tables.XLicense;
@@ -33,9 +38,29 @@ import io.zerows.extension.module.ambient.domain.tables.XTenant;
 public class Tables {
 
     /**
+     * 关联表
+     */
+    public static final RGroupRole R_GROUP_ROLE = RGroupRole.R_GROUP_ROLE;
+
+    /**
+     * 角色 - 权限
+     */
+    public static final RRolePerm R_ROLE_PERM = RRolePerm.R_ROLE_PERM;
+
+    /**
      * 标签-实体
      */
     public static final RTagEntity R_TAG_ENTITY = RTagEntity.R_TAG_ENTITY;
+
+    /**
+     * 账号 - 组
+     */
+    public static final RUserGroup R_USER_GROUP = RUserGroup.R_USER_GROUP;
+
+    /**
+     * 账号-角色
+     */
+    public static final RUserRole R_USER_ROLE = RUserRole.R_USER_ROLE;
 
     /**
      * X_ACTIVITY
@@ -56,6 +81,11 @@ public class Tables {
      * X_APP
      */
     public static final XApp X_APP = XApp.X_APP;
+
+    /**
+     * X_APP_INSTANCE
+     */
+    public static final XAppInstance X_APP_INSTANCE = XAppInstance.X_APP_INSTANCE;
 
     /**
      * X_ATTACHMENT

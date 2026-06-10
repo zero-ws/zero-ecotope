@@ -3,6 +3,7 @@ package io.zerows.extension.module.ambient.common.em;
 import java.util.Locale;
 
 public enum InstanceStatus {
+    PENDING_INSTALL,
     READY,
     DEPLOYING,
     DEPLOYED,

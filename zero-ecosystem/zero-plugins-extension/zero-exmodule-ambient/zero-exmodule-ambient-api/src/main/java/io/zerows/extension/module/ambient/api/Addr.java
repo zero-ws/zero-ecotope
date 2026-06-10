@@ -186,6 +186,14 @@ interface Addr {
         String STATISTICS = Prefix._EVENT + "X-TENANT/STATISTICS";
     }
 
+    interface Instance {
+        String SEARCH = Prefix._EVENT + "X-APP-INSTANCE/SEARCH";
+        String BY_ID = Prefix._EVENT + "X-APP-INSTANCE/BY-ID";
+        String UPSERT = Prefix._EVENT + "X-APP-INSTANCE/UPSERT";
+        String STATUS_UPDATE = Prefix._EVENT + "X-APP-INSTANCE/STATUS-UPDATE";
+        String DELETE = Prefix._EVENT + "X-APP-INSTANCE/DELETE";
+    }
+
     interface Subscription {
         // Dashboard
         String DASHBOARD = Prefix._EVENT + "X-SUBSCRIPTION/DASHBOARD";

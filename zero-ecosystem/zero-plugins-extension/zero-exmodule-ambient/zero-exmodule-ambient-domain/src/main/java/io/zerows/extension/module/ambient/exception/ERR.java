@@ -13,4 +13,6 @@ interface ERR {
     VertxE _80303 = VertxE.of(-80303).state(HttpResponseStatus.INTERNAL_SERVER_ERROR);
     VertxE _80304 = VertxE.of(-80304).state(HttpResponseStatus.CONFLICT);
     VertxE _80305 = VertxE.of(-80305).state(HttpResponseStatus.NOT_IMPLEMENTED);
+    VertxE _80306 = VertxE.of(-80306).state(HttpResponseStatus.NOT_FOUND);
+    VertxE _80307 = VertxE.of(-80307).state(HttpResponseStatus.BAD_REQUEST);
 }

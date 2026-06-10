@@ -4,10 +4,14 @@
 package io.zerows.extension.module.ambient.domain;
 
 
+import io.zerows.extension.module.ambient.domain.tables.RRolePerm;
+import io.zerows.extension.module.ambient.domain.tables.RUserGroup;
+import io.zerows.extension.module.ambient.domain.tables.RUserRole;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.XApp;
+import io.zerows.extension.module.ambient.domain.tables.XAppInstance;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
 import io.zerows.extension.module.ambient.domain.tables.XLicense;
 import io.zerows.extension.module.ambient.domain.tables.XLinkage;
@@ -33,9 +37,18 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
+    public static final Index R_ROLE_PERM_IDX_R_ROLE_PERM_ROLE_ID = Internal.createIndex(DSL.name("IDX_R_ROLE_PERM_ROLE_ID"), RRolePerm.R_ROLE_PERM, new OrderField[] { RRolePerm.R_ROLE_PERM.ROLE_ID }, false);
+    public static final Index R_USER_GROUP_IDX_R_USER_GROUP_USER_ID = Internal.createIndex(DSL.name("IDX_R_USER_GROUP_USER_ID"), RUserGroup.R_USER_GROUP, new OrderField[] { RUserGroup.R_USER_GROUP.USER_ID }, false);
+    public static final Index R_USER_ROLE_IDX_R_USER_ROLE_USER_ID = Internal.createIndex(DSL.name("IDX_R_USER_ROLE_USER_ID"), RUserRole.R_USER_ROLE, new OrderField[] { RUserRole.R_USER_ROLE.USER_ID }, false);
     public static final Index X_ACTIVITY_CHANGE_IDX_X_ACTIVITY_CHANGE_ACTIVITY_ID = Internal.createIndex(DSL.name("IDX_X_ACTIVITY_CHANGE_ACTIVITY_ID"), XActivityChange.X_ACTIVITY_CHANGE, new OrderField[] { XActivityChange.X_ACTIVITY_CHANGE.ACTIVITY_ID }, false);
     public static final Index X_ACTIVITY_CHANGE_IDX_X_ACTIVITY_CHANGE_CREATED_AT = Internal.createIndex(DSL.name("IDX_X_ACTIVITY_CHANGE_CREATED_AT"), XActivityChange.X_ACTIVITY_CHANGE, new OrderField[] { XActivityChange.X_ACTIVITY_CHANGE.CREATED_AT }, false);
     public static final Index X_ACTIVITY_IDX_X_ACTIVITY_CREATED_AT = Internal.createIndex(DSL.name("IDX_X_ACTIVITY_CREATED_AT"), XActivity.X_ACTIVITY, new OrderField[] { XActivity.X_ACTIVITY.CREATED_AT }, false);
+    public static final Index X_APP_INSTANCE_IDX_X_APP_INSTANCE_SIGMA = Internal.createIndex(DSL.name("IDX_X_APP_INSTANCE_SIGMA"), XAppInstance.X_APP_INSTANCE, new OrderField[] { XAppInstance.X_APP_INSTANCE.SIGMA }, false);
+    public static final Index X_APP_INSTANCE_IDX_X_APP_INSTANCE_STATUS = Internal.createIndex(DSL.name("IDX_X_APP_INSTANCE_STATUS"), XAppInstance.X_APP_INSTANCE, new OrderField[] { XAppInstance.X_APP_INSTANCE.STATUS }, false);
+    public static final Index X_APP_INSTANCE_IDX_X_APP_INSTANCE_TENANT_ID = Internal.createIndex(DSL.name("IDX_X_APP_INSTANCE_TENANT_ID"), XAppInstance.X_APP_INSTANCE, new OrderField[] { XAppInstance.X_APP_INSTANCE.TENANT_ID }, false);
+    public static final Index X_APP_INSTANCE_IDX_X_APP_INSTANCE_APP_TENANT = Internal.createIndex(DSL.name("IDX_X_APP_INSTANCE_APP_TENANT"), XAppInstance.X_APP_INSTANCE, new OrderField[] { XAppInstance.X_APP_INSTANCE.APP_ID, XAppInstance.X_APP_INSTANCE.TENANT_ID }, false);
+    public static final Index X_APP_INSTANCE_IDX_X_APP_INSTANCE_RELEASE = Internal.createIndex(DSL.name("IDX_X_APP_INSTANCE_RELEASE"), XAppInstance.X_APP_INSTANCE, new OrderField[] { XAppInstance.X_APP_INSTANCE.RELEASE_ID }, false);
+    public static final Index X_APP_INSTANCE_IDX_X_APP_INSTANCE_HEALTH = Internal.createIndex(DSL.name("IDX_X_APP_INSTANCE_HEALTH"), XAppInstance.X_APP_INSTANCE, new OrderField[] { XAppInstance.X_APP_INSTANCE.HEALTH_STATUS }, false);
     public static final Index X_APP_IDX_X_APP_NAME = Internal.createIndex(DSL.name("IDX_X_APP_NAME"), XApp.X_APP, new OrderField[] { XApp.X_APP.NAME }, false);
     public static final Index X_LICENSE_IDX_X_LICENSE_BIND_TENANT_ID = Internal.createIndex(DSL.name("IDX_X_LICENSE_BIND_TENANT_ID"), XLicense.X_LICENSE, new OrderField[] { XLicense.X_LICENSE.BIND_TENANT_ID }, false);
     public static final Index X_LICENSE_IDX_X_LICENSE_EXPIRED_AT = Internal.createIndex(DSL.name("IDX_X_LICENSE_EXPIRED_AT"), XLicense.X_LICENSE, new OrderField[] { XLicense.X_LICENSE.EXPIRED_AT }, false);

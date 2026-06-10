@@ -3,6 +3,7 @@ package io.zerows.extension.module.ambient.boot;
 import io.r2mo.vertx.jooq.generate.configuration.TypeOfJsonObject;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
+import io.zerows.extension.module.ambient.domain.tables.XAppInstance;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
 import io.zerows.extension.module.ambient.domain.tables.XSource;
 
@@ -32,6 +33,10 @@ public class TypeOfAmbientJsonObject extends TypeOfJsonObject {
             Map.of(
                 XActivity.X_ACTIVITY.RECORD_NEW.getName(), XActivity.X_ACTIVITY.getName(),
                 XActivity.X_ACTIVITY.RECORD_OLD.getName(), XActivity.X_ACTIVITY.getName()
+            ),
+            // XAppInstance
+            Map.of(
+                XAppInstance.X_APP_INSTANCE.METADATA.getName(), XAppInstance.X_APP_INSTANCE.getName()
             )
         );
     }

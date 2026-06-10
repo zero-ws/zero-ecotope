@@ -31,6 +31,10 @@ data:
   - "perm.crud.x-subscription.fetch"
   - "perm.crud.x-subscription.write"
   - "perm.crud.x-subscription.meta"
+  # CRUD - 应用实例
+  - "perm.crud.x-app-instance.fetch"
+  - "perm.crud.x-app-instance.write"
+  - "perm.crud.x-app-instance.meta"
   # CRUD - 租户管理
   - "perm.crud.x-tenant.fetch"
   - "perm.crud.x-tenant.write"

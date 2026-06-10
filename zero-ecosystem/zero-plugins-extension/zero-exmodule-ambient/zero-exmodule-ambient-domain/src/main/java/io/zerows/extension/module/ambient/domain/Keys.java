@@ -4,11 +4,16 @@
 package io.zerows.extension.module.ambient.domain;
 
 
+import io.zerows.extension.module.ambient.domain.tables.RGroupRole;
+import io.zerows.extension.module.ambient.domain.tables.RRolePerm;
 import io.zerows.extension.module.ambient.domain.tables.RTagEntity;
+import io.zerows.extension.module.ambient.domain.tables.RUserGroup;
+import io.zerows.extension.module.ambient.domain.tables.RUserRole;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.XApp;
+import io.zerows.extension.module.ambient.domain.tables.XAppInstance;
 import io.zerows.extension.module.ambient.domain.tables.XAttachment;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
 import io.zerows.extension.module.ambient.domain.tables.XLicense;
@@ -24,10 +29,15 @@ import io.zerows.extension.module.ambient.domain.tables.XSubscription;
 import io.zerows.extension.module.ambient.domain.tables.XTabular;
 import io.zerows.extension.module.ambient.domain.tables.XTag;
 import io.zerows.extension.module.ambient.domain.tables.XTenant;
+import io.zerows.extension.module.ambient.domain.tables.records.RGroupRoleRecord;
+import io.zerows.extension.module.ambient.domain.tables.records.RRolePermRecord;
 import io.zerows.extension.module.ambient.domain.tables.records.RTagEntityRecord;
+import io.zerows.extension.module.ambient.domain.tables.records.RUserGroupRecord;
+import io.zerows.extension.module.ambient.domain.tables.records.RUserRoleRecord;
 import io.zerows.extension.module.ambient.domain.tables.records.XActivityChangeRecord;
 import io.zerows.extension.module.ambient.domain.tables.records.XActivityRecord;
 import io.zerows.extension.module.ambient.domain.tables.records.XActivityRuleRecord;
+import io.zerows.extension.module.ambient.domain.tables.records.XAppInstanceRecord;
 import io.zerows.extension.module.ambient.domain.tables.records.XAppRecord;
 import io.zerows.extension.module.ambient.domain.tables.records.XAttachmentRecord;
 import io.zerows.extension.module.ambient.domain.tables.records.XCategoryRecord;
@@ -61,13 +71,19 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<RGroupRoleRecord> KEY_R_GROUP_ROLE_PRIMARY = Internal.createUniqueKey(RGroupRole.R_GROUP_ROLE, DSL.name("KEY_R_GROUP_ROLE_PRIMARY"), new TableField[] { RGroupRole.R_GROUP_ROLE.GROUP_ID, RGroupRole.R_GROUP_ROLE.ROLE_ID }, true);
+    public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = Internal.createUniqueKey(RRolePerm.R_ROLE_PERM, DSL.name("KEY_R_ROLE_PERM_PRIMARY"), new TableField[] { RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID }, true);
     public static final UniqueKey<RTagEntityRecord> KEY_R_TAG_ENTITY_PRIMARY = Internal.createUniqueKey(RTagEntity.R_TAG_ENTITY, DSL.name("KEY_R_TAG_ENTITY_PRIMARY"), new TableField[] { RTagEntity.R_TAG_ENTITY.TAG_ID, RTagEntity.R_TAG_ENTITY.ENTITY_TYPE, RTagEntity.R_TAG_ENTITY.ENTITY_ID }, true);
+    public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = Internal.createUniqueKey(RUserGroup.R_USER_GROUP, DSL.name("KEY_R_USER_GROUP_PRIMARY"), new TableField[] { RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID }, true);
+    public static final UniqueKey<RUserRoleRecord> KEY_R_USER_ROLE_PRIMARY = Internal.createUniqueKey(RUserRole.R_USER_ROLE, DSL.name("KEY_R_USER_ROLE_PRIMARY"), new TableField[] { RUserRole.R_USER_ROLE.USER_ID, RUserRole.R_USER_ROLE.ROLE_ID }, true);
     public static final UniqueKey<XActivityRecord> KEY_X_ACTIVITY_PRIMARY = Internal.createUniqueKey(XActivity.X_ACTIVITY, DSL.name("KEY_X_ACTIVITY_PRIMARY"), new TableField[] { XActivity.X_ACTIVITY.ID }, true);
     public static final UniqueKey<XActivityChangeRecord> KEY_X_ACTIVITY_CHANGE_PRIMARY = Internal.createUniqueKey(XActivityChange.X_ACTIVITY_CHANGE, DSL.name("KEY_X_ACTIVITY_CHANGE_PRIMARY"), new TableField[] { XActivityChange.X_ACTIVITY_CHANGE.ID }, true);
     public static final UniqueKey<XActivityRuleRecord> KEY_X_ACTIVITY_RULE_PRIMARY = Internal.createUniqueKey(XActivityRule.X_ACTIVITY_RULE, DSL.name("KEY_X_ACTIVITY_RULE_PRIMARY"), new TableField[] { XActivityRule.X_ACTIVITY_RULE.ID }, true);
     public static final UniqueKey<XAppRecord> KEY_X_APP_PRIMARY = Internal.createUniqueKey(XApp.X_APP, DSL.name("KEY_X_APP_PRIMARY"), new TableField[] { XApp.X_APP.ID }, true);
     public static final UniqueKey<XAppRecord> KEY_X_APP_UK_X_APP_CODE_APP_ID = Internal.createUniqueKey(XApp.X_APP, DSL.name("KEY_X_APP_UK_X_APP_CODE_APP_ID"), new TableField[] { XApp.X_APP.CODE, XApp.X_APP.APP_ID }, true);
     public static final UniqueKey<XAppRecord> KEY_X_APP_UK_X_APP_NAME_APP_ID = Internal.createUniqueKey(XApp.X_APP, DSL.name("KEY_X_APP_UK_X_APP_NAME_APP_ID"), new TableField[] { XApp.X_APP.NAME, XApp.X_APP.APP_ID }, true);
+    public static final UniqueKey<XAppInstanceRecord> KEY_X_APP_INSTANCE_PRIMARY = Internal.createUniqueKey(XAppInstance.X_APP_INSTANCE, DSL.name("KEY_X_APP_INSTANCE_PRIMARY"), new TableField[] { XAppInstance.X_APP_INSTANCE.ID }, true);
+    public static final UniqueKey<XAppInstanceRecord> KEY_X_APP_INSTANCE_UK_X_APP_INSTANCE_APP_SIGMA = Internal.createUniqueKey(XAppInstance.X_APP_INSTANCE, DSL.name("KEY_X_APP_INSTANCE_UK_X_APP_INSTANCE_APP_SIGMA"), new TableField[] { XAppInstance.X_APP_INSTANCE.APP_ID, XAppInstance.X_APP_INSTANCE.SIGMA }, true);
     public static final UniqueKey<XAttachmentRecord> KEY_X_ATTACHMENT_PRIMARY = Internal.createUniqueKey(XAttachment.X_ATTACHMENT, DSL.name("KEY_X_ATTACHMENT_PRIMARY"), new TableField[] { XAttachment.X_ATTACHMENT.ID }, true);
     public static final UniqueKey<XAttachmentRecord> KEY_X_ATTACHMENT_UK_X_ATTACHMENT_FILE_KEY = Internal.createUniqueKey(XAttachment.X_ATTACHMENT, DSL.name("KEY_X_ATTACHMENT_UK_X_ATTACHMENT_FILE_KEY"), new TableField[] { XAttachment.X_ATTACHMENT.FILE_KEY }, true);
     public static final UniqueKey<XAttachmentRecord> KEY_X_ATTACHMENT_UK_X_ATTACHMENT_FILE_PATH = Internal.createUniqueKey(XAttachment.X_ATTACHMENT, DSL.name("KEY_X_ATTACHMENT_UK_X_ATTACHMENT_FILE_PATH"), new TableField[] { XAttachment.X_ATTACHMENT.FILE_PATH }, true);

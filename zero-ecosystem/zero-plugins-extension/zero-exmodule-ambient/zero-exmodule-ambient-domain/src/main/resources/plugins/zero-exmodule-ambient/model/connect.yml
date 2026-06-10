@@ -63,3 +63,7 @@
 - dao: X_SUBSCRIPTION
   unique:
     - code
+- dao: X_APP_INSTANCE
+  unique:
+    - appId
+    - sigma

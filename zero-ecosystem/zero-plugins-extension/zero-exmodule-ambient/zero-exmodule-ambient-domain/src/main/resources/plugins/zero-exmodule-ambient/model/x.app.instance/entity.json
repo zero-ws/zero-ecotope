@@ -1,0 +1,25 @@
+{
+  "name": "x-app-instance",
+  "daoCls": "X_APP_INSTANCE",
+  "field": {
+    "unique": [
+      [
+        "appId",
+        "sigma"
+      ]
+    ]
+  },
+  "transform": {
+    "initial": {
+      "status": "READY",
+      "active": true,
+      "compositeApp": false
+    }
+  },
+  "tag": "云端管理/应用实例",
+  "required": [
+    "appId",
+    "sigma",
+    "tenantId"
+  ]
+}

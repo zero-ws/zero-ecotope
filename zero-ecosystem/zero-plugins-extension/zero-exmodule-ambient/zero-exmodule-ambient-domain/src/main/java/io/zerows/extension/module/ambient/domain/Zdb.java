@@ -4,11 +4,16 @@
 package io.zerows.extension.module.ambient.domain;
 
 
+import io.zerows.extension.module.ambient.domain.tables.RGroupRole;
+import io.zerows.extension.module.ambient.domain.tables.RRolePerm;
 import io.zerows.extension.module.ambient.domain.tables.RTagEntity;
+import io.zerows.extension.module.ambient.domain.tables.RUserGroup;
+import io.zerows.extension.module.ambient.domain.tables.RUserRole;
 import io.zerows.extension.module.ambient.domain.tables.XActivity;
 import io.zerows.extension.module.ambient.domain.tables.XActivityChange;
 import io.zerows.extension.module.ambient.domain.tables.XActivityRule;
 import io.zerows.extension.module.ambient.domain.tables.XApp;
+import io.zerows.extension.module.ambient.domain.tables.XAppInstance;
 import io.zerows.extension.module.ambient.domain.tables.XAttachment;
 import io.zerows.extension.module.ambient.domain.tables.XCategory;
 import io.zerows.extension.module.ambient.domain.tables.XLicense;
@@ -49,9 +54,29 @@ public class Zdb extends SchemaImpl {
     public static final Zdb ZDB = new Zdb();
 
     /**
+     * 关联表
+     */
+    public final RGroupRole R_GROUP_ROLE = RGroupRole.R_GROUP_ROLE;
+
+    /**
+     * 角色 - 权限
+     */
+    public final RRolePerm R_ROLE_PERM = RRolePerm.R_ROLE_PERM;
+
+    /**
      * 标签-实体
      */
     public final RTagEntity R_TAG_ENTITY = RTagEntity.R_TAG_ENTITY;
+
+    /**
+     * 账号 - 组
+     */
+    public final RUserGroup R_USER_GROUP = RUserGroup.R_USER_GROUP;
+
+    /**
+     * 账号-角色
+     */
+    public final RUserRole R_USER_ROLE = RUserRole.R_USER_ROLE;
 
     /**
      * X_ACTIVITY
@@ -72,6 +97,11 @@ public class Zdb extends SchemaImpl {
      * X_APP
      */
     public final XApp X_APP = XApp.X_APP;
+
+    /**
+     * X_APP_INSTANCE
+     */
+    public final XAppInstance X_APP_INSTANCE = XAppInstance.X_APP_INSTANCE;
 
     /**
      * X_ATTACHMENT
@@ -164,11 +194,16 @@ public class Zdb extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            RGroupRole.R_GROUP_ROLE,
+            RRolePerm.R_ROLE_PERM,
             RTagEntity.R_TAG_ENTITY,
+            RUserGroup.R_USER_GROUP,
+            RUserRole.R_USER_ROLE,
             XActivity.X_ACTIVITY,
             XActivityChange.X_ACTIVITY_CHANGE,
             XActivityRule.X_ACTIVITY_RULE,
             XApp.X_APP,
+            XAppInstance.X_APP_INSTANCE,
             XAttachment.X_ATTACHMENT,
             XCategory.X_CATEGORY,
             XLicense.X_LICENSE,
