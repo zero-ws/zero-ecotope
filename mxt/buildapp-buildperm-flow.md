@@ -87,6 +87,51 @@ It scans:
 
 Role IDs are loaded from the database before role-permission relations are loaded.
 
+### `S_ACTION` Import Contract
+
+`BuildPerm` is the path that turns declarative RBAC files into runtime tables:
+
+```text
+PERM.yml      -> S_PERMISSION
+action yml    -> S_ACTION + S_RESOURCE
+RBAC_ROLE yml -> role-permission relations
+```
+
+Action yml files are every non-`PERM.yml` route file under a third-level
+permission directory:
+
+```text
+plugins/{MID}/security/RBAC_RESOURCE/{type}/{directory}/{permission}/{label}@{METHOD}@{uri}.yml
+```
+
+During the second loader stage, BuildPerm parses the action filename and
+payload:
+
+- filename part `{METHOD}` becomes `S_ACTION.METHOD`
+- filename part `{uri}` becomes `S_ACTION.URI`
+- `data.keyword` becomes the action code suffix, stored as `act.{keyword}`
+- `data.resource` contributes the imported `S_RESOURCE`
+- `data.identifier`, when present, overrides the parent permission identifier
+- otherwise the parent `PERM.yml` identifier is used
+- the current `{type}/{directory}/{permission}` path is used to find the
+  matching `S_PERMISSION`
+
+This means every protected API route must have an action yml. Adding only
+`PERM.yml`, role permissions, OpenAPI metadata, or frontend client code does
+not create `S_ACTION`.
+
+Path variants are independent. If two public routes hit the same Java method,
+both routes still need action yml files when both can be called by clients:
+
+```text
+实例搜索@POST@_api_instance_search.yml
+许可搜索@POST@_api_x-license_search.yml
+许可搜索@POST@_api_license_search.yml      # only if this alias is exposed
+```
+
+Do not assume OpenAPI metadata or Java annotations will backfill `S_ACTION`.
+The importer uses `RBAC_RESOURCE` action files as the durable route registry.
+
 ### Persistence Order
 
 Persistence order is mandatory:
@@ -104,6 +149,11 @@ The implementation enforces this order inside one chained async flow rather than
 
 - `SPermission` / `SAction` / `SResource` use `code + appId`
 - menu persistence uses `NAME + APP_ID`
+- role and role-permission updates are append-oriented in normal API/RBAC
+  work; adding a role or permission must not delete unrelated existing grants
+  unless the task explicitly requires permission removal
+- existing-database backfills should insert missing role relation rows
+  idempotently, not rebuild `S_ROLE_PERMISSION` from a partial file snapshot
 
 ## 5. Agent Rules
 
@@ -112,3 +162,16 @@ The implementation enforces this order inside one chained async flow rather than
 - If app/menu cache behavior looks wrong, inspect generated cache artifacts together with database upsert logic.
 - If RBAC import looks wrong, inspect both resource trees and database role lookup before changing persistence code.
 - If bootstrap output looks incomplete, inspect scanners and resource trees before assuming persistence is wrong.
+- If an authenticated API returns 403 after a new endpoint was added, first
+  check whether the exact method + URI exists as an action yml and was imported
+  into `S_ACTION`.
+- If `S_PERMISSION` exists but the request still returns 403, inspect
+  `S_ACTION.permissionId`, `S_ACTION.METHOD`, `S_ACTION.URI`, and the user's
+  role-permission relation before changing authorization code.
+- For existing databases, changing RBAC resource files is not enough by itself;
+  rerun the controlled installation/import path or apply an explicit data
+  backfill so `S_ACTION`, `S_RESOURCE`, `S_PERMISSION`, and role bindings match
+  the files.
+- When processing a new role, use append mode: add the new role files/grants and
+  preserve existing role grants. Do not truncate or overwrite role-permission
+  data to "sync" one role unless the task is explicitly a permission removal.

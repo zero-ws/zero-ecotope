@@ -82,6 +82,7 @@ Common translations:
 | search/filter/page/sort | DBE / `QQuery` / `QTree` / `criteria` / `pager` / `sorter` |
 | extension hook | `SPI` / `Ex*` / `Sc*` / `Ui*` / `META-INF/services` |
 | permission/resource | `RBAC_RESOURCE` / `RBAC_ROLE` / `PERM.yml` / `seekSyntax` |
+| menu visibility or route guard | `S_VIEW.ROWS.name` / `Sc.resourceMenu()` / `X_MENU` / `/api/menus` |
 | cache/session/jwt/ldap | plugin capability |
 | startup/config/env issue | `ConfigMod` / `vertx.yml` / runtime contract |
 | frontend dynamic form/visibility | `UiForm` / `UiValve` / `zero-ui/src/extension/` |

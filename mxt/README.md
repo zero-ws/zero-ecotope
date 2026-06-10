@@ -83,6 +83,7 @@
 | [dbe-query-rules.md](dbe-query-rules.md) | DBE, `QQuery`, `QTree`, and query placement rules |
 | [backend-model-tenant-rules.md](backend-model-tenant-rules.md) | Table conventions, model metadata, and tenant isolation rules |
 | [backend-rbac-rules.md](backend-rbac-rules.md) | RBAC resource ownership and declarative permission rules |
+| [menu-security-view-guide.md](menu-security-view-guide.md) | `S_VIEW`-backed menu authorization for backend `X_MENU` and frontend-stored menu modes |
 | [crud-engine-guide.md](crud-engine-guide.md) | CRUD-engine-first decision rules for standard Zero modules |
 | [contract-source-rules.md](contract-source-rules.md) | `.r2mo` contract authority and model-source precedence |
 | [backend-api-integration.md](backend-api-integration.md) | Contract-aligned backend API integration into Zero runtime flow |
@@ -188,6 +189,7 @@ Do not start with the largest file unless the task is already known to be broad.
 | inspect DBE or query syntax | `dbe-query-rules.md` | `search-hints.md` |
 | inspect model metadata or tenant rules | `backend-model-tenant-rules.md` | `crud-engine-guide.md` |
 | inspect RBAC resource rules | `backend-rbac-rules.md` | `buildapp-buildperm-flow.md` |
+| inspect `S_VIEW` menu filtering, `/api/menus`, `X_MENU`, frontend YAML menus, or route guards | `menu-security-view-guide.md` | `exmodule-rbac-guide.md`, `buildapp-buildperm-flow.md` |
 | inspect standard CRUD delivery decisions | `crud-engine-guide.md` | `backend-dpa-guide.md` |
 | inspect contract-source authority | `contract-source-rules.md` | `backend-api-integration.md` |
 | inspect backend integration from contract to runtime | `backend-api-integration.md` | `dbe-query-rules.md` |

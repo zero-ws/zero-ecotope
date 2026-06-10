@@ -106,6 +106,7 @@ Use this file together with:
 | logging and activity rules | `activity-log-guide.md` | `zero-exmodule-ambient`, shared activity SPI owners | `ExActivity`, ambient provider classes, audit/resource trees | search `ExActivity`, `zero-exmodule-ambient` |
 | configurable report center | `report-center-guide.md` | `zero-exmodule-report` | report provider classes, dataset and join components | search `zero-exmodule-report` |
 | ACL and reinforced authorization domain | `acl-authorization-guide.md` | `zero-exmodule-rbac`, `zero-plugins-security*` | `ScPermit`, `ScSeeker`, `RBAC_RESOURCE`, `PERM.yml` | search `ScPermit`, `RBAC_RESOURCE` |
+| `S_VIEW` menu filtering, `X_MENU` menu authorization, frontend-stored menus, route guard | `menu-security-view-guide.md` | `zero-exmodule-rbac`, `zero-exmodule-ambient`, `zero-ui` | `S_VIEW`, `Sc.resourceMenu()`, `X_MENU`, `EntryAgent.menuByApp`, `Ex.I.menus()` | search `Sc.resourceMenu`, `/api/menus`, `S_VIEW`, `X_MENU` |
 | modular configuration service and unified UI | `modulat-ui-unified-guide.md` | `zero-exmodule-modulat`, `zero-exmodule-ui` | modular config provider classes, UI extension trees, `UiValve` | search `zero-exmodule-modulat`, `UiValve` |
 
 ## 7. Topic-to-Graph Translation Rules
@@ -120,6 +121,7 @@ When a user starts with business words, translate them before using MCP graph to
 | remote config center | `ConfigMod`, `NacosRule`, `zero-epoch-spec-nacos` |
 | multiple data sources | `DBSActor`, `ofDBS`, `Flyway11Configurator` |
 | permission and ACL | `RBAC_RESOURCE`, `ScPermit`, `ScSeeker`, `PERM.yml` |
+| menu visibility, role menus, frontend menu filtering, route guard | `S_VIEW.ROWS.name`, `Sc.resourceMenu()`, `X_MENU`, `/api/menus`, `Ex.I.menus()` |
 | plugin extension | `ExBoot`, `SPI_SET`, `META-INF/services` |
 | dynamic form or visibility | `UiForm`, `UiValve`, `zero-ui/src/extension/` |
 | activity log or change history | `X_ACTIVITY`, `X_ACTIVITY_CHANGE`, `ExActivity`, `Schism`, `AtDiffer` |
