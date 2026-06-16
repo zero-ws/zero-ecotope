@@ -98,8 +98,13 @@ class ScGenerated {
     static String valueProfile(final SResource resource) {
         /*
          * Get Role/Group/Tree modes
+         * Default modeRole to UNION when null/empty to prevent NPE on
+         * resources (e.g. app-defined actions) that omit MODE_ROLE.
          */
-        final String modeRole = resource.getModeRole();
+        String modeRole = resource.getModeRole();
+        if (Ut.isNil(modeRole)) {
+            modeRole = "UNION";
+        }
         final String modeGroup = resource.getModeGroup();
         if (Ut.isNil(modeGroup)) {
             /*
